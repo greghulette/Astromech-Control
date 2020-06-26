@@ -77,9 +77,9 @@ function commandNoOptions(x, y, t) {
   socket.emit('command', {
     commandstring: commandString
   });
-  socket.emit('command', {
-    commandstring: commandString
-  });
+  // socket.emit('command', {
+  //   commandstring: commandString
+  // });
 
   // return commandString;
 };
