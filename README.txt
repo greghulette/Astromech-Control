@@ -1,0 +1,2 @@
+This project is aimed at controlling the LEDs and sounds of my R2D2.  It is available for anyone to use it.
+Just be aware that this is my first attempt at any real programming and thus the code is probably very inefficient.
