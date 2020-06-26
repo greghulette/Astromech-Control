@@ -1,0 +1,281 @@
+body {
+  background-color: Black;
+  background-image: url(..//Images/basic_background.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+  font-size: 1.5rem;
+  color: white;
+}
+
+.SubMenuLabelPosition {
+  position: absolute;
+  /* border: 2px solid blue; */
+  color: white;
+  top: 20px;
+  left: 550px;
+  width: 500px;
+  font-size: 30px;
+}
+span.myButton input {
+  /* background-image: url(..//Images/Buttons/Button-Apply.png); */
+  background-size: cover;
+  position: absolute;
+  top: 550px;
+  left: 150px;
+  width: 150px;
+  height: 55px;
+}
+.buttonwidth {
+  width: 150px;
+}
+#buttons {
+  /* border: 4px solid blue; */
+  position: absolute;
+  top: 100px;
+  left: 450px;
+  padding-right: 100px;
+}
+#ldptarget {
+  position: absolute;
+  top: 145px;
+  left: 120px;
+
+
+}
+#ldptargetpicture {
+  width: 90px;
+  height: 20px;
+  opacity: 0.9;
+shadow: 2px, 4px 15px blue;
+
+}
+#ldptargetpicture:hover{
+  opacity: 1;
+  shadow: 2px, 4px 15px black;
+}
+#r2menu {
+  /* border: 4px solid blue; */
+  position: absolute;
+  width: 400px;
+  height: 650px;
+  /* top: 5%;
+  left: 5%; */
+}
+.r2menupicture {
+  position: inherit;
+      /* height: 1100px; */
+  top: 7.25%;
+  left: 12%;
+  width: 60%
+}
+#homeback {
+  position: absolute;
+  top: 450px;
+  left: 90px;
+}
+
+.applyButton{
+  background-image: url(..//Images/Buttons/Button-Apply.png);
+  background-size: cover;
+  /* opacity: 1; */
+  /* border: 1px; */
+  position: absolute;
+  top:250px;
+  left: 27%;
+  height: 60px;
+  width: 150px;
+  box-shadow: 0px 0px 15px black;
+  opacity: .8;
+}
+.applyButton:hover{
+  opacity: 1.0;
+}
+.applyButtonoff{
+  /* background-image: url(..//Images/Buttons/Button-Off-White.png);
+  background-size: cover; */
+  /* opacity: 1; */
+  /* border: 1px; */
+  position: absolute;
+  top:250px;
+  left: 60%;
+  height: 60px;
+  width: 150px;
+  box-shadow: 0px 0px 15px black;
+  opacity: .8;
+}
+.applyButtonoff:hover{
+  opacity: 1.0;
+}
+INPUT[type="submit"] {
+  background: url(..//Images/Buttons/Button-Apply.png);
+
+  display: inline;
+  position: absolute;
+  height: 40px;
+  width: 150px;
+}
+.ColorPickerdiv {
+  position: absolute;
+  /* border: 3px blue solid; */
+  top: 200%;
+  /* top: 360px;
+  left: 625px; */
+  width: 765px;
+  font-size: 35 px;
+}
+.ColorPicker {
+  /* border: 3px green solid; */
+  align-items: center;
+  /* justify-content: center; */
+  position:absolute;
+  top: 5%;
+  left: 40%;
+  width: 25%;
+  font-size: 1.5rem;
+  /* overflow: auto; */
+}
+label[for= ColorPicker]{
+  position: absolute;
+  left: 9%;
+  font-size: 2rem;
+
+}
+
+.WhiteText {
+  color: white;
+  background: black;
+  font-size: 30px;
+
+}
+.KnightRiderSliderPosition {
+  /* position: absolute; */
+  /* top: 100px;
+  lef: 450px; */
+  border: 3px red solid;
+}
+
+input[type="range"] {
+  height: 40px;
+  -webkit-appearance: none;
+  /* justify-content: center; */
+  margin: 10px 0;
+  position: absolute;
+  width: 75%;
+  top: 200%;
+  left: 15%;
+  background: transparent;
+  opacity: 0.7;
+
+
+}
+input[type="range"]:focus {
+  outline: none;
+
+}
+input[type="range"]:hover {
+  outline: none;
+  opacity: 1;
+}
+input[type="range"]::after {
+  content: "Slowest";
+  color: White;
+  font-size: 2rem;
+  position: absolute;
+  text-shadow: 0px 3px 15px blue;
+  left: 80%;
+  top: 120%;
+}
+input[type="range"]::before {
+  content: "Fastest";
+  color: White;
+  font-size: 2rem;
+  position: absolute;
+  text-shadow: 0px 0px 10px blue;
+
+  left: 0%;
+  top: 120%;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 20px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 0px 0px 25px lightyellow;
+  background: Yellow;
+  border-radius: 9px;
+  border: 1px solid #000000;
+  b
+}
+input[type="range"]::-webkit-slider-thumb {
+  box-shadow: 0px 0px 25px black;
+  border: 2px solid black;
+  height: 45px;
+  width: 15px;
+  border-radius: 5px;
+  background: lightblue;
+
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -11px;
+}
+input[type="range"]:focus::-webkit-slider-runnable-track {
+  background: Yellow;
+}
+input[type="range"]::-moz-range-track {
+  width: 100%;
+  height: 20px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 1px 1px 1px #000000;
+  background: yellow;
+  border-radius: 5px;
+  border: 1px solid #000000;
+}
+input[type="range"]::-moz-range-thumb {
+  box-shadow: 1px 1px 1px #000000;
+  border: 1px solid black;
+  height: 30px;
+  width: 15px;
+  border-radius: 5px;
+  background: black;
+  cursor: pointer;
+}
+input[type="range"]::-ms-track {
+  width: 100%;
+  height: 10px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type="range"]::-ms-fill-lower {
+  background: #3071a9;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px #000000;
+}
+input[type="range"]::-ms-fill-upper {
+  background: #3071a9;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px #000000;
+}
+input[type="range"]::-ms-thumb {
+  margin-top: 1px;
+  box-shadow: 1px 1px 1px #000000;
+  border: 1px solid #000000;
+  height: 30px;
+  width: 15px;
+  border-radius: 5px;
+  background: #000000;
+  cursor: pointer;
+}
+input[type="range"]:focus::-ms-fill-lower {
+  background: #3071a9;
+}
+input[type="range"]:focus::-ms-fill-upper {
+  background: #3071a9;
+}

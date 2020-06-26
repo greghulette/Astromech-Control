@@ -1,0 +1,129 @@
+body {
+  background-color: Black;
+  background-image: url(..//Images/basic_background.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+  padding: 0px;
+  display: flex;
+  font-size: 2rem;
+  color: white;
+  justify-content: center;
+}
+
+.SubMenuLabelPosition {
+  position: absolute;
+  color: white;
+  top: 20px;
+  left: 650px;
+  font-size: 40px;
+}
+span.myButton input {
+  /* background-image: url(..//Images/Buttons/Button-Apply.png); */
+  background-size: cover;
+  width: 150px;
+  height: 55px;
+}
+.buttonwidth {
+  width: 150px;
+}
+#buttons {
+  /* border: 4px solid blue; */
+  position: absolute;
+  top: 150px;
+  left: 500px;
+}
+#ldptarget {
+  position: absolute;
+  top: 180px;
+  left: 130px;
+    opacity: 0.7;
+}
+#ldptarget:hover{
+  opacity: 1;
+}
+#ldptargetpicture {
+  width: 130px;
+  height: 30px;
+  opacity: 0.7;
+
+}
+#ldptargetpicture:hover{
+  opacity: 1;
+}
+#r2menu {
+  /* border: 4px solid blue; */
+  position: absolute;
+  width: 400px;
+  height: 750px;
+  /* top: 5%;
+  left: 5%; */
+}
+.r2menupicture {
+  position: inherit;
+  height: 1100px;
+  top: -2%;
+  left: -0%;
+}
+#homeback {
+  position: absolute;
+  top: 550px;
+  left: 40px;
+}
+.WhiteText {
+  color: white;
+  background: black;
+  font-size: 30px;
+}
+.pwhite {
+  margin-top: 50px;
+  opacity: 0.7;
+  color: white;
+}
+.slideContainer {
+  width: 75%;
+  margin-top: 200px;
+}
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 20px;
+  background: linear-gradient(90deg, rgb(214,214,214) 60%, rgb(214,214,214) 60%);
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+  border-radius: 12px;
+  box-shadow: 0px 1px 10px 1px black;
+}
+.slider::after {
+  content: "100";
+  color: white;
+  font-size: 2rem;
+  position: absolute;
+  left: 84%;
+  top: 34%;
+}
+.slider::before {
+  content: "0";
+  color: white;
+  font-size: 2rem;
+  position: absolute;
+  left: 12%;
+  top: 34%;
+}
+.slider:hover {
+  opacity: 1;
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 40px;
+  height: 40px;
+  border: 12px;
+  border-color: Yellow;
+  background: lime;
+  border-radius: 50%;
+  cursor: pointer;
+
+}

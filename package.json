@@ -1,0 +1,29 @@
+{
+  "name": "Express_Tutorial",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "Start": "node index",
+    "dev": "nodemon index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "arduino": "^0.2.3",
+    "express": "^4.17.1",
+    "express-handlebars": "^4.0.4",
+    "johnny-five": "^2.0.0",
+    "moment": "^2.27.0",
+    "serial-io": "^1.2.0",
+    "serialport": "^9.0.0",
+    "socket-io": "^1.0.0",
+    "socket.io": "^2.3.0",
+    "uuid": "^8.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
