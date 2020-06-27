@@ -9,13 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.5" />
     <title>Astromech Control Website</title>
     <link rel="stylesheet" href="../..//CSS/Styles.css" />
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script> -->
-    <script src="/socket.io/socket.io.js">
+    <script src="/socket.io/socket.io.js"></script>
 
-    </script>
   </head>
   <body>
-    <h2 class="SubMenuLabelPosition">LDP Rainbow - Large Span</h2>
+    <h2 class="SubMenuLabelPosition">Alternating Colors</h2>
     <br />
     <div id="r2menu">
       <img
@@ -48,21 +46,21 @@
       <table>
         <tr>
           <td>
-            <a href="./LargeSpan.html"
+            <a href="#"
               ><img
                 class="buttonwidth"
-                src="../..//Images/Buttons/LEDFunctionButtons/Rainbow/Button-Rainbow-LargeSpan-Yellow.png"
-                alt="button for Knight Rider"
+                src="../..//Images/Buttons/LEDFunctionButtons/Generic/Button-AlternatingColors-Yellow.png"
+                alt="button for Alternating Colors"
             /></a>
           </td>
-          <td>
+          <!-- <td>
             <a href="./ShortSpan.html">
               <img
               src="../..//Images/Buttons/LEDFunctionButtons/Rainbow/Button-Rainbow-ShortSpan-White.png"
                 alt="button for Wave1"
                 class="buttonwidth"
             /></a>
-          </td>
+          </td> -->
           <!-- <td>
             <a href="./YellowGreen.html">
               <img
@@ -122,8 +120,8 @@
       </table>
       <div class="ColorPickerdiv">
         <form class="" action="index.html" method="post">
-          <!-- <label for="ColorPicker">Choose a color:</label>
-            <select class="ColorPicker" id="knightRiderColorChoiceColorSelect" name="ColorPicker">
+          <label for="ColorPicker1">Choose First color:</label>
+            <select class="ColorPicker" id="FirstColorSelctionBox" name="ColorPicker1">
             <option value="5">Blue</option>
             <option value="1">Red</option>
             <option value="2">Yellow</option>
@@ -133,20 +131,34 @@
             <option value="7">Orange</option>
             <option value="8">White</option>
             <option value="0">Off</option>
-          </select> -->
+          </select>
           <br />
+          <br>
+          <form class="" action="#" method="post">
+            <label for="ColorPicker2">Choose Second color:</label>
+              <select class="ColorPicker2" id="SecondColorSelectionBox" name="ColorPicker2">
+              <option value="5">Blue</option>
+              <option value="1">Red</option>
+              <option value="2">Yellow</option>
+              <option value="3">Green</option>
+              <option value="4">Cyan</option>
+              <option value="6">Magenta</option>
+              <option value="7">Orange</option>
+              <option value="8">White</option>
+              <option value="0">Off</option>
+            </select>
           <br />
-          <!-- <input
+          <input
             class="slider"
-            id="knightRiderSlider"
+            id="AlternatingColorsSpeedSlider"
             type="range"
             name="LDPSpeed"
             value="4"
             min="0"
             max="8"
-          /> -->
+          />
           <!-- <button id='LDPKnightRiderColorChoiceSubmitButton' onclick="commandSingleColor('LDP','04',1, 'knightRiderColorChoiceColorSelect')" class="applyButton" type="button" name="button"></button> -->
-          <a href="#" onclick="commandNoOptions('LDP','05',1,)" class="applyButton"></a>
+          <a href="#" onclick="commandTwoColors('LDP','06','AlternatingColorsSpeedSlider', 'FirstColorSelctionBox', 'SecondColorSelectionBox')" class="applyButton"></a>
           <img src="../..//Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
 
         </form>

@@ -22,18 +22,27 @@
 // };
 
 
-function getSliderValue(){
-  var slider1 = document.getElementById('knightRiderSlider').value;
+function getSliderValue(t) {
+  var slider1 = document.getElementById('AlternatingColorsSpeedSlider').value;
   return slider1;
 }
 
-function getcolor1(z){
+function getcolor1(z) {
   var color = document.getElementById(z)
 
   var colorValue = (color.options[color.selectedIndex].value);
   // alert(colorValue);
   return colorValue;
 };
+
+function getcolor2(s) {
+  var color2 = document.getElementById(s)
+
+  var colorValue2 = (color2.options[color2.selectedIndex].value);
+  // alert(colorValue);
+  return colorValue2;
+};
+
 
 function getStripName (x){
   switch (x) {
@@ -66,6 +75,26 @@ function commandSingleColor(x, y, t, z) {
 
   // return commandString;
 };
+
+function commandTwoColors(x, y, t, z, s) {
+  let LEDSelector = getStripName(x);
+  let sliderValue = getSliderValue(t);
+  let colorValues1 = getcolor1(z);
+  let colorValues2 = getcolor2(s);
+  let commandString = LEDSelector + y + sliderValue + colorValues1 + colorValues2;
+  console.log(commandString);
+  socket.emit('command', {
+    commandstring: commandString
+  });
+  socket.emit('command', {
+    commandstring: commandString
+  });
+
+  // return commandString;
+};
+
+
+
 
 function commandNoOptions(x, y, t) {
   let LEDSelector = getStripName(x);
