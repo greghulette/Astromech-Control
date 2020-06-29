@@ -5,7 +5,6 @@ const exphbs = require('express-handlebars');
 const socket = require('socket.io');
 const serial = require('./serial');
 
-
 const app = express();
 
 //handlebars middleware
@@ -32,13 +31,21 @@ io.on('connection', function (socket) {
   console.log('made Socket Connection', socket.id);
 
   socket.on('command', function (data) {
-    // console.log(data);
-    var co = data.commandstring;
-    console.log(co);
-    // var short = co.toString();
-    // console.log(short);
-    // var test1 = short.substring(2, 17);
-    // console.log(test1);
-    serial(co);
+    console.log(data);
+    var ldp = data.ldpcommandstring;
+    var coin = data.coincommandstring;
+    var vu = data.vucommandstring;
+    var maint = data.mcommandstring;
+    sleep(500).then(() => { serial(ldp, coin, vu, maint); });
+
+    // sleep(500).then(() => { serial(coin); });
+
+    // console.log("Coin Command: " + coin);
+    // serial(ldp);
+    // serial(coin);
   });
 });
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+};

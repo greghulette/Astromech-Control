@@ -44,36 +44,103 @@ function getcolor2(s) {
 };
 
 
-function getStripName (x){
-  switch (x) {
-    case "LDP":
-      return "L";
-      break;
-    case "Coin":
-      return "C";
-      break;
-    default:
-      return "";
+function getStripName (){
+
+for (var i = 0; i < checkedItems.length; i++) {
+
+  if (checkedItems[i] === "L") {
+    console.log("L selected");
+      return checkedItems[i];
   };
+  if (checkedItems[i] === "C") {
+    console.log("C selected");
+      return checkedItems[i];
+  };
+  if (checkedItems[i] === "V") {
+    console.log("V selected");
+      return checkedItems[i];
+  };
+  if (checkedItems[i] === "M") {
+    console.log("M selected");
+      return checkedItems[i];
+  };
+};
 };
 
 var socket = io.connect('http://10.0.0.15:5000');
 
 function commandSingleColor(x, y, t, z) {
-  let LEDSelector = getStripName(x);
+  // let LEDSelector = getStripName();
   let colorValues = getcolor1(z);
 
-  // let slidervalues = getSliderValue();
-  let commandString = LEDSelector + y + t + colorValues;
-  console.log(commandString);
-  socket.emit('command', {
-    commandstring: commandString
-  });
-  socket.emit('command', {
-    commandstring: commandString
-  });
+  for (var i = 0; i < checkedItems.length; i++) {
+    if (checkedItems[i] === "L") {
+      // console.log("L selected");
+      var ldpcommandstring = checkedItems[i] + y + t + colorValues;
+      console.log(ldpcommandstring);
+    };
 
-  // return commandString;
+    if (checkedItems[i] === "C") {
+      // console.log("C selected");
+      var coincommandstring = checkedItems[i] + y + t + colorValues;
+      console.log(coincommandstring);
+    };
+
+    if (checkedItems[i] === "V") {
+      // console.log("V selected");
+      var vucommandstring = checkedItems[i] + y + t + colorValues;
+      console.log(vucommandstring);
+    };
+
+    if (checkedItems[i] === "M") {
+      // console.log("M selected");
+      var mcommandstring = checkedItems[i] + y + t + colorValues;
+      console.log(mcommandstring);
+    };
+  };
+
+  socket.emit('command', {
+    ldpcommandstring: ldpcommandstring,
+    coincommandstring: coincommandstring,
+    vucommandstring: vucommandstring,
+    mcommandstring: mcommandstring
+  });
+};
+
+function commandNoOptions(x, y, t, z) {
+
+  for (var i = 0; i < checkedItems.length; i++) {
+    if (checkedItems[i] === "L") {
+      // console.log("L selected");
+      var ldpcommandstring = checkedItems[i] + y + t;
+      console.log(ldpcommandstring);
+    };
+
+    if (checkedItems[i] === "C") {
+      // console.log("C selected");
+      var coincommandstring = checkedItems[i] + y + t;
+      console.log(coincommandstring);
+    };
+
+    if (checkedItems[i] === "V") {
+      // console.log("V selected");
+      var vucommandstring = checkedItems[i] + y + t;
+      console.log(vucommandstring);
+    };
+
+    if (checkedItems[i] === "M") {
+      // console.log("M selected");
+      var mcommandstring = checkedItems[i] + y + t;
+      console.log(mcommandstring);
+    };
+  };
+
+  socket.emit('command', {
+    ldpcommandstring: ldpcommandstring,
+    coincommandstring: coincommandstring,
+    vucommandstring: vucommandstring,
+    mcommandstring: mcommandstring
+  });
 };
 
 function commandTwoColors(x, y, t, z, s) {
@@ -81,77 +148,167 @@ function commandTwoColors(x, y, t, z, s) {
   let sliderValue = getSliderValue(t);
   let colorValues1 = getcolor1(z);
   let colorValues2 = getcolor2(s);
-  let commandString = LEDSelector + y + sliderValue + colorValues1 + colorValues2;
-  console.log(commandString);
+  for (var i = 0; i < checkedItems.length; i++) {
+    if (checkedItems[i] === "L") {
+      // console.log("L selected");
+      var ldpcommandstring = checkedItems[i] + y + sliderValue + colorValues1 + colorValues2;
+      console.log(ldpcommandstring);
+    };
+
+    if (checkedItems[i] === "C") {
+      // console.log("C selected");
+      var coincommandstring = checkedItems[i] + y + sliderValue + colorValues1 + colorValues2;
+      console.log(coincommandstring);
+    };
+
+    if (checkedItems[i] === "V") {
+      // console.log("V selected");
+      var vucommandstring = checkedItems[i] + y + sliderValue + colorValues1 + colorValues2;
+      console.log(vucommandstring);
+    };
+
+    if (checkedItems[i] === "M") {
+      // console.log("M selected");
+      var mcommandstring = checkedItems[i] + y + sliderValue + colorValues1 + colorValues2;
+      console.log(mcommandstring);
+    };
+  };
+
   socket.emit('command', {
-    commandstring: commandString
+    ldpcommandstring: ldpcommandstring,
+    coincommandstring: coincommandstring,
+    vucommandstring: vucommandstring,
+    mcommandstring: mcommandstring
   });
-  socket.emit('command', {
-    commandstring: commandString
-  });
-
-  // return commandString;
-};
-
-
-
-
-function commandNoOptions(x, y, t) {
-  let LEDSelector = getStripName(x);
-  // let colorValues = getcolor1(z);
-
-  // let slidervalues = getSliderValue();
-  let commandString = LEDSelector + y + t;
-  console.log(commandString);
-  socket.emit('command', {
-    commandstring: commandString
-  });
-  // socket.emit('command', {
-  //   commandstring: commandString
-  // });
-
-  // return commandString;
 };
 
 function commandStripOff(x,) {
   let LEDSelector = getStripName(x);
-  // let colorValues = getcolor1(z);
 
-  // let slidervalues = getSliderValue();
-  let commandString = LEDSelector + '98';
-  console.log(commandString);
-  socket.emit('command', {
-    commandstring: commandString
-  });
-  socket.emit('command', {
-    commandstring: commandString
-  });
+  for (var i = 0; i < checkedItems.length; i++) {
+    if (checkedItems[i] === "L") {
+      // console.log("L selected");
+      var ldpcommandstring = checkedItems[i] + '98';
+      console.log(ldpcommandstring);
+    };
 
-  // return commandString;
+    if (checkedItems[i] === "C") {
+      // console.log("C selected");
+      var coincommandstring = checkedItems[i] + '98';
+      console.log(coincommandstring);
+    };
+
+    if (checkedItems[i] === "V") {
+      // console.log("V selected");
+      var vucommandstring = checkedItems[i] + '98';
+      console.log(vucommandstring);
+    };
+
+    if (checkedItems[i] === "M") {
+      // console.log("M selected");
+      var mcommandstring = checkedItems[i] + '98';
+      console.log(mcommandstring);
+    };
+  };
+
+  socket.emit('command', {
+    ldpcommandstring: ldpcommandstring,
+    coincommandstring: coincommandstring,
+    vucommandstring: vucommandstring,
+    mcommandstring: mcommandstring
+  });
 };
 
+function commandStripAllOff() {
+  var ldpcommandstring = 'A98';
+  var coincommandstring = 'L98';
+  var vucommandstring = 'L98';
+  var mcommandstring = 'L98';
+
+  socket.emit('command', {
+    ldpcommandstring: ldpcommandstring,
+    coincommandstring: coincommandstring,
+    vucommandstring: vucommandstring,
+    mcommandstring: mcommandstring
+  });
+};
+
+// Varialbles for the selection of the LED selector buttons
 var ldpImageClicked = '/Images/Buttons/Button-LED-Selector-LDP-Yellow.png';
 var ldpImageUnclicked = '/Images/Buttons/Button-LED-Selector-LDP-White.png';
+var maintImageClicked = '/Images/Buttons/Button-LED-Selector-Maint-Yellow.png';
+var maintImageUnclicked = '/Images/Buttons/Button-LED-Selector-Maint-White.png';
+var coinImageClicked = '/Images/Buttons/Button-LED-Selector-Coin-Yellow.png';
+var coinImageUnclicked = '/Images/Buttons/Button-LED-Selector-Coin-White.png';
+var vuImageClicked = '/Images/Buttons/Button-LED-Selector-VU-Yellow.png';
+var vuImageUnclicked = '/Images/Buttons/Button-LED-Selector-VU-White.png';
+
 var checkedItems = new Array();
 
 function swapImageLDP(imgID) {
 
-  var theImage = document.getElementById(imgID);
-  var theState = theImage.src;
+  let theldpImage = document.getElementById(imgID);
+  let theldpState = theldpImage.src;
 
-  console.log(theImage);
-  console.log(theState);
-  if (theState.indexOf(ldpImageUnclicked) != -1) {
-    theImage.src = ldpImageClicked;
-    console.log('changed to Clicked');
+
+  // console.log(theldpImage);
+  // console.log(theldpState);
+  if (theldpState.indexOf(ldpImageUnclicked) != -1) {
+    theldpImage.src = ldpImageClicked;
+    // console.log('changed to Clicked');
   } else {
-    theImage.src = ldpImageUnclicked;
-    console.log('changed to Unclicked');
+    theldpImage.src = ldpImageUnclicked;
+    // console.log('changed to Unclicked');
   }
 
   getCheckedElements();
 };
 
+function swapImageMaint(imgID) {
+
+  let themaintImage = document.getElementById(imgID);
+  let themaintState = themaintImage.src;
+
+  if (themaintState.indexOf(maintImageUnclicked) != -1) {
+    themaintImage.src = maintImageClicked;
+    // console.log('changed to Clicked');
+  } else {
+    themaintImage.src = maintImageUnclicked;
+    // console.log('changed to Unclicked');
+  }
+  getCheckedElements();
+};
+
+function swapImageCoin(imgID) {
+
+  let thecoinImage = document.getElementById(imgID);
+  let thecoinState = thecoinImage.src;
+
+  if (thecoinState.indexOf(coinImageUnclicked) != -1) {
+    thecoinImage.src = coinImageClicked;
+    // console.log('changed to Clicked');
+  } else {
+    thecoinImage.src = coinImageUnclicked;
+    // console.log('changed to Unclicked');
+  }
+  getCheckedElements();
+};
+
+function swapImageVU(imgID) {
+
+  let thevuImage = document.getElementById(imgID);
+  let thevuState = thevuImage.src;
+
+  if (thevuState.indexOf(vuImageUnclicked) != -1) {
+    thevuImage.src = vuImageClicked;
+    // console.log('changed to Clicked');
+  } else {
+    thevuImage.src = vuImageUnclicked;
+    // console.log('changed to Unclicked');
+  }
+  getCheckedElements();
+};
+var imgArray = [];
 function getCheckedElements() {
  var imgArray = document.getElementsByName('checkboximg');
   checkedItems.length = 0;
@@ -160,19 +317,28 @@ function getCheckedElements() {
     if (tmp.indexOf(ldpImageClicked) != -1) {
       checkedItems.push(imgArray[i].id.toString());
     }
+    if (tmp.indexOf(maintImageClicked) != -1) {
+      checkedItems.push(imgArray[i].id.toString());
+    }
+    if (tmp.indexOf(coinImageClicked) != -1) {
+      checkedItems.push(imgArray[i].id.toString());
+    }
+    if (tmp.indexOf(vuImageClicked) != -1) {
+      checkedItems.push(imgArray[i].id.toString());
+    }
   }
 
-  var strOut = "<p>The following items are checked: ";
-
-  if (checkedItems.length != 0) {
-    strOut += checkedItems.toString();
-  } else {
-    strOut += "none";
-  }
-   strOut += "</p>";
-
-   var theDiv = document.getElementById('statusDiv');
-   theDiv.innerHTML = strOut
+  // var strOut = "<p>" ;
+  //
+  // if (checkedItems.length != 0) {
+  //   strOut += checkedItems.toString();
+  // } else {
+  //   strOut += "none";
+  // }
+  //  strOut += "</p>";
+  //
+  //  var theDiv = document.getElementById('statusDiv');
+  //  theDiv.innerHTML = strOut
 }
 
 function preloadImages() {
@@ -180,6 +346,10 @@ function preloadImages() {
     var tmp = new Image();
     tmp.src = arguments[i];
   }
+};
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 };
 
 // function sendSerial(x, y, t, z) {

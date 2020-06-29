@@ -322,9 +322,16 @@ input[type="range"]:focus::-ms-fill-upper {
 .LEDselectorTable{
   position: absolute;
   top: 175px;
-  left: 350px;
+  left: 325px;
 }
 .LEDselectorButtons{
   width: 75px;
   height: 75px;
+}
+
+#statusDiv {
+  position: relative;
+  top: 450px;
+  left: 350px;
+  color: white;
 }

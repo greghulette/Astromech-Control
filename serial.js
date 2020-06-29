@@ -4,18 +4,30 @@ const port = new SerialPort('/dev/cu.usbmodem14101', {
     autoOpen: false,
   });
 
-function serialSend(lastLDPcommands) {
-  var command = lastLDPcommands + '\r';
+function serialSend(ldp, coin, vu, maint) {
+  var ldpcommand = ldp + '\r';
+  var coincommand = coin + '\r';
+  var vucommand = vu + '\r';
+  var maintcommand = maint + '\r';
+  var sleepinterval = 50;
   port.open(function (err) {
       if (err) {
-        port.write(command);
-        return console.log('port opened already but sending the command of ' + command);
+        port.write(ldpcommand);
+        sleep(50).then(() => { port.write(coincommand); });
+        // sleep(50).then(() => { port.write(coincommand); });
+        sleep(75).then(() => { port.write(vucommand); });
+        sleep(100).then(() => { port.write(maintcommand); });
+        return console.log('sending the command of ' + ldpcommand);
+        return console.log('sending the command of ' + coincommand);
+        return console.log('sending the command of ' + vucommand);
+        return console.log('sending the command of ' + maintcommand);
       }
 
       // port.set({ options: dtr = false });
 
       console.log('serial command says: ' + command);
-      sleep(2000).then(() => { port.write(command); });
+      sleep(2000).then(() => { port.write(ldpcommand); });
+      // sleep(2000).then(() => { port.write(coincommand); });
     });
 
 };
