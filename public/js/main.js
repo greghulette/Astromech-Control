@@ -130,34 +130,71 @@ function commandStripOff(x,) {
   // return commandString;
 };
 
+var ldpImageClicked = '/Images/Buttons/Button-LED-Selector-LDP-Yellow.png';
+var ldpImageUnclicked = '/Images/Buttons/Button-LED-Selector-LDP-White.png';
+var checkedItems = new Array();
 
+function swapImageLDP(imgID) {
 
+  var theImage = document.getElementById(imgID);
+  var theState = theImage.src;
 
+  console.log(theImage);
+  console.log(theState);
+  if (theState.indexOf(ldpImageUnclicked) != -1) {
+    theImage.src = ldpImageClicked;
+    console.log('changed to Clicked');
+  } else {
+    theImage.src = ldpImageUnclicked;
+    console.log('changed to Unclicked');
+  }
 
+  getCheckedElements();
+};
 
+function getCheckedElements() {
+ var imgArray = document.getElementsByName('checkboximg');
+  checkedItems.length = 0;
+  for (var i = 0; i < imgArray.length; i++) {
+    var tmp = imgArray[i].src.toString();
+    if (tmp.indexOf(ldpImageClicked) != -1) {
+      checkedItems.push(imgArray[i].id.toString());
+    }
+  }
 
+  var strOut = "<p>The following items are checked: ";
 
+  if (checkedItems.length != 0) {
+    strOut += checkedItems.toString();
+  } else {
+    strOut += "none";
+  }
+   strOut += "</p>";
 
+   var theDiv = document.getElementById('statusDiv');
+   theDiv.innerHTML = strOut
+}
 
-
-
-
+function preloadImages() {
+  for (var i = 0; i < arguments.length; i++) {
+    var tmp = new Image();
+    tmp.src = arguments[i];
+  }
+};
 
 // function sendSerial(x, y, t, z) {
 //   var commandStrings = str.toUpperCase(getCommandString(x, y, t, z)) + '\r';
 //   console.log(commandStrings);
-  // alert('The command of ' + commandStrings + 'sent to the Arduino');
+// alert('The command of ' + commandStrings + 'sent to the Arduino');
 
-
-
-  // port.open(function (err) {
-  //   if (err) {
-  //     return console.log('Error opening port: ', err.message);
-  //   }
-  //
-  //   sleep(1500).then(() => { port.write(commandStrings); });
-  //
-  //   // Because there's no callback to write, write errors will be emitted on the port:
-  //   // port.write('L123\n');
-  // });
+// port.open(function (err) {
+//   if (err) {
+//     return console.log('Error opening port: ', err.message);
+//   }
+//
+//   sleep(1500).then(() => { port.write(commandStrings); });
+//
+//   // Because there's no callback to write, write errors will be emitted on the port:
+//   // port.write('L123\n');
+// });
 // };

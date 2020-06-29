@@ -318,3 +318,13 @@ input[type="range"]:focus::-ms-fill-lower {
 input[type="range"]:focus::-ms-fill-upper {
   background: #3071a9;
 }
+
+.LEDselectorTable{
+  position: absolute;
+  top: 175px;
+  left: 350px;
+}
+.LEDselectorButtons{
+  width: 75px;
+  height: 75px;
+}

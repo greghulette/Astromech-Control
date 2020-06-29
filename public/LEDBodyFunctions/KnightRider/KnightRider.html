@@ -12,7 +12,7 @@
     <script src="/socket.io/socket.io.js"></script>
 
   </head>
-  <body>
+  <body onload="preloadImages('../..//Images/Buttons/Button-LED-Selector-Checked-Yellow.png')">
     <h2 class="SubMenuLabelPosition">LDP Knight Rider</h2>
     <br />
     <div id="r2menu">
@@ -85,82 +85,63 @@
                 alt="button for Knight Rider"
             /></a>
           </td>
-          <!-- </tr>
-        <tr>
-          <td>
-            <img
-              src="..//Images/Buttons/LDPButtons/Button-LDP-Off-White.png"
-              alt="button for Wave1"
-              class="buttonwidth"
-            />
-          </td>
-          <td>
-            <img
-              src="..//Images/Buttons/Button-Blank.png"
-              alt="button for Wave1"
-              class="buttonwidth"
-            />
-          </td>
-          <td>
-            <img
-              src="..//Images/Buttons/Button-Blank.png"
-              alt="button for Wave1"
-              class="buttonwidth"
-            />
-          </td>
-          <td>
-            <img
-              src="..//Images/Buttons/Button-Blank.png"
-              alt="button for Wave1"
-              class="buttonwidth"
-            />
-          </td>
-        </tr> -->
+
         </tr>
       </table>
-      <table>
-        <tr>
-          <td>
-            <img
-              src="../..//Images/Buttons/Button-LED-Selector-LDP-White.png"
-              alt="button for LDP Button"
-            />
-          </td>
-        </tr>
-      </table>
+
       <div class="ColorPickerdiv">
         <form class="" action="index.html" method="post">
-          <!-- <label for="ColorPicker">Choose a color:</label>
-            <select class="ColorPicker" id="knightRiderColorChoiceColorSelect" name="ColorPicker">
-            <option value="5">Blue</option>
-            <option value="1">Red</option>
-            <option value="2">Yellow</option>
-            <option value="3">Green</option>
-            <option value="4">Cyan</option>
-            <option value="6">Magenta</option>
-            <option value="7">Orange</option>
-            <option value="8">White</option>
-            <option value="0">Off</option>
-          </select> -->
-          <br />
-          <br />
-          <!-- <input
-            class="slider"
-            id="knightRiderSlider"
-            type="range"
-            name="LDPSpeed"
-            value="4"
-            min="0"
-            max="8"
-          /> -->
-          <!-- <button id='LDPKnightRiderColorChoiceSubmitButton' onclick="commandSingleColor('LDP','04',1, 'knightRiderColorChoiceColorSelect')" class="applyButton" type="button" name="button"></button> -->
-          <!-- <a href="#" onclick="commandSingleColor('LDP','04',1, 'knightRiderColorChoiceColorSelect')" class="applyButton"></a> -->
+
           <img src="../..//Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
 
         </form>
 
       </div>
+
     </div>
+    <table class="LEDselectorTable">
+      <tr>
+        <td>
+          <img id='LDP' name="checkboximg" onclick="swapImageLDP('LDP')"class='LEDselectorButtons'
+            src='\../..//Images/Buttons/Button-LED-Selector-LDP-White.png'
+            alt="button for LDP Button"
+          />
+        </td>
+        <td onclick="swapImageLDP('LDP')" class="LEDselectorButtons">LDP
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img id='Maint' name="checkboximg" onclick="swapImageLDP('Maint')"class='LEDselectorButtons'
+            src='\../..//Images/Buttons/Button-LED-Selector-Unchecked.png'
+            alt="button for LDP Button"
+          />
+        </td>
+        <td onclick="swapImageLDP('Maint')" class="LEDselectorButtons">Maint
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img id='Coin' name="checkboximg" onclick="swapImageLDP('Coin')"class='LEDselectorButtons'
+            src='\../..//Images/Buttons/Button-LED-Selector-Unchecked.png'
+            alt="button for LDP Button"
+          />
+        </td>
+        <td onclick="swapImageLDP('Coin')" class="LEDselectorButtons">Coin
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img id='VU' name="checkboximg" onclick="swapImageLDP('VU')"class='LEDselectorButtons'
+            src='\../..//Images/Buttons/Button-LED-Selector-Unchecked.png'
+            alt="button for LDP Button"
+          />
+        </td>
+        <td onclick="swapImageLDP('VU')" class="LEDselectorButtons">VU
+        </td>
+      </tr>
+    </table>
+    <div id="statusDiv">The following items are checked: none</div>
   </body>
   <script src="../..//js/main.js">
   </script>
