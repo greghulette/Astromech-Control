@@ -183,6 +183,42 @@ label[for= ColorPicker2]{
 
 }
 
+.ColorPicker1Bounce {
+  /* border: 3px green solid; */
+  align-items: center;
+  /* justify-content: center; */
+  position:absolute;
+  top: 5%;
+  left: 60%;
+  width: 25%;
+  font-size: 1.5rem;
+  /* overflow: auto; */
+}
+label[for= ColorPicker1Bounce]{
+  position: absolute;
+  left: 0%;
+  font-size: 2rem;
+
+}
+
+.ColorPicker2Bounce {
+  /* border: 3px green solid; */
+  align-items: center;
+  /* justify-content: center; */
+  position:absolute;
+  top: 75%;
+  left: 60%;
+  width: 25%;
+  font-size: 1.5rem;
+  /* overflow: auto; */
+}
+label[for= ColorPicker2Bounce]{
+  position: absolute;
+  left: 0%;
+  font-size: 2rem;
+
+}
+
 
 
 
