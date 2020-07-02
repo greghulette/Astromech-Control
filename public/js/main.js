@@ -234,12 +234,12 @@ function commandStripAllOff() {
 };
 
 // Varialbles for the selection of the LED selector buttons
-var ldpImageClicked = '/Images/Buttons/Button-LED-Selector-LDP-Yellow.png';
-var ldpImageUnclicked = '/Images/Buttons/Button-LED-Selector-LDP-White.png';
+var ldpImageClicked = '/Images/Buttons/Button-LED-Selector-LDP-Yellowv5.png';
+var ldpImageUnclicked = '/Images/Buttons/Button-LED-Selector-LDP-Whitev5.png';
 var maintImageClicked = '/Images/Buttons/Button-LED-Selector-Maint-Yellow.png';
 var maintImageUnclicked = '/Images/Buttons/Button-LED-Selector-Maint-White.png';
-var coinImageClicked = '/Images/Buttons/Button-LED-Selector-Coin-Yellow.png';
-var coinImageUnclicked = '/Images/Buttons/Button-LED-Selector-Coin-White.png';
+var coinImageClicked = '/Images/Buttons/Button-LED-Selector-Coin-Yellowv5.png';
+var coinImageUnclicked = '/Images/Buttons/Button-LED-Selector-Coin-Whitev5.png';
 var vuImageClicked = '/Images/Buttons/Button-LED-Selector-VU-Yellow.png';
 var vuImageUnclicked = '/Images/Buttons/Button-LED-Selector-VU-White.png';
 
