@@ -42,7 +42,7 @@ span.myButton input {
 }
 #ldptarget {
   position: absolute;
-  top: 145px;
+  top: 137px;
   left: 120px;
 
 
@@ -153,7 +153,7 @@ label[for= ColorPicker]{
   /* justify-content: center; */
   position:absolute;
   top: 5%;
-  left: 30%;
+  left: 40%;
   width: 25%;
   font-size: 1.5rem;
   /* overflow: auto; */
@@ -206,7 +206,7 @@ input[type="range"] {
   margin: 10px 0;
   position: absolute;
   width: 75%;
-  top: 170%;
+  top: 135%;
   left: 15%;
   background: transparent;
   opacity: 0.7;

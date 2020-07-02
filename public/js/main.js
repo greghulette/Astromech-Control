@@ -23,7 +23,7 @@
 
 
 function getSliderValue(t) {
-  var slider1 = document.getElementById('AlternatingColorsSpeedSlider').value;
+  var slider1 = document.getElementById(t).value;
   return slider1;
 }
 
@@ -181,6 +181,46 @@ function commandTwoColors(x, y, t, z, s) {
     mcommandstring: mcommandstring
   });
 };
+
+function commandOneColorAndSpeed(x, y, t, z) {
+  let LEDSelector = getStripName(x);
+  let sliderValue = getSliderValue(t);
+  let colorValues1 = getcolor1(z);
+  for (var i = 0; i < checkedItems.length; i++) {
+    if (checkedItems[i] === "L") {
+      // console.log("L selected");
+      var ldpcommandstring = checkedItems[i] + y + sliderValue + colorValues1;
+      console.log(ldpcommandstring);
+    };
+
+    if (checkedItems[i] === "C") {
+      // console.log("C selected");
+      var coincommandstring = checkedItems[i] + y + sliderValue + colorValues1;
+      console.log(coincommandstring);
+    };
+
+    if (checkedItems[i] === "V") {
+      // console.log("V selected");
+      var vucommandstring = checkedItems[i] + y + sliderValue + colorValues1;
+      console.log(vucommandstring);
+    };
+
+    if (checkedItems[i] === "M") {
+      // console.log("M selected");
+      var mcommandstring = checkedItems[i] + y + sliderValue + colorValues1;
+      console.log(mcommandstring);
+    };
+  };
+
+  socket.emit('command', {
+    ldpcommandstring: ldpcommandstring,
+    coincommandstring: coincommandstring,
+    vucommandstring: vucommandstring,
+    mcommandstring: mcommandstring
+  });
+};
+
+
 
 function commandStripOff(x,) {
   let LEDSelector = getStripName(x);

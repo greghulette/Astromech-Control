@@ -70,12 +70,46 @@
             max="3"
           />
           <!-- <button id='LDPKnightRiderColorChoiceSubmitButton' onclick="commandSingleColor('LDP','04',1, 'knightRiderColorChoiceColorSelect')" class="applyButton" type="button" name="button"></button> -->
-          <!-- <a href="#" onclick="commandSingleColor('LDP','04',1, 'knightRiderColorChoiceColorSelect')" class="applyButton"></a> -->
+          <a href="#" onclick="commandOneColorAndSpeed('LDP','07','knightRiderSlider', 'knightRiderColorChoiceColorSelect')" class="applyButton"></a>
           <img src="../..//Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img>
 
         </form>
 
       </div>
+    </div>
+    <div id="dockContainer">
+    <div id="dockWrapper">
+    <div class="cap left"></div>
+    <ul class="osx-dock">
+    <li class="active">
+    <span>LDP</span>
+    <a><img id='L' name="checkboximg" onclick="swapImageLDP('L')"class='LEDselectorButtons'
+    src='../..//Images/Buttons/Button-LED-Selector-LDP-Whitev5.png'
+    alt="button for LDP Button"
+    /></a>
+    </li>
+    <li class="">
+    <span>coin slots</span>
+    <a ><img id='C' name="checkboximg" onclick="swapImageCoin('C')" class='LEDselectorButtons'
+    src='../..//Images/Buttons/Button-LED-Selector-Coin-Whitev5.png'
+    alt="button for Coin Button"
+    /></a>
+    </li>
+    <li class="">
+    <span>vu strips</span>
+    <a><img id='V' name="checkboximg" onclick="swapImageVU('V')"class='LEDselectorButtons'
+    src='\../..//Images/Buttons/Button-LED-Selector-VU-White.png'
+    alt="button for LDP Button"
+    /></a>
+    </li>
+    <li class="">
+    <span>Maintenence</span>
+    <a ><img id='M' name="checkboximg" onclick="swapImageMaint('M')"class='LEDselectorButtons'
+    src='\../..//Images/Buttons/Button-LED-Selector-Maint-White.png'
+    alt="button for LDP Button"
+    /></a>
+    </li>
+    </ul>
     </div>
   </body>
   <script src="../..//js/main.js">

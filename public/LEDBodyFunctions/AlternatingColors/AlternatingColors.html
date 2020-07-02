@@ -120,8 +120,8 @@
       </table>
       <div class="ColorPickerdiv">
         <form class="" action="index.html" method="post">
-          <label for="ColorPicker1">Choose First color:</label>
-            <select class="ColorPicker" id="FirstColorSelctionBox" name="ColorPicker1">
+          <label for="ColorPicker1">First color:</label>
+            <select class="ColorPicker1" id="FirstColorSelctionBox" name="ColorPicker1">
             <option value="5">Blue</option>
             <option value="1">Red</option>
             <option value="2">Yellow</option>
@@ -135,7 +135,7 @@
           <br />
           <br>
           <form class="" action="#" method="post">
-            <label for="ColorPicker2">Choose Second color:</label>
+            <label for="ColorPicker2">Second color:</label>
               <select class="ColorPicker2" id="SecondColorSelectionBox" name="ColorPicker2">
               <option value="5">Blue</option>
               <option value="1">Red</option>
@@ -165,42 +165,40 @@
 
       </div>
     </div>
-    <table class="LEDselectorTable">
-      <tr>
-        <td>
-          <img id='L' name="checkboximg" onclick="swapImageLDP('L')"class='LEDselectorButtons'
-            src='\../..//Images/Buttons/Button-LED-Selector-LDP-White.png'
-            alt="button for LDP Button"
-          />
-        </td>
-      </tr>
-
-      <tr>
-        <td>
-          <img id='C' name="checkboximg" onclick="swapImageCoin('C')" class='LEDselectorButtons'
-            src='../..//Images/Buttons/Button-LED-Selector-Coin-White.png'
-            alt="button for Coin Button"
-          />
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <img id='V' name="checkboximg" onclick="swapImageVU('V')"class='LEDselectorButtons'
-            src='\../..//Images/Buttons/Button-LED-Selector-VU-White.png'
-            alt="button for LDP Button"
-          />
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <img id='M' name="checkboximg" onclick="swapImageMaint('M')"class='LEDselectorButtons'
-            src='\../..//Images/Buttons/Button-LED-Selector-Maint-White.png'
-            alt="button for LDP Button"
-          />
-        </td>
-      </tr>
-    </table>
-    <div id="statusDiv"></div>
+    <div id="dockContainer">
+    <div id="dockWrapper">
+    <div class="cap left"></div>
+    <ul class="osx-dock">
+    <li class="active">
+    <span>LDP</span>
+    <a><img id='L' name="checkboximg" onclick="swapImageLDP('L')"class='LEDselectorButtons'
+    src='../..//Images/Buttons/Button-LED-Selector-LDP-Whitev5.png'
+    alt="button for LDP Button"
+    /></a>
+    </li>
+    <li class="">
+    <span>coin slots</span>
+    <a ><img id='C' name="checkboximg" onclick="swapImageCoin('C')" class='LEDselectorButtons'
+    src='../..//Images/Buttons/Button-LED-Selector-Coin-Whitev5.png'
+    alt="button for Coin Button"
+    /></a>
+    </li>
+    <li class="">
+    <span>vu strips</span>
+    <a><img id='V' name="checkboximg" onclick="swapImageVU('V')"class='LEDselectorButtons'
+    src='\../..//Images/Buttons/Button-LED-Selector-VU-White.png'
+    alt="button for LDP Button"
+    /></a>
+    </li>
+    <li class="">
+    <span>Maintenence</span>
+    <a ><img id='M' name="checkboximg" onclick="swapImageMaint('M')"class='LEDselectorButtons'
+    src='\../..//Images/Buttons/Button-LED-Selector-Maint-White.png'
+    alt="button for LDP Button"
+    /></a>
+    </li>
+    </ul>
+    </div>
   </body>
   <script src="../..//js/main.js">
   </script>
