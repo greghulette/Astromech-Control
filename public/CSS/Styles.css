@@ -89,11 +89,13 @@ shadow: 2px, 4px 15px blue;
   left: 27%;
   height: 60px;
   width: 150px;
-  box-shadow: 0px 0px 15px black;
-  opacity: .8;
+
+  opacity: .9;
 }
 .applyButton:hover{
   opacity: 1.0;
+  box-shadow: 0px 0px 15px blue;
+  scale: 1.2;
 }
 .applyButtonoff{
   /* background-image: url(..//Images/Buttons/Button-Off-White.png);
@@ -106,10 +108,13 @@ shadow: 2px, 4px 15px blue;
   height: 60px;
   width: 150px;
   box-shadow: 0px 0px 15px black;
-  opacity: .8;
+  opacity: .9;
 }
 .applyButtonoff:hover{
   opacity: 1.0;
+  scale: 1.2;
+  box-shadow: 0px 0px 15px blue;
+
 }
 INPUT[type="submit"] {
   background: url(..//Images/Buttons/Button-Apply.png);

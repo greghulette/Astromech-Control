@@ -36,7 +36,8 @@ io.on('connection', function (socket) {
     var coin = data.coincommandstring;
     var vu = data.vucommandstring;
     var maint = data.mcommandstring;
-    sleep(500).then(() => { serial(ldp, coin, vu, maint); });
+    var serialcommand = data.serialcommandstring;
+    sleep(500).then(() => { serial(ldp, coin, vu, maint, serialcommand); });
 
     // sleep(500).then(() => { serial(coin); });
 

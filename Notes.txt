@@ -1,0 +1,7 @@
+1. Maintenance Lights for color wheel function don't work properly if the LDP isn't
+   on the color wheel as well. It just stalls and won't change color.  Need to modify the
+   Arduino code to fix this.
+
+2. Pulse Beat 2 - the VU strips aren't transitioning properly at the top.  This
+   is probably due to the fact that I'm using 7 instead of 9.  Need to modify the
+   Arduino code to fix this.  

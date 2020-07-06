@@ -12,8 +12,8 @@
     <script src="/socket.io/socket.io.js"></script>
 
   </head>
-  <body onload="preloadImages('../..//Images/Buttons/Button-LED-Selector-Checked-Yellow.png')">
-    <h2 class="SubMenuLabelPosition">Knight Rider</h2>
+  <!-- <body onload="preloadImages('../..//Images/Buttons/Button-LED-Selector-Checked-Yellow.png')"> -->
+    <h2 class="SubMenuLabelPosition">Serial Command</h2>
     <br />
     <div id="r2menu">
       <img
@@ -43,7 +43,7 @@
     </div>
 
     <div id="buttons">
-      <table>
+      <!-- <table>
         <tr>
           <td>
             <a href="./ColorChoice.html"
@@ -96,11 +96,15 @@
           </td>
 
         </tr>
-      </table>
+      </table> -->
 
       <div class="ColorPickerdiv">
-        <form class="" action="index.html" method="post">
-
+        <form class="" action="" method="sendSerialCommand('SerialCommandTextBox')">
+          <br>
+          <br>
+          <p>Enter your serial command: <input type="text" name="SerialCommandTextBox" id="SerialCommandTextBox" value=""> </p>
+          <a href="#" onclick="sendSerialCommand('SerialCommandTextBox')" class="applyButton"></a>
+          <input type="submit" onclick="sendSerialCommand('SerialCommandTextBox')"name="" value="" style="display: none">
           <img src="../..//Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img>
 
         </form>

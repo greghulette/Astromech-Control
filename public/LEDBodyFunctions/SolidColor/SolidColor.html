@@ -6,14 +6,19 @@
       name="description"
       content="This is a website dedicated to R2 LED Control"
     />
+    <link href="https://allfont.net/allfont.css?fonts=star-jedi" rel="stylesheet" type="text/css" />
     <meta name="viewport" content="width=device-width, initial-scale=0.5" />
     <title>Astromech Control Website</title>
+    <!-- <link rel="stylesheet" href="../..//CSS/Styles1.css" /> -->
+
     <link rel="stylesheet" href="../..//CSS/Styles.css" />
     <script src="/socket.io/socket.io.js"></script>
 
+
+
   </head>
   <body>
-    <h2 class="SubMenuLabelPosition">Dim Pulse</h2>
+    <h2 class="SubMenuLabelPosition">Solid Color</h2>
     <br />
     <div id="r2menu">
       <img
@@ -46,14 +51,15 @@
       <table>
         <tr>
           <td>
-            <a href="#"
+            <a href="./ColorChoice.html"
               ><img
                 class="buttonwidth"
                 id="transparent"
-                src="../..//Images/Buttons/LEDFunctionButtons/Generic/Button-DimPulse-Yellow.png"
-                alt="button for Alternating Colors"
+                src="../..//Images/Buttons/LEDFunctionButtons/Generic/Button-SolidColor-Yellow.png"
+                alt="ColorChoice"
             /></a>
           </td>
+
         </tr>
       </table>
       <div class="ColorPickerdiv">
@@ -72,22 +78,23 @@
           </select>
           <br />
           <br />
-          <input
+          <!-- <input
             class="slider"
             id="knightRiderSlider"
             type="range"
             name="LDPSpeed"
-            value="1"
-            min="1"
-            max="3"
-          />
+            value="4"
+            min="0"
+            max="8"
+          /> -->
           <!-- <button id='LDPKnightRiderColorChoiceSubmitButton' onclick="commandSingleColor('LDP','04',1, 'knightRiderColorChoiceColorSelect')" class="applyButton" type="button" name="button"></button> -->
-          <a href="#" onclick="commandOneColorAndSpeed('LDP','07','knightRiderSlider', 'knightRiderColorChoiceColorSelect')" class="applyButton"></a>
-          <img src="../..//Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff()"  class="applyButtonoff"></img>
+          <a href="#" onclick="commandSingleColor('LDP','15',1, 'knightRiderColorChoiceColorSelect')" class="applyButton"></a>
+          <img src="../..//Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
 
         </form>
 
       </div>
+
     </div>
     <div id="dockContainer">
     <div id="dockWrapper">
@@ -123,6 +130,7 @@
     </li>
     </ul>
     </div>
+
   </body>
   <script src="../..//js/main.js">
   </script>

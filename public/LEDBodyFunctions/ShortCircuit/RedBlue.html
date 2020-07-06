@@ -13,7 +13,7 @@
 
   </head>
   <body>
-    <h2 class="SubMenuLabelPosition">Dim Pulse</h2>
+    <h2 class="SubMenuLabelPosition">Short Circuit - Red/Blue</h2>
     <br />
     <div id="r2menu">
       <img
@@ -45,30 +45,53 @@
     <div id="buttons">
       <table>
         <tr>
+
           <td>
-            <a href="#"
+            <a href="./RedBlue.html">
+              <img
+                src="../..//Images/Buttons/LEDFunctionButtons/KnightRider/Button-KnightRider-RedBlue-Yellow.png"
+                alt="button for Wave1"
+                class="buttonwidth"
+                id="transparent"
+
+            /></a>
+          </td>
+          <td>
+            <a href="./ColorChoice.html"
               ><img
                 class="buttonwidth"
                 id="transparent"
-                src="../..//Images/Buttons/LEDFunctionButtons/Generic/Button-DimPulse-Yellow.png"
-                alt="button for Alternating Colors"
+                src="../..//Images/Buttons/LEDFunctionButtons/KnightRider/Button-KnightRider-ColorChoice-WHite.png"
+                alt="button for Knight Rider"
             /></a>
           </td>
+          <td>
+            <a href="./Random.html">
+              <img
+                src="../..//Images/Buttons/LEDFunctionButtons/Generic/Button-RandomColor-White.png"
+                alt="button for Wave1"
+                class="buttonwidth"
+                id="transparent"
+
+            /></a>
+          </td>
+
+
         </tr>
       </table>
       <div class="ColorPickerdiv">
-        <form class="" action="index.html" method="post">
+        <!-- <form class="" action="index.html" method="post">
           <label for="ColorPicker">Choose a color:</label>
             <select class="ColorPicker" id="knightRiderColorChoiceColorSelect" name="ColorPicker">
-            <option value="5">Blue</option>
+            <option value="0">Off</option>
             <option value="1">Red</option>
             <option value="2">Yellow</option>
             <option value="3">Green</option>
             <option value="4">Cyan</option>
+            <option value="5">Blue</option>
             <option value="6">Magenta</option>
             <option value="7">Orange</option>
             <option value="8">White</option>
-            <option value="0">Off</option>
           </select>
           <br />
           <br />
@@ -77,13 +100,13 @@
             id="knightRiderSlider"
             type="range"
             name="LDPSpeed"
-            value="1"
-            min="1"
-            max="3"
-          />
-          <!-- <button id='LDPKnightRiderColorChoiceSubmitButton' onclick="commandSingleColor('LDP','04',1, 'knightRiderColorChoiceColorSelect')" class="applyButton" type="button" name="button"></button> -->
-          <a href="#" onclick="commandOneColorAndSpeed('LDP','07','knightRiderSlider', 'knightRiderColorChoiceColorSelect')" class="applyButton"></a>
-          <img src="../..//Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff()"  class="applyButtonoff"></img>
+            value="4"
+            min="0"
+            max="8"
+          /> -->
+          <!-- <button onclick="commandNoOptions('LDP', '04','3','')" class="applyButton" type="button" name="button"></button> -->
+          <a href="#" onclick="commandNoOptions('LDP', '14','1','')" class="applyButton"></a>
+          <img src="../..//Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
 
         </form>
 

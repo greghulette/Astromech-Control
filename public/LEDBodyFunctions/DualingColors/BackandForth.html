@@ -13,7 +13,7 @@
 
   </head>
   <body>
-    <h2 class="SubMenuLabelPosition">Dim Pulse</h2>
+    <h2 class="SubMenuLabelPosition">Dualing Colors - Back and Forth</h2>
     <br />
     <div id="r2menu">
       <img
@@ -50,16 +50,26 @@
               ><img
                 class="buttonwidth"
                 id="transparent"
-                src="../..//Images/Buttons/LEDFunctionButtons/Generic/Button-DimPulse-Yellow.png"
-                alt="button for Alternating Colors"
+                src="../..//Images/Buttons/LEDFunctionButtons/DualingColors/Button-DualingColors-BackandForth-Yellow.png"
+                alt="button for Knight Rider"
             /></a>
           </td>
-        </tr>
+          <td>
+            <a href="./InandOut.html">
+              <img
+              src="../..//Images/Buttons/LEDFunctionButtons/DualBounce/Button-DualBounce-InandOut-White.png"
+                alt="button for Wave1"
+                class="buttonwidth"
+                id="transparent"
+
+            /></a>
+          </td>
+
       </table>
       <div class="ColorPickerdiv">
         <form class="" action="index.html" method="post">
-          <label for="ColorPicker">Choose a color:</label>
-            <select class="ColorPicker" id="knightRiderColorChoiceColorSelect" name="ColorPicker">
+          <label for="ColorPicker1">First Color:</label>
+            <select class="ColorPicker1Bounce" id="FirstColorSelctionBox" name="ColorPicker1">
             <option value="5">Blue</option>
             <option value="1">Red</option>
             <option value="2">Yellow</option>
@@ -71,19 +81,33 @@
             <option value="0">Off</option>
           </select>
           <br />
+          <br>
+          <form class="" action="#" method="post">
+            <label for="ColorPicker2">Second Color:</label>
+              <select class="ColorPicker2Bounce" id="SecondColorSelectionBox" name="ColorPicker2">
+              <option value="5">Blue</option>
+              <option value="1">Red</option>
+              <option value="2">Yellow</option>
+              <option value="3">Green</option>
+              <option value="4">Cyan</option>
+              <option value="6">Magenta</option>
+              <option value="7">Orange</option>
+              <option value="8">White</option>
+              <option value="0">Off</option>
+            </select>
           <br />
-          <input
+          <!-- <input
             class="slider"
-            id="knightRiderSlider"
+            id="AlternatingColorsSpeedSlider"
             type="range"
             name="LDPSpeed"
-            value="1"
-            min="1"
-            max="3"
-          />
+            value="4"
+            min="0"
+            max="8"
+          /> -->
           <!-- <button id='LDPKnightRiderColorChoiceSubmitButton' onclick="commandSingleColor('LDP','04',1, 'knightRiderColorChoiceColorSelect')" class="applyButton" type="button" name="button"></button> -->
-          <a href="#" onclick="commandOneColorAndSpeed('LDP','07','knightRiderSlider', 'knightRiderColorChoiceColorSelect')" class="applyButton"></a>
-          <img src="../..//Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff()"  class="applyButtonoff"></img>
+          <a href="#" onclick="commandTwoColorsNoSlider('10', '2' , 'FirstColorSelctionBox', 'SecondColorSelectionBox')" class="applyButton"></a>
+          <img src="../..//Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
 
         </form>
 
@@ -124,6 +148,6 @@
     </ul>
     </div>
   </body>
-  <script src="../..//js/main.js">
+   <script src="../..//js/main.js">
   </script>
 </html>
