@@ -7,6 +7,8 @@
       content="This is a website dedicated to R2 LED Control"
     />
     <meta name="viewport" content="width=device-width, initial-scale=0.5" />
+    <script src="/socket.io/socket.io.js"></script>
+
     <title>Astromech Control Website</title>
     <link rel="stylesheet" href="CSS/Styles.css" />
   </head>
@@ -173,80 +175,89 @@
             /></a>
           </td>
           <td>
-            <img
-              id ="transparent"
-              src="Images/Buttons/Button-Blank.png"
-              alt="button for Wave1"
-              class="buttonwidth"
-            />
+            <a href="./LEDBodyFunctions/WigWag/WigWag.html"
+              ><img
+                class="buttonwidth"
+                id ="transparent"
+                src="Images/Buttons/LEDFunctionButtons/Generic/Button-WigWag-White.png"
+                alt="button for Knight Rider"
+            /></a>
           </td>
         </tr>
         <tr>
           <td>
-            <img
-              id ="transparent"
-              src="Images/Buttons/Button-Blank.png"
-              alt="button for Wave1"
-              class="buttonwidth"
-            />
+            <a href="./LEDBodyFunctions/ZigZag/ZigZag.html"
+              ><img
+                class="buttonwidth"
+                id ="transparent"
+                src="Images/Buttons/LEDFunctionButtons/Generic/Button-ZigZag-White.png"
+                alt="button for Knight Rider"
+            /></a>
           </td>
           <td>
-            <img
-              id ="transparent"
-              src="Images/Buttons/Button-Blank.png"
-              alt="button for Wave1"
-              class="buttonwidth"
-            />
+            <a href="./LEDBodyFunctions/WigWag2/WigWag2.html"
+              ><img
+                class="buttonwidth"
+                id ="transparent"
+                src="Images/Buttons/LEDFunctionButtons/Generic/Button-WigWag2-White.png"
+                alt="button for Knight Rider"
+            /></a>
           </td>
           <td>
-            <img
-              id ="transparent"
-              src="Images/Buttons/Button-Blank.png"
-              alt="button for Wave1"
-              class="buttonwidth"
-            />
+            <a href="./LEDBodyFunctions/ZigZag2/ZigZag2.html"
+              ><img
+                class="buttonwidth"
+                id ="transparent"
+                src="Images/Buttons/LEDFunctionButtons/Generic/Button-ZigZag2-White.png"
+                alt="button for Knight Rider"
+            /></a>
           </td>
           <td>
-            <img
-              id ="transparent"
-              src="Images/Buttons/Button-Blank.png"
-              alt="button for Wave1"
-              class="buttonwidth"
-            />
+            <a href="./LEDBodyFunctions/DimPulse2/DimPulse2.html"
+              ><img
+                class="buttonwidth"
+                id ="transparent"
+                src="Images/Buttons/LEDFunctionButtons/Generic/Button-DimPulse2-White.png"
+                alt="button for Knight Rider"
+            /></a>
           </td>
           <td>
-            <img
-              id ="transparent"
-              src="Images/Buttons/Button-Blank.png"
-              alt="button for Wave1"
-              class="buttonwidth"
-            />
+            <a href="./LEDBodyFunctions/DimPulse3/DimPulse3.html"
+              ><img
+                class="buttonwidth"
+                id ="transparent"
+                src="Images/Buttons/LEDFunctionButtons/Generic/Button-DimPulse3-White.png"
+                alt="button for Knight Rider"
+            /></a>
           </td>
         </tr>
         <tr>
           <td>
-            <img
-              id ="transparent"
-              src="Images/Buttons/Button-Blank.png"
-              alt="button for Wave1"
-              class="buttonwidth"
-            />
+            <a href="./LEDBodyFunctions/DualingColors2/DualingColors2.html"
+              ><img
+                class="buttonwidth"
+                id ="transparent"
+                src="Images/Buttons/LEDFunctionButtons/Generic/Button-DualingColors2-White.png"
+                alt="button for Knight Rider"
+            /></a>
           </td>
           <td>
-            <img
-              id ="transparent"
-              src="Images/Buttons/Button-Blank.png"
-              alt="button for Wave1"
-              class="buttonwidth"
-            />
+            <a href="./LEDBodyFunctions/FLD/FLD.html"
+              ><img
+                class="buttonwidth"
+                id ="transparent"
+                src="Images/Buttons/LEDFunctionButtons/Generic/Button-FLD-White.png"
+                alt="button for Knight Rider"
+            /></a>
           </td>
           <td>
-            <img
-              id ="transparent"
-              src="Images/Buttons/Button-Blank.png"
-              alt="button for Wave1"
-              class="buttonwidth"
-            />
+            <a href="./LEDBodyFunctions/RLD/RLD.html"
+              ><img
+                class="buttonwidth"
+                id ="transparent"
+                src="Images/Buttons/LEDFunctionButtons/Generic/Button-RLD-White.png"
+                alt="button for Knight Rider"
+            /></a>
           </td>
           <td>
             <img
@@ -347,10 +358,14 @@
               alt="button for Wave1"
               class="buttonwidth"
               id="transparent"
+              onclick="commandStripAllOff()"
             />
           </td>
         </tr>
       </table>
     </div>
   </body>
+  <script src="./js/main.js">
+
+  </script>
 </html>

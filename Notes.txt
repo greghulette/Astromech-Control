@@ -4,4 +4,11 @@
 
 2. Pulse Beat 2 - the VU strips aren't transitioning properly at the top.  This
    is probably due to the fact that I'm using 7 instead of 9.  Need to modify the
-   Arduino code to fix this.  
+   Arduino code to fix this.
+
+3. Maintenence Lights for WigWag aren't working properly.  Not all the LEDs are lighting up.
+   Look at the Arduino code for this.
+
+4. FIXED - VU Front Logic Display function has green in it.  It should only be white and blue.
+
+5. 
