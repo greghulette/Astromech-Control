@@ -16,7 +16,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 //Set a static folder
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public',
+// {
+//   etag: true,
+//   lastModified: true,
+//   setHeaders: (res, path) => {
+//     if (path.endsWith('.png')) {
+//       res.setHeader('Cache-Control', 'no-cache');
+//     }
+//   },
+)));
 
 app.use('/api/members', require('./routes/api/members'));
 

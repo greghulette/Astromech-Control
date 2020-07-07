@@ -337,12 +337,19 @@ function sendSerialCommand(x) {
 // Varialbles for the selection of the LED selector buttons
 var ldpImageClicked = '/Images/Buttons/Button-LED-Selector-LDP-Yellowv5.png';
 var ldpImageUnclicked = '/Images/Buttons/Button-LED-Selector-LDP-Whitev5.png';
+ var ldpState ;
+
 var maintImageClicked = '/Images/Buttons/Button-LED-Selector-Maint-Yellow.png';
 var maintImageUnclicked = '/Images/Buttons/Button-LED-Selector-Maint-White.png';
+var maintState = false;
+
 var coinImageClicked = '/Images/Buttons/Button-LED-Selector-Coin-Yellowv5.png';
 var coinImageUnclicked = '/Images/Buttons/Button-LED-Selector-Coin-Whitev5.png';
+var coinState = false;
+
 var vuImageClicked = '/Images/Buttons/Button-LED-Selector-VU-Yellow.png';
 var vuImageUnclicked = '/Images/Buttons/Button-LED-Selector-VU-White.png';
+var vuState = false;
 
 var checkedItems = new Array();
 
@@ -356,9 +363,12 @@ function swapImageLDP(imgID) {
   // console.log(theldpState);
   if (theldpState.indexOf(ldpImageUnclicked) != -1) {
     theldpImage.src = ldpImageClicked;
+    ldpState = true;
     // console.log('changed to Clicked');
   } else {
     theldpImage.src = ldpImageUnclicked;
+    ldpState = false;
+
     // console.log('changed to Unclicked');
   }
 
@@ -469,3 +479,23 @@ function sleep(ms) {
 //   // port.write('L123\n');
 // });
 // };
+
+function displayState(imgID) {
+  let theldpImage = document.getElementById(imgID);
+  let theldpState = theldpImage.src;
+
+
+  // console.log(theldpImage);
+  // console.log(theldpState);
+  if (theldpState.indexOf(ldpImageUnclicked) != -1) {
+    // theldpImage.src = ldpImageClicked;
+    ldpState = true;
+    // console.log('changed to Clicked');
+  } else {
+    // theldpImage.src = ldpImageUnclicked;
+    ldpState = false;
+
+    // console.log('changed to Unclicked');
+  }
+
+}

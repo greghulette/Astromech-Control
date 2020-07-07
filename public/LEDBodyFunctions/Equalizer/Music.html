@@ -9,11 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.5" />
     <title>Astromech Control Website</title>
     <link rel="stylesheet" href="../..//CSS/Styles.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
 
   </head>
   <body>
-    <h2 class="SubMenuLabelPosition">Knight Rider - Color Changing</h2>
+    <h2 class="SubMenuLabelPosition">Auto Sequence - Enable</h2>
     <br />
     <div id="r2menu">
       <img
@@ -46,30 +46,27 @@
       <table>
         <tr>
           <td>
-            <a href="./ColorChoice.html"
+            <a href="#"
               ><img
                 class="buttonwidth"
-                id="transparent"
-                src="../..//Images/Buttons/LEDFunctionButtons/KnightRider/Button-KnightRider-ColorChoice-White.png"
-                alt="ColorChoice"
+                src="../..//Images/Buttons/LEDFunctionButtons/Generic/Button-Enable-Yellow.png"
+                alt="button for Knight Rider"
             /></a>
           </td>
           <td>
-            <a href="./RedBlue.html">
+            <a href="./Disable.html">
               <img
-                src="../..//Images/Buttons/LEDFunctionButtons/KnightRider/Button-KnightRider-RedBlue-White.png"
-                alt="Red/Blue"
+              src="../..//Images/Buttons/LEDFunctionButtons/Generic/Button-Disable-White.png"
+                alt="button for Wave1"
                 class="buttonwidth"
-                id="transparent"
             /></a>
           </td>
-          <td>
+          <!-- <td>
             <a href="./YellowGreen.html">
               <img
                 src="../..//Images/Buttons/LEDFunctionButtons/KnightRider/Button-KnightRider-YellowGreen-White.png"
-                alt="Yellow/Green"
+                alt="button for Wave1"
                 class="buttonwidth"
-                id="transparent"
             /></a>
           </td>
           <td>
@@ -77,39 +74,67 @@
               ><img
                 class="buttonwidth"
                 src="../..//Images/Buttons/LEDFunctionButtons/KnightRider/Button-KnightRider-ColorWheel-White.png"
-                alt="Color Wheel"
-                id="transparent"
+                alt="button for Knight Rider"
             /></a>
           </td>
-          <td>
           <td>
             <a href="./ColorChanging.html"
               ><img
                 class="buttonwidth"
-                src="../..//Images/Buttons/LEDFunctionButtons/KnightRider/Button-KnightRider-ColorChanging-Yellow.png"
-                alt="Color Changing"
-                id="transparent"
+                src="../..//Images/Buttons/LEDFunctionButtons/KnightRider/Button-KnightRider-ColorChanging-White.png"
+                alt="button for Knight Rider"
             /></a>
+          </td> -->
+          <!-- </tr>
+        <tr>
+          <td>
+            <img
+              src="..//Images/Buttons/LDPButtons/Button-LDP-Off-White.png"
+              alt="button for Wave1"
+              class="buttonwidth"
+            />
           </td>
+          <td>
+            <img
+              src="..//Images/Buttons/Button-Blank.png"
+              alt="button for Wave1"
+              class="buttonwidth"
+            />
+          </td>
+          <td>
+            <img
+              src="..//Images/Buttons/Button-Blank.png"
+              alt="button for Wave1"
+              class="buttonwidth"
+            />
+          </td>
+          <td>
+            <img
+              src="..//Images/Buttons/Button-Blank.png"
+              alt="button for Wave1"
+              class="buttonwidth"
+            />
+          </td>
+        </tr> -->
         </tr>
       </table>
       <div class="ColorPickerdiv">
         <form class="" action="index.html" method="post">
           <!-- <label for="ColorPicker">Choose a color:</label>
             <select class="ColorPicker" id="knightRiderColorChoiceColorSelect" name="ColorPicker">
-            <option value="0">Off</option>
+            <option value="5">Blue</option>
             <option value="1">Red</option>
             <option value="2">Yellow</option>
             <option value="3">Green</option>
             <option value="4">Cyan</option>
-            <option value="5">Blue</option>
             <option value="6">Magenta</option>
             <option value="7">Orange</option>
             <option value="8">White</option>
-          </select>
+            <option value="0">Off</option>
+          </select> -->
           <br />
           <br />
-          <input
+          <!-- <input
             class="slider"
             id="knightRiderSlider"
             type="range"
@@ -118,9 +143,9 @@
             min="0"
             max="8"
           /> -->
-          <!-- <button onclick="commandNoOptions('LDP', '04','2','')" class="applyButton" type="button" name="button"></button> -->
-          <a href="#" onclick="commandNoOptions('LDP', '04','2','')" class="applyButton"></a>
-          <img src="../..//Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
+          <!-- <button id='LDPKnightRiderColorChoiceSubmitButton' onclick="commandSingleColor('LDP','04',1, 'knightRiderColorChoiceColorSelect')" class="applyButton" type="button" name="button"></button> -->
+          <a href="#" onclick="commandNoOptions('LDP', '99','5','')" class="applyButton"></a>
+          <img src="../..//Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img>
 
         </form>
 
