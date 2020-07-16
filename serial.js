@@ -1,5 +1,6 @@
 const SerialPort = require('serialport');
-const port = new SerialPort('/dev/cu.usbmodem14101', {
+//const port = new SerialPort('/dev/cu.usbmodem14101', {
+const port = new SerialPort('/dev/ttyUSB0', {
     baudRate: 57600,
     autoOpen: false,
   });
@@ -19,16 +20,26 @@ function serialSend(ldp, coin, vu, maint, serial) {
         sleep(75).then(() => { port.write(vucommand); });
         sleep(100).then(() => { port.write(maintcommand); });
         sleep(125).then(() => { port.write(serialcommand); });
-        return console.log('sending the command of ' + ldpcommand);
-        return console.log('sending the command of ' + coincommand);
-        return console.log('sending the command of ' + vucommand);
-        return console.log('sending the command of ' + maintcommand);
+        return console.log('sending the LDP command of ' + ldpcommand);
+        return console.log('sending the COIN command of ' + coincommand);
+        return console.log('sending the VU command of ' + vucommand);
+        return console.log('sending the MAINT command of ' + maintcommand);
       }
+      console.log('opening port');
 
       // port.set({ options: dtr = false });
 
-      console.log('serial command says: ' + command);
-      sleep(2000).then(() => { port.write(ldpcommand); });
+      //console.log('serial command says: ' + command);
+      port.write(ldpcommand);
+      port.write(coincommand);
+      //sleep(2000).then(() => { port.write(ldpcommand); });
+      //sleep(75).then(() => { port.write(vucommand); });
+        ////sleep(100).then(() => { port.write(maintcommand); });
+        //sleep(125).then(() => { port.write(serialcommand); });
+        return console.log('sending the LDP command of ' + ldpcommand);
+        return console.log('sending the COIN command of ' + coincommand);
+        //return console.log('sending the VU command of ' + vucommand);
+        //return console.log('sending the MAINT command of ' + maintcommand);
       // sleep(2000).then(() => { port.write(coincommand); });
     });
 
