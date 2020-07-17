@@ -18,10 +18,10 @@ app.use(express.urlencoded({ extended: false }));
 var options =  {
   etag: true,
   lastModified: true,
-  setHeaders: (res, path) => {
-    if (path.endsWith('.png')) {
+  setHeaders:  (res, path) => {
+
       res.setHeader('Cache-Control', 'no-cache');
-    }
+
   }
 };
 
