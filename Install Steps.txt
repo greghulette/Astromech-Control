@@ -1,0 +1,57 @@
+This is a high level install instructions.
+
+1. Go to raspberry.org and download the latest installer.  I chose to use the installer rather then downloading the
+    image and burning it to the SD card.  It was a much easier method then downloading the image.
+    I'm using the "Raspberry Pi OS (32-bit) with desktop".
+
+2. Rotate the LCD screen.  I do this because of the way it's mounted in my droid.  You may not have to perform this step.
+    In Terminal, type "sudo nano /boot/config.txt"
+    Add the line "lcd_rotate=2" to the top of the file.
+    Press CTRL+X
+    Then Y
+    Then Enter
+    Then reboot
+
+3. Go through setup process
+
+4. Enable SSH, I2C, SSH Console
+
+5.  I SSH'd into the pi but you can connect a KVM to it if you'd like.
+
+6.  clone GitHub repository "https://github.com/greghulette/Astromech-Control.git"
+
+7. Install Node.js  //this installs version 14 onto the raspbery pi
+  curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+  sudo apt-get install -y nodejs
+
+8. Install dependencies
+   npm install
+
+9. Enable VNC (Remote Desktop Connection)  I did this for programming and ease of file manipulation.  Not needed
+
+10. Install Geany
+
+11. install Arduino
+
+12. Make node.js run by default when booting
+  mkdir ~/.config/lxsession
+  cd ~/.config/lxsession
+  mkdir/LXDE-pi
+  cd LXDE-pi
+  nano autostart
+
+  Type the following in the autostart file:
+  @lxpanel --profile LXDE-pi
+  @pcmanfm --desktop --profile LXDE-pi
+  @lxterminal --command "/home/pi/Astromech-Control/start.sh"
+  @xscreensaver SHAPE_REPRESENTATION_RELATIONSHIP
+
+
+  create start.sh in Astromech folder
+  nano start.sh
+
+  type the following:
+  cd /home/pi/Astromech-Control/
+  npm run dev
+
+13.

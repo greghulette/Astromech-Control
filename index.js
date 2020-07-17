@@ -19,11 +19,11 @@ var options =  {
   etag: true,
   lastModified: true,
   maxAge: 55111512312,
-  // setHeaders:  (res, path) => {
-  //
-  //     res.setHeader('Cache-Control', 'no-cache');
-  //
-  // }
+  setHeaders:  (res, path) => {
+
+      res.setHeader('Cache-Control', 'no-cache');
+
+  }
 };
 
 //Set a static folder
