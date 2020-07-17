@@ -18,11 +18,12 @@ app.use(express.urlencoded({ extended: false }));
 var options =  {
   etag: true,
   lastModified: true,
-  setHeaders:  (res, path) => {
-
-      res.setHeader('Cache-Control', 'no-cache');
-
-  }
+  maxAge: 55111512312,
+  // setHeaders:  (res, path) => {
+  //
+  //     res.setHeader('Cache-Control', 'no-cache');
+  //
+  // }
 };
 
 //Set a static folder
