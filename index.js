@@ -15,17 +15,18 @@ app.set('view enine', 'handlebars');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+var options =  {
+  etag: true,
+  lastModified: true,
+  setHeaders: (res, path) => {
+    if (path.endsWith('.png')) {
+      res.setHeader('Cache-Control', 'no-cache');
+    }
+  }
+};
+
 //Set a static folder
-app.use(express.static(path.join(__dirname, 'public',
-// {
-//   etag: true,
-//   lastModified: true,
-//   setHeaders: (res, path) => {
-//     if (path.endsWith('.png')) {
-//       res.setHeader('Cache-Control', 'no-cache');
-//     }
-//   },
-)));
+app.use(express.static(path.join(__dirname, 'public'), options));
 
 //app.use('/api/members', require('./routes/api/members'));
 
