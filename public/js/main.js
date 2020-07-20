@@ -68,7 +68,7 @@ for (var i = 0; i < checkedItems.length; i++) {
 };
 
 //var socket = io.connect('http://10.0.0.15:5000');
-var socket = io.connect('http://10.0.0.237:5000');
+var socket = io.connect('http://astromech.local:5000');
 function commandSingleColor(x, y, t, z) {
   // let LEDSelector = getStripName();
   let colorValues = getcolor1(z);
@@ -500,6 +500,7 @@ function displayState(imgID) {
 
 }
 
+//Sets the little icon in the tab
 function setFavicons(favImg){
   let headTitle = document.querySelector('head');
   let setFavicon = document.createElement('link');
