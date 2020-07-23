@@ -4,6 +4,7 @@ const logger = require('./middleware/logger');
 const exphbs = require('express-handlebars');
 const socket = require('socket.io');
 const serial = require('./serial');
+var player = require('play-sound')(opts={})
 
 const app = express();
 
@@ -56,6 +57,10 @@ io.on('connection', function (socket) {
     // serial(ldp);
     // serial(coin);
   });
+});
+
+player.play('./public/sounds/mp3/008 gen-8.mp3', function (err) {
+
 });
 
 function sleep(ms) {
