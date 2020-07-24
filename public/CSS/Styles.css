@@ -42,13 +42,13 @@ span.myButton input {
 }
 #ldptarget {
   position: absolute;
-  top: 137px;
-  left: 120px;
+  top: 125px;
+  left: 160px;
 
 
 }
 #ldptargetpicture {
-  width: 90px;
+  width: 130px;
   height: 20px;
   opacity: 0.9;
 shadow: 2px, 4px 15px blue;
@@ -69,14 +69,14 @@ shadow: 2px, 4px 15px blue;
 .r2menupicture {
   position: inherit;
       /* height: 1100px; */
-  top: 7.25%;
-  left: 12%;
-  width: 60%
+  top: 0%;
+  left: 20%;
+  width: 80%
 }
 #homeback {
   position: absolute;
-  top: 450px;
-  left: 90px;
+  top: 475px;
+  left: 155px;
 }
 
 .applyButton{
