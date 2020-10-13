@@ -3,8 +3,11 @@
 <html>
 
 <head>
-
-
+  <title>Astromech Control</title>
+  <meta
+    name="description"
+    content="This is a website dedicated to R2 LED Control"
+  />
   <link rel="shortcut icon" href="./Images/r2-d2.ico" type="image/x-icon"/>
   <link rel="stylesheet" href="./CSS/Styles.css" />
   <meta name="viewport" content="width=device-width, initial-scale=.5" />
@@ -2181,8 +2184,150 @@
       </div> <!-- end of Pulse-->
 
 
+      <div class="menu-Level-1-Content" id="AutoSequence">
+        <h1 class="menuHeader-Level-1">Auto Sequence</h1>
+        <div class="menu-Level-2">
+
+            <div class="menu-Level-2-Links " >
+              <button class="active" rel="AutoSequenceEnable"><img
+                  class="buttonwidth"
+                  id ="transparent"
+                  src="Images/Buttons/LEDFunctionButtons/Generic/Button-Enable-White.png"
+                  alt="button for Large Span"
+                /></button>
+
+            <button class="" rel="AutoSequenceDisable"><img
+                class="buttonwidth"
+                id ="transparent"
+                src="Images/Buttons/LEDFunctionButtons/Generic/Button-Disable-White.png"
+                alt="button for Large Span"
+              /></button>
+            </div>
+
+          <div class="menu-Level-2-Content active" id="AutoSequenceEnable">
+            <h2 class="menuHeader-Level-2">Enable</h2>
+            <div class="ColorPickerdiv">
+              <form class="" action="index.html" method="post">
+                <br />
+                <br />
+                <a href="#" onclick="commandNoOptions('LDP', '99','','')" class="applyButton"></a>
+                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img>
+              </form>
+            </div><!--end of Auto Sequence Enble div-->
+          </div> <!-- end of Level 2 Content Auto Sequence Enable-->
+
+          <div class="menu-Level-2-Content" id="AutoSequenceDisable">
+            <h2 class="menuHeader-Level-2">Disable</h2>
+            <div class="ColorPickerdiv">
+              <form class="" action="index.html" method="post">
+                <br />
+                <br />
+                <a href="#" onclick="commandNoOptions('LDP', '98','','')" class="applyButton"></a>
+                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img>
+              </form>
+            </div><!--end of Auto Sequence Disable div-->
+          </div> <!-- end of Level 2 Auto Sequence Disable-->
+
+        </div><!--end of Level 2 Menu-->
+      </div> <!-- end of Auto Sequence-->
+
+
+      <div class="menu-Level-1-Content" id="Equalizer">
+        <h1 class="menuHeader-Level-1">Sound Equalizer</h1>
+        <div class="menu-Level-2">
+
+            <div class="menu-Level-2-Links " >
+              <button class="active" rel="SoundOption1"><img
+                  class="buttonwidth"
+                  id ="transparent"
+                  src="Images/Buttons/LEDFunctionButtons/Generic/Button-Option1-White.png"
+                  alt="button for Large Span"
+                /></button>
+            </div>
+
+          <div class="menu-Level-2-Links " >
+            <button class="" rel="SoundOption2"><img
+                class="buttonwidth"
+                id ="transparent"
+                src="Images/Buttons/LEDFunctionButtons/Generic/Button-Option2-White.png"
+                alt="button for Large Span"
+              /></button>
+          </div>
+
+        <div class="menu-Level-2-Links " >
+          <button class="" rel="SoundOption3"><img
+              class="buttonwidth"
+              id ="transparent"
+              src="Images/Buttons/LEDFunctionButtons/Generic/Button-Option3-White.png"
+              alt="button for Large Span"
+            /></button>
+        </div>
+
+        <div class="menu-Level-2-Links " >
+          <button class="" rel="SoundOption4"><img
+              class="buttonwidth"
+              id ="transparent"
+              src="Images/Buttons/LEDFunctionButtons/Generic/Button-Option4-White.png"
+              alt="button for Large Span"
+            /></button>
+        </div>
+
+          <div class="menu-Level-2-Content active" id="SoundOption1">
+            <h2 class="menuHeader-Level-2">option 1</h2>
+            <div class="ColorPickerdiv">
+              <form class="" action="index.html" method="post">
+                <a href="#" onclick="commandNoOptions('LDP', '3','1','')" class="applyButton"></a>
+                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img>
+
+              </form>
+
+            </div><!--end of ColorPickerdiv div-->
+          </div> <!-- end of Level 2 Conetent Option 1-->
+
+          <div class="menu-Level-2-Content " id="SoundOption2">
+            <h2 class="menuHeader-Level-2">option 2</h2>
+            <div class="ColorPickerdiv">
+              <form class="" action="index.html" method="post">
+                <a href="#" onclick="commandNoOptions('LDP', '3','2','')" class="applyButton"></a>
+                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img>
+
+              </form>
+
+            </div><!--end of ColorPickerdiv div-->
+          </div> <!-- end of Level 2 Conetent Option 1-->
+
+          <div class="menu-Level-2-Content " id="SoundOption3">
+            <h2 class="menuHeader-Level-2">option 3</h2>
+            <div class="ColorPickerdiv">
+              <form class="" action="index.html" method="post">
+                <a href="#" onclick="commandNoOptions('LDP', '3','3','')" class="applyButton"></a>
+                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img>
+
+              </form>
+
+            </div><!--end of ColorPickerdiv div-->
+          </div> <!-- end of Level 2 Conetent Option 1-->
+
+          <div class="menu-Level-2-Content " id="SoundOption4">
+            <h2 class="menuHeader-Level-2">option 4</h2>
+            <div class="ColorPickerdiv">
+              <form class="" action="index.html" method="post">
+                <a href="#" onclick="commandNoOptions('LDP', '3','4','')" class="applyButton"></a>
+                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img>
+
+              </form>
+
+            </div><!--end of ColorPickerdiv div-->
+          </div> <!-- end of Level 2 Conetent Option 1-->
+
+
+
+
+        </div><!--end of Level 2 Menu-->
+      </div> <!-- end of Dualing Colors 2-->
+
       <div class="menu-Level-1-Content" id="SerialCommand">
-        <h1 class="menuHeader-Level-1">Dual Pulse</h1>
+        <h1 class="menuHeader-Level-1">Serial Command</h1>
         <div class="menu-Level-2">
 
             <div class="menu-Level-2-Links " >
