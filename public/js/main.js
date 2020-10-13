@@ -93,8 +93,8 @@ for (var i = 0; i < checkedItems.length; i++) {
 };
 };
 
-var socket = io.connect('http://10.0.0.15:5000');
-// var socket = io.connect('http://astromech.local:5000');
+//var socket = io.connect('http://10.0.0.15:5000');
+var socket = io.connect('http://astromech.local:5000');
 // var socket = io.connect('127.0.0.1:3000');
 
 function commandSingleColor(x, y, t, z) {
