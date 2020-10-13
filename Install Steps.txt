@@ -43,7 +43,7 @@ This is a high level install instructions.
   Type the following in the autostart file:
   @lxpanel --profile LXDE-pi
   @pcmanfm --desktop --profile LXDE-pi
-  @lxterminal --command "/home/pi/Astromech-Control/start.sh"
+  @lxterminal --geometry=30x20%s --command "/home/pi/Astromech-Control/start.sh"
   @xscreensaver SHAPE_REPRESENTATION_RELATIONSHIP
 
 

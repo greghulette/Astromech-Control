@@ -1,26 +1,52 @@
-// const SerialPort = require('serialport');
-//
-// var port = new SerialPort('/dev/cu.usbmodem14101', {
-//       baudRate: 57600,
-//       autoOpen: false
-//     });
 
-// var lastLDPcommand = process.argv[2] + '\r';
+//Uses this section to determine which led strips to use
+var checkedItems = new Array();
 
+function ldptoggle() {
+ let tmp = document.querySelector('#L');
+ tmp.classList.toggle('active');
+ if (tmp.classList.contains('active')) {
+ }
+  getCheckedElements2()
+};
 
-// var slidervalue = slider.value;
+function cointoggle() {
+ let tmp = document.querySelector('#C');
+ tmp.classList.toggle('active');
+ if (tmp.classList.contains('active')) {
+ }
+  getCheckedElements2()
+};
 
-// slider.oninput = function () {
-//   sliderValue = this.value;
-//   // var sliderValueString = slidervalue.toString;
-//   alert(sliderValue);
-// };
+function vutoggle() {
+ let tmp = document.querySelector('#V');
+ tmp.classList.toggle('active');
+ if (tmp.classList.contains('active')) {
+ }
+  getCheckedElements2()
+};
 
+function mainttoggle() {
+ let tmp = document.querySelector('#M');
+ tmp.classList.toggle('active');
+ if (tmp.classList.contains('active')) {
+ }
+  getCheckedElements2()
+};
 
-// function sleep(ms) {
-//   return new Promise(resolve => setTimeout(resolve, ms));
-// };
+var imgArray = [];
 
+function getCheckedElements2() {
+  var imgArray = document.getElementsByName('stripSelector');
+  checkedItems.length = 0;
+  for (var i = 0; i < imgArray.length; i++) {
+    var tmp = imgArray[i].classList.toString();
+    if (tmp.indexOf('active') != -1) {
+      checkedItems.push(imgArray[i].id.toString());
+    }
+
+    }
+  };
 
 function getSliderValue(t) {
   var slider1 = document.getElementById(t).value;
@@ -67,8 +93,10 @@ for (var i = 0; i < checkedItems.length; i++) {
 };
 };
 
-//var socket = io.connect('http://10.0.0.15:5000');
-var socket = io.connect('http://astromech.local:5000');
+var socket = io.connect('http://10.0.0.15:5000');
+// var socket = io.connect('http://astromech.local:5000');
+// var socket = io.connect('127.0.0.1:3000');
+
 function commandSingleColor(x, y, t, z) {
   // let LEDSelector = getStripName();
   let colorValues = getcolor1(z);
@@ -320,24 +348,13 @@ function sendSerialCommand(x) {
     serialcommandstring: commandUpper,
 
   });
-
-  // var coincommandstring = 'L98';
-  // var vucommandstring = 'L98';
-  // var mcommandstring = 'L98';
-  //
-  // socket.emit('command', {
-  //   ldpcommandstring: ldpcommandstring,
-  //   coincommandstring: coincommandstring,
-  //   vucommandstring: vucommandstring,
-  //   mcommandstring: mcommandstring
-  // });
 };
 
 
 // Varialbles for the selection of the LED selector buttons
 var ldpImageClicked = '/Images/Buttons/Button-LED-Selector-LDP-Yellowv5.png';
 var ldpImageUnclicked = '/Images/Buttons/Button-LED-Selector-LDP-Whitev5.png';
- var ldpState ;
+var ldpState ;
 
 var maintImageClicked = '/Images/Buttons/Button-LED-Selector-Maint-Yellow.png';
 var maintImageUnclicked = '/Images/Buttons/Button-LED-Selector-Maint-White.png';
@@ -358,9 +375,6 @@ function swapImageLDP(imgID) {
   let theldpImage = document.getElementById(imgID);
   let theldpState = theldpImage.src;
 
-
-  // console.log(theldpImage);
-  // console.log(theldpState);
   if (theldpState.indexOf(ldpImageUnclicked) != -1) {
     theldpImage.src = ldpImageClicked;
     ldpState = true;
@@ -420,6 +434,7 @@ function swapImageVU(imgID) {
   getCheckedElements();
 };
 var imgArray = [];
+
 function getCheckedElements() {
  var imgArray = document.getElementsByName('checkboximg');
   checkedItems.length = 0;
@@ -438,19 +453,21 @@ function getCheckedElements() {
       checkedItems.push(imgArray[i].id.toString());
     }
   }
-
-  // var strOut = "<p>" ;
-  //
-  // if (checkedItems.length != 0) {
-  //   strOut += checkedItems.toString();
-  // } else {
-  //   strOut += "none";
-  // }
-  //  strOut += "</p>";
-  //
-  //  var theDiv = document.getElementById('statusDiv');
-  //  theDiv.innerHTML = strOut
 }
+
+// const blankBorderLDP = document.querySelector('.blankBorderLDP');
+// const ldp = document.querySelector('#ldp12');
+// const coin = document.getElementById('coin');
+// const vu = document.getElementById('vu');
+// const maint = document.getElementById('maint');
+//
+// ldp.addEventListener('click' => () {
+//   // blankBorderLDP.classList.toggle('active');
+//   alert("ldp clicked");
+//
+// });
+
+
 
 function preloadImages() {
   for (var i = 0; i < arguments.length; i++) {
@@ -463,42 +480,23 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 };
 
-// function sendSerial(x, y, t, z) {
-//   var commandStrings = str.toUpperCase(getCommandString(x, y, t, z)) + '\r';
-//   console.log(commandStrings);
-// alert('The command of ' + commandStrings + 'sent to the Arduino');
 
-// port.open(function (err) {
-//   if (err) {
-//     return console.log('Error opening port: ', err.message);
+// function displayState(imgID) {
+//   let theldpImage = document.getElementById(imgID);
+//   let theldpState = theldpImage.src;
+//
+//   if (theldpState.indexOf(ldpImageUnclicked) != -1) {
+//     // theldpImage.src = ldpImageClicked;
+//     ldpState = true;
+//     // console.log('changed to Clicked');
+//   } else {
+//     // theldpImage.src = ldpImageUnclicked;
+//     ldpState = false;
+//
+//     // console.log('changed to Unclicked');
 //   }
 //
-//   sleep(1500).then(() => { port.write(commandStrings); });
-//
-//   // Because there's no callback to write, write errors will be emitted on the port:
-//   // port.write('L123\n');
-// });
-// };
-
-function displayState(imgID) {
-  let theldpImage = document.getElementById(imgID);
-  let theldpState = theldpImage.src;
-
-
-  // console.log(theldpImage);
-  // console.log(theldpState);
-  if (theldpState.indexOf(ldpImageUnclicked) != -1) {
-    // theldpImage.src = ldpImageClicked;
-    ldpState = true;
-    // console.log('changed to Clicked');
-  } else {
-    // theldpImage.src = ldpImageUnclicked;
-    ldpState = false;
-
-    // console.log('changed to Unclicked');
-  }
-
-}
+// }
 
 //Sets the little icon in the tab
 function setFavicons(favImg){

@@ -11,16 +11,42 @@ body {
 }
 
 .SubMenuLabelPosition {
-  position: absolute;
+  position: relative;
   /* border: 2px solid blue; */
   color: lightyellow;
   top: 10px;
-  left: 550px;
+  left: 130px;
   width: 800px;
   font-size: 30px;
   font-family: 'Star Jedi', arial;
 
 }
+
+.SubMenuLabelPosition1 {
+  position: relative;
+  /* border: 2px solid blue; */
+  color: lightyellow;
+  top: 10px;
+  left: 00px;
+  width: 800px;
+  font-size: 30px;
+  font-family: 'Star Jedi', arial;
+
+}
+
+.SubMenuLabelPosition2 {
+  position: inherit;
+  /* border: 2px solid blue; */
+  color: lightyellow;
+  top: 10px;
+  left: 00px;
+  width: 800px;
+  font-size: 30px;
+  font-family: 'Star Jedi', arial;
+
+}
+
+
 span.myButton input {
   /* background-image: url(..//Images/Buttons/Button-Apply.png); */
   background-size: cover;
@@ -40,13 +66,170 @@ span.myButton input {
   left: 450px;
   padding-right: 100px;
 }
-#ldptarget {
+.buttons {
+  /* border: 4px solid blue; */
   position: absolute;
-  top: 125px;
-  left: 160px;
+  top: 130px;
+  left: -50px;
+  padding-right: 100px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.ldpTarget {
+  position: absolute;
+  top: 75px;
+  left: -160px;
+}
+.coinTarget{
+  position: absolute;
+  left: -350px;
+  top: -47px;
+}
+.vuTarget{
+  position: absolute;
+  left: -350px;
+  top: -47px;
+}
+.maintTarget{
+  position: absolute;
+  left: -150px;
+  top: 100px;
+}
+
+
+
+
+.blankBorderLDP{
+  border: 4px solid blue;
+  box-shadow:  0px 0px 25px white, 0px 0px 10px white inset;
+  width: 130px;
+  height: 22px;
+  border-radius: 7p x;
+  background-color: transparent;
+  position: absolute;
+  top: 2px;
+  left: -110px;
+  outline: none;
+}
+
+.blankBorderLDP.active{
+  border: 4px solid yellow;
+  box-shadow: 0px 0px 15px yellow;
+  width: 130px;
+  height: 17px;
+  border-radius: 5px;
+
+  background-color: transparent;
+  position: absolute;
+  top: 2px;
+  left: -110px;
+  outline: none;
+
+}
+
+.blankBorderCoin{
+  border: 3px solid blue;
+  box-shadow: 0px 0px 15px blue;
+  width: 30px;
+  height: 60px;
+  border-radius: 5px;
+
+  background-color: transparent;
+  position: absolute;
+  top: 227px;
+  left: 77px;
+  outline: none;
+}
+
+.blankBorderCoin.active{
+  border: 3px solid yellow;
+  box-shadow: 0px 0px 15px yellow;
+  outline: none;
+  border-radius: 5px;
 
 
 }
+
+.blankBorderVU{
+  border: 3px solid blue;
+  box-shadow: 0px 0px 15px blue;
+  width: 45px;
+  height: 95px;
+  border-radius: 5px;
+  border-radius: 5px;
+
+  background-color: transparent;
+  position: absolute;
+  top: 192px;
+  left: 170px;
+  outline: none;
+}
+
+.blankBorderVU.active{
+  border: 3px solid yellow;
+  box-shadow: 0px 0px 15px yellow;
+  outline: none;
+  border-radius: 5px;
+
+}
+
+.blankBorderMaint{
+  border: 3px solid blue;
+  box-shadow: 0px 0px 15px blue;
+  width: 45px;
+  height: 45px;
+  border-radius: 5px;
+
+  background-color: transparent;
+  position: absolute;
+  top: 240px;
+  left: -70px;
+  outline: none;
+  color: blue;
+  font-size: 2rem;
+}
+
+.blankBorderMaint.active{
+  border: 3px solid yellow;
+  box-shadow: 0px 0px 15px yellow;
+  outline: none;
+    color: Yellow;
+    border-radius: 5px;
+
+}
+
+.hideexcess{
+  overflow: hidden;
+  width: 85px;
+  height: 100px;
+}
+
 #ldptargetpicture {
   width: 130px;
   height: 20px;
@@ -58,21 +241,32 @@ shadow: 2px, 4px 15px blue;
   opacity: 1;
   shadow: 2px, 4px 15px black;
 }
-#r2menu {
+.r2menu {
   /* border: 4px solid blue; */
   position: absolute;
-  width: 400px;
-  height: 650px;
+  top: 50px;
+  left: 150px;
+  width: 300px;
+  height: 625px;
   /* top: 5%;
   left: 5%; */
 }
-.r2menupicture {
-  position: inherit;
-      /* height: 1100px; */
-  top: 0%;
-  left: 20%;
-  width: 80%
+ .r2menupicture {
+  width: 100%
 }
+.r2menu  .img-wrapper {
+  display: inline-block;
+  overflow: hidden;
+}
+ .img-wrapper img {
+-webkit-transition: all .2s ease;
+width: 100%;
+}
+ /* .img-wrapper img:hover {
+-webkit-transform: scale(1.5);
+} */
+
+
 #homeback {
   position: absolute;
   top: 475px;
@@ -85,8 +279,8 @@ shadow: 2px, 4px 15px blue;
   /* opacity: 1; */
   /* border: 1px; */
   position: absolute;
-  top:250px;
-  left: 27%;
+  top:225px;
+  left: 25px;
   height: 60px;
   width: 150px;
 
@@ -103,8 +297,8 @@ shadow: 2px, 4px 15px blue;
   /* opacity: 1; */
   /* border: 1px; */
   position: absolute;
-  top:250px;
-  left: 60%;
+  top:225px;
+  left: 220px;
   height: 60px;
   width: 150px;
   box-shadow: 0px 0px 15px black;
@@ -127,10 +321,10 @@ INPUT[type="submit"] {
 .ColorPickerdiv {
   position: absolute;
   /* border: 3px blue solid; */
-  top: 200%;
+  top: 100px;
   /* top: 360px;
   left: 625px; */
-  width: 765px;
+  width: 450px;
   font-size: 35 px;
 }
 .ColorPicker {
@@ -138,16 +332,17 @@ INPUT[type="submit"] {
   align-items: center;
   /* justify-content: center; */
   position:absolute;
-  top: 10%;
-  left: 47%;
-  width: 25%;
+  top: 10px;
+  left: 100px;
+  /* width: 25%; */
   font-size: 1.5rem;
   /* overflow: auto; */
 }
 label[for= ColorPicker]{
   position: absolute;
-  left: 0%;
-  top: -5%;
+  left: 20px;
+  top: -45px;
+  width: 450px;
   font-size: 2rem;
 
 }
@@ -157,15 +352,16 @@ label[for= ColorPicker]{
   align-items: center;
   /* justify-content: center; */
   position:absolute;
-  top: 5%;
-  left: 40%;
+  top: -35px;
+  left: 280px;
   width: 25%;
   font-size: 1.5rem;
   /* overflow: auto; */
 }
 label[for= ColorPicker1]{
   position: absolute;
-  left: 0%;
+  left: 10px;
+  top: -50px;
   font-size: 2rem;
 
 }
@@ -175,15 +371,17 @@ label[for= ColorPicker1]{
   align-items: center;
   /* justify-content: center; */
   position:absolute;
-  top: 75%;
-  left: 40%;
+  top: 50px;
+  left: 280px;
   width: 25%;
   font-size: 1.5rem;
   /* overflow: auto; */
 }
 label[for= ColorPicker2]{
   position: absolute;
-  left: 0%;
+  left: -10px;
+  top: 35px;
+
   font-size: 2rem;
 
 }
@@ -194,7 +392,7 @@ label[for= ColorPicker2]{
   /* justify-content: center; */
   position:absolute;
   top: 5%;
-  left: 60%;
+  left: 100px;
   width: 25%;
   font-size: 1.5rem;
   /* overflow: auto; */
@@ -202,6 +400,7 @@ label[for= ColorPicker2]{
 label[for= ColorPicker1Bounce]{
   position: absolute;
   left: 0%;
+  top: -60px;
   font-size: 2rem;
 
 }
@@ -211,15 +410,16 @@ label[for= ColorPicker1Bounce]{
   align-items: center;
   /* justify-content: center; */
   position:absolute;
-  top: 75%;
-  left: 60%;
+  top: 100px;
+  left: 100px;
   width: 25%;
   font-size: 1.5rem;
   /* overflow: auto; */
 }
 label[for= ColorPicker2Bounce]{
   position: absolute;
-  left: 0%;
+  left: 100px;
+  top: 50px;
   font-size: 2rem;
 
 }
@@ -236,7 +436,7 @@ label[for= ColorPicker2Bounce]{
 .KnightRiderSliderPosition {
   /* position: absolute; */
   top: 80px;
-  lef: 450px; */
+  lef: 450px;
   border: 3px red solid;
 }
 
@@ -247,7 +447,7 @@ input[type="range"] {
   margin: 10px 0;
   position: absolute;
   width: 75%;
-  top: 135%;
+  top: 10 5%;
   left: 15%;
   background: transparent;
   opacity: 0.7;
@@ -438,3 +638,329 @@ div.cap {display: block;height: 100px;width: 40px;/* background: url("https://d3
         z-index: 1;
         box-shadow: 0px 0px 30px blue;
       }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.ColorPickerdivtab {
+  position: absolute;
+  /* border: 3px blue solid; */
+  top: 300px;
+  /* top: 360px;
+  left: 625px; */
+  width: 765px;
+  font-size: 35 px;
+}
+.ColorPickertab {
+  /* border: 3px green solid; */
+  align-items: center;
+  /* justify-content: center; */
+  position:absolute;
+  top: 10%;
+  left: 47%;
+  width: 25%;
+  font-size: 1.5rem;
+  /* overflow: auto; */
+}
+label[for= ColorPickertab]{
+  position: absolute;
+  left: 0%;
+  top: -5%;
+  font-size: 2rem;
+
+}
+.SubMenuLabelPositiontab {
+  position: absolute;
+  /* border: 2px solid blue; */
+  color: lightyellow;
+  top: -300px;
+  left: 75px;
+  width: 800px;
+  font-size: 30px;
+  font-family: 'Star Jedi', arial;
+
+
+}
+
+.w3-animate-top{position:relative;animation:animatetop 0.4s}@keyframes animatetop{from{top:-300px;opacity:0} to{top:0;opacity:1}}
+
+.menuheader{
+  position: absolute;
+  top: -120px;
+}
+.menuHeader-Level-1{
+  position: absolute;
+  top: -120px;
+  left: 205px;
+  width: 600px;
+}
+.menuHeader-Level-2{
+  position: absolute;
+  top: -65px;
+  left: 20px;
+  width: 450px;
+}
+.menu-Level-0 {
+  float: left;
+  position: absolute;
+  left: 0px;
+  top: 100px;
+  /* border: 1px solid #ccc; */
+  background-color: black;
+  width: 85px;
+  height: 100%;
+}
+
+/* Style the buttons that are used to open the tab content */
+.menu-Level-0 .menu-Level-0-Links button {
+  display: block;
+  background-color: inherit;
+  color: black;
+  padding: 15px 6px;
+  width: 100%;
+  height: 100px;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s;
+  border-top: 1px solid white;
+  border-right: 1px solid white;
+  border-radius: 10px;
+  box-shadow: 5px 0px 7px blue;
+}
+
+/* Change background color of buttons on hover */
+.menu-Level-0 .menu-Level-0-Links button:hover {
+  background-color: #778899;
+}
+
+/* Create an active/current "tab button" class */
+.menu-Level-0 .menu-Level-0-Links button.active {
+  box-shadow: (5px 0px 25px yellow);
+  background-color: #696969;
+  display: block;
+}
+
+/* Style the tab content */
+.menu-Level-0  .menu-Level-0-Content {
+  position: absolute;
+  display: none;
+  left: 500px;
+  top: 0px;
+  padding: 5px 12px;
+  /* border: 1px solid #ccc; */
+  width: 800px;
+  border-left: none;
+  height: 100%;
+}
+.menu-Level-0  .menu-Level-0-Content.active{
+  display: block;
+}
+
+
+
+
+
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1{
+  width: 220px;
+  height: 400px;
+  overflow-y: auto;
+  overflow-x: visible;
+  padding-left: 37px;
+  padding-top: 25px;
+
+}
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1::-webkit-scrollbar {
+  height: 1rem;
+}
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1::-webkit-scrollbar-track{
+  box-shadow: inset 0 0 7px blue;
+
+}
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1::-webkit-scrollbar-thumb {
+  background-color: yellow;
+  outline: 1px solid slategrey;
+  border-radius: .4rem;
+  opacity:0.7;
+}
+
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Links button{
+   display: inline-block;
+   /* left:100px;
+   top: 100px; */
+   width: 160px;
+   height: 54px;
+   overflow: visible;
+   border: none;
+   padding-top: 0px;
+   background-color: black;
+}
+
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Links button.active{
+   box-shadow: 0px 0px 25px yellow;
+   background-color: yellow;
+   border: none;
+   outline: none;
+  -webkit-transform: scale(1.25);
+}
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Links button.active:hover{
+   box-shadow: 0px 0px 25px yellow;
+   background-color: yellow;
+   border: none;
+   outline: none;
+
+}
+
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content{
+  width: 400px;
+  position:  absolute;
+  top: 0px;
+  left: 275px;
+  display: none;
+}
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content.active{
+  display: block;
+  outline: none;
+  border: none;
+}
+
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-2{
+  width: 200px;
+  height: 400px;
+  overflow: visible;
+  padding-left: 25px;
+  padding-top: 25px;
+}
+
+
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content .menu-Level-2 .menu-Level-2-Links button{
+ display: inline-block;
+ width: 160px;
+ height: 54px;
+ overflow: visible;
+border: none;
+padding-top: 0px;
+background-color: black;
+}
+
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content .menu-Level-2 .menu-Level-2-Links button.active{
+ box-shadow: 0px 0px 25px yellow;
+ background-color: yellow;
+ border: none;
+ outline: none;
+-webkit-transform: scale(1.25);
+}
+
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content .menu-Level-2 .menu-Level-2-Content{
+  width: 400px;
+  position:  absolute;
+  top: 0px;
+  left: 250px;
+  display: none;
+}
+
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content .menu-Level-2 .menu-Level-2-Content.active{
+display: block;
+}
+
+
+
+/*.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content button{
+ position: absolute;
+
+ background: none;
+ width: 200px;
+ height: 400px;
+ display: none;
+}
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content button.active{
+ display: block;
+
+ width: 200px;
+ height: 400px;
+
+
+}
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content  .ledControlSubMenuControl .ledControlSubMenu{
+
+ background: none;
+ width: 160px;
+ height: 55px;
+ border: none;
+ outline: none;
+}
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content  .ledControlSubMenuControl .ledControlSubMenu.active{
+-webkit-transform: scale(1.25);
+box-shadow: 0px 0px 15px yellow;
+}
+
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content .ledControlSubMenuControl .tabSubMenu {
+width: 200px;
+height: 400px;
+display: contents;
+}
+
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content  .ledControlSubMenuControl.tabSubMenu .tablinks button {
+  display: block;
+  background-color: inherit;
+  color: black;
+  padding: 15px 6px;
+  width: 100%;
+  height: 100px;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s;
+  border-top: 1px solid white;
+  border-right: 1px solid white;
+  border-radius: 10px;
+  box-shadow: 5px 0px 7px blue;
+}
+
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content  .ledControlSubMenuControl .tabSubMenu .tablinks button:hover {
+  background-color: #778899;
+}
+
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content  .ledControlSubMenuControl .tabSubMenu .tablinks button.active {
+  box-shadow: (5px 0px 25px yellow);
+  background-color: #696969;
+  display: block;
+}
+
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content  .menu-Level-2 .menu-Level-2-Links{
+  position: absolute;
+  display: none;
+  left: 500px;
+  top: 60px;
+  padding: 0px 12px;
+  width: 800px;
+  border-left: none;
+  height: 100%;
+}
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content  .menu-Level-2 .menu-Level-2-Link.active{
+  display: block;
+}
+
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content  .ledControlSubMenuControl .tabSubMenu .tabcontentmenu.header{
+  position: absolute;
+  top: -100px;
+
+}*/
