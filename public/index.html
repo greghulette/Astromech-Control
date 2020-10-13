@@ -2181,6 +2181,36 @@
       </div> <!-- end of Pulse-->
 
 
+      <div class="menu-Level-1-Content" id="SerialCommand">
+        <h1 class="menuHeader-Level-1">Dual Pulse</h1>
+        <div class="menu-Level-2">
+
+            <div class="menu-Level-2-Links " >
+              <button class="active" rel="SerialCommand1"><img
+                  class="buttonwidth"
+                  id ="transparent"
+                  src="Images/Buttons/LEDFunctionButtons/Generic/Button-DualPulse-White.png"
+                  alt="button for Large Span"
+                /></button>
+            </div>
+
+          <div class="menu-Level-2-Content active" id="SerialCommand1">
+            <h2 class="menuHeader-Level-2"></h2>
+            <div class="ColorPickerdiv">
+              <form class="" action="" method="sendSerialCommand('SerialCommandTextBox')">
+                <br>
+                <br>
+                <p>Enter your serial command: <input type="text" name="SerialCommandTextBox" id="SerialCommandTextBox" value=""> </p>
+                <a href="#" onclick="sendSerialCommand('SerialCommandTextBox')" class="applyButton"></a>
+                <input type="submit" onclick="sendSerialCommand('SerialCommandTextBox')"name="" value="" style="display: none">
+                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img>
+              </form>
+            </div><!--end of Serial Command div-->
+          </div> <!-- end of Level 2 Conetent Serial Command-->
+
+        </div><!--end of Level 2 Menu-->
+      </div> <!-- end of Serial Command-->
+
 
 <!--                      end of Level 1 Menu -->
 </div>
