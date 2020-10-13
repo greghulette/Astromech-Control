@@ -58,7 +58,7 @@ io.on('connection', function (socket) {
     // serial(coin);
   });
 });
-
+player.volume = 0.2;
 player.play('./public/sounds/mp3/008 gen-8.mp3', function (err) {
 
 });
