@@ -92,8 +92,9 @@ for (var i = 0; i < checkedItems.length; i++) {
   };
 };
 };
+var socket = io.connect('http://astromech.local:5000');
 // var socket = io();
-var socket = io.connect ();
+// var socket = io.connect ();
 // var socket1 = io.connect('http://astromech.local:5000');
 // var socket2 = io.connect('10.0.0.40:5000');
 // var socket = io.connect('127.0.0.1:3000');
