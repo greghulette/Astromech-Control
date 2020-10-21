@@ -93,9 +93,9 @@ for (var i = 0; i < checkedItems.length; i++) {
 };
 };
 
-//var socket = io.connect('http://10.0.0.15:5000');
-var socket = io.connect('http://astromech.local:5000');
-// var socket = io.connect('127.0.0.1:3000');
+var socket = io.connect('http://10.0.0.15:5000');
+var socket1 = io.connect('http://astromech.local:5000');
+var socket2 = io.connect('127.0.0.1:3000');
 
 function commandSingleColor(x, y, t, z) {
   // let LEDSelector = getStripName();
@@ -133,6 +133,18 @@ function commandSingleColor(x, y, t, z) {
     vucommandstring: vucommandstring,
     mcommandstring: mcommandstring
   });
+  socket1.emit('command', {
+    ldpcommandstring: ldpcommandstring,
+    coincommandstring: coincommandstring,
+    vucommandstring: vucommandstring,
+    mcommandstring: mcommandstring
+  });
+  socket2.emit('command', {
+    ldpcommandstring: ldpcommandstring,
+    coincommandstring: coincommandstring,
+    vucommandstring: vucommandstring,
+    mcommandstring: mcommandstring
+  });
 };
 
 function commandNoOptions(x, y, t, z) {
@@ -164,6 +176,18 @@ function commandNoOptions(x, y, t, z) {
   };
 
   socket.emit('command', {
+    ldpcommandstring: ldpcommandstring,
+    coincommandstring: coincommandstring,
+    vucommandstring: vucommandstring,
+    mcommandstring: mcommandstring
+  });
+  socket1.emit('command', {
+    ldpcommandstring: ldpcommandstring,
+    coincommandstring: coincommandstring,
+    vucommandstring: vucommandstring,
+    mcommandstring: mcommandstring
+  });
+  socket2.emit('command', {
     ldpcommandstring: ldpcommandstring,
     coincommandstring: coincommandstring,
     vucommandstring: vucommandstring,
@@ -208,6 +232,18 @@ function commandTwoColors(x, y, t, z, s) {
     vucommandstring: vucommandstring,
     mcommandstring: mcommandstring
   });
+  socket1.emit('command', {
+    ldpcommandstring: ldpcommandstring,
+    coincommandstring: coincommandstring,
+    vucommandstring: vucommandstring,
+    mcommandstring: mcommandstring
+  });
+  socket2.emit('command', {
+    ldpcommandstring: ldpcommandstring,
+    coincommandstring: coincommandstring,
+    vucommandstring: vucommandstring,
+    mcommandstring: mcommandstring
+  });
 };
 
 
@@ -241,6 +277,18 @@ function commandTwoColorsNoSlider( y, t, z, s) {
   };
 
   socket.emit('command', {
+    ldpcommandstring: ldpcommandstring,
+    coincommandstring: coincommandstring,
+    vucommandstring: vucommandstring,
+    mcommandstring: mcommandstring
+  });
+  socket1.emit('command', {
+    ldpcommandstring: ldpcommandstring,
+    coincommandstring: coincommandstring,
+    vucommandstring: vucommandstring,
+    mcommandstring: mcommandstring
+  });
+  socket2.emit('command', {
     ldpcommandstring: ldpcommandstring,
     coincommandstring: coincommandstring,
     vucommandstring: vucommandstring,
@@ -285,6 +333,18 @@ function commandOneColorAndSpeed(x, y, t, z) {
     vucommandstring: vucommandstring,
     mcommandstring: mcommandstring
   });
+  socket1.emit('command', {
+    ldpcommandstring: ldpcommandstring,
+    coincommandstring: coincommandstring,
+    vucommandstring: vucommandstring,
+    mcommandstring: mcommandstring
+  });
+  socket2.emit('command', {
+    ldpcommandstring: ldpcommandstring,
+    coincommandstring: coincommandstring,
+    vucommandstring: vucommandstring,
+    mcommandstring: mcommandstring
+  });
 };
 
 
@@ -324,6 +384,18 @@ function commandStripOff(x,) {
     vucommandstring: vucommandstring,
     mcommandstring: mcommandstring
   });
+  socket1.emit('command', {
+    ldpcommandstring: ldpcommandstring,
+    coincommandstring: coincommandstring,
+    vucommandstring: vucommandstring,
+    mcommandstring: mcommandstring
+  });
+  socket2.emit('command', {
+    ldpcommandstring: ldpcommandstring,
+    coincommandstring: coincommandstring,
+    vucommandstring: vucommandstring,
+    mcommandstring: mcommandstring
+  });
 };
 
 function commandStripAllOff() {
@@ -338,6 +410,18 @@ function commandStripAllOff() {
     vucommandstring: vucommandstring,
     mcommandstring: mcommandstring
   });
+  socket1.emit('command', {
+    ldpcommandstring: ldpcommandstring,
+    coincommandstring: coincommandstring,
+    vucommandstring: vucommandstring,
+    mcommandstring: mcommandstring
+  });
+  socket2.emit('command', {
+    ldpcommandstring: ldpcommandstring,
+    coincommandstring: coincommandstring,
+    vucommandstring: vucommandstring,
+    mcommandstring: mcommandstring
+  });
 };
 
 function sendSerialCommand(x) {
@@ -345,6 +429,14 @@ function sendSerialCommand(x) {
   let commandUpper = command.toUpperCase();
   console.log(commandUpper);
   socket.emit('command', {
+    serialcommandstring: commandUpper,
+
+  });
+  socket1.emit('command', {
+    serialcommandstring: commandUpper,
+
+  });
+  socket2.emit('command', {
     serialcommandstring: commandUpper,
 
   });
