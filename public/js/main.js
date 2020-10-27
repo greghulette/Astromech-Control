@@ -35,7 +35,7 @@ function mainttoggle() {
 };
 
 function dptoggle() {
- let tmp = document.querySelector('#DP');
+ let tmp = document.querySelector('#D');
  tmp.classList.toggle('active');
  if (tmp.classList.contains('active')) {
  }
@@ -43,7 +43,7 @@ function dptoggle() {
 };
 
 function cbitoggle() {
- let tmp = document.querySelector('#CBI');
+ let tmp = document.querySelector('#I');
  tmp.classList.toggle('active');
  if (tmp.classList.contains('active')) {
  }
@@ -103,6 +103,14 @@ for (var i = 0; i < checkedItems.length; i++) {
       return checkedItems[i];
   };
   if (checkedItems[i] === "M") {
+    console.log("M selected");
+      return checkedItems[i];
+  };
+  if (checkedItems[i] === "I") {
+    console.log("M selected");
+      return checkedItems[i];
+  };
+  if (checkedItems[i] === "D") {
     console.log("M selected");
       return checkedItems[i];
   };
