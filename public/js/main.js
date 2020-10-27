@@ -34,6 +34,22 @@ function mainttoggle() {
   getCheckedElements2()
 };
 
+function dptoggle() {
+ let tmp = document.querySelector('#DP');
+ tmp.classList.toggle('active');
+ if (tmp.classList.contains('active')) {
+ }
+  getCheckedElements2()
+};
+
+function cbitoggle() {
+ let tmp = document.querySelector('#CBI');
+ tmp.classList.toggle('active');
+ if (tmp.classList.contains('active')) {
+ }
+  getCheckedElements2()
+};
+
 var imgArray = [];
 
 function getCheckedElements2() {

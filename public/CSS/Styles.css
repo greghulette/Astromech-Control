@@ -122,7 +122,16 @@ span.myButton input {
   top: 100px;
 }
 
-
+.DPTarget{
+  position: absolute;
+  left: -65px;
+  top: -95px;
+}
+.CBITarget{
+  position: absolute;
+  left: -210px;
+  top: -100px;
+}
 
 
 .blankBorderLDP{
@@ -222,6 +231,52 @@ span.myButton input {
     color: Yellow;
     border-radius: 5px;
 
+}
+
+.blankBorderDP{
+  border: 3px solid blue;
+  box-shadow: 0px 0px 15px blue;
+  width: 45px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: transparent;
+  position: absolute;
+  top: 240px;
+  left: -70px;
+  outline: none;
+  color: blue;
+  font-size: 2rem;
+}
+
+.blankBorderDP.active{
+  border: 3px solid yellow;
+  box-shadow: 0px 0px 15px yellow;
+  outline: none;
+    color: Yellow;
+    border-radius: 5px;
+}
+
+.blankBorderCBI{
+  border: 3px solid blue;
+  box-shadow: 0px 0px 15px blue;
+  width: 45px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: transparent;
+  position: absolute;
+  top: 240px;
+  left: -70px;
+  outline: none;
+  color: blue;
+  font-size: 2rem;
+}
+
+.blankBorderCBI.active{
+  border: 3px solid yellow;
+  box-shadow: 0px 0px 15px yellow;
+  outline: none;
+    color: Yellow;
+    border-radius: 5px;
 }
 
 .hideexcess{

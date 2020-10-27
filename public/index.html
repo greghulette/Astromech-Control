@@ -248,6 +248,12 @@
       <div class="maintTarget">
         <button class="blankBorderMaint " type="" name="stripSelector" onclick="mainttoggle()" id="M">M</button>
       </div>
+      <div class="DPTarget">
+        <button class="blankBorderDP " type="" name="stripSelector" onclick="dptoggle()" id="DP">D</button>
+      </div>
+      <div class="CBITarget">
+        <button class="blankBorderCBI " type="" name="stripSelector" onclick="cbitoggle()" id="CBI">C</button>
+      </div>
 
 
 
@@ -478,6 +484,14 @@
                   alt="button for Knight Rider"
                 /></button>
             </div>
+          <div class="menu-Level-1-Links">
+                <button class="" rel="DataPanel"><img
+                    class="buttonwidth"
+                    id ="transparent"
+                    src="Images/Buttons/LEDFunctionButtons/Generic/Button-DataPanelCBI-White.png"
+                    alt="button for Data Panel"
+                  /></button>
+              </div>
 
 
 
@@ -1907,7 +1921,7 @@
             </div><!--end of ColorPickerdiv div-->
           </div> <!-- end of Level 2 Conetent Option 1-->
 
-          <div class="menu-Level-2-Content active" id="Option2">
+          <div class="menu-Level-2-Content " id="Option2">
             <h2 class="menuHeader-Level-2">option 2</h2>
             <div class="ColorPickerdiv">
               <form class="" action="index.html" method="post">
@@ -1945,7 +1959,7 @@
             </div><!--end of ColorPickerdiv div-->
           </div> <!-- end of Level 2 Conetent Option 2-->
 
-          <div class="menu-Level-2-Content active" id="Option3">
+          <div class="menu-Level-2-Content " id="Option3">
             <h2 class="menuHeader-Level-2">option 3</h2>
             <div class="ColorPickerdiv">
               <form class="" action="index.html" method="post">
@@ -1983,7 +1997,7 @@
             </div><!--end of ColorPickerdiv div-->
           </div> <!-- end of Level 2 Conetent Option 3-->
 
-          <div class="menu-Level-2-Content active" id="Option4">
+          <div class="menu-Level-2-Content " id="Option4">
             <h2 class="menuHeader-Level-2">option 4</h2>
             <div class="ColorPickerdiv">
               <form class="" action="index.html" method="post">
@@ -2345,6 +2359,131 @@
 
         </div><!--end of Level 2 Menu-->
       </div> <!-- end of Serial Command-->
+
+      <div class="menu-Level-1-Content" id="DataPanel">
+        <h1 class="menuHeader-Level-1">Data Panel/CBi</h1>
+        <div class="menu-Level-2">
+
+            <div class="menu-Level-2-Links " >
+              <button class="active" rel="DataPanelNormal"><img
+                  class="buttonwidth"
+                  id ="transparent"
+                  src="Images/Buttons/LEDFunctionButtons/Generic/Button-Normal-White.png"
+                  alt="button for Large Span"
+                /></button>
+            </div>
+
+          <div class="menu-Level-2-Links " >
+            <button class="" rel="DataPanelShortCircuit"><img
+                class="buttonwidth"
+                id ="transparent"
+                src="Images/Buttons/LEDFunctionButtons/Generic/Button-ShortCircuit-White.png"
+                alt="button for Large Span"
+              /></button>
+          </div>
+
+        <div class="menu-Level-2-Links " >
+          <button class="" rel="DataPanelFlash"><img
+              class="buttonwidth"
+              id ="transparent"
+              src="Images/Buttons/LEDFunctionButtons/Generic/Button-Flash-White.png"
+              alt="button for Large Span"
+            /></button>
+        </div>
+
+          <div class="menu-Level-2-Content active" id="DataPanelNormal">
+            <h2 class="menuHeader-Level-2">Normal</h2>
+            <div class="ColorPickerdiv">
+              <form class="" action="index.html" method="post">
+
+                <br />
+                <a href="#" onclick="commandNoOptions('LDP', '99','','')" class="applyButton"></a>
+                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
+              </form>
+            </div><!--end of ColorPickerdiv div-->
+          </div> <!-- end of Level 2 Conetent Option 1-->
+
+          <div class="menu-Level-2-Content " id="DataPanelShortCircuit">
+            <h2 class="menuHeader-Level-2">Short Circuit</h2>
+            <div class="ColorPickerdiv">
+              <form class="" action="index.html" method="post">
+                <label for="ColorPicker1">First color:</label>
+                  <select class="ColorPicker1Bounce" id="Option2FirstColorSelctionBox" name="ColorPicker1">
+                  <option value="5">Blue</option>
+                  <option value="1">Red</option>
+                  <option value="2">Yellow</option>
+                  <option value="3">Green</option>
+                  <option value="4">Cyan</option>
+                  <option value="6">Magenta</option>
+                  <option value="7">Orange</option>
+                  <option value="8">White</option>
+                  <option value="0">Off</option>
+                </select>
+                <br />
+                <br>
+                <form class="" action="#" method="post">
+                  <label for="ColorPicker2">Second color:</label>
+                    <select class="ColorPicker2Bounce" id="Option2SecondColorSelectionBox" name="ColorPicker2">
+                    <option value="5">Blue</option>
+                    <option value="1">Red</option>
+                    <option value="2">Yellow</option>
+                    <option value="3">Green</option>
+                    <option value="4">Cyan</option>
+                    <option value="6">Magenta</option>
+                    <option value="7">Orange</option>
+                    <option value="8">White</option>
+                    <option value="0">Off</option>
+                  </select>
+                <br />
+                <a href="#" onclick="commandTwoColorsNoSlider('25','2', 'Option2FirstColorSelctionBox', 'Option2SecondColorSelectionBox')" class="applyButton"></a>
+                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
+              </form>
+            </div><!--end of ColorPickerdiv div-->
+          </div> <!-- end of Level 2 Conetent Option 2-->
+
+          <div class="menu-Level-2-Content " id="DataPanelFlash">
+            <h2 class="menuHeader-Level-2">Flash</h2>
+            <div class="ColorPickerdiv">
+              <form class="" action="index.html" method="post">
+                <label for="ColorPicker1">First color:</label>
+                  <select class="ColorPicker1Bounce" id="Option3FirstColorSelctionBox" name="ColorPicker1">
+                  <option value="5">Blue</option>
+                  <option value="1">Red</option>
+                  <option value="2">Yellow</option>
+                  <option value="3">Green</option>
+                  <option value="4">Cyan</option>
+                  <option value="6">Magenta</option>
+                  <option value="7">Orange</option>
+                  <option value="8">White</option>
+                  <option value="0">Off</option>
+                </select>
+                <br />
+                <br>
+                <form class="" action="#" method="post">
+                  <label for="ColorPicker2">Second color:</label>
+                    <select class="ColorPicker2Bounce" id="Option3SecondColorSelectionBox" name="ColorPicker2">
+                    <option value="5">Blue</option>
+                    <option value="1">Red</option>
+                    <option value="2">Yellow</option>
+                    <option value="3">Green</option>
+                    <option value="4">Cyan</option>
+                    <option value="6">Magenta</option>
+                    <option value="7">Orange</option>
+                    <option value="8">White</option>
+                    <option value="0">Off</option>
+                  </select>
+                <br />
+                <a href="#" onclick="commandTwoColorsNoSlider('25','3', 'Option3FirstColorSelctionBox', 'Option3SecondColorSelectionBox')" class="applyButton"></a>
+                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
+              </form>
+            </div><!--end of ColorPickerdiv div-->
+          </div> <!-- end of Level 2 Conetent Option 3-->
+
+
+
+
+        </div><!--end of Level 2 Menu-->
+      </div> <!-- end of Dualing Colors 2-->
 
 
 <!--                      end of Level 1 Menu -->
