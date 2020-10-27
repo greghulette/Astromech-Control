@@ -444,13 +444,25 @@ function commandStripOff(x,) {
       var mcommandstring = checkedItems[i] + '98';
       console.log(mcommandstring);
     };
+    if (checkedItems[i] === "D") {
+      // console.log("M selected");
+      var dcommandstring = checkedItems[i] + '98';
+      console.log(mcommandstring);
+    };
+    if (checkedItems[i] === "I") {
+      // console.log("M selected");
+      var icommandstring = checkedItems[i] + '98';
+      console.log(mcommandstring);
+    };
   };
 
   socket.emit('command', {
     ldpcommandstring: ldpcommandstring,
     coincommandstring: coincommandstring,
     vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring
+    mcommandstring: mcommandstring,
+    dcommandstring: dcommandstring,
+    icommandstring: icommandstring
   });
   // socket1.emit('command', {
   //   ldpcommandstring: ldpcommandstring,
