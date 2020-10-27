@@ -208,12 +208,12 @@ function commandNoOptions(x, y, t, z) {
     if (checkedItems[i] === "D") {
       // console.log("M selected");
       var dcommandstring = checkedItems[i] + y + t;
-      console.log(mcommandstring);
+      console.log(dcommandstring);
     };
     if (checkedItems[i] === "I") {
       // console.log("M selected");
       var icommandstring = checkedItems[i] + y + t;
-      console.log(mcommandstring);
+      console.log(icommandstring);
     };
   };
 
