@@ -5,7 +5,7 @@ const port = new SerialPort('/dev/ttyACM0', {
     autoOpen: false,
   });
 
-function serialSend(ldp, coin, vu, maint, serial) {
+function serialSend(ldp, coin, vu, maint, serial, dp, cbi) {
   var ldpcommand = ldp + '\r';
   var coincommand = coin + '\r';
   var vucommand = vu + '\r';
