@@ -29,7 +29,7 @@ function serialSend(ldp, coin, vu, maint, serial, dp, cbi) {
         return console.log('sending the VU command of ' + vucommand);
         return console.log('sending the MAINT command of ' + maintcommand);
         return console.log('sending the DP command of ' + dpcommand);
-        return console.log ('sending the CBI command of ' + cbicommand);
+        return console.log('sending the CBI command of ' + cbicommand);
       }
       console.log('opening port');
 
