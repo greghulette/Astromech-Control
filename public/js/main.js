@@ -107,11 +107,11 @@ for (var i = 0; i < checkedItems.length; i++) {
       return checkedItems[i];
   };
   if (checkedItems[i] === "I") {
-    console.log("M selected");
+    console.log("I selected");
       return checkedItems[i];
   };
   if (checkedItems[i] === "D") {
-    console.log("M selected");
+    console.log("D selected");
       return checkedItems[i];
   };
 };
@@ -205,13 +205,25 @@ function commandNoOptions(x, y, t, z) {
       var mcommandstring = checkedItems[i] + y + t;
       console.log(mcommandstring);
     };
+    if (checkedItems[i] === "D") {
+      // console.log("M selected");
+      var dcommandstring = checkedItems[i] + y + t;
+      console.log(mcommandstring);
+    };
+    if (checkedItems[i] === "I") {
+      // console.log("M selected");
+      var icommandstring = checkedItems[i] + y + t;
+      console.log(mcommandstring);
+    };
   };
 
   socket.emit('command', {
     ldpcommandstring: ldpcommandstring,
     coincommandstring: coincommandstring,
     vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring
+    mcommandstring: mcommandstring,
+    dcommandstring: dcommandstring,
+    icommandstring: icommandstring
   });
   // socket1.emit('command', {
   //   ldpcommandstring: ldpcommandstring,

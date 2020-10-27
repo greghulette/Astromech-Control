@@ -11,6 +11,8 @@ function serialSend(ldp, coin, vu, maint, serial) {
   var vucommand = vu + '\r';
   var maintcommand = maint + '\r';
   var serialcommand = serial + '\r';
+  var dpcommand = dp + '\r';
+  var cbicommand = cbi + '\r';
   var sleepinterval = 50;
   port.open(function (err) {
       if (err) {
@@ -20,10 +22,14 @@ function serialSend(ldp, coin, vu, maint, serial) {
         sleep(75).then(() => { port.write(vucommand); });
         sleep(100).then(() => { port.write(maintcommand); });
         sleep(125).then(() => { port.write(serialcommand); });
+        leep(125).then(() => { port.write(dpcommand); });
+        leep(125).then(() => { port.write(cbicommand); });
         return console.log('sending the LDP command of ' + ldpcommand);
         return console.log('sending the COIN command of ' + coincommand);
         return console.log('sending the VU command of ' + vucommand);
         return console.log('sending the MAINT command of ' + maintcommand);
+        return console.log('sending the DP command of ' + dpcommand);
+        return console.log ('sending the CBI command of ' + cbicommand);
       }
       console.log('opening port');
 
