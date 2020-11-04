@@ -15,8 +15,8 @@ body {
   width: 0px;
   background: transparent;
 }
-::-webkit-scrollbar-thumb {
-  background: red;
+::-webkit-scrollbar-thumb-horizontal {
+  background: blue;
   height: 3px;
 }
 
