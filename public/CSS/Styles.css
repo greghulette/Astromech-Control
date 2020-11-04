@@ -8,6 +8,15 @@ body {
   color: lightyellow;
   font-family: 'Star Jedi', arial;
 
+
+}
+
+::webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+::webkit-scrollbar-thumb {
+  background: red;
 }
 
 .SubMenuLabelPosition {
