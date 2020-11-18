@@ -115,3 +115,20 @@ This is a high level install instructions.
   Finally to pair, run:
 
   sudo bt-adapter --set Discoverable 1
+
+14. (OPTIONAL) Setup a AFP server on the raspbery pi to allow remote access to the files for development
+    sudo apt install netatalk
+
+    sudo /etc/netatalk/afp.config
+
+      Add
+      [Homes]
+      basedir regex = /home
+
+      [My AFP Volumes]
+      path = /home
+
+      Under Global
+      guest account = pi
+
+    
