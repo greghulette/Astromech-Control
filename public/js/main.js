@@ -1,6 +1,7 @@
 
 //Uses this section to determine which led strips to use
 var checkedItems = new Array();
+var servoCheckedItems = new Array();
 
 function ldptoggle() {
  let tmp = document.querySelector('#L');
@@ -34,7 +35,7 @@ function mainttoggle() {
   getCheckedElements2()
 };
 
-function dptoggle() {
+function dptoggle(a) {
  let tmp = document.querySelector('#D');
  tmp.classList.toggle('active');
  if (tmp.classList.contains('active')) {
@@ -50,7 +51,27 @@ function cbitoggle() {
   getCheckedElements2()
 };
 
+function Doortoggle(a) {
+  let st = "#" + a
+ let tmp = document.querySelector(st);
+ tmp.classList.toggle('active');
+ if (tmp.classList.contains('active')) {
+ }
+  getCheckedElements3()
+};
+
+
+function LeftDoortoggle() {
+ let tmp = document.querySelector('#LD');
+ tmp.classList.toggle('active');
+ if (tmp.classList.contains('active')) {
+ }
+  getCheckedElements3()
+  console.log(servoArray)
+};
+
 var imgArray = [];
+var servoArray = [];
 
 function getCheckedElements2() {
   var imgArray = document.getElementsByName('stripSelector');
@@ -59,6 +80,18 @@ function getCheckedElements2() {
     var tmp = imgArray[i].classList.toString();
     if (tmp.indexOf('active') != -1) {
       checkedItems.push(imgArray[i].id.toString());
+    }
+
+    }
+  };
+
+function getCheckedElements3() {
+  var servoArray = document.getElementsByName('ServoSelector');
+  servoCheckedItems.length = 0;
+  for (var i = 0; i < servoArray.length; i++) {
+    var tmp = servoArray[i].classList.toString();
+    if (tmp.indexOf('active') != -1) {
+      servoCheckedItems.push(servoArray[i].id.toString());
     }
 
     }
