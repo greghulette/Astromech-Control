@@ -131,4 +131,6 @@ This is a high level install instructions.
       Under Global
       guest account = pi
 
-    
+  15. Install I2C
+
+  npm install I2C

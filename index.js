@@ -61,9 +61,9 @@ io.on('connection', function (socket) {
   });
 });
 
-player.play('./public/sounds/mp3/008 gen-8.mp3', { afplay: ['-v', 0.3] }, function (err) {
-
-});
+// player.play('./public/sounds/mp3/008 gen-8.mp3', { afplay: ['-v', 0.3] }, function (err) {
+//
+// });
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));

@@ -2443,16 +2443,15 @@
     </div>
     <div class="menu-Level--Content" id="SerialCommand">
       <div class="menu-Level-">
-        <div class="menu-Level--Content active" id="SerialCommand1">
+        <!-- <div class="menu-Level-Content active" id="SerialCommand1">
           <h2 class="menuHeader-Level-"></h2>
           <div class="ColorPickerdiv">
             <form class="" action="" method="sendSerialCommand('SerialCommandTextBox')">
               <br>
               <br>
               <p>serial command:
-                <input type="text" name="SerialCommandTextBox" id="SerialCommandTextBox" value=""> </p>
-              <a href="#" onclick="sendSerialCommand('SerialCommandTextBox')" class="applyButton"></a>
-              <input type="submit" onclick="sendSerialCommand('SerialCommandTextBox')"name="" value="" style="display: none">
+                <input type="text" name="SerialCommandTextBox" id="SerialCommandTextBox" value=""> </p> -->
+
 
             </form>
           </div><!--end of Serial Command div-->
@@ -2462,12 +2461,18 @@
            <td>i2c command:</td>
            <td><select class="" id="I2CSelectionBox" name="I2C List">
            <option value="0x1a">Dome Servo Controller</option>
-           <option value="0x40">Flthy HP Controller</option>
-           <option value="0x27">Body LED Controller</option>
+           <option value="0x40">HP Controller</option>
            <option value="0x26">Body Servo Contoller</option>
            <option value="0x9">Stealth</option>
+           <option value="0x27">Body LED Controller</option>
          </select></td>
            <td><input type="text" name="I2CCommandTextBox" id="I2CCommandTextBox" value=""></td>
+         </tr>
+         <tr>
+           <td>dome logic command: </td>
+           <td><input type="text" name="SerialCommandTextBox" id="SerialCommandTextBox" value=""></td>
+           <td>  <a href="#" onclick="sendSerialCommand('SerialCommandTextBox')" class="applyButton"></a>
+             <input type="submit" onclick="sendSerialCommand('SerialCommandTextBox')"name="" value="" style="display: none"></td>
          </tr>
         </table>
       </div><!--end of Level 1 Menu-->
