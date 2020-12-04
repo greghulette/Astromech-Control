@@ -569,6 +569,20 @@ shadow: 2px, 4px 15px blue;
 
 }
 
+.r2menupictureCoin {
+  width: 30px;
+  position: absolute;
+  left: -308px;
+  top: 157px;
+  /* background: url("../Images/Body/LDPBlue.png"); */
+}
+
+.r2menupictureCoin.active{
+
+/* background: url("../Images/Body/LDPGreen.png"); */
+
+}
+
 .r2menu  .img-wrapper {
   display: inline-block;
   overflow: hidden;

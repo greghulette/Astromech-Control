@@ -106,7 +106,7 @@ function getCheckedElements3() {
 
   function changeImageLDP() {
 
-          if (document.getElementById("L").src.match("LDPBlue."))
+          if (document.getElementById("L").src.match("LDPBlue.png"))
           {
               document.getElementById("L").src = "Images/Body/LDPGreen.png";
               console.log("Changed to Green");
@@ -117,6 +117,19 @@ function getCheckedElements3() {
           ldptoggle()
       }
 
+
+      function changeImageCoinSlots() {
+
+              if (document.getElementById("C").src.match("CoinSLotsBlue.png"))
+              {
+                  document.getElementById("C").src = "Images/Body/CoinSLotsGreen.png";
+                  console.log("Changed to Green");
+              } else {
+                  document.getElementById("C").src = "Images/Body/CoinSLotsBlue.png";
+                  console.log("Change to Blue");
+              }
+              cointoggle()
+          }
 
 
 
