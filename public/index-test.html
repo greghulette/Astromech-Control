@@ -245,22 +245,28 @@
       <h1 class="">LED Control</h1>
     </div>
 
-      <img
-          class="r2menupictureLDP"
-          src="Images/Body/LDPBlue.png"
-          alt="picture"
-          name="stripSelector"
-          onclick=changeImageLDP("L")
-          id="L"
-        />
-        <img
+
+        <!-- <img
             class="r2menupictureCoin"
             src="Images/Body/CoinSLotsBlue.png"
             alt="picture"
             name="stripSelector"
             onclick=changeImageCoinSlots("C")
             id="C"
-          />
+          /> -->
+
+          <!-- <img
+              class="r2menupictureMaint"
+              src="Images/Body/SkirtBlue.png"
+              alt="picture"
+              name="stripSelector"
+              onclick=changeImageMaint("M")
+              id="M"
+            /> -->
+
+            <img src="Images/Dome/DomeOutline.png" class="domePicture" alt="image for the dome">
+            <!-- <img src="Images/Dome/Door1Blue.png" class="domePicture" alt="image for the dome"> -->
+
       <!-- <img
           class="r2menupicture1"
           src="Images/Body/CoinSlotsBlue.png"
@@ -332,6 +338,14 @@
             id ="transparent"
             src="Images/Buttons/LEDFunctionButtons/Button-New-Rainbow.png"
             alt="button for Rainbow "
+            /></button>
+          </div>
+        <div class="menu-Level-1-Links">
+          <button class="" rel="SolidColor"><img
+              class="buttonwidth"
+              id ="transparent"
+              src="Images/Buttons/LEDFunctionButtons/Generic/Button-SolidColor-White.png"
+              alt="button for Knight Rider"
             /></button>
           </div>
         <div class="menu-Level-1-Links" >
@@ -422,14 +436,7 @@
               alt="button for Knight Rider"
             /></button>
           </div>
-        <div class="menu-Level-1-Links">
-          <button class="" rel="SolidColor"><img
-              class="buttonwidth"
-              id ="transparent"
-              src="Images/Buttons/LEDFunctionButtons/Generic/Button-SolidColor-White.png"
-              alt="button for Knight Rider"
-            /></button>
-          </div>
+
         <div class="menu-Level-1-Links">
           <button class="" rel="PulseBeat"><img
               class="buttonwidth"
@@ -561,6 +568,45 @@
 
        <div class="menu-Level-1-Content active" id="knightrider">
         <h1 class="menuHeader-Level-1">Knight Rider</h1>
+
+        <img
+            class="r2menupictureLDP1"
+            src="Images/Body/LDPBlue.png"
+            alt="picture"
+            name="stripSelector"
+            onclick=changeImageLDP("L")
+            id="L"
+          />
+
+        <img
+            class="r2menupictureCoin"
+            src="Images/Body/CoinSLotsBlue.png"
+            alt="picture"
+            name="stripSelector"
+            onclick=changeImageCoinSlots("C")
+            id="C"
+          />
+
+        <img
+            class="r2menupictureMaint"
+            src="Images/Body/SkirtBlue.png"
+            alt="picture"
+            name="stripSelector"
+            onclick=changeImageMaint("M")
+            id="M"
+          />
+        <img
+            class="r2menupictureDataPanelVerticalBars"
+            src="Images/Body/DataPanelVerticalBlue.png"
+            alt="picture"
+            name="stripSelector"
+            onclick=changeImageDataPanelVerticalBars("V")
+            id="V"
+          />
+
+
+
+
         <div class="menu-Level-2">
             <div class="menu-Level-2-Links" >
               <button class=" active" rel="ColorChoice" ><img
@@ -678,6 +724,45 @@
 
           <div class="menu-Level-1-Content" id="rainbow">
             <h1 class="menuHeader-Level-1">Rainbow</h1>
+            <img
+                class="r2menupictureLDP1"
+                src="Images/Body/LDPBlue.png"
+                alt="picture"
+                name="stripSelectorRainbow"
+                onclick=changeImageLDPRainbow()
+                id="LDPRainbow"
+              />
+
+              <img
+                  class="r2menupictureCoin"
+                  src="Images/Body/CoinSLotsBlue.png"
+                  alt="picture"
+                  name="stripSelectorRainbow"
+                  onclick=changeImageCoinRainbow()
+                  id="CoinRainbow"
+                />
+
+                <img
+                    class="r2menupictureMaint"
+                    src="Images/Body/SkirtBlue.png"
+                    alt="picture"
+                    name="stripSelectorRainbow"
+                    onclick=changeImageMaintRainbow()
+                    id="MaintRainbow"
+                  />
+
+
+
+
+
+
+
+
+
+
+
+
+
             <div class="menu-Level-2">
 
                 <div class="menu-Level-2-Links " >
@@ -703,7 +788,7 @@
                   <form class="" action="index.html" method="post">
                     <br />
                     <br />
-                    <a href="#" onclick="commandNoOptions('LDP','05',1,)" class="applyButton"></a>
+                    <a href="#" onclick="commandNoOptionsRainbow('LDP','05',1,)" class="applyButton"></a>
                     <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
                   </form>
                 </div> <!--end of ColorPickerdiv-->
@@ -715,7 +800,7 @@
                     <form class="" action="index.html" method="post">
                       <br />
                       <br />
-                      <a href="#" onclick="commandNoOptions('LDP','05',2,)" class="applyButton"></a>
+                      <a href="#" onclick="commandNoOptionsRainbow('LDP','05',2,)" class="applyButton"></a>
                       <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
                     </form>
                   </div> <!--end of ColorPickerdiv-->
@@ -2497,7 +2582,7 @@
     <img src="Images/Dome/DomeOutline.png" class="domePicture" alt="image for the dome">
     <img src="Images/Dome/Door1Blue.png" class="domePicture" alt="image for the dome">
 
-    <div class="leftDoorTarget" >
+    <!-- <div class="leftDoorTarget" >
       <button class="blankBorderLeftDoor" name="ServoSelector" onclick="Doortoggle('LD')" id='LD'></button>
     </div>
     <div class="rightDoorTarget" >
@@ -2508,7 +2593,7 @@
     </div>
     <div class="CBIDoorTarget" >
       <button class="blankBorderCBIDoor " name="ServoSelector" onclick="Doortoggle('CBID')" id="CBID" > </button>
-    </div>
+    </div> -->
 
     <!-- <div class="domeLittleDoor1Target" >
       <button class="domeLittleDoor1 " name="ServoSelector" onclick="Doortoggle('DL1')" id="DL1" >1</button>

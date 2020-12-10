@@ -406,6 +406,8 @@ span.myButton input {
 .domePicture{
   position: absolute;
   height: 400px;
+  left: -440px;
+  top: -40px;
 }
 
 .domeLittleDoor1Target {
@@ -539,7 +541,7 @@ shadow: 2px, 4px 15px blue;
   width: 350px;
   position: absolute;
   left: 10px;
-  top: 10px;
+  top: 430px;
 }
 
 .r2menupicture21 {
@@ -559,7 +561,7 @@ shadow: 2px, 4px 15px blue;
   width: 189px;
   position: absolute;
   left: -289px;
-  top: -15px;
+  top: 315px;
   /* background: url("../Images/Body/LDPBlue.png"); */
 }
 
@@ -569,19 +571,55 @@ shadow: 2px, 4px 15px blue;
 
 }
 
-.r2menupictureCoin {
-  width: 30px;
+.r2menupictureLDP1 {
+  width: 190px;
+  height: 20px;
   position: absolute;
-  left: -308px;
-  top: 157px;
+  left: -616px;
+  top: 405px;
   /* background: url("../Images/Body/LDPBlue.png"); */
 }
 
-.r2menupictureCoin.active{
+.r2menupictureLDP1.active{
 
 /* background: url("../Images/Body/LDPGreen.png"); */
 
 }
+
+
+.r2menupictureCoin {
+  width: 30px;
+  position: absolute;
+  left: -633px;
+  top: 577px;
+}
+
+.r2menupictureCoin.active{
+}
+.r2menupictureMaint {
+  width: 290px;
+  position: absolute;
+  left: -665px;
+  top: 760px;
+}
+
+.r2menupictureMaint.active{
+}
+.r2menupictureDataPanelVerticalBars {
+  width: 40px;
+  position: absolute;
+  left: -480px;
+  top: 555px;
+}
+
+.r2menupictureDataPanelVerticalBars.active{
+}
+
+
+
+
+
+
 
 .r2menu  .img-wrapper {
   display: inline-block;
@@ -591,7 +629,7 @@ shadow: 2px, 4px 15px blue;
 .r2menupicturedome {
  width: 300px;
  position: absolute;
- left: 20px;
+ left: -220px;
 }
 
  .img-wrapper img {
@@ -1098,7 +1136,7 @@ label[for= ColorPickertab]{
 .menu-Level-0  .menu-Level-0-Content {
   position: absolute;
   display: none;
-  left: 500px;
+  left: 550px;
   top: 0px;
   padding: 5px 12px;
   /* border: 1px solid #ccc; */
@@ -1116,7 +1154,7 @@ label[for= ColorPickertab]{
 
 .menu-Level-0  .menu-Level-0-Content .menu-Level-1{
   width: 220px;
-  height: 400px;
+  height: 700px;
   overflow-y: auto;
   overflow-x: visible;
   padding-left: 37px;

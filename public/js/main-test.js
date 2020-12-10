@@ -1,5 +1,181 @@
 
+//Rainbow stuff
+var checkedItemsRainbow = new Array();
+var imgArrayRainbow = [];
+
+
+function ldptoggleRainbow() {
+ let tmp = document.querySelector('#LDPRainbow');
+ tmp.classList.toggle('active');
+ if (tmp.classList.contains('active')) {
+ }
+  getCheckedElementRainbow()
+};
+
+function cointoggleRainbow() {
+ let tmp = document.querySelector('#CoinRainbow');
+ tmp.classList.toggle('active');
+ if (tmp.classList.contains('active')) {
+ }
+  getCheckedElementRainbow()
+};
+
+function mainttoggleRainbow() {
+ let tmp = document.querySelector('#MaintRainbow');
+ tmp.classList.toggle('active');
+ if (tmp.classList.contains('active')) {
+ }
+  getCheckedElementRainbow()
+};
+
+
+
+function getCheckedElementRainbow() {
+  var imgArrayRainbow = document.getElementsByName('stripSelectorRainbow');
+  checkedItemsRainbow.length = 0;
+  for (var i = 0; i < imgArrayRainbow.length; i++) {
+    var tmp = imgArrayRainbow[i].classList.toString();
+    if (tmp.indexOf('active') != -1) {
+      checkedItemsRainbow.push(imgArrayRainbow[i].id.toString());
+    }
+
+    }
+  };
+
+  function changeImageLDPRainbow() {
+
+                if (document.getElementById("LDPRainbow").src.match("LDPBlue.png"))
+                {
+                    document.getElementById("LDPRainbow").src = "Images/Body/LDPGreen.png";
+                    // console.log("Changed to Green");
+                } else {
+                    document.getElementById("LDPRainbow").src = "Images/Body/LDPBlue.png";
+                    // console.log("Change to Blue");
+                }
+                ldptoggleRainbow()
+            };
+
+function changeImageCoinRainbow() {
+
+              if (document.getElementById("CoinRainbow").src.match("CoinSLotsBlue.png"))
+              {
+                  document.getElementById("CoinRainbow").src = "Images/Body/CoinSlotsGreen.png";
+                  // console.log("Changed to Green");
+              } else {
+                  document.getElementById("CoinRainbow").src = "Images/Body/CoinSLotsBlue.png";
+                  // console.log("Change to Blue");
+              }
+              cointoggleRainbow()
+          };
+function changeImageMaintRainbow() {
+
+          if (document.getElementById("MaintRainbow").src.match("SkirtBlue.png"))
+          {
+              document.getElementById("MaintRainbow").src = "Images/Body/SkirtGreen.png";
+              // console.log("Changed to Green");
+          } else {
+              document.getElementById("MaintRainbow").src = "Images/Body/SkirtBlue.png";
+              // console.log("Change to Blue");
+          }
+          mainttoggleRainbow()
+      };
+
+
+
+// function getStripNameRainbow (){
+//
+//     for (var i = 0; i < checkedItemsRainbow.length; i++) {
+//
+//       if (checkedItemsRainbow[i] === "LDPRainbow") {
+//         console.log("L selected");
+//           return checkedItemsRainbow[i];
+//       };
+//       if (checkedItemsRainbow[i] === "CoinRainbow") {
+//         console.log("C selected");
+//           return checkedItemsRainbow[i];
+//       };
+//       if (checkedItemsRainbow[i] === "V") {
+//         console.log("V selected");
+//           return checkedItemsRainbow[i];
+//       };
+//       if (checkedItemsRainbow[i] === "M") {
+//         console.log("M selected");
+//           return checkedItemsRainbow[i];
+//       };
+//       if (checkedItemsRainbow[i] === "I") {
+//         console.log("I selected");
+//           return checkedItemsRainbow[i];
+//       };
+//       if (checkedItemsRainbow[i] === "D") {
+//         console.log("D selected");
+//           return checkedItemsRainbow[i];
+//       };
+//     };
+// };
+
+function commandNoOptionsRainbow(x, y, t, z) {
+
+  for (var i = 0; i < checkedItemsRainbow.length; i++) {
+    if (checkedItemsRainbow[i] === "LDPRainbow") {
+      // console.log("L selected");
+      var ldpcommandstring = "L" + y + t;
+      console.log(ldpcommandstring);
+    };
+
+    if (checkedItemsRainbow[i] === "CoinRainbow") {
+      // console.log("C selected");
+      var coincommandstring = "C" + y + t;
+      console.log(coincommandstring);
+    };
+
+    if (checkedItemsRainbow[i] === "DataPanelVerticalRainbow") {
+      // console.log("V selected");
+      var vucommandstring = "V" + y + t;
+      console.log(vucommandstring);
+    };
+
+    if (checkedItemsRainbow[i] === "MaintRainbow") {
+      // console.log("M selected");
+      var mcommandstring = "M" + y + t;
+      console.log(mcommandstring);
+    };
+    if (checkedItemsRainbow[i] === "D") {
+      // console.log("M selected");
+      var dcommandstring = checkedItems[i] + y + t;
+      console.log(dcommandstring);
+    };
+    if (checkedItemsRainbow[i] === "I") {
+      // console.log("M selected");
+      var icommandstring = checkedItems[i] + y + t;
+      console.log(icommandstring);
+    };
+  };
+
+  socket.emit('command', {
+    ldpcommandstring: ldpcommandstring,
+    coincommandstring: coincommandstring,
+    vucommandstring: vucommandstring,
+    mcommandstring: mcommandstring,
+    dcommandstring: dcommandstring,
+    icommandstring: icommandstring
+  });
+};
+
+
+
+
 //Uses this section to determine which led strips to use
+
+
+
+
+
+
+
+
+
+
+
 var checkedItems = new Array();
 var servoCheckedItems = new Array();
 
@@ -10,7 +186,6 @@ function ldptoggle() {
  }
   getCheckedElements2()
 };
-
 function cointoggle() {
  let tmp = document.querySelector('#C');
  tmp.classList.toggle('active');
@@ -104,33 +279,57 @@ function getCheckedElements3() {
 
 
 
-  function changeImageLDP() {
+function changeImageLDP() {
 
           if (document.getElementById("L").src.match("LDPBlue.png"))
           {
               document.getElementById("L").src = "Images/Body/LDPGreen.png";
-              console.log("Changed to Green");
+              // console.log("Changed to Green");
           } else {
               document.getElementById("L").src = "Images/Body/LDPBlue.png";
-              console.log("Change to Blue");
+              // console.log("Change to Blue");
           }
           ldptoggle()
+      };
+
+function changeImageCoinSlots() {
+
+      if (document.getElementById("C").src.match("CoinSLotsBlue.png"))
+      {
+          document.getElementById("C").src = "Images/Body/CoinSLotsGreen.png";
+          // console.log("Changed to Green");
+      } else {
+          document.getElementById("C").src = "Images/Body/CoinSLotsBlue.png";
+          // console.log("Change to Blue");
       }
+      cointoggle()
+  }
 
+  function changeImageMaint() {
 
-      function changeImageCoinSlots() {
+        if (document.getElementById("M").src.match("SkirtBlue.png"))
+        {
+            document.getElementById("M").src = "Images/Body/SkirtGreen.png";
+            // console.log("Changed to Green");
+        } else {
+            document.getElementById("M").src = "Images/Body/SkirtBlue.png";
+            // console.log("Change to Blue");
+        }
+        mainttoggle()
+    }
 
-              if (document.getElementById("C").src.match("CoinSLotsBlue.png"))
-              {
-                  document.getElementById("C").src = "Images/Body/CoinSLotsGreen.png";
-                  console.log("Changed to Green");
-              } else {
-                  document.getElementById("C").src = "Images/Body/CoinSLotsBlue.png";
-                  console.log("Change to Blue");
-              }
-              cointoggle()
+    function changeImageDataPanelVerticalBars() {
+
+          if (document.getElementById("V").src.match("DataPanelVerticalBlue.png"))
+          {
+              document.getElementById("V").src = "Images/Body/DataPanelVerticalGreen.png";
+              // console.log("Changed to Green");
+          } else {
+              document.getElementById("V").src = "Images/Body/DataPanelVerticalBlue.png";
+              // console.log("Change to Blue");
           }
-
+          vutoggle()
+      }
 
 
 
@@ -171,6 +370,10 @@ for (var i = 0; i < checkedItems.length; i++) {
     console.log("L selected");
       return checkedItems[i];
   };
+  if (checkedItems[i] === "LDPRainbow") {
+    console.log("L selected");
+      return checkedItems[i];
+  };
   if (checkedItems[i] === "C") {
     console.log("C selected");
       return checkedItems[i];
@@ -207,10 +410,9 @@ function commandSingleColor(x, y, t, z) {
   for (var i = 0; i < checkedItems.length; i++) {
     if (checkedItems[i] === "L") {
       // console.log("L selected");
-      var ldpcommandstring = checkedItems[i] + y + t + colorValues;
+      var ldpcommandstring = "L" + y + t + colorValues;
       console.log(ldpcommandstring);
-    };
-
+    }
     if (checkedItems[i] === "C") {
       // console.log("C selected");
       var coincommandstring = checkedItems[i] + y + t + colorValues;
@@ -236,25 +438,9 @@ function commandSingleColor(x, y, t, z) {
     vucommandstring: vucommandstring,
     mcommandstring: mcommandstring
   });
-  // socket1.emit('command', {
-  //   ldpcommandstring: ldpcommandstring,
-  //   coincommandstring: coincommandstring,
-  //   vucommandstring: vucommandstring,
-  //   mcommandstring: mcommandstring
-  // });
-  // socket2.emit('command', {
-  //   ldpcommandstring: ldpcommandstring,
-  //   coincommandstring: coincommandstring,
-  //   vucommandstring: vucommandstring,
-  //   mcommandstring: mcommandstring
-  // });
-  // socket3.emit('command', {
-  //   ldpcommandstring: ldpcommandstring,
-  //   coincommandstring: coincommandstring,
-  //   vucommandstring: vucommandstring,
-  //   mcommandstring: mcommandstring
-  // });
 };
+
+
 
 function commandNoOptions(x, y, t, z) {
 
@@ -263,8 +449,7 @@ function commandNoOptions(x, y, t, z) {
       // console.log("L selected");
       var ldpcommandstring = checkedItems[i] + y + t;
       console.log(ldpcommandstring);
-    };
-
+    }
     if (checkedItems[i] === "C") {
       // console.log("C selected");
       var coincommandstring = checkedItems[i] + y + t;
@@ -321,6 +506,13 @@ function commandNoOptions(x, y, t, z) {
   //   mcommandstring: mcommandstring
   // });
 };
+
+
+
+
+
+
+
 
 function commandTwoColors(x, y, t, z, s) {
   let LEDSelector = getStripName(x);
