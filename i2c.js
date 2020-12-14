@@ -35,7 +35,7 @@ function i2CSend(ldp, coin, vu, maint, serialcommand, dp, cbi) {
   var dpcommand = dp;
   var cbicommand = cbi;
   var sleepinterval = 50;
-  var bodyLEDI2C = 0x26;
+ bodyLEDI2C = 0x26;
   var bodyServoI2C = 0x27;
   var domeServoLEDI2C = 0x0a;
   var domeHPI2C = 0x19;
