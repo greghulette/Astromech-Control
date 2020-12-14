@@ -52,38 +52,38 @@ function I2CSend(ldp, coin, vu, maint, i2cvar, dp, cbi, i2caddress) {
        throw err;
      }
    })
-
-   if (devicetosend == "d"){
-     dev = 0x0a;
-     var com = Number(commandtosend);
-
-     i2c1.sendByte(dev, com, function (err) {
-       if (err) {
-         throw err;
-       }
-     })
-   }
-   if (devicetosend == "b"){
-     dev = 0x26;
-
-     i2c1.i2cWrite(dev, commandtosend.length, commandtosend, function (err) {
-      if (err) {
-        throw err;
-       }
-   })
-
-  }
-
-  if (devicetosend == "u"){
-    dev = 0x27;
-
-    i2c1.i2cWrite(dev, commandtosend.length, commandtosend, function (err) {
-     if (err) {
-       throw err;
-      }
-  })
-
-  }
+  //
+  //  if (devicetosend == "d"){
+  //    dev = 0x0a;
+  //    var com = Number(commandtosend);
+  //
+  //    i2c1.sendByte(dev, com, function (err) {
+  //      if (err) {
+  //        throw err;
+  //      }
+  //    })
+  //  }
+  //  if (devicetosend == "b"){
+  //    dev = 0x26;
+  //
+  //    i2c1.i2cWrite(dev, commandtosend.length, commandtosend, function (err) {
+  //     if (err) {
+  //       throw err;
+  //      }
+  //  })
+  //
+  // }
+  //
+  // if (devicetosend == "u"){
+  //   dev = 0x27;
+  //
+  //   i2c1.i2cWrite(dev, commandtosend.length, commandtosend, function (err) {
+  //    if (err) {
+  //      throw err;
+  //     }
+  // })
+  //
+  // }
 
      console.log("Sent " + commandtosend);
    });
