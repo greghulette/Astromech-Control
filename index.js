@@ -5,7 +5,7 @@ const exphbs = require('express-handlebars');
 const socket = require('socket.io');
 const serial = require('./serial');
 var player = require('play-sound')(opts = {});
-
+var i2c = require('./i2c.js');
 const app = express();
 
 //handlebars middleware
@@ -51,8 +51,9 @@ io.on('connection', function (socket) {
     var serialcommand = data.serialcommandstring;
     var dp = data.dcommandstring;
     var cbi = data.icommandstring;
-    sleep(500).then(() => { serial(ldp, coin, vu, maint, serialcommand, dp, cbi); });
-4106653602
+    // sleep(500).then(() => { serial(ldp, coin, vu, maint, serialcommand, dp, cbi); });
+    I2CSend(ldp, coin, vu, maint, serialcommand, dp, cbi);
+
     // sleep(500).then(() => { serial(coin); });
 
     // console.log("Coin Command: " + coin);

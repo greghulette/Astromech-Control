@@ -28,6 +28,13 @@ function mainttoggleRainbow() {
   getCheckedElementRainbow()
 };
 
+function verticaltoggleRainbow() {
+ let tmp = document.querySelector('#VerticalBarstRainbow');
+ tmp.classList.toggle('active');
+ if (tmp.classList.contains('active')) {
+ }
+  getCheckedElementRainbow()
+};
 
 
 function getCheckedElementRainbow() {
@@ -79,39 +86,19 @@ function changeImageMaintRainbow() {
           }
           mainttoggleRainbow()
       };
+function changeImageVerticalBarsRainbow() {
 
+        if (document.getElementById("VerticalBarstRainbow").src.match("DataPanelVerticalBlue.png"))
+        {
+            document.getElementById("VerticalBarstRainbow").src = "Images/Body/DataPanelVerticalGreen.png";
+            // console.log("Changed to Green");
+        } else {
+            document.getElementById("VerticalBarstRainbow").src = "Images/Body/DataPanelVerticalBlue.png";
+            // console.log("Change to Blue");
+        }
+        verticaltoggleRainbow()
+    };
 
-
-// function getStripNameRainbow (){
-//
-//     for (var i = 0; i < checkedItemsRainbow.length; i++) {
-//
-//       if (checkedItemsRainbow[i] === "LDPRainbow") {
-//         console.log("L selected");
-//           return checkedItemsRainbow[i];
-//       };
-//       if (checkedItemsRainbow[i] === "CoinRainbow") {
-//         console.log("C selected");
-//           return checkedItemsRainbow[i];
-//       };
-//       if (checkedItemsRainbow[i] === "V") {
-//         console.log("V selected");
-//           return checkedItemsRainbow[i];
-//       };
-//       if (checkedItemsRainbow[i] === "M") {
-//         console.log("M selected");
-//           return checkedItemsRainbow[i];
-//       };
-//       if (checkedItemsRainbow[i] === "I") {
-//         console.log("I selected");
-//           return checkedItemsRainbow[i];
-//       };
-//       if (checkedItemsRainbow[i] === "D") {
-//         console.log("D selected");
-//           return checkedItemsRainbow[i];
-//       };
-//     };
-// };
 
 function commandNoOptionsRainbow(x, y, t, z) {
 
@@ -128,7 +115,7 @@ function commandNoOptionsRainbow(x, y, t, z) {
       console.log(coincommandstring);
     };
 
-    if (checkedItemsRainbow[i] === "DataPanelVerticalRainbow") {
+    if (checkedItemsRainbow[i] === "VerticalBarstRainbow") {
       // console.log("V selected");
       var vucommandstring = "V" + y + t;
       console.log(vucommandstring);
