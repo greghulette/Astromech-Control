@@ -51,7 +51,7 @@ function I2CSend(ldp, coin, vu, maint, i2cvar, dp, cbi, i2caddress) {
      if (err){
        throw err;
      }
-   })
+   });
   //
   //  if (devicetosend == "d"){
   //    dev = 0x0a;
