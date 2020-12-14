@@ -5,7 +5,7 @@ const exphbs = require('express-handlebars');
 const socket = require('socket.io');
 const serial = require('./serial');
 var player = require('play-sound')(opts = {});
-var i2c = require('./i2CSend');
+var i2c = require('./i2c');
 const app = express();
 
 //handlebars middleware
