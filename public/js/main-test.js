@@ -53,7 +53,7 @@ function getCheckedElementRainbow() {
 
                 if (document.getElementById("LDPRainbow").src.match("LDPBlue.png"))
                 {
-                    document.getElementById("LDPRainbow").src = "Images/Body/LDPGreen.png";
+                    document.getElementById("LDPRainbow").src = "./Images/Body/LDPGreen.png";
                     // console.log("Changed to Green");
                 } else {
                     document.getElementById("LDPRainbow").src = "Images/Body/LDPBlue.png";
