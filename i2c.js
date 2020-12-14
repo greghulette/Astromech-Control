@@ -27,7 +27,7 @@ console.log(commandtosend);
 
 
 function i2CSend(ldp, coin, vu, maint, serialcommand, dp, cbi) {
-  var ldpcommand = ldp;
+  var ldpcommand = Buffer.from(ldp);
   var coincommand = coin;
   var vucommand = vu;
   var maintcommand = maint;
@@ -46,7 +46,7 @@ function i2CSend(ldp, coin, vu, maint, serialcommand, dp, cbi) {
     throw err;
    }
    console.log("open")
-   i2c1.i2cWrite(bodyLEDI2C, ldp.length, ldp, function (err){
+   i2c1.i2cWrite(bodyLEDI2C, ldpcommand.length, ldpcommand, function (err){
      if (err){
        throw err;
      }
