@@ -26,7 +26,7 @@ console.log(commandtosend);
 // console.log(com)
 
 
-function I2CSend(ldp, coin, vu, maint, i2cvar, dp, cbi, i2caddress) {
+function i2CSend(ldp, coin, vu, maint, i2cvar, dp, cbi, i2caddress) {
   var ldpcommand = ldp;
   var coincommand = coin;
   var vucommand = vu;
