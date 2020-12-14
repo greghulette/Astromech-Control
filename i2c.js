@@ -124,7 +124,7 @@ function I2CSend(ldp, coin, vu, maint, i2cvar, dp, cbi, i2caddress) {
   //   });
 
 };
-module.exports = I2CSend;
+module.exports = i2CSend;
 //
 // const i2c1 = i2c.open(1, function (err) {
 //  if (err) {
