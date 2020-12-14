@@ -283,7 +283,7 @@ function changeImageCoinSlots() {
 
       if (document.getElementById("C").src.match("CoinSLotsBlue.png"))
       {
-          document.getElementById("C").src = "Images/Body/CoinSLotsGreen.png";
+          document.getElementById("C").src = "Images/Body/CoinSlotsGreen.png";
           // console.log("Changed to Green");
       } else {
           document.getElementById("C").src = "Images/Body/CoinSLotsBlue.png";
