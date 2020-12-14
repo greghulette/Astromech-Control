@@ -26,7 +26,7 @@ console.log(commandtosend);
 // console.log(com)
 
 
-function i2CSend(ldp, coin, vu, maint, i2cvar, dp, cbi, i2caddress) {
+function i2CSend(ldp, coin, vu, maint, i2cvar, dp, cbi) {
   var ldpcommand = ldp;
   var coincommand = coin;
   var vucommand = vu;
@@ -40,7 +40,6 @@ function i2CSend(ldp, coin, vu, maint, i2cvar, dp, cbi, i2caddress) {
   var domeServoLEDI2C = 0x0a;
   var domeHPI2C = 0x19;
   var bodyStealhI2C = 0x09;
-
 
   const i2c1 = i2c.open(1, function (err) {
    if (err) {
