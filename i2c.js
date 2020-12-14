@@ -26,12 +26,12 @@ console.log(commandtosend);
 // console.log(com)
 
 
-function i2CSend(ldp, coin, vu, maint, i2cvar, dp, cbi) {
+function i2CSend(ldp, coin, vu, maint, serialcommand, dp, cbi) {
   var ldpcommand = ldp;
   var coincommand = coin;
   var vucommand = vu;
   var maintcommand = maint;
-  var i2ccommand = i2cvar;
+  var serialcommand = serialcommand;
   var dpcommand = dp;
   var cbicommand = cbi;
   var sleepinterval = 50;
