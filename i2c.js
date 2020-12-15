@@ -51,7 +51,7 @@ function i2CSend(ldp, coin, vu, maint, serialcommand, dp, cbi) {
        throw err;
      }
    })
-   i2c1.i2cWrite(bodyLEDI2C, ciubcommand.length, coincommand, function (err){
+   i2c1.i2cWrite(bodyLEDI2C, coincommand.length, coincommand, function (err){
      if (err){
        throw err;
      }
