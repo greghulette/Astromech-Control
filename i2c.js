@@ -27,7 +27,7 @@ console.log(commandtosend);
 
 
 function i2CSend(ldp, coin, vu, maint, serialcommand, dp, cbi) {
-  var ldpcommand = toString(ldp);
+  var ldpcommand = String.from(ldp);
   var coincommand = Buffer.from(coin);
   var vucommand = vu;
   var maintcommand = maint;
