@@ -406,8 +406,8 @@ span.myButton input {
 .domePicture{
   position: absolute;
   height: 400px;
-  left: -440px;
-  top: -40px;
+  left: 00px;
+  top: 0px;
 }
 
 .domeLittleDoor1Target {
@@ -613,6 +613,15 @@ shadow: 2px, 4px 15px blue;
 }
 
 .r2menupictureDataPanelVerticalBars.active{
+}
+.r2menupictureFrontHP {
+  width: 46px;
+  position: absolute;
+  left: -466px;
+  top: 300px;
+}
+
+.r2menupictureFrontHP.active{
 }
 
 

@@ -35,6 +35,7 @@
     src="./Images/Body/BodyOutline.png"
     alt="picture"
   />
+  <img src="Images/Dome/DomeOutline.png" class="domePicture" alt="image for the dome">
 
   </div>
 
@@ -264,7 +265,6 @@
               id="M"
             /> -->
 
-            <img src="Images/Dome/DomeOutline.png" class="domePicture" alt="image for the dome">
             <!-- <img src="Images/Dome/Door1Blue.png" class="domePicture" alt="image for the dome"> -->
 
       <!-- <img
@@ -733,33 +733,40 @@
                 id="LDPRainbow"
               />
 
-              <img
-                  class="r2menupictureCoin"
-                  src="Images/Body/CoinSLotsBlue.png"
-                  alt="picture"
-                  name="stripSelectorRainbow"
-                  onclick=changeImageCoinRainbow()
-                  id="CoinRainbow"
-                />
+            <img
+              class="r2menupictureCoin"
+              src="Images/Body/CoinSLotsBlue.png"
+              alt="picture"
+              name="stripSelectorRainbow"
+              onclick=changeImageCoinRainbow()
+              id="CoinRainbow"
+            />
 
-                <img
-                    class="r2menupictureMaint"
-                    src="Images/Body/SkirtBlue.png"
-                    alt="picture"
-                    name="stripSelectorRainbow"
-                    onclick=changeImageMaintRainbow()
-                    id="MaintRainbow"
-                  />
+            <img
+                class="r2menupictureMaint"
+                src="Images/Body/SkirtBlue.png"
+                alt="picture"
+                name="stripSelectorRainbow"
+                onclick=changeImageMaintRainbow()
+                id="MaintRainbow"
+              />
 
-                  <img
-                      class="r2menupictureDataPanelVerticalBars"
-                      src="Images/Body/DataPanelVerticalBlue.png"
-                      alt="picture"
-                      name="stripSelectorRainbow"
-                      onclick=changeImageVerticalBarsRainbow()
-                      id="VerticalBarstRainbow"
-                    />
-
+            <img
+                class="r2menupictureDataPanelVerticalBars"
+                src="Images/Body/DataPanelVerticalBlue.png"
+                alt="picture"
+                name="stripSelectorRainbow"
+                onclick=changeImageVerticalBarsRainbow()
+                id="VerticalBarstRainbow"
+              />
+            <img
+                class="r2menupictureFrontHP"
+                src="Images/Dome/FrontHPBlue.png"
+                alt="picture"
+                name="stripSelectorRainbow"
+                onclick=changeImageFrontHPRainbow()
+                id="FrontHPRainbow"
+              />
 
 
 
@@ -2639,19 +2646,19 @@
          <tr>
            <td>i2c command:</td>
            <td><select class="" id="I2CSelectionBox" name="I2C List">
-           <option value="0x1a">Dome Servo Controller</option>
-           <option value="0x40">HP Controller</option>
-           <option value="0x26">Body Servo Contoller</option>
-           <option value="0x9">Stealth</option>
-           <option value="0x27">Body LED Controller</option>
+           <option value="DS">Dome Servo Controller</option>
+           <option value="HP">HP Controller</option>
+           <option value="BS">Body Servo Contoller</option>
+           <option value="ST">Stealth</option>
+           <option value="BL">Body LED Controller</option>
          </select></td>
            <td><input type="text" name="I2CCommandTextBox" id="I2CCommandTextBox" value=""></td>
          </tr>
          <tr>
            <td>dome logic command: </td>
-           <td><input type="text" name="SerialCommandTextBox1" id="SerialCommandTextBox1" value=""></td>
-           <td>  <a href="#" onclick="sendSerialCommand('SerialCommandTextBox1')" class="applyButton"></a>
-             <input type="submit" onclick="sendSerialCommand('SerialCommandTextBox1')"name="" value="" style="display: none"></td>
+           <td><input type="text" name="i2CCommandTextBox" id="i2CCommandTextBox" value=""></td>
+           <td>  <a href="#" onclick="sendi2CCommand('i2CCommandTextBox')" class="applyButton"></a>
+             <input type="submit" onclick="sendi2CCommand('i2CCommandTextBox')"name="" value="" style="display: none"></td>
          </tr>
         </table>
       </div><!--end of Level 1 Menu-->

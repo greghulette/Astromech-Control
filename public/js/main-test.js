@@ -36,6 +36,14 @@ function verticaltoggleRainbow() {
   getCheckedElementRainbow()
 };
 
+function frontHPtoggleRainbow() {
+ let tmp = document.querySelector('#FrontHPRainbow');
+ tmp.classList.toggle('active');
+ if (tmp.classList.contains('active')) {
+ }
+  getCheckedElementRainbow()
+};
+
 
 function getCheckedElementRainbow() {
   var imgArrayRainbow = document.getElementsByName('stripSelectorRainbow');
@@ -99,6 +107,19 @@ function changeImageVerticalBarsRainbow() {
         verticaltoggleRainbow()
     };
 
+  function changeImageFrontHPRainbow() {
+
+            if (document.getElementById("FrontHPRainbow").src.match("FrontHPBlue.png"))
+            {
+                document.getElementById("FrontHPRainbow").src = "Images/Dome/FrontHPGreen.png";
+                // console.log("Changed to Green");
+            } else {
+                document.getElementById("FrontHPRainbow").src = "Images/Dome/FrontHPBlue.png";
+                // console.log("Change to Blue");
+            }
+            verticaltoggleRainbow()
+        };
+
 
 function commandNoOptionsRainbow(x, y, t, z) {
 
@@ -136,6 +157,11 @@ function commandNoOptionsRainbow(x, y, t, z) {
       var icommandstring = checkedItems[i] + y + t;
       console.log(icommandstring);
     };
+  };
+  if (checkedItemsRainbow[i] === "FrontHPRainbow") {
+    // console.log("M selected");
+    var mcommandstring = "F007";
+    console.log(mcommandstring);
   };
 
   socket.emit('command', {
@@ -780,20 +806,16 @@ function sendSerialCommand(x) {
     serialcommandstring: commandUpper,
 
   });
-  // socket1.emit('command', {
-  //   serialcommandstring: commandUpper,
-  //
-  // });
-  // socket2.emit('command', {
-  //   serialcommandstring: commandUpper,
-  //
-  // });
-  // socket3.emit('command', {
-  //   serialcommandstring: commandUpper,
-  //
-  // });
 };
+function sendi2CCommand(b, x) {
+  let command = document.getElementById(x).value;
+  let commandUpper = command.toUpperCase();
+  console.log(commandUpper);
+  socket.emit('command', {
+    serialcommandstring: commandUpper,
 
+  });
+};
 
 // Varialbles for the selection of the LED selector buttons
 var ldpImageClicked = '/Images/Buttons/Button-LED-Selector-LDP-Yellowv5.png';
