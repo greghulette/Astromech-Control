@@ -27,36 +27,49 @@ console.log(commandtosend);
 
 
 function i2CSend(ldp, coin, vu, maint, serialcommand, dp, cbi) {
-  var ldpcommand = String(ldp);
-  var coincommand = String(coin);
+  var ldpcommand = Buffer.from(ldp);
+  var coincommand = Buffer.from(coin);
   var vucommand = vu;
   var maintcommand = maint;
   var serialcommand = serialcommand;
   var dpcommand = dp;
   var cbicommand = cbi;
   var sleepinterval = 50;
- bodyLEDI2C = 0x26;
+  bodyLEDI2C = 0x26;
   var bodyServoI2C = 0x27;
   var domeServoLEDI2C = 0x0a;
   var domeHPI2C = 0x19;
   var bodyStealhI2C = 0x09;
-
+// if (ldpcommand.length  == 0){
+//   ldpcommand[1] = "n";
+// }
+// if (coincommand.length  == 0){
+//   coincommand[1] = "n";
+// }
   const i2c1 = i2c.open(1, function (err) {
    if (err) {
     throw err;
    }
    console.log("open")
-   i2c1.i2cWrite(bodyLEDI2C, ldpcommand.length, ldpcommand, function (err){
+
+
+   // if (ldpcommand.length >> 0 ){
+     console.log("LDP Command length: " + ldpcommand.length);
+     i2c1.i2cWrite(bodyLEDI2C, ldpcommand.length, ldpcommand, function (err){
      if (err){
        throw err;
      }
    })
-   i2c1.i2cWrite(bodyLEDI2C, coincommand.length, coincommand, function (err){
+ // }  
+   if (coincommand.length >> 0 ){
+     console.log("Coin Command length: " + coincommand.length);
+     i2c1.i2cWrite(bodyLEDI2C, coincommand.length, coincommand, function (err){
      if (err){
        throw err;
      }
    })
-  //
+ }
+  // //
   //  if (devicetosend == "d"){
   //    dev = 0x0a;
   //    var com = Number(commandtosend);
