@@ -158,12 +158,13 @@ function commandNoOptionsRainbow(x, y, t, z) {
       var icommandstring = checkedItems[i] + y + t;
       console.log(icommandstring);
     };
+    if (checkedItemsRainbow[i] === "FrontHPRainbow") {
+      // console.log("M selected");
+      var hpfcommandstring = "F007";
+      console.log(hpfcommandstring);
+    };
   };
-  if (checkedItemsRainbow[i] === "FrontHPRainbow") {
-    // console.log("M selected");
-    var hpfcommandstring = "F007";
-    console.log(hpfcommandstring);
-  };
+
 
   socket.emit('command', {
     ldpcommandstring: ldpcommandstring,
