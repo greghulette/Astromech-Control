@@ -7,17 +7,17 @@ var domeHPI2C = 0x19;
 var bodyStealhI2C = 0x09;
 var i2cdest;
 function i2CSend(ldp, coin, vu, maint, textcommand, dp, cbi, i2ccommand, i2cdevice) {
-  sleep(25).then(() => { BodyledSend(ldp); });
-  sleep(50).then(() => { BodyledSend(coin); });
-  sleep(75).then(() => { BodyledSend(vu); });
-  sleep(100).then(() => { BodyledSend(maint); });
-  sleep(125).then(() => { BodyledSend(dp); });
-  sleep(150).then(() => { BodyledSend(cbi); });
+  sleep(25).then(() => { BodyledSend(ldp, bodyLEDI2C ); });
+  sleep(50).then(() => { BodyledSend(coin, bodyLEDI2C ); });
+  sleep(75).then(() => { BodyledSend(vu, bodyLEDI2C ); });
+  sleep(100).then(() => { BodyledSend(maint, bodyLEDI2C ); });
+  sleep(125).then(() => { BodyledSend(dp, bodyLEDI2C ); });
+  sleep(150).then(() => { BodyledSend(cbi, bodyLEDI2C ); });
   sleep(175).then(() => { i2cCommandSend(i2ccommand, i2cdevice); });
   console.log("Complete");
 };
 
-function BodyledSend(led) {
+function BodyledSend(led, i2cdest) {
   const i2c1 = i2c.open(1, function (err) {
         if (err) {
           throw err;
@@ -26,7 +26,7 @@ function BodyledSend(led) {
         if (typeof (led) != 'undefined') {
           var ledcommand = Buffer.from(led);
           console.log('Command Recieved: ' + ledcommand);
-          i2c1.i2cWrite(bodyLEDI2C, ledcommand.length, ledcommand, function (err) {
+          i2c1.i2cWrite(i2cdest, ledcommand.length, ledcommand, function (err) {
             if (err) {
               throw err;
             }
