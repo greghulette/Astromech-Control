@@ -55,7 +55,7 @@ function i2cCommandSend(i2ctextcommand, device) {
         } else if (device == 'ST') {
           i2cdest = bodyStealhI2C;
         } else {
-          i2cdest = 0x27;
+          i2cdest = 0x2;
         }
 
         console.log(i2ctextcommand);
