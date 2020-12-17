@@ -45,7 +45,7 @@ function i2cCommandSend(i2ctextcommand, device) {
         }
         console.log("Open");
         if (device == 'HP') {
-          i2cdest = domeHPI2C;
+          i2cdest = 0x19;
         } else {
           i2cdest = "0x19"
         }
