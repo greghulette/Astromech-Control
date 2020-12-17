@@ -2643,7 +2643,7 @@
           </div><!--end of Serial Command div-->
         </div> <!-- end of Level 1 Conetent Serial Command-->
         <form>
-          <label for="ColorPicker">Choose a color:</label>
+          <!-- <label for="ColorPicker">Choose a color:</label>
             <select class="ColorPicker" id="I2CSelectionBox" name="ColorPicker">
             <option value="5">Blue</option>
             <option value="1">Red</option>
@@ -2654,21 +2654,21 @@
             <option value="7">Orange</option>
             <option value="8">White</option>
             <option value="0">Off</option>
-          </select>
-           <!-- <td>i2c command:</td>
-           <td><select class="i2CPicker" id="I2CSelectionBox" name="I2CList" method = 'sendi2CCommand('I2CSelectionBox', 'i2CCommandTextBox')'>
+          </select> -->
+           <label for='I2CList'>i2c command:</label>
+           <select class="i2CPicker" id="I2CSelectionBox" name="I2CList" method = 'sendi2CCommand('I2CSelectionBox', 'i2CCommandTextBox')'>
            <option value="DS">Dome Servo Controller</option>
            <option value="HP">HP Controller</option>
            <option value="BS">Body Servo Contoller</option>
            <option value="ST">Stealth</option>
            <option value="BL">Body LED Controller</option>
-         </select></td> -->
+         </select>
            <input class="i2CPickertext" type="text" name="i2CCommandTextBox" id="i2CCommandTextBox" value="">
 
            <!-- <td><input type="text" name="i2CCommandTextBox" id="i2CCommandTextBox" value=""></td> -->
             <a href="#" onclick="sendi2CCommand('I2CSelectionBox' , 'i2CCommandTextBox')" class="applyButton"></a>
           <input type="submit" onclick="sendi2CCommand('I2CSelectionBox', 'i2CCommandTextBox')"name="" value="" style="display: none">
-        
+
        </form>
       </div><!--end of Level 1 Menu-->
     </div> <!-- end of Serial Command-->
