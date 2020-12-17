@@ -374,8 +374,8 @@ function getcolor2(s) {
   return colorValue2;
 };
 
-function geti2CDevice(s) {
-  var i2cdevice1 = document.getElementById(s)
+function geti2CDevice(g) {
+  var i2cdevice1 = document.getElementById(g)
 
   var i2cdevice1Value = (i2cdevice1.options[i2cdevice1.selectedIndex].value);
   // alert(colorValue);
@@ -818,7 +818,7 @@ function sendSerialCommand(x) {
 function sendi2CCommand(b, x) {
   let i2Ccommand = document.getElementById(x).value;
   let i2CcommandUpper = i2Ccommand.toUpperCase();
-  let i2cDevice = i2cDevice(b);
+  let i2cDevice = geti2CDevice(b);
    // console.log(commandUpper);
   socket.emit('command', {
     i2Ccommandstring: i2CcommandUpper,
