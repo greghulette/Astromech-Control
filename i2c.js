@@ -37,21 +37,21 @@ function BodyledSend(led, device) {
       });
 };
 
-function i2cCommandSend(i2ccommand, device) {
+function i2cCommandSend(i2ccommand1, device) {
   const i2c1 = i2c.open(1, function (err) {
         if (err) {
           throw err;
         }
 
-        if (typeof (i2ccommand) != 'undefined') {
-          var i2ccommandtext = Buffer.from(i2ccommand);
-          console.log('Command Recieved: ' + i2ccommand);
+        if (typeof (i2ccommand1) != 'undefined') {
+          var i2ccommandtext = Buffer.from(i2ccommand1);
+          console.log('Command Recieved: ' + i2ccommand1);
           i2c1.i2cWrite(device, i2ccommandtext.length, i2ccommandtext, function (err) {
             if (err) {
               throw err;
             }
 
-            console.log('Command Sent: ' + i2ccommand);
+            console.log('Command Sent: ' + i2ccommand1);
 
           });
         };
