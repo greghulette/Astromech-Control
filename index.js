@@ -51,13 +51,13 @@ io.on('connection', function (socket) {
     var textcommand = data.serialcommandstring;
     var dp = data.dcommandstring;
     var cbi = data.icommandstring;
-    var i2ccommand = data.i2CcommandUpper;
-    var i2cdevice = data.i2cDevice;
+    var i2ccommand1 = data.i2CcommandUpper;
+    var i2cdevice1 = data.i2cDevice;
 
     // sleep(500).then(() => { serial(ldp, coin, vu, maint, serialcommand, dp, cbi); });
 
     // sleep(500).then(() => { i2c(ldp, coin, vu, maint, serialcommand, dp, cbi); });
-    i2c(ldp, coin, vu, maint, textcommand, dp, cbi, i2ccommand, i2cdevice);
+    i2c(ldp, coin, vu, maint, textcommand, dp, cbi, i2ccommand1, i2cdevice1);
 
     // sleep(500).then(() => { serial(coin); });
 
