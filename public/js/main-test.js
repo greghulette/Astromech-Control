@@ -160,8 +160,8 @@ function commandNoOptionsRainbow(x, y, t, z) {
   };
   if (checkedItemsRainbow[i] === "FrontHPRainbow") {
     // console.log("M selected");
-    var mcommandstring = "F007";
-    console.log(mcommandstring);
+    var hpfcommandstring = "F007";
+    console.log(hpfcommandstring);
   };
 
   socket.emit('command', {
@@ -170,7 +170,8 @@ function commandNoOptionsRainbow(x, y, t, z) {
     vucommandstring: vucommandstring,
     mcommandstring: mcommandstring,
     dcommandstring: dcommandstring,
-    icommandstring: icommandstring
+    icommandstring: icommandstring,
+    hpfcommandstring: hpfcommandstring
   });
 };
 
