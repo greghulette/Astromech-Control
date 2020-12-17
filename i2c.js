@@ -51,7 +51,7 @@ function i2cCommandSend(i2ctextcommand, device) {
         }
 
         console.log('destination is: ' + i2cdest);
-        // if (typeof (i2ctextcommand) != 'undefined') {
+        if (typeof (i2ctextcommand) != 'undefined') {
           var i2ccommandtext = Buffer.from(i2ctextcommand);
           console.log('Command Recieved: ' + i2ccommandtext);
           i2c1.i2cWrite(i2cdest, i2ccommandtext.length, i2ccommandtext, function (err) {
@@ -62,7 +62,8 @@ function i2cCommandSend(i2ctextcommand, device) {
             console.log('Command Sent: ' + i2ccommandtext);
 
           });
-        // };
+        };
+        console.log('nothing happened');
       });
 };
 
