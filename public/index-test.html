@@ -2642,7 +2642,7 @@
             <!-- </form> -->
           </div><!--end of Serial Command div-->
         </div> <!-- end of Level 1 Conetent Serial Command-->
-        <form>
+        <form method='sendi2CCommand('I2CSelectionBox', 'i2CCommandTextBox')'>
           <!-- <label for="ColorPicker">Choose a color:</label>
             <select class="ColorPicker" id="I2CSelectionBox" name="ColorPicker">
             <option value="5">Blue</option>
@@ -2656,7 +2656,7 @@
             <option value="0">Off</option>
           </select> -->
            <label for='I2CList'>i2c command:</label>
-           <select class="i2CPicker" id="I2CSelectionBox" name="I2CList" method = 'sendi2CCommand('I2CSelectionBox', 'i2CCommandTextBox')'>
+           <select class="i2CPicker" id="I2CSelectionBox" name="I2CList">
            <option value="DS">Dome Servo Controller</option>
            <option value="HP">HP Controller</option>
            <option value="BS">Body Servo Contoller</option>
