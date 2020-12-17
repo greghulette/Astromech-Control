@@ -6,17 +6,17 @@ var domeServoLEDI2C = 0x0a;
 var domeHPI2C = 0x19;
 var bodyStealhI2C = 0x09;
 
-function i2CSend(ldp, coin, vu, maint, textcommand, dp, cbi) {
+function i2CSend(ldp, coin, vu, maint, textcommand, dp, cbi, i2ccommand, i2cdevice) {
   sleep(25).then(() => { BodyledSend(ldp); });
   sleep(50).then(() => { BodyledSend(coin); });
   sleep(75).then(() => { BodyledSend(vu); });
   sleep(100).then(() => { BodyledSend(maint); });
   sleep(125).then(() => { BodyledSend(dp); });
   sleep(150).then(() => { BodyledSend(cbi); });
-
+  sleep(175).then(() => { i2cCommandSend(i2ccommand, i2cdevice); });
 };
 
-function BodyledSend(led) {
+function BodyledSend(led, device) {
   const i2c1 = i2c.open(1, function (err) {
         if (err) {
           throw err;
@@ -31,6 +31,27 @@ function BodyledSend(led) {
             }
 
             console.log('Command Sent: ' + ledcommand);
+
+          });
+        };
+      });
+};
+
+function i2cCommandSend(i2ccommand, device) {
+  const i2c1 = i2c.open(1, function (err) {
+        if (err) {
+          throw err;
+        }
+
+        if (typeof (i2ccommand) != 'undefined') {
+          var i2ccommandtext = Buffer.from(i2ccommand);
+          console.log('Command Recieved: ' + i2ccommand);
+          i2c1.i2cWrite(device, i2ccommandtext.length, i2ccommandtext, function (err) {
+            if (err) {
+              throw err;
+            }
+
+            console.log('Command Sent: ' + i2ccommand);
 
           });
         };
