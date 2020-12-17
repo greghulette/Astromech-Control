@@ -5,7 +5,7 @@ var bodyServoI2C = 0x27;
 var domeServoLEDI2C = 0x0a;
 var domeHPI2C = 0x19;
 var bodyStealhI2C = 0x09;
-
+var i2cdest;
 function i2CSend(ldp, coin, vu, maint, textcommand, dp, cbi, i2ccommand, i2cdevice) {
   // sleep(25).then(() => { BodyledSend(ldp); });
   // sleep(50).then(() => { BodyledSend(coin); });
@@ -48,7 +48,7 @@ function i2cCommandSend(i2ccommand1, device) {
           i2cdest = domeHPI2C;
         }
 
-        console.log('destination is: ' + i2cdest)
+        console.log('destination is: ' + i2cdest);
         if (typeof (i2ccommand1) != 'undefined') {
           var i2ccommandtext = Buffer.from(i2ccommand1);
           console.log('Command Recieved: ' + i2ccommandtext);
