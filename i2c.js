@@ -14,6 +14,7 @@ function i2CSend(ldp, coin, vu, maint, textcommand, dp, cbi, i2ccommand, i2cdevi
   // sleep(125).then(() => { BodyledSend(dp); });
   // sleep(150).then(() => { BodyledSend(cbi); });
   sleep(175).then(() => { i2cCommandSend(i2ccommand, i2cdevice); });
+  console.log("Complete");
 };
 
 function BodyledSend(led) {
@@ -42,8 +43,8 @@ function i2cCommandSend(i2ccommand1, device) {
         if (err) {
           throw err;
         }
-
-        if (device == 'HP') {
+        console.log("Open");
+        if (device === 'HP') {
           i2cdest = domeHPI2C;
         }
 
