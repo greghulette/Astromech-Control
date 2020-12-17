@@ -46,7 +46,12 @@ function i2cCommandSend(i2ctextcommand, device) {
         console.log("Open");
         if (device == 'HP') {
           i2cdest = domeHPI2C;
-        } else {
+        }
+        if (device == 'DS') {
+          i2cdest = domeServoLEDI2C;
+        }
+
+        else {
           i2cdest = 0x27;
         }
         console.log(i2ctextcommand);
