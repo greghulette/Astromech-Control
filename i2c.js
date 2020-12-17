@@ -19,7 +19,7 @@ function i2CSend(ldp, coin, vu, maint, textcommand, dp, cbi, i2ccommand, i2cdevi
   console.log("Complete");
 };
 
-function BodyledSend(led, i2cdest) {
+function BodyledSend(led, i2cdestled) {
   const i2c1 = i2c.open(1, function (err) {
         if (err) {
           throw err;
@@ -28,7 +28,7 @@ function BodyledSend(led, i2cdest) {
         if (typeof (led) != 'undefined') {
           var ledcommand = Buffer.from(led);
           console.log('Command Recieved: ' + ledcommand);
-          i2c1.i2cWrite(i2cdest, ledcommand.length, ledcommand, function (err) {
+          i2c1.i2cWrite(i2cdestled, ledcommand.length, ledcommand, function (err) {
             if (err) {
               throw err;
             }
@@ -46,24 +46,25 @@ function i2cCommandSend(i2ctextcommand, device) {
           throw err;
         }
         console.log("Open");
-        if (device == 'HP') {
-          i2cdest = domeHPI2C;
-        } else if (device == 'DS') {
-          i2cdest = domeServoLEDI2C;
-        }else if (device == 'BL') {
-          i2cdest = bodyLEDI2C;
-        }  else if (device == 'BS') {
-          i2cdest = bodyServoI2C;
-        } else if (device == 'ST') {
-          i2cdest = bodyStealhI2C;
-        } else {
-          i2cdest = 0x2;
-        }
+
 
         console.log(i2ctextcommand);
         console.log(typeof (i2ctextcommand));
         console.log('destination is: ' + i2cdest);
         if (typeof (i2ctextcommand) != 'undefined') {
+          if (device == 'HP') {
+            i2cdest = domeHPI2C;
+          } else if (device == 'DS') {
+            i2cdest = domeServoLEDI2C;
+          }else if (device == 'BL') {
+            i2cdest = bodyLEDI2C;
+          }  else if (device == 'BS') {
+            i2cdest = bodyServoI2C;
+          } else if (device == 'ST') {
+            i2cdest = bodyStealhI2C;
+          } else {
+            i2cdest = 0x2;
+          }
           var i2ccommandtext = Buffer.from(i2ctextcommand);
           console.log('Command Recieved: ' + i2ccommandtext);
           i2c1.i2cWrite(i2cdest, i2ccommandtext.length, i2ccommandtext, function (err) {
