@@ -48,6 +48,7 @@ function i2cCommandSend(i2ccommand1, device) {
           i2cdest = domeHPI2C;
         }
 
+        console.log('destination is: ' + i2cdest)
         if (typeof (i2ccommand1) != 'undefined') {
           var i2ccommandtext = Buffer.from(i2ccommand1);
           console.log('Command Recieved: ' + i2ccommandtext);
