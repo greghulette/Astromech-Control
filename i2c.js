@@ -49,7 +49,7 @@ function i2cCommandSend(i2ctextcommand, device) {
         } else {
           i2cdest = "0x19"
         }
-
+        console.log(typeof (i2ctextcommand));
         console.log('destination is: ' + i2cdest);
         if (typeof (i2ctextcommand) != 'undefined') {
           var i2ccommandtext = Buffer.from(i2ctextcommand);
