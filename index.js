@@ -51,7 +51,7 @@ io.on('connection', function (socket) {
     var textcommand = data.serialcommandstring;
     var dp = data.dcommandstring;
     var cbi = data.icommandstring;
-    var i2ccommand = data.i2cCommandUpper;
+    var i2ccommand = data.i2CcommandUpper;
     var i2cdevice = data.i2cDevice;
 
     // sleep(500).then(() => { serial(ldp, coin, vu, maint, serialcommand, dp, cbi); });
