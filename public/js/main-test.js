@@ -117,7 +117,7 @@ function changeImageVerticalBarsRainbow() {
                 document.getElementById("FrontHPRainbow").src = "Images/Dome/FrontHPBlue.png";
                 // console.log("Change to Blue");
             }
-            verticaltoggleRainbow()
+            frontHPtoggleRainbow()
         };
 
 
