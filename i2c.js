@@ -16,7 +16,7 @@ function i2CSend(ldp, coin, vu, maint, textcommand, dp, cbi, i2ccommand, i2cdevi
   sleep(175).then(() => { i2cCommandSend(i2ccommand, i2cdevice); });
 };
 
-function BodyledSend(led, device) {
+function BodyledSend(led) {
   const i2c1 = i2c.open(1, function (err) {
         if (err) {
           throw err;
@@ -45,13 +45,13 @@ function i2cCommandSend(i2ccommand1, device) {
 
         if (typeof (i2ccommand1) != 'undefined') {
           var i2ccommandtext = Buffer.from(i2ccommand1);
-          console.log('Command Recieved: ' + i2ccommand1);
+          console.log('Command Recieved: ' + i2ccommandtext);
           i2c1.i2cWrite(device, i2ccommandtext.length, i2ccommandtext, function (err) {
             if (err) {
               throw err;
             }
 
-            console.log('Command Sent: ' + i2ccommand1);
+            console.log('Command Sent: ' + i2ccommandtext);
 
           });
         };
