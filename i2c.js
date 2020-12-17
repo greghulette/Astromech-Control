@@ -33,7 +33,7 @@ function BodyledSend(led, i2cdestled) {
               throw err;
             }
 
-            console.log('Command Sent: ' + ledcommand);
+            console.log('Command Sent: ' + ledcommand + " to dest: " + i2cdestled);
 
           });
         };
@@ -72,7 +72,7 @@ function i2cCommandSend(i2ctextcommand, device) {
               throw err;
             }
 
-            console.log('Command Sent: ' + i2ccommandtext + " to dest: " + i2cdestled);
+            console.log('Command Sent: ' + i2ccommandtext);
 
           });
         };
