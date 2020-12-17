@@ -374,6 +374,14 @@ function getcolor2(s) {
   return colorValue2;
 };
 
+function geti2CDevice(s) {
+  var i2cdevice1 = document.getElementById(s)
+
+  var i2cdevice1Value = (i2cdevice1.options[i2cdevice1.selectedIndex].value);
+  // alert(colorValue);
+  return i2cdevice1Value;
+};
+
 
 function getStripName (){
 
@@ -810,7 +818,7 @@ function sendSerialCommand(x) {
 function sendi2CCommand(b, x) {
   let i2Ccommand = document.getElementById(x).value;
   let i2CcommandUpper = i2Ccommand.toUpperCase();
-  let i2cDevice = b;
+  let i2cDevice = i2cDevice(b);
    // console.log(commandUpper);
   socket.emit('command', {
     i2Ccommandstring: i2CcommandUpper,
