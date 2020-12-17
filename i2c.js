@@ -43,10 +43,14 @@ function i2cCommandSend(i2ccommand1, device) {
           throw err;
         }
 
+        if (device == 'HP') {
+          i2cdest = domeHPI2C;
+        }
+
         if (typeof (i2ccommand1) != 'undefined') {
           var i2ccommandtext = Buffer.from(i2ccommand1);
           console.log('Command Recieved: ' + i2ccommandtext);
-          i2c1.i2cWrite(device, i2ccommandtext.length, i2ccommandtext, function (err) {
+          i2c1.i2cWrite(i2cdest, i2ccommandtext.length, i2ccommandtext, function (err) {
             if (err) {
               throw err;
             }
