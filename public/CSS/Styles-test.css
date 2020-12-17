@@ -730,6 +730,16 @@ label[for= ColorPicker]{
 
 }
 
+.i2CPicker {
+
+  font-size: 1.5rem;
+
+}
+.i2CPickertext {
+  height: 25px;
+  font-size: 1.5rem;
+}
+
 .ColorPicker1 {
   /* border: 3px green solid; */
   align-items: center;
