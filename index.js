@@ -53,11 +53,12 @@ io.on('connection', function (socket) {
     var cbi = data.icommandstring;
     var i2ccommand1 = data.i2Ccommandstring;
     var i2cdevice1 = data.i2cCommandDevice;
+    var hpFront = data.hpfcommandstring;
 
     // sleep(500).then(() => { serial(ldp, coin, vu, maint, serialcommand, dp, cbi); });
 
     // sleep(500).then(() => { i2c(ldp, coin, vu, maint, serialcommand, dp, cbi); });
-    i2c(ldp, coin, vu, maint, textcommand, dp, cbi, i2ccommand1, i2cdevice1);
+    i2c(ldp, coin, vu, maint, textcommand, dp, cbi, i2ccommand1, i2cdevice1, hpFront);
 
     // sleep(500).then(() => { serial(coin); });
 

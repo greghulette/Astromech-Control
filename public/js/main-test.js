@@ -122,11 +122,12 @@ function changeImageVerticalBarsRainbow() {
 
 
 function commandNoOptionsRainbow(x, y, t, z) {
-
+  var bodyLEDi2cdest = "BL"
   for (var i = 0; i < checkedItemsRainbow.length; i++) {
     if (checkedItemsRainbow[i] === "LDPRainbow") {
       // console.log("L selected");
       var ldpcommandstring = "L" + y + t;
+
       console.log(ldpcommandstring);
     };
 
@@ -166,6 +167,7 @@ function commandNoOptionsRainbow(x, y, t, z) {
 
   socket.emit('command', {
     ldpcommandstring: ldpcommandstring,
+    ldpi2cdest: bodyLEDi2cdest,
     coincommandstring: coincommandstring,
     vucommandstring: vucommandstring,
     mcommandstring: mcommandstring,
