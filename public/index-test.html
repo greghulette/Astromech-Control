@@ -604,7 +604,9 @@
             id="V"
           />
 
-
+          <h3 class="selectAll" onclick=selectALLStripsRainbow()> A </h3>
+          <h3 class="selectNone" onclick=selectNoneStripsRainbow()> N </h3>
+          <img src="Images/checkmark.png" alt="" class="checkmarkall" id="checkmarkallknightRider">
 
 
         <div class="menu-Level-2">
@@ -767,18 +769,27 @@
                 onclick=changeImageFrontHPRainbow()
                 id="FrontHPRainbow"
               />
+            <img
+                class="r2menupictureTopHP"
+                src="Images/Dome/TopHPBlue.png"
+                alt="picture"
+                name="stripSelectorRainbow"
+                onclick=changeImageTopHPRainbow()
+                id="TopHPRainbow"
+              />
+            <img
+                class="r2menupictureRearHP"
+                src="Images/Dome/RearHPBlue.png"
+                alt="picture"
+                name="stripSelectorRainbow"
+                onclick=changeImageRearHPRainbow()
+                id="RearHPRainbow"
+              />
 
-
-
-
-
-
-
-
-
-
-
-
+              <h3 class="selectAll" onclick=selectALLStripsRainbow()> A </h3>
+              <h3 class="selectNone" onclick=selectNoneStripsRainbow()> N </h3>
+              <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallRainbow">
+              <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneRainbow">
             <div class="menu-Level-2">
 
                 <div class="menu-Level-2-Links " >
@@ -804,9 +815,12 @@
                   <form class="" action="index.html" method="post">
                     <br />
                     <br />
-                    <a href="#" onclick="commandNoOptionsRainbow('LDP','05',1,)" class="applyButton"></a>
+                    <a href="#" onclick="commandNoOptionsRainbow('05',1,'checkmarkapplyRainbow')" class="applyButton"></a>
                     <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
+
                   </form>
+                  <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyRainbow">
+
                 </div> <!--end of ColorPickerdiv-->
               </div>  <!--end of Level 2 Content LargeSpan-->
 
@@ -816,9 +830,11 @@
                     <form class="" action="index.html" method="post">
                       <br />
                       <br />
-                      <a href="#" onclick="commandNoOptionsRainbow('LDP','05',2,)" class="applyButton"></a>
+                      <a href="#" onclick="commandNoOptionsRainbow('05',2,'checkmarkapplyRainbowShort')" class="applyButton"></a>
                       <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
                     </form>
+                    <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyRainbowShort">
+
                   </div> <!--end of ColorPickerdiv-->
                 </div>  <!--end of Level 2 Content ShortSpan-->
               </div> <!--end of Level 2 Menu-->
@@ -829,6 +845,47 @@
 
             <div class="menu-Level-1-Content" id="AlternatingColors">
               <h1 class="menuHeader-Level-1">Alternating Colors</h1>
+              <img
+                  class="r2menupictureLDP1"
+                  src="Images/Body/LDPBlue.png"
+                  alt="picture"
+                  name="stripSelectorRainbow"
+                  onclick=changeImageLDPRainbow()
+                  id="LDPRainbow"
+                />
+
+              <img
+                class="r2menupictureCoin"
+                src="Images/Body/CoinSLotsBlue.png"
+                alt="picture"
+                name="stripSelectorRainbow"
+                onclick=changeImageCoinRainbow()
+                id="CoinRainbow"
+              />
+
+              <img
+                  class="r2menupictureMaint"
+                  src="Images/Body/SkirtBlue.png"
+                  alt="picture"
+                  name="stripSelectorRainbow"
+                  onclick=changeImageMaintRainbow()
+                  id="MaintRainbow"
+                />
+
+              <img
+                  class="r2menupictureDataPanelVerticalBars"
+                  src="Images/Body/DataPanelVerticalBlue.png"
+                  alt="picture"
+                  name="stripSelectorRainbow"
+                  onclick=changeImageVerticalBarsRainbow()
+                  id="VerticalBarstRainbow"
+                />
+
+
+
+                  <h3 class="selectAll" onclick=selectALLStripsRainbow()> A </h3>
+                  <h3 class="selectNone" onclick=selectNoneStripsRainbow()> N </h3>
+
               <div class="menu-Level-2">
 
                   <div class="menu-Level-2-Links " >
@@ -897,6 +954,71 @@
 
               <div class="menu-Level-1-Content" id="DimPulse">
                 <h1 class="menuHeader-Level-1">Dim Pulse</h1>
+                <img
+                    class="r2menupictureLDP1"
+                    src="Images/Body/LDPBlue.png"
+                    alt="picture"
+                    name="stripSelectorRainbow"
+                    onclick=changeImageLDPRainbow()
+                    id="LDPRainbow"
+                  />
+
+                <img
+                  class="r2menupictureCoin"
+                  src="Images/Body/CoinSLotsBlue.png"
+                  alt="picture"
+                  name="stripSelectorRainbow"
+                  onclick=changeImageCoinRainbow()
+                  id="CoinRainbow"
+                />
+
+                <img
+                    class="r2menupictureMaint"
+                    src="Images/Body/SkirtBlue.png"
+                    alt="picture"
+                    name="stripSelectorRainbow"
+                    onclick=changeImageMaintRainbow()
+                    id="MaintRainbow"
+                  />
+
+                <img
+                    class="r2menupictureDataPanelVerticalBars"
+                    src="Images/Body/DataPanelVerticalBlue.png"
+                    alt="picture"
+                    name="stripSelectorRainbow"
+                    onclick=changeImageVerticalBarsRainbow()
+                    id="VerticalBarstRainbow"
+                  />
+
+                  <img
+                      class="r2menupictureFrontHP"
+                      src="Images/Dome/FrontHPBlue.png"
+                      alt="picture"
+                      name="stripSelectorRainbow"
+                      onclick=changeImageFrontHPRainbow()
+                      id="FrontHPRainbow"
+                    />
+                  <img
+                      class="r2menupictureTopHP"
+                      src="Images/Dome/TopHPBlue.png"
+                      alt="picture"
+                      name="stripSelectorRainbow"
+                      onclick=changeImageTopHPRainbow()
+                      id="TopHPRainbow"
+                    />
+                  <img
+                      class="r2menupictureRearHP"
+                      src="Images/Dome/RearHPBlue.png"
+                      alt="picture"
+                      name="stripSelectorRainbow"
+                      onclick=changeImageRearHPRainbow()
+                      id="RearHPRainbow"
+                    />
+
+                    <h3 class="selectAll" onclick=selectALLStripsRainbow()> A </h3>
+                    <h3 class="selectNone" onclick=selectNoneStripsRainbow()> N </h3>
+
+
                 <div class="menu-Level-2">
 
                     <div class="menu-Level-2-Links " >

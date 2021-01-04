@@ -624,12 +624,78 @@ shadow: 2px, 4px 15px blue;
 .r2menupictureFrontHP.active{
 }
 
+.r2menupictureTopHP {
+  width: 46px;
+  position: absolute;
+  left: -494px;
+  top: 67px;
+}
 
+.r2menupictureTopHP.active{
+}
 
+.r2menupictureRearHP {
+  width: 46px;
+  position: absolute;
+  left: -552px;
+  top: -40px;
+}
 
+.r2menupictureRearHP.active{
+}
 
+.selectAll {
+  position: absolute;
+  left: -815px;
+  top: 550px;
+  font-size: 35px;
+  text-align: center;
+  border: 5px blue solid;
+  /* padding-left: 15px;
+  padding-right: 15 px;
+  padding-top: 5px;
+  padding-bottom: 5px; */
+  width: 60px;
+  height: 60px;
+}
 
+.selectNone {
+  position: absolute;
+  left: -815px;
+  top: 640px;
+  font-size: 35px;
+  text-align: center;
+  border: 5px blue solid;
+  /* padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px; */
+  width: 60px;
+  height: 60px;
 
+}
+.checkmarkall{
+  position: absolute;
+  top: 575px;
+  left: -745px;
+  height: 60px;
+  width: 60px;
+}
+
+.checkmarknone{
+  position: absolute;
+  top: 675px;
+  left: -745px;
+  height: 60px;
+  width: 60px;
+}
+.checkmarkapply{
+  position: absolute;
+  top: 305px;
+  left: 75px;
+  height: 60px;
+  width: 60px;
+}
 .r2menu  .img-wrapper {
   display: inline-block;
   overflow: hidden;
