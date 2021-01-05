@@ -45,18 +45,18 @@ function frontHPtoggleKnightRider() {
 };
 
 function topHPtoggleKnightRider() {
- let tmp = document.querySelector('#TopHPKnightRider');
+  let tmp = document.querySelector('#TopHPKnightRider');
  tmp.classList.toggle('active');
  if (tmp.classList.contains('active')) {
  }
   getCheckedElementKnightRider()
 };
 function rearHPtoggleKnightRider() {
- let tmp = document.querySelector('#RearHPKnightRider');
- tmp.classList.toggle('active');
- if (tmp.classList.contains('active')) {
- }
-  getCheckedElementKnightRider()
+   let tmp = document.querySelector('#RearHPKnightRider');
+   tmp.classList.toggle('active');
+   if (tmp.classList.contains('active')) {
+   }
+    getCheckedElementKnightRider()
 };
 
 function getCheckedElementKnightRider() {
@@ -77,9 +77,9 @@ function getCheckedElementKnightRider() {
    document.getElementById("CoinKnightRider").src = "Images/Body/CoinSlotsGreen.png";
    document.getElementById("MaintKnightRider").src = "Images/Body/SkirtGreen.png";
    document.getElementById("VerticalBarstKnightRider").src = "Images/Body/DataPanelVerticalGreen.png";
-   document.getElementById("FrontHPKnightRider").src = "Images/Dome/FrontHPGreen.png";
-   document.getElementById("TopHPKnightRider").src = "Images/Dome/TopHPGreen.png";
-   document.getElementById("RearHPKnightRider").src = "Images/Dome/RearHPGreen.png";
+   // document.getElementById("FrontHPKnightRider").src = "Images/Dome/FrontHPGreen.png";
+   // document.getElementById("TopHPKnightRider").src = "Images/Dome/TopHPGreen.png";
+   // document.getElementById("RearHPKnightRider").src = "Images/Dome/RearHPGreen.png";
    document.getElementById("checkmarkallKnightRider").src = "Images/checkmark.png";
    setTimeout('document.getElementById("checkmarkallKnightRider").src = "Images/blankcheckmark.png"', 2000);
 
@@ -107,9 +107,9 @@ function getCheckedElementKnightRider() {
    document.getElementById("CoinKnightRider").src = "Images/Body/CoinSlotsBlue.png";
    document.getElementById("MaintKnightRider").src = "Images/Body/SkirtBlue.png";
    document.getElementById("VerticalBarstKnightRider").src = "Images/Body/DataPanelVerticalBlue.png";
-   document.getElementById("FrontHPKnightRider").src = "Images/Dome/FrontHPBlue.png";
-   document.getElementById("TopHPKnightRider").src = "Images/Dome/TopHPBlue.png";
-   document.getElementById("RearHPKnightRider").src = "Images/Dome/RearHPBLue.png";
+   //  document.getElementById("FrontHPKnightRider").src = "Images/Dome/FrontHPBlue.png";
+   //  document.getElementById("TopHPKnightRider").src = "Images/Dome/TopHPBlue.png";
+   // document.getElementById("RearHPKnightRider").src = "Images/Dome/RearHPBLue.png";
    document.getElementById("checkmarknoneKnightRider").src = "Images/checkmark.png";
    setTimeout('document.getElementById("checkmarknoneKnightRider").src = "Images/blankcheckmark.png"', 2000);
 
@@ -181,46 +181,46 @@ function changeImageVerticalBarsKnightRider() {
         verticaltoggleKnightRider()
     };
 
-  function changeImageFrontHPKnightRider() {
-
-            if (document.getElementById("FrontHPKnightRider").src.match("FrontHPBlue.png"))
-            {
-                document.getElementById("FrontHPKnightRider").src = "Images/Dome/FrontHPGreen.png";
-                // console.log("Changed to Green");
-            } else {
-                document.getElementById("FrontHPKnightRider").src = "Images/Dome/FrontHPBlue.png";
-                // console.log("Change to Blue");
-            }
-            frontHPtoggleKnightRider()
-        };
-    function changeImageTopHPKnightRider() {
-
-              if (document.getElementById("TopHPKnightRider").src.match("TopHPBlue.png"))
-              {
-                  document.getElementById("TopHPKnightRider").src = "Images/Dome/TopHPGreen.png";
-                  // console.log("Changed to Green");
-              } else {
-                  document.getElementById("TopHPKnightRider").src = "Images/Dome/TopHPBlue.png";
-                  // console.log("Change to Blue");
-              }
-              topHPtoggleKnightRider()
-          };
-    function changeImageRearHPKnightRider() {
-
-              if (document.getElementById("RearHPKnightRider").src.match("RearHPBlue.png"))
-              {
-                  document.getElementById("RearHPKnightRider").src = "Images/Dome/RearHPGreen.png";
-                  // console.log("Changed to Green");
-              } else {
-                  document.getElementById("RearHPKnightRider").src = "Images/Dome/RearHPBlue.png";
-                  // console.log("Change to Blue");
-              }
-              rearHPtoggleKnightRider()
-          };
-function changeapply(u){
-  document.getElementById(u).src = "Images/blankcheckmark.png";
-
-}
+  // function changeImageFrontHPKnightRider() {
+  //
+  //           if (document.getElementById("FrontHPKnightRider").src.match("FrontHPBlue.png"))
+  //           {
+  //               document.getElementById("FrontHPKnightRider").src = "Images/Dome/FrontHPGreen.png";
+  //               // console.log("Changed to Green");
+  //           } else {
+  //               document.getElementById("FrontHPKnightRider").src = "Images/Dome/FrontHPBlue.png";
+  //               // console.log("Change to Blue");
+  //           }
+  //           frontHPtoggleKnightRider()
+  //       };
+  //   function changeImageTopHPKnightRider() {
+  //
+  //             if (document.getElementById("TopHPKnightRider").src.match("TopHPBlue.png"))
+  //             {
+  //                 document.getElementById("TopHPKnightRider").src = "Images/Dome/TopHPGreen.png";
+  //                 // console.log("Changed to Green");
+  //             } else {
+  //                 document.getElementById("TopHPKnightRider").src = "Images/Dome/TopHPBlue.png";
+  //                 // console.log("Change to Blue");
+  //             }
+  //             topHPtoggleKnightRider()
+  //         };
+  //   function changeImageRearHPKnightRider() {
+  //
+  //             if (document.getElementById("RearHPKnightRider").src.match("RearHPBlue.png"))
+  //             {
+  //                 document.getElementById("RearHPKnightRider").src = "Images/Dome/RearHPGreen.png";
+  //                 // console.log("Changed to Green");
+  //             } else {
+  //                 document.getElementById("RearHPKnightRider").src = "Images/Dome/RearHPBlue.png";
+  //                 // console.log("Change to Blue");
+  //             }
+  //             rearHPtoggleKnightRider()
+  //         };
+  // function changeapply(u){
+  //   document.getElementById(u).src = "Images/blankcheckmark.png";
+  //
+  // }
 
 function commandNoOptionsKnightRider( y, t, u) {
   // var bodyLEDi2cdest = "BL"
