@@ -77,9 +77,9 @@ function getCheckedElementKnightRider() {
    document.getElementById("CoinKnightRider").src = "Images/Body/CoinSlotsGreen.png";
    document.getElementById("MaintKnightRider").src = "Images/Body/SkirtGreen.png";
    document.getElementById("VerticalBarstKnightRider").src = "Images/Body/DataPanelVerticalGreen.png";
-   document.getElementById("FrontHPKnightRider").src = "Images/Dome/FrontHPGreen.png";
-   document.getElementById("TopHPKnightRider").src = "Images/Dome/TopHPGreen.png";
-   document.getElementById("RearHPKnightRider").src = "Images/Dome/RearHPGreen.png";
+   // document.getElementById("FrontHPKnightRider").src = "Images/Dome/FrontHPGreen.png";
+   // document.getElementById("TopHPKnightRider").src = "Images/Dome/TopHPGreen.png";
+   // document.getElementById("RearHPKnightRider").src = "Images/Dome/RearHPGreen.png";
    document.getElementById("checkmarkallKnightRider").src = "Images/checkmark.png";
    setTimeout('document.getElementById("checkmarkallKnightRider").src = "Images/blankcheckmark.png"', 2000);
 
@@ -91,12 +91,12 @@ function getCheckedElementKnightRider() {
   mainttemp.classList.add('active');
   let vutemp = document.querySelector('#VerticalBarstKnightRider');
   vutemp.classList.add('active');
-  let frontHPtemp = document.querySelector('#FrontHPKnightRider');
-  frontHPtemp.classList.add('active');
-  let topHPtemp = document.querySelector('#TopHPKnightRider');
-  topHPtemp.classList.add('active');
-  let rearHPtemp = document.querySelector('#RearHPKnightRider');
-  rearHPtemp.classList.add('active');
+  // let frontHPtemp = document.querySelector('#FrontHPKnightRider');
+  // frontHPtemp.classList.add('active');
+  // let topHPtemp = document.querySelector('#TopHPKnightRider');
+  // topHPtemp.classList.add('active');
+  // let rearHPtemp = document.querySelector('#RearHPKnightRider');
+  // rearHPtemp.classList.add('active');
 
   getCheckedElementKnightRider()
  }
@@ -107,9 +107,9 @@ function getCheckedElementKnightRider() {
    document.getElementById("CoinKnightRider").src = "Images/Body/CoinSlotsBlue.png";
    document.getElementById("MaintKnightRider").src = "Images/Body/SkirtBlue.png";
    document.getElementById("VerticalBarstKnightRider").src = "Images/Body/DataPanelVerticalBlue.png";
-   document.getElementById("FrontHPKnightRider").src = "Images/Dome/FrontHPBlue.png";
-   document.getElementById("TopHPKnightRider").src = "Images/Dome/TopHPBlue.png";
-   document.getElementById("RearHPKnightRider").src = "Images/Dome/RearHPBLue.png";
+   //  document.getElementById("FrontHPKnightRider").src = "Images/Dome/FrontHPBlue.png";
+   //  document.getElementById("TopHPKnightRider").src = "Images/Dome/TopHPBlue.png";
+   // document.getElementById("RearHPKnightRider").src = "Images/Dome/RearHPBLue.png";
    document.getElementById("checkmarknoneKnightRider").src = "Images/checkmark.png";
    setTimeout('document.getElementById("checkmarknoneKnightRider").src = "Images/blankcheckmark.png"', 2000);
 
@@ -181,46 +181,46 @@ function changeImageVerticalBarsKnightRider() {
         verticaltoggleKnightRider()
     };
 
-  function changeImageFrontHPKnightRider() {
-
-            if (document.getElementById("FrontHPKnightRider").src.match("FrontHPBlue.png"))
-            {
-                document.getElementById("FrontHPKnightRider").src = "Images/Dome/FrontHPGreen.png";
-                // console.log("Changed to Green");
-            } else {
-                document.getElementById("FrontHPKnightRider").src = "Images/Dome/FrontHPBlue.png";
-                // console.log("Change to Blue");
-            }
-            frontHPtoggleKnightRider()
-        };
-    function changeImageTopHPKnightRider() {
-
-              if (document.getElementById("TopHPKnightRider").src.match("TopHPBlue.png"))
-              {
-                  document.getElementById("TopHPKnightRider").src = "Images/Dome/TopHPGreen.png";
-                  // console.log("Changed to Green");
-              } else {
-                  document.getElementById("TopHPKnightRider").src = "Images/Dome/TopHPBlue.png";
-                  // console.log("Change to Blue");
-              }
-              topHPtoggleKnightRider()
-          };
-    function changeImageRearHPKnightRider() {
-
-              if (document.getElementById("RearHPKnightRider").src.match("RearHPBlue.png"))
-              {
-                  document.getElementById("RearHPKnightRider").src = "Images/Dome/RearHPGreen.png";
-                  // console.log("Changed to Green");
-              } else {
-                  document.getElementById("RearHPKnightRider").src = "Images/Dome/RearHPBlue.png";
-                  // console.log("Change to Blue");
-              }
-              rearHPtoggleKnightRider()
-          };
-function changeapply(u){
-  document.getElementById(u).src = "Images/blankcheckmark.png";
-
-}
+  // function changeImageFrontHPKnightRider() {
+  //
+  //           if (document.getElementById("FrontHPKnightRider").src.match("FrontHPBlue.png"))
+  //           {
+  //               document.getElementById("FrontHPKnightRider").src = "Images/Dome/FrontHPGreen.png";
+  //               // console.log("Changed to Green");
+  //           } else {
+  //               document.getElementById("FrontHPKnightRider").src = "Images/Dome/FrontHPBlue.png";
+  //               // console.log("Change to Blue");
+  //           }
+  //           frontHPtoggleKnightRider()
+  //       };
+  //   function changeImageTopHPKnightRider() {
+  //
+  //             if (document.getElementById("TopHPKnightRider").src.match("TopHPBlue.png"))
+  //             {
+  //                 document.getElementById("TopHPKnightRider").src = "Images/Dome/TopHPGreen.png";
+  //                 // console.log("Changed to Green");
+  //             } else {
+  //                 document.getElementById("TopHPKnightRider").src = "Images/Dome/TopHPBlue.png";
+  //                 // console.log("Change to Blue");
+  //             }
+  //             topHPtoggleKnightRider()
+  //         };
+  //   function changeImageRearHPKnightRider() {
+  //
+  //             if (document.getElementById("RearHPKnightRider").src.match("RearHPBlue.png"))
+  //             {
+  //                 document.getElementById("RearHPKnightRider").src = "Images/Dome/RearHPGreen.png";
+  //                 // console.log("Changed to Green");
+  //             } else {
+  //                 document.getElementById("RearHPKnightRider").src = "Images/Dome/RearHPBlue.png";
+  //                 // console.log("Change to Blue");
+  //             }
+  //             rearHPtoggleKnightRider()
+  //         };
+  // function changeapply(u){
+  //   document.getElementById(u).src = "Images/blankcheckmark.png";
+  //
+  // }
 
 function commandNoOptionsKnightRider( y, t, u) {
   // var bodyLEDi2cdest = "BL"
@@ -256,31 +256,31 @@ function commandNoOptionsKnightRider( y, t, u) {
       var mcommandstring = "M" + y + t;
       console.log(mcommandstring);
     };
-    if (checkedItemsKnightRider[i] === "D") {
-      // console.log("M selected");
-      var dcommandstring = checkedItems[i] + y + t;
-      console.log(dcommandstring);
-    };
-    if (checkedItemsKnightRider[i] === "I") {
-      // console.log("M selected");
-      var icommandstring = checkedItems[i] + y + t;
-      console.log(icommandstring);
-    };
-    if (checkedItemsKnightRider[i] === "FrontHPKnightRider") {
-      // console.log("M selected");
-      var hpfcommandstring = "F007";
-      console.log(hpfcommandstring);
-    };
-    if (checkedItemsKnightRider[i] === "TopHPKnightRider") {
-      // console.log("M selected");
-      var hptcommandstring = "T007";
-      console.log(hptcommandstring);
-    };
-    if (checkedItemsKnightRider[i] === "RearHPKnightRider") {
-      // console.log("M selected");
-      var hprcommandstring = "R007";
-      console.log(hprcommandstring);
-    };
+    // if (checkedItemsKnightRider[i] === "D") {
+    //   // console.log("M selected");
+    //   var dcommandstring = checkedItems[i] + y + t;
+    //   console.log(dcommandstring);
+    // };
+    // if (checkedItemsKnightRider[i] === "I") {
+    //   // console.log("M selected");
+    //   var icommandstring = checkedItems[i] + y + t;
+    //   console.log(icommandstring);
+    // };
+    // if (checkedItemsKnightRider[i] === "FrontHPKnightRider") {
+    //   // console.log("M selected");
+    //   var hpfcommandstring = "F007";
+    //   console.log(hpfcommandstring);
+    // };
+    // if (checkedItemsKnightRider[i] === "TopHPKnightRider") {
+    //   // console.log("M selected");
+    //   var hptcommandstring = "T007";
+    //   console.log(hptcommandstring);
+    // };
+    // if (checkedItemsKnightRider[i] === "RearHPKnightRider") {
+    //   // console.log("M selected");
+    //   var hprcommandstring = "R007";
+    //   console.log(hprcommandstring);
+    // };
   };
 
 
@@ -290,15 +290,49 @@ function commandNoOptionsKnightRider( y, t, u) {
     coincommandstring: coincommandstring,
     vucommandstring: vucommandstring,
     mcommandstring: mcommandstring,
-    dcommandstring: dcommandstring,
-    icommandstring: icommandstring,
-    hpfcommandstring: hpfcommandstring,
-    hptcommandstring: hptcommandstring,
-    hprcommandstring: hprcommandstring
+
   });
 
 
 };
+
+function commandSingleColorKnightRider(y, t, z) {
+  // let LEDSelector = getStripName();
+  let colorValues = getcolor1(z);
+
+  for (var i = 0; i < checkedItems.length; i++) {
+    if (checkedItems[i] === "LDPKnightRider") {
+      // console.log("L selected");
+      var ldpcommandstring = "L" + y + t + colorValues;
+      console.log(ldpcommandstring);
+    }
+    if (checkedItems[i] === "CoinKnightRider") {
+      // console.log("C selected");
+      var coincommandstring = "C" + y + t + colorValues;
+      console.log(coincommandstring);
+    };
+
+    if (checkedItems[i] === "VerticalBarstKnightRider") {
+      // console.log("V selected");
+      var vucommandstring = 'V' + y + t + colorValues;
+      console.log(vucommandstring);
+    };
+
+    if (checkedItems[i] === "MaintKnightRider") {
+      // console.log("M selected");
+      var mcommandstring = checkedItems[i] + y + t + colorValues;
+      console.log(mcommandstring);
+    };
+  };
+
+  socket.emit('command', {
+    ldpcommandstring: ldpcommandstring,
+    coincommandstring: coincommandstring,
+    vucommandstring: vucommandstring,
+    mcommandstring: mcommandstring
+  });
+};
+
 
 
 

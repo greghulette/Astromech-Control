@@ -67,7 +67,11 @@ span.myButton input {
   height: 55px;
 }
 .buttonwidth {
-  width: 150px;
+  width: 165px;
+}
+
+.homebuttonwidth {
+  width: 240px;
 }
 #buttons {
   /* border: 4px solid blue; */
@@ -1212,7 +1216,7 @@ label[for= ColorPickertab]{
 
 /* Create an active/current "tab button" class */
 .menu-Level-0 .menu-Level-0-Links button.active {
-  box-shadow: (5px 0px 25px yellow);
+  box-shadow: (25px 0px 145px yellow);
   background-color: #696969;
   display: block;
 }
@@ -1264,8 +1268,8 @@ label[for= ColorPickertab]{
    display: inline-block;
    /* left:100px;
    top: 100px; */
-   width: 160px;
-   height: 54px;
+   width: 170px;
+   height: 57px;
    overflow: visible;
    border: none;
    padding-top: 0px;
@@ -1273,14 +1277,14 @@ label[for= ColorPickertab]{
 }
 
 .menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Links button.active{
-   box-shadow: 0px 0px 25px yellow;
+   box-shadow: 0px 0px 15px yellow;
    background-color: yellow;
    border: none;
    outline: none;
   -webkit-transform: scale(1.25);
 }
 .menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Links button.active:hover{
-   box-shadow: 0px 0px 25px yellow;
+   box-shadow: 0px 0px 55px yellow;
    background-color: yellow;
    border: none;
    outline: none;
@@ -1311,16 +1315,17 @@ label[for= ColorPickertab]{
 
 .menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content .menu-Level-2 .menu-Level-2-Links button{
  display: inline-block;
- width: 160px;
+ width: 170px;
  height: 54px;
  overflow: visible;
 border: none;
 padding-top: 0px;
 background-color: black;
+/* padding-left: -25px; */
 }
 
 .menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content .menu-Level-2 .menu-Level-2-Links button.active{
- box-shadow: 0px 0px 25px yellow;
+ box-shadow: 0px 0px 75px yellow;
  background-color: yellow;
  border: none;
  outline: none;
