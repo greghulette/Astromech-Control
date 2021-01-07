@@ -1064,6 +1064,49 @@
 
                 <div class="menu-Level-1-Content" id="Bounce">
                   <h1 class="menuHeader-Level-1">Bouncing</h1>
+                  <img
+                      class="r2menupictureLDP1"
+                      src="Images/Body/LDPBlue.png"
+                      alt="picture"
+                      name="stripSelectorBouncing"
+                      onclick=changeImageLDPBouncing()
+                      id="LDPBouncing"
+                    />
+
+                  <img
+                    class="r2menupictureCoin"
+                    src="Images/Body/CoinSLotsBlue.png"
+                    alt="picture"
+                    name="stripSelectorBouncing"
+                    onclick=changeImageCoinBouncing()
+                    id="CoinBouncing"
+                  />
+
+                  <img
+                      class="r2menupictureMaint"
+                      src="Images/Body/SkirtBlue.png"
+                      alt="picture"
+                      name="stripSelectorBouncing"
+                      onclick=changeImageMaintBouncing()
+                      id="MaintBouncing"
+                    />
+
+                  <img
+                      class="r2menupictureDataPanelVerticalBars"
+                      src="Images/Body/DataPanelVerticalBlue.png"
+                      alt="picture"
+                      name="stripSelectorBouncing"
+                      onclick=changeImageVerticalBarsBouncing()
+                      id="VerticalBarstBouncing"
+                    />
+
+
+                    <h3 class="selectAll" onclick=selectALLStripsBouncing()> A </h3>
+                    <h3 class="selectNone" onclick=selectNoneStripsBouncing()> N </h3>
+                    <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallBouncing">
+                    <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneBouncing">
+
+
                   <div class="menu-Level-2">
 
                       <div class="menu-Level-2-Links " >
@@ -1107,11 +1150,11 @@
                               <option value="0">Off</option>
                             </select>
                           <br />
-                          <a href="#" onclick="commandTwoColorsNoSlider('08','1', 'BounceFirstColorSelctionBox', 'BounceSecondColorSelectionBox')" class="applyButton"></a>
+                          <a href="#" onclick="commandTwoColorsNoSliderBouncing('08','1', 'BounceFirstColorSelctionBox', 'BounceSecondColorSelectionBox', 'checkmarkapplyBouncing')" class="applyButton"></a>
                           <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
 
                         </form>
-
+                        <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyBouncing">
                       </div>
                     </div>
 
@@ -1121,6 +1164,49 @@
 
                   <div class="menu-Level-1-Content" id="DualBounce">
                     <h1 class="menuHeader-Level-1">Dual Bouncing</h1>
+                    <img
+                        class="r2menupictureLDP1"
+                        src="Images/Body/LDPBlue.png"
+                        alt="picture"
+                        name="stripSelectorDualBounce"
+                        onclick=changeImageLDPDualBounce()
+                        id="LDPDualBounce"
+                      />
+
+                    <img
+                      class="r2menupictureCoin"
+                      src="Images/Body/CoinSLotsBlue.png"
+                      alt="picture"
+                      name="stripSelectorDualBounce"
+                      onclick=changeImageCoinDualBounce()
+                      id="CoinDualBounce"
+                    />
+
+                    <img
+                        class="r2menupictureMaint"
+                        src="Images/Body/SkirtBlue.png"
+                        alt="picture"
+                        name="stripSelectorDualBounce"
+                        onclick=changeImageMaintDualBounce()
+                        id="MaintDualBounce"
+                      />
+
+                    <img
+                        class="r2menupictureDataPanelVerticalBars"
+                        src="Images/Body/DataPanelVerticalBlue.png"
+                        alt="picture"
+                        name="stripSelectorDualBounce"
+                        onclick=changeImageVerticalBarsDualBounce()
+                        id="VerticalBarstDualBounce"
+                      />
+
+
+                      <h3 class="selectAll" onclick=selectALLStripsDualBounce()> A </h3>
+                      <h3 class="selectNone" onclick=selectNoneStripsDualBounce()> N </h3>
+                      <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallDualBounce">
+                      <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneDualBounce">
+
+
                     <div class="menu-Level-2">
                       <div class="menu-Level-2-Links " >
                         <button class="active" rel="MeetInMiddle"><img
@@ -1172,10 +1258,11 @@
                               </select>
                               <br />
                               <br />
-                              <a href="#" onclick="commandSingleColor('LDP','09',2, 'MeetInMiddleColorChoiceColorSelect')" class="applyButton"></a>
+                              <a href="#" onclick="commandSingleColorDualBounce('09','2', 'MeetInMiddleColorChoiceColorSelect', 'checkmarkapplyDualBounceMeetInMiddle')" class="applyButton"></a>
                               <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img>
 
                             </form>
+                            <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyDualBounceMeetInMiddle">
 
                           </div>
                         </div>
@@ -1198,10 +1285,11 @@
                             </select>
                             <br />
                             <br />
-                            <a href="#" onclick="commandSingleColor('LDP','09',3, 'ConvergeinMiddleColorChoiceColorSelect')" class="applyButton"></a>
+                            <a href="#" onclick="commandSingleColorDualBounce('09',3, 'ConvergeinMiddleColorChoiceColorSelect', 'checkmarkapplyDualBounceConvergeinMiddle')" class="applyButton"></a>
                             <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img>
 
                           </form>
+                          <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyDualBounceConvergeinMiddle">
 
                         </div>
                       </div>
@@ -1223,10 +1311,11 @@
                             </select>
                             <br />
                             <br />
-                            <a href="#" onclick="commandSingleColor('LDP','09',4, 'InAndOutColorChoiceColorSelect')" class="applyButton"></a>
+                            <a href="#" onclick="commandSingleColorDualBounce('09',4, 'InAndOutColorChoiceColorSelect', 'checkmarkapplyDualBounceInAndOut')" class="applyButton"></a>
                             <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img>
 
                           </form>
+                          <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyDualBounceInAndOut">
 
                         </div>
                       </div>
@@ -1248,10 +1337,11 @@
                             </select>
                             <br />
                             <br />
-                            <a href="#" onclick="commandSingleColor('LDP','09',5, 'DotsToTheMiddleColorChoiceColorSelect')" class="applyButton"></a>
+                            <a href="#" onclick="commandSingleColorDualBounce('09',5, 'DotsToTheMiddleColorChoiceColorSelect', 'checkmarkapplyDualBounceDotsToTheMiddle')" class="applyButton"></a>
                             <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img>
 
                           </form>
+                          <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyDualBounceDotsToTheMiddle">
 
                         </div>
                       </div>
