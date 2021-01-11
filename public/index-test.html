@@ -1353,6 +1353,49 @@
 
                     <div class="menu-Level-1-Content" id="DualingColors">
                       <h1 class="menuHeader-Level-1">Dualing Colors</h1>
+                      <img
+                          class="r2menupictureLDP1"
+                          src="Images/Body/LDPBlue.png"
+                          alt="picture"
+                          name="stripSelectorDualingColors"
+                          onclick=changeImageLDPDualingColors()
+                          id="LDPDualingColors"
+                        />
+
+                      <img
+                        class="r2menupictureCoin"
+                        src="Images/Body/CoinSLotsBlue.png"
+                        alt="picture"
+                        name="stripSelectorDualingColors"
+                        onclick=changeImageCoinDualingColors()
+                        id="CoinDualingColors"
+                      />
+
+                      <img
+                          class="r2menupictureMaint"
+                          src="Images/Body/SkirtBlue.png"
+                          alt="picture"
+                          name="stripSelectorDualingColors"
+                          onclick=changeImageMaintDualingColors()
+                          id="MaintDualingColors"
+                        />
+
+                      <img
+                          class="r2menupictureDataPanelVerticalBars"
+                          src="Images/Body/DataPanelVerticalBlue.png"
+                          alt="picture"
+                          name="stripSelectorDualingColors"
+                          onclick=changeImageVerticalBarsDualingColors()
+                          id="VerticalBarstDualingColors"
+                        />
+
+
+                        <h3 class="selectAll" onclick=selectALLStripsDualingColors()> A </h3>
+                        <h3 class="selectNone" onclick=selectNoneStripsDualingColors()> N </h3>
+                        <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallDualingColors">
+                        <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneDualingColors">
+
+
                       <div class="menu-Level-2">
                         <div class="menu-Level-2-Links " >
                           <button class="active" rel="BackandForth"><img
@@ -1403,9 +1446,10 @@
                                     <option value="0">Off</option>
                                   </select>
                                 <br />
-                                <a href="#" onclick="commandTwoColorsNoSlider('10', '3', 'BackandForthFirstColorSelctionBox', 'BackandForthSecondColorSelectionBox')" class="applyButton"></a>
+                                <a href="#" onclick="commandTwoColorsNoSliderDualingColors('10', '2', 'BackandForthFirstColorSelctionBox', 'BackandForthSecondColorSelectionBox', 'checkmarkapplyDualingColorsBacknadForth')" class="applyButton"></a>
                                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
                               </form>
+                              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyDualingColorsBacknadForth">
                             </div> <!--end of ColorPickerdiv-->
                           </div>  <!--end of Level 2 Content BackandForth-->
 
@@ -1441,9 +1485,10 @@
                                   <option value="0">Off</option>
                                 </select>
                               <br />
-                              <a href="#" onclick="commandTwoColorsNoSlider('10', '3', 'InandOut2FirstColorSelctionBox', 'InandOut2SecondColorSelectionBox')" class="applyButton"></a>
+                              <a href="#" onclick="commandTwoColorsNoSliderDualingColors('10', '3', 'InandOut2FirstColorSelctionBox', 'InandOut2SecondColorSelectionBox', 'checkmarkapplyDualingColorsInandOut')" class="applyButton"></a>
                               <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
                             </form><!--end of form-->
+                            <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyDualingColorsInandOut">
                           </div> <!--end of ColorPickerdiv div-->
                         </div> <!-- end of Level 2 Content In and Out-->
                       </div><!--end of Level 2 Menu-->
