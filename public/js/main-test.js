@@ -607,17 +607,17 @@ function commandNoOptionsRainbow( y, t, u) {
     };
     if (checkedItemsRainbow[i] === "FrontHPRainbow") {
       // console.log("M selected");
-      var hpfcommandstring = "F" + y;
+      var hpfcommandstring = "F0" + y;
       console.log(hpfcommandstring);
     };
     if (checkedItemsRainbow[i] === "TopHPRainbow") {
       // console.log("M selected");
-      var hptcommandstring = "T" + y;
+      var hptcommandstring = "T0" + y;
       console.log(hptcommandstring);
     };
     if (checkedItemsRainbow[i] === "RearHPRainbow") {
       // console.log("M selected");
-      var hprcommandstring = "R" + y;
+      var hprcommandstring = "R0" + y;
       console.log(hprcommandstring);
     };
   };
@@ -899,17 +899,17 @@ function commandSingleColorSolidColor( y, t, z, u) {
     };
     if (checkedItemsSolidColor[i] === "FrontHPSolidColor") {
       // console.log("M selected");
-      var hpfcommandstring = "F"+ y + colorValues;
+      var hpfcommandstring = "F0"+ y + colorValues;
       console.log(hpfcommandstring);
     };
     if (checkedItemsSolidColor[i] === "TopHPSolidColor") {
       // console.log("M selected");
-      var hptcommandstring = "T" + y + colorValues;
+      var hptcommandstring = "T0" + y + colorValues;
       console.log(hptcommandstring);
     };
     if (checkedItemsSolidColor[i] === "RearHPSolidColor") {
       // console.log("M selected");
-      var hprcommandstring = "R"+ y  + colorValues;
+      var hprcommandstring = "R0"+ y  + colorValues;
       console.log(hprcommandstring);
     };
   };
@@ -1410,17 +1410,17 @@ function commandOneColorAndSpeedDimPulse(y, t, z, u) {
     };
     if (checkedItemsDimPulse[i] === "FrontHPDimPulse") {
       // console.log("M selected");
-      var hpfcommandstring = "F"+ y + colorValues1 + sliderValue;
+      var hpfcommandstring = "F0"+ y + colorValues1 + sliderValue;
       console.log(hpfcommandstring);
     };
     if (checkedItemsDimPulse[i] === "TopHPDimPulse") {
       // console.log("M selected");
-      var hptcommandstring = "T"+ y + colorValues1 + sliderValue;
+      var hptcommandstring = "T0"+ y + colorValues1 + sliderValue;
       console.log(hptcommandstring);
     };
     if (checkedItemsDimPulse[i] === "RearHPDimPulse") {
       // console.log("M selected");
-      var hprcommandstring = "R"+ y + colorValues1 + sliderValue;
+      var hprcommandstring = "R0"+ y + colorValues1 + sliderValue;
       console.log(hprcommandstring);
     };
   };
