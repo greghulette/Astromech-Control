@@ -607,17 +607,17 @@ function commandNoOptionsRainbow( y, t, u) {
     };
     if (checkedItemsRainbow[i] === "FrontHPRainbow") {
       // console.log("M selected");
-      var hpfcommandstring = "F007";
+      var hpfcommandstring = "F" + y;
       console.log(hpfcommandstring);
     };
     if (checkedItemsRainbow[i] === "TopHPRainbow") {
       // console.log("M selected");
-      var hptcommandstring = "T007";
+      var hptcommandstring = "T" + y;
       console.log(hptcommandstring);
     };
     if (checkedItemsRainbow[i] === "RearHPRainbow") {
       // console.log("M selected");
-      var hprcommandstring = "R007";
+      var hprcommandstring = "R" + y;
       console.log(hprcommandstring);
     };
   };
