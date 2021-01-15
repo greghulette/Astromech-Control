@@ -1446,7 +1446,7 @@
                                     <option value="0">Off</option>
                                   </select>
                                 <br />
-                                <a href="#" onclick="commandTwoColorsNoSliderDualingColors('10', '2', 'BackandForthFirstColorSelctionBox', 'BackandForthSecondColorSelectionBox', 'checkmarkapplyDualingColorsBacknadForth')" class="applyButton"></a>
+                                <a href="#" onclick="commandTwoColorsNoSliderDualingColors('10', '2 ', 'BackandForthFirstColorSelctionBox', 'BackandForthSecondColorSelectionBox', 'checkmarkapplyDualingColorsBacknadForth')" class="applyButton"></a>
                                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
                               </form>
                               <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyDualingColorsBacknadForth">
@@ -1496,6 +1496,48 @@
 
                   <div class="menu-Level-1-Content" id="RandomColor">
                     <h1 class="menuHeader-Level-1">Random Colors</h1>
+                    <img
+                        class="r2menupictureLDP1"
+                        src="Images/Body/LDPBlue.png"
+                        alt="picture"
+                        name="stripSelectorRandomColor"
+                        onclick=changeImageLDPRandomColor()
+                        id="LDPRandomColor"
+                      />
+
+                    <img
+                      class="r2menupictureCoin"
+                      src="Images/Body/CoinSLotsBlue.png"
+                      alt="picture"
+                      name="stripSelectorRandomColor"
+                      onclick=changeImageCoinRandomColor()
+                      id="CoinRandomColor"
+                    />
+
+                    <img
+                        class="r2menupictureMaint"
+                        src="Images/Body/SkirtBlue.png"
+                        alt="picture"
+                        name="stripSelectorRandomColor"
+                        onclick=changeImageMaintRandomColor()
+                        id="MaintRandomColor"
+                      />
+
+                    <img
+                        class="r2menupictureDataPanelVerticalBars"
+                        src="Images/Body/DataPanelVerticalBlue.png"
+                        alt="picture"
+                        name="stripSelectorRandomColor"
+                        onclick=changeImageVerticalBarsRandomColor()
+                        id="VerticalBarstRandomColor"
+                      />
+
+
+                      <h3 class="selectAll" onclick=selectALLStripsRandomColor()> A </h3>
+                      <h3 class="selectNone" onclick=selectNoneStripsRandomColor()> N </h3>
+                      <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallRandomColor">
+                      <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneRandomColor">
+
                     <div class="menu-Level-2">
                       <div class="menu-Level-2-Links " >
                         <button class="active" rel="RandomRandom"><img
@@ -1526,9 +1568,10 @@
                           <h2 class="menuHeader-Level-2">Random</h2>
                           <div class="ColorPickerdiv">
                             <form class="" action="index.html" method="post">
-                              <a href="#" onclick="commandNoOptions('LDP', '11','4','')" class="applyButton"></a>
+                              <a href="#" onclick="commandNoOptionsRandomColor('11','4','checkmarkapplyRandomColorRandom')" class="applyButton"></a>
                               <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
                             </form><!--end of form-->
+                            <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyRandomColorRandom">
                           </div> <!--end of ColorPickerdiv div-->
                         </div>  <!--end of Level 2 Content Random Color Random-->
 
@@ -1564,9 +1607,10 @@
                                 <option value="0">Off</option>
                               </select>
                             <br />
-                            <a href="#" onclick="commandTwoColorsNoSlider('11', '1', 'ColorChoiceRandomFirstColorSelctionBox', 'ColorChoiceRandomSecondColorSelectionBox')" class="applyButton"></a>
+                            <a href="#" onclick="commandTwoColorsNoSliderRandomColor('11', '1', 'ColorChoiceRandomFirstColorSelctionBox', 'ColorChoiceRandomSecondColorSelectionBox', 'checkmarkapplyRandomColorChoice')" class="applyButton"></a>
                             <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
                           </form>
+                          <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyRandomColorChoice">
                         </div> <!--end of ColorPickerdiv div-->
                       </div> <!-- end of Level 2 Content Random Color Color Choice -->
 
@@ -1574,9 +1618,10 @@
                         <h2 class="menuHeader-Level-2">Red/Blue</h2>
                         <div class="ColorPickerdiv">
                           <form class="" action="index.html" method="post">
-                            <a href="#" onclick="commandNoOptions('LDP', '12','1','')" class="applyButton"></a>
+                            <a href="#" onclick="commandNoOptionsRandomColor('12','1','checkmarkapplyRandomColorRedBlue')" class="applyButton"></a>
                             <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
                           </form>
+                          <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyRandomColorRedBlue">
                         </div><!--end of ColorPickerdiv div-->
                       </div> <!-- end of Level 2 Content Random Color Red/Blue-->
 
