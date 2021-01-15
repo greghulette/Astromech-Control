@@ -3078,7 +3078,6 @@ function changeImageRearHPBouncing() {
             if (checkedItemsRandomColor[i] === "LDPRandomColor") {
               // console.log("L selected");
               var ldpcommandstring = "L" + y + t;
-
               console.log(ldpcommandstring);
             };
 

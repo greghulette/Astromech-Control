@@ -15,8 +15,8 @@ function i2CSend(ldp, coin, vu, maint, textcommand, dp, cbi, i2ccommand, i2cdevi
   sleep(150).then(() => { BodyledSend(cbi, bodyLEDI2C ); });
   sleep(175).then(() => { i2cCommandSend(i2ccommand, i2cdevice); });
   sleep(200).then(() => { BodyledSend(hpFront, domeHPI2C); });
-  sleep(200).then(() => { BodyledSend(hpTop, domeHPI2C); });
-  sleep(200).then(() => { BodyledSend(hpRear, domeHPI2C); });
+  sleep(225).then(() => { BodyledSend(hpTop, domeHPI2C); });
+  sleep(250).then(() => { BodyledSend(hpRear, domeHPI2C); });
   console.log("Complete");
 };
 
