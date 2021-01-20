@@ -109,7 +109,7 @@ function getCheckedElementKnightRider() {
    document.getElementById("VerticalBarstKnightRider").src = "Images/Body/DataPanelVerticalBlue.png";
    //  document.getElementById("FrontHPKnightRider").src = "Images/Dome/FrontHPBlue.png";
    //  document.getElementById("TopHPKnightRider").src = "Images/Dome/TopHPBlue.png";
-   // document.getElementById("RearHPKnightRider").src = "Images/Dome/RearHPBLue.png";
+   // document.getElementById("RearHPKnightRider").src = "Images/Dome/RearHPBlue.png";
    document.getElementById("checkmarknoneKnightRider").src = "Images/checkmark.png";
    setTimeout('document.getElementById("checkmarknoneKnightRider").src = "Images/blankcheckmark.png"', 2000);
 
@@ -448,7 +448,7 @@ function getCheckedElementRainbow() {
    document.getElementById("VerticalBarstRainbow").src = "Images/Body/DataPanelVerticalBlue.png";
    document.getElementById("FrontHPRainbow").src = "Images/Dome/FrontHPBlue.png";
    document.getElementById("TopHPRainbow").src = "Images/Dome/TopHPBlue.png";
-   document.getElementById("RearHPRainbow").src = "Images/Dome/RearHPBLue.png";
+   document.getElementById("RearHPRainbow").src = "Images/Dome/RearHPBlue.png";
    document.getElementById("checkmarknoneRainbow").src = "Images/checkmark.png";
    setTimeout('document.getElementById("checkmarknoneRainbow").src = "Images/blankcheckmark.png"', 2000);
 
@@ -562,7 +562,7 @@ function changeapply(u){
 }
 
 function commandNoOptionsRainbow( y, t, u) {
-  // var bodyLEDi2cdest = "BL"
+  // var bodyLEDi2cdest = "Bl"
   let tmp = u;
   document.getElementById(u).src = "Images/checkmark.png";
   // setTimeout(changeapply(), 2000, u);
@@ -751,7 +751,7 @@ function getCheckedElementSolidColor() {
    document.getElementById("VerticalBarstSolidColor").src = "Images/Body/DataPanelVerticalBlue.png";
    document.getElementById("FrontHPSolidColor").src = "Images/Dome/FrontHPBlue.png";
    document.getElementById("TopHPSolidColor").src = "Images/Dome/TopHPBlue.png";
-   document.getElementById("RearHPSolidColor").src = "Images/Dome/RearHPBLue.png";
+   document.getElementById("RearHPSolidColor").src = "Images/Dome/RearHPBlue.png";
    document.getElementById("checkmarknoneSolidColor").src = "Images/checkmark.png";
    setTimeout('document.getElementById("checkmarknoneSolidColor").src = "Images/blankcheckmark.png"', 2000);
 
@@ -863,7 +863,7 @@ function changeImageVerticalBarsSolidColor() {
 
 
 function commandSingleColorSolidColor( y, t, z, u) {
-  // var bodyLEDi2cdest = "BL"
+  // var bodyLEDi2cdest = "Bl"
   let colorValues = getcolor1(z);
   // let tmp = u;
   document.getElementById(u).src = "Images/checkmark.png";
@@ -1043,7 +1043,7 @@ function getCheckedElementAlternatingColors() {
    document.getElementById("VerticalBarstAlternatingColors").src = "Images/Body/DataPanelVerticalBlue.png";
    //  document.getElementById("FrontHPAlternatingColors").src = "Images/Dome/FrontHPBlue.png";
    //  document.getElementById("TopHPAlternatingColors").src = "Images/Dome/TopHPBlue.png";
-   // document.getElementById("RearHPAlternatingColors").src = "Images/Dome/RearHPBLue.png";
+   // document.getElementById("RearHPAlternatingColors").src = "Images/Dome/RearHPBlue.png";
    document.getElementById("checkmarknoneAlternatingColors").src = "Images/checkmark.png";
    setTimeout('document.getElementById("checkmarknoneAlternatingColors").src = "Images/blankcheckmark.png"', 2000);
 
@@ -1273,7 +1273,7 @@ function getCheckedElementDimPulse() {
    document.getElementById("VerticalBarstDimPulse").src = "Images/Body/DataPanelVerticalBlue.png";
     document.getElementById("FrontHPDimPulse").src = "Images/Dome/FrontHPBlue.png";
     document.getElementById("TopHPDimPulse").src = "Images/Dome/TopHPBlue.png";
-   document.getElementById("RearHPDimPulse").src = "Images/Dome/RearHPBLue.png";
+   document.getElementById("RearHPDimPulse").src = "Images/Dome/RearHPBlue.png";
    document.getElementById("checkmarknoneDimPulse").src = "Images/checkmark.png";
    setTimeout('document.getElementById("checkmarknoneDimPulse").src = "Images/blankcheckmark.png"', 2000);
 
@@ -1554,7 +1554,7 @@ function commandOneColorAndSpeedDimPulse(y, t, z, u) {
      document.getElementById("VerticalBarstDimPulse2").src = "Images/Body/DataPanelVerticalBlue.png";
      //  document.getElementById("FrontHPDimPulse2").src = "Images/Dome/FrontHPBlue.png";
      //  document.getElementById("TopHPDimPulse2").src = "Images/Dome/TopHPBlue.png";
-     // document.getElementById("RearHPDimPulse2").src = "Images/Dome/RearHPBLue.png";
+     // document.getElementById("RearHPDimPulse2").src = "Images/Dome/RearHPBlue.png";
      document.getElementById("checkmarknoneDimPulse2").src = "Images/checkmark.png";
      setTimeout('document.getElementById("checkmarknoneDimPulse2").src = "Images/blankcheckmark.png"', 2000);
 
@@ -1831,7 +1831,7 @@ function commandOneColorAndSpeedDimPulse(y, t, z, u) {
          document.getElementById("VerticalBarstDimPulse3").src = "Images/Body/DataPanelVerticalBlue.png";
          //  document.getElementById("FrontHPDimPulse3").src = "Images/Dome/FrontHPBlue.png";
          //  document.getElementById("TopHPDimPulse3").src = "Images/Dome/TopHPBlue.png";
-         // document.getElementById("RearHPDimPulse3").src = "Images/Dome/RearHPBLue.png";
+         // document.getElementById("RearHPDimPulse3").src = "Images/Dome/RearHPBlue.png";
          document.getElementById("checkmarknoneDimPulse3").src = "Images/checkmark.png";
          setTimeout('document.getElementById("checkmarknoneDimPulse3").src = "Images/blankcheckmark.png"', 2000);
 
@@ -2111,7 +2111,7 @@ function getCheckedElementBouncing() {
    document.getElementById("VerticalBarstBouncing").src = "Images/Body/DataPanelVerticalBlue.png";
    //  document.getElementById("FrontHPBouncing").src = "Images/Dome/FrontHPBlue.png";
    //  document.getElementById("TopHPBouncing").src = "Images/Dome/TopHPBlue.png";
-   // document.getElementById("RearHPBouncing").src = "Images/Dome/RearHPBLue.png";
+   // document.getElementById("RearHPBouncing").src = "Images/Dome/RearHPBlue.png";
    document.getElementById("checkmarknoneBouncing").src = "Images/checkmark.png";
    setTimeout('document.getElementById("checkmarknoneBouncing").src = "Images/blankcheckmark.png"', 2000);
 
@@ -2352,7 +2352,7 @@ function changeImageRearHPBouncing() {
          document.getElementById("VerticalBarstDualBounce").src = "Images/Body/DataPanelVerticalBlue.png";
          //  document.getElementById("FrontHPDualBounce").src = "Images/Dome/FrontHPBlue.png";
          //  document.getElementById("TopHPDualBounce").src = "Images/Dome/TopHPBlue.png";
-         // document.getElementById("RearHPDualBounce").src = "Images/Dome/RearHPBLue.png";
+         // document.getElementById("RearHPDualBounce").src = "Images/Dome/RearHPBlue.png";
          document.getElementById("checkmarknoneDualBounce").src = "Images/checkmark.png";
          setTimeout('document.getElementById("checkmarknoneDualBounce").src = "Images/blankcheckmark.png"', 2000);
 
@@ -2655,7 +2655,7 @@ function changeImageRearHPBouncing() {
        document.getElementById("VerticalBarstDualingColors").src = "Images/Body/DataPanelVerticalBlue.png";
        //  document.getElementById("FrontHPDualingColors").src = "Images/Dome/FrontHPBlue.png";
        //  document.getElementById("TopHPDualingColors").src = "Images/Dome/TopHPBlue.png";
-       // document.getElementById("RearHPDualingColors").src = "Images/Dome/RearHPBLue.png";
+       // document.getElementById("RearHPDualingColors").src = "Images/Dome/RearHPBlue.png";
        document.getElementById("checkmarknoneDualingColors").src = "Images/checkmark.png";
        setTimeout('document.getElementById("checkmarknoneDualingColors").src = "Images/blankcheckmark.png"', 2000);
 
@@ -2918,7 +2918,7 @@ function changeImageRearHPBouncing() {
      document.getElementById("VerticalBarstRandomColor").src = "Images/Body/DataPanelVerticalBlue.png";
      //  document.getElementById("FrontHPRandomColor").src = "Images/Dome/FrontHPBlue.png";
      //  document.getElementById("TopHPRandomColor").src = "Images/Dome/TopHPBlue.png";
-     // document.getElementById("RearHPRandomColor").src = "Images/Dome/RearHPBLue.png";
+     // document.getElementById("RearHPRandomColor").src = "Images/Dome/RearHPBlue.png";
      document.getElementById("checkmarknoneRandomColor").src = "Images/checkmark.png";
      setTimeout('document.getElementById("checkmarknoneRandomColor").src = "Images/blankcheckmark.png"', 2000);
 
