@@ -3113,6 +3113,311 @@ function changeImageRearHPBouncing() {
 
         };
 
+  //RandomColor2 stuff
+  var checkedItemsRandomColor2 = new Array();
+  var imgArrayRandomColor2 = [];
+
+  function ldptoggleRandomColor2() {
+    let tmp = document.querySelector('#LDPRandomColor2');
+    tmp.classList.toggle('active');
+    if (tmp.classList.contains('active')) {
+    }
+
+    getCheckedElementRandomColor2();
+  };
+
+  function cointoggleRandomColor2() {
+    let tmp = document.querySelector('#CoinRandomColor2');
+    tmp.classList.toggle('active');
+    if (tmp.classList.contains('active')) {
+    }
+
+    getCheckedElementRandomColor2();
+  };
+
+  function mainttoggleRandomColor2() {
+   let tmp = document.querySelector('#MaintRandomColor2');
+   tmp.classList.toggle('active');
+   if (tmp.classList.contains('active')) {
+   }
+    getCheckedElementRandomColor2()
+  };
+
+  function verticaltoggleRandomColor2() {
+   let tmp = document.querySelector('#VerticalBarstRandomColor2');
+   tmp.classList.toggle('active');
+   if (tmp.classList.contains('active')) {
+   }
+    getCheckedElementRandomColor2()
+  };
+
+  function frontHPtoggleRandomColor2() {
+   let tmp = document.querySelector('#FrontHPRandomColor2');
+   tmp.classList.toggle('active');
+   if (tmp.classList.contains('active')) {
+   }
+    getCheckedElementRandomColor2()
+  };
+
+  function topHPtoggleRandomColor2() {
+    let tmp = document.querySelector('#TopHPRandomColor2');
+   tmp.classList.toggle('active');
+   if (tmp.classList.contains('active')) {
+   }
+    getCheckedElementRandomColor2()
+  };
+  function rearHPtoggleRandomColor2() {
+     let tmp = document.querySelector('#RearHPRandomColor2');
+     tmp.classList.toggle('active');
+     if (tmp.classList.contains('active')) {
+     }
+      getCheckedElementRandomColor2()
+  };
+
+  function getCheckedElementRandomColor2() {
+    var imgArrayRandomColor2 = document.getElementsByName('stripSelectorRandomColor2');
+    checkedItemsRandomColor2.length = 0;
+    for (var i = 0; i < imgArrayRandomColor2.length; i++) {
+      var tmp = imgArrayRandomColor2[i].classList.toString();
+      if (tmp.indexOf('active') != -1) {
+        checkedItemsRandomColor2.push(imgArrayRandomColor2[i].id.toString());
+      }
+
+      }
+    };
+
+
+   function selectALLStripsRandomColor2(){
+     document.getElementById("LDPRandomColor2").src = "./Images/Body/LDPGreen.png";
+     document.getElementById("CoinRandomColor2").src = "Images/Body/CoinSlotsGreen.png";
+     document.getElementById("MaintRandomColor2").src = "Images/Body/SkirtGreen.png";
+     document.getElementById("VerticalBarstRandomColor2").src = "Images/Body/DataPanelVerticalGreen.png";
+     // document.getElementById("FrontHPRandomColor2").src = "Images/Dome/FrontHPGreen.png";
+     // document.getElementById("TopHPRandomColor2").src = "Images/Dome/TopHPGreen.png";
+     // document.getElementById("RearHPRandomColor2").src = "Images/Dome/RearHPGreen.png";
+     document.getElementById("checkmarkallRandomColor2").src = "Images/checkmark.png";
+     setTimeout('document.getElementById("checkmarkallRandomColor2").src = "Images/blankcheckmark.png"', 2000);
+
+    let ldptemp = document.querySelector('#LDPRandomColor2');
+    ldptemp.classList.add('active');
+    let cointemp = document.querySelector('#CoinRandomColor2');
+    cointemp.classList.add('active');
+    let mainttemp = document.querySelector('#MaintRandomColor2');
+    mainttemp.classList.add('active');
+    let vutemp = document.querySelector('#VerticalBarstRandomColor2');
+    vutemp.classList.add('active');
+    // let frontHPtemp = document.querySelector('#FrontHPRandomColor2');
+    // frontHPtemp.classList.add('active');
+    // let topHPtemp = document.querySelector('#TopHPRandomColor2');
+    // topHPtemp.classList.add('active');
+    // let rearHPtemp = document.querySelector('#RearHPRandomColor2');
+    // rearHPtemp.classList.add('active');
+
+    getCheckedElementRandomColor2()
+   }
+
+
+   function selectNoneStripsRandomColor2(){
+     document.getElementById("LDPRandomColor2").src = "./Images/Body/LDPBlue.png";
+     document.getElementById("CoinRandomColor2").src = "Images/Body/CoinSlotsBlue.png";
+     document.getElementById("MaintRandomColor2").src = "Images/Body/SkirtBlue.png";
+     document.getElementById("VerticalBarstRandomColor2").src = "Images/Body/DataPanelVerticalBlue.png";
+     //  document.getElementById("FrontHPRandomColor2").src = "Images/Dome/FrontHPBlue.png";
+     //  document.getElementById("TopHPRandomColor2").src = "Images/Dome/TopHPBlue.png";
+     // document.getElementById("RearHPRandomColor2").src = "Images/Dome/RearHPBlue.png";
+     document.getElementById("checkmarknoneRandomColor2").src = "Images/checkmark.png";
+     setTimeout('document.getElementById("checkmarknoneRandomColor2").src = "Images/blankcheckmark.png"', 2000);
+
+
+     let ldptemp = document.querySelector('#LDPRandomColor2');
+     ldptemp.classList.remove('active');
+     let cointemp = document.querySelector('#CoinRandomColor2');
+     cointemp.classList.remove('active');
+     let mainttemp = document.querySelector('#MaintRandomColor2');
+     mainttemp.classList.remove('active');
+     let vutemp = document.querySelector('#VerticalBarstRandomColor2');
+     vutemp.classList.remove('active');
+     // let frontHPtemp = document.querySelector('#FrontHPRandomColor2');
+     // frontHPtemp.classList.remove('active');
+     // let topHPtemp = document.querySelector('#TopHPRandomColor2');
+     // topHPtemp.classList.remove('active');
+     // let rearHPtemp = document.querySelector('#RearHPRandomColor2');
+     // rearHPtemp.classList.remove('active');
+
+     getCheckedElementRandomColor2()
+   }
+    function changeImageLDPRandomColor2() {
+
+                  if (document.getElementById("LDPRandomColor2").src.match("LDPBlue.png"))
+                  {
+                      document.getElementById("LDPRandomColor2").src = "./Images/Body/LDPGreen.png";
+                      // console.log("Changed to Green");
+                  } else {
+                      document.getElementById("LDPRandomColor2").src = "Images/Body/LDPBlue.png";
+                      // console.log("Change to Blue");
+                  }
+                  ldptoggleRandomColor2()
+              };
+
+  function changeImageCoinRandomColor2() {
+
+                if (document.getElementById("CoinRandomColor2").src.match("CoinSLotsBlue.png"))
+                {
+                    document.getElementById("CoinRandomColor2").src = "Images/Body/CoinSlotsGreen.png";
+                    // console.log("Changed to Green");
+                } else {
+                    document.getElementById("CoinRandomColor2").src = "Images/Body/CoinSLotsBlue.png";
+                    // console.log("Change to Blue");
+                }
+                cointoggleRandomColor2()
+            };
+  function changeImageMaintRandomColor2() {
+
+            if (document.getElementById("MaintRandomColor2").src.match("SkirtBlue.png"))
+            {
+                document.getElementById("MaintRandomColor2").src = "Images/Body/SkirtGreen.png";
+                // console.log("Changed to Green");
+            } else {
+                document.getElementById("MaintRandomColor2").src = "Images/Body/SkirtBlue.png";
+                // console.log("Change to Blue");
+            }
+            mainttoggleRandomColor2()
+        };
+  function changeImageVerticalBarsRandomColor2() {
+
+          if (document.getElementById("VerticalBarstRandomColor2").src.match("DataPanelVerticalBlue.png"))
+          {
+              document.getElementById("VerticalBarstRandomColor2").src = "Images/Body/DataPanelVerticalGreen.png";
+              // console.log("Changed to Green");
+          } else {
+              document.getElementById("VerticalBarstRandomColor2").src = "Images/Body/DataPanelVerticalBlue.png";
+              // console.log("Change to Blue");
+          }
+          verticaltoggleRandomColor2()
+      };
+  function changeImageFrontHPRandomColor2() {
+
+            if (document.getElementById("FrontHPRandomColor2").src.match("FrontHPBlue.png"))
+            {
+                document.getElementById("FrontHPRandomColor2").src = "Images/Dome/FrontHPGreen.png";
+                // console.log("Changed to Green");
+            } else {
+                document.getElementById("FrontHPRandomColor2").src = "Images/Dome/FrontHPBlue.png";
+                // console.log("Change to Blue");
+            }
+            frontHPtoggleRandomColor2()
+        };
+    function changeImageTopHPRandomColor2() {
+
+            if (document.getElementById("TopHPRandomColor2").src.match("TopHPBlue.png"))
+            {
+                document.getElementById("TopHPRandomColor2").src = "Images/Dome/TopHPGreen.png";
+                // console.log("Changed to Green");
+            } else {
+                document.getElementById("TopHPRandomColor2").src = "Images/Dome/TopHPBlue.png";
+                // console.log("Change to Blue");
+            }
+            topHPtoggleRandomColor2()
+        };
+  function changeImageRearHPRandomColor2() {
+
+            if (document.getElementById("RearHPRandomColor2").src.match("RearHPBlue.png"))
+            {
+                document.getElementById("RearHPRandomColor2").src = "Images/Dome/RearHPGreen.png";
+                // console.log("Changed to Green");
+            } else {
+                document.getElementById("RearHPRandomColor2").src = "Images/Dome/RearHPBlue.png";
+                // console.log("Change to Blue");
+            }
+            rearHPtoggleRandomColor2()
+        };
+
+        function commandTwoColorsNoSliderRandomColor2( y, t, z, s, u) {
+          let colorValues1 = getcolor1(z);
+          let colorValues2 = getcolor2(s);
+          document.getElementById(u).src = "Images/checkmark.png";
+          setTimeout(function(){  document.getElementById(u).src = "Images/blankcheckmark.png";}, 2000)
+
+          for (var i = 0; i < checkedItemsRandomColor2.length; i++) {
+            if (checkedItemsRandomColor2[i] === "LDPRandomColor2") {
+              // console.log("L selected");
+              var ldpcommandstring = 'L' + y + t + colorValues1 + colorValues2;
+              console.log(ldpcommandstring);
+            };
+
+            if (checkedItemsRandomColor2[i] === "CoinRandomColor2") {
+              // console.log("C selected");
+              var coincommandstring = 'C' + y + t + colorValues1 + colorValues2;
+              console.log(coincommandstring);
+            };
+
+            if (checkedItemsRandomColor2[i] === "VerticalBarstRandomColor2") {
+              // console.log("V selected");
+              var vucommandstring = 'V' + y + t + colorValues1 + colorValues2;
+              console.log(vucommandstring);
+            };
+
+            if (checkedItemsRandomColor2[i] === "MaintRandomColor2") {
+              // console.log("M selected");
+              var mcommandstring = "M" + y  + t + colorValues1 + colorValues2;
+              console.log(mcommandstring);
+            };
+          };
+
+          socket.emit('command', {
+            ldpcommandstring: ldpcommandstring,
+            coincommandstring: coincommandstring,
+            vucommandstring: vucommandstring,
+            mcommandstring: mcommandstring
+          });
+          //
+        };
+
+        function commandNoOptionsRandomColor2( y, t, u) {
+
+          document.getElementById(u).src = "Images/checkmark.png";
+          setTimeout(function(){  document.getElementById(u).src = "Images/blankcheckmark.png";}, 2000)
+
+
+
+          for (var i = 0; i < checkedItemsRandomColor2.length; i++) {
+            if (checkedItemsRandomColor2[i] === "LDPRandomColor2") {
+              // console.log("L selected");
+              var ldpcommandstring = "L" + y + t;
+              console.log(ldpcommandstring);
+            };
+
+            if (checkedItemsRandomColor2[i] === "CoinRandomColor2") {
+              // console.log("C selected");
+              var coincommandstring = "C" + y + t;
+              console.log(coincommandstring);
+            };
+
+            if (checkedItemsRandomColor2[i] === "VerticalBarstRandomColor2") {
+              // console.log("V selected");
+              var vucommandstring = "V" + y + t;
+              console.log(vucommandstring);
+            };
+
+            if (checkedItemsRandomColor2[i] === "MaintRandomColor2") {
+              // console.log("M selected");
+              var mcommandstring = "M" + y + t;
+              console.log(mcommandstring);
+            };
+
+          };
+
+
+          socket.emit('command', {
+            ldpcommandstring: ldpcommandstring,
+            coincommandstring: coincommandstring,
+            vucommandstring: vucommandstring,
+            mcommandstring: mcommandstring,
+
+          });
+
+
+        };
 
 
 
