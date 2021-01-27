@@ -4032,13 +4032,31 @@ function changeImageRearHPBouncing() {
                 var mcommandstring = "M" + y  + t + colorValues1 + colorValues2;
                 console.log(mcommandstring);
               };
+              if (checkedItemsShortCircuit[i] === "FrontHPShortCircuit") {
+               // console.log("M selected");
+               var hpfcommandstring = "F0" + y + t + colorValues1 + colorValues2;
+               console.log(hpfcommandstring);
+             };
+             if (checkedItemsShortCircuit[i] === "TopHPShortCircuit") {
+               // console.log("M selected");
+               var hptcommandstring = "T0" + y + t + colorValues1 + colorValues2;
+               console.log(hptcommandstring);
+             };
+             if (checkedItemsShortCircuit[i] === "RearHPShortCircuit") {
+               // console.log("M selected");
+               var hprcommandstring = "R0" + y + t + colorValues1 + colorValues2;
+               console.log(hprcommandstring);
+             };
             };
 
             socket.emit('command', {
               ldpcommandstring: ldpcommandstring,
               coincommandstring: coincommandstring,
               vucommandstring: vucommandstring,
-              mcommandstring: mcommandstring
+              mcommandstring: mcommandstring,
+              hpfcommandstring: hpfcommandstring,
+              hptcommandstring: hptcommandstring,
+              hprcommandstring: hprcommandstring
             });
             //
           };
