@@ -4076,17 +4076,17 @@ function changeImageRearHPBouncing() {
               };
               if (checkedItemsShortCircuit[i] === "FrontHPShortCircuit") {
                // console.log("M selected");
-               var hpfcommandstring = "F" + y + t;
+               var hpfcommandstring = "F0" + y + t;
                console.log(hpfcommandstring);
              };
              if (checkedItemsShortCircuit[i] === "TopHPShortCircuit") {
                // console.log("M selected");
-               var hptcommandstring = "T" + y + t;
+               var hptcommandstring = "T0" + y + t;
                console.log(hptcommandstring);
              };
              if (checkedItemsShortCircuit[i] === "RearHPShortCircuit") {
                // console.log("M selected");
-               var hprcommandstring = "R" + y + t;
+               var hprcommandstring = "R0" + y + t;
                console.log(hprcommandstring);
              };
 
