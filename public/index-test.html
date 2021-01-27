@@ -1764,6 +1764,48 @@
 
                 <div class="menu-Level-1-Content" id="Flash">
                   <h1 class="menuHeader-Level-1">Flash</h1>
+                  <img
+                      class="r2menupictureLDP1"
+                      src="Images/Body/LDPBlue.png"
+                      alt="picture"
+                      name="stripSelectorFlash"
+                      onclick=changeImageLDPFlash()
+                      id="LDPFlash"
+                    />
+
+                  <img
+                    class="r2menupictureCoin"
+                    src="Images/Body/CoinSLotsBlue.png"
+                    alt="picture"
+                    name="stripSelectorFlash"
+                    onclick=changeImageCoinFlash()
+                    id="CoinFlash"
+                  />
+
+                  <img
+                      class="r2menupictureMaint"
+                      src="Images/Body/SkirtBlue.png"
+                      alt="picture"
+                      name="stripSelectorFlash"
+                      onclick=changeImageMaintFlash()
+                      id="MaintFlash"
+                    />
+
+                  <img
+                      class="r2menupictureDataPanelVerticalBars"
+                      src="Images/Body/DataPanelVerticalBlue.png"
+                      alt="picture"
+                      name="stripSelectorFlash"
+                      onclick=changeImageVerticalBarsFlash()
+                      id="VerticalBarstFlash"
+                    />
+
+
+                    <h3 class="selectAll" onclick=selectALLStripsFlash()> A </h3>
+                    <h3 class="selectNone" onclick=selectNoneStripsFlash()> N </h3>
+                    <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallFlash">
+                    <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneFlash">
+
                   <div class="menu-Level-2">
 
                       <div class="menu-Level-2-Links " >
@@ -1802,9 +1844,10 @@
                             min="0"
                             max="9"
                           />
-                          <a href="#" onclick="commandOneColorAndSpeed('LDP','13','Flash1Slider', 'Flash1ColorChoiceColorSelect')" class="applyButton"></a>
+                          <a href="#" onclick="commandOneColorAndSpeedFlash('13','Flash1Slider', 'Flash1ColorChoiceColorSelect', 'checkmarkapplyFlash')" class="applyButton"></a>
                           <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff()"  class="applyButtonoff"></img>
                         </form>
+                        <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyFlash">
                     </div><!--end of ColorPickerdiv div-->
                   </div> <!-- end of Level 2 Conetent Flash-->
                 </div><!--end of Level 2 Menu-->
@@ -1813,6 +1856,73 @@
 
             <div class="menu-Level-1-Content" id="ShortCircuit">
               <h1 class="menuHeader-Level-1">Short Circuit</h1>
+
+              <img
+                  class="r2menupictureLDP1"
+                  src="Images/Body/LDPBlue.png"
+                  alt="picture"
+                  name="stripSelectorShortCircuit"
+                  onclick=changeImageLDPShortCircuit()
+                  id="LDPShortCircuit"
+                />
+
+              <img
+                class="r2menupictureCoin"
+                src="Images/Body/CoinSLotsBlue.png"
+                alt="picture"
+                name="stripSelectorShortCircuit"
+                onclick=changeImageCoinShortCircuit()
+                id="CoinShortCircuit"
+              />
+
+              <img
+                  class="r2menupictureMaint"
+                  src="Images/Body/SkirtBlue.png"
+                  alt="picture"
+                  name="stripSelectorShortCircuit"
+                  onclick=changeImageMaintShortCircuit()
+                  id="MaintShortCircuit"
+                />
+
+              <img
+                  class="r2menupictureDataPanelVerticalBars"
+                  src="Images/Body/DataPanelVerticalBlue.png"
+                  alt="picture"
+                  name="stripSelectorShortCircuit"
+                  onclick=changeImageVerticalBarsShortCircuit()
+                  id="VerticalBarstShortCircuit"
+                />
+              <img
+                  class="r2menupictureFrontHP"
+                  src="Images/Dome/FrontHPBlue.png"
+                  alt="picture"
+                  name="stripSelectorShortCircuit"
+                  onclick=changeImageFrontHPShortCircuit()
+                  id="FrontHPShortCircuit"
+                />
+              <img
+                  class="r2menupictureTopHP"
+                  src="Images/Dome/TopHPBlue.png"
+                  alt="picture"
+                  name="stripSelectorShortCircuit"
+                  onclick=changeImageTopHPShortCircuit()
+                  id="TopHPShortCircuit"
+                />
+              <img
+                  class="r2menupictureRearHP"
+                  src="Images/Dome/RearHPBlue.png"
+                  alt="picture"
+                  name="stripSelectorShortCircuit"
+                  onclick=changeImageRearHPShortCircuit()
+                  id="RearHPShortCircuit"
+                />
+
+                <h3 class="selectAll" onclick=selectALLStripsShortCircuit()> A </h3>
+                <h3 class="selectNone" onclick=selectNoneStripsShortCircuit()> N </h3>
+                <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallShortCircuit">
+                <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneShortCircuit">
+
+
               <div class="menu-Level-2">
 
                   <div class="menu-Level-2-Links " >
@@ -1844,18 +1954,20 @@
                   <h2 class="menuHeader-Level-2">Red/Blue</h2>
                   <div class="ColorPickerdiv">
                        <form class="" action="index.html" method="post">
-                        <a href="#" onclick="commandNoOptions('LDP', '14','1','')" class="applyButton"></a>
+                        <a href="#" onclick="commandNoOptionsShortCircuit('14','1','checkmarkapplyShortCircuitRedBlue')" class="applyButton"></a>
                         <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
                       </form>
+                      <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyShortCircuitRedBlue">
                     </div><!--end of ColorPickerdiv div-->
                   </div> <!-- end of Level 2 Conetent RedBlue-->
               <div class="menu-Level-2-Content " id="ShortCircuitRandom">
                 <h2 class="menuHeader-Level-2">Red/Blue</h2>
                 <div class="ColorPickerdiv">
                    <form class="" action="index.html" method="post">
-                    <a href="#" onclick="commandNoOptions('LDP', '14','2','')" class="applyButton"></a>
+                    <a href="#" onclick="commandNoOptionsShortCircuit('14','2','checkmarkapplyShortCircuitRandomeColor')" class="applyButton"></a>
                     <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
                   </form>
+                  <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyShortCircuitRandomeColor">
                 </div><!--end of ColorPickerdiv div-->
             </div> <!-- end of Level 2 Conetent RedBlue-->
             <div class="menu-Level-2-Content " id="ShortCircuitColorChoice">
@@ -1890,11 +2002,10 @@
                       <option value="0">Off</option>
                     </select>
                   <br />
-                <a href="#" onclick="commandTwoColorsNoSlider('14', '1', 'ShortCircuitColorChoiceFirstColorSelctionBox', 'ShortCircuitColorChoiceSecondColorSelectionBox')" class="applyButton"></a>
+                <a href="#" onclick="commandTwoColorsNoSliderShortCircuit('14', '1', 'ShortCircuitColorChoiceFirstColorSelctionBox', 'ShortCircuitColorChoiceSecondColorSelectionBox', 'checkmarkapplyShortCircuitColorChoice')" class="applyButton"></a>
                   <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
-
                 </form>
-
+                <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyShortCircuitColorChoice">
               </div><!--end of ColorPickerdiv div-->
             </div> <!-- end of Level 2 Conetent RedBlue-->
             </div><!--end of Level 2 Menu-->
