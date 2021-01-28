@@ -648,6 +648,27 @@ shadow: 2px, 4px 15px blue;
 .r2menupictureRearHP.active{
 }
 
+.r2menupictureCBI {
+  width: 68px;
+  position: absolute;
+  left: -629px;
+  top: 518px;
+}
+
+.r2menupictureCBI.active{
+}
+
+.r2menupictureDataPanelLED1 {
+  width: 68px;
+  position: absolute;
+  left: -439px;
+  top: 518px;
+  box-shadow: 0px, 0px, 3px, 3px, white;
+}
+
+.r2menupictureDataPanelLED1.active{
+}
+
 .selectAll {
   position: absolute;
   left: -815px;
