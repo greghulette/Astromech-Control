@@ -663,7 +663,7 @@ shadow: 2px, 4px 15px blue;
   position: absolute;
   left: -439px;
   top: 518px;
-  box-shadow: 0px, 0px, 3px, 3px, white;
+  /* box-shadow: 0px, 0px, 3px, 3px, white; */
 }
 
 .r2menupictureDataPanelLED1.active{

@@ -3843,6 +3843,20 @@ function changeImageRearHPBouncing() {
        }
         getCheckedElementShortCircuit()
     };
+    function CBItoggleShortCircuit() {
+       let tmp = document.querySelector('#CBIShortCircuit');
+       tmp.classList.toggle('active');
+       if (tmp.classList.contains('active')) {
+       }
+        getCheckedElementShortCircuit()
+    };
+    function DPtoggleShortCircuit() {
+       let tmp = document.querySelector('#DataPanelShortCircuit');
+       tmp.classList.toggle('active');
+       if (tmp.classList.contains('active')) {
+       }
+        getCheckedElementShortCircuit()
+    };
 
     function getCheckedElementShortCircuit() {
       var imgArrayShortCircuit = document.getElementsByName('stripSelectorShortCircuit');
@@ -3865,6 +3879,8 @@ function changeImageRearHPBouncing() {
        document.getElementById("FrontHPShortCircuit").src = "Images/Dome/FrontHPGreen.png";
        document.getElementById("TopHPShortCircuit").src = "Images/Dome/TopHPGreen.png";
        document.getElementById("RearHPShortCircuit").src = "Images/Dome/RearHPGreen.png";
+       document.getElementById("CBIShortCircuit").src = "Images/Body/CBIDoorGreen.png";
+       document.getElementById("DataPanelShortCircuit").src = "Images/Body/DataPanelLEDsGreen.png";
        document.getElementById("checkmarkallShortCircuit").src = "Images/checkmark.png";
        setTimeout('document.getElementById("checkmarkallShortCircuit").src = "Images/blankcheckmark.png"', 2000);
 
@@ -3882,6 +3898,10 @@ function changeImageRearHPBouncing() {
       topHPtemp.classList.add('active');
       let rearHPtemp = document.querySelector('#RearHPShortCircuit');
       rearHPtemp.classList.add('active');
+      let cbitemp = document.querySelector('#CBIShortCircuit');
+      cbitemp.classList.add('active');
+      let datapaneltemp = document.querySelector('#DataPanelShortCircuit');
+      datapaneltemp.classList.add('active');
 
       getCheckedElementShortCircuit()
      }
@@ -3895,6 +3915,8 @@ function changeImageRearHPBouncing() {
         document.getElementById("FrontHPShortCircuit").src = "Images/Dome/FrontHPBlue.png";
         document.getElementById("TopHPShortCircuit").src = "Images/Dome/TopHPBlue.png";
        document.getElementById("RearHPShortCircuit").src = "Images/Dome/RearHPBlue.png";
+       document.getElementById("CBIShortCircuit").src = "Images/Body/CBIDoorBlue.png";
+       document.getElementById("DataPanelShortCircuit").src = "Images/Body/DataPanelLEDsBlue.png";
        document.getElementById("checkmarknoneShortCircuit").src = "Images/checkmark.png";
        setTimeout('document.getElementById("checkmarknoneShortCircuit").src = "Images/blankcheckmark.png"', 2000);
 
@@ -3913,6 +3935,10 @@ function changeImageRearHPBouncing() {
        topHPtemp.classList.remove('active');
        let rearHPtemp = document.querySelector('#RearHPShortCircuit');
        rearHPtemp.classList.remove('active');
+       let cbitemp = document.querySelector('#CBIShortCircuit');
+       cbitemp.classList.remove('active');
+       let datapaneltemp = document.querySelector('#DataPanelShortCircuit');
+       datapaneltemp.classList.remove('active');
 
        getCheckedElementShortCircuit()
      }
@@ -4002,6 +4028,33 @@ function changeImageRearHPBouncing() {
               rearHPtoggleShortCircuit()
           };
 
+      function changeImageCBIShortCircuit() {
+
+                if (document.getElementById("CBIShortCircuit").src.match("CBIDoorBlue.png"))
+                {
+                    document.getElementById("CBIShortCircuit").src = "Images/Body/CBIDoorGreen.png";
+                    // console.log("Changed to Green");
+                } else {
+                    document.getElementById("CBIShortCircuit").src = "Images/Body/CBIDoorBlue.png";
+                    // console.log("Change to Blue");
+                }
+                CBItoggleShortCircuit()
+            };
+
+      function changeImageDPShortCircuit() {
+
+                if (document.getElementById("DataPanelShortCircuit").src.match("DataPanelLEDsBlue.png"))
+                {
+                    document.getElementById("DataPanelShortCircuit").src = "Images/Body/DataPanelLEDsGreen.png";
+                    // console.log("Changed to Green");
+                } else {
+                    document.getElementById("DataPanelShortCircuit").src = "Images/Body/DataPanelLEDsBlue.png";
+                    // console.log("Change to Blue");
+                }
+                DPtoggleShortCircuit()
+            };
+
+
           function commandTwoColorsNoSliderShortCircuit( y, t, z, s, u) {
             let colorValues1 = getcolor1(z);
             let colorValues2 = getcolor2(s);
@@ -4047,6 +4100,16 @@ function changeImageRearHPBouncing() {
                var hprcommandstring = "R0" + y + t + colorValues1 + colorValues2;
                console.log(hprcommandstring);
              };
+             if (checkedItemsShortCircuit[i] === "CBIShortCircuit") {
+               // console.log("M selected");
+               var icommandstring = "I" + y + t;
+               console.log(icommandstring);
+             };
+             if (checkedItemsShortCircuit[i] === "DataPanelShortCircuit") {
+               // console.log("M selected");
+               var dcommandstring = "D" + y + t;
+               console.log(dcommandstring);
+             };
             };
 
             socket.emit('command', {
@@ -4056,7 +4119,9 @@ function changeImageRearHPBouncing() {
               mcommandstring: mcommandstring,
               hpfcommandstring: hpfcommandstring,
               hptcommandstring: hptcommandstring,
-              hprcommandstring: hprcommandstring
+              hprcommandstring: hprcommandstring,
+              icommandstring: icommandstring,
+              dcommandstring: dcommandstring
             });
             //
           };
@@ -4107,6 +4172,16 @@ function changeImageRearHPBouncing() {
                var hprcommandstring = "R0" + y + t;
                console.log(hprcommandstring);
              };
+             if (checkedItemsShortCircuit[i] === "CBIShortCircuit") {
+               // console.log("M selected");
+               var icommandstring = "I" + y + t;
+               console.log(icommandstring);
+             };
+             if (checkedItemsShortCircuit[i] === "DataPanelShortCircuit") {
+               // console.log("M selected");
+               var dcommandstring = "D" + y + t;
+               console.log(dcommandstring);
+             };
 
             };
 
@@ -4118,7 +4193,9 @@ function changeImageRearHPBouncing() {
               mcommandstring: mcommandstring,
               hpfcommandstring: hpfcommandstring,
               hptcommandstring: hptcommandstring,
-              hprcommandstring: hprcommandstring
+              hprcommandstring: hprcommandstring,
+              icommandstring: icommandstring,
+              dcommandstring: dcommandstring
             });
 
 
