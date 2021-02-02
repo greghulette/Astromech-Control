@@ -6,6 +6,8 @@ const fs = require('fs');
 const i2c = require('i2c-bus');
 const i2c1 = i2c.openSync(1);
 
+const i2devices = [];
+
 const EBUSY = 16; /* Device or resource busy */
 
 const scan = (first, last) => {
@@ -23,6 +25,8 @@ const scan = (first, last) => {
       try {
         i2c1.receiveByteSync(addr);
         fs.writeSync(0, ' ' + addr.toString(16)); // device found, print addr
+        i2devices.push(addr);
+        console.log(i2cdevices);
       } catch (e) {
         if (e.errno === EBUSY) {
           fs.writeSync(0, ' UU');
