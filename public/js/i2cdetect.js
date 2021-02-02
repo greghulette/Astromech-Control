@@ -3,7 +3,7 @@
 // When run, this program will output the same information as the
 // command 'i2cdetect -y -r 1'
 const fs = require('fs');
-const i2c = require('../');
+// const i2c = require('../');
 const i2c1 = i2c.openSync(1);
 
 const EBUSY = 16; /* Device or resource busy */
