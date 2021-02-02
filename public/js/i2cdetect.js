@@ -24,7 +24,7 @@ const scan = (first, last) => {
     } else {
       try {
         i2c1.receiveByteSync(addr);
-        fs.writeSync(0, ' ' + addr.toString(16)); // device found, print addr
+        // fs.writeSync(0, ' ' + addr.toString(16)); // device found, print addr
         i2devices.push(addr);
         console.log(i2cdevices);
       } catch (e) {
