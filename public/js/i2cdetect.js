@@ -18,7 +18,7 @@ const scan = (first, last) => {
     // }
 
     if (addr < first || addr > last) {
-      fs.writeSync(0, '   ');
+      // fs.writeSync(0, '   ');
     } else {
       try {
         i2c1.receiveByteSync(addr);
