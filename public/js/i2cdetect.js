@@ -27,7 +27,7 @@ const scan = (first, last) => {
         if (e.errno === EBUSY) {
           fs.writeSync(0, ' UU');
         } else {
-          fs.writeSync(0, ' --');
+          fs.writeSync(0, '');
         }
       }
     }
