@@ -9,7 +9,7 @@ const i2c1 = i2c.openSync(1);
 const EBUSY = 16; /* Device or resource busy */
 
 const scan = (first, last) => {
-  fs.writeSync(0, '     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f');
+  // fs.writeSync(0, '     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f');
 
   for (let addr = 0; addr <= 127; addr += 1) {
     if (addr % 16 === 0) {
