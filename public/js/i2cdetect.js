@@ -42,5 +42,5 @@ const scan = (first, last) => {
 
 scan(0x3, 0x77);
 console.log(i2devices);
-const body = i2devices.find("9");
+const body = i2devices.includes("9");
 console.log(body);
