@@ -42,5 +42,10 @@ const scan = (first, last) => {
 
 scan(0x3, 0x77);
 console.log(i2devices);
-const body = i2devices.includes(9);
-console.log(body);
+const stealth = i2devices.includes(9);
+const dome = i2devices.includes(10);
+
+console.log('Stealth found?: ' + stealth);
+console.log('Dome Servos found?: ' + dome);
+// console.log(stealth);
+// console.log(stealth);
