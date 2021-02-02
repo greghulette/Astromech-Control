@@ -46,5 +46,7 @@ const stealth = i2devices.includes(9);
 console.log('Stealth found?: ' + stealth);
 const dome = i2devices.includes(10);
 console.log('Dome Servos found?: ' + dome);
+const bodyleds = i2devices.includes(38);
+console.log('Body LED Controller found?: ' + bodyleds);
 // console.log(stealth);
 // console.log(stealth);
