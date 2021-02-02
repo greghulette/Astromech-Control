@@ -26,7 +26,7 @@ const scan = (first, last) => {
         i2c1.receiveByteSync(addr);
         // fs.writeSync(0, ' ' + addr.toString(16)); // device found, print addr
         i2devices.push(addr);
-        console.log(i2devices);
+
       } catch (e) {
         if (e.errno === EBUSY) {
           fs.writeSync(0, ' UU');
@@ -41,3 +41,4 @@ const scan = (first, last) => {
 };
 
 scan(0x3, 0x77);
+console.log(i2devices);
