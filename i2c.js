@@ -81,7 +81,7 @@ function i2cCommandSend(i2ctextcommand, device) {
       });
 };
 
-function scan(){
+// function scan(){
       const i2c1 = i2c.openSync(1);
 
       const i2devices = [];
@@ -123,7 +123,7 @@ function scan(){
       const hp = i2devices.includes(25);
       console.log('Body Servos found?: ' + hp);
 
-};
+// };
 
 
 function sleep(ms) {
