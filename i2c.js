@@ -132,7 +132,7 @@ function scan(){
        dome = i2cdevicesfound.includes(10);
       console.log('Dome Servos found?: ' + dome);
        bodyleds = i2cdevicesfound.includes(38);
-      console.log('Body LED Controller found?: ' + bodyleds);
+      console.log('Body LED  found?: ' + bodyleds);
        bodyservos = i2cdevicesfound.includes(39);
       console.log('Body Servos found?: ' + bodyservos);
        hp = i2cdevicesfound.includes(25);
