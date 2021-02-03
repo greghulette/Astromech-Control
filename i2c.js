@@ -8,6 +8,7 @@ var bodyStealhI2C = 0x09;
 var i2cdest;
 function i2CSend(ldp, coin, vu, maint, textcommand, dp, cbi, i2ccommand, i2cdevice, hpFront, hpTop, hpRear) {
   scan();
+  console.log(stealth);
   sleep(25).then(() => { BodyledSend(ldp, bodyLEDI2C ); });
   sleep(50).then(() => { BodyledSend(coin, bodyLEDI2C ); });
   sleep(75).then(() => { BodyledSend(vu, bodyLEDI2C ); });
@@ -114,6 +115,7 @@ function scan(){
       scan(0x3, 0x77);
       console.log(i2cdevicesfound);
       const stealth = i2cdevicesfound.includes(9);
+      return stealth;
       console.log('Stealth found?: ' + stealth);
       const dome = i2cdevicesfound.includes(10);
       console.log('Dome Servos found?: ' + dome);
