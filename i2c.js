@@ -119,16 +119,16 @@ function scan(){
 
       scan(0x3, 0x77);
       console.log(i2cdevicesfound);
-      const stealth = i2cdevicesfound.includes(9);
-      return stealth;
+       stealth = i2cdevicesfound.includes(9);
+      // return stealth;
       console.log('Stealth found?: ' + stealth);
-      const dome = i2cdevicesfound.includes(10);
+       dome = i2cdevicesfound.includes(10);
       console.log('Dome Servos found?: ' + dome);
-      const bodyleds = i2cdevicesfound.includes(38);
+       bodyleds = i2cdevicesfound.includes(38);
       console.log('Body LED Controller found?: ' + bodyleds);
-      const bodyservos = i2cdevicesfound.includes(39);
+       bodyservos = i2cdevicesfound.includes(39);
       console.log('Body Servos found?: ' + bodyservos);
-      const hp = i2cdevicesfound.includes(25);
+       hp = i2cdevicesfound.includes(25);
       console.log('Body Servos found?: ' + hp);
 
 };
