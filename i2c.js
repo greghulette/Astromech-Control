@@ -13,17 +13,24 @@ var bodyservos;
 var hp;
 function i2CSend(ldp, coin, vu, maint, textcommand, dp, cbi, i2ccommand, i2cdevice, hpFront, hpTop, hpRear) {
   scan();
-  console.log(stealth);
+if (bodyleds == true) {
   sleep(25).then(() => { BodyledSend(ldp, bodyLEDI2C ); });
   sleep(50).then(() => { BodyledSend(coin, bodyLEDI2C ); });
   sleep(75).then(() => { BodyledSend(vu, bodyLEDI2C ); });
   sleep(100).then(() => { BodyledSend(maint, bodyLEDI2C ); });
   sleep(125).then(() => { BodyledSend(dp, bodyLEDI2C ); });
   sleep(150).then(() => { BodyledSend(cbi, bodyLEDI2C ); });
-  sleep(175).then(() => { i2cCommandSend(i2ccommand, i2cdevice); });
+
+};
+if (hp == true){
   sleep(200).then(() => { BodyledSend(hpFront, domeHPI2C); });
   sleep(225).then(() => { BodyledSend(hpTop, domeHPI2C); });
   sleep(250).then(() => { BodyledSend(hpRear, domeHPI2C); });
+
+}
+
+  sleep(175).then(() => { i2cCommandSend(i2ccommand, i2cdevice); });
+
   console.log("Complete");
 };
 
