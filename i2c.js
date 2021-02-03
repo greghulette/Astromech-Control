@@ -6,6 +6,11 @@ var domeServoLEDI2C = 0x0a;
 var domeHPI2C = 0x19;
 var bodyStealhI2C = 0x09;
 var i2cdest;
+var stealth;
+var bodyleds;
+var dome;
+var bodyservos;
+var hp;
 function i2CSend(ldp, coin, vu, maint, textcommand, dp, cbi, i2ccommand, i2cdevice, hpFront, hpTop, hpRear) {
   scan();
   console.log(stealth);
