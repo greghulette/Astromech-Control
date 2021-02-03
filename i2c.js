@@ -7,6 +7,7 @@ var domeHPI2C = 0x19;
 var bodyStealhI2C = 0x09;
 var i2cdest;
 function i2CSend(ldp, coin, vu, maint, textcommand, dp, cbi, i2ccommand, i2cdevice, hpFront, hpTop, hpRear) {
+  scan();
   sleep(25).then(() => { BodyledSend(ldp, bodyLEDI2C ); });
   sleep(50).then(() => { BodyledSend(coin, bodyLEDI2C ); });
   sleep(75).then(() => { BodyledSend(vu, bodyLEDI2C ); });
@@ -81,10 +82,10 @@ function i2cCommandSend(i2ctextcommand, device) {
       });
 };
 
-// function scan(){
+function scan(){
       const i2c1 = i2c.openSync(1);
 
-      const i2devices = [];
+      const i2cdevicesfound = [];
 
       const EBUSY = 16; /* Device or resource busy */
 
@@ -96,7 +97,7 @@ function i2cCommandSend(i2ctextcommand, device) {
           } else {
             try {
               i2c1.receiveByteSync(addr);
-              i2devices.push(addr);
+              i2cdevicesfound.push(addr);
             } catch (e) {
               if (e.errno === EBUSY) {
                 fs.writeSync(0, ' UU');
@@ -111,19 +112,19 @@ function i2cCommandSend(i2ctextcommand, device) {
       };
 
       scan(0x3, 0x77);
-      console.log(i2devices);
-      const stealth = i2devices.includes(9);
+      console.log(i2cdevicesfound);
+      const stealth = i2cdevicesfound.includes(9);
       console.log('Stealth found?: ' + stealth);
-      const dome = i2devices.includes(10);
+      const dome = i2cdevicesfound.includes(10);
       console.log('Dome Servos found?: ' + dome);
-      const bodyleds = i2devices.includes(38);
+      const bodyleds = i2cdevicesfound.includes(38);
       console.log('Body LED Controller found?: ' + bodyleds);
-      const bodyservos = i2devices.includes(39);
+      const bodyservos = i2cdevicesfound.includes(39);
       console.log('Body Servos found?: ' + bodyservos);
-      const hp = i2devices.includes(25);
+      const hp = i2cdevicesfound.includes(25);
       console.log('Body Servos found?: ' + hp);
 
-// };
+};
 
 
 function sleep(ms) {
