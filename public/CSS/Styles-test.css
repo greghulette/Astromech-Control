@@ -706,6 +706,37 @@ shadow: 2px, 4px 15px blue;
   height: 60px;
   width: 60px;
 }
+.UpArrowPicture{
+  position: absolute;
+  top: 30px;
+  left: 645px;
+  height: 60px;
+  width: 60px;
+}
+.DownArrowPicture{
+  position: absolute;
+  top: 175px;
+  left: 645px;
+  height: 60px;
+  width: 60px;
+  transform: rotate(180deg);
+}
+.RightArrowPicture{
+  position: absolute;
+  top: 100px;
+  left: 705px;
+  height: 60px;
+  width: 60px;
+  transform: rotate(90deg);
+}
+.LeftArrowPicture{
+  position: absolute;
+  top: 100px;
+  left: 580px;
+  height: 60px;
+  width: 60px;
+  transform: rotate(270deg);
+}
 
 .checkmarknone{
   position: absolute;
