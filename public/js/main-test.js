@@ -5634,7 +5634,7 @@ function commandOneColorAndSpeedZigZag(y, t, z, u) {
   });
   };
 
-  //ZigZag stuff
+  //ZigZag2 stuff
   var checkedItemsZigZag2 = new Array();
   var imgArrayZigZag2 = [];
 
@@ -5950,6 +5950,793 @@ function commandOneColorAndSpeedZigZag(y, t, z, u) {
 
     };
 
+//DualingColors2 stuff
+var checkedItemsDualingColors2 = new Array();
+var imgArrayDualingColors2 = [];
+
+function ldptoggleDualingColors2() {
+  let tmp = document.querySelector('#LDPDualingColors2');
+  tmp.classList.toggle('active');
+  if (tmp.classList.contains('active')) {
+  }
+
+  getCheckedElementDualingColors2();
+};
+
+function cointoggleDualingColors2() {
+  let tmp = document.querySelector('#CoinDualingColors2');
+  tmp.classList.toggle('active');
+  if (tmp.classList.contains('active')) {
+  }
+
+  getCheckedElementDualingColors2();
+};
+
+function mainttoggleDualingColors2() {
+ let tmp = document.querySelector('#MaintDualingColors2');
+ tmp.classList.toggle('active');
+ if (tmp.classList.contains('active')) {
+ }
+  getCheckedElementDualingColors2()
+};
+
+function verticaltoggleDualingColors2() {
+ let tmp = document.querySelector('#VerticalBarstDualingColors2');
+ tmp.classList.toggle('active');
+ if (tmp.classList.contains('active')) {
+ }
+  getCheckedElementDualingColors2()
+};
+
+function frontHPtoggleDualingColors2() {
+ let tmp = document.querySelector('#FrontHPDualingColors2');
+ tmp.classList.toggle('active');
+ if (tmp.classList.contains('active')) {
+ }
+  getCheckedElementDualingColors2()
+};
+
+function topHPtoggleDualingColors2() {
+  let tmp = document.querySelector('#TopHPDualingColors2');
+ tmp.classList.toggle('active');
+ if (tmp.classList.contains('active')) {
+ }
+  getCheckedElementDualingColors2()
+};
+function rearHPtoggleDualingColors2() {
+   let tmp = document.querySelector('#RearHPDualingColors2');
+   tmp.classList.toggle('active');
+   if (tmp.classList.contains('active')) {
+   }
+    getCheckedElementDualingColors2()
+};
+
+function getCheckedElementDualingColors2() {
+  var imgArrayDualingColors2 = document.getElementsByName('stripSelectorDualingColors2');
+  checkedItemsDualingColors2.length = 0;
+  for (var i = 0; i < imgArrayDualingColors2.length; i++) {
+    var tmp = imgArrayDualingColors2[i].classList.toString();
+    if (tmp.indexOf('active') != -1) {
+      checkedItemsDualingColors2.push(imgArrayDualingColors2[i].id.toString());
+    }
+
+    }
+  };
+
+
+ function selectALLStripsDualingColors2(){
+   document.getElementById("LDPDualingColors2").src = "./Images/Body/LDPGreen.png";
+   document.getElementById("CoinDualingColors2").src = "Images/Body/CoinSlotsGreen.png";
+   document.getElementById("MaintDualingColors2").src = "Images/Body/SkirtGreen.png";
+   document.getElementById("VerticalBarstDualingColors2").src = "Images/Body/DataPanelVerticalGreen.png";
+   // document.getElementById("FrontHPDualingColors2").src = "Images/Dome/FrontHPGreen.png";
+   // document.getElementById("TopHPDualingColors2").src = "Images/Dome/TopHPGreen.png";
+   // document.getElementById("RearHPDualingColors2").src = "Images/Dome/RearHPGreen.png";
+   document.getElementById("checkmarkallDualingColors2").src = "Images/checkmark.png";
+   setTimeout('document.getElementById("checkmarkallDualingColors2").src = "Images/blankcheckmark.png"', 2000);
+
+  let ldptemp = document.querySelector('#LDPDualingColors2');
+  ldptemp.classList.add('active');
+  let cointemp = document.querySelector('#CoinDualingColors2');
+  cointemp.classList.add('active');
+  let mainttemp = document.querySelector('#MaintDualingColors2');
+  mainttemp.classList.add('active');
+  let vutemp = document.querySelector('#VerticalBarstDualingColors2');
+  vutemp.classList.add('active');
+  // let frontHPtemp = document.querySelector('#FrontHPDualingColors2');
+  // frontHPtemp.classList.add('active');
+  // let topHPtemp = document.querySelector('#TopHPDualingColors2');
+  // topHPtemp.classList.add('active');
+  // let rearHPtemp = document.querySelector('#RearHPDualingColors2');
+  // rearHPtemp.classList.add('active');
+
+  getCheckedElementDualingColors2()
+ }
+
+
+ function selectNoneStripsDualingColors2(){
+   document.getElementById("LDPDualingColors2").src = "./Images/Body/LDPBlue.png";
+   document.getElementById("CoinDualingColors2").src = "Images/Body/CoinSlotsBlue.png";
+   document.getElementById("MaintDualingColors2").src = "Images/Body/SkirtBlue.png";
+   document.getElementById("VerticalBarstDualingColors2").src = "Images/Body/DataPanelVerticalBlue.png";
+   //  document.getElementById("FrontHPDualingColors2").src = "Images/Dome/FrontHPBlue.png";
+   //  document.getElementById("TopHPDualingColors2").src = "Images/Dome/TopHPBlue.png";
+   // document.getElementById("RearHPDualingColors2").src = "Images/Dome/RearHPBlue.png";
+   document.getElementById("checkmarknoneDualingColors2").src = "Images/checkmark.png";
+   setTimeout('document.getElementById("checkmarknoneDualingColors2").src = "Images/blankcheckmark.png"', 2000);
+
+
+   let ldptemp = document.querySelector('#LDPDualingColors2');
+   ldptemp.classList.remove('active');
+   let cointemp = document.querySelector('#CoinDualingColors2');
+   cointemp.classList.remove('active');
+   let mainttemp = document.querySelector('#MaintDualingColors2');
+   mainttemp.classList.remove('active');
+   let vutemp = document.querySelector('#VerticalBarstDualingColors2');
+   vutemp.classList.remove('active');
+   // let frontHPtemp = document.querySelector('#FrontHPDualingColors2');
+   // frontHPtemp.classList.remove('active');
+   // let topHPtemp = document.querySelector('#TopHPDualingColors2');
+   // topHPtemp.classList.remove('active');
+   // let rearHPtemp = document.querySelector('#RearHPDualingColors2');
+   // rearHPtemp.classList.remove('active');
+
+   getCheckedElementDualingColors2()
+ }
+  function changeImageLDPDualingColors2() {
+
+                if (document.getElementById("LDPDualingColors2").src.match("LDPBlue.png"))
+                {
+                    document.getElementById("LDPDualingColors2").src = "./Images/Body/LDPGreen.png";
+                    // console.log("Changed to Green");
+                } else {
+                    document.getElementById("LDPDualingColors2").src = "Images/Body/LDPBlue.png";
+                    // console.log("Change to Blue");
+                }
+                ldptoggleDualingColors2()
+            };
+
+function changeImageCoinDualingColors2() {
+
+              if (document.getElementById("CoinDualingColors2").src.match("CoinSLotsBlue.png"))
+              {
+                  document.getElementById("CoinDualingColors2").src = "Images/Body/CoinSlotsGreen.png";
+                  // console.log("Changed to Green");
+              } else {
+                  document.getElementById("CoinDualingColors2").src = "Images/Body/CoinSLotsBlue.png";
+                  // console.log("Change to Blue");
+              }
+              cointoggleDualingColors2()
+          };
+function changeImageMaintDualingColors2() {
+
+          if (document.getElementById("MaintDualingColors2").src.match("SkirtBlue.png"))
+          {
+              document.getElementById("MaintDualingColors2").src = "Images/Body/SkirtGreen.png";
+              // console.log("Changed to Green");
+          } else {
+              document.getElementById("MaintDualingColors2").src = "Images/Body/SkirtBlue.png";
+              // console.log("Change to Blue");
+          }
+          mainttoggleDualingColors2()
+      };
+function changeImageVerticalBarsDualingColors2() {
+
+        if (document.getElementById("VerticalBarstDualingColors2").src.match("DataPanelVerticalBlue.png"))
+        {
+            document.getElementById("VerticalBarstDualingColors2").src = "Images/Body/DataPanelVerticalGreen.png";
+            // console.log("Changed to Green");
+        } else {
+            document.getElementById("VerticalBarstDualingColors2").src = "Images/Body/DataPanelVerticalBlue.png";
+            // console.log("Change to Blue");
+        }
+        verticaltoggleDualingColors2()
+    };
+function changeImageFrontHPDualingColors2() {
+
+          if (document.getElementById("FrontHPDualingColors2").src.match("FrontHPBlue.png"))
+          {
+              document.getElementById("FrontHPDualingColors2").src = "Images/Dome/FrontHPGreen.png";
+              // console.log("Changed to Green");
+          } else {
+              document.getElementById("FrontHPDualingColors2").src = "Images/Dome/FrontHPBlue.png";
+              // console.log("Change to Blue");
+          }
+          frontHPtoggleDualingColors2()
+      };
+  function changeImageTopHPDualingColors2() {
+
+          if (document.getElementById("TopHPDualingColors2").src.match("TopHPBlue.png"))
+          {
+              document.getElementById("TopHPDualingColors2").src = "Images/Dome/TopHPGreen.png";
+              // console.log("Changed to Green");
+          } else {
+              document.getElementById("TopHPDualingColors2").src = "Images/Dome/TopHPBlue.png";
+              // console.log("Change to Blue");
+          }
+          topHPtoggleDualingColors2()
+      };
+function changeImageRearHPDualingColors2() {
+
+          if (document.getElementById("RearHPDualingColors2").src.match("RearHPBlue.png"))
+          {
+              document.getElementById("RearHPDualingColors2").src = "Images/Dome/RearHPGreen.png";
+              // console.log("Changed to Green");
+          } else {
+              document.getElementById("RearHPDualingColors2").src = "Images/Dome/RearHPBlue.png";
+              // console.log("Change to Blue");
+          }
+          rearHPtoggleDualingColors2()
+      };
+
+function commandOneColorAndSpeedDualingColors2(y, t, z, u) {
+  let sliderValue = getSliderValue(t);
+  let colorValues1 = getcolor1(z);
+  document.getElementById(u).src = "Images/checkmark.png";
+  setTimeout(function(){  document.getElementById(u).src = "Images/blankcheckmark.png";}, 2000)
+
+  for (var i = 0; i < checkedItemsDualingColors2.length; i++) {
+    if (checkedItemsDualingColors2[i] === "LDPDualingColors2") {
+      // console.log("L selected");
+      var ldpcommandstring = "L" + y + sliderValue + colorValues1;
+      console.log(ldpcommandstring);
+    };
+    if (checkedItemsDualingColors2[i] === "CoinDualingColors2") {
+      // console.log("C selected");
+      var coincommandstring = "C"+ y + sliderValue + colorValues1;
+      console.log(coincommandstring);
+    };
+    if (checkedItemsDualingColors2[i] === "VerticalBarstDualingColors2") {
+      // console.log("V selected");
+      var vucommandstring = "V" + y + sliderValue + colorValues1;
+      console.log(vucommandstring);
+    };
+    if (checkedItemsDualingColors2[i] === "MaintDualingColors2") {
+      // console.log("M selected");
+      var mcommandstring = 'M' + y + sliderValue + colorValues1;
+      console.log(mcommandstring);
+    };
+    // if (checkedItemsDualingColors2[i] === "FrontHPDualingColors2") {
+    //   // console.log("M selected");
+    //   var hpfcommandstring = "F"+ y + colorValues1 + sliderValue;
+    //   console.log(hpfcommandstring);
+    // };
+    // if (checkedItemsDualingColors2[i] === "TopHPDualingColors2") {
+    //   // console.log("M selected");
+    //   var hptcommandstring = "T"+ y + colorValues1 + sliderValue;
+    //   console.log(hptcommandstring);
+    // };
+    // if (checkedItemsDualingColors2[i] === "RearHPDualingColors2") {
+    //   // console.log("M selected");
+    //   var hprcommandstring = "R"+ y + colorValues1 + sliderValue;
+    //   console.log(hprcommandstring);
+    // };
+  };
+
+
+  socket.emit('command', {
+    ldpcommandstring: ldpcommandstring,
+    coincommandstring: coincommandstring,
+    vucommandstring: vucommandstring,
+    mcommandstring: mcommandstring,
+    // hpfcommandstring: hpfcommandstring,
+    // hptcommandstring: hptcommandstring,
+    // hprcommandstring: hprcommandstring
+  });
+  };
+
+  function commandTwoColorsDualingColors2(y, t, z, s, u) {
+    let sliderValue = getSliderValue(t);
+    let colorValues1 = getcolor1(z);
+    let colorValues2 = getcolor2(s);
+    document.getElementById(u).src = "Images/checkmark.png";
+    setTimeout(function(){  document.getElementById(u).src = "Images/blankcheckmark.png";}, 2000)
+
+    for (var i = 0; i < checkedItemsDualingColors2.length; i++) {
+      if (checkedItemsDualingColors2[i] === "LDPDualingColors2") {
+        // console.log("L selected");
+        var ldpcommandstring = 'L'+ y + sliderValue + colorValues1 + colorValues2;
+        console.log(ldpcommandstring);
+      }
+      if (checkedItemsDualingColors2[i] === "CoinDualingColors2") {
+        // console.log("C selected");
+        var coincommandstring = 'C'+ y + sliderValue + colorValues1 + colorValues2;
+        console.log(coincommandstring);
+      };
+
+      if (checkedItemsDualingColors2[i] === "VerticalBarstDualingColors2") {
+        // console.log("V selected");
+        var vucommandstring = 'V'+ y + sliderValue + colorValues1 + colorValues2;
+        console.log(vucommandstring);
+      };
+
+      if (checkedItemsDualingColors2[i] === "MaintDualingColors2") {
+        // console.log("M selected");
+        var mcommandstring = 'M'+ y + sliderValue + colorValues1 + colorValues2;
+        console.log(mcommandstring);
+      };
+    };
+
+    socket.emit('command', {
+      ldpcommandstring: ldpcommandstring,
+      coincommandstring: coincommandstring,
+      vucommandstring: vucommandstring,
+      mcommandstring: mcommandstring
+    });
+
+  };
+
+  function commandTwoColorsNoSliderDualingColors2( y, t, z, s, u) {
+    let colorValues1 = getcolor1(z);
+    let colorValues2 = getcolor2(s);
+    document.getElementById(u).src = "Images/checkmark.png";
+    setTimeout(function(){  document.getElementById(u).src = "Images/blankcheckmark.png";}, 2000)
+
+    for (var i = 0; i < checkedItemsDualingColors2.length; i++) {
+      if (checkedItemsDualingColors2[i] === "LDPDualingColors2") {
+        // console.log("L selected");
+        var ldpcommandstring = 'L' + y + t + colorValues1 + colorValues2;
+        console.log(ldpcommandstring);
+      };
+
+      if (checkedItemsDualingColors2[i] === "CoinDualingColors2") {
+        // console.log("C selected");
+        var coincommandstring = 'C' + y + t + colorValues1 + colorValues2;
+        console.log(coincommandstring);
+      };
+
+      if (checkedItemsDualingColors2[i] === "VerticalBarstDualingColors2") {
+        // console.log("V selected");
+        var vucommandstring = 'V' + y + t + colorValues1 + colorValues2;
+        console.log(vucommandstring);
+      };
+
+      if (checkedItemsDualingColors2[i] === "MaintDualingColors2") {
+        // console.log("M selected");
+        var mcommandstring = "M" + y  + t + colorValues1 + colorValues2;
+        console.log(mcommandstring);
+      };
+    };
+
+    socket.emit('command', {
+      ldpcommandstring: ldpcommandstring,
+      coincommandstring: coincommandstring,
+      vucommandstring: vucommandstring,
+      mcommandstring: mcommandstring
+    });
+    //
+  };
+
+//FLD stuff
+var checkedItemsFLD = new Array();
+var imgArrayFLD = [];
+
+function ldptoggleFLD() {
+  let tmp = document.querySelector('#LDPFLD');
+  tmp.classList.toggle('active');
+  if (tmp.classList.contains('active')) {
+  }
+
+  getCheckedElementFLD();
+};
+
+function cointoggleFLD() {
+  let tmp = document.querySelector('#CoinFLD');
+  tmp.classList.toggle('active');
+  if (tmp.classList.contains('active')) {
+  }
+
+  getCheckedElementFLD();
+};
+
+function mainttoggleFLD() {
+ let tmp = document.querySelector('#MaintFLD');
+ tmp.classList.toggle('active');
+ if (tmp.classList.contains('active')) {
+ }
+  getCheckedElementFLD()
+};
+
+function verticaltoggleFLD() {
+ let tmp = document.querySelector('#VerticalBarstFLD');
+ tmp.classList.toggle('active');
+ if (tmp.classList.contains('active')) {
+ }
+  getCheckedElementFLD()
+};
+
+function frontHPtoggleFLD() {
+ let tmp = document.querySelector('#FrontHPFLD');
+ tmp.classList.toggle('active');
+ if (tmp.classList.contains('active')) {
+ }
+  getCheckedElementFLD()
+};
+
+function topHPtoggleFLD() {
+  let tmp = document.querySelector('#TopHPFLD');
+ tmp.classList.toggle('active');
+ if (tmp.classList.contains('active')) {
+ }
+  getCheckedElementFLD()
+};
+function rearHPtoggleFLD() {
+   let tmp = document.querySelector('#RearHPFLD');
+   tmp.classList.toggle('active');
+   if (tmp.classList.contains('active')) {
+   }
+    getCheckedElementFLD()
+};
+
+function getCheckedElementFLD() {
+  var imgArrayFLD = document.getElementsByName('stripSelectorFLD');
+  checkedItemsFLD.length = 0;
+  for (var i = 0; i < imgArrayFLD.length; i++) {
+    var tmp = imgArrayFLD[i].classList.toString();
+    if (tmp.indexOf('active') != -1) {
+      checkedItemsFLD.push(imgArrayFLD[i].id.toString());
+    }
+
+    }
+  };
+
+
+ function selectALLStripsFLD(){
+   document.getElementById("LDPFLD").src = "./Images/Body/LDPGreen.png";
+   document.getElementById("CoinFLD").src = "Images/Body/CoinSlotsGreen.png";
+   document.getElementById("MaintFLD").src = "Images/Body/SkirtGreen.png";
+   document.getElementById("VerticalBarstFLD").src = "Images/Body/DataPanelVerticalGreen.png";
+   // document.getElementById("FrontHPFLD").src = "Images/Dome/FrontHPGreen.png";
+   // document.getElementById("TopHPFLD").src = "Images/Dome/TopHPGreen.png";
+   // document.getElementById("RearHPFLD").src = "Images/Dome/RearHPGreen.png";
+   document.getElementById("checkmarkallFLD").src = "Images/checkmark.png";
+   setTimeout('document.getElementById("checkmarkallFLD").src = "Images/blankcheckmark.png"', 2000);
+
+  let ldptemp = document.querySelector('#LDPFLD');
+  ldptemp.classList.add('active');
+  let cointemp = document.querySelector('#CoinFLD');
+  cointemp.classList.add('active');
+  let mainttemp = document.querySelector('#MaintFLD');
+  mainttemp.classList.add('active');
+  let vutemp = document.querySelector('#VerticalBarstFLD');
+  vutemp.classList.add('active');
+  // let frontHPtemp = document.querySelector('#FrontHPFLD');
+  // frontHPtemp.classList.add('active');
+  // let topHPtemp = document.querySelector('#TopHPFLD');
+  // topHPtemp.classList.add('active');
+  // let rearHPtemp = document.querySelector('#RearHPFLD');
+  // rearHPtemp.classList.add('active');
+
+  getCheckedElementFLD()
+ }
+
+
+ function selectNoneStripsFLD(){
+   document.getElementById("LDPFLD").src = "./Images/Body/LDPBlue.png";
+   document.getElementById("CoinFLD").src = "Images/Body/CoinSlotsBlue.png";
+   document.getElementById("MaintFLD").src = "Images/Body/SkirtBlue.png";
+   document.getElementById("VerticalBarstFLD").src = "Images/Body/DataPanelVerticalBlue.png";
+   //  document.getElementById("FrontHPFLD").src = "Images/Dome/FrontHPBlue.png";
+   //  document.getElementById("TopHPFLD").src = "Images/Dome/TopHPBlue.png";
+   // document.getElementById("RearHPFLD").src = "Images/Dome/RearHPBlue.png";
+   document.getElementById("checkmarknoneFLD").src = "Images/checkmark.png";
+   setTimeout('document.getElementById("checkmarknoneFLD").src = "Images/blankcheckmark.png"', 2000);
+
+
+   let ldptemp = document.querySelector('#LDPFLD');
+   ldptemp.classList.remove('active');
+   let cointemp = document.querySelector('#CoinFLD');
+   cointemp.classList.remove('active');
+   let mainttemp = document.querySelector('#MaintFLD');
+   mainttemp.classList.remove('active');
+   let vutemp = document.querySelector('#VerticalBarstFLD');
+   vutemp.classList.remove('active');
+   // let frontHPtemp = document.querySelector('#FrontHPFLD');
+   // frontHPtemp.classList.remove('active');
+   // let topHPtemp = document.querySelector('#TopHPFLD');
+   // topHPtemp.classList.remove('active');
+   // let rearHPtemp = document.querySelector('#RearHPFLD');
+   // rearHPtemp.classList.remove('active');
+
+   getCheckedElementFLD()
+ }
+  function changeImageLDPFLD() {
+
+                if (document.getElementById("LDPFLD").src.match("LDPBlue.png"))
+                {
+                    document.getElementById("LDPFLD").src = "./Images/Body/LDPGreen.png";
+                    // console.log("Changed to Green");
+                } else {
+                    document.getElementById("LDPFLD").src = "Images/Body/LDPBlue.png";
+                    // console.log("Change to Blue");
+                }
+                ldptoggleFLD()
+            };
+
+function changeImageCoinFLD() {
+
+              if (document.getElementById("CoinFLD").src.match("CoinSLotsBlue.png"))
+              {
+                  document.getElementById("CoinFLD").src = "Images/Body/CoinSlotsGreen.png";
+                  // console.log("Changed to Green");
+              } else {
+                  document.getElementById("CoinFLD").src = "Images/Body/CoinSLotsBlue.png";
+                  // console.log("Change to Blue");
+              }
+              cointoggleFLD()
+          };
+function changeImageMaintFLD() {
+
+          if (document.getElementById("MaintFLD").src.match("SkirtBlue.png"))
+          {
+              document.getElementById("MaintFLD").src = "Images/Body/SkirtGreen.png";
+              // console.log("Changed to Green");
+          } else {
+              document.getElementById("MaintFLD").src = "Images/Body/SkirtBlue.png";
+              // console.log("Change to Blue");
+          }
+          mainttoggleFLD()
+      };
+function changeImageVerticalBarsFLD() {
+
+        if (document.getElementById("VerticalBarstFLD").src.match("DataPanelVerticalBlue.png"))
+        {
+            document.getElementById("VerticalBarstFLD").src = "Images/Body/DataPanelVerticalGreen.png";
+            // console.log("Changed to Green");
+        } else {
+            document.getElementById("VerticalBarstFLD").src = "Images/Body/DataPanelVerticalBlue.png";
+            // console.log("Change to Blue");
+        }
+        verticaltoggleFLD()
+    };
+function changeImageFrontHPFLD() {
+
+          if (document.getElementById("FrontHPFLD").src.match("FrontHPBlue.png"))
+          {
+              document.getElementById("FrontHPFLD").src = "Images/Dome/FrontHPGreen.png";
+              // console.log("Changed to Green");
+          } else {
+              document.getElementById("FrontHPFLD").src = "Images/Dome/FrontHPBlue.png";
+              // console.log("Change to Blue");
+          }
+          frontHPtoggleFLD()
+      };
+  function changeImageTopHPFLD() {
+
+          if (document.getElementById("TopHPFLD").src.match("TopHPBlue.png"))
+          {
+              document.getElementById("TopHPFLD").src = "Images/Dome/TopHPGreen.png";
+              // console.log("Changed to Green");
+          } else {
+              document.getElementById("TopHPFLD").src = "Images/Dome/TopHPBlue.png";
+              // console.log("Change to Blue");
+          }
+          topHPtoggleFLD()
+      };
+function changeImageRearHPFLD() {
+
+          if (document.getElementById("RearHPFLD").src.match("RearHPBlue.png"))
+          {
+              document.getElementById("RearHPFLD").src = "Images/Dome/RearHPGreen.png";
+              // console.log("Changed to Green");
+          } else {
+              document.getElementById("RearHPFLD").src = "Images/Dome/RearHPBlue.png";
+              // console.log("Change to Blue");
+          }
+          rearHPtoggleFLD()
+      };
+
+function commandOneColorAndSpeedFLD(y, t, z, u) {
+  let sliderValue = getSliderValue(t);
+  let colorValues1 = getcolor1(z);
+  document.getElementById(u).src = "Images/checkmark.png";
+  setTimeout(function(){  document.getElementById(u).src = "Images/blankcheckmark.png";}, 2000)
+
+  for (var i = 0; i < checkedItemsFLD.length; i++) {
+    if (checkedItemsFLD[i] === "LDPFLD") {
+      // console.log("L selected");
+      var ldpcommandstring = "L" + y + sliderValue + colorValues1;
+      console.log(ldpcommandstring);
+    };
+    if (checkedItemsFLD[i] === "CoinFLD") {
+      // console.log("C selected");
+      var coincommandstring = "C"+ y + sliderValue + colorValues1;
+      console.log(coincommandstring);
+    };
+    if (checkedItemsFLD[i] === "VerticalBarstFLD") {
+      // console.log("V selected");
+      var vucommandstring = "V" + y + sliderValue + colorValues1;
+      console.log(vucommandstring);
+    };
+    if (checkedItemsFLD[i] === "MaintFLD") {
+      // console.log("M selected");
+      var mcommandstring = 'M' + y + sliderValue + colorValues1;
+      console.log(mcommandstring);
+    };
+    // if (checkedItemsFLD[i] === "FrontHPFLD") {
+    //   // console.log("M selected");
+    //   var hpfcommandstring = "F"+ y + colorValues1 + sliderValue;
+    //   console.log(hpfcommandstring);
+    // };
+    // if (checkedItemsFLD[i] === "TopHPFLD") {
+    //   // console.log("M selected");
+    //   var hptcommandstring = "T"+ y + colorValues1 + sliderValue;
+    //   console.log(hptcommandstring);
+    // };
+    // if (checkedItemsFLD[i] === "RearHPFLD") {
+    //   // console.log("M selected");
+    //   var hprcommandstring = "R"+ y + colorValues1 + sliderValue;
+    //   console.log(hprcommandstring);
+    // };
+  };
+
+
+  socket.emit('command', {
+    ldpcommandstring: ldpcommandstring,
+    coincommandstring: coincommandstring,
+    vucommandstring: vucommandstring,
+    mcommandstring: mcommandstring,
+    // hpfcommandstring: hpfcommandstring,
+    // hptcommandstring: hptcommandstring,
+    // hprcommandstring: hprcommandstring
+  });
+  };
+
+  function commandTwoColorsFLD(y, t, z, s, u) {
+    let sliderValue = getSliderValue(t);
+    let colorValues1 = getcolor1(z);
+    let colorValues2 = getcolor2(s);
+    document.getElementById(u).src = "Images/checkmark.png";
+    setTimeout(function(){  document.getElementById(u).src = "Images/blankcheckmark.png";}, 2000)
+
+    for (var i = 0; i < checkedItemsFLD.length; i++) {
+      if (checkedItemsFLD[i] === "LDPFLD") {
+        // console.log("L selected");
+        var ldpcommandstring = 'L'+ y + sliderValue + colorValues1 + colorValues2;
+        console.log(ldpcommandstring);
+      }
+      if (checkedItemsFLD[i] === "CoinFLD") {
+        // console.log("C selected");
+        var coincommandstring = 'C'+ y + sliderValue + colorValues1 + colorValues2;
+        console.log(coincommandstring);
+      };
+
+      if (checkedItemsFLD[i] === "VerticalBarstFLD") {
+        // console.log("V selected");
+        var vucommandstring = 'V'+ y + sliderValue + colorValues1 + colorValues2;
+        console.log(vucommandstring);
+      };
+
+      if (checkedItemsFLD[i] === "MaintFLD") {
+        // console.log("M selected");
+        var mcommandstring = 'M'+ y + sliderValue + colorValues1 + colorValues2;
+        console.log(mcommandstring);
+      };
+    };
+
+    socket.emit('command', {
+      ldpcommandstring: ldpcommandstring,
+      coincommandstring: coincommandstring,
+      vucommandstring: vucommandstring,
+      mcommandstring: mcommandstring
+    });
+
+  };
+
+  function commandTwoColorsNoSliderFLD( y, t, z, s, u) {
+    let colorValues1 = getcolor1(z);
+    let colorValues2 = getcolor2(s);
+    document.getElementById(u).src = "Images/checkmark.png";
+    setTimeout(function(){  document.getElementById(u).src = "Images/blankcheckmark.png";}, 2000)
+
+    for (var i = 0; i < checkedItemsFLD.length; i++) {
+      if (checkedItemsFLD[i] === "LDPFLD") {
+        // console.log("L selected");
+        var ldpcommandstring = 'L' + y + t + colorValues1 + colorValues2;
+        console.log(ldpcommandstring);
+      };
+
+      if (checkedItemsFLD[i] === "CoinFLD") {
+        // console.log("C selected");
+        var coincommandstring = 'C' + y + t + colorValues1 + colorValues2;
+        console.log(coincommandstring);
+      };
+
+      if (checkedItemsFLD[i] === "VerticalBarstFLD") {
+        // console.log("V selected");
+        var vucommandstring = 'V' + y + t + colorValues1 + colorValues2;
+        console.log(vucommandstring);
+      };
+
+      if (checkedItemsFLD[i] === "MaintFLD") {
+        // console.log("M selected");
+        var mcommandstring = "M" + y  + t + colorValues1 + colorValues2;
+        console.log(mcommandstring);
+      };
+    };
+
+    socket.emit('command', {
+      ldpcommandstring: ldpcommandstring,
+      coincommandstring: coincommandstring,
+      vucommandstring: vucommandstring,
+      mcommandstring: mcommandstring
+    });
+    //
+  };
+  function commandNoOptionsFLD( y, t, u) {
+
+    document.getElementById(u).src = "Images/checkmark.png";
+    setTimeout(function(){  document.getElementById(u).src = "Images/blankcheckmark.png";}, 2000)
+
+
+
+    for (var i = 0; i < checkedItemsFLD.length; i++) {
+      if (checkedItemsFLD[i] === "LDPFLD") {
+        // console.log("L selected");
+        var ldpcommandstring = "L" + y + t;
+
+        console.log(ldpcommandstring);
+      };
+
+      if (checkedItemsFLD[i] === "CoinFLD") {
+        // console.log("C selected");
+        var coincommandstring = "C" + y + t;
+        console.log(coincommandstring);
+      };
+
+      if (checkedItemsFLD[i] === "VerticalBarstFLD") {
+        // console.log("V selected");
+        var vucommandstring = "V" + y + t;
+        console.log(vucommandstring);
+      };
+
+      if (checkedItemsFLD[i] === "MaintFLD") {
+        // console.log("M selected");
+        var mcommandstring = "M" + y + t;
+        console.log(mcommandstring);
+      };
+      // if (checkedItemsFLD[i] === "D") {
+      //   // console.log("M selected");
+      //   var dcommandstring = checkedItems[i] + y + t;
+      //   console.log(dcommandstring);
+      // };
+      // if (checkedItemsFLD[i] === "I") {
+      //   // console.log("M selected");
+      //   var icommandstring = checkedItems[i] + y + t;
+      //   console.log(icommandstring);
+      // };
+      // if (checkedItemsFLD[i] === "FrontHPFLD") {
+      //   // console.log("M selected");
+      //   var hpfcommandstring = "F007";
+      //   console.log(hpfcommandstring);
+      // };
+      // if (checkedItemsFLD[i] === "TopHPFLD") {
+      //   // console.log("M selected");
+      //   var hptcommandstring = "T007";
+      //   console.log(hptcommandstring);
+      // };
+      // if (checkedItemsFLD[i] === "RearHPFLD") {
+      //   // console.log("M selected");
+      //   var hprcommandstring = "R007";
+      //   console.log(hprcommandstring);
+      // };
+    };
+
+
+    socket.emit('command', {
+      ldpcommandstring: ldpcommandstring,
+      coincommandstring: coincommandstring,
+      vucommandstring: vucommandstring,
+      mcommandstring: mcommandstring,
+      // dcommandstring: dcommandstring,
+      // icommandstring: icommandstring,
+      // hpfcommandstring: hpfcommandstring,
+      // hptcommandstring: hptcommandstring,
+      // hprcommandstring: hprcommandstring
+    });
+
+
+  };
 
 
 

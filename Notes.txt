@@ -12,3 +12,5 @@
 4. FIXED - VU Front Logic Display function has green in it.  It should only be white and blue.
 
 5. Setup auto sounds in Settings
+
+6. Zig Zag and ZigZig2 freezes the LDP strips
