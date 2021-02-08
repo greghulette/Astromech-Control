@@ -658,6 +658,36 @@ shadow: 2px, 4px 15px blue;
 .r2menupictureCBI.active{
 }
 
+.r2menupictureCBIServo {
+  width: 68px;
+  position: absolute;
+  left: -366px;
+  top: 638px;
+}
+
+.r2menupictureCBIServo.active{
+}
+
+.r2menupictureDPServo {
+  width: 71px;
+  position: absolute;
+  left: -218px;
+  top: 638px;
+}
+
+.r2menupictureDPServo.active{
+}
+
+.r2menupictureRightLargeDoorServo {
+  width: 39px;
+  position: absolute;
+  left: -142px;
+  top: 540px;
+}
+
+.r2menupictureRightLargeDoorServo.active{
+}
+
 .r2menupictureDataPanelLED1 {
   width: 68px;
   position: absolute;
@@ -667,6 +697,26 @@ shadow: 2px, 4px 15px blue;
 }
 
 .r2menupictureDataPanelLED1.active{
+}
+
+.r2menupictureTopUtilityArm {
+  width: 184px;
+  position: absolute;
+  left: -352px;
+  top: 549px;
+}
+
+.r2menupictureTopUtilityArm.active{
+}
+.r2menupictureBottomUtilityArm {
+  width: 184px;
+  position: absolute;
+  left: -348px;
+  top: 595px;
+  transform: rotate(180deg);
+}
+
+.r2menupictureTopUtilityArm.active{
 }
 
 .selectAll {

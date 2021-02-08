@@ -2,15 +2,19 @@ const i2c = require('i2c-bus');
 const fs = require('fs');
 var bodyLEDI2C = 0x26;
 var bodyServoI2C = 0x27;
-var domeServoLEDI2C = 0x0a;
+var domeServoLEDI2C = 0x0c;
 var domeHPI2C = 0x19;
 var bodyStealhI2C = 0x09;
+var rSeriesLogic = 0x22;
+var psiPro = 0x23;
 var i2cdest;
 var stealth;
 var bodyleds;
 var dome;
 var bodyservos;
 var hp;
+var rseries;
+var psi;
 function i2CSend(ldp, coin, vu, maint, textcommand, dp, cbi, i2ccommand, i2cdevice, hpFront, hpTop, hpRear) {
   scan(); //used to check if the i2c destination is availabe.  If available the var is "true".  WIthout this check, the server crashes when it tries to send a command to an i2c device that isn't online.
 if (bodyleds == true) {     //used to check if the i2c destination is availabe
@@ -39,6 +43,14 @@ if (bodyservos == true){
 
 }
 if (stealth == true){
+  //put commands for the Stealth System here
+
+}
+if (rseries == true){
+  //put commands for the Stealth System here
+
+}
+if (psi == true){
   //put commands for the Stealth System here
 
 }

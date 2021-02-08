@@ -531,14 +531,14 @@
                 alt="button for Knight Rider"
               /></button>
           </div>
-        <div class="menu-Level-1-Links">
+        <!-- <div class="menu-Level-1-Links">
               <button class="" rel="SerialCommand"><img
                   class="buttonwidth"
                   id ="transparent"
                   src="Images/Buttons/LEDFunctionButtons/Generic/Button-SerialCommand-White.png"
                   alt="button for Knight Rider"
                 /></button>
-            </div>
+            </div> -->
           <div class="menu-Level-1-Links">
                 <button class="" rel="DataPanel"><img
                     class="buttonwidth"
@@ -3785,6 +3785,48 @@
   <div class="menu-Level-0-Content" id="servo">
     <div class="menuheader">
       <h1 class="">Servos</h1>
+      <!-- <img src="Images/Body/TopUtilityArmBlue.png" class="r2menupictureTopUtilityArm" alt="image for the dome">
+      <img src="Images/Body/TopUtilityArmBlue.png" class="r2menupictureBottomUtilityArm" alt="image for the dome"> -->
+      <img
+          class="r2menupictureTopUtilityArm"
+          src="Images/Body/TopUtilityArmBlue.png"
+          alt="picture"
+          name="stripSelectorServo"
+          onclick=changeImageTopUtilityArm()
+          id="TopUtilityArm"
+        />
+      <img
+          class="r2menupictureBottomUtilityArm"
+          src="Images/Body/TopUtilityArmBlue.png"
+          alt="picture"
+          name="stripSelectorServo"
+          onclick=changeImageBottomUtilityArm()
+          id="BottomUtilityArm"
+        />
+      <img
+          class="r2menupictureCBIServo"
+          src="Images/Body/CBIDoorBlue.png"
+          alt="picture"
+          name="stripSelectorServo"
+          onclick=changeImageCBIServo()
+          id="CBIDoor"
+        />
+      <img
+          class="r2menupictureDPServo"
+          src="Images/Body/DataPanelDoorBlue.png"
+          alt="picture"
+          name="stripSelectorServo"
+          onclick=changeImageDPServo()
+          id="DPDoor"
+        />
+      <img
+          class="r2menupictureRightLargeDoorServo"
+          src="Images/Body/RightLargeDoorBlue.png"
+          alt="picture"
+          name="stripSelectorServo"
+          onclick=changeImageRightLargeDoorServo()
+          id="RightLargeDoor"
+        />
     </div>
     <div class="HPServo">
       <h3 class="HPServoHeader">HP Servo Control</h3>
@@ -3879,6 +3921,8 @@
            <option value="DS">Dome Servo Controller</option>
            <option value="HP">HP Controller</option>
            <option value="BS">Body Servo Contoller</option>
+           <option value="RS">RSeries Logic</option>
+           <option value="PS">PSI Pro</option>
            <option value="ST">Stealth</option>
            <option value="BL">Body LED Controller</option>
          </select>
