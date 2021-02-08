@@ -3545,6 +3545,47 @@
 
       <div class="menu-Level-1-Content" id="Equalizer">
         <h1 class="menuHeader-Level-1">Sound Equalizer</h1>
+        <img
+            class="r2menupictureLDP1"
+            src="Images/Body/LDPBlue.png"
+            alt="picture"
+            name="stripSelectorEqualizer"
+            onclick=changeImageLDPEqualizer()
+            id="LDPEqualizer"
+          />
+
+        <img
+          class="r2menupictureCoin"
+          src="Images/Body/CoinSLotsBlue.png"
+          alt="picture"
+          name="stripSelectorEqualizer"
+          onclick=changeImageCoinEqualizer()
+          id="CoinEqualizer"
+        />
+
+        <img
+            class="r2menupictureMaint"
+            src="Images/Body/SkirtBlue.png"
+            alt="picture"
+            name="stripSelectorEqualizer"
+            onclick=changeImageMaintEqualizer()
+            id="MaintEqualizer"
+          />
+
+        <img
+            class="r2menupictureDataPanelVerticalBars"
+            src="Images/Body/DataPanelVerticalBlue.png"
+            alt="picture"
+            name="stripSelectorEqualizer"
+            onclick=changeImageVerticalBarsEqualizer()
+            id="VerticalBarstEqualizer"
+          />
+
+          <h3 class="selectAll" onclick=selectALLStripsEqualizer()> A </h3>
+          <h3 class="selectNone" onclick=selectNoneStripsEqualizer()> N </h3>
+          <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallEqualizer">
+          <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneEqualizer">
+
         <div class="menu-Level-2">
 
             <div class="menu-Level-2-Links " >
@@ -3587,11 +3628,11 @@
             <h2 class="menuHeader-Level-2">option 1</h2>
             <div class="ColorPickerdiv">
               <form class="" action="index.html" method="post">
-                <a href="#" onclick="commandNoOptions('LDP', '02','1','')" class="applyButton"></a>
+                <a href="#" onclick="commandNoOptionsEqualizer('02','1','checkmarkapplyEqualizerOption1')" class="applyButton"></a>
                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img>
 
               </form>
-
+              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyEqualizerOption1">
             </div><!--end of ColorPickerdiv div-->
           </div> <!-- end of Level 2 Conetent Option 1-->
 
@@ -3599,10 +3640,11 @@
             <h2 class="menuHeader-Level-2">option 2</h2>
             <div class="ColorPickerdiv">
               <form class="" action="index.html" method="post">
-                <a href="#" onclick="commandNoOptions('LDP', '02','2','')" class="applyButton"></a>
+                <a href="#" onclick="commandNoOptionsEqualizer('02','2','checkmarkapplyEqualizerOption2')" class="applyButton"></a>
                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img>
 
               </form>
+              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyEqualizerOption2">
 
             </div><!--end of ColorPickerdiv div-->
           </div> <!-- end of Level 2 Conetent Option 1-->
@@ -3611,10 +3653,11 @@
             <h2 class="menuHeader-Level-2">option 3</h2>
             <div class="ColorPickerdiv">
               <form class="" action="index.html" method="post">
-                <a href="#" onclick="commandNoOptions('LDP', '02','3','')" class="applyButton"></a>
+                <a href="#" onclick="commandNoOptionsEqualizer('02','3','checkmarkapplyEqualizerOption3')" class="applyButton"></a>
                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img>
 
               </form>
+              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyEqualizerOption3">
 
             </div><!--end of ColorPickerdiv div-->
           </div> <!-- end of Level 2 Conetent Option 1-->
@@ -3623,10 +3666,11 @@
             <h2 class="menuHeader-Level-2">option 4</h2>
             <div class="ColorPickerdiv">
               <form class="" action="index.html" method="post">
-                <a href="#" onclick="commandNoOptions('LDP', '02','4','')" class="applyButton"></a>
+                <a href="#" onclick="commandNoOptionsEqualizer('02','4','checkmarkapplyEqualizerOption4')" class="applyButton"></a>
                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img>
 
               </form>
+              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyEqualizerOption4">
 
             </div><!--end of ColorPickerdiv div-->
           </div> <!-- end of Level 2 Conetent Option 1-->
