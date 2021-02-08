@@ -2140,6 +2140,50 @@
 
       <div class="menu-Level-1-Content" id="PulseBeat">
         <h1 class="menuHeader-Level-1">Pulse Beat</h1>
+        <img
+            class="r2menupictureLDP1"
+            src="Images/Body/LDPBlue.png"
+            alt="picture"
+            name="stripSelectorPulseBeat"
+            onclick=changeImageLDPPulseBeat()
+            id="LDPPulseBeat"
+          />
+
+        <img
+          class="r2menupictureCoin"
+          src="Images/Body/CoinSLotsBlue.png"
+          alt="picture"
+          name="stripSelectorPulseBeat"
+          onclick=changeImageCoinPulseBeat()
+          id="CoinPulseBeat"
+        />
+
+        <img
+            class="r2menupictureMaint"
+            src="Images/Body/SkirtBlue.png"
+            alt="picture"
+            name="stripSelectorPulseBeat"
+            onclick=changeImageMaintPulseBeat()
+            id="MaintPulseBeat"
+          />
+
+        <img
+            class="r2menupictureDataPanelVerticalBars"
+            src="Images/Body/DataPanelVerticalBlue.png"
+            alt="picture"
+            name="stripSelectorPulseBeat"
+            onclick=changeImageVerticalBarsPulseBeat()
+            id="VerticalBarstPulseBeat"
+          />
+
+
+          <h3 class="selectAll" onclick=selectALLStripsPulseBeat()> A </h3>
+          <h3 class="selectNone" onclick=selectNoneStripsPulseBeat()> N </h3>
+          <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallPulseBeat">
+          <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknonePulseBeat">
+
+
+
         <div class="menu-Level-2">
 
             <div class="menu-Level-2-Links " >
@@ -2177,9 +2221,10 @@
                   value="3"
                   min="0"
                   max="9"
-                /><a href="#" onclick="commandOneColorAndSpeed('LDP','16','PulseBeat123Slider', 'PulseBeat123ColorChoiceColorSelect')" class="applyButton"></a>
+                /><a href="#" onclick="commandOneColorAndSpeedPulseBeat('16','PulseBeat123Slider', 'PulseBeat123ColorChoiceColorSelect', 'checkmarkapplyPulseBeat')" class="applyButton"></a>
                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff()"  class="applyButtonoff"></img>
               </form>
+              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyPulseBeat">
             </div><!--end of ColorPickerdiv div-->
           </div> <!-- end of Level 2 Conetent Pule Beat-->
 

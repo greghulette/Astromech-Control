@@ -4257,6 +4257,281 @@ function changeImageRearHPBouncing() {
             };
 
 
+    //PulseBeat stuff
+    var checkedItemsPulseBeat = new Array();
+    var imgArrayPulseBeat = [];
+
+    function ldptogglePulseBeat() {
+      let tmp = document.querySelector('#LDPPulseBeat');
+      tmp.classList.toggle('active');
+      if (tmp.classList.contains('active')) {
+      }
+
+      getCheckedElementPulseBeat();
+    };
+
+    function cointogglePulseBeat() {
+      let tmp = document.querySelector('#CoinPulseBeat');
+      tmp.classList.toggle('active');
+      if (tmp.classList.contains('active')) {
+      }
+
+      getCheckedElementPulseBeat();
+    };
+
+    function mainttogglePulseBeat() {
+     let tmp = document.querySelector('#MaintPulseBeat');
+     tmp.classList.toggle('active');
+     if (tmp.classList.contains('active')) {
+     }
+      getCheckedElementPulseBeat()
+    };
+
+    function verticaltogglePulseBeat() {
+     let tmp = document.querySelector('#VerticalBarstPulseBeat');
+     tmp.classList.toggle('active');
+     if (tmp.classList.contains('active')) {
+     }
+      getCheckedElementPulseBeat()
+    };
+
+    function frontHPtogglePulseBeat() {
+     let tmp = document.querySelector('#FrontHPPulseBeat');
+     tmp.classList.toggle('active');
+     if (tmp.classList.contains('active')) {
+     }
+      getCheckedElementPulseBeat()
+    };
+
+    function topHPtogglePulseBeat() {
+      let tmp = document.querySelector('#TopHPPulseBeat');
+     tmp.classList.toggle('active');
+     if (tmp.classList.contains('active')) {
+     }
+      getCheckedElementPulseBeat()
+    };
+    function rearHPtogglePulseBeat() {
+       let tmp = document.querySelector('#RearHPPulseBeat');
+       tmp.classList.toggle('active');
+       if (tmp.classList.contains('active')) {
+       }
+        getCheckedElementPulseBeat()
+    };
+
+    function getCheckedElementPulseBeat() {
+      var imgArrayPulseBeat = document.getElementsByName('stripSelectorPulseBeat');
+      checkedItemsPulseBeat.length = 0;
+      for (var i = 0; i < imgArrayPulseBeat.length; i++) {
+        var tmp = imgArrayPulseBeat[i].classList.toString();
+        if (tmp.indexOf('active') != -1) {
+          checkedItemsPulseBeat.push(imgArrayPulseBeat[i].id.toString());
+        }
+
+        }
+      };
+
+
+     function selectALLStripsPulseBeat(){
+       document.getElementById("LDPPulseBeat").src = "./Images/Body/LDPGreen.png";
+       document.getElementById("CoinPulseBeat").src = "Images/Body/CoinSlotsGreen.png";
+       document.getElementById("MaintPulseBeat").src = "Images/Body/SkirtGreen.png";
+       document.getElementById("VerticalBarstPulseBeat").src = "Images/Body/DataPanelVerticalGreen.png";
+       // document.getElementById("FrontHPPulseBeat").src = "Images/Dome/FrontHPGreen.png";
+       // document.getElementById("TopHPPulseBeat").src = "Images/Dome/TopHPGreen.png";
+       // document.getElementById("RearHPPulseBeat").src = "Images/Dome/RearHPGreen.png";
+       document.getElementById("checkmarkallPulseBeat").src = "Images/checkmark.png";
+       setTimeout('document.getElementById("checkmarkallPulseBeat").src = "Images/blankcheckmark.png"', 2000);
+
+      let ldptemp = document.querySelector('#LDPPulseBeat');
+      ldptemp.classList.add('active');
+      let cointemp = document.querySelector('#CoinPulseBeat');
+      cointemp.classList.add('active');
+      let mainttemp = document.querySelector('#MaintPulseBeat');
+      mainttemp.classList.add('active');
+      let vutemp = document.querySelector('#VerticalBarstPulseBeat');
+      vutemp.classList.add('active');
+      // let frontHPtemp = document.querySelector('#FrontHPPulseBeat');
+      // frontHPtemp.classList.add('active');
+      // let topHPtemp = document.querySelector('#TopHPPulseBeat');
+      // topHPtemp.classList.add('active');
+      // let rearHPtemp = document.querySelector('#RearHPPulseBeat');
+      // rearHPtemp.classList.add('active');
+
+      getCheckedElementPulseBeat()
+     }
+
+
+     function selectNoneStripsPulseBeat(){
+       document.getElementById("LDPPulseBeat").src = "./Images/Body/LDPBlue.png";
+       document.getElementById("CoinPulseBeat").src = "Images/Body/CoinSlotsBlue.png";
+       document.getElementById("MaintPulseBeat").src = "Images/Body/SkirtBlue.png";
+       document.getElementById("VerticalBarstPulseBeat").src = "Images/Body/DataPanelVerticalBlue.png";
+       //  document.getElementById("FrontHPPulseBeat").src = "Images/Dome/FrontHPBlue.png";
+       //  document.getElementById("TopHPPulseBeat").src = "Images/Dome/TopHPBlue.png";
+       // document.getElementById("RearHPPulseBeat").src = "Images/Dome/RearHPBlue.png";
+       document.getElementById("checkmarknonePulseBeat").src = "Images/checkmark.png";
+       setTimeout('document.getElementById("checkmarknonePulseBeat").src = "Images/blankcheckmark.png"', 2000);
+
+
+       let ldptemp = document.querySelector('#LDPPulseBeat');
+       ldptemp.classList.remove('active');
+       let cointemp = document.querySelector('#CoinPulseBeat');
+       cointemp.classList.remove('active');
+       let mainttemp = document.querySelector('#MaintPulseBeat');
+       mainttemp.classList.remove('active');
+       let vutemp = document.querySelector('#VerticalBarstPulseBeat');
+       vutemp.classList.remove('active');
+       // let frontHPtemp = document.querySelector('#FrontHPPulseBeat');
+       // frontHPtemp.classList.remove('active');
+       // let topHPtemp = document.querySelector('#TopHPPulseBeat');
+       // topHPtemp.classList.remove('active');
+       // let rearHPtemp = document.querySelector('#RearHPPulseBeat');
+       // rearHPtemp.classList.remove('active');
+
+       getCheckedElementPulseBeat()
+     }
+      function changeImageLDPPulseBeat() {
+
+                    if (document.getElementById("LDPPulseBeat").src.match("LDPBlue.png"))
+                    {
+                        document.getElementById("LDPPulseBeat").src = "./Images/Body/LDPGreen.png";
+                        // console.log("Changed to Green");
+                    } else {
+                        document.getElementById("LDPPulseBeat").src = "Images/Body/LDPBlue.png";
+                        // console.log("Change to Blue");
+                    }
+                    ldptogglePulseBeat()
+                };
+
+    function changeImageCoinPulseBeat() {
+
+                  if (document.getElementById("CoinPulseBeat").src.match("CoinSLotsBlue.png"))
+                  {
+                      document.getElementById("CoinPulseBeat").src = "Images/Body/CoinSlotsGreen.png";
+                      // console.log("Changed to Green");
+                  } else {
+                      document.getElementById("CoinPulseBeat").src = "Images/Body/CoinSLotsBlue.png";
+                      // console.log("Change to Blue");
+                  }
+                  cointogglePulseBeat()
+              };
+    function changeImageMaintPulseBeat() {
+
+              if (document.getElementById("MaintPulseBeat").src.match("SkirtBlue.png"))
+              {
+                  document.getElementById("MaintPulseBeat").src = "Images/Body/SkirtGreen.png";
+                  // console.log("Changed to Green");
+              } else {
+                  document.getElementById("MaintPulseBeat").src = "Images/Body/SkirtBlue.png";
+                  // console.log("Change to Blue");
+              }
+              mainttogglePulseBeat()
+          };
+    function changeImageVerticalBarsPulseBeat() {
+
+            if (document.getElementById("VerticalBarstPulseBeat").src.match("DataPanelVerticalBlue.png"))
+            {
+                document.getElementById("VerticalBarstPulseBeat").src = "Images/Body/DataPanelVerticalGreen.png";
+                // console.log("Changed to Green");
+            } else {
+                document.getElementById("VerticalBarstPulseBeat").src = "Images/Body/DataPanelVerticalBlue.png";
+                // console.log("Change to Blue");
+            }
+            verticaltogglePulseBeat()
+        };
+    function changeImageFrontHPPulseBeat() {
+
+              if (document.getElementById("FrontHPPulseBeat").src.match("FrontHPBlue.png"))
+              {
+                  document.getElementById("FrontHPPulseBeat").src = "Images/Dome/FrontHPGreen.png";
+                  // console.log("Changed to Green");
+              } else {
+                  document.getElementById("FrontHPPulseBeat").src = "Images/Dome/FrontHPBlue.png";
+                  // console.log("Change to Blue");
+              }
+              frontHPtogglePulseBeat()
+          };
+      function changeImageTopHPPulseBeat() {
+
+              if (document.getElementById("TopHPPulseBeat").src.match("TopHPBlue.png"))
+              {
+                  document.getElementById("TopHPPulseBeat").src = "Images/Dome/TopHPGreen.png";
+                  // console.log("Changed to Green");
+              } else {
+                  document.getElementById("TopHPPulseBeat").src = "Images/Dome/TopHPBlue.png";
+                  // console.log("Change to Blue");
+              }
+              topHPtogglePulseBeat()
+          };
+    function changeImageRearHPPulseBeat() {
+
+              if (document.getElementById("RearHPPulseBeat").src.match("RearHPBlue.png"))
+              {
+                  document.getElementById("RearHPPulseBeat").src = "Images/Dome/RearHPGreen.png";
+                  // console.log("Changed to Green");
+              } else {
+                  document.getElementById("RearHPPulseBeat").src = "Images/Dome/RearHPBlue.png";
+                  // console.log("Change to Blue");
+              }
+              rearHPtogglePulseBeat()
+          };
+
+    function commandOneColorAndSpeedPulseBeat(y, t, z, u) {
+      let sliderValue = getSliderValue(t);
+      let colorValues1 = getcolor1(z);
+      document.getElementById(u).src = "Images/checkmark.png";
+      setTimeout(function(){  document.getElementById(u).src = "Images/blankcheckmark.png";}, 2000)
+
+      for (var i = 0; i < checkedItemsPulseBeat.length; i++) {
+        if (checkedItemsPulseBeat[i] === "LDPPulseBeat") {
+          // console.log("L selected");
+          var ldpcommandstring = "L" + y + sliderValue + colorValues1;
+          console.log(ldpcommandstring);
+        };
+        if (checkedItemsPulseBeat[i] === "CoinPulseBeat") {
+          // console.log("C selected");
+          var coincommandstring = "C"+ y + sliderValue + colorValues1;
+          console.log(coincommandstring);
+        };
+        if (checkedItemsPulseBeat[i] === "VerticalBarstPulseBeat") {
+          // console.log("V selected");
+          var vucommandstring = "V" + y + sliderValue + colorValues1;
+          console.log(vucommandstring);
+        };
+        if (checkedItemsPulseBeat[i] === "MaintPulseBeat") {
+          // console.log("M selected");
+          var mcommandstring = 'M' + y + sliderValue + colorValues1;
+          console.log(mcommandstring);
+        };
+        // if (checkedItemsPulseBeat[i] === "FrontHPPulseBeat") {
+        //   // console.log("M selected");
+        //   var hpfcommandstring = "F"+ y + colorValues1 + sliderValue;
+        //   console.log(hpfcommandstring);
+        // };
+        // if (checkedItemsPulseBeat[i] === "TopHPPulseBeat") {
+        //   // console.log("M selected");
+        //   var hptcommandstring = "T"+ y + colorValues1 + sliderValue;
+        //   console.log(hptcommandstring);
+        // };
+        // if (checkedItemsPulseBeat[i] === "RearHPPulseBeat") {
+        //   // console.log("M selected");
+        //   var hprcommandstring = "R"+ y + colorValues1 + sliderValue;
+        //   console.log(hprcommandstring);
+        // };
+      };
+
+
+      socket.emit('command', {
+        ldpcommandstring: ldpcommandstring,
+        coincommandstring: coincommandstring,
+        vucommandstring: vucommandstring,
+        mcommandstring: mcommandstring,
+        // hpfcommandstring: hpfcommandstring,
+        // hptcommandstring: hptcommandstring,
+        // hprcommandstring: hprcommandstring
+      });
+      };
+
 
 
 //Uses this section to determine which led strips to use
