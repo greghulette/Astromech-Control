@@ -3203,6 +3203,47 @@
 
       <div class="menu-Level-1-Content" id="RLD">
         <h1 class="menuHeader-Level-1">Rear Logic Display</h1>
+        <img
+            class="r2menupictureLDP1"
+            src="Images/Body/LDPBlue.png"
+            alt="picture"
+            name="stripSelectorRLD"
+            onclick=changeImageLDPRLD()
+            id="LDPRLD"
+          />
+
+        <img
+          class="r2menupictureCoin"
+          src="Images/Body/CoinSLotsBlue.png"
+          alt="picture"
+          name="stripSelectorRLD"
+          onclick=changeImageCoinRLD()
+          id="CoinRLD"
+        />
+
+        <img
+            class="r2menupictureMaint"
+            src="Images/Body/SkirtBlue.png"
+            alt="picture"
+            name="stripSelectorRLD"
+            onclick=changeImageMaintRLD()
+            id="MaintRLD"
+          />
+
+        <img
+            class="r2menupictureDataPanelVerticalBars"
+            src="Images/Body/DataPanelVerticalBlue.png"
+            alt="picture"
+            name="stripSelectorRLD"
+            onclick=changeImageVerticalBarsRLD()
+            id="VerticalBarstRLD"
+          />
+
+          <h3 class="selectAll" onclick=selectALLStripsRLD()> A </h3>
+          <h3 class="selectNone" onclick=selectNoneStripsRLD()> N </h3>
+          <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallRLD">
+          <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneRLD">
+
         <div class="menu-Level-2">
 
             <div class="menu-Level-2-Links " >
@@ -3217,9 +3258,10 @@
           <div class="menu-Level-2-Content active" id="RLD1">
             <h2 class="menuHeader-Level-2"></h2>
             <div class="ColorPickerdiv">
-              <a href="#" onclick="commandNoOptions('LDP', '71','5','')" class="applyButton"></a>
+              <a href="#" onclick="commandNoOptionsRLD('71','5','checkmarkapplyRLD')" class="applyButton"></a>
                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
               </form>
+              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyRLD">
             </div><!--end of ColorPickerdiv div-->
           </div> <!-- end of Level 2 Conetent FLD-->
 
