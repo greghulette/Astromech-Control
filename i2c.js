@@ -5,8 +5,8 @@ var bodyServoI2C = 0x27;
 var domeServoLEDI2C = 0x0c;
 var domeHPI2C = 0x19;
 var bodyStealhI2C = 0x09;
-var rSeriesLogic = 0x22;
-var psiPro = 0x23;
+var rSeriesLogicI2C = 0x22;
+var psiProI2C = 0x23;
 var i2cdest;
 var stealth;
 var bodyleds;
@@ -102,7 +102,12 @@ function i2cTextBoxCommandSend(i2ctextcommand, device) {
             i2cdest = bodyServoI2C;
           } else if (device == 'ST') {
             i2cdest = bodyStealhI2C;
-          } else {
+          } else if (device == 'RS') {
+            i2cdest = rSeriesLogicI2C;
+          } else if (device == 'PS') {
+            i2cdest = psiProI2C;
+          }
+          else {
             i2cdest = 0x2;
           }
           var i2ccommandtext = Buffer.from(i2ctextcommand);

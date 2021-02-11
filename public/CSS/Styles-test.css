@@ -678,6 +678,16 @@ shadow: 2px, 4px 15px blue;
 .r2menupictureDPServo.active{
 }
 
+.r2menupictureLeftLargeDoorServo {
+  width: 39px;
+  position: absolute;
+  left: -412px;
+  top: 540px;
+}
+
+.r2menupictureLeftLargeDoorServo.active{
+}
+
 .r2menupictureRightLargeDoorServo {
   width: 39px;
   position: absolute;
@@ -717,6 +727,17 @@ shadow: 2px, 4px 15px blue;
 }
 
 .r2menupictureTopUtilityArm.active{
+}
+
+.r2menupictureDoor1Servo {
+  width: 41px;
+  position: absolute;
+  left: -158px;
+  top: 412px;
+  transform: rotate(-34deg);
+}
+
+.r2menupictureDoor1Servo.active{
 }
 
 .selectAll {
