@@ -5,7 +5,7 @@ var bodyServoI2C = 0x27;
 var domeServoLEDI2C = 0x0c;
 var domeHPI2C = 0x19;
 var bodyStealhI2C = 0x09;
-var rSeriesLogicI2C = 0x19;
+var rSeriesLogicI2C = 0x15;
 var psiProI2C = 0x23;
 var i2cdest;
 var stealth;
