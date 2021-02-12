@@ -108,7 +108,7 @@ function i2cTextBoxCommandSend(i2ctextcommand, device) {
             i2cdest = psiProI2C;
           }
           else {
-            i2cdest = 0x2;
+            i2cdest = 0x09;
           }
           var i2ccommandtext = Buffer.from(i2ctextcommand);
           console.log('Command Recieved: ' + i2ccommandtext);
