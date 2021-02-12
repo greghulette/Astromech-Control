@@ -9101,6 +9101,7 @@ function geti2CDevice(g) {
 
   var i2cdevice1Value = (i2cdevice1.options[i2cdevice1.selectedIndex].value);
   // alert(colorValue);
+  console.log(i2cdevice1Value);
   return i2cdevice1Value;
 };
 
