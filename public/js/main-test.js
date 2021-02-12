@@ -9541,7 +9541,7 @@ function sendi2CCommand(b, x) {
   let i2Ccommand = document.getElementById(x).value;
   let i2CcommandUpper = i2Ccommand.toUpperCase();
     // let i2CcommandUpper = i2Ccommand.toUpperCase();
-  let i2cDevice = b;
+  let i2cDevice = geti2CDevice(b);
    // console.log(commandUpper);
   socket.emit('command', {
     i2Ccommandstring: i2Ccommand,
