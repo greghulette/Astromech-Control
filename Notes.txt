@@ -14,3 +14,16 @@
 5. Setup auto sounds in Settings
 
 6. Zig Zag and ZigZig2 freezes the LDP strips
+
+
+zenity --question --text "Which Interface would you like?" --ok-label "Dev" --cancel-label "Droid"
+if [ "$?" -eq 1 ]
+ then
+	echo Droid Selected
+	chromium-browser --start-fullscreen http://astromech.local:5000/public/index-test.html
+
+ else
+	echo Development Enviroment Selected
+	chromium-browser --start-fullscreen http://10.0.0.15:3000/public/index-test.html
+
+fi

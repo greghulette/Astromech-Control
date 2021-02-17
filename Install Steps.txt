@@ -45,7 +45,7 @@ This is a high level install instructions.
   @pcmanfm --desktop --profile LXDE-pi
   @lxterminal --geometry=30x20%s --command "/home/pi/Astromech-Control/start.sh"
   @xscreensaver SHAPE_REPRESENTATION_RELATIONSHIP
-  chromium-browser --start-fullscreen http://astromech.local:5000
+  chromium-browser --start-fullscreen http://astromech.local/index-test.html:5000
 
 
   create start.sh in Astromech folder
