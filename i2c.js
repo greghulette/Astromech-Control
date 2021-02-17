@@ -112,7 +112,7 @@ function i2cTextBoxCommandSend(i2ctextcommand, device) {
           }
 
           var i2ccommandtext = Buffer.from(i2ctextcommand);
-          i2ccommandtext = i2ccommandtext + "\r"
+
           console.log('Command Recieved: ' + i2ccommandtext);
           i2c1.i2cWrite(i2cdest, i2ccommandtext.length, i2ccommandtext, function (err) {
             if (err) {
