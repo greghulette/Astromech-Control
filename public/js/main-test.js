@@ -1,4 +1,30 @@
+var dstatus = true;
+function openAllDoorsMS(){
+
+
+  console.log(dscommandstring);
+  if (dstatus == true;){
+      var dscommandstring = "d03"
+      dstatus = false;
+  socket.emit('command', {
+    doorservocommandstring: dscommandstring;
+  });
+};
+  if (dstatus == false;){
+      var dscommandstring = "d04"
+      dstatus = true;
+  socket.emit('command', {
+    doorservocommandstring: dscommandstring,
+
+  });
+};
+};
+
+
 //KnightRider stuff
+
+
+
 var checkedItemsKnightRider = new Array();
 var imgArrayKnightRider = [];
 
@@ -221,27 +247,7 @@ function changeImageVerticalBarsKnightRider() {
   //   document.getElementById(u).src = "Images/blankcheckmark.png";
   //
   // }
-var dstatus = true;
-function openAllDoorsMS(){
 
-
-  console.log(dscommandstring);
-  if (dstatus == true;){
-      var dscommandstring = "d03"
-      dstatus = false;
-  socket.emit('command', {
-    doorservocommandstring: dscommandstring;
-  });
-};
-  if (dstatus == false;){
-      var dscommandstring = "d04"
-      dstatus = true;
-  socket.emit('command', {
-    doorservocommandstring: dscommandstring,
-
-  });
-};
-};
 
 function commandNoOptionsKnightRider( y, t, u) {
 
