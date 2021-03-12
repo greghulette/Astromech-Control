@@ -15,7 +15,7 @@ var bodyservos;
 var hp;
 var rseries;
 var psi;
-function i2CSend(ldp, coin, vu, maint, textcommand, dp, cbi, i2ccommand, i2cdevice, hpFront, hpTop, hpRear) {
+function i2CSend(ldp, coin, vu, maint, textcommand, dp, cbi, i2ccommand, i2cdevice, hpFront, hpTop, hpRear, ds) {
   scan(); //used to check if the i2c destination is availabe.  If available the var is "true".  WIthout this check, the server crashes when it tries to send a command to an i2c device that isn't online.
 if (bodyleds == true) {     //used to check if the i2c destination is availabe
   //put the commands for the Body LED Controller here
@@ -37,6 +37,8 @@ if (hp == true){
 
 if (dome == true){
 //put commands for the Dome Servo and Lens Controller here
+sleep(200).then(() => { i2CCommandSend(ds, domeServoLEDI2C); });
+
 }
 if (bodyservos == true){
   //put commands for the Body Servos Controller here

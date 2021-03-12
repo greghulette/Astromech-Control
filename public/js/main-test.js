@@ -222,6 +222,23 @@ function changeImageVerticalBarsKnightRider() {
   //
   // }
 
+function openAllDoorsMS(i){
+
+  var dscommandstring = i
+  socket.emit('command', {
+    doorservocommandstring: dscommandstring,
+    coincommandstring: coincommandstring,
+    vucommandstring: vucommandstring,
+    mcommandstring: mcommandstring,
+    // dcommandstring: dcommandstring,
+    // icommandstring: icommandstring,
+    // hpfcommandstring: hpfcommandstring,
+    // hptcommandstring: hptcommandstring,
+    // hprcommandstring: hprcommandstring
+  });
+
+
+}
 function commandNoOptionsKnightRider( y, t, u) {
 
   document.getElementById(u).src = "Images/checkmark.png";
