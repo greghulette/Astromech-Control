@@ -232,7 +232,7 @@ function openAllDoorsMS(){
   socket.emit('command', {
     doorservocommandstring: dscommandstring;
   });
-}
+};
   if (dstatus == false;){
       var dscommandstring = "d04"
       dstatus = true;
@@ -240,8 +240,8 @@ function openAllDoorsMS(){
     doorservocommandstring: dscommandstring,
 
   });
-}
-}
+};
+};
 
 function commandNoOptionsKnightRider( y, t, u) {
 
