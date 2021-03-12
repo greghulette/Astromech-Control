@@ -230,17 +230,17 @@ function openAllDoorsMS(i){
       var dscommandstring = "d03"
       dstatus = false;
   socket.emit('command', {
-    doorservocommandstring: dscommandstring,
-}
+    doorservocommandstring: dscommandstring;
   });
-  if (dstatus == fa;se;){
+}
+  if (dstatus == false;){
       var dscommandstring = "d04"
       dstatus = true;
   socket.emit('command', {
     doorservocommandstring: dscommandstring,
-  }
-  });
 
+  });
+}
 }
 function commandNoOptionsKnightRider( y, t, u) {
 
