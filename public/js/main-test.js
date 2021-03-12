@@ -2,28 +2,32 @@ var dstatus = true;
 function openAllDoorsMS(){
 
 
-  console.log(dscommandstring);
-  if (dstatus == true;){
-      var dscommandstring = "d03"
-      dstatus = false;
+  if (dstatus === true){
+    console.log(dstatus);
+    console.log("Doors Open");
+      var dscommandstring = "d03";
+        console.log(dscommandstring);
+          dstatus=false;
   socket.emit('command', {
-    doorservocommandstring: dscommandstring;
-  });
-};
-  if (dstatus == false;){
-      var dscommandstring = "d04"
-      dstatus = true;
-  socket.emit('command', {
-    doorservocommandstring: dscommandstring,
+    doorservocommandstring: dscommandstring
+  })
 
-  });
+
+} else {
+    console.log(dstatus);
+    var dscommandstring = "d04";
+    dstatus = true;
+    console.log("Doors Close");
+    console.log(dscommandstring);
+  socket.emit('command', {
+    doorservocommandstring: dscommandstring
+
+  })
 };
 };
 
 
 //KnightRider stuff
-
-
 
 var checkedItemsKnightRider = new Array();
 var imgArrayKnightRider = [];
