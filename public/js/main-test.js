@@ -228,14 +228,7 @@ function openAllDoorsMS(i){
   console.log(dscommandstring);
   socket.emit('command', {
     doorservocommandstring: dscommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring,
-    // dcommandstring: dcommandstring,
-    // icommandstring: icommandstring,
-    // hpfcommandstring: hpfcommandstring,
-    // hptcommandstring: hptcommandstring,
-    // hprcommandstring: hprcommandstring
+
   });
 
 
