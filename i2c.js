@@ -42,6 +42,7 @@ sleep(200).then(() => { i2CCommandSend(ds, domeServoLEDI2C); });
 }
 if (bodyservos == true){
   //put commands for the Body Servos Controller here
+  sleep(200).then(() => { i2CCommandSend(ds, bodyServoI2C); });
 
 }
 if (stealth == true){
