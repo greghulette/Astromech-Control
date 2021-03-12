@@ -222,7 +222,7 @@ function changeImageVerticalBarsKnightRider() {
   //
   // }
 var dstatus = true;
-function openAllDoorsMS(i){
+function openAllDoorsMS(){
 
 
   console.log(dscommandstring);
@@ -242,6 +242,7 @@ function openAllDoorsMS(i){
   });
 }
 }
+
 function commandNoOptionsKnightRider( y, t, u) {
 
   document.getElementById(u).src = "Images/checkmark.png";
