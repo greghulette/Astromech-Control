@@ -225,6 +225,7 @@ function changeImageVerticalBarsKnightRider() {
 function openAllDoorsMS(i){
 
   var dscommandstring = i
+  console.log(dscommandstring);
   socket.emit('command', {
     doorservocommandstring: dscommandstring,
     coincommandstring: coincommandstring,
