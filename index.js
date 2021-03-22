@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 var options =  {
-  etag: true,  
+  etag: true,
   lastModified: true,
   maxAge: 55111512312,
   setHeaders:  (res, path) => {
