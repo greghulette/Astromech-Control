@@ -1,7 +1,7 @@
 {
-  "name": "Express_Tutorial",
+  "name": "express_tutorial",
   "version": "1.0.0",
-  "description": "",
+  "description": "This project is aimed at controlling the LEDs and sounds of my R2D2.  It is available for anyone to use.  Just be aware that this is my first attempt at any real programming and thus the code is probably very inefficient.",
   "main": "index.js",
   "scripts": {
     "Start": "node index",
@@ -28,5 +28,13 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/greghulette/Astromech-Control.git"
+  },
+  "bugs": {
+    "url": "https://github.com/greghulette/Astromech-Control/issues"
+  },
+  "homepage": "https://github.com/greghulette/Astromech-Control#readme"
 }
