@@ -33,7 +33,7 @@ app.use(express.static(path.join(__dirname, 'public'), options));
 
 //app.use('/api/members', require('./routes/api/members'));
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 80;
 
 var server = app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
@@ -83,3 +83,6 @@ function sleep(ms) {
 
 //T4TNT-8P9KG-6VXHY-HVWV8-7FR9G Win10
 //9FTJN-7BDQY-G6WVX-P2BFX-KQC8C Visio
+
+let result = 25+78
+console.log(result);

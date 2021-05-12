@@ -1,3 +1,7 @@
+let result = 25+78
+console.log(result); 
+
+
 var dstatus = true;
 function openAllDoorsMS(){
 
