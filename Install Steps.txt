@@ -16,24 +16,19 @@ This is a high level install instructions.
 
 4. Enable SSH, I2C, SSH Console
 
-5.  I SSH'd into the pi but you can connect a KVM to it if you'd like.
+5. Enable VNC (Remote Desktop Connection)  I did this for programming and ease of file manipulation.  Not needed
 
-6.  clone GitHub repository "https://github.com/greghulette/Astromech-Control.git"
+6.  I SSH'd into the pi but you can connect a KVM to it if you'd like.
 
-7. Install Node.js  //this installs version 14 onto the raspbery pi
-  curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-  sudo apt-get install -y nodejs
+7.  clone GitHub repository "https://github.com/greghulette/Astromech-Control.git"
 
-8. Install dependencies
+8. Install Node.js  //this installs Node.js onto the raspbery pi
+  sudo apt install nodejs
+
+9. Install dependencies
    npm install
 
-9. Enable VNC (Remote Desktop Connection)  I did this for programming and ease of file manipulation.  Not needed
-
-10. Install Geany  ?? What does this do?
-
-11. install Arduino  (Optional)
-
-12. Make node.js run by default when booting
+10. Make node.js run by default when booting
   mkdir ~/.config/lxsession
   cd ~/.config/lxsession
   mkdir/LXDE-pi
@@ -45,7 +40,7 @@ This is a high level install instructions.
   @pcmanfm --desktop --profile LXDE-pi
   @lxterminal --geometry=30x20%s --command "/home/pi/Astromech-Control/start.sh"
   @xscreensaver SHAPE_REPRESENTATION_RELATIONSHIP
-  chromium-browser --start-fullscreen http://astromech.local/index-test.html:5000
+  chromium-browser --start-fullscreen http://astromech.local/index-test.html
 
 
   create start.sh in Astromech folder
@@ -55,69 +50,13 @@ This is a high level install instructions.
   cd /home/pi/Astromech-Control/
   sudo npm run dev
 
-13.Create a Bluetooth Personal Area Network (PAN)
+  Then make the start.sh file executable
+  chmod +x start.sh
 
-  sudo apt-get install bluez-tools
+11. Install I2C
+  npm install I2C
 
-  Create the following files:
-
-  /etc/systemd/network/pan0.netdev
-
-  [NetDev]
-  Name=pan0
-  Kind=bridge
-  /etc/systemd/network/pan0.network
-
-  [Match]
-  Name=pan0
-
-  [Network]
-  Address=172.20.1.1/24
-  DHCPServer=yes
-
-
-  /etc/systemd/system/bt-agent.service
-
-  [Unit]
-  Description=Bluetooth Auth Agent
-
-  [Service]
-  ExecStart=/usr/bin/bt-agent -c NoInputNoOutput
-  Type=simple
-
-  [Install]
-  WantedBy=multi-user.target
-
-
-  /etc/systemd/system/bt-network.service
-
-  [Unit]
-  Description=Bluetooth NEP PAN
-  After=pan0.network
-
-  [Service]
-  ExecStart=/usr/bin/bt-network -s nap pan0
-  Type=simple
-
-  [Install]
-  WantedBy=multi-user.target
-
-
-  Then run
-
-  sudo systemctl enable systemd-networkd
-  sudo systemctl enable bt-agent
-  sudo systemctl enable bt-network
-  sudo systemctl start systemd-networkd
-  sudo systemctl start bt-agent
-  sudo systemctl start bt-network
-
-
-  Finally to pair, run:
-
-  sudo bt-adapter --set Discoverable 1
-
-14. (OPTIONAL) Setup a AFP server on the raspbery pi to allow remote access to the files for development
+12. (OPTIONAL) Setup a AFP server on the raspbery pi to allow remote access to the files for development
     sudo apt install netatalk
 
     sudo /etc/netatalk/afp.config
@@ -132,6 +71,6 @@ This is a high level install instructions.
       Under Global
       guest account = pi
 
-  15. Install I2C
+13. (OPTIONAL) Install Geany - Text editor for the code (Optional)
 
-  npm install I2C
+14. (OPTIONAL) install Arduino  (Optional)
