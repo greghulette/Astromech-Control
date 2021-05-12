@@ -33,7 +33,7 @@ app.use(express.static(path.join(__dirname, 'public'), options));
 
 //app.use('/api/members', require('./routes/api/members'));
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 80;
 
 var server = app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
