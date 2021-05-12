@@ -1,6 +1,5 @@
-let result = 25+78
+let result = 25+78678
 console.log(result); 
-
 
 var dstatus = true;
 function openAllDoorsMS(){

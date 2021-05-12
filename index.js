@@ -5,7 +5,7 @@ const exphbs = require('express-handlebars');
 const socket = require('socket.io');
 const serial = require('./serial');
 var player = require('play-sound')(opts = {});
-var i2c = require('./i2c');
+// var i2c = require('./i2c');
 
 const app = express();
 
@@ -62,7 +62,7 @@ io.on('connection', function (socket) {
     // sleep(500).then(() => { serial(ldp, coin, vu, maint, serialcommand, dp, cbi); });
 
     // sleep(500).then(() => { i2c(ldp, coin, vu, maint, serialcommand, dp, cbi); });
-    i2c(ldp, coin, vu, maint, textcommand, dp, cbi, i2ccommand1, i2cdevice1, hpFront, hpTop, hpRear, ds);
+    // i2c(ldp, coin, vu, maint, textcommand, dp, cbi, i2ccommand1, i2cdevice1, hpFront, hpTop, hpRear, ds);
 
     // sleep(500).then(() => { serial(coin); });
 
