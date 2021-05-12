@@ -29,9 +29,9 @@ This is a high level install instructions.
 
 9. Enable VNC (Remote Desktop Connection)  I did this for programming and ease of file manipulation.  Not needed
 
-10. Install Geany
+10. Install Geany  ?? What does this do?
 
-11. install Arduino
+11. install Arduino  (Optional)
 
 12. Make node.js run by default when booting
   mkdir ~/.config/lxsession
@@ -53,7 +53,7 @@ This is a high level install instructions.
 
   type the following:
   cd /home/pi/Astromech-Control/
-  npm run dev
+  sudo npm run dev
 
 13.Create a Bluetooth Personal Area Network (PAN)
 
