@@ -16,7 +16,7 @@ This is a high level install instructions.
 
 4. Enable SSH, I2C, SSH Console
 
-5. Enable VNC (Remote Desktop Connection)  I did this for programming and ease of file manipulation.  Not needed
+5. Enable VNC (Remote Desktop Connection)  I did this for programming and ease of file manipulation.  Not needed.  I use VNCViewer on my Mac to connect.
 
 6.  I SSH'd into the pi but you can connect a KVM to it if you'd like.
 
