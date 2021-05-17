@@ -410,8 +410,8 @@ span.myButton input {
 .domePicture{
   position: absolute;
   height: 400px;
-  left: 00px;
-  top: 0px;
+  left: -430px;
+  top: -40px;
 }
 
 .domeLittleDoor1Target {
@@ -544,8 +544,8 @@ shadow: 2px, 4px 15px blue;
  .r2menupicture {
   width: 350px;
   position: absolute;
-  left: 10px;
-  top: 430px;
+  left: -420px;
+  top: 390px;
 }
 
 .r2menupicture21 {
@@ -661,8 +661,8 @@ shadow: 2px, 4px 15px blue;
 .r2menupictureCBIServo {
   width: 68px;
   position: absolute;
-  left: -366px;
-  top: 638px;
+  left: -356px;
+  top: 518px;
 }
 
 .r2menupictureCBIServo.active{
@@ -671,8 +671,8 @@ shadow: 2px, 4px 15px blue;
 .r2menupictureDPServo {
   width: 71px;
   position: absolute;
-  left: -218px;
-  top: 638px;
+  left: -207px;
+  top: 518px;
 }
 
 .r2menupictureDPServo.active{
@@ -681,8 +681,8 @@ shadow: 2px, 4px 15px blue;
 .r2menupictureLeftLargeDoorServo {
   width: 39px;
   position: absolute;
-  left: -412px;
-  top: 540px;
+  left: -402px;
+  top: 420px;
 }
 
 .r2menupictureLeftLargeDoorServo.active{
@@ -691,8 +691,8 @@ shadow: 2px, 4px 15px blue;
 .r2menupictureRightLargeDoorServo {
   width: 39px;
   position: absolute;
-  left: -142px;
-  top: 540px;
+  left: -129px;
+  top: 420px;
 }
 
 .r2menupictureRightLargeDoorServo.active{
@@ -701,7 +701,7 @@ shadow: 2px, 4px 15px blue;
 .r2menupictureDataPanelLED1 {
   width: 68px;
   position: absolute;
-  left: -439px;
+  left: -339px;
   top: 518px;
   /* box-shadow: 0px, 0px, 3px, 3px, white; */
 }
@@ -712,8 +712,8 @@ shadow: 2px, 4px 15px blue;
 .r2menupictureTopUtilityArm {
   width: 184px;
   position: absolute;
-  left: -352px;
-  top: 549px;
+  left: -340px;
+  top: 429px;
 }
 
 .r2menupictureTopUtilityArm.active{
@@ -721,8 +721,8 @@ shadow: 2px, 4px 15px blue;
 .r2menupictureBottomUtilityArm {
   width: 184px;
   position: absolute;
-  left: -348px;
-  top: 595px;
+  left: -338px;
+  top: 473px;
   transform: rotate(180deg);
 }
 
@@ -732,8 +732,8 @@ shadow: 2px, 4px 15px blue;
 .r2menupictureDoor1Servo {
   width: 41px;
   position: absolute;
-  left: -158px;
-  top: 412px;
+  left: -150px;
+  top: 292px;
   transform: rotate(-34deg);
 }
 

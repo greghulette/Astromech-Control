@@ -24,12 +24,6 @@
     "socket.io": "^2.4.1",
     "uuid": "^8.1.0"
   },
-  "optionalDependencies": {
-    var i2c;
-    try {
-    i2c = require('i2c');
-    } catch { console.log("no i2c access")}
-  },  
   "devDependencies": {
     "nodemon": "^2.0.4"
   },

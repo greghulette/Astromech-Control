@@ -13,6 +13,8 @@ Track IPS elements, readiness data, warrenty, ...)
 
 7. tech data - tm's and full TDP
 
+hello
+
 8, support equipment - specials tools needs, not normal
 
 9. training - not just training material, are LARs trained, are sustainment activities trained, is the depot trained to sustain, is SEC trained?

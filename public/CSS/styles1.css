@@ -60,10 +60,10 @@ span.myButton input {
   left: 5%; */
 }
 .r2menupicture {
-  position: inherit;
+  position: absolute;
   height: 1100px;
-  top: -2%;
-  left: -0%;
+  top: -20px;
+  left: -600px;
 }
 #homeback {
   position: absolute;
