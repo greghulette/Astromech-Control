@@ -29,7 +29,7 @@ function openAllDoorsMS() {
   };
 };
 
-
+j
 //KnightRider stuff
 
 var checkedItemsKnightRider = new Array();
