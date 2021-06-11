@@ -1,4 +1,4 @@
-const i2c = require('i2c-bus');
+// const i2c = require('i2c-bus');
 const fs = require('fs');
 var bodyLEDI2C = 0x26;
 var bodyServoI2C = 0x27;
