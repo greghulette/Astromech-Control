@@ -180,4 +180,4 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 };
 
-module.exports = i2CSend;
+// module.exports = i2CSend;
