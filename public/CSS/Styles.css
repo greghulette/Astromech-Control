@@ -1,8 +1,8 @@
 body {
   background-color: Black;
-  /* background-image: url(..//Images/basic_background.png); */
-  background-size: cover;
-  background-repeat: no-repeat;
+  background-image: url(..//Images/darkbluebackground4.jpg);
+  background-size:cover;
+  /* background-repeat:repeat; */
   background-position: top center;
   font-size: 1.5rem;
   color: lightyellow;
@@ -10,7 +10,19 @@ body {
 
 
 }
-
+.iframe { 
+  position: absolute;
+  left: 200px;
+  top: 50px;
+  width: 700px;
+  height: 900px;
+  border-radius: 5px;
+  border-color: blue;
+  box-shadow: 0px 0px 50px white;
+  
+ transform: rotate(90deg);
+  /* box-shadow: inset 0px, 0px, 25px, 2px, blue; */
+}
 ::-webkit-scrollbar {
   width: 0px;
   background: transparent;
@@ -67,7 +79,11 @@ span.myButton input {
   height: 55px;
 }
 .buttonwidth {
-  width: 150px;
+  width: 165px;
+}
+
+.homebuttonwidth {
+  width: 240px;
 }
 #buttons {
   /* border: 4px solid blue; */
@@ -406,6 +422,8 @@ span.myButton input {
 .domePicture{
   position: absolute;
   height: 400px;
+  left: -430px;
+  top: -40px;
 }
 
 .domeLittleDoor1Target {
@@ -528,19 +546,383 @@ shadow: 2px, 4px 15px blue;
 .r2menu {
   /* border: 4px solid blue; */
   position: absolute;
-  top: 50px;
-  left: 150px;
+  top: 60px;
+  left: 120px;
   width: 300px;
   height: 625px;
   /* top: 5%;
   left: 5%; */
 }
  .r2menupicture {
-  width: 100%
+  width: 350px;
+  position: absolute;
+  left: -420px;
+  top: 390px;
+}
+
+.r2menupicture21 {
+ width: 350px;
+ position: absolute;
+ left: -620px;
+ top: -90px;
+}
+
+.r2menupicture1 {
+ width: 350px;
+ position: absolute;
+ left: -370px;
+ top: -30px;
+}
+.r2menupictureLDP {
+  width: 189px;
+  position: absolute;
+  left: -289px;
+  top: 315px;
+  /* background: url("../Images/Body/LDPBlue.png"); */
+}
+
+.r2menupictureLDP.active{
+
+/* background: url("../Images/Body/LDPGreen.png"); */
+
+}
+
+.r2menupictureLDP1 {
+  width: 190px;
+  height: 20px;
+  position: absolute;
+  left: -616px;
+  top: 405px;
+  /* background: url("../Images/Body/LDPBlue.png"); */
+}
+
+.r2menupictureLDP1.active{
+
+/* background: url("../Images/Body/LDPGreen.png"); */
+
+}
+
+
+.r2menupictureCoin {
+  width: 30px;
+  position: absolute;
+  left: -633px;
+  top: 577px;
+}
+
+.r2menupictureCoin.active{
+}
+.r2menupictureMaint {
+  width: 290px;
+  position: absolute;
+  left: -665px;
+  top: 760px;
+}
+
+.r2menupictureMaint.active{
+}
+.r2menupictureDataPanelVerticalBars {
+  width: 40px;
+  position: absolute;
+  left: -480px;
+  top: 555px;
+}
+
+.r2menupictureDataPanelVerticalBars.active{
+}
+.r2menupictureFrontHP {
+  width: 46px;
+  position: absolute;
+  left: -466px;
+  top: 300px;
+}
+
+.r2menupictureFrontHP.active{
+}
+
+.r2menupictureTopHP {
+  width: 46px;
+  position: absolute;
+  left: -494px;
+  top: 67px;
+}
+
+.r2menupictureTopHP.active{
+}
+
+.r2menupictureRearHP {
+  width: 46px;
+  position: absolute;
+  left: -552px;
+  top: -40px;
+}
+
+.r2menupictureRearHP.active{
+}
+
+.r2menupictureCBI {
+  width: 68px;
+  position: absolute;
+  left: -629px;
+  top: 518px;
+}
+
+.r2menupictureCBI.active{
+}
+
+.r2menupictureCBIServo {
+  width: 68px;
+  position: absolute;
+  left: -356px;
+  top: 518px;
+}
+
+.r2menupictureCBIServo.active{
+}
+
+.r2menupictureDPServo {
+  width: 71px;
+  position: absolute;
+  left: -207px;
+  top: 518px;
+}
+
+.r2menupictureDPServo.active{
+}
+
+.r2menupictureLeftLargeDoorServo {
+  width: 39px;
+  position: absolute;
+  left: -402px;
+  top: 420px;
+}
+
+.r2menupictureLeftLargeDoorServo.active{
+}
+
+.r2menupictureRightLargeDoorServo {
+  width: 39px;
+  position: absolute;
+  left: -129px;
+  top: 420px;
+}
+
+.r2menupictureRightLargeDoorServo.active{
+}
+
+.r2menupictureDataPanelLED1 {
+  width: 68px;
+  position: absolute;
+  left: -339px;
+  top: 518px;
+  /* box-shadow: 0px, 0px, 3px, 3px, white; */
+}
+
+.r2menupictureDataPanelLED1.active{
+}
+
+.r2menupictureTopUtilityArm {
+  width: 184px;
+  position: absolute;
+  left: -340px;
+  top: 429px;
+}
+
+.r2menupictureTopUtilityArm.active{
+}
+.r2menupictureBottomUtilityArm {
+  width: 184px;
+  position: absolute;
+  left: -338px;
+  top: 473px;
+  transform: rotate(180deg);
+}
+
+.r2menupictureTopUtilityArm.active{
+}
+
+.r2menupictureDoor1Servo {
+  width: 41px;
+  position: absolute;
+  left: -150px;
+  top: 292px;
+  transform: rotate(-34deg);
+}
+
+.r2menupictureDoor1Servo.active{
+}
+
+.selectAll {
+  position: absolute;
+  left: -815px;
+  top: 550px;
+  font-size: 35px;
+  text-align: center;
+  border: 5px blue solid;
+  /* padding-left: 15px;
+  padding-right: 15 px;
+  padding-top: 5px;
+  padding-bottom: 5px; */
+  width: 60px;
+  height: 60px;
+}
+
+.selectNone {
+  position: absolute;
+  left: -815px;
+  top: 640px;
+  font-size: 35px;
+  text-align: center;
+  border: 5px blue solid;
+  /* padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px; */
+  width: 60px;
+  height: 60px;
+
+}
+.checkmarkall{
+  position: absolute;
+  top: 575px;
+  left: -745px;
+  height: 60px;
+  width: 60px;
+}
+.UpArrowPicture{
+  position: absolute;
+  top: 10px;
+  left: 100px;
+  height: 80px;
+  width: 80px;
+}
+.DownArrowPicture{
+  position: absolute;
+  top: 190px;
+  left: 100px;
+  height: 80px;
+  width: 80px;
+  /* transform: rotate(180deg); */
+}
+.RightArrowPicture{
+  position: absolute;
+top: 100px;
+left: 190px;
+  height: 80px;
+  width: 80px;
+  /* transform: rotate(90deg); */
+}
+.LeftArrowPicture{
+  position: absolute;
+top: 100px;
+left: 10px;
+  height: 80px;
+  width: 80px;
+  /* transform: rotate(270deg); */
+}
+.CenterArrowPicture{
+  position: absolute;
+top: 100px;
+left: 100px;
+  height: 80px;
+  width: 80px;
+  /* transform: rotate(270deg); */
+}
+.UpperRightArrowPicture{
+  position: absolute;
+  top: 10px;
+  left: 190px;
+  height: 80px;
+  width: 80px;
+  /* transform: rotate(270deg); */
+}
+.LowerLeftArrowPicture{
+  position: absolute;
+  top: 190px;
+  left: 10px;
+  height: 80px;
+  width: 80px;
+  /* transform: rotate(270deg); */
+}
+.UpperLeftArrowPicture{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  height: 80px;
+  width: 80px;
+  /* transform: rotate(270deg); */
+}
+.LowerRightArrowPicture{
+  position: absolute;
+  top: 190px;
+  left: 190px;
+  height: 80px;
+  width: 80px;
+  /* transform: rotate(270deg); */
+}
+.checkmarknone{
+  position: absolute;
+  top: 675px;
+  left: -745px;
+  height: 60px;
+  width: 60px;
+}
+.checkmarkapply{
+  position: absolute;
+  top: 305px;
+  left: 75px;
+  height: 60px;
+  width: 60px;
 }
 .r2menu  .img-wrapper {
   display: inline-block;
   overflow: hidden;
+}
+
+.r2menupicturedome {
+ width: 300px;
+ position: absolute;
+ left: -220px;
+}
+.HPServo{
+  position: absolute;
+  top: 400px;
+  left: 550px;
+  border: 3px solid white;
+  width: 280px;
+  height: 280px;
+}
+.HPServoHeader{
+  position: absolute;
+  top: -105px;
+  left: -15px;
+  width: 350px;
+}
+
+.openclosedoors{
+  position: absolute;
+  top: 400px;
+  left: 150px;
+  border: 3px solid white;
+  height: 150px;
+  width: 330px;
+
+}
+.openclosedoorsheader{
+  position: absolute;
+  top: -105px;
+  left: 10px;
+  width: 400px;
+}
+
+
+.utilityArmsDiv{
+  border: 3px solid white;
+  height: 150px;
+  width: 900px;
+  position: absolute;
+  top: 50px;
+  left: 60px;
 }
  .img-wrapper img {
 -webkit-transition: all .2s ease;
@@ -557,6 +939,34 @@ width: 100%;
   left: 155px;
 }
 
+.openButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+.closeButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 10px;
+  left: 170px;
+}
+.cycleButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 80px;
+  left: 10px;
+}
+.AlternateButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 80px;
+  left: 170px;
+}
 .applyButton{
   background-image: url(..//Images/Buttons/Button-Apply.png);
   background-size: cover;
@@ -569,6 +979,25 @@ width: 100%;
   width: 150px;
 
   opacity: .9;
+}
+
+.applyButtonSettings{
+  background-image: url(..//Images/Buttons/Button-Apply.png);
+  background-size: cover;
+  /* opacity: 1; */
+  /* border: 1px; */
+  position: absolute;
+  top:0px;
+  left: 825px;
+  height: 60px;
+  width: 150px;
+
+  opacity: .9;
+}
+.applyButtonSettings:hover{
+  opacity: 1.0;
+  box-shadow: 0px 0px 15px blue;
+  scale: 1.2;
 }
 .applyButton:hover{
   opacity: 1.0;
@@ -629,6 +1058,16 @@ label[for= ColorPicker]{
   width: 450px;
   font-size: 2rem;
 
+}
+
+.i2CPicker {
+
+  font-size: 1.5rem;
+
+}
+.i2CPickertext {
+  height: 25px;
+  font-size: 1.5rem;
 }
 
 .ColorPicker1 {
@@ -1006,7 +1445,7 @@ label[for= ColorPickertab]{
   left: 0px;
   top: 100px;
   /* border: 1px solid #ccc; */
-  background-color: black;
+  /* background-color: black; */
   width: 85px;
   height: 100%;
 }
@@ -1037,7 +1476,7 @@ label[for= ColorPickertab]{
 
 /* Create an active/current "tab button" class */
 .menu-Level-0 .menu-Level-0-Links button.active {
-  box-shadow: (5px 0px 25px yellow);
+  box-shadow: (25px 0px 145px yellow);
   background-color: #696969;
   display: block;
 }
@@ -1046,7 +1485,7 @@ label[for= ColorPickertab]{
 .menu-Level-0  .menu-Level-0-Content {
   position: absolute;
   display: none;
-  left: 500px;
+  left: 550px;
   top: 0px;
   padding: 5px 12px;
   /* border: 1px solid #ccc; */
@@ -1064,7 +1503,7 @@ label[for= ColorPickertab]{
 
 .menu-Level-0  .menu-Level-0-Content .menu-Level-1{
   width: 220px;
-  height: 400px;
+  height: 700px;
   overflow-y: auto;
   overflow-x: visible;
   padding-left: 37px;
@@ -1089,8 +1528,8 @@ label[for= ColorPickertab]{
    display: inline-block;
    /* left:100px;
    top: 100px; */
-   width: 160px;
-   height: 54px;
+   width: 170px;
+   height: 57px;
    overflow: visible;
    border: none;
    padding-top: 0px;
@@ -1098,14 +1537,14 @@ label[for= ColorPickertab]{
 }
 
 .menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Links button.active{
-   box-shadow: 0px 0px 25px yellow;
+   box-shadow: 0px 0px 15px yellow;
    background-color: yellow;
    border: none;
    outline: none;
   -webkit-transform: scale(1.25);
 }
 .menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Links button.active:hover{
-   box-shadow: 0px 0px 25px yellow;
+   box-shadow: 0px 0px 55px yellow;
    background-color: yellow;
    border: none;
    outline: none;
@@ -1136,16 +1575,17 @@ label[for= ColorPickertab]{
 
 .menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content .menu-Level-2 .menu-Level-2-Links button{
  display: inline-block;
- width: 160px;
+ width: 170px;
  height: 54px;
  overflow: visible;
 border: none;
 padding-top: 0px;
 background-color: black;
+/* padding-left: -25px; */
 }
 
 .menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content .menu-Level-2 .menu-Level-2-Links button.active{
- box-shadow: 0px 0px 25px yellow;
+ box-shadow: 0px 0px 75px yellow;
  background-color: yellow;
  border: none;
  outline: none;
