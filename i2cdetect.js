@@ -3,7 +3,7 @@
 // When run, this program will output the same information as the
 // command 'i2cdetect -y -r 1'
 const fs = require('fs');
-const i2c = require('i2c-bus');
+// const i2c = require('i2c-bus');
 const i2c1 = i2c.openSync(1);
 
 const i2devices = [];
