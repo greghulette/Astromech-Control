@@ -1,0 +1,38 @@
+{
+  "name": "express_tutorial",
+  "version": "1.0.0",
+  "description": "This project is aimed at controlling the LEDs and sounds of my R2D2.  It is available for anyone to use.  Just be aware that this is my first attempt at any real programming and thus the code is probably very inefficient.",
+  "main": "index.js",
+  "scripts": {
+    "Start": "node index",
+    "dev": "nodemon index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "arduino": "^0.2.3",
+    "express": "^4.17.1",
+    "i2c-bus": "^5.2.2",
+    "johnny-five": "^2.0.0",
+    "moment": "^2.27.0",
+    "play-sound": "^1.1.3",
+    "serial-io": "^1.2.0",
+    "serialport": "^9.0.0",
+    "socket-io": "^1.0.0",
+    "socket.io": "^2.4.1",
+    "uuid": "^8.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/greghulette/Astromech-Control.git"
+  },
+  "bugs": {
+    "url": "https://github.com/greghulette/Astromech-Control/issues"
+  },
+  "homepage": "https://github.com/greghulette/Astromech-Control#readme"
+}
