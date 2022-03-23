@@ -557,7 +557,14 @@
                     alt="button for Data Panel"
                   /></button>
               </div>
-
+            <div class="menu-Level-1-Links">
+              <button class="" rel="RSeriesLogic"><img
+                  class="buttonwidth"
+                  id ="transparent"
+                  src="Images/Buttons/Button-R-Series-GIMP.png"
+                  alt="button for R-Series"
+                /></button>
+            </div>
 
 
 
@@ -672,7 +679,7 @@
                   <br />
                   <br />
                   <a href="#" onclick="commandSingleColorKnightRider('04','1','knightRiderColorChoiceColorSelect', 'checkmarkapplyKnightRiderColorSelect')" class="applyButton"></a>
-                  <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
+                  <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOffKnightRider('','','checkmarkapplyKnightRiderColorSelect')" class="applyButtonoff"></img>
                 </form>
                 <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyKnightRiderColorSelect">
               </div>
@@ -686,7 +693,7 @@
                       <br />
                       <br />
                       <a href="#" onclick="commandNoOptionsKnightRider('04','3','checkmarkapplyKnightRiderRedBlue')" class="applyButton"></a>
-                      <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
+                      <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOffKnightRider('','','checkmarkapplyKnightRiderColorSelect')" class="applyButtonoff"></img>
                     </form>
                     <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyKnightRiderRedBlue">
                 </div>
@@ -698,7 +705,7 @@
                      <br />
                      <br />
                      <a href="#" onclick="commandNoOptionsKnightRider('04','4','checkmarkapplyKnightRiderYellowGreen')" class="applyButton"></a>
-                     <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
+                     <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOffKnightRider('','','checkmarkapplyKnightRiderColorSelect')" class="applyButtonoff"></img>
                    </form>
                    <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyKnightRiderYellowGreen">
                  </div>
@@ -710,7 +717,7 @@
                       <br />
                       <br />
                       <a href="#" onclick="commandNoOptionsKnightRider('04','5','checkmarkapplyKnightRiderColorWheel')" class="applyButton"></a>
-                      <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
+                      <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOffKnightRider('','','checkmarkapplyKnightRiderColorSelect')" class="applyButtonoff"></img>
                     </form>
                     <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyKnightRiderColorWheel">
                   </div>
@@ -722,7 +729,7 @@
                        <br />
                        <br />
                        <a href="#" onclick="commandNoOptionsKnightRider('04','2','checkmarkapplyKnightRiderColorChanging')" class="applyButton"></a>
-                       <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
+                       <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOffKnightRider('','','checkmarkapplyKnightRiderColorSelect')" class="applyButtonoff"></img>
                      </form>
                      <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyKnightRiderColorChanging">
                    </div>
@@ -921,8 +928,8 @@
                       <form class="" action="#" method="post">
                         <label for="ColorPicker2">Second color:</label>
                           <select class="ColorPicker2" id="SecondColorSelectionBox" name="ColorPicker2">
-                          <option value="5">Blue</option>
                           <option value="1">Red</option>
+                          <option value="5">Blue</option>
                           <option value="2">Yellow</option>
                           <option value="3">Green</option>
                           <option value="4">Cyan</option>
@@ -1149,8 +1156,9 @@
                           <form class="" action="#" method="post">
                             <label for="ColorPicker2Bounce">Dot color:</label>
                               <select class="ColorPicker2Bounce" id="BounceSecondColorSelectionBox" name="ColorPicker2">
-                              <option value="5">Blue</option>
+                              
                               <option value="1">Red</option>
+                              <option value="5">Blue</option>
                               <option value="2">Yellow</option>
                               <option value="3">Green</option>
                               <option value="4">Cyan</option>
@@ -1209,8 +1217,6 @@
                         onclick=changeImageVerticalBarsDualBounce()
                         id="VerticalBarstDualBounce"
                       />
-
-
                       <h3 class="selectAll" onclick=selectALLStripsDualBounce()> A </h3>
                       <h3 class="selectNone" onclick=selectNoneStripsDualBounce()> N </h3>
                       <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallDualBounce">
@@ -1445,8 +1451,8 @@
                                 <form class="" action="#" method="post">
                                   <label for="ColorPicker2">Second Color:</label>
                                     <select class="ColorPicker2Bounce" id="BackandForthSecondColorSelectionBox" name="ColorPicker2">
-                                    <option value="5">Blue</option>
                                     <option value="1">Red</option>
+                                    <option value="5">Blue</option>
                                     <option value="2">Yellow</option>
                                     <option value="3">Green</option>
                                     <option value="4">Cyan</option>
@@ -1484,8 +1490,8 @@
                               <form class="" action="#" method="post">
                                 <label for="ColorPicker2">Second Color:</label>
                                   <select class="ColorPicker2Bounce" id="InandOut2SecondColorSelectionBox" name="ColorPicker2">
-                                  <option value="5">Blue</option>
                                   <option value="1">Red</option>
+                                  <option value="5">Blue</option>
                                   <option value="2">Yellow</option>
                                   <option value="3">Green</option>
                                   <option value="4">Cyan</option>
@@ -1591,14 +1597,15 @@
                           <form class="" action="index.html" method="post">
                             <label for="ColorPicker1">First color:</label>
                               <select class="ColorPicker1" id="ColorChoiceRandomFirstColorSelctionBox" name="ColorPicker1">
-                              <option value="5">Blue</option>
+                              <option value="8">White</option>
                               <option value="1">Red</option>
+                              <option value="5">Blue</option>
                               <option value="2">Yellow</option>
                               <option value="3">Green</option>
                               <option value="4">Cyan</option>
                               <option value="6">Magenta</option>
                               <option value="7">Orange</option>
-                              <option value="8">White</option>
+                            
                               <option value="0">Off</option>
                             </select>
                             <br />
@@ -1606,8 +1613,8 @@
                             <form class="" action="#" method="post">
                               <label for="ColorPicker2">Second color:</label>
                                 <select class="ColorPicker2" id="ColorChoiceRandomSecondColorSelectionBox" name="ColorPicker2">
-                                <option value="5">Blue</option>
                                 <option value="1">Red</option>
+                                <option value="5">Blue</option>
                                 <option value="2">Yellow</option>
                                 <option value="3">Green</option>
                                 <option value="4">Cyan</option>
@@ -1740,8 +1747,8 @@
                           <form class="" action="#" method="post">
                             <label for="ColorPicker2">Second color:</label>
                               <select class="ColorPicker2" id="ColorChoiceRandom2SecondColorSelectionBox" name="ColorPicker2">
-                              <option value="5">Blue</option>
                               <option value="1">Red</option>
+                              <option value="5">Blue</option>
                               <option value="2">Yellow</option>
                               <option value="3">Green</option>
                               <option value="4">Cyan</option>
@@ -2017,8 +2024,8 @@
                   <form class="" action="#" method="post">
                     <label for="ColorPicker2">Second color:</label>
                       <select class="ColorPicker2" id="ShortCircuitColorChoiceSecondColorSelectionBox" name="ColorPicker2">
-                      <option value="5">Blue</option>
                       <option value="1">Red</option>
+                      <option value="5">Blue</option>
                       <option value="2">Yellow</option>
                       <option value="3">Green</option>
                       <option value="4">Cyan</option>
@@ -3785,7 +3792,70 @@
 
         </div><!--end of Level 2 Menu-->
       </div> <!-- end of Dualing Colors 2-->
+      <div class="menu-Level-1-Content" id="RSeriesLogic">
+        <h1 class="menuHeader-Level-1">Data Panel/CBi</h1>
+        <div class="menu-Level-2">
 
+            <div class="menu-Level-2-Links " >
+              <button class="active" rel="DataPanelNormal"><img
+                  class="buttonwidth"
+                  id ="transparent"
+                  src="Images/Buttons/Button-R-Series-Home-GIMP.png"
+                  alt="button for Large Span"
+                /></button>
+            </div>
+
+          <div class="menu-Level-2-Links " >
+            <button class="" rel="DataPanelShortCircuit"><img
+                class="buttonwidth"
+                id ="transparent"
+                src="Images/Buttons/LEDFunctionButtons/Generic/Button-ShortCircuit-White.png"
+                alt="button for Large Span"
+              /></button>
+          </div>
+
+        <div class="menu-Level-2-Links " >
+          <button class="" rel="DataPanelFlash"><img
+              class="buttonwidth"
+              id ="transparent"
+              src="Images/Buttons/LEDFunctionButtons/Generic/Button-Flash-White.png"
+              alt="button for Large Span"
+            /></button>
+        </div>
+
+          <div class="menu-Level-2-Content active" id="DataPanelNormal">
+            <h2 class="menuHeader-Level-2">Normal</h2>
+            <div class="ColorPickerdiv">
+              <form class="" action="index.html" method="post">
+                <a href="#" onclick="commandNoOptions('LDP', '99','','')" class="applyButton"></a>
+                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
+              </form>
+            </div><!--end of ColorPickerdiv div-->
+          </div> <!-- end of Level 2 Conetent Option 1-->
+
+          <div class="menu-Level-2-Content " id="DataPanelShortCircuit">
+            <h2 class="menuHeader-Level-2">Short Circuit</h2>
+            <div class="ColorPickerdiv">
+              <form class="" action="index.html" method="post">
+                <a href="#" onclick="commandNoOptions('LDP', '14','','')" class="applyButton"></a>
+                </form>
+            </div><!--end of ColorPickerdiv div-->
+          </div> <!-- end of Level 2 Conetent Option 2-->
+
+          <div class="menu-Level-2-Content " id="DataPanelFlash">
+            <h2 class="menuHeader-Level-2">Flash</h2>
+            <div class="ColorPickerdiv">
+              <form class="" action="index.html" method="post">
+                <a href="#" onclick="commandNoOptions('LDP', '13','','')" class="applyButton"></a>
+                </form>
+            </div><!--end of ColorPickerdiv div-->
+          </div> <!-- end of Level 2 Conetent Option 3-->
+
+
+
+
+        </div><!--end of Level 2 Menu-->
+      </div> <!-- end of Dualing Colors 2-->
 
     <!--                      end of Level 1 Menu -->
      </div>
@@ -3925,123 +3995,136 @@
     </div>
     <div class="menu-Level--Content" id="SerialCommand">
       <div class="menu-Level-">
-        <!-- <div class="menu-Level-Content active" id="SerialCommand1">
-          <h2 class="menuHeader-Level-"></h2>
-          <div class="ColorPickerdiv">
-            <form class="" action="" method="sendSerialCommand('SerialCommandTextBox')">
-              <br>
-              <br>
-              <p>serial command:
-                <input type="text" name="SerialCommandTextBox" id="SerialCommandTextBox" value=""> </p> -->
-
-
-            <!-- </form> -->
-          </div><!--end of Serial Command div-->
-        </div> <!-- end of Level 1 Conetent Serial Command-->
-        <form method='sendi2CCommand('I2CSelectionBox', 'i2CCommandTextBox')'>
-          <!-- <label for="ColorPicker">Choose a color:</label>
-            <select class="ColorPicker" id="I2CSelectionBox" name="ColorPicker">
-            <option value="5">Blue</option>
-            <option value="1">Red</option>
-            <option value="2">Yellow</option>
-            <option value="3">Green</option>
-            <option value="4">Cyan</option>
-            <option value="6">Magenta</option>
-            <option value="7">Orange</option>
-            <option value="8">White</option>
-            <option value="0">Off</option>
-          </select> -->
-           <label for='I2CList'>i2c command:</label>
-           <select class="i2CPicker" id="I2CSelectionBox" name="I2CList">
+       
+        <form method='ESP32SendCommand('ESP32SelectionBox', 'ESP32CommandTextBox')'>
+           <label for='ClientESP32s'>Send command:</label>
+           <select class="ESP32Picker" id="ESP32SelectionBox" name="ClientESP32s">
+           <option value="BC">Body LED Controller- V</option>
+           <option value="PC">Periscope Controller - V</option>
            <option value="DS">Dome Servo Controller</option>
-           <option value="HP">HP Controller</option>
+           <option value="HP">HP Controller - V</option>
            <option value="BS">Body Servo Contoller</option>
            <option value="RS">RSeries Logic</option>
            <option value="PS">PSI Pro</option>
            <option value="ST">Stealth</option>
-           <option value="BL">Body LED Controller</option>
+  
          </select>
-           <input class="i2CPickertext" type="text" name="i2CCommandTextBox" id="i2CCommandTextBox" value="">
+           <input class="ESP32Pickertext" type="text" name="ESP32CommandTextBox" id="ESP32CommandTextBox" value="">
 
-           <!-- <td><input type="text" name="i2CCommandTextBox" id="i2CCommandTextBox" value=""></td> -->
-            <a href="#" onclick="sendi2CCommand('I2CSelectionBox' , 'i2CCommandTextBox')" class="applyButtonSettings"></a>
-          <input type="submit" onclick="sendi2CCommand('I2CSelectionBox', 'i2CCommandTextBox')"name="" value="" style="display: none">
+            <a href="#" onclick="ESP32SendCommand('ESP32SelectionBox' , 'ESP32CommandTextBox')" class="applyButtonSettings"></a>
+          <input type="submit" onclick="ESP32SendCommand('ESP32SelectionBox', 'ESP32CommandTextBox')"name="" value="" style="display: none">
 
        </form>
 
-       <!-- <iframe src="http://10.0.0.120" frameBorder="0" class="iframe"></iframe> -->
- </div>
+       <div class="LDPBrightnesRangeDiv">
+        <iframe name="submit3" style="display:none;" ></iframe>
+        <form action="http://192.168.8.101/" method="get" target="submit3">
+        <div class="" >
+        <label for="LDPBrightnessParam" style="position:relative; left:-100px; top:8px;">LDP Brightness</label>
+        <label for="LDPBrightnessParam" style="position:relative; left:-80px; top:40px;">Dim</label>
+        <label for="LDPBrightnessParam" style="position:relative; left:430px; top:40px;">Bright</label>
+
+
+        <input type="hidden" name="param1" id="LDPBrightnessParam" value="">
+        <input class="" type="range" id="LDPBrightnessRange" min="0" max="255" step="1" value="125" onchange="BrightnessRangeFunc('LDPBrightnessRange', 'LDPBrightnesssliderAmount', '01')">
+        </div>
+        <div class="buttonspacing2" id="LDPBrightnesssliderAmount" style="position:absolute; left:460px; top:40px;">125</div>
+        </form>
+  
+      </div>
+
+      <div class="MaintBrightnesRangeDiv">
+        <iframe name="submit3" style="display:none;" ></iframe>
+        <form action="http://192.168.8.101/" method="get" target="submit3">
+        <div class="" >
+        <label for="MaintBrightnessParam" style="position:relative; left:-215px; top:8px;">Maintenance Brightness</label>
+        <label for="MaintBrightnessParam" style="position:relative; left:-210px; top:40px;">Dim</label>
+        <label for="MaintBrightnessParam" style="position:relative; left:300px; top:40px;">Bright</label>
+        <input type="hidden" name="param1" id="MaintBrightnessParam" value="">
+        <input class="" type="range" id="MaintBrightnessRange" min="0" max="255" step="1" value="" onchange="BrightnessRangeFunc('MaintBrightnessRange', 'MaintBrightnesssliderAmount', '02')">
+        </div>
+        <div class="buttonspacing2" id="MaintBrightnesssliderAmount" style="position:absolute; left:460px; top:40px;">125</div>
+        </form>
+  
+      </div>
+
+
+       <div class="VUBrightnesRangeDiv">
+        <iframe name="submit3" style="display:none;" ></iframe>
+        <form action="http://192.168.8.101/" method="get" target="submit3">
+        <div class="" >
+        <label for="VUBrightnessParam" style="position:relative; left:-75px; top:8px;">vu Brightness</label>
+        <label for="VUBrightnessParam" style="position:relative; left:-70px; top:40px;">Dim</label>
+        <label for="VUBrightnessParam" style="position:relative; left:440px; top:40px;">Bright</label>
+        <input type="hidden" name="param1" id="VUBrightnessParam" value="">
+        <input class="" type="range" id="VUBrightnessRange" min="0" max="255" step="1" value="125" onchange="BrightnessRangeFunc('VUBrightnessRange', 'VUBrightnesssliderAmount', '04')">
+        </div>
+        <div class="buttonspacing2" id="VUBrightnesssliderAmount" style="position:absolute; left:460px; top:40px;">125</div>
+        </form>
+  
+      </div>
+
+      <div class="CoinBrightnesRangeDiv">
+        <iframe name="submit3" style="display:none;" ></iframe>
+        <form action="http://192.168.8.101/" method="get" target="submit3">
+        <div class="" >
+        <label for="CoinBrightnessParam" style="position:relative; left:-195px; top:8px;">Coin Slots Brightness</label>
+        <label for="CoinBrightnessParam" style="position:relative; left:-180px; top:40px;">Dim</label>
+        <label for="CoinBrightnessParam" style="position:relative; left:330px; top:40px;">Bright</label>
+        <input type="hidden" name="param1" id="CoinBrightnessParam" value="">
+        <input class="" type="range" id="CoinBrightnessRange" min="0" max="255" step="1" value="125" onchange="BrightnessRangeFunc('CoinBrightnessRange', 'CoinBrightnesssliderAmount', '03')">
+        </div>
+        <div class="buttonspacing2" id="CoinBrightnesssliderAmount" style="position:absolute; left:460px; top:40px;">125</div>
+        </form>
+  
+      </div>
+
+      <div class="IntOffsetRangeDiv">
+        <iframe name="submit3" style="display:none;" ></iframe>
+        <form action="http://192.168.8.101/" method="get" target="submit3">
+        <div class="" >
+        <label for="IntOffsetParam" style="position:relative; left:-195px; top:8px;">spectrum - sensitivity</label>
+        <label for="IntOffsetParam" style="position:relative; left:-180px; top:40px;">High</label>
+        <label for="IntOffsetParam" style="position:relative; left:350px; top:40px;">Low</label>
+        <input type="hidden" name="param1" id="IntOffsetParam1" value="">
+        <input class="" type="range" id="IntOffsetParam" min="1" max="15" step="1" value="4" onchange="BrightnessRangeFunc('IntOffsetParam', 'IntOffsetsliderAmount', '05')">
+        </div>
+        <div class="buttonspacing2" id="IntOffsetsliderAmount" style="position:absolute; left:460px; top:40px;">4</div>
+        </form>
+  
+      </div>
+
+      <div class="IntBaselineRangeDiv">
+        <iframe name="submit3" style="display:none;" ></iframe>
+        <form action="http://192.168.8.101/" method="get" target="submit3">
+        <div class="" >
+        <label for="IntBaselineParam" style="position:relative; left:-290px; top:8px;">spectrum - noise adjustment</label>
+        <label for="IntBaselineParam" style="position:relative; left:-280px; top:40px;">Low</label>
+        <label for="IntBaselineParam" style="position:relative; left:260px; top:40px;">High</label>
+        <input type="hidden" name="param1" id="IntBaselineParam1" value="">
+        <input class="" type="range" id="IntBaselineParam" min="0" max="255" step="1" value="90" onchange="BrightnessRangeFunc('IntBaselineParam', 'IntBaselinesliderAmount', '06')">
+        </div>
+        <div class="buttonspacing2" id="IntBaselinesliderAmount" style="position:absolute; left:460px; top:40px;">90</div>
+        </form>
+  
+      </div>
+
+
+
+
+
+
+      </div>
+    </div>
+
+    </div>
 
   <div class="menu-Level-0-Content" id="periscope">
     <div class="menuheader">
-      <h1 class="">periscope</h1>
+      <h1 class="">periscope control</h1>
       </div>
       <img src="./Images/periscope.png" alt="" style="position:absolute; height:600px; left:-350px;";>
-    <!-- <img
-    class="r2menupicture"
-    src="./Images/Body/BodyOutline.png"
-    alt="picture"
-      /> -->
-    <!-- <img src="Images/Dome/DomeOutline.png" class="domePicture" alt="image for the dome"/>
-
-    <img
-          class="r2menupictureTopUtilityArm"
-          src="Images/Body/TopUtilityArmBlue.png"
-          alt="picture"
-          name="stripSelectorServo"
-          onclick=changeImageTopUtilityArm()
-          id="TopUtilityArm"
-        />
-      <img
-          class="r2menupictureBottomUtilityArm"
-          src="Images/Body/TopUtilityArmBlue.png"
-          alt="picture"
-          name="stripSelectorServo"
-          onclick=changeImageBottomUtilityArm()
-          id="BottomUtilityArm"
-        />
-      <img
-          class="r2menupictureCBIServo"
-          src="Images/Body/CBIDoorBlue.png"
-          alt="picture"
-          name="stripSelectorServo"
-          onclick=changeImageCBIServo()
-          id="CBIDoor"
-        />
-      <img
-          class="r2menupictureDPServo"
-          src="Images/Body/DataPanelDoorBlue.png"
-          alt="picture"
-          name="stripSelectorServo"
-          onclick=changeImageDPServo()
-          id="DPDoor"
-        />
-      <img
-          class="r2menupictureRightLargeDoorServo"
-          src="Images/Body/RightLargeDoorBlue.png"
-          alt="picture"
-          name="stripSelectorServo"
-          onclick=changeImageRightLargeDoorServo()
-          id="RightLargeDoor"
-        />
-
-        <img
-            class="r2menupictureLeftLargeDoorServo"
-            src="Images/Body/LeftLargeDoorBlue.png"
-            alt="picture"
-            name="stripSelectorServo"
-            onclick=changeImageLeftLargeDoorServo()
-            id="LeftLargeDoor"
-          />
-
-          <img
-              class="r2menupictureDoor1Servo"
-              src="Images/Dome/Door1Blue.png"
-              alt="picture"
-              name="stripSelectorServo"
-              onclick=changeImageDoor1Servo()
-              id="Door1"
-            /> -->
+  
     <div class="periscopeControl">
       <h3 class="HPServoHeader">Perisope Control</h3>
       <img src="Images/UpArrows.png" class="UpArrowPicture" alt="image for the dome" onclick="pericopeLifter('100')">
@@ -4082,23 +4165,30 @@
 
 
     </div> -->
-    <div class="utilityArmsDiv">
+    <div class="periscopeRangeDiv">
       <iframe name="submit3" style="display:none;" ></iframe>
       <form action="http://192.168.8.142/" method="get" target="submit3">
       <div class="" >
       <label for="paramrange" style="position:relative; left:360px; top:-35px;">Select Height</label>
       
       <input type="hidden" name="param1" id="paramrange" value=":PP">
-      <input class="" type="range" id="heightRange" min="0" max="100" step="10" value="50" onchange="periscopeRange()">
+      <input class=""  type="range" id="heightRange" min="0" max="100" step="10" value="50" onchange="periscopeRange()">
       <!-- <img src="Images/Buttons/Button-Apply.png" onclick="getRange('heightRange')" class="applyButton"></img> -->
       
       
       <!-- <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="getRange('heightRange')" class="applyButton"></img> -->
       </div>
-      <div class="buttonspacing2" id="sliderAmount" style="position:absolute; left:460px; top:55px;">50</div>
+      <div class="buttonspacing2" id="sliderAmount" style="position:absolute; left:460px; top:40px;">50</div>
       </form>
 
     </div>
+
+    <dir class="StoredSequenceDiv">
+      <img class="applyButton" style="position: absolute; top: 220px;"src="Images/Buttons/Button-Stored-Sequence1-GIMP.jpeg" alt="image for the dome" onclick="pericopeLifter('100')">
+      <img class="applyButton" style="position: absolute; top: 300px;"src="Images/Buttons/Button-Stored-Sequence2-GIMP.jpeg" alt="image for the dome" onclick="pericopeLifter('100')">
+      <img class="applyButton" style="position: absolute; top: 380px;"src="Images/Buttons/Button-Stored-Sequence3-GIMP.jpeg" alt="image for the dome" onclick="pericopeLifter('100')">
+
+    </dir>
 
   
 
@@ -4107,13 +4197,13 @@
   </div><!--end of Level 0 Settings Content-->
   
   
-        <!-- </div><!--end of Level 1 Menu -->
+        <!-- </div><end of Level 1 Menu -->
     <!-- </div> end of Serial Command -->
 
     <!-- </div> end of Level 0 Settings Content -->
 
  
-    <!-- </div> end of Serial Command --> -->
+    <!-- </div> end of Serial Command --> 
   
   
  
@@ -4131,7 +4221,7 @@
 <script src="./js/jquery-3.5.1.min.js"></script>
 
 <script>
-//
+
 
 $(document).ready(function(){
 
@@ -4221,7 +4311,6 @@ $(document).ready(function(){
   });
 
 
-  // let center = document.getElementByID('CenterArrowPeriscope').addEventListener("click", function () {console.log("Hello");});
 
 
 </script>

@@ -1,6 +1,3 @@
-let result = 25 + 78678
-console.log(result);
-
 var dstatus = true;
 function openAllDoorsMS() {
 
@@ -310,18 +307,13 @@ function commandNoOptionsKnightRider(y, t, u) {
     // };
   };
 
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  let fullURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullURL);
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring,
-    // dcommandstring: dcommandstring,
-    // icommandstring: icommandstring,
-    // hpfcommandstring: hpfcommandstring,
-    // hptcommandstring: hptcommandstring,
-    // hprcommandstring: hprcommandstring
-  });
 
 
 };
@@ -342,29 +334,131 @@ function commandSingleColorKnightRider(y, t, z, u) {
       // console.log("C selected");
       var coincommandstring = "C" + y + t + colorValues;
       console.log(coincommandstring);
+
     };
 
     if (checkedItemsKnightRider[i] === "VerticalBarstKnightRider") {
       // console.log("V selected");
       var vucommandstring = 'V' + y + t + colorValues;
       console.log(vucommandstring);
+
     };
 
     if (checkedItemsKnightRider[i] === "MaintKnightRider") {
       // console.log("M selected");
       var mcommandstring = 'M' + y + t + colorValues;
       console.log(mcommandstring);
+
     };
   };
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  let fullURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullURL);
+
+  // socket.emit('command', {
+  //   ldpcommandstring: ldpcommandstring,
+  //   coincommandstring: coincommandstring,
+  //   vucommandstring: vucommandstring,
+  //   mcommandstring: mcommandstring
+  // });
 };
 
+function commandStripOffKnightRider(y, t, u) {
+
+  document.getElementById(u).src = "Images/checkmark.png";
+  setTimeout(function () { document.getElementById(u).src = "Images/blankcheckmark.png"; }, 2000)
+
+
+
+  for (var i = 0; i < checkedItemsKnightRider.length; i++) {
+    if (checkedItemsKnightRider[i] === "LDPKnightRider") {
+      // console.log("L selected");
+      var ldpcommandstring = "L" + "98";
+
+      console.log(ldpcommandstring);
+    };
+
+    if (checkedItemsKnightRider[i] === "CoinKnightRider") {
+      // console.log("C selected");
+      var coincommandstring = "C" + "98";
+      console.log(coincommandstring);
+    };
+
+    if (checkedItemsKnightRider[i] === "VerticalBarstKnightRider") {
+      // console.log("V selected");
+      var vucommandstring = "V" + "98";
+      console.log(vucommandstring);
+    };
+
+    if (checkedItemsKnightRider[i] === "MaintKnightRider") {
+      // console.log("M selected");
+      var mcommandstring = "M" + "98";
+      console.log(mcommandstring);
+    };
+    // if (checkedItemsKnightRider[i] === "D") {
+    //   // console.log("M selected");
+    //   var dcommandstring = checkedItems[i] + y + t;
+    //   console.log(dcommandstring);
+    // };
+    // if (checkedItemsKnightRider[i] === "I") {
+    //   // console.log("M selected");
+    //   var icommandstring = checkedItems[i] + y + t;
+    //   console.log(icommandstring);
+    // };
+    // if (checkedItemsKnightRider[i] === "FrontHPKnightRider") {
+    //   // console.log("M selected");
+    //   var hpfcommandstring = "F007";
+    //   console.log(hpfcommandstring);
+    // };
+    // if (checkedItemsKnightRider[i] === "TopHPKnightRider") {
+    //   // console.log("M selected");
+    //   var hptcommandstring = "T007";
+    //   console.log(hptcommandstring);
+    // };
+    // if (checkedItemsKnightRider[i] === "RearHPKnightRider") {
+    //   // console.log("M selected");
+    //   var hprcommandstring = "R007";
+    //   console.log(hprcommandstring);
+    // };
+  };
+
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  let fullURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullURL);
+
+
+
+};
+function bodyControllerLEDFunctionExecution(t) {
+  var LEDCommand = t;
+  var bodyLEDControllerSPURL = "http://192.168.8.101/?param0=2";
+
+  var bodyLEDControllerFullURL = bodyLEDControllerSPURL + LEDCommand;
+  console.log(bodyLEDControllerFullURL);
+  // setTimeout(function () { httpGet(bodyLEDControllerFullURL); }, 500);
+  // sleep(1000);
+  httpGet(bodyLEDControllerFullURL);
+
+};
+
+function HPLEDFunctionExecution(t) {
+  var LEDCommand = t;
+  var bodyLEDControllerSPURL = "http://192.168.8.245/?param0=1";
+
+  var bodyLEDControllerFullURL = bodyLEDControllerSPURL + LEDCommand;
+  console.log(bodyLEDControllerFullURL);
+  // setTimeout(function () { httpGet(bodyLEDControllerFullURL); }, 500);
+  // sleep(1000);
+  httpGet(bodyLEDControllerFullURL);
+
+};
 
 //Rainbow stuff
 var checkedItemsRainbow = new Array();
@@ -645,20 +739,17 @@ function commandNoOptionsRainbow(y, t, u) {
   };
 
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    // ldpi2cdest: bodyLEDi2cdest,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring,
-    dcommandstring: dcommandstring,
-    icommandstring: icommandstring,
-    hpfcommandstring: hpfcommandstring,
-    hptcommandstring: hptcommandstring,
-    hprcommandstring: hprcommandstring
-  });
-
-
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  let hpFrontParam = "&param1=" + hpfcommandstring;
+  let hpTopParam = "&param2=" + hptcommandstring;
+  let hpRearParam = "&param3=" + hprcommandstring;
+  let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
 
 
@@ -930,16 +1021,18 @@ function commandSingleColorSolidColor(y, t, z, u) {
   };
 
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    // ldpi2cdest: bodyLEDi2cdest,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring,
-    hpfcommandstring: hpfcommandstring,
-    hptcommandstring: hptcommandstring,
-    hprcommandstring: hprcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  let hpFrontParam = "&param1=" + hpfcommandstring;
+  let hpTopParam = "&param2=" + hptcommandstring;
+  let hpRearParam = "&param3=" + hprcommandstring;
+  let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  HPLEDFunctionExecution(fullHPLEDControllerURL);
+
 
 
 };
@@ -1159,12 +1252,17 @@ function commandTwoColorsAlternatingColors(y, t, z, s, u) {
     };
   };
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
 };
 
@@ -1430,15 +1528,17 @@ function commandOneColorAndSpeedDimPulse(y, t, z, u) {
   };
 
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring,
-    hpfcommandstring: hpfcommandstring,
-    hptcommandstring: hptcommandstring,
-    hprcommandstring: hprcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  let hpFrontParam = "&param1=" + hpfcommandstring;
+  let hpTopParam = "&param2=" + hptcommandstring;
+  let hpRearParam = "&param3=" + hprcommandstring;
+  let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
 
 
@@ -1704,15 +1804,17 @@ function commandOneColorAndSpeedDimPulse2(y, t, z, u) {
   };
 
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring,
-    // hpfcommandstring: hpfcommandstring,
-    // hptcommandstring: hptcommandstring,
-    // hprcommandstring: hprcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
 
 
@@ -1974,15 +2076,17 @@ function commandOneColorAndSpeedDimPulse3(y, t, z, u) {
   };
 
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring,
-    // hpfcommandstring: hpfcommandstring,
-    // hptcommandstring: hptcommandstring,
-    // hprcommandstring: hprcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
 
 
@@ -2234,12 +2338,17 @@ function commandTwoColorsNoSliderBouncing(y, t, z, s, u) {
     };
   };
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
   //
 };
 
@@ -2468,12 +2577,18 @@ function commandTwoColorsNoSliderDualBounce(y, t, z, s, u) {
     };
   };
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
+  //
   //
 };
 
@@ -2508,12 +2623,18 @@ function commandSingleColorDualBounce(y, t, z, u) {
     };
   };
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
+  //
 };
 
 
@@ -2764,12 +2885,18 @@ function commandTwoColorsNoSliderDualingColors(y, t, z, s, u) {
     };
   };
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
+  //
   //
 };
 
@@ -3020,12 +3147,18 @@ function commandTwoColorsNoSliderRandomColor(y, t, z, s, u) {
     };
   };
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
+  //
   //
 };
 
@@ -3064,13 +3197,18 @@ function commandNoOptionsRandomColor(y, t, u) {
   };
 
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring,
-
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
+  //
 
 
 };
@@ -3319,12 +3457,17 @@ function commandTwoColorsNoSliderRandomColor2(y, t, z, s, u) {
     };
   };
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
   //
 };
 
@@ -3363,13 +3506,17 @@ function commandNoOptionsRandomColor2(y, t, u) {
   };
 
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring,
-
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
 
 };
@@ -3620,12 +3767,17 @@ function commandTwoColorsNoSliderFlash(y, t, z, s, u) {
     };
   };
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
   //
 };
 
@@ -3664,13 +3816,17 @@ function commandNoOptionsFlash(y, t, u) {
   };
 
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring,
-
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
 
 };
@@ -3719,15 +3875,17 @@ function commandOneColorAndSpeedFlash(y, t, z, u) {
   };
 
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring,
-    // hpfcommandstring: hpfcommandstring,
-    // hptcommandstring: hptcommandstring,
-    // hprcommandstring: hprcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
 
 
@@ -4051,17 +4209,19 @@ function commandTwoColorsNoSliderShortCircuit(y, t, z, s, u) {
     };
   };
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring,
-    hpfcommandstring: hpfcommandstring,
-    hptcommandstring: hptcommandstring,
-    hprcommandstring: hprcommandstring,
-    icommandstring: icommandstring,
-    dcommandstring: dcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  let cbiCommandParam = "&param5=" + icommandstring;
+  let dataportCommandParam = "&param6=" + dcommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam + cbiCommandParam + dataportCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  let hpFrontParam = "&param1=" + hpfcommandstring;
+  let hpTopParam = "&param2=" + hptcommandstring;
+  let hpRearParam = "&param3=" + hprcommandstring;
+  let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  HPLEDFunctionExecution(fullHPLEDControllerURL);
   //
 };
 
@@ -4125,17 +4285,19 @@ function commandNoOptionsShortCircuit(y, t, u) {
   };
 
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring,
-    hpfcommandstring: hpfcommandstring,
-    hptcommandstring: hptcommandstring,
-    hprcommandstring: hprcommandstring,
-    icommandstring: icommandstring,
-    dcommandstring: dcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  let cbiCommandParam = "&param5=" + icommandstring;
+  let dataportCommandParam = "&param6=" + dcommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam + cbiCommandParam + dataportCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  let hpFrontParam = "&param1=" + hpfcommandstring;
+  let hpTopParam = "&param2=" + hptcommandstring;
+  let hpRearParam = "&param3=" + hprcommandstring;
+  let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  HPLEDFunctionExecution(fullHPLEDControllerURL);
 
 
 };
@@ -4184,15 +4346,19 @@ function commandOneColorAndSpeedShortCircuit(y, t, z, u) {
   };
 
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring,
-    // hpfcommandstring: hpfcommandstring,
-    // hptcommandstring: hptcommandstring,
-    // hprcommandstring: hprcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  let cbiCommandParam = "&param5=" + icommandstring;
+  let dataportCommandParam = "&param6=" + dcommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam + cbiCommandParam + dataportCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
 
 
@@ -4453,15 +4619,17 @@ function commandOneColorAndSpeedPulseBeat(y, t, z, u) {
   };
 
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring,
-    // hpfcommandstring: hpfcommandstring,
-    // hptcommandstring: hptcommandstring,
-    // hprcommandstring: hprcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
 
 
@@ -4722,15 +4890,17 @@ function commandOneColorAndSpeedPulseBeat2(y, t, z, u) {
   };
 
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring,
-    // hpfcommandstring: hpfcommandstring,
-    // hptcommandstring: hptcommandstring,
-    // hprcommandstring: hprcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
 
 
@@ -4991,15 +5161,19 @@ function commandOneColorAndSpeedWigWag(y, t, z, u) {
   };
 
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring,
-    // hpfcommandstring: hpfcommandstring,
-    // hptcommandstring: hptcommandstring,
-    // hprcommandstring: hprcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  // let cbiCommandParam = "&param5=" + icommandstring;
+  // let dataportCommandParam = "&param6=" + dcommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
 
 //WigWag2 stuff
@@ -5259,15 +5433,19 @@ function commandOneColorAndSpeedWigWag2(y, t, z, u) {
   };
 
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring,
-    // hpfcommandstring: hpfcommandstring,
-    // hptcommandstring: hptcommandstring,
-    // hprcommandstring: hprcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  // let cbiCommandParam = "&param5=" + icommandstring;
+  // let dataportCommandParam = "&param6=" + dcommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
 
 //ZigZag stuff
@@ -5527,15 +5705,19 @@ function commandOneColorAndSpeedZigZag(y, t, z, u) {
   };
 
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring,
-    // hpfcommandstring: hpfcommandstring,
-    // hptcommandstring: hptcommandstring,
-    // hprcommandstring: hprcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  // let cbiCommandParam = "&param5=" + icommandstring;
+  // let dataportCommandParam = "&param6=" + dcommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
 
 //ZigZag2 stuff
@@ -5795,15 +5977,19 @@ function commandOneColorAndSpeedZigZag2(y, t, z, u) {
   };
 
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring,
-    // hpfcommandstring: hpfcommandstring,
-    // hptcommandstring: hptcommandstring,
-    // hprcommandstring: hprcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  // let cbiCommandParam = "&param5=" + icommandstring;
+  // let dataportCommandParam = "&param6=" + dcommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
 
 function commandTwoColorsZigZag2(y, t, z, s, u) {
@@ -5838,12 +6024,19 @@ function commandTwoColorsZigZag2(y, t, z, s, u) {
     };
   };
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  // let cbiCommandParam = "&param5=" + icommandstring;
+  // let dataportCommandParam = "&param6=" + dcommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
 };
 
@@ -6104,15 +6297,19 @@ function commandOneColorAndSpeedDualingColors2(y, t, z, u) {
   };
 
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring,
-    // hpfcommandstring: hpfcommandstring,
-    // hptcommandstring: hptcommandstring,
-    // hprcommandstring: hprcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  // let cbiCommandParam = "&param5=" + icommandstring;
+  // let dataportCommandParam = "&param6=" + dcommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
 
 function commandTwoColorsDualingColors2(y, t, z, s, u) {
@@ -6147,12 +6344,19 @@ function commandTwoColorsDualingColors2(y, t, z, s, u) {
     };
   };
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  // let cbiCommandParam = "&param5=" + icommandstring;
+  // let dataportCommandParam = "&param6=" + dcommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
 };
 
@@ -6188,12 +6392,19 @@ function commandTwoColorsNoSliderDualingColors2(y, t, z, s, u) {
     };
   };
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  // let cbiCommandParam = "&param5=" + icommandstring;
+  // let dataportCommandParam = "&param6=" + dcommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
   //
 };
 
@@ -6454,15 +6665,19 @@ function commandOneColorAndSpeedFLD(y, t, z, u) {
   };
 
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring,
-    // hpfcommandstring: hpfcommandstring,
-    // hptcommandstring: hptcommandstring,
-    // hprcommandstring: hprcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  // let cbiCommandParam = "&param5=" + icommandstring;
+  // let dataportCommandParam = "&param6=" + dcommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
 
 function commandTwoColorsFLD(y, t, z, s, u) {
@@ -6497,12 +6712,19 @@ function commandTwoColorsFLD(y, t, z, s, u) {
     };
   };
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  // let cbiCommandParam = "&param5=" + icommandstring;
+  // let dataportCommandParam = "&param6=" + dcommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
 };
 
@@ -6538,12 +6760,19 @@ function commandTwoColorsNoSliderFLD(y, t, z, s, u) {
     };
   };
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  // let cbiCommandParam = "&param5=" + icommandstring;
+  // let dataportCommandParam = "&param6=" + dcommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
   //
 };
 function commandNoOptionsFLD(y, t, u) {
@@ -6606,17 +6835,19 @@ function commandNoOptionsFLD(y, t, u) {
   };
 
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring,
-    // dcommandstring: dcommandstring,
-    // icommandstring: icommandstring,
-    // hpfcommandstring: hpfcommandstring,
-    // hptcommandstring: hptcommandstring,
-    // hprcommandstring: hprcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  // let cbiCommandParam = "&param5=" + icommandstring;
+  // let dataportCommandParam = "&param6=" + dcommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
 
 };
@@ -6879,15 +7110,19 @@ function commandOneColorAndSpeedRLD(y, t, z, u) {
   };
 
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring,
-    // hpfcommandstring: hpfcommandstring,
-    // hptcommandstring: hptcommandstring,
-    // hprcommandstring: hprcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  // let cbiCommandParam = "&param5=" + icommandstring;
+  // let dataportCommandParam = "&param6=" + dcommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
 
 function commandTwoColorsRLD(y, t, z, s, u) {
@@ -6922,12 +7157,19 @@ function commandTwoColorsRLD(y, t, z, s, u) {
     };
   };
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  // let cbiCommandParam = "&param5=" + icommandstring;
+  // let dataportCommandParam = "&param6=" + dcommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
 };
 
@@ -6963,12 +7205,19 @@ function commandTwoColorsNoSliderRLD(y, t, z, s, u) {
     };
   };
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  // let cbiCommandParam = "&param5=" + icommandstring;
+  // let dataportCommandParam = "&param6=" + dcommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
   //
 };
 function commandNoOptionsRLD(y, t, u) {
@@ -7031,17 +7280,19 @@ function commandNoOptionsRLD(y, t, u) {
   };
 
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring,
-    // dcommandstring: dcommandstring,
-    // icommandstring: icommandstring,
-    // hpfcommandstring: hpfcommandstring,
-    // hptcommandstring: hptcommandstring,
-    // hprcommandstring: hprcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  // let cbiCommandParam = "&param5=" + icommandstring;
+  // let dataportCommandParam = "&param6=" + dcommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
 
 };
@@ -7303,17 +7554,20 @@ function commandOneColorAndSpeedPulse(y, t, z, u) {
   };
 
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring,
-    // hpfcommandstring: hpfcommandstring,
-    // hptcommandstring: hptcommandstring,
-    // hprcommandstring: hprcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  // let cbiCommandParam = "&param5=" + icommandstring;
+  // let dataportCommandParam = "&param6=" + dcommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
-
 function commandTwoColorsPulse(y, t, z, s, u) {
   let sliderValue = getSliderValue(t);
   let colorValues1 = getcolor1(z);
@@ -7346,12 +7600,19 @@ function commandTwoColorsPulse(y, t, z, s, u) {
     };
   };
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  // let cbiCommandParam = "&param5=" + icommandstring;
+  // let dataportCommandParam = "&param6=" + dcommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
 };
 
@@ -7387,12 +7648,19 @@ function commandTwoColorsNoSliderPulse(y, t, z, s, u) {
     };
   };
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  // let cbiCommandParam = "&param5=" + icommandstring;
+  // let dataportCommandParam = "&param6=" + dcommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
   //
 };
 function commandNoOptionsPulse(y, t, u) {
@@ -7455,17 +7723,19 @@ function commandNoOptionsPulse(y, t, u) {
   };
 
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring,
-    // dcommandstring: dcommandstring,
-    // icommandstring: icommandstring,
-    // hpfcommandstring: hpfcommandstring,
-    // hptcommandstring: hptcommandstring,
-    // hprcommandstring: hprcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  // let cbiCommandParam = "&param5=" + icommandstring;
+  // let dataportCommandParam = "&param6=" + dcommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
 
 };
@@ -7727,15 +7997,19 @@ function commandOneColorAndSpeedDualPulse(y, t, z, u) {
   };
 
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring,
-    // hpfcommandstring: hpfcommandstring,
-    // hptcommandstring: hptcommandstring,
-    // hprcommandstring: hprcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  // let cbiCommandParam = "&param5=" + icommandstring;
+  // let dataportCommandParam = "&param6=" + dcommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
 
 function commandTwoColorsDualPulse(y, t, z, s, u) {
@@ -7770,12 +8044,19 @@ function commandTwoColorsDualPulse(y, t, z, s, u) {
     };
   };
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  // let cbiCommandParam = "&param5=" + icommandstring;
+  // let dataportCommandParam = "&param6=" + dcommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
 };
 
@@ -7811,12 +8092,19 @@ function commandTwoColorsNoSliderDualPulse(y, t, z, s, u) {
     };
   };
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  // let cbiCommandParam = "&param5=" + icommandstring;
+  // let dataportCommandParam = "&param6=" + dcommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
   //
 };
 function commandNoOptionsDualPulse(y, t, u) {
@@ -7879,17 +8167,19 @@ function commandNoOptionsDualPulse(y, t, u) {
   };
 
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring,
-    // dcommandstring: dcommandstring,
-    // icommandstring: icommandstring,
-    // hpfcommandstring: hpfcommandstring,
-    // hptcommandstring: hptcommandstring,
-    // hprcommandstring: hprcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  // let cbiCommandParam = "&param5=" + icommandstring;
+  // let dataportCommandParam = "&param6=" + dcommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
 
 };
@@ -8150,15 +8440,19 @@ function commandOneColorAndSpeedAutoSequence(y, t, z, u) {
   };
 
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring,
-    // hpfcommandstring: hpfcommandstring,
-    // hptcommandstring: hptcommandstring,
-    // hprcommandstring: hprcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  // let cbiCommandParam = "&param5=" + icommandstring;
+  // let dataportCommandParam = "&param6=" + dcommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
 
 function commandTwoColorsAutoSequence(y, t, z, s, u) {
@@ -8193,12 +8487,19 @@ function commandTwoColorsAutoSequence(y, t, z, s, u) {
     };
   };
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  // let cbiCommandParam = "&param5=" + icommandstring;
+  // let dataportCommandParam = "&param6=" + dcommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
 };
 
@@ -8234,12 +8535,19 @@ function commandTwoColorsNoSliderAutoSequence(y, t, z, s, u) {
     };
   };
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  // let cbiCommandParam = "&param5=" + icommandstring;
+  // let dataportCommandParam = "&param6=" + dcommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
   //
 };
 function commandNoOptionsAutoSequence(y, t, u) {
@@ -8302,17 +8610,19 @@ function commandNoOptionsAutoSequence(y, t, u) {
   };
 
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring,
-    // dcommandstring: dcommandstring,
-    // icommandstring: icommandstring,
-    // hpfcommandstring: hpfcommandstring,
-    // hptcommandstring: hptcommandstring,
-    // hprcommandstring: hprcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  // let cbiCommandParam = "&param5=" + icommandstring;
+  // let dataportCommandParam = "&param6=" + dcommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
 
 };
@@ -8575,15 +8885,19 @@ function commandOneColorAndSpeedEqualizer(y, t, z, u) {
   };
 
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring,
-    // hpfcommandstring: hpfcommandstring,
-    // hptcommandstring: hptcommandstring,
-    // hprcommandstring: hprcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  // let cbiCommandParam = "&param5=" + icommandstring;
+  // let dataportCommandParam = "&param6=" + dcommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
 
 function commandTwoColorsEqualizer(y, t, z, s, u) {
@@ -8618,12 +8932,19 @@ function commandTwoColorsEqualizer(y, t, z, s, u) {
     };
   };
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  // let cbiCommandParam = "&param5=" + icommandstring;
+  // let dataportCommandParam = "&param6=" + dcommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
 };
 
@@ -8659,12 +8980,19 @@ function commandTwoColorsNoSliderEqualizer(y, t, z, s, u) {
     };
   };
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  // let cbiCommandParam = "&param5=" + icommandstring;
+  // let dataportCommandParam = "&param6=" + dcommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
   //
 };
 function commandNoOptionsEqualizer(y, t, u) {
@@ -8727,17 +9055,19 @@ function commandNoOptionsEqualizer(y, t, u) {
   };
 
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring,
-    // dcommandstring: dcommandstring,
-    // icommandstring: icommandstring,
-    // hpfcommandstring: hpfcommandstring,
-    // hptcommandstring: hptcommandstring,
-    // hprcommandstring: hprcommandstring
-  });
+  let ldpCommandParam = "&param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  // let cbiCommandParam = "&param5=" + icommandstring;
+  // let dataportCommandParam = "&param6=" + dcommandstring;
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
+  // let hpFrontParam = "&param1=" + hpfcommandstring;
+  // let hpTopParam = "&param2=" + hptcommandstring;
+  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
 
 };
@@ -9276,28 +9606,28 @@ function commandOneColorAndSpeed(x, y, t, z) {
 
 function commandStripOff(x,) {
   let LEDSelector = getStripName(x);
-
+  console.log("something");
   for (var i = 0; i < checkedItems.length; i++) {
     if (checkedItems[i] === "L") {
-      // console.log("L selected");
+      console.log("L selected");
       var ldpcommandstring = checkedItems[i] + '98';
       console.log(ldpcommandstring);
     };
 
     if (checkedItems[i] === "C") {
-      // console.log("C selected");
+      console.log("C selected");
       var coincommandstring = checkedItems[i] + '98';
       console.log(coincommandstring);
     };
 
     if (checkedItems[i] === "V") {
-      // console.log("V selected");
+      console.log("V selected");
       var vucommandstring = checkedItems[i] + '98';
       console.log(vucommandstring);
     };
 
     if (checkedItems[i] === "M") {
-      // console.log("M selected");
+      console.log("M selected");
       var mcommandstring = checkedItems[i] + '98';
       console.log(mcommandstring);
     };
@@ -9313,32 +9643,13 @@ function commandStripOff(x,) {
     };
   };
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring,
-    dcommandstring: dcommandstring,
-    icommandstring: icommandstring
-  });
-  // socket1.emit('command', {
-  //   ldpcommandstring: ldpcommandstring,
-  //   coincommandstring: coincommandstring,
-  //   vucommandstring: vucommandstring,
-  //   mcommandstring: mcommandstring
-  // });
-  // socket2.emit('command', {
-  //   ldpcommandstring: ldpcommandstring,
-  //   coincommandstring: coincommandstring,
-  //   vucommandstring: vucommandstring,
-  //   mcommandstring: mcommandstring
-  // });
-  // socket3.emit('command', {
-  //   ldpcommandstring: ldpcommandstring,
-  //   coincommandstring: coincommandstring,
-  //   vucommandstring: vucommandstring,
-  //   mcommandstring: mcommandstring
-  // });
+  let ldpCommandParam = "/?param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  let fullURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFuntionExecution(fullURL);
+
 };
 
 function commandStripAllOff() {
@@ -9346,13 +9657,13 @@ function commandStripAllOff() {
   var coincommandstring = 'L98';
   var vucommandstring = 'L98';
   var mcommandstring = 'L98';
+  let ldpCommandParam = "/?param1=" + ldpcommandstring;
+  let maintCommandParam = "&param2=" + mcommandstring;
+  let coinCommandParam = "&param3=" + coincommandstring;
+  let vuCommandParam = "&param4=" + vucommandstring;
+  let fullURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFuntionExecution(fullURL);
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring
-  });
   // socket1.emit('command', {
   //   ldpcommandstring: ldpcommandstring,
   //   coincommandstring: coincommandstring,
@@ -9554,12 +9865,95 @@ setFavicons('/Images/r2-d2.ico')
 
 
 
+////////////////////////-------------------------------------------------------------------*****************************************************************************************
+////////////////////////-------------------------------------------------------------------*****************************************************************************************
+////////////////////////-------------------------------------------------------------------*****************************************************************************************
+////////////////////////-------------------------------------------------------------------*****************************************************************************************
+////////////////////////-------------------------------------------------------------------*****************************************************************************************
+////////////////////////-------------------------------------------------------------------*****************************************************************************************
+////////////////////////-------------------------------------------------------------------*****************************************************************************************
+////////////////////////-------------------------------------------------------------------*****************************************************************************************
+////////////////////////-------------------------------------------------------------------*****************************************************************************************
+////////////////////////-------------------------------------------------------------------*****************************************************************************************
+////////////////////////-------------------------------------------------------------------*****************************************************************************************
+////////////////////////-------------------------------------------------------------------*****************************************************************************************
+////////////////////////-------------------------------------------------------------------*****************************************************************************************
+////////////////////////-------------------------------------------------------------------*****************************************************************************************
+////////////////////////-------------------------------------------------------------------*****************************************************************************************
+var periscopeControllerIP = '192.168.8.142';
 
-// let center = document.getElementById('CenterArrowPeriscope').addEventListener('click', function () {
+var paramVariable = '/?param1='
 
-//   // center.addEventListener('click', function () {
-//   console.log("Hello");
-// });
+function ESP32SendCommand(b, x) {
+
+  var ESP32command = document.getElementById(x).value;
+  var ESP32commandUpper = ESP32command.toUpperCase();
+  console.log('triggered');
+  // let i2CcommandUpper = i2Ccommand.toUpperCase();
+  //let ESP32Device = document.getElementById(b);
+  var ESP32DeviceSelected = getcolor1(b);
+  // var ESP32DeviceSelected = (ESP32Device.options[ESP32Device.selectedIndex].value);
+  console.log('Device: ' + ESP32DeviceSelected);
+  if (ESP32DeviceSelected === "PC") {
+    var periscopeControllerIP = 'http://192.168.8.142/?param0=1&param1=';
+    var periscopeLifterFullURL = periscopeControllerIP + ESP32commandUpper;
+    httpGet(periscopeLifterFullURL);
+    console.log(periscopeLifterFullURL);
+
+  };
+  if (ESP32DeviceSelected === "BC") {
+    var bodyLEDControllerIP = 'http://192.168.8.101/?param0=2&param1=';
+    console.log('BC subselection');
+    console.log(bodyLEDControllerIP)
+
+    var bodyLEDControllerFullURL = bodyLEDControllerIP + ESP32commandUpper;
+    httpGet(bodyLEDControllerFullURL);
+    console.log(bodyLEDControllerFullURL);
+
+  };
+  if (ESP32DeviceSelected === "HP") {
+    var bodyLEDControllerIP = 'http://192.168.8.245/?param0=1&param1=';
+    console.log('BC subselection');
+    console.log(bodyLEDControllerIP)
+
+    var bodyLEDControllerFullURL = bodyLEDControllerIP + ESP32commandUpper;
+    httpGet(bodyLEDControllerFullURL);
+    console.log(bodyLEDControllerFullURL);
+
+  };
+};
+
+function BrightnessRangeFunc(a, b, c) {
+  var VUslide = document.getElementById(a),
+    sliderDiv = document.getElementById(b);
+
+  VUslide.onchange = function () {
+    sliderDiv.innerHTML = this.value;
+    let slidervalue1 = this.value;
+    console.log(slidervalue1);
+    getBodyLEDController(slidervalue1, c);
+  }
+}
+
+
+function getBodyLEDController(t, v) {
+  var BodyBright = t;
+  var bodyLEDControllerSPURL = "http://192.168.8.101/?param0=2&param1=P";
+
+  var bodyLEDControllerFullURL = bodyLEDControllerSPURL + v + BodyBright;
+  console.log(bodyLEDControllerFullURL);
+
+  httpGet(bodyLEDControllerFullURL);
+
+};
+
+
+
+
+
+
+
+
 
 function pericopeLifter(t) {
   console.log("What up");
@@ -9580,19 +9974,30 @@ function periscopeRange() {
 }
 
 
+
 function getPeriscope(t) {
   var periscopeHeight = t;
-  var periscopeESPURL = "http://192.168.8.142/?param1=:PP";
+  var periscopeESPURL = "http://192.168.8.142/?param0=1&param1=:PP";
+  // var periscopeESPURLOutside = "http://10.0.0.230:8080/?param1=:PP";
+
   var periscopeESPFullURL = periscopeESPURL + periscopeHeight;
+  // var periscopeESPFullURLOutSide = periscopeESPURLOutside + periscopeHeight;
   console.log(periscopeESPFullURL);
+  // console.log(periscopeESPFullURLOutSide);
+
   // alert(periscopeESPFullURL);
   httpGet(periscopeESPFullURL);
+  // httpGet(periscopeESPFullURLOutSide);
+  // getUserIP();
 };
 
 
 function httpGet(theUrl) {
   var xmlHttp = new XMLHttpRequest();
-  xmlHttp.open("GET", theUrl, false); // false for synchronous request
+  xmlHttp.open("GET", theUrl, true); // false for synchronous request
   xmlHttp.send(null);
+  console.log('Sent to :' + theUrl);
   return xmlHttp.responseText;
+
 }
+

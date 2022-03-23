@@ -37,38 +37,6 @@ body {
   background: blue;
   height: 3px;
 }
-.periscopeRange {
-  height: 40px;
-  -webkit-appearance: none;
-  /* justify-content: center; */
-  margin: 10px 0;
-  position: absolute;
-  width: 75%;
-  top: 10 5%;
-  left: 15%;
-  background: transparent;
-  opacity: 0.7;
-
-}
-.periscopeRange ::before {
-  content: "Bottom";
-  color: White;
-  font-size: 2rem;
-  position: absolute;
-  text-shadow: 0px 0px 10px blue;
-
-  left: 0%;
-  top: 120%;
-}
-.periscopeRange ::after {
-  content: "Top";
-  color: White;
-  font-size: 2rem;
-  position: absolute;
-  text-shadow: 0px 3px 15px blue;
-  left: 80%;
-  top: 120%;
-}
 
 .SubMenuLabelPosition {
   position: relative;
@@ -958,6 +926,12 @@ left: 100px;
   height: 28px;
 }
 
+.StoredSequenceDiv{
+  position: absolute;
+  top: 0px;
+  left: 150px;
+}
+
 
 
 .HPServoHeader{
@@ -985,11 +959,61 @@ left: 100px;
 
 
 .utilityArmsDiv{
-  //border: 3px solid white;
   height: 150px;
   width: 900px;
   position: absolute;
   top: 50px;
+  left: 60px;
+}
+
+.periscopeRangeDiv{
+  height: 150px;
+  width: 900px;
+  position: absolute;
+  top: 50px;
+  left: 60px;
+}
+.LDPBrightnesRangeDiv{
+  height: 120px;
+  width: 900px;
+  position: absolute;
+  top: 100px;
+  left: 60px;
+}
+.MaintBrightnesRangeDiv{
+  height: 120px;
+  width: 900px;
+  position: absolute;
+  top: 190px;
+  left: 60px;
+}
+.VUBrightnesRangeDiv{
+  height: 120px;
+  width: 900px;
+  position: absolute;
+  top: 370px;
+  left: 60px;
+}
+
+.CoinBrightnesRangeDiv{
+  height: 120px;
+  width: 900px;
+  position: absolute;
+  top: 280px;
+  left: 60px;
+}
+.IntBaselineRangeDiv{
+  height: 120px;
+  width: 900px;
+  position: absolute;
+  top: 550px;
+  left: 60px;
+}
+.IntOffsetRangeDiv{
+  height: 120px;
+  width: 900px;
+  position: absolute;
+  top: 460px;
   left: 60px;
 }
  .img-wrapper img {
@@ -1138,6 +1162,17 @@ label[for= ColorPicker]{
   font-size: 1.5rem;
 }
 
+.ESP32Picker {
+
+  font-size: 1.5rem;
+
+}
+.ESP32Pickertext {
+  height: 25px;
+  font-size: 1.5rem;
+}
+
+
 .ColorPicker1 {
   /* border: 3px green solid; */
   align-items: center;
@@ -1256,7 +1291,7 @@ input[type="range"]:hover {
   opacity: 1;
 }
 input[type="range"]::after {
-  content: "Slowest";
+  content: "";
   color: White;
   font-size: 2rem;
   position: absolute;
@@ -1265,7 +1300,7 @@ input[type="range"]::after {
   top: 120%;
 }
 input[type="range"]::before {
-  content: "Fastest";
+  content: "";
   color: White;
   font-size: 2rem;
   position: absolute;
@@ -1673,6 +1708,8 @@ background-color: black;
 .menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content .menu-Level-2 .menu-Level-2-Content.active{
 display: block;
 }
+
+
 
 
 
