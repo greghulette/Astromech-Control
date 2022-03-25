@@ -7,7 +7,7 @@
 // SERIAL CONFIGURATION
 ///
 
-#define BAUDRATE 2400 //this is the baudrate that we use to listen for incoming commands over serial
+#define BAUDRATE 9600 //this is the baudrate that we use to listen for incoming commands over serial
 
 // NOTE THAT NO USB COMMANDS WILL BE PROCESSED IF THIS IS COMMENTED OUT
 #define DEBUG  // uncomment this line to output debug messages on Debug serial
