@@ -26,6 +26,237 @@ function openAllDoorsMS() {
   };
 };
 
+
+var BodyControllerStatus = false;
+var PerisopeLifterStatus = false;
+var DomeControllerStatus = false
+
+
+function checkPeriscopeLifterStatus() {
+  const before = new Date();
+  var request = new XMLHttpRequest();
+  request.timeout = 1000;
+  request.open('GET', 'http://192.168.8.142', true);
+  request.onreadystatechange = function () {
+
+    if (request.readyState === 4) {
+      if (request.status === 200) {
+        document.getElementById("PeriscopeLifterIcon").src = "./Images/Status-icon-Green.png";
+        PerisopeLifterStatus = true;
+      }
+      else {
+        document.getElementById("PeriscopeLifterIcon").src = "./Images/Status-icon-Red.png";
+        PerisopeLifterStatus = false;
+      }
+    }
+  };
+
+  request.send();
+};
+
+
+function checkBodyLEDControllerStatus() {
+  const before = new Date();
+  var request = new XMLHttpRequest();
+  request.timeout = 1000;
+  request.open('GET', 'http://192.168.8.101', true);
+  request.onreadystatechange = function () {
+
+    if (request.readyState === 4) {
+      if (request.status === 200) {
+        document.getElementById("BodyLEDControllerIcon").src = "./Images/Status-icon-Green.png";
+        BodyControllerStatus = true;
+
+      }
+      else {
+        document.getElementById("BodyLEDControllerIcon").src = "./Images/Status-icon-Red.png";
+        BodyControllerStatus = false;
+
+      }
+    }
+  };
+
+  request.send();
+
+};
+
+
+function checkDomeControllerStatus() {
+  const before = new Date();
+  var request = new XMLHttpRequest();
+  request.timeout = 1000;
+  request.open('GET', 'http://192.168.8.245', true);
+  request.onreadystatechange = function () {
+
+    if (request.readyState === 4) {
+      if (request.status === 200) {
+        document.getElementById("HPIcon").src = "./Images/Status-icon-Green.png";
+        DomeControllerStatus = true;
+
+      }
+      else {
+        document.getElementById("HPIcon").src = "./Images/Status-icon-Red.png";
+        DomeControllerStatus = false;
+
+      }
+    }
+  };
+
+  request.send();
+
+};
+
+
+
+setInterval(function () {
+  checkPeriscopeLifterStatus()
+  checkBodyLEDControllerStatus()
+  checkDomeControllerStatus()
+}, 1000)
+
+function bodyControllerLEDFunctionExecution(t) {
+  var LEDCommand = t;
+  var bodyLEDControllerSPURL = "http://192.168.8.101/?param0=2";
+
+  var bodyLEDControllerFullURL = bodyLEDControllerSPURL + LEDCommand;
+  console.log(bodyLEDControllerFullURL);
+  // setTimeout(function () { httpGet(bodyLEDControllerFullURL); }, 500);
+  // sleep(1000); 
+  if (BodyControllerStatus === true) {
+    httpGet(bodyLEDControllerFullURL);
+
+  } else {
+    console.log('Body Controller Not Online')
+  }
+
+
+};
+
+function HPLEDFunctionExecution(t) {
+  var LEDCommand = t;
+  var HPControllerSPURL = "http://192.168.8.245/?param0=0";
+
+  var HPLEDControllerFullURL = HPControllerSPURL + LEDCommand;
+  console.log(HPLEDControllerFullURL);
+  // setTimeout(function () { httpGet(bodyLEDControllerFullURL); }, 500);
+  // sleep(1000);
+  if (DomeControllerStatus === true) {
+    httpGet(HPLEDControllerFullURL);
+
+  } else {
+    console.log('Body Controller Not Online')
+  }
+
+};
+
+
+
+//R Series Stuff
+var checkedItemsRSeries = new Array();
+var imgArrayRSeries = [];
+
+var checkedItemsKnightRider = new Array();
+var imgArrayKnightRider = [];
+
+function rldtoggleRSeries() {
+  let tmp = document.querySelector('#RLDRSeries');
+  tmp.classList.toggle('active');
+  if (tmp.classList.contains('active')) {
+  }
+
+  getCheckedElementRseries();
+};
+
+function fldtoggleRseries() {
+  let tmp = document.querySelector('#FLDRSeries');
+  tmp.classList.toggle('active');
+  if (tmp.classList.contains('active')) {
+  }
+
+  getCheckedElementRseries();
+};
+
+function getCheckedElementRseries() {
+  var imgArrayRSeries = document.getElementsByName('stripSelectorRSeries');
+  checkedItemsRSeries.length = 0;
+  for (var i = 0; i < imgArrayRSeries.length; i++) {
+    var tmp = imgArrayRSeries[i].classList.toString();
+    if (tmp.indexOf('active') != -1) {
+      checkedItemsRSeries.push(imgArrayRSeries[i].id.toString());
+    }
+
+  }
+};
+function changeImageFLDRseries() {
+
+  if (document.getElementById("FLDRSeries").src.match("Images/Dome-Outline-FLD-Blue.png")) {
+    document.getElementById("FLDRSeries").src = "./Images/Dome-Outline-FLD-Green.png";
+    // console.log("Changed to Green");
+  } else {
+    document.getElementById("FLDRSeries").src = "Images/Dome-Outline-FLD-Blue.png";
+    // console.log("Change to Blue");
+  }
+  fldtoggleRseries();
+};
+
+function changeImageRLDRseries() {
+
+  if (document.getElementById("RLDRSeries").src.match("Images/Dome-Outline-RLD-Blue.png")) {
+    document.getElementById("RLDRSeries").src = "./Images/Dome-Outline-RLD-Green.png";
+    // console.log("Changed to Green");
+  } else {
+    document.getElementById("RLDRSeries").src = "Images/Dome-Outline-RLD-Blue.png";
+    // console.log("Change to Blue");
+  }
+  rldtoggleRSeries()
+};
+
+
+function selectALLStripsRSeries() {
+  console.log("Clicked")
+  document.getElementById("RLDRSeries").src = "./Images/Dome-Outline-RLD-Green.png";
+  document.getElementById("FLDRSeries").src = "./Images/Dome-Outline-FLD-Green.png";
+
+  document.getElementById("checkmarkallRSeries").src = "Images/checkmark.png";
+  setTimeout('document.getElementById("checkmarkallRSeries").src = "Images/blankcheckmark.png"', 1000);
+  setTimeout('document.getElementById("checkmarkallRSeries").src = "Images/Button-Select-All-GIMP.png"', 1000);
+
+  let rldtemp = document.querySelector('#RLDRSeries');
+  rldtemp.classList.add('active');
+  let fldtemp = document.querySelector('#FLDRSeries');
+  fldtemp.classList.add('active');
+
+  getCheckedElementRseries()
+};
+
+function selectNoneStripsRSeries() {
+  console.log("Clicked None")
+  document.getElementById("RLDRSeries").src = "./Images/Dome-Outline-RLD-Blue.png";
+  document.getElementById("FLDRSeries").src = "./Images/Dome-Outline-FLD-Blue.png";
+
+  document.getElementById("checkmarkNoneRSeries").src = "Images/checkmark.png";
+  setTimeout('document.getElementById("checkmarkNoneRSeries").src = "Images/blankcheckmark.png"', 1000);
+  setTimeout('document.getElementById("checkmarkNoneRSeries").src = "Images/Button-Select-None-GIMP.png"', 1000);
+
+  let rldtemp = document.querySelector('#RLDRSeries');
+  rldtemp.classList.remove('active');
+  let fldtemp = document.querySelector('#FLDRSeries');
+  fldtemp.classList.remove('active');
+
+  getCheckedElementRseries()
+};
+
+
+
+
+
+
+
+
+
+
+
+
 //KnightRider stuff
 
 var checkedItemsKnightRider = new Array();
@@ -359,6 +590,8 @@ function commandSingleColorKnightRider(y, t, z, u) {
   let fullURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullURL);
 
+
+
   // socket.emit('command', {
   //   ldpcommandstring: ldpcommandstring,
   //   coincommandstring: coincommandstring,
@@ -436,29 +669,40 @@ function commandStripOffKnightRider(y, t, u) {
 
 
 };
-function bodyControllerLEDFunctionExecution(t) {
-  var LEDCommand = t;
-  var bodyLEDControllerSPURL = "http://192.168.8.101/?param0=2";
+// function bodyControllerLEDFunctionExecution(t) {
+//   var LEDCommand = t;
+//   var bodyLEDControllerSPURL = "http://192.168.8.101/?param0=2";
 
-  var bodyLEDControllerFullURL = bodyLEDControllerSPURL + LEDCommand;
-  console.log(bodyLEDControllerFullURL);
-  // setTimeout(function () { httpGet(bodyLEDControllerFullURL); }, 500);
-  // sleep(1000);
-  httpGet(bodyLEDControllerFullURL);
+//   var bodyLEDControllerFullURL = bodyLEDControllerSPURL + LEDCommand;
+//   console.log(bodyLEDControllerFullURL);
+//   // setTimeout(function () { httpGet(bodyLEDControllerFullURL); }, 500);
+//   // sleep(1000); 
+//   if (BodyControllerStatus === true) {
+//     httpGet(bodyLEDControllerFullURL);
 
-};
+//   } else {
+//     console.log('Body Controller Not Online')
+//   }
 
-function HPLEDFunctionExecution(t) {
-  var LEDCommand = t;
-  var bodyLEDControllerSPURL = "http://192.168.8.245/?param0=1";
 
-  var bodyLEDControllerFullURL = bodyLEDControllerSPURL + LEDCommand;
-  console.log(bodyLEDControllerFullURL);
-  // setTimeout(function () { httpGet(bodyLEDControllerFullURL); }, 500);
-  // sleep(1000);
-  httpGet(bodyLEDControllerFullURL);
+// };
 
-};
+// function HPLEDFunctionExecution(t) {
+//   var LEDCommand = t;
+//   var HPControllerSPURL = "http://192.168.8.245/?param0=0";
+
+//   var HPLEDControllerFullURL = HPControllerSPURL + LEDCommand;
+//   console.log(bodyLEDControllerFullURL);
+//   // setTimeout(function () { httpGet(bodyLEDControllerFullURL); }, 500);
+//   // sleep(1000);
+//   if (HPControllerStatus === true) {
+//     httpGet(HPLEDControllerFullURL);
+
+//   } else {
+//     console.log('Body Controller Not Online')
+//   }
+
+// };
 
 //Rainbow stuff
 var checkedItemsRainbow = new Array();
@@ -9316,7 +9560,7 @@ function getStripName() {
 };
 //var socket = io.connect('http://astromech.local:5000');
 // var socket = io();
-var socket = io.connect();
+// var socket = io.connect();
 // var socket1 = io.connect('http://astromech.local:5000');
 // var socket2 = io.connect('10.0.0.40:5000');
 // var socket = io.connect('127.0.0.1:3000');
@@ -9350,12 +9594,12 @@ function commandSingleColor(x, y, t, z) {
     };
   };
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring
-  });
+  // socket.emit('command', {
+  //   ldpcommandstring: ldpcommandstring,
+  //   coincommandstring: coincommandstring,
+  //   vucommandstring: vucommandstring,
+  //   mcommandstring: mcommandstring
+  // });
 };
 
 
@@ -9397,14 +9641,14 @@ function commandNoOptions(x, y, t, z) {
     };
   };
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring,
-    dcommandstring: dcommandstring,
-    icommandstring: icommandstring
-  });
+  // socket.emit('command', {
+  //   ldpcommandstring: ldpcommandstring,
+  //   coincommandstring: coincommandstring,
+  //   vucommandstring: vucommandstring,
+  //   mcommandstring: mcommandstring,
+  //   dcommandstring: dcommandstring,
+  //   icommandstring: icommandstring
+  // });
   // socket1.emit('command', {
   //   ldpcommandstring: ldpcommandstring,
   //   coincommandstring: coincommandstring,
@@ -9463,12 +9707,12 @@ function commandTwoColors(x, y, t, z, s) {
     };
   };
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring
-  });
+  // socket.emit('command', {
+  //   ldpcommandstring: ldpcommandstring,
+  //   coincommandstring: coincommandstring,
+  //   vucommandstring: vucommandstring,
+  //   mcommandstring: mcommandstring
+  // });
   // socket1.emit('command', {
   //   ldpcommandstring: ldpcommandstring,
   //   coincommandstring: coincommandstring,
@@ -9519,12 +9763,12 @@ function commandTwoColorsNoSlider(y, t, z, s) {
     };
   };
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring
-  });
+  // socket.emit('command', {
+  //   ldpcommandstring: ldpcommandstring,
+  //   coincommandstring: coincommandstring,
+  //   vucommandstring: vucommandstring,
+  //   mcommandstring: mcommandstring
+  // });
   // socket1.emit('command', {
   //   ldpcommandstring: ldpcommandstring,
   //   coincommandstring: coincommandstring,
@@ -9576,12 +9820,12 @@ function commandOneColorAndSpeed(x, y, t, z) {
     };
   };
 
-  socket.emit('command', {
-    ldpcommandstring: ldpcommandstring,
-    coincommandstring: coincommandstring,
-    vucommandstring: vucommandstring,
-    mcommandstring: mcommandstring
-  });
+  // socket.emit('command', {
+  //   ldpcommandstring: ldpcommandstring,
+  //   coincommandstring: coincommandstring,
+  //   vucommandstring: vucommandstring,
+  //   mcommandstring: mcommandstring
+  // });
   // socket1.emit('command', {
   //   ldpcommandstring: ldpcommandstring,
   //   coincommandstring: coincommandstring,
@@ -9688,10 +9932,10 @@ function sendSerialCommand(x) {
   let command = document.getElementById(x).value;
   let commandUpper = command.toUpperCase();
   console.log(commandUpper);
-  socket.emit('command', {
-    serialcommandstring: commandUpper,
+  // socket.emit('command', {
+  //   serialcommandstring: commandUpper,
 
-  });
+  // });
 };
 function sendi2CCommand(b, x) {
   let i2Ccommand = document.getElementById(x).value;
@@ -9699,11 +9943,11 @@ function sendi2CCommand(b, x) {
   // let i2CcommandUpper = i2Ccommand.toUpperCase();
   let i2cDevice = geti2CDevice(b);
   // console.log(commandUpper);
-  socket.emit('command', {
-    i2Ccommandstring: i2Ccommand,
-    i2cCommandDevice: i2cDevice,
+  // socket.emit('command', {
+  //   i2Ccommandstring: i2Ccommand,
+  //   i2cCommandDevice: i2cDevice,
 
-  });
+  // });
 };
 
 // Varialbles for the selection of the LED selector buttons

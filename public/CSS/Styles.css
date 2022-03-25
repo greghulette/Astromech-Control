@@ -10,6 +10,100 @@ body {
 
 
 }
+
+.statusIconsOverallDiv{
+
+  position: absolute;
+  top: 870px;
+  left: 600px;
+}
+
+.iconStatusPLDiv{
+
+  position: relative;
+  height: 70px;
+  top: 0px;
+  left: 40px;
+}
+
+.iconStatusPLicon{
+  height: 70px;
+position: relative;
+top: -70px;
+left: 30px;
+}
+
+.PLStatusText{
+  position: relative;
+  top: 0px;
+  left:0px;
+}
+
+
+.StatusIconBCDiv{
+
+  position: relative;
+  height: 70px;
+  top: -94px;
+  left: 140px;
+}
+  .BCStatusText{
+    position: relative;
+    top: 0px;
+    left:0px;
+  }
+
+.iconStatusBC{
+
+  position: relative;
+  height: 70px;
+  top: 0px;
+  left: 340px;
+}
+
+.StatusIconHPDiv{
+
+  position: relative;
+  height: 70px;
+  top: -187px;
+  left: 240px;
+}
+  .HPStatusText{
+    position: relative;
+    top: 0px;
+    left:0px;
+  }
+
+.iconStatusHP{
+
+  position: relative;
+  height: 70px;
+  top: 0px;
+  left: 340px;
+}
+
+
+.StatusIconStealthDiv{
+
+  position: relative;
+  height: 70px;
+  top: -285px;
+  left: 340px;
+}
+  .StealthStatusText{
+    position: relative;
+    top: 0px;
+    left:5px;
+  }
+
+.iconStatusStealth{
+
+  position: relative;
+  height: 70px;
+  top: -70px;
+  left: 110px;
+}
+
 .per{
   height: 40px;
   width: 60px;
@@ -609,6 +703,30 @@ shadow: 2px, 4px 15px blue;
 }
 
 
+.r2menuRseriesRLD {
+  width: 70px;
+  /* height: 20px; */
+  position: absolute;
+  left: -663px;
+  top: 01px;
+  /* background: url("../Images/Body/LDPBlue.png"); */
+}
+.r2menuRseriesRLD.active{
+}
+
+.r2menuRseriesFLD {
+  width: 40px;
+  /* height: 20px; */
+  position: absolute;
+  left: -580px;
+  top: 313px;
+  /* background: url("../Images/Body/LDPBlue.png"); */
+}
+.r2menuRseriesFLD.active{
+}
+
+
+
 .r2menupictureCoin {
   width: 30px;
   position: absolute;
@@ -624,6 +742,20 @@ shadow: 2px, 4px 15px blue;
   left: -665px;
   top: 760px;
 }
+.r2menupictureCoin {
+  width: 30px;
+  position: absolute;
+  left: -633px;
+  top: 577px;
+}
+
+.r2menupictureMaint {
+  width: 290px;
+  position: absolute;
+  left: -665px;
+  top: 760px;
+}
+
 
 .r2menupictureMaint.active{
 }
@@ -795,6 +927,37 @@ shadow: 2px, 4px 15px blue;
   height: 60px;
   width: 60px;
 }
+
+.selectALLpic{
+  position: absolute;
+  top: 575px;
+  left: -805px;
+  height: 70px;
+  width: 70px;
+}
+.checkmarkallpic{
+  position: absolute;
+  top: 575px;
+  left: -705px;
+  height: 70px;
+  width: 70px;
+}
+
+.selectNonepic{
+  position: absolute;
+  top: 675px;
+  left: -805px;
+  height: 70px;
+  width: 70px;
+}
+.checkmarkNonepic{
+  position: absolute;
+  top: 575px;
+  left: -705px;
+  height: 70px;
+  width: 70px;
+}
+
 .UpArrowPicture{
   position: absolute;
   top: 10px;
@@ -1165,13 +1328,20 @@ label[for= ColorPicker]{
 .ESP32Picker {
 
   font-size: 1.5rem;
+  position:absolute;
+  left: 190px;
 
 }
 .ESP32Pickertext {
   height: 25px;
   font-size: 1.5rem;
+  position: absolute;
+  left : 490px;
 }
-
+.ESP32PickerLabel{
+  position: absolute;
+  left: -60px;
+}
 
 .ColorPicker1 {
   /* border: 3px green solid; */
