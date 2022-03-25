@@ -150,13 +150,30 @@ function HPLEDFunctionExecution(t) {
 };
 
 
+function RSeriesLEDFunctionExecution(t) {
+  var LEDCommand = t;
+  var RSeriesControllerSPURL = "http://192.168.8.129/?param0=1";
+
+  var RSeriesControllerSFullPURL = RSeriesControllerSPURL + LEDCommand;
+  console.log(RSeriesControllerSFullPURL);
+  // setTimeout(function () { httpGet(bodyLEDControllerFullURL); }, 500);
+  // sleep(1000);
+  if (DomeControllerStatus === true) {
+    httpGet(RSeriesControllerSFullPURL);
+
+  } else {
+    console.log('Dome Controller Not Online')
+  }
+
+};
+
+
 
 //R Series Stuff
 var checkedItemsRSeries = new Array();
 var imgArrayRSeries = [];
 
-var checkedItemsKnightRider = new Array();
-var imgArrayKnightRider = [];
+
 
 function rldtoggleRSeries() {
   let tmp = document.querySelector('#RLDRSeries');
@@ -247,7 +264,84 @@ function selectNoneStripsRSeries() {
 };
 
 
+function commandNoOptionsRSeries(t) {
 
+  // document.getElementById(u).src = "Images/checkmark.png";
+  // setTimeout(function () { document.getElementById(u).src = "Images/blankcheckmark.png"; }, 2000)
+
+
+
+  for (var i = 0; i < checkedItemsRSeries.length; i++) {
+    if (checkedItemsRSeries[i] === "RLDRSeries") {
+      console.log("L selected");
+      var RLDSeriescommandString = "3" + "T" + t;
+
+      console.log(RLDSeriescommandString);
+    };
+
+    if (checkedItemsRSeries[i] === "FLDRSeries") {
+      // console.log("C selected");
+      var FLDTRSeriesCommandString = "1" + "T" + t;
+      console.log(FLDTRSeriesCommandString);
+    };
+
+    if (checkedItemsRSeries[i] === "FrontPSI") {
+      // console.log("V selected");
+      var FLDBRSeriesCommandString = "2" + "T" + t;
+      console.log(FLDBRSeriesCommandString);
+    };
+
+    if (checkedItemsRSeries[i] === "RearPSI") {
+      // console.log("M selected");
+      var rpsicommandstring = "5" + "T" + t;
+      console.log(rpsicommandstring);
+
+    };
+
+    if (checkedItemsRSeries[i] === "FrontPSI") {
+      // console.log("M selected");
+      var fpsicommandstring = "6" + "T" + t;
+      console.log(fpsicommandstring);
+    };
+    // if (checkedItemsKnightRider[i] === "D") {
+    //   // console.log("M selected");
+    //   var dcommandstring = checkedItems[i] + y + t;
+    //   console.log(dcommandstring);
+    // };
+    // if (checkedItemsKnightRider[i] === "I") {
+    //   // console.log("M selected");
+    //   var icommandstring = checkedItems[i] + y + t;
+    //   console.log(icommandstring);
+    // };
+    // if (checkedItemsKnightRider[i] === "FrontHPKnightRider") {
+    //   // console.log("M selected");
+    //   var hpfcommandstring = "F007";
+    //   console.log(hpfcommandstring);
+    // };
+    // if (checkedItemsKnightRider[i] === "TopHPKnightRider") {
+    //   // console.log("M selected");
+    //   var hptcommandstring = "T007";
+    //   console.log(hptcommandstring);
+    // };
+    // if (checkedItemsKnightRider[i] === "RearHPKnightRider") {
+    //   // console.log("M selected");
+    //   var hprcommandstring = "R007";
+    //   console.log(hprcommandstring);
+    // };
+  };
+
+  let rldCommandParam = "&param1=" + RLDSeriescommandString;
+  let fldtCommandParam = "&param2=" + FLDTRSeriesCommandString;
+  let fldbCommandParam = "&param3=" + FLDBRSeriesCommandString;
+  let rpsiCommandParam = "&param4=" + rpsicommandstring;
+  let fpsiCommandParam = "&param5=" + fpsicommandstring;
+
+  let fullURL = rldCommandParam + fldtCommandParam + fldbCommandParam + rpsiCommandParam + fpsiCommandParam;
+  RSeriesLEDFunctionExecution(fullURL);
+
+
+
+};
 
 
 
@@ -10132,7 +10226,7 @@ function ESP32SendCommand(b, x) {
 
   var ESP32command = document.getElementById(x).value;
   var ESP32commandUpper = ESP32command.toUpperCase();
-  console.log('triggered');
+  // console.log('triggered');
   // let i2CcommandUpper = i2Ccommand.toUpperCase();
   //let ESP32Device = document.getElementById(b);
   var ESP32DeviceSelected = getcolor1(b);
@@ -10156,7 +10250,7 @@ function ESP32SendCommand(b, x) {
 
   };
   if (ESP32DeviceSelected === "HP") {
-    var DomeHPControllerIP = 'http://192.168.8.245/?param0=1&param1=';
+    var DomeHPControllerIP = 'http://192.168.8.129/?param0=1&param1=';
     console.log('BC subselection');
     console.log(DomeHPControllerIP)
 
@@ -10166,7 +10260,7 @@ function ESP32SendCommand(b, x) {
 
   };
   if (ESP32DeviceSelected === "RS") {
-    var DomeRSeriesControllerIP = 'http://192.168.8.129/?param0=2&param1=';
+    var DomeRSeriesControllerIP = 'http://192.168.8.129/?param0=0&param1=';
     console.log('RS subselection');
     console.log(DomeRSeriesControllerIP)
 

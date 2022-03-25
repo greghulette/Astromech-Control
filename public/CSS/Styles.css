@@ -185,6 +185,12 @@ span.myButton input {
 .homebuttonwidth {
   width: 240px;
 }
+
+.homebuttonwidth2 {
+  width: 160px;
+}
+
+
 #buttons {
   /* border: 4px solid blue; */
   position: absolute;
