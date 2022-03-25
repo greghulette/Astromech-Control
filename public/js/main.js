@@ -85,7 +85,7 @@ function checkDomeControllerStatus() {
   const before = new Date();
   var request = new XMLHttpRequest();
   request.timeout = 1000;
-  request.open('GET', 'http://192.168.8.245', true);
+  request.open('GET', 'http://192.168.8.129', true);
   request.onreadystatechange = function () {
 
     if (request.readyState === 4) {
@@ -134,7 +134,7 @@ function bodyControllerLEDFunctionExecution(t) {
 
 function HPLEDFunctionExecution(t) {
   var LEDCommand = t;
-  var HPControllerSPURL = "http://192.168.8.245/?param0=0";
+  var HPControllerSPURL = "http://192.168.8.129/?param0=1";
 
   var HPLEDControllerFullURL = HPControllerSPURL + LEDCommand;
   console.log(HPLEDControllerFullURL);
@@ -144,7 +144,7 @@ function HPLEDFunctionExecution(t) {
     httpGet(HPLEDControllerFullURL);
 
   } else {
-    console.log('Body Controller Not Online')
+    console.log('Dome Controller Not Online')
   }
 
 };
@@ -10156,13 +10156,23 @@ function ESP32SendCommand(b, x) {
 
   };
   if (ESP32DeviceSelected === "HP") {
-    var bodyLEDControllerIP = 'http://192.168.8.245/?param0=1&param1=';
+    var DomeHPControllerIP = 'http://192.168.8.245/?param0=1&param1=';
     console.log('BC subselection');
-    console.log(bodyLEDControllerIP)
+    console.log(DomeHPControllerIP)
 
-    var bodyLEDControllerFullURL = bodyLEDControllerIP + ESP32commandUpper;
-    httpGet(bodyLEDControllerFullURL);
-    console.log(bodyLEDControllerFullURL);
+    var DomeHPControllerFullURL = DomeHPControllerIP + ESP32commandUpper;
+    httpGet(DomeHPControllerFullURL);
+    console.log(DomeHPControllerFullURL);
+
+  };
+  if (ESP32DeviceSelected === "RS") {
+    var DomeRSeriesControllerIP = 'http://192.168.8.129/?param0=2&param1=';
+    console.log('RS subselection');
+    console.log(DomeRSeriesControllerIP)
+
+    var DomeRSeriesControllerFullURL = DomeRSeriesControllerIP + ESP32commandUpper;
+    httpGet(DomeRSeriesControllerFullURL);
+    console.log(DomeRSeriesControllerFullURL);
 
   };
 };
