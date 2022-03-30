@@ -112,7 +112,7 @@ setInterval(function () {
   checkPeriscopeLifterStatus()
   checkBodyLEDControllerStatus()
   checkDomeControllerStatus()
-}, 1000)
+}, 5000)
 
 function bodyControllerLEDFunctionExecution(t) {
   var LEDCommand = t;
@@ -10260,7 +10260,7 @@ function ESP32SendCommand(b, x) {
 
   };
   if (ESP32DeviceSelected === "RS") {
-    var DomeRSeriesControllerIP = 'http://192.168.8.129/?param0=0&param1=';
+    var DomeRSeriesControllerIP = 'http://192.168.8.129/?param0=1&param1=';
     console.log('RS subselection');
     console.log(DomeRSeriesControllerIP)
 

@@ -971,6 +971,30 @@ shadow: 2px, 4px 15px blue;
   height: 80px;
   width: 80px;
 }
+
+.UpArrowPicturePeriscope{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  height: 80px;
+  width: 80px;
+}
+.CenterArrowPicturePeriscope{
+  position: absolute;
+  top: 100px;
+  left: 10px;
+  height: 80px;
+  width: 80px;
+  /* transform: rotate(270deg); */
+}
+.DownArrowPicturePeriscope{
+  position: absolute;
+  top: 190px;
+  left: 10px;
+  height: 80px;
+  width: 80px;
+  /* transform: rotate(180deg); */
+}
 .DownArrowPicture{
   position: absolute;
   top: 190px;
@@ -1070,13 +1094,178 @@ left: 100px;
 
 .periscopeControl{
   position: absolute;
-  top: 245px;
-  left: 400px;
+  top: 70px;
+  left: 390px;
   border: 3px solid white;
-  width: 280px;
-  height: 280px;
+  width: 80px;
+  height: 400px;
 }
 
+.periscopeRotationControl{
+  position: absolute;
+  top: 70px;
+  left: 580px;
+  border: 3px solid white;
+  width: 360px;
+  height: 400px;
+}
+
+.RotateClockwiseContinous{
+  position: absolute;
+  top: 240px;
+  left: 10px;
+
+}
+
+.RotateCounterClockwiseContinous{
+  position: absolute;
+  top: 240px;
+  left: 180px;
+
+}
+.rotateCCPicturePeriscope{
+position: absolute;
+top: 10px;
+left: 10px;
+
+}
+
+.rotateCWPicturePeriscope{
+  position: absolute;
+  top: 10px;
+  left: 180px;
+  
+  }
+
+  .absolute0Periscope{
+    position: absolute;
+    top: 130px;
+    left: 10px;
+    height: 70px;
+    width: 70px;
+  }
+
+  .absolute90Periscope{
+    position: absolute;
+    top: 130px;
+    left: 100px;
+    height: 70px;
+    width: 70px;
+  }
+  .absolute180Periscope{
+    position: absolute;
+    top: 130px;
+    left: 185px;
+    height: 70px;
+    width: 70px;
+  }
+  .absolute270Periscope{
+    position: absolute;
+    top: 130px;
+    left: 270px;
+    height: 70px;
+    width: 70px;
+  }
+
+  .RotateHome{
+    position: relative;
+    top: 320px;
+    left: 100px;
+  }
+  .RotateClockwiseRelativeText{
+    position: absolute;
+    top: 80px;
+    left: 20px;
+  }
+  .RotateCounterClockwiseRelativeText{
+    position: absolute;
+    top: 80px;
+    left: 185px;
+  }
+  .Height0{
+    position: absolute;
+    background-image: url('Images/Buttons/Button-Height-0-Grey.png') no-repeat;
+    top: 340px;
+    left: 10px;
+    width: 60px;
+    /* border: 2px solid yellow; */
+  }
+  .Height0:hover{
+    background: url('Images/Buttons/Button-Height-0.png') no-repeat;
+
+    opacity: 1.0;
+    box-shadow: 0px 0px 20px yellow;
+    scale: 2;
+  }
+
+  .Height10{
+
+    position: absolute;
+    top: 305px;
+    left: 10px;
+    width: 60px;
+    /* border: 2px solid blueviolet; */
+
+  }
+  .Height10:hover{
+    opacity: 1.0;
+    box-shadow: 0px 0px 45px yellow;
+    scale: 1.2;
+    }
+  .Height20{
+    position: absolute;
+    top: 270px;
+    left: 10px;
+    width: 60px;
+  }
+  .Height30{
+    position: absolute;
+    top: 235px;
+    left: 10px;
+    width: 60px;
+  }
+  .Height40{
+    position: absolute;
+    top: 200px;
+    left: 10px;
+    width: 60px;
+  }
+  .Height50{
+    position: absolute;
+    top: 165px;
+    left: 10px;
+    width: 60px;
+  }
+  .Height60{
+    position: absolute;
+    top: 130px;
+    left: 10px;
+    width: 60px;
+  }
+  .Height70{
+    position: absolute;
+    top: 95px;
+    left: 10px;
+    width: 60px;
+  }
+  .Height80{
+    position: absolute;
+    top: 60px;
+    left: 10px;
+    width: 60px;
+  }
+  .Height90{
+    position: absolute;
+    top: 25px;
+    left: 10px;
+    width: 60px;
+  }
+  .Height100{
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    width: 60px;
+  }
 .periscopeText{
   position: absolute;
   top: 645px;
@@ -1097,8 +1286,8 @@ left: 100px;
 
 .StoredSequenceDiv{
   position: absolute;
-  top: 0px;
-  left: 150px;
+  top:-90px;
+  left: 130px;
 }
 
 
@@ -1110,6 +1299,19 @@ left: 100px;
   width: 350px;
 }
 
+.PeriscopeHeightHeader{
+  position: absolute;
+  top: -75px;
+  left: -10px;
+  width: 350px;
+}
+
+.PeriscopeRotateHeader{
+  position: absolute;
+  top: -75px;
+  left: 105px;
+  width: 350px;
+}
 .openclosedoors{
   position: absolute;
   top: 400px;
