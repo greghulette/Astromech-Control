@@ -9097,8 +9097,14 @@ function selectNoneStripsEqualizer() {
   // let rearHPtemp = document.querySelector('#RearHPEqualizer');
   // rearHPtemp.classList.remove('active');
 
+
+
+
   getCheckedElementEqualizer()
 }
+
+
+
 function changeImageLDPEqualizer() {
 
   if (document.getElementById("LDPEqualizer").src.match("LDPBlue.png")) {
@@ -10302,10 +10308,13 @@ function getBodyLEDController(t, v) {
 
 
 
-
-function pericopeLifter(t) {
+function pericopeLifter(s, t) {
   console.log("What up");
   getPeriscope(t);
+}
+function pericopeRotateAbsolute(t) {
+
+  getPeriscopeRotateAbsolute(t);
 }
 
 function periscopeRange() {
@@ -10323,9 +10332,56 @@ function periscopeRange() {
 
 
 
-function getPeriscope(t) {
+function getPeriscope(s, t) {
+
+  let periscopeFunction = s;
+  if (periscopeFunction === 'D' && t === 'RotateClockwiseRelative') {
+    let periscopeRelativeDeg = document.getElementById(t).value;
+    let periscopeESPURL = "http://192.168.8.142/?param0=1&param1=:P" + periscopeFunction;
+    let periscopeESPFullURL = periscopeESPURL + periscopeRelativeDeg;
+    httpGet(periscopeESPFullURL);
+
+  } else if (periscopeFunction === 'D' && t === 'RotateCounterClockwiseRelative') {
+    let periscopeRelativeDeg = document.getElementById(t).value;
+    let periscopeESPURL = "http://192.168.8.142/?param0=1&param1=:P" + periscopeFunction + '-';
+    let periscopeESPFullURL = periscopeESPURL + periscopeRelativeDeg;
+    httpGet(periscopeESPFullURL);
+  } else {
+    var periscopeHeight = t;
+    var periscopeESPURL = "http://192.168.8.142/?param0=1&param1=:P" + periscopeFunction;
+    let periscopeESPFullURL = periscopeESPURL + periscopeHeight;
+    console.log(periscopeESPFullURL);
+
+    httpGet(periscopeESPFullURL);
+  }
+
+
+
+};
+
+
+
+
+
+function getPeriscopeRotateAbsolute(t) {
   var periscopeHeight = t;
-  var periscopeESPURL = "http://192.168.8.142/?param0=1&param1=:PP";
+  var periscopeESPURL = "http://192.168.8.142/?param0=1&param1=:PA";
+  // var periscopeESPURLOutside = "http://10.0.0.230:8080/?param1=:PP";
+
+  var periscopeESPFullURL = periscopeESPURL + periscopeHeight;
+  // var periscopeESPFullURLOutSide = periscopeESPURLOutside + periscopeHeight;
+  console.log(periscopeESPFullURL);
+  // console.log(periscopeESPFullURLOutSide);
+
+  // alert(periscopeESPFullURL);
+  httpGet(periscopeESPFullURL);
+  // httpGet(periscopeESPFullURLOutSide);
+  // getUserIP();
+};
+
+function getPeriscopeRotateAbsolute(t) {
+  var periscopeHeight = t;
+  var periscopeESPURL = "http://192.168.8.142/?param0=1&param1=:PD";
   // var periscopeESPURLOutside = "http://10.0.0.230:8080/?param1=:PP";
 
   var periscopeESPFullURL = periscopeESPURL + periscopeHeight;
@@ -10349,3 +10405,570 @@ function httpGet(theUrl) {
 
 }
 
+function HeightSelection(t) {
+  let tmp = document.querySelector('#Height' + t);
+  let tmppic = "Images/Buttons/Button-Height-" + t + ".png"
+  let tmpid = "Height" + t;
+  document.getElementById(tmpid).src = tmppic;
+  tmp.classList.toggle('active');
+  console.log(tmp);
+
+}
+
+function HeightSelectionAll() {
+  let tmp = document.querySelector('#Height' + t);
+  let tmppic = "Images/Buttons/Button-Height-" + t + ".png"
+  let tmpid = "Height" + t;
+  document.getElementById(tmpid).src = tmppic;
+  tmp.classList.toggle('active');
+  console.log(tmp);
+
+}
+
+function HeightSelection0(t) {
+  let tmp0 = document.querySelector('#Height0');
+  let tmp10 = document.querySelector('#Height10');
+  let tmp20 = document.querySelector('#Height20');
+  let tmp30 = document.querySelector('#Height30');
+  let tmp40 = document.querySelector('#Height40');
+  let tmp50 = document.querySelector('#Height50');
+  let tmp60 = document.querySelector('#Height60');
+  let tmp70 = document.querySelector('#Height70');
+  let tmp80 = document.querySelector('#Height80');
+  let tmp90 = document.querySelector('#Height90');
+  let tmp100 = document.querySelector('#Height100');
+  let tmppic0 = "Images/Buttons/Button-Height-0.png"
+  let tmppic10 = "Images/Buttons/Button-Height-10-Grey.png"
+  let tmppic20 = "Images/Buttons/Button-Height-20-Grey.png"
+  let tmppic30 = "Images/Buttons/Button-Height-30-Grey.png"
+  let tmppic40 = "Images/Buttons/Button-Height-40-Grey.png"
+  let tmppic50 = "Images/Buttons/Button-Height-50-Grey.png"
+  let tmppic60 = "Images/Buttons/Button-Height-60-Grey.png"
+  let tmppic70 = "Images/Buttons/Button-Height-70-Grey.png"
+  let tmppic80 = "Images/Buttons/Button-Height-80-Grey.png"
+  let tmppic90 = "Images/Buttons/Button-Height-90-Grey.png"
+  let tmppic100 = "Images/Buttons/Button-Height-100-Grey.png"
+
+
+
+  document.getElementById("Height0").src = tmppic0;
+  tmp0.classList.add('active');
+  document.getElementById("Height10").src = tmppic10;
+  tmp10.classList.remove('active');
+  document.getElementById("Height20").src = tmppic20;
+  tmp20.classList.remove('active');
+  document.getElementById("Height30").src = tmppic30;
+  tmp30.classList.remove('active');
+  document.getElementById("Height40").src = tmppic40;
+  tmp40.classList.remove('active');
+  document.getElementById("Height50").src = tmppic50;
+  tmp50.classList.remove('active');
+  document.getElementById("Height60").src = tmppic60;
+  tmp60.classList.remove('active');
+  document.getElementById("Height70").src = tmppic70;
+  tmp70.classList.remove('active');
+  document.getElementById("Height80").src = tmppic80;
+  tmp80.classList.remove('active');
+  document.getElementById("Height90").src = tmppic90;
+  tmp90.classList.remove('active');
+  document.getElementById("Height100").src = tmppic100;
+  tmp100.classList.remove('active');
+  getPeriscope('P', '0');
+}
+function HeightSelection10(t) {
+  let tmp0 = document.querySelector('#Height0');
+  let tmp10 = document.querySelector('#Height10');
+  let tmp20 = document.querySelector('#Height20');
+  let tmp30 = document.querySelector('#Height30');
+  let tmp40 = document.querySelector('#Height40');
+  let tmp50 = document.querySelector('#Height50');
+  let tmp60 = document.querySelector('#Height60');
+  let tmp70 = document.querySelector('#Height70');
+  let tmp80 = document.querySelector('#Height80');
+  let tmp90 = document.querySelector('#Height90');
+  let tmp100 = document.querySelector('#Height100');
+  let tmppic0 = "Images/Buttons/Button-Height-0.png"
+  let tmppic10 = "Images/Buttons/Button-Height-10.png"
+  let tmppic20 = "Images/Buttons/Button-Height-20-Grey.png"
+  let tmppic30 = "Images/Buttons/Button-Height-30-Grey.png"
+  let tmppic40 = "Images/Buttons/Button-Height-40-Grey.png"
+  let tmppic50 = "Images/Buttons/Button-Height-50-Grey.png"
+  let tmppic60 = "Images/Buttons/Button-Height-60-Grey.png"
+  let tmppic70 = "Images/Buttons/Button-Height-70-Grey.png"
+  let tmppic80 = "Images/Buttons/Button-Height-80-Grey.png"
+  let tmppic90 = "Images/Buttons/Button-Height-90-Grey.png"
+  let tmppic100 = "Images/Buttons/Button-Height-100-Grey.png"
+
+
+
+  document.getElementById("Height0").src = tmppic0;
+  tmp0.classList.add('active');
+  document.getElementById("Height10").src = tmppic10;
+  tmp10.classList.remove('active');
+  document.getElementById("Height20").src = tmppic20;
+  tmp20.classList.remove('active');
+  document.getElementById("Height30").src = tmppic30;
+  tmp30.classList.remove('active');
+  document.getElementById("Height40").src = tmppic40;
+  tmp40.classList.remove('active');
+  document.getElementById("Height50").src = tmppic50;
+  tmp50.classList.remove('active');
+  document.getElementById("Height60").src = tmppic60;
+  tmp60.classList.remove('active');
+  document.getElementById("Height70").src = tmppic70;
+  tmp70.classList.remove('active');
+  document.getElementById("Height80").src = tmppic80;
+  tmp80.classList.remove('active');
+  document.getElementById("Height90").src = tmppic90;
+  tmp90.classList.remove('active');
+  document.getElementById("Height100").src = tmppic100;
+  tmp100.classList.remove('active');
+  getPeriscope('P', '10');
+
+}
+
+function HeightSelection20(t) {
+  let tmp0 = document.querySelector('#Height0');
+  let tmp10 = document.querySelector('#Height10');
+  let tmp20 = document.querySelector('#Height20');
+  let tmp30 = document.querySelector('#Height30');
+  let tmp40 = document.querySelector('#Height40');
+  let tmp50 = document.querySelector('#Height50');
+  let tmp60 = document.querySelector('#Height60');
+  let tmp70 = document.querySelector('#Height70');
+  let tmp80 = document.querySelector('#Height80');
+  let tmp90 = document.querySelector('#Height90');
+  let tmp100 = document.querySelector('#Height100');
+  let tmppic0 = "Images/Buttons/Button-Height-0.png"
+  let tmppic10 = "Images/Buttons/Button-Height-10.png"
+  let tmppic20 = "Images/Buttons/Button-Height-20.png"
+  let tmppic30 = "Images/Buttons/Button-Height-30-Grey.png"
+  let tmppic40 = "Images/Buttons/Button-Height-40-Grey.png"
+  let tmppic50 = "Images/Buttons/Button-Height-50-Grey.png"
+  let tmppic60 = "Images/Buttons/Button-Height-60-Grey.png"
+  let tmppic70 = "Images/Buttons/Button-Height-70-Grey.png"
+  let tmppic80 = "Images/Buttons/Button-Height-80-Grey.png"
+  let tmppic90 = "Images/Buttons/Button-Height-90-Grey.png"
+  let tmppic100 = "Images/Buttons/Button-Height-100-Grey.png"
+
+
+
+  document.getElementById("Height0").src = tmppic0;
+  tmp0.classList.add('active');
+  document.getElementById("Height10").src = tmppic10;
+  tmp10.classList.add('active');
+  document.getElementById("Height20").src = tmppic20;
+  tmp20.classList.add('active');
+  document.getElementById("Height30").src = tmppic30;
+  tmp30.classList.remove('active');
+  document.getElementById("Height40").src = tmppic40;
+  tmp40.classList.remove('active');
+  document.getElementById("Height50").src = tmppic50;
+  tmp50.classList.remove('active');
+  document.getElementById("Height60").src = tmppic60;
+  tmp60.classList.remove('active');
+  document.getElementById("Height70").src = tmppic70;
+  tmp70.classList.remove('active');
+  document.getElementById("Height80").src = tmppic80;
+  tmp80.classList.remove('active');
+  document.getElementById("Height90").src = tmppic90;
+  tmp90.classList.remove('active');
+  document.getElementById("Height100").src = tmppic100;
+  tmp100.classList.remove('active');
+  getPeriscope('P', '20');
+}
+
+
+function HeightSelection30(t) {
+  let tmp0 = document.querySelector('#Height0');
+  let tmp10 = document.querySelector('#Height10');
+  let tmp20 = document.querySelector('#Height20');
+  let tmp30 = document.querySelector('#Height30');
+  let tmp40 = document.querySelector('#Height40');
+  let tmp50 = document.querySelector('#Height50');
+  let tmp60 = document.querySelector('#Height60');
+  let tmp70 = document.querySelector('#Height70');
+  let tmp80 = document.querySelector('#Height80');
+  let tmp90 = document.querySelector('#Height90');
+  let tmp100 = document.querySelector('#Height100');
+  let tmppic0 = "Images/Buttons/Button-Height-0.png"
+  let tmppic10 = "Images/Buttons/Button-Height-10.png"
+  let tmppic20 = "Images/Buttons/Button-Height-20.png"
+  let tmppic30 = "Images/Buttons/Button-Height-30.png"
+  let tmppic40 = "Images/Buttons/Button-Height-40-Grey.png"
+  let tmppic50 = "Images/Buttons/Button-Height-50-Grey.png"
+  let tmppic60 = "Images/Buttons/Button-Height-60-Grey.png"
+  let tmppic70 = "Images/Buttons/Button-Height-70-Grey.png"
+  let tmppic80 = "Images/Buttons/Button-Height-80-Grey.png"
+  let tmppic90 = "Images/Buttons/Button-Height-90-Grey.png"
+  let tmppic100 = "Images/Buttons/Button-Height-100-Grey.png"
+
+  document.getElementById("Height0").src = tmppic0;
+  tmp0.classList.add('active');
+  document.getElementById("Height10").src = tmppic10;
+  tmp10.classList.add('active');
+  document.getElementById("Height20").src = tmppic20;
+  tmp20.classList.add('active');
+  document.getElementById("Height30").src = tmppic30;
+  tmp30.classList.add('active');
+  document.getElementById("Height40").src = tmppic40;
+  tmp40.classList.remove('active');
+  document.getElementById("Height50").src = tmppic50;
+  tmp50.classList.remove('active');
+  document.getElementById("Height60").src = tmppic60;
+  tmp60.classList.remove('active');
+  document.getElementById("Height70").src = tmppic70;
+  tmp70.classList.remove('active');
+  document.getElementById("Height80").src = tmppic80;
+  tmp80.classList.remove('active');
+  document.getElementById("Height90").src = tmppic90;
+  tmp90.classList.remove('active');
+  document.getElementById("Height100").src = tmppic100;
+  tmp100.classList.remove('active');
+  getPeriscope('P', '30');
+}
+function HeightSelection40(t) {
+  let tmp0 = document.querySelector('#Height0');
+  let tmp10 = document.querySelector('#Height10');
+  let tmp20 = document.querySelector('#Height20');
+  let tmp30 = document.querySelector('#Height30');
+  let tmp40 = document.querySelector('#Height40');
+  let tmp50 = document.querySelector('#Height50');
+  let tmp60 = document.querySelector('#Height60');
+  let tmp70 = document.querySelector('#Height70');
+  let tmp80 = document.querySelector('#Height80');
+  let tmp90 = document.querySelector('#Height90');
+  let tmp100 = document.querySelector('#Height100');
+  let tmppic0 = "Images/Buttons/Button-Height-0.png"
+  let tmppic10 = "Images/Buttons/Button-Height-10.png"
+  let tmppic20 = "Images/Buttons/Button-Height-20.png"
+  let tmppic30 = "Images/Buttons/Button-Height-30.png"
+  let tmppic40 = "Images/Buttons/Button-Height-40.png"
+  let tmppic50 = "Images/Buttons/Button-Height-50-Grey.png"
+  let tmppic60 = "Images/Buttons/Button-Height-60-Grey.png"
+  let tmppic70 = "Images/Buttons/Button-Height-70-Grey.png"
+  let tmppic80 = "Images/Buttons/Button-Height-80-Grey.png"
+  let tmppic90 = "Images/Buttons/Button-Height-90-Grey.png"
+  let tmppic100 = "Images/Buttons/Button-Height-100-Grey.png"
+
+  document.getElementById("Height0").src = tmppic0;
+  tmp0.classList.add('active');
+  document.getElementById("Height10").src = tmppic10;
+  tmp10.classList.add('active');
+  document.getElementById("Height20").src = tmppic20;
+  tmp20.classList.add('active');
+  document.getElementById("Height30").src = tmppic30;
+  tmp30.classList.add('active');
+  document.getElementById("Height40").src = tmppic40;
+  tmp40.classList.add('active');
+  document.getElementById("Height50").src = tmppic50;
+  tmp50.classList.remove('active');
+  document.getElementById("Height60").src = tmppic60;
+  tmp60.classList.remove('active');
+  document.getElementById("Height70").src = tmppic70;
+  tmp70.classList.remove('active');
+  document.getElementById("Height80").src = tmppic80;
+  tmp80.classList.remove('active');
+  document.getElementById("Height90").src = tmppic90;
+  tmp90.classList.remove('active');
+  document.getElementById("Height100").src = tmppic100;
+  tmp100.classList.remove('active');
+  getPeriscope('P', '40');
+}
+
+function HeightSelection50(t) {
+  let tmp0 = document.querySelector('#Height0');
+  let tmp10 = document.querySelector('#Height10');
+  let tmp20 = document.querySelector('#Height20');
+  let tmp30 = document.querySelector('#Height30');
+  let tmp40 = document.querySelector('#Height40');
+  let tmp50 = document.querySelector('#Height50');
+  let tmp60 = document.querySelector('#Height60');
+  let tmp70 = document.querySelector('#Height70');
+  let tmp80 = document.querySelector('#Height80');
+  let tmp90 = document.querySelector('#Height90');
+  let tmp100 = document.querySelector('#Height100');
+  let tmppic0 = "Images/Buttons/Button-Height-0.png"
+  let tmppic10 = "Images/Buttons/Button-Height-10.png"
+  let tmppic20 = "Images/Buttons/Button-Height-20.png"
+  let tmppic30 = "Images/Buttons/Button-Height-30.png"
+  let tmppic40 = "Images/Buttons/Button-Height-40.png"
+  let tmppic50 = "Images/Buttons/Button-Height-50.png"
+  let tmppic60 = "Images/Buttons/Button-Height-60-Grey.png"
+  let tmppic70 = "Images/Buttons/Button-Height-70-Grey.png"
+  let tmppic80 = "Images/Buttons/Button-Height-80-Grey.png"
+  let tmppic90 = "Images/Buttons/Button-Height-90-Grey.png"
+  let tmppic100 = "Images/Buttons/Button-Height-100-Grey.png"
+
+  document.getElementById("Height0").src = tmppic0;
+  tmp0.classList.add('active');
+  document.getElementById("Height10").src = tmppic10;
+  tmp10.classList.add('active');
+  document.getElementById("Height20").src = tmppic20;
+  tmp20.classList.add('active');
+  document.getElementById("Height30").src = tmppic30;
+  tmp30.classList.add('active');
+  document.getElementById("Height40").src = tmppic40;
+  tmp40.classList.add('active');
+  document.getElementById("Height50").src = tmppic50;
+  tmp50.classList.add('active');
+  document.getElementById("Height60").src = tmppic60;
+  tmp60.classList.remove('active');
+  document.getElementById("Height70").src = tmppic70;
+  tmp70.classList.remove('active');
+  document.getElementById("Height80").src = tmppic80;
+  tmp80.classList.remove('active');
+  document.getElementById("Height90").src = tmppic90;
+  tmp90.classList.remove('active');
+  document.getElementById("Height100").src = tmppic100;
+  tmp100.classList.remove('active');
+  getPeriscope('P', '50');
+}
+
+function HeightSelection60(t) {
+  let tmp0 = document.querySelector('#Height0');
+  let tmp10 = document.querySelector('#Height10');
+  let tmp20 = document.querySelector('#Height20');
+  let tmp30 = document.querySelector('#Height30');
+  let tmp40 = document.querySelector('#Height40');
+  let tmp50 = document.querySelector('#Height50');
+  let tmp60 = document.querySelector('#Height60');
+  let tmp70 = document.querySelector('#Height70');
+  let tmp80 = document.querySelector('#Height80');
+  let tmp90 = document.querySelector('#Height90');
+  let tmp100 = document.querySelector('#Height100');
+  let tmppic0 = "Images/Buttons/Button-Height-0.png"
+  let tmppic10 = "Images/Buttons/Button-Height-10.png"
+  let tmppic20 = "Images/Buttons/Button-Height-20.png"
+  let tmppic30 = "Images/Buttons/Button-Height-30.png"
+  let tmppic40 = "Images/Buttons/Button-Height-40.png"
+  let tmppic50 = "Images/Buttons/Button-Height-50.png"
+  let tmppic60 = "Images/Buttons/Button-Height-60.png"
+  let tmppic70 = "Images/Buttons/Button-Height-70-Grey.png"
+  let tmppic80 = "Images/Buttons/Button-Height-80-Grey.png"
+  let tmppic90 = "Images/Buttons/Button-Height-90-Grey.png"
+  let tmppic100 = "Images/Buttons/Button-Height-100-Grey.png"
+
+  document.getElementById("Height0").src = tmppic0;
+  tmp0.classList.add('active');
+  document.getElementById("Height10").src = tmppic10;
+  tmp10.classList.add('active');
+  document.getElementById("Height20").src = tmppic20;
+  tmp20.classList.add('active');
+  document.getElementById("Height30").src = tmppic30;
+  tmp30.classList.add('active');
+  document.getElementById("Height40").src = tmppic40;
+  tmp40.classList.add('active');
+  document.getElementById("Height50").src = tmppic50;
+  tmp50.classList.add('active');
+  document.getElementById("Height60").src = tmppic60;
+  tmp60.classList.add('active');
+  document.getElementById("Height70").src = tmppic70;
+  tmp70.classList.remove('active');
+  document.getElementById("Height80").src = tmppic80;
+  tmp80.classList.remove('active');
+  document.getElementById("Height90").src = tmppic90;
+  tmp90.classList.remove('active');
+  document.getElementById("Height100").src = tmppic100;
+  tmp100.classList.remove('active');
+  getPeriscope('P', '60');
+}
+
+
+function HeightSelection70(t) {
+  let tmp0 = document.querySelector('#Height0');
+  let tmp10 = document.querySelector('#Height10');
+  let tmp20 = document.querySelector('#Height20');
+  let tmp30 = document.querySelector('#Height30');
+  let tmp40 = document.querySelector('#Height40');
+  let tmp50 = document.querySelector('#Height50');
+  let tmp60 = document.querySelector('#Height60');
+  let tmp70 = document.querySelector('#Height70');
+  let tmp80 = document.querySelector('#Height80');
+  let tmp90 = document.querySelector('#Height90');
+  let tmp100 = document.querySelector('#Height100');
+  let tmppic0 = "Images/Buttons/Button-Height-0.png"
+  let tmppic10 = "Images/Buttons/Button-Height-10.png"
+  let tmppic20 = "Images/Buttons/Button-Height-20.png"
+  let tmppic30 = "Images/Buttons/Button-Height-30.png"
+  let tmppic40 = "Images/Buttons/Button-Height-40.png"
+  let tmppic50 = "Images/Buttons/Button-Height-50.png"
+  let tmppic60 = "Images/Buttons/Button-Height-60.png"
+  let tmppic70 = "Images/Buttons/Button-Height-70.png"
+  let tmppic80 = "Images/Buttons/Button-Height-80-Grey.png"
+  let tmppic90 = "Images/Buttons/Button-Height-90-Grey.png"
+  let tmppic100 = "Images/Buttons/Button-Height-100-Grey.png"
+
+  document.getElementById("Height0").src = tmppic0;
+  tmp0.classList.add('active');
+  document.getElementById("Height10").src = tmppic10;
+  tmp10.classList.add('active');
+  document.getElementById("Height20").src = tmppic20;
+  tmp20.classList.add('active');
+  document.getElementById("Height30").src = tmppic30;
+  tmp30.classList.add('active');
+  document.getElementById("Height40").src = tmppic40;
+  tmp40.classList.add('active');
+  document.getElementById("Height50").src = tmppic50;
+  tmp50.classList.add('active');
+  document.getElementById("Height60").src = tmppic60;
+  tmp60.classList.add('active');
+  document.getElementById("Height70").src = tmppic70;
+  tmp70.classList.add('active');
+  document.getElementById("Height80").src = tmppic80;
+  tmp80.classList.remove('active');
+  document.getElementById("Height90").src = tmppic90;
+  tmp90.classList.remove('active');
+  document.getElementById("Height100").src = tmppic100;
+  tmp100.classList.remove('active');
+  getPeriscope('P', '70');
+}
+
+
+function HeightSelection80(t) {
+  let tmp0 = document.querySelector('#Height0');
+  let tmp10 = document.querySelector('#Height10');
+  let tmp20 = document.querySelector('#Height20');
+  let tmp30 = document.querySelector('#Height30');
+  let tmp40 = document.querySelector('#Height40');
+  let tmp50 = document.querySelector('#Height50');
+  let tmp60 = document.querySelector('#Height60');
+  let tmp70 = document.querySelector('#Height70');
+  let tmp80 = document.querySelector('#Height80');
+  let tmp90 = document.querySelector('#Height90');
+  let tmp100 = document.querySelector('#Height100');
+  let tmppic0 = "Images/Buttons/Button-Height-0.png"
+  let tmppic10 = "Images/Buttons/Button-Height-10.png"
+  let tmppic20 = "Images/Buttons/Button-Height-20.png"
+  let tmppic30 = "Images/Buttons/Button-Height-30.png"
+  let tmppic40 = "Images/Buttons/Button-Height-40.png"
+  let tmppic50 = "Images/Buttons/Button-Height-50.png"
+  let tmppic60 = "Images/Buttons/Button-Height-60.png"
+  let tmppic70 = "Images/Buttons/Button-Height-70.png"
+  let tmppic80 = "Images/Buttons/Button-Height-80.png"
+  let tmppic90 = "Images/Buttons/Button-Height-90-Grey.png"
+  let tmppic100 = "Images/Buttons/Button-Height-100-Grey.png"
+
+  document.getElementById("Height0").src = tmppic0;
+  tmp0.classList.add('active');
+  document.getElementById("Height10").src = tmppic10;
+  tmp10.classList.add('active');
+  document.getElementById("Height20").src = tmppic20;
+  tmp20.classList.add('active');
+  document.getElementById("Height30").src = tmppic30;
+  tmp30.classList.add('active');
+  document.getElementById("Height40").src = tmppic40;
+  tmp40.classList.add('active');
+  document.getElementById("Height50").src = tmppic50;
+  tmp50.classList.add('active');
+  document.getElementById("Height60").src = tmppic60;
+  tmp60.classList.add('active');
+  document.getElementById("Height70").src = tmppic70;
+  tmp70.classList.add('active');
+  document.getElementById("Height80").src = tmppic80;
+  tmp80.classList.add('active');
+  document.getElementById("Height90").src = tmppic90;
+  tmp90.classList.remove('active');
+  document.getElementById("Height100").src = tmppic100;
+  tmp100.classList.remove('active');
+  getPeriscope('P', '80');
+}
+
+function HeightSelection90(t) {
+  let tmp0 = document.querySelector('#Height0');
+  let tmp10 = document.querySelector('#Height10');
+  let tmp20 = document.querySelector('#Height20');
+  let tmp30 = document.querySelector('#Height30');
+  let tmp40 = document.querySelector('#Height40');
+  let tmp50 = document.querySelector('#Height50');
+  let tmp60 = document.querySelector('#Height60');
+  let tmp70 = document.querySelector('#Height70');
+  let tmp80 = document.querySelector('#Height80');
+  let tmp90 = document.querySelector('#Height90');
+  let tmp100 = document.querySelector('#Height100');
+  let tmppic0 = "Images/Buttons/Button-Height-0.png"
+  let tmppic10 = "Images/Buttons/Button-Height-10.png"
+  let tmppic20 = "Images/Buttons/Button-Height-20.png"
+  let tmppic30 = "Images/Buttons/Button-Height-30.png"
+  let tmppic40 = "Images/Buttons/Button-Height-40.png"
+  let tmppic50 = "Images/Buttons/Button-Height-50.png"
+  let tmppic60 = "Images/Buttons/Button-Height-60.png"
+  let tmppic70 = "Images/Buttons/Button-Height-70.png"
+  let tmppic80 = "Images/Buttons/Button-Height-80.png"
+  let tmppic90 = "Images/Buttons/Button-Height-90.png"
+  let tmppic100 = "Images/Buttons/Button-Height-100-Grey.png"
+
+  document.getElementById("Height0").src = tmppic0;
+  tmp0.classList.add('active');
+  document.getElementById("Height10").src = tmppic10;
+  tmp10.classList.add('active');
+  document.getElementById("Height20").src = tmppic20;
+  tmp20.classList.add('active');
+  document.getElementById("Height30").src = tmppic30;
+  tmp30.classList.add('active');
+  document.getElementById("Height40").src = tmppic40;
+  tmp40.classList.add('active');
+  document.getElementById("Height50").src = tmppic50;
+  tmp50.classList.add('active');
+  document.getElementById("Height60").src = tmppic60;
+  tmp60.classList.add('active');
+  document.getElementById("Height70").src = tmppic70;
+  tmp70.classList.add('active');
+  document.getElementById("Height80").src = tmppic80;
+  tmp80.classList.add('active');
+  document.getElementById("Height90").src = tmppic90;
+  tmp90.classList.add('active');
+  document.getElementById("Height100").src = tmppic100;
+  tmp100.classList.remove('active');
+  getPeriscope('P', '90');
+}
+
+
+function HeightSelection100(t) {
+  let tmp0 = document.querySelector('#Height0');
+  let tmp10 = document.querySelector('#Height10');
+  let tmp20 = document.querySelector('#Height20');
+  let tmp30 = document.querySelector('#Height30');
+  let tmp40 = document.querySelector('#Height40');
+  let tmp50 = document.querySelector('#Height50');
+  let tmp60 = document.querySelector('#Height60');
+  let tmp70 = document.querySelector('#Height70');
+  let tmp80 = document.querySelector('#Height80');
+  let tmp90 = document.querySelector('#Height90');
+  let tmp100 = document.querySelector('#Height100');
+  let tmppic0 = "Images/Buttons/Button-Height-0.png"
+  let tmppic10 = "Images/Buttons/Button-Height-10.png"
+  let tmppic20 = "Images/Buttons/Button-Height-20.png"
+  let tmppic30 = "Images/Buttons/Button-Height-30.png"
+  let tmppic40 = "Images/Buttons/Button-Height-40.png"
+  let tmppic50 = "Images/Buttons/Button-Height-50.png"
+  let tmppic60 = "Images/Buttons/Button-Height-60.png"
+  let tmppic70 = "Images/Buttons/Button-Height-70.png"
+  let tmppic80 = "Images/Buttons/Button-Height-80.png"
+  let tmppic90 = "Images/Buttons/Button-Height-90.png"
+  let tmppic100 = "Images/Buttons/Button-Height-100.png"
+
+  document.getElementById("Height0").src = tmppic0;
+  tmp0.classList.add('active');
+  document.getElementById("Height10").src = tmppic10;
+  tmp10.classList.add('active');
+  document.getElementById("Height20").src = tmppic20;
+  tmp20.classList.add('active');
+  document.getElementById("Height30").src = tmppic30;
+  tmp30.classList.add('active');
+  document.getElementById("Height40").src = tmppic40;
+  tmp40.classList.add('active');
+  document.getElementById("Height50").src = tmppic50;
+  tmp50.classList.add('active');
+  document.getElementById("Height60").src = tmppic60;
+  tmp60.classList.add('active');
+  document.getElementById("Height70").src = tmppic70;
+  tmp70.classList.add('active');
+  document.getElementById("Height80").src = tmppic80;
+  tmp80.classList.add('active');
+  document.getElementById("Height90").src = tmppic90;
+  tmp90.classList.add('active');
+  document.getElementById("Height100").src = tmppic100;
+  tmp100.classList.add('active');
+  getPeriscope('P', '100');
+} 

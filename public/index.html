@@ -4187,132 +4187,57 @@
     <div class="menuheader">
       <h1 class="">periscope control</h1>
       </div>
-      <img src="./Images/periscope.png" alt="" style="position:absolute; height:600px; left:-350px;";>
+      <img src="./Images/periscope.png" alt="" style="position:absolute; height:600px; left:-350px;">
   
     <div class="periscopeControl">
       <h3 class="PeriscopeHeightHeader">Height</h3>
-      <!-- <img src="Images/UpArrows.png" class="UpArrowPicturePeriscope" alt="image for the dome" onclick="pericopeLifter('100')"> -->
-      <!-- <img src="Images/DownArrows.png" class="DownArrowPicturePeriscope" alt="image for the dome" onclick="pericopeLifter('0')"> -->
-      <!-- <img src="Images/RightArrows.png" class="RightArrowPicture" alt="image for the dome"> -->
-      <!-- <img src="Images/LeftArrows.png" class="LeftArrowPicture" alt="image for the dome"> -->
-      <!-- <img src="Images/CenterArrows.png" class="CenterArrowPicturePeriscope" alt="image for the dome" onclick="pericopeLifter('50')"> -->
-      <!-- <img src="Images/LowerLeftArrows.png" class="LowerLeftArrowPicture" alt="image for the dome">
-      <img src="Images/UpperLeftArrows.png" class="UpperLeftArrowPicture" alt="image for the dome">
-      <img src="Images/UpperRightArrows.png" class="UpperRightArrowPicture" alt="image for the dome">
-      <img src="Images/LowerRightArrows.png" class="LowerRightArrowPicture" alt="image for the dome"> -->
-      <img src=""" class="Height0" alt="">
-      <img src="Images/Buttons/Button-Height-10.png" class="Height10" alt="">
-      <!-- <img src="Images/Buttons/Button-Height-20.png" class="Height20" alt="">
-      <img src="Images/Buttons/Button-Height-30.png" class="Height30" alt="">
-      <img src="Images/Buttons/Button-Height-40.png" class="Height40" alt="">
-      <img src="Images/Buttons/Button-Height-50.png" class="Height50" alt="">
-      <img src="Images/Buttons/Button-Height-60.png" class="Height60" alt="">
-      <img src="Images/Buttons/Button-Height-70.png" class="Height70" alt="">   
-      <img src="Images/Buttons/Button-Height-80.png" class="Height80" alt="">
-      <img src="Images/Buttons/Button-Height-90.png" class="Height90" alt="">
-      <img src="Images/Buttons/Button-Height-100.png" class="Height100" alt=""> -->
+
+      <img src="Images/buttons/Button-Height-0-Grey.png" class="Height0" onclick="HeightSelection0('0')" alt="" id="Height0">
+      <img src="Images/buttons/Button-Height-10-Grey.png" class="Height10" onclick="HeightSelection10()" alt="" id="Height10">
+      <img src="Images/buttons/Button-Height-20-Grey.png"" class="Height20" alt=""id="Height20"onclick="HeightSelection20('20')">
+      <img src="Images/buttons/Button-Height-30-Grey.png"" class="Height30" alt=""id="Height30"onclick="HeightSelection30('30')">
+      <img src="Images/buttons/Button-Height-40-Grey.png"" class="Height40" alt=""id="Height40"onclick="HeightSelection40('40')">
+      <img src="Images/buttons/Button-Height-50-Grey.png"" class="Height50" alt=""id="Height50"onclick="HeightSelection50('50')">
+      <img src="Images/buttons/Button-Height-60-Grey.png"" class="Height60" alt=""id="Height60"onclick="HeightSelection60('60')">
+      <img src="Images/buttons/Button-Height-70-Grey.png"" class="Height70" alt=""id="Height70"onclick="HeightSelection70('70')">   
+      <img src="Images/buttons/Button-Height-80-Grey.png"" class="Height80" alt=""id="Height80"onclick="HeightSelection80('80')">
+      <img src="Images/buttons/Button-Height-90-Grey.png"" class="Height90" alt=""id="Height90"onclick="HeightSelection90('90')">
+      <img src="Images/buttons/Button-Height-100-Grey.png"" class="Height100" alt=""id="Height100"onclick="HeightSelection100('100')"> 
 
 
     </div>
 
-    <div class="periscopeRotationControl">
+    <div style="border: 2px solid white" class="periscopeRotationControl">
       <h3 class="PeriscopeRotateHeader">Rotate</h3>
       
-      <!-- <form method='RotateCWRelative('ESP32SelectionBox', 'ESP32CommandTextBox')'>
-        <label class=""for='RotateClockwiseRelative'>Send command:</label>
-        <select class="" id="RotateClockwiseRelative" name="ClientESP32s">
-        <option value="90">90</option>
-        <option value="0">0</option>
-        <option value="45">45</option>
-        <option value="90">90</option>
-        <option value="135">135</option>
-        <option value="180">180</option>
-        <option value="225">225</option>
-        <option value="270">270</option>
-        <option value="315">315</option>
-        <option value="360">360</option>
+         <input class="RotateClockwiseRelativeText" type="text" name="RotateClockwiseRelative" id="RotateClockwiseRelative" value="90">
+        <img src="Images/Buttons/Button-Periscope-90deg-CW-.png" class="rotateCWPicturePeriscope homebuttonwidth2" alt="image for the dome" onclick="getPeriscope('D','RotateClockwiseRelative')">
 
-        
-
-      </select> -->
-        <input class="RotateClockwiseRelativeText" type="text" name="RotateClockwiseRelative" id="RotateClockwiseRelative" value="90">
-        <img src="Images/Buttons/Button-Periscope-90deg-CW-.png" class="rotateCWPicturePeriscope homebuttonwidth2" alt="image for the dome" onclick="pericopeLifter('0')">
-
-         <!-- <a href="#" onclick="ESP32SendCommand('ESP32SelectionBox' , 'ESP32CommandTextBox')" class="applyButtonSettings"></a> -->
        <input type="submit" onclick="ESP32SendCommand('ESP32SelectionBox', 'ESP32CommandTextBox')"name="" value="" style="display: none">
 
-    <!-- </form> -->
+  
 
       
-      <img src="Images/Buttons/Button-Periscope-90deg-CC-.png" class=" rotateCCPicturePeriscope homebuttonwidth2" alt="image for the dome" onclick="pericopeLifter('100')">
-      <input class="RotateCounterClockwiseRelativeText" type="text" name="RotateCounterClockwiseRelative" id="RotateCounterClockwiseRelative" value="90">
+      <img  src="Images/Buttons/Button-Periscope-90deg-CC-.png" class=" rotateCCPicturePeriscope homebuttonwidth2" alt="image for the dome" onclick="getPeriscope('D','RotateCounterClockwiseRelative')">
+      <input  class="RotateCounterClockwiseRelativeText" type="text" name="RotateCounterClockwiseRelative" id="RotateCounterClockwiseRelative" value="90">
 
       
-      <img src="Images/Button-Rotate-Absolute-0.png" class=" absolute0Periscope" alt="image for the dome" onclick="pericopeLifter('0')">
-      <img src="Images/Button-Rotate-Absolute-90.png" class=" absolute90Periscope" alt="image for the dome" onclick="pericopeLifter('0')">
-      <img src="Images/Button-Rotate-Absolute-180.png" class=" absolute180Periscope" alt="image for the dome" onclick="pericopeLifter('0')">
-      <img src="Images/Button-Rotate-Absolute-270.png" class=" absolute270Periscope" alt="image for the dome" onclick="pericopeLifter('0')">
+      <img  src="Images/Button-Rotate-Absolute-0.png" class=" absolute0Periscope" alt="image for the dome" onclick="getPeriscope('A','0')">
+      <img src="Images/Button-Rotate-Absolute-90.png" class=" absolute90Periscope" alt="image for the dome" onclick="getPeriscope('A','90')">
+      <img src="Images/Button-Rotate-Absolute-180.png" class=" absolute180Periscope" alt="image for the dome" onclick="getPeriscope('A','180')">
+      <img src="Images/Button-Rotate-Absolute-270.png" class=" absolute270Periscope" alt="image for the dome" onclick="getPeriscope('A','270')">
 
       <img src="Images/Buttons/Button-Rotate-Clockwise-GIMP.png" class="RotateClockwiseContinous homebuttonwidth2" alt="image for the dome" onclick="pericopeLifter('0')">
 
       <img src="Images/Buttons/Button-Rotate-Clockwise-GIMP.png" class=" RotateCounterClockwiseContinous homebuttonwidth2" alt="image for the dome" onclick="pericopeLifter('0')">
 
-      <img src="Images/Buttons/Button-Rotate-Home-GIMP.png" class=" RotateHome homebuttonwidth2" alt="image for the dome" onclick="pericopeLifter('0')">
+      <img src="Images/Buttons/Button-Rotate-Home-GIMP.png" class=" RotateHome homebuttonwidth2" alt="image for the dome" onclick="pericopeLifter('H')">
 
 
-      <!-- <img src="Images/RightArrows.png" class="RightArrowPicture" alt="image for the dome"> -->
-      <!-- <img src="Images/LeftArrows.png" class="LeftArrowPicture" alt="image for the dome"> -->
-      <!-- <img src="Images/CenterArrows.png" class="CenterArrowPicturePeriscope" alt="image for the dome" onclick="pericopeLifter('50')"> -->
-      <!-- <img src="Images/LowerLeftArrows.png" class="LowerLeftArrowPicture" alt="image for the dome">
-      <img src="Images/UpperLeftArrows.png" class="UpperLeftArrowPicture" alt="image for the dome">
-      <img src="Images/UpperRightArrows.png" class="UpperRightArrowPicture" alt="image for the dome">
-      <img src="Images/LowerRightArrows.png" class="LowerRightArrowPicture" alt="image for the dome"> -->
 
     </div>
 
-    <!-- <div class="periscopeText">
-      <iframe name="submit" style="display:none;"> </iframe>
-      <form action="http://192.168.8.142/?param0=1&" method="get" target="submit">
-    <div class="buttonspacing1">
-      <label for="param1">Command for Serial1:</label>
-      <input name="param1" id="param1" value=":PP0:P100:P0">
-    </div>
-    <br>
-    <div>
-      <button class="periscopeCommandButton" >Submit</button>
-    </div>
-  
-    <br>
-    <br>
-  </form>
-    </div> -->
-    <!-- <div class="openclosedoors">
-      <h3 class="openclosedoorsheader">Door/Pie Control</h3>
-      <img src="Images/Buttons/Button-Open-White.png" class="openButton" alt="image for the dome">
-      <img src="Images/Buttons/Button-Close-White.png" class="closeButton" alt="image for the dome">
-      <img src="Images/Buttons/Button-Cycle-White.png" class="cycleButton" alt="image for the dome">
-
-      <img src="Images/Buttons/Button-Alternate-White.png" class="AlternateButton" alt="image for the dome">
-
-
-    </div> -->
-    <div class="periscopeRangeDiv">
-      <!-- <iframe name="submit3" style="display:none;" ></iframe>
-      <form action="http://192.168.8.142/" method="get" target="submit3">
-      <div class="" >
-      <label for="paramrange" style="position:relative; left:360px; top:-35px;">Select Height</label>
-      
-      <input type="hidden" name="param1" id="paramrange" value=":PP">
-      <input class=""  type="range" id="heightRange" min="0" max="100" step="10" value="50" onchange="periscopeRange()">
-      <!-- <img src="Images/Buttons/Button-Apply.png" onclick="getRange('heightRange')" class="applyButton"></img> -->
-      
-      
-      <!-- <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="getRange('heightRange')" class="applyButton"></img> -->
-      <!-- </div>
-      <div class="buttonspacing2" id="sliderAmount" style="position:absolute; left:460px; top:40px;">50</div>
-      </form> -->
-
-    </div>
+   
 
     <dir class="StoredSequenceDiv">
       <img class="applyButton" style="position: absolute; top: 120px;"src="Images/Buttons/Button-Stored-Sequence1-GIMP.png" alt="image for the dome" onclick="pericopeLifter('100')">
@@ -4328,7 +4253,7 @@
 
     </div>
 
-  </div><!--end of Level 0 Settings Content-->
+  <!-- </div>end of Level 0 Settings Content -->
   
   
         <!-- </div><end of Level 1 Menu -->

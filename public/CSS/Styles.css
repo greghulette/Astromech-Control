@@ -1098,7 +1098,7 @@ left: 100px;
   left: 390px;
   border: 3px solid white;
   width: 80px;
-  height: 400px;
+  height: 550px;
 }
 
 .periscopeRotationControl{
@@ -1184,27 +1184,30 @@ left: 10px;
   }
   .Height0{
     position: absolute;
-    background-image: url('Images/Buttons/Button-Height-0-Grey.png') no-repeat;
-    top: 340px;
+    /* content: url(../Images/Buttons/Button-Height-0-Grey.png); */
+    top: 510px;
     left: 10px;
     width: 60px;
-    /* border: 2px solid yellow; */
   }
-  .Height0:hover{
-    background: url('Images/Buttons/Button-Height-0.png') no-repeat;
-
+  .Height0 :active{
+     /* content: url(../Images/Buttons/Button-Height-0.png); */
     opacity: 1.0;
     box-shadow: 0px 0px 20px yellow;
-    scale: 2;
+    scale:10px ;
   }
+ 
 
   .Height10{
-
     position: absolute;
-    top: 305px;
+    /* content: url(../Images/Buttons/Button-Height-10-Grey.png); */
+
+    top: 460px;
     left: 10px;
     width: 60px;
     /* border: 2px solid blueviolet; */
+  }
+  .Height10:active{
+    /* content: url(../Images/Buttons/Button-Height-10.png); */
 
   }
   .Height10:hover{
@@ -1212,60 +1215,127 @@ left: 10px;
     box-shadow: 0px 0px 45px yellow;
     scale: 1.2;
     }
-  .Height20{
+
+   .Height20{
     position: absolute;
-    top: 270px;
+    top: 410px;
     left: 10px;
     width: 60px;
   }
-  .Height30{
+  .Height20:active{
+    opacity: 1.0;
+    box-shadow: 0px 0px 20px yellow;
+    scale: 2;
+  }
+  
+   .Height30{
     position: absolute;
-    top: 235px;
+    top: 360px;
     left: 10px;
     width: 60px;
   }
+  .Height30:active{
+    opacity: 1.0;
+    box-shadow: 0px 0px 20px yellow;
+    scale: 2;
+  }
+ 
   .Height40{
     position: absolute;
-    top: 200px;
+    top: 310px;
     left: 10px;
     width: 60px;
   }
+  .Height40:active{
+    opacity: 1.0;
+    box-shadow: 0px 0px 20px yellow;
+    scale: 2;
+  }
+  
   .Height50{
     position: absolute;
-    top: 165px;
+    top: 260px;
     left: 10px;
     width: 60px;
   }
+  .Height50:active{
+    opacity: 1.0;
+    box-shadow: 0px 0px 20px yellow;
+    scale: 2;
+  }
+ 
   .Height60{
     position: absolute;
-    top: 130px;
+    top: 210px;
     left: 10px;
     width: 60px;
   }
+  .Height60:active{
+    opacity: 1.0;
+    box-shadow: 0px 0px 20px yellow;
+    scale: 2;
+  }
+  
   .Height70{
     position: absolute;
-    top: 95px;
+    top: 160px;
     left: 10px;
     width: 60px;
   }
+  .Height70:active{
+    opacity: 1.0;
+    box-shadow: 0px 0px 40px yellow;
+    scale: 2;
+  }
+ 
   .Height80{
+    position: absolute;
+    top: 110px;
+    left: 10px;
+    width: 60px;
+  }
+  .Height80:active{
+    opacity: 1.0;
+    box-shadow: 0px 0px 20px yellow;
+    scale: 2;
+  }
+ 
+
+
+  .Height90{
     position: absolute;
     top: 60px;
     left: 10px;
     width: 60px;
   }
-  .Height90{
-    position: absolute;
-    top: 25px;
-    left: 10px;
-    width: 60px;
+  .Height90active{
+    opacity: 1.0;
+    box-shadow: 0px 0px 20px yellow;
+    scale: 2;
   }
-  .Height100{
+ 
+  /* .Height100{
     position: absolute;
     top: -10px;
     left: 10px;
     width: 60px;
+  } */
+
+  .Height100{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 60px;
+    /* border: 2px solid white; */
   }
+  .Height100:active{
+    opacity: 1.0;
+    box-shadow: 0px 0px 20px yellow;
+    scale: 2;
+  }
+
+
+
 .periscopeText{
   position: absolute;
   top: 645px;
@@ -1288,6 +1358,7 @@ left: 10px;
   position: absolute;
   top:-90px;
   left: 130px;
+  /* border: 2px solid white; */
 }
 
 
@@ -1301,16 +1372,18 @@ left: 10px;
 
 .PeriscopeHeightHeader{
   position: absolute;
-  top: -75px;
+  top: -80px;
   left: -10px;
-  width: 350px;
+  width: 100px;
 }
 
 .PeriscopeRotateHeader{
   position: absolute;
-  top: -75px;
+  top: -80px;
   left: 105px;
-  width: 350px;
+  width: 130px;
+  /* border: 2px solid white; */
+
 }
 .openclosedoors{
   position: absolute;
