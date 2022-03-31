@@ -1098,7 +1098,7 @@ left: 100px;
   left: 390px;
   border: 3px solid white;
   width: 80px;
-  height: 550px;
+  height: 620px;
 }
 
 .periscopeRotationControl{
@@ -1107,9 +1107,14 @@ left: 100px;
   left: 580px;
   border: 3px solid white;
   width: 360px;
-  height: 400px;
+  height: 370px;
 }
-
+.RandomHeader{
+  position: absolute;
+  top: 530px;
+  left: 500px;
+  width: 265px;
+}
 .RotateClockwiseContinous{
   position: absolute;
   top: 240px;
@@ -1168,9 +1173,15 @@ left: 10px;
   }
 
   .RotateHome{
-    position: relative;
-    top: 320px;
-    left: 100px;
+    position: absolute;
+    top: 360px;
+    left: 180px;
+  }
+
+  .RotateRandom{
+    position: absolute;
+    top: 360px;
+    left: 10px;
   }
   .RotateClockwiseRelativeText{
     position: absolute;
@@ -1181,6 +1192,24 @@ left: 10px;
     position: absolute;
     top: 80px;
     left: 185px;
+  }
+  .RandomPeriscope{
+    position: absolute;
+    top: 530px;
+    left: 580px;
+    border: 2px solid white;
+    height: 80px;
+    width: 360px;
+  }
+  .RotateRandomHeight{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+  .RotateRandomRotate{
+    position: absolute;
+    top: 10px;
+    left: 180px;
   }
   .Height0{
     position: absolute;
@@ -1334,7 +1363,30 @@ left: 10px;
     scale: 2;
   }
 
-
+.HeightSpeed{
+  position: absolute;
+  top: 590px;
+  left: 10px;
+  width: 55px;
+}
+.RotateSpeed{
+  position: absolute;
+  top: 320px;
+  left: 250px;
+  width: 55px;
+}
+.RotateSpeedText{
+  position: absolute;
+  top: 285px;
+  left: 15px;
+  width: 255px;
+}
+.HeightSpeedText{
+  position: absolute;
+  top: 525px;
+  left: 0px;
+  width: 55px;
+}
 
 .periscopeText{
   position: absolute;

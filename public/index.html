@@ -4203,49 +4203,90 @@
       <img src="Images/buttons/Button-Height-80-Grey.png"" class="Height80" alt=""id="Height80"onclick="HeightSelection80('80')">
       <img src="Images/buttons/Button-Height-90-Grey.png"" class="Height90" alt=""id="Height90"onclick="HeightSelection90('90')">
       <img src="Images/buttons/Button-Height-100-Grey.png"" class="Height100" alt=""id="Height100"onclick="HeightSelection100('100')"> 
+      <p class="HeightSpeedText">speed</p>
+      <!-- <input  class="HeightSpeed" type="text" name="RotateCounterClockwiseRelative" id="RotateCounterClockwiseRelative" value="100"> -->
+
+      <form>
+        <!-- <label class="HeightSpeed"for='HeightSpeed'>Send command:</label> -->
+        <select class="HeightSpeed" id="HeightSpeed" name="HeightSpeed">
+        <option value="100">100</option>
+        <option value="90">90</option>
+        <option value="80">80</option>
+        <option value="70">70</option>
+        <option value="60">60</option>
+        <option value="50">50</option>
+        <option value="40">40</option>
+        <option value="30">30</option>
+        <option value="20">20</option>
+        <option value="10">10</option>
+      </select>
+    </form>
+
 
 
     </div>
 
     <div style="border: 2px solid white" class="periscopeRotationControl">
-      <h3 class="PeriscopeRotateHeader">Rotate</h3>
+      <h3 class="PeriscopeRotateHeader">rotation</h3>
       
          <input class="RotateClockwiseRelativeText" type="text" name="RotateClockwiseRelative" id="RotateClockwiseRelative" value="90">
-        <img src="Images/Buttons/Button-Periscope-90deg-CW-.png" class="rotateCWPicturePeriscope homebuttonwidth2" alt="image for the dome" onclick="getPeriscope('D','RotateClockwiseRelative')">
-
+        <img src="Images/Buttons/Button-Periscope-90deg-CW-.png" class="rotateCWPicturePeriscope homebuttonwidth2" alt="image for the dome" onclick="getPeriscope('D','RotateClockwiseRelative','RotateSpeed')">
+  
        <input type="submit" onclick="ESP32SendCommand('ESP32SelectionBox', 'ESP32CommandTextBox')"name="" value="" style="display: none">
 
   
 
       
-      <img  src="Images/Buttons/Button-Periscope-90deg-CC-.png" class=" rotateCCPicturePeriscope homebuttonwidth2" alt="image for the dome" onclick="getPeriscope('D','RotateCounterClockwiseRelative')">
+      <img  src="Images/Buttons/Button-Periscope-90deg-CC-.png" class=" rotateCCPicturePeriscope homebuttonwidth2" alt="image for the dome" onclick="getPeriscope('D','RotateCounterClockwiseRelative','RotateSpeed')">
       <input  class="RotateCounterClockwiseRelativeText" type="text" name="RotateCounterClockwiseRelative" id="RotateCounterClockwiseRelative" value="90">
 
       
-      <img  src="Images/Button-Rotate-Absolute-0.png" class=" absolute0Periscope" alt="image for the dome" onclick="getPeriscope('A','0')">
-      <img src="Images/Button-Rotate-Absolute-90.png" class=" absolute90Periscope" alt="image for the dome" onclick="getPeriscope('A','90')">
-      <img src="Images/Button-Rotate-Absolute-180.png" class=" absolute180Periscope" alt="image for the dome" onclick="getPeriscope('A','180')">
-      <img src="Images/Button-Rotate-Absolute-270.png" class=" absolute270Periscope" alt="image for the dome" onclick="getPeriscope('A','270')">
+      <img  src="Images/Button-Rotate-Absolute-0.png" class=" absolute0Periscope" alt="image for the dome" onclick="getPeriscope('A','0','RotateSpeed')">
+      <img src="Images/Button-Rotate-Absolute-90.png" class=" absolute90Periscope" alt="image for the dome" onclick="getPeriscope('A','90','RotateSpeed')">
+      <img src="Images/Button-Rotate-Absolute-180.png" class=" absolute180Periscope" alt="image for the dome" onclick="getPeriscope('A','180','RotateSpeed')">
+      <img src="Images/Button-Rotate-Absolute-270.png" class=" absolute270Periscope" alt="image for the dome" onclick="getPeriscope('A','270','RotateSpeed')">
 
-      <img src="Images/Buttons/Button-Rotate-Clockwise-GIMP.png" class="RotateClockwiseContinous homebuttonwidth2" alt="image for the dome" onclick="pericopeLifter('0')">
+      <img src="Images/Buttons/Button-Rotate-Clockwise-GIMP.png" class="RotateClockwiseContinous homebuttonwidth2" alt="image for the dome" id="RotateClockwiseContinous" onclick="getPeriscope('R','RotateClockwiseContinous','RotateSpeed')">
 
-      <img src="Images/Buttons/Button-Rotate-Clockwise-GIMP.png" class=" RotateCounterClockwiseContinous homebuttonwidth2" alt="image for the dome" onclick="pericopeLifter('0')">
-
-      <img src="Images/Buttons/Button-Rotate-Home-GIMP.png" class=" RotateHome homebuttonwidth2" alt="image for the dome" onclick="pericopeLifter('H')">
+      <img src="Images/Buttons/Button-Rotate-CounterClockwise-GIMP.png" class=" RotateCounterClockwiseContinous homebuttonwidth2" alt="image for the dome" onclick="getPeriscope('R','RotateCounterClockwiseContinous','RotateSpeed')">
+      <p class="RotateSpeedText">Rotation Speed</p>
+      <form>
+        <!-- <label class="RotateSpeedText"for='RotateSpeed'>Rotation Speed:</label> -->
+        <select class="RotateSpeed" id="RotateSpeed" name="RotateSpeed">
+          <option value="100">100</option>
+          <option value="90">90</option>
+          <option value="80">80</option>
+          <option value="70">70</option>
+          <option value="60">60</option>
+          <option value="50">50</option>
+          <option value="40">40</option>
+          <option value="30">30</option>
+          <option value="20">20</option>
+          <option value="10">10</option>
+        </select>
+      </form>
+      <!-- <img src="Images/Buttons/Button-Rotate-Home-GIMP.png" class=" RotateHome homebuttonwidth2" alt="image for the dome" onclick="getPeriscope('A','0','RotateSpeed')"> -->
 
 
 
     </div>
 
-   
+   <div class="RandomPeriscope">
+    <img src="Images/Buttons/Button-Rotate-RotateRandom-GIMP.png" class=" RotateRandomRotate homebuttonwidth2" alt="image for the dome" onclick="getPeriscope('AR','0','RotateSpeed')">
+    <img src="Images/Buttons/Button-Rotate-HeightRandom-GIMP.png" class=" RotateRandomHeight homebuttonwidth2" alt="image for the dome" onclick="getPeriscope('PR','0','HeightSpeed')">
+
+
+   </div>
 
     <dir class="StoredSequenceDiv">
-      <img class="applyButton" style="position: absolute; top: 120px;"src="Images/Buttons/Button-Stored-Sequence1-GIMP.png" alt="image for the dome" onclick="pericopeLifter('100')">
-      <img class="applyButton" style="position: absolute; top: 200px;"src="Images/Buttons/Button-Stored-Sequence2-GIMP.png" alt="image for the dome" onclick="pericopeLifter('100')">
-      <img class="applyButton" style="position: absolute; top: 280px;"src="Images/Buttons/Button-Stored-Sequence3-GIMP.png" alt="image for the dome" onclick="pericopeLifter('100')">
-      <img class="applyButton" style="position: absolute; top: 360px;"src="Images/Buttons/Button-Stored-Sequence4-GIMP.png" alt="image for the dome" onclick="pericopeLifter('100')">
-      <img class="applyButton" style="position: absolute; top: 440px;"src="Images/Buttons/Button-Stored-Sequence5-GIMP.png" alt="image for the dome" onclick="pericopeLifter('100')">
-      <img class="applyButton" style="position: absolute; top: 520px;"src="Images/Buttons/Button-Stored-Sequence6-GIMP.png" alt="image for the dome" onclick="pericopeLifter('100')">
+      <p class="RandomHeader">random movement</p>
+
+      <img class="applyButton" style="position: absolute; top: 120px;"src="Images/Buttons/Button-Stored-Sequence1-GIMP.png" alt="image for the dome" onclick="getPeriscope('S','1','RotateSpeed')">
+      <img class="applyButton" style="position: absolute; top: 200px;"src="Images/Buttons/Button-Stored-Sequence2-GIMP.png" alt="image for the dome" onclick="getPeriscope('S','2','RotateSpeed')">
+      <img class="applyButton" style="position: absolute; top: 280px;"src="Images/Buttons/Button-Stored-Sequence3-GIMP.png" alt="image for the dome" onclick="getPeriscope('S','3','RotateSpeed')">
+      <img class="applyButton" style="position: absolute; top: 360px;"src="Images/Buttons/Button-Stored-Sequence4-GIMP.png" alt="image for the dome" onclick="getPeriscope('S','4','RotateSpeed')">
+      <img class="applyButton" style="position: absolute; top: 440px;"src="Images/Buttons/Button-Stored-Sequence5-GIMP.png" alt="image for the dome" onclick="getPeriscope('S','5','RotateSpeed')">
+      <img class="applyButton" style="position: absolute; top: 520px;"src="Images/Buttons/Button-Stored-Sequence6-GIMP.png" alt="image for the dome" onclick="getPeriscope('S','6','RotateSpeed')">
 
     </dir>
 

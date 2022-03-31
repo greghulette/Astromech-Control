@@ -10295,7 +10295,7 @@ function getBodyLEDController(t, v) {
   var bodyLEDControllerSPURL = "http://192.168.8.101/?param0=2&param1=P";
 
   var bodyLEDControllerFullURL = bodyLEDControllerSPURL + v + BodyBright;
-  console.log(bodyLEDControllerFullURL);
+  // console.log(bodyLEDControllerFullURL);
 
   httpGet(bodyLEDControllerFullURL);
 
@@ -10332,28 +10332,44 @@ function periscopeRange() {
 
 
 
-function getPeriscope(s, t) {
-
+function getPeriscope(s, t, u) {
+  let speed = document.getElementById(u)
+  let speedValue = (speed.options[speed.selectedIndex].value);
+  console.log(speedValue);
   let periscopeFunction = s;
   if (periscopeFunction === 'D' && t === 'RotateClockwiseRelative') {
     let periscopeRelativeDeg = document.getElementById(t).value;
-    let periscopeESPURL = "http://192.168.8.142/?param0=1&param1=:P" + periscopeFunction;
-    let periscopeESPFullURL = periscopeESPURL + periscopeRelativeDeg;
+    let periscopeESPURL = "http://192.168.8.142/?param0=1&param1=:P" + periscopeFunction + '-';
+    let periscopeESPFullURL = periscopeESPURL + periscopeRelativeDeg + ',' + speedValue;;
     httpGet(periscopeESPFullURL);
-
   } else if (periscopeFunction === 'D' && t === 'RotateCounterClockwiseRelative') {
     let periscopeRelativeDeg = document.getElementById(t).value;
+    let periscopeESPURL = "http://192.168.8.142/?param0=1&param1=:P" + periscopeFunction;
+    let periscopeESPFullURL = periscopeESPURL + periscopeRelativeDeg + ',' + speedValue;;
+    httpGet(periscopeESPFullURL);
+  } else if (periscopeFunction === 'R' && t === 'RotateClockwiseContinous') {
     let periscopeESPURL = "http://192.168.8.142/?param0=1&param1=:P" + periscopeFunction + '-';
-    let periscopeESPFullURL = periscopeESPURL + periscopeRelativeDeg;
+    let periscopeESPFullURL = periscopeESPURL + speedValue;;
+    httpGet(periscopeESPFullURL);
+  } else if (periscopeFunction === 'R' && t === 'RotateCounterClockwiseContinous') {
+    let periscopeESPURL = "http://192.168.8.142/?param0=1&param1=:P" + periscopeFunction;
+    let periscopeESPFullURL = periscopeESPURL + speedValue;;
+    httpGet(periscopeESPFullURL);
+  } else if (periscopeFunction === 'AR' || periscopeFunction === 'PR') {
+    let periscopeESPURL = "http://192.168.8.142/?param0=1&param1=:P" + periscopeFunction;
+    let periscopeESPFullURL = periscopeESPURL + ',' + speedValue;
+    httpGet(periscopeESPFullURL);
+  } else if (periscopeFunction === 'S') {
+    let periscopeESPURL = "http://192.168.8.142/?param0=1&param1=:P" + periscopeFunction;
+    let periscopeESPFullURL = periscopeESPURL + t;
     httpGet(periscopeESPFullURL);
   } else {
     var periscopeHeight = t;
-    var periscopeESPURL = "http://192.168.8.142/?param0=1&param1=:P" + periscopeFunction;
-    let periscopeESPFullURL = periscopeESPURL + periscopeHeight;
-    console.log(periscopeESPFullURL);
-
+    var periscopeESPURL = "http://192.168.8.142/?param0=1&param1=:P" + periscopeFunction
+    let periscopeESPFullURL = periscopeESPURL + periscopeHeight + ',' + speedValue;;
+    // console.log(periscopeESPFullURL);
     httpGet(periscopeESPFullURL);
-  }
+  };
 
 
 
@@ -10473,7 +10489,7 @@ function HeightSelection0(t) {
   tmp90.classList.remove('active');
   document.getElementById("Height100").src = tmppic100;
   tmp100.classList.remove('active');
-  getPeriscope('P', '0');
+  getPeriscope('P', '0', 'HeightSpeed');
 }
 function HeightSelection10(t) {
   let tmp0 = document.querySelector('#Height0');
@@ -10523,7 +10539,7 @@ function HeightSelection10(t) {
   tmp90.classList.remove('active');
   document.getElementById("Height100").src = tmppic100;
   tmp100.classList.remove('active');
-  getPeriscope('P', '10');
+  getPeriscope('P', '10', 'HeightSpeed');
 
 }
 
@@ -10575,7 +10591,7 @@ function HeightSelection20(t) {
   tmp90.classList.remove('active');
   document.getElementById("Height100").src = tmppic100;
   tmp100.classList.remove('active');
-  getPeriscope('P', '20');
+  getPeriscope('P', '20', 'HeightSpeed');
 }
 
 
@@ -10625,7 +10641,7 @@ function HeightSelection30(t) {
   tmp90.classList.remove('active');
   document.getElementById("Height100").src = tmppic100;
   tmp100.classList.remove('active');
-  getPeriscope('P', '30');
+  getPeriscope('P', '30', 'HeightSpeed');
 }
 function HeightSelection40(t) {
   let tmp0 = document.querySelector('#Height0');
@@ -10673,7 +10689,7 @@ function HeightSelection40(t) {
   tmp90.classList.remove('active');
   document.getElementById("Height100").src = tmppic100;
   tmp100.classList.remove('active');
-  getPeriscope('P', '40');
+  getPeriscope('P', '40', 'HeightSpeed');
 }
 
 function HeightSelection50(t) {
@@ -10722,7 +10738,7 @@ function HeightSelection50(t) {
   tmp90.classList.remove('active');
   document.getElementById("Height100").src = tmppic100;
   tmp100.classList.remove('active');
-  getPeriscope('P', '50');
+  getPeriscope('P', '50', 'HeightSpeed');
 }
 
 function HeightSelection60(t) {
@@ -10771,7 +10787,7 @@ function HeightSelection60(t) {
   tmp90.classList.remove('active');
   document.getElementById("Height100").src = tmppic100;
   tmp100.classList.remove('active');
-  getPeriscope('P', '60');
+  getPeriscope('P', '60', 'HeightSpeed');
 }
 
 
@@ -10821,7 +10837,7 @@ function HeightSelection70(t) {
   tmp90.classList.remove('active');
   document.getElementById("Height100").src = tmppic100;
   tmp100.classList.remove('active');
-  getPeriscope('P', '70');
+  getPeriscope('P', '70', 'HeightSpeed');
 }
 
 
@@ -10871,7 +10887,7 @@ function HeightSelection80(t) {
   tmp90.classList.remove('active');
   document.getElementById("Height100").src = tmppic100;
   tmp100.classList.remove('active');
-  getPeriscope('P', '80');
+  getPeriscope('P', '80', 'HeightSpeed');
 }
 
 function HeightSelection90(t) {
@@ -10920,7 +10936,7 @@ function HeightSelection90(t) {
   tmp90.classList.add('active');
   document.getElementById("Height100").src = tmppic100;
   tmp100.classList.remove('active');
-  getPeriscope('P', '90');
+  getPeriscope('P', '90', 'HeightSpeed');
 }
 
 
@@ -10970,5 +10986,5 @@ function HeightSelection100(t) {
   tmp90.classList.add('active');
   document.getElementById("Height100").src = tmppic100;
   tmp100.classList.add('active');
-  getPeriscope('P', '100');
+  getPeriscope('P', '100', 'HeightSpeed');
 } 
