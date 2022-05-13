@@ -44,10 +44,14 @@ function checkPeriscopeLifterStatus() {
     if (request.readyState === 4) {
       if (request.status === 200) {
         document.getElementById("PeriscopeLifterIcon").src = "./Images/Status-icon-Green.png";
+        document.getElementById("PLStatusText").style.color = "black";
+
         PerisopeLifterStatus = true;
       }
       else {
         document.getElementById("PeriscopeLifterIcon").src = "./Images/Status-icon-Red.png";
+        document.getElementById("PLStatusText").style.color = "white";
+
         PerisopeLifterStatus = false;
       }
     }
@@ -67,11 +71,15 @@ function checkBodyLEDControllerStatus() {
     if (request.readyState === 4) {
       if (request.status === 200) {
         document.getElementById("BodyLEDControllerIcon").src = "./Images/Status-icon-Green.png";
+        document.getElementById("BCStatusText").style.color = "black";
+
         BodyControllerStatus = true;
 
       }
       else {
         document.getElementById("BodyLEDControllerIcon").src = "./Images/Status-icon-Red.png";
+        document.getElementById("BCStatusText").style.color = "white";
+
         BodyControllerStatus = false;
 
       }
