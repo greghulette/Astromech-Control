@@ -1,3 +1,5 @@
+// const { text } = require("express");
+
 var dstatus = true;
 function openAllDoorsMS() {
 
@@ -85,17 +87,21 @@ function checkDomeControllerStatus() {
   const before = new Date();
   var request = new XMLHttpRequest();
   request.timeout = 1000;
-  request.open('GET', 'http://192.168.8.129', true);
+  // request.open('GET', 'http://192.168.8.129', true);
+  request.open("GET", "http://AstromechRemote:8000/BatteryCapacity.txt", true);
+
   request.onreadystatechange = function () {
 
     if (request.readyState === 4) {
       if (request.status === 200) {
         document.getElementById("HPIcon").src = "./Images/Status-icon-Green.png";
+        document.getElementById("HPStatusText").style.color = "black";
         DomeControllerStatus = true;
 
       }
       else {
         document.getElementById("HPIcon").src = "./Images/Status-icon-Red.png";
+        document.getElementById("HPStatusText").style.color = "white";
         DomeControllerStatus = false;
 
       }
@@ -106,12 +112,108 @@ function checkDomeControllerStatus() {
 
 };
 
+function GetBatteryLevel() {
+  // var req = new XMLHttpRequest();
+  // req.open('GET', 'http://10.0.0.40:8000/BatteryCapacity.txt', true);
+  // req.send();
+  // // if (req.status == 200) {
+  // //   dump(req.responseText);
+  // // }
+  var connected = "good";
+  var textLower = "";
+  var file = new XMLHttpRequest();
+  // var batteryLevelInt;
+  var greenLevel = 65;
+  var yellowLevel = 35;
+  var redLevel = 34;
 
+  file.timeout = 1000;
+  file.open("GET", "http://AstromechRemote:8000/BatteryCapacity.txt", true);
+  file.onreadystatechange = function () {
+    // console.log("Something")
+    if (file.readyState === 4) {
+      if (file.status == 200) {
+        text = file.responseText;
+        let batteryLevelInt = parseInt(text)
+        // console.log(batteryLevelInt);
+        document.getElementById("batteryChargeLevel").innerHTML = text
+
+        if (greenLevel < batteryLevelInt && batteryLevelInt <= 100) {
+          // console.log("Green Level Selected");
+          document.getElementById("batteryIcon").src = "./Images/batteryIcon-Green.png";
+        } else if (yellowLevel < batteryLevelInt && batteryLevelInt < greenLevel) {
+          // console.log("Yellow Level Selected");
+          document.getElementById("batteryIcon").src = "./Images/batteryIcon-Yellow.png";
+
+        }
+        else {
+          console.log("Not Communicating")
+          document.getElementById("batteryIcon").src = "./Images/batteryIcon-Grey.png";
+        }
+        // if (textLower.includes(connected)) {
+        //   console.log("Yes")
+        //   document.getElementById("batteryIcon").src = "./Images/Status-Icon-Green.png";
+        // };
+
+        // console.log(text);
+      }
+    }
+    else {
+
+
+    }
+
+  }
+
+  file.send();
+
+};
+
+function GetBatteryConnection() {
+  // var req = new XMLHttpRequest();
+  // req.open('GET', 'http://10.0.0.40:8000/BatteryCapacity.txt', true);
+  // req.send();
+  // // if (req.status == 200) {
+  // //   dump(req.responseText);
+  // // }
+  var connected = "good";
+  var textLower = "";
+  var file = new XMLHttpRequest();
+  // file.timeout = 1000;
+  file.open("GET", "http://astromechremote:8000/ConnectedStatus.txt", true);
+  file.onreadystatechange = function () {
+    // console.log("Something")
+    if (file.readyState === 4) {
+      if (file.status == 200) {
+        text = file.responseText;
+        textLower = text.toLowerCase();
+        // document.getElementById("batteryChargeLevel").innerHTML = textLower
+
+        if (textLower.includes(connected)) {
+          // console.log("Yes")
+          document.getElementById("batteryIconIndicator").src = "./Images/charging.png";
+        } else {
+          document.getElementById("batteryIconIndicator").src = "./Images/chargingblank.png";
+
+        };
+
+        // console.log(text);
+      }
+    } else {
+      // document.getElementById("batteryIcon").src = "";
+
+    }
+  }
+  file.send();
+
+};
 
 setInterval(function () {
   checkPeriscopeLifterStatus()
   checkBodyLEDControllerStatus()
   checkDomeControllerStatus()
+  GetBatteryLevel()
+  GetBatteryConnection()
 }, 5000)
 
 function bodyControllerLEDFunctionExecution(t) {
