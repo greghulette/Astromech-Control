@@ -65,7 +65,7 @@ function checkBodyLEDControllerStatus() {
   const before = new Date();
   var request = new XMLHttpRequest();
   request.timeout = 1000;
-  request.open('GET', 'http://192.168.8.101', true);
+  request.open('GET', 'http://192.168.4.101', true);
   request.onreadystatechange = function () {
 
     if (request.readyState === 4) {
@@ -226,7 +226,7 @@ setInterval(function () {
 
 function bodyControllerLEDFunctionExecution(t) {
   var LEDCommand = t;
-  var bodyLEDControllerSPURL = "http://192.168.8.101/?param0=2";
+  var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=2";
 
   var bodyLEDControllerFullURL = bodyLEDControllerSPURL + LEDCommand;
   console.log(bodyLEDControllerFullURL);
@@ -10402,7 +10402,7 @@ function BrightnessRangeFunc(a, b, c) {
 
 function getBodyLEDController(t, v) {
   var BodyBright = t;
-  var bodyLEDControllerSPURL = "http://192.168.8.101/?param0=2&param1=P";
+  var bodyLEDControllerSPURL = "http://192.168.4.100/?param0=2&param1=P";
 
   var bodyLEDControllerFullURL = bodyLEDControllerSPURL + v + BodyBright;
   // console.log(bodyLEDControllerFullURL);
