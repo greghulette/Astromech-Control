@@ -112,16 +112,16 @@ Serial.println();
 //      Serial.println("Serial 2 Chosen with If Statement");
           serialNr = 3;
     };
-//    if ((p->name()) == "param0" & (p->value()) == "5"){
-////      resetArduino();
-//      Serial.println("resetting Arduino");
-//    };
-        if ((p->name())== "param0" & (p->value()) == "5"){
-        Serial.println("Serial5 Chosen with If Statement");
+    if ((p->name())== "param0" & (p->value()) == "ArduinoReset"){
+        Serial.println("Reset Only Arduino Chosen with If Statement");
           serialNr = 5;
           resetArduino(50);
         };
-    
+    if ((p->name())== "param0" & (p->value()) == "ESPReset"){
+        Serial.println("Reset ESP and Arduino Chosen with If Statement");
+        ESP.restart();
+        };
+        
         Serial.print("Param name: ");
         Serial.println(p->name());
         Serial.print("Param value: ");
