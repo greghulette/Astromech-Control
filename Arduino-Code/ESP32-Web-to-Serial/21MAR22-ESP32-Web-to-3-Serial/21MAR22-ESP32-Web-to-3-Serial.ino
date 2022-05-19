@@ -10,12 +10,27 @@ AsyncWebServer server(80);
 #define TXD1 18 
 #define RXD2 25
 #define TXD2 27 
+#define RST 4
+
+void resetArduino(){
+  digitalWrite(RST,LOW);
+  delay(500);
+  digitalWrite(RST,HIGH);
+}
+
+IPAddress local_IP(192,168,4,100);
+IPAddress subnet(255,255,255,0);
+IPAddress gateway(192,168,4,1);
 void setup(){
   Serial.begin(9600);
   Serial1.begin(9600, SERIAL_8N1, RXD1, TXD1);
   Serial2.begin(9600, SERIAL_8N1, RXD2, TXD2);
-  
+  pinMode(RST, OUTPUT);
+  digitalWrite(RST,HIGH);
   delay(1000);
+   if (!WiFi.config(local_IP, gateway, subnet)) {
+    Serial.println("STA Failed to configure");
+  }
   WiFi.begin(ssid, password);
  
   while (WiFi.status() != WL_CONNECTED) {
@@ -53,6 +68,10 @@ void setup(){
 //      Serial.println("Serial 2 Chosen with If Statement");
           serialNr = 3;
     };
+//    if ((p->name()) == "param0" & (p->value()) == "5"){
+////      resetArduino();
+//      Serial.println("resetting Arduino");
+//    };
     
         Serial.print("Param name: ");
         Serial.println(p->name());
