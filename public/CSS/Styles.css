@@ -6,51 +6,127 @@ body {
   background-position: top center;
   font-size: 1.5rem;
   color: lightyellow;
-  font-family: 'Star Jedi', arial;
+  font-family: 'Star Jedi', 'Starjedi', arial, camb;
+
+
+}
+.remoteIcon{
+  position: absolute;
+  height: 50px;
+  top: -60px;
+  left: 130px;
+}
+.menuheadermain{
+
+    position: absolute;
+    top: -135px;
+    left: -40px;
+    font-size: 4rem;
 
 
 }
 
+.homeButtonClass{
+  position: absolute;
+  left: -350px;
+  top: 40px;
+}
+.battery{
+width: 90px;
+height: 50px;
+
+
+}
 .statusIconsOverallDiv{
 
   position: absolute;
-  top: 870px;
+  top: 650px;
   left: 600px;
 }
-
-.iconStatusPLDiv{
+.StatusIconBatteryDiv{
 
   position: relative;
   height: 70px;
+  top: 220px;
+  left: 660px;
+}
+.batteryChargeLevelDiv{
+  position: relative;
+  top: -107px;
+  left: 228px;
+  color: black;
+  font-size: 1.5rem;
+  text-align: center;
+  text-shadow: 0px 0px 10px yellow;
+
+}
+
+.iconStatusBatteryicon{
+  height: 70px;
+position: relative;
+top: -73px;
+left: 185px;
+}
+
+.iconStatusBatteryiconconst{
+  height: 40px;
+position: relative;
+top: -55px;
+left: 240px;
+}
+.iconStatusBatteryiconIndicator{
+  position: absolute;
+  /* border: 2px solid white; */
+  left: 297px;
+  top: -48px;
+  width: 15px;
+  height: 30px;
+}
+
+.BatteryStatusText{
+  position: relative;
   top: 0px;
-  left: 40px;
+  left:20px;
+}
+.iconStatusPLDiv{
+
+  position: absolute;
+  height: 70px;
+  top: 130px;
+  left: 0px;
 }
 
 .iconStatusPLicon{
   height: 70px;
-position: relative;
-top: -70px;
-left: 30px;
+position: absolute;
+top: 20px;
+left: -590px;
 }
 
 .PLStatusText{
-  position: relative;
-  top: 0px;
-  left:0px;
+  position: absolute;
+  top: 7px;
+  left:-570px;
 }
 
 
 .StatusIconBCDiv{
 
-  position: relative;
+  position: absolute;
   height: 70px;
-  top: -94px;
-  left: 140px;
+  top: 0px;
+  left: 0px;
+}
+.iconStatusBCicon{
+  height: 70px;
+position: absolute;
+top: 20px;
+left: -590px;
 }
   .BCStatusText{
-    position: relative;
-    top: 0px;
-    left:0px;
+    position: absolute;
+    top: 7px;
+    left:-570px;
   }
 
 .iconStatusBC{
@@ -58,25 +134,31 @@ left: 30px;
   position: relative;
   height: 70px;
   top: 0px;
-  left: 340px;
+  left: -600px;
 }
 
 .StatusIconHPDiv{
 
   position: relative;
   height: 70px;
-  top: -187px;
-  left: 240px;
+  top: 65px;
+  left: 0px;
 }
   .HPStatusText{
-    position: relative;
-    top: 0px;
-    left:0px;
+    position: absolute;
+    top: 7px;
+    left:-570px;
+    /* color: black; */
   }
-
+  .iconStatusHPicon{
+    height: 70px;
+  position: absolute;
+  top: 20px;
+  left: -590px;
+  }
 .iconStatusHP{
 
-  position: relative;
+  position: absolute;
   height: 70px;
   top: 0px;
   left: 340px;
@@ -85,23 +167,23 @@ left: 30px;
 
 .StatusIconStealthDiv{
 
-  position: relative;
+  position: absolute;
   height: 70px;
-  top: -285px;
-  left: 340px;
+  top: 190px;
+  left: 0px;
 }
   .StealthStatusText{
-    position: relative;
-    top: 0px;
-    left:5px;
+    position: absolute;
+    top: 7px;
+    left:-570px;
   }
 
 .iconStatusStealth{
 
-  position: relative;
+  position: absolute;
   height: 70px;
-  top: -70px;
-  left: 110px;
+  top: 20px;
+  left: -590px;
 }
 
 .per{
@@ -179,12 +261,18 @@ span.myButton input {
   height: 55px;
 }
 .buttonwidth {
-  width: 165px;
+  width: 195px;
 }
 
 .homebuttonwidth {
-  width: 240px;
+  width: 340px;
 }
+
+.homebuttonwidth2 {
+  width: 160px;
+}
+
+
 #buttons {
   /* border: 4px solid blue; */
   position: absolute;
@@ -646,7 +734,7 @@ shadow: 2px, 4px 15px blue;
 .r2menu {
   /* border: 4px solid blue; */
   position: absolute;
-  top: 60px;
+  top: 0px;
   left: 120px;
   width: 300px;
   height: 625px;
@@ -893,7 +981,7 @@ shadow: 2px, 4px 15px blue;
 .selectAll {
   position: absolute;
   left: -815px;
-  top: 550px;
+  top: 600px;
   font-size: 35px;
   text-align: center;
   border: 5px blue solid;
@@ -901,14 +989,14 @@ shadow: 2px, 4px 15px blue;
   padding-right: 15 px;
   padding-top: 5px;
   padding-bottom: 5px; */
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height:40px;
 }
 
 .selectNone {
   position: absolute;
   left: -815px;
-  top: 640px;
+  top: 680px;
   font-size: 35px;
   text-align: center;
   border: 5px blue solid;
@@ -922,33 +1010,33 @@ shadow: 2px, 4px 15px blue;
 }
 .checkmarkall{
   position: absolute;
-  top: 575px;
-  left: -745px;
+  top: 715px;
+  left: -735px;
   height: 60px;
   width: 60px;
 }
 
 .selectALLpic{
   position: absolute;
-  top: 575px;
-  left: -805px;
-  height: 70px;
-  width: 70px;
+  top: 780px;
+  left: -725px;
+  height: 50px;
+  width: 50px;
 }
 .checkmarkallpic{
   position: absolute;
   top: 575px;
   left: -705px;
-  height: 70px;
-  width: 70px;
+  height: 50px;
+  width: 50px;
 }
 
 .selectNonepic{
   position: absolute;
-  top: 675px;
-  left: -805px;
-  height: 70px;
-  width: 70px;
+  top: 780px;
+  left: -365px;
+  height: 50px;
+  width: 50px;
 }
 .checkmarkNonepic{
   position: absolute;
@@ -964,6 +1052,30 @@ shadow: 2px, 4px 15px blue;
   left: 100px;
   height: 80px;
   width: 80px;
+}
+
+.UpArrowPicturePeriscope{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  height: 80px;
+  width: 80px;
+}
+.CenterArrowPicturePeriscope{
+  position: absolute;
+  top: 100px;
+  left: 10px;
+  height: 80px;
+  width: 80px;
+  /* transform: rotate(270deg); */
+}
+.DownArrowPicturePeriscope{
+  position: absolute;
+  top: 190px;
+  left: 10px;
+  height: 80px;
+  width: 80px;
+  /* transform: rotate(180deg); */
 }
 .DownArrowPicture{
   position: absolute;
@@ -1031,8 +1143,8 @@ left: 100px;
 }
 .checkmarknone{
   position: absolute;
-  top: 675px;
-  left: -745px;
+  top: 715px;
+  left: -345px;
   height: 60px;
   width: 60px;
 }
@@ -1040,8 +1152,8 @@ left: 100px;
   position: absolute;
   top: 305px;
   left: 75px;
-  height: 60px;
-  width: 60px;
+  height: 90px;
+  width: 80px;
 }
 .r2menu  .img-wrapper {
   display: inline-block;
@@ -1064,11 +1176,306 @@ left: 100px;
 
 .periscopeControl{
   position: absolute;
-  top: 245px;
-  left: 400px;
+  top: 70px;
+  left: 390px;
   border: 3px solid white;
-  width: 280px;
-  height: 280px;
+  width:110px;
+  height: 640px;
+}
+
+.periscopeRotationControl{
+  position: absolute;
+  top: 70px;
+  left: 580px;
+  border: 3px solid white;
+  width: 360px;
+  height: 370px;
+}
+.RandomHeader{
+  position: absolute;
+  top: 530px;
+  left: 500px;
+  width: 265px;
+}
+.RotateClockwiseContinous{
+  position: absolute;
+  top: 240px;
+  left: 10px;
+
+}
+
+.RotateCounterClockwiseContinous{
+  position: absolute;
+  top: 240px;
+  left: 180px;
+
+}
+.rotateCCPicturePeriscope{
+position: absolute;
+top: 10px;
+left: 10px;
+
+}
+
+.rotateCWPicturePeriscope{
+  position: absolute;
+  top: 10px;
+  left: 180px;
+  
+  }
+
+  .absolute0Periscope{
+    position: absolute;
+    top: 130px;
+    left: 10px;
+    height: 70px;
+    width: 70px;
+  }
+
+  .absolute90Periscope{
+    position: absolute;
+    top: 130px;
+    left: 100px;
+    height: 70px;
+    width: 70px;
+  }
+  .absolute180Periscope{
+    position: absolute;
+    top: 130px;
+    left: 185px;
+    height: 70px;
+    width: 70px;
+  }
+  .absolute270Periscope{
+    position: absolute;
+    top: 130px;
+    left: 270px;
+    height: 70px;
+    width: 70px;
+  }
+
+  .RotateHome{
+    position: absolute;
+    top: 360px;
+    left: 180px;
+  }
+
+  .RotateRandom{
+    position: absolute;
+    top: 360px;
+    left: 10px;
+  }
+  .RotateClockwiseRelativeText{
+    position: absolute;
+    top: 80px;
+    left: 60px;
+    width: 50px;
+    font-size: 1.7rem;
+  }
+  .RotateCounterClockwiseRelativeText{
+    position: absolute;
+    top: 80px;
+    left: 220px;
+    font-size: 1.7rem;
+    width: 50px;
+  }
+  .RandomPeriscope{
+    position: absolute;
+    top: 530px;
+    left: 580px;
+    border: 2px solid white;
+    height: 80px;
+    width: 360px;
+  }
+  .RotateRandomHeight{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+  .RotateRandomRotate{
+    position: absolute;
+    top: 10px;
+    left: 180px;
+  }
+  .Height0{
+    position: absolute;
+    /* content: url(../Images/Buttons/Button-Height-0-Grey.png); */
+    top: 510px;
+    left: 10px;
+    width: 90px;
+  }
+  .Height0 :active{
+     /* content: url(../Images/Buttons/Button-Height-0.png); */
+    opacity: 1.0;
+    box-shadow: 0px 0px 20px yellow;
+    scale:10px ;
+  }
+ 
+
+  .Height10{
+    position: absolute;
+    /* content: url(../Images/Buttons/Button-Height-10-Grey.png); */
+
+    top: 460px;
+    left: 10px;
+    width: 90px;
+    /* border: 2px solid blueviolet; */
+  }
+  .Height10:active{
+    /* content: url(../Images/Buttons/Button-Height-10.png); */
+
+  }
+  .Height10:hover{
+    opacity: 1.0;
+    box-shadow: 0px 0px 45px yellow;
+    scale: 1.2;
+    }
+
+   .Height20{
+    position: absolute;
+    top: 410px;
+    left: 10px;
+    width: 90px;
+  }
+  .Height20:active{
+    opacity: 1.0;
+    box-shadow: 0px 0px 20px yellow;
+    scale: 2;
+  }
+  
+   .Height30{
+    position: absolute;
+    top: 360px;
+    left: 10px;
+    width: 90px;
+  }
+  .Height30:active{
+    opacity: 1.0;
+    box-shadow: 0px 0px 20px yellow;
+    scale: 2;
+  }
+ 
+  .Height40{
+    position: absolute;
+    top: 310px;
+    left: 10px;
+    width: 90px;
+  }
+  .Height40:active{
+    opacity: 1.0;
+    box-shadow: 0px 0px 20px yellow;
+    scale: 2;
+  }
+  
+  .Height50{
+    position: absolute;
+    top: 260px;
+    left: 10px;
+    width: 90px;
+  }
+  .Height50:active{
+    opacity: 1.0;
+    box-shadow: 0px 0px 20px yellow;
+    scale: 2;
+  }
+ 
+  .Height60{
+    position: absolute;
+    top: 210px;
+    left: 10px;
+    width: 90px;
+  }
+  .Height60:active{
+    opacity: 1.0;
+    box-shadow: 0px 0px 20px yellow;
+    scale: 2;
+  }
+  
+  .Height70{
+    position: absolute;
+    top: 160px;
+    left: 10px;
+    width: 90px;
+  }
+  .Height70:active{
+    opacity: 1.0;
+    box-shadow: 0px 0px 40px yellow;
+    scale: 2;
+  }
+ 
+  .Height80{
+    position: absolute;
+    top: 110px;
+    left: 10px;
+    width: 90px;
+  }
+  .Height80:active{
+    opacity: 1.0;
+    box-shadow: 0px 0px 20px yellow;
+    scale: 2;
+  }
+ 
+
+
+  .Height90{
+    position: absolute;
+    top: 60px;
+    left: 10px;
+    width: 90px;
+  }
+  .Height90active{
+    opacity: 1.0;
+    box-shadow: 0px 0px 20px yellow;
+    scale: 2;
+  }
+ 
+  /* .Height100{
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    width: 60px;
+  } */
+
+  .Height100{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 90px;
+    /* border: 2px solid white; */
+  }
+  .Height100:active{
+    opacity: 1.0;
+    box-shadow: 0px 0px 20px yellow;
+    scale: 2;
+  }
+
+.HeightSpeed{
+  position: absolute;
+  top: 590px;
+  left: 10px;
+  width: 90px;
+  font-size: 1.7rem;
+}
+.RotateSpeed{
+  position: absolute;
+  top: 320px;
+  left: 262px;
+  width: 90px;
+  font-size: 1.7rem;
+}
+.RotateSpeedText{
+  position: absolute;
+  top: 285px;
+  left: 5px;
+  width: 255px;
+  font-size: 1.7rem;
+}
+.HeightSpeedText{
+  position: absolute;
+  top: 525px;
+  left: 10px;
+  width: 90px;
+  font-size: 1.6rem;
 }
 
 .periscopeText{
@@ -1091,8 +1498,9 @@ left: 100px;
 
 .StoredSequenceDiv{
   position: absolute;
-  top: 0px;
-  left: 150px;
+  top:-90px;
+  left: 130px;
+  /* border: 2px solid white; */
 }
 
 
@@ -1104,6 +1512,21 @@ left: 100px;
   width: 350px;
 }
 
+.PeriscopeHeightHeader{
+  position: absolute;
+  top: -80px;
+  left: -10px;
+  width: 130px;
+}
+
+.PeriscopeRotateHeader{
+  position: absolute;
+  top: -80px;
+  left: 105px;
+  width: 130px;
+  /* border: 2px solid white; */
+
+}
 .openclosedoors{
   position: absolute;
   top: 400px;
@@ -1231,7 +1654,21 @@ width: 100%;
   top:225px;
   left: 25px;
   height: 60px;
-  width: 150px;
+  width: 170px;
+
+  opacity: .9;
+}
+
+.applyButtonStored{
+  background-image: url(..//Images/Buttons/Button-Apply.png);
+  background-size: cover;
+  /* opacity: 1; */
+  /* border: 1px; */
+  position: absolute;
+  top:225px;
+  left: 25px;
+  height: 75px;
+  width: 190px;
 
   opacity: .9;
 }
@@ -1248,6 +1685,16 @@ width: 100%;
   width: 150px;
 
   opacity: .9;
+}
+.periscopePicture{
+  position: absolute;
+  height: 625px;
+  left: -400px;
+  top: 30px;
+
+}
+.periscopeheightwidth{
+  width: 80px;
 }
 .applyButtonSettings:hover{
   opacity: 1.0;
@@ -1267,8 +1714,8 @@ width: 100%;
   position: absolute;
   top:225px;
   left: 220px;
-  height: 60px;
-  width: 150px;
+  height: 70px;
+  width: 180px;
   box-shadow: 0px 0px 15px black;
   opacity: .9;
 }
@@ -1718,7 +2165,7 @@ label[for= ColorPickertab]{
   float: left;
   position: absolute;
   left: 0px;
-  top: 100px;
+  top: 40px;
   /* border: 1px solid #ccc; */
   /* background-color: black; */
   width: 85px;
@@ -1740,8 +2187,9 @@ label[for= ColorPickertab]{
   transition: 0.3s;
   border-top: 1px solid white;
   border-right: 1px solid white;
+  border-bottom: 1px solid white;
   border-radius: 10px;
-  box-shadow: 5px 0px 7px blue;
+  box-shadow: 0px 0px 10px blue;
 }
 
 /* Change background color of buttons on hover */
@@ -1761,7 +2209,7 @@ label[for= ColorPickertab]{
   position: absolute;
   display: none;
   left: 550px;
-  top: 0px;
+  top: 50px;
   padding: 5px 12px;
   /* border: 1px solid #ccc; */
   width: 800px;
@@ -1777,7 +2225,7 @@ label[for= ColorPickertab]{
 
 
 .menu-Level-0  .menu-Level-0-Content .menu-Level-1{
-  width: 220px;
+  width: 240px;
   height: 700px;
   overflow-y: auto;
   overflow-x: visible;
@@ -1803,7 +2251,7 @@ label[for= ColorPickertab]{
    display: inline-block;
    /* left:100px;
    top: 100px; */
-   width: 170px;
+   width: 190px;
    height: 57px;
    overflow: visible;
    border: none;
@@ -1812,7 +2260,7 @@ label[for= ColorPickertab]{
 }
 
 .menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Links button.active{
-   box-shadow: 0px 0px 15px yellow;
+   box-shadow: 0px 0px 5px yellow;
    background-color: yellow;
    border: none;
    outline: none;
@@ -1820,7 +2268,7 @@ label[for= ColorPickertab]{
 }
 .menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Links button.active:hover{
    box-shadow: 0px 0px 55px yellow;
-   background-color: yellow;
+   /* background-color: yellow; */
    border: none;
    outline: none;
 

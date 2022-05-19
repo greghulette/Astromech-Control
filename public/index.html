@@ -15,13 +15,13 @@
   <!-- <script src="/socket.io/socket.io.js"></script> -->
 </head>
 
-<body>
+<body scroll="no" style="overflow: hidden;">
 
   <div class="statusIconsOverallDiv">
    
    
     <div class="iconStatusPLDiv">
-        <p class="PLStatusText">PL</p>
+       
         
         <img
         class="iconStatusPLicon"
@@ -29,31 +29,33 @@
         alt="button for PL Status"
         id="PeriscopeLifterIcon"
       />
-
+      <p id="PLStatusText" class="PLStatusText">P</p>
     </div> 
     <div class="StatusIconBCDiv">
-      <p class="BCStatusText">BC</p>
+ 
      
       <img
-      class="iconStatusPLicon"
+      class="iconStatusBCicon"
       src="Images/Status-Icon-Grey.png"
       alt="button for PL Status"
       id="BodyLEDControllerIcon"
       />
+      <p id="BCStatusText" class="BCStatusText">B</p>
     </div>
     <div class="StatusIconHPDiv">
-      <p class="HPStatusText">HP</p>
+
      
       <img
-      class="iconStatusPLicon"
+      class="iconStatusHPicon"
       src="Images/Status-Icon-Grey.png"
       alt="button for PL Status"
       id="HPIcon"
       />
+      <p id="HPStatusText" class="HPStatusText">D</p>
     </div>
 
     <div class="StatusIconStealthDiv">
-      <p class="HPStatusText">Stealth</p>
+
      
       <img
       class="iconStatusStealth"
@@ -61,9 +63,38 @@
       alt="button for PL Status"
       id="StealthIcon"
       />
+      <p id="StealthStatusText" class="StealthStatusText">s</p>
     </div>
+    <!-- <iframe class="battery" scrolling="no" style="overflow: hidden; color: white;" src="http://10.0.0.40:8000/BatteryCapacity.txt" frameborder="0"></iframe> -->
+<div class="StatusIconBatteryDiv">
+<!-- <img src="./Images/RemoteIcon.png" class="remoteIcon" alt=""> -->
+  <!-- <p class="BatteryStatusText"></p> -->
+  <img
+  class="iconStatusBatteryiconconst"
+  src="Images/batteryIcon-Grey.png"
+  alt="button for battery Status"
+  id="batteryIcon"
+  />
+  <!-- <img
+  class="iconStatusBatteryicon"
+  src="Images/Status-Icon-Grey.png"
+  alt="button for battery Status"
+  id="batteryIcon"
+  /> -->
+  <img
+  class="iconStatusBatteryiconIndicator"
+  src="./Images/chargingblank.png"
+  alt=""
+  id="batteryIconIndicator"
+  />
+  <div class="batteryChargeLevelDiv" id="batteryChargeLevel"></div>
 
+</div>
   </div>
+
+
+
+
 <div class="r2menu">
     <div >
 
@@ -110,7 +141,13 @@
     </div>
     <div class="menu-Level-0-Links" id="periscope">
       <button rel="periscope" >
-        <img style="position:relative; height:75px; left:10px; top:-5px;" src="./Images/periscope.jpeg" alt="button for Wave1"/>    
+        <img style="position:relative; height:78px; left:10px; top:-5px;" src="./Images/periscope.png" alt="button for Wave1"/>    
+        </button>
+    </div>
+
+    <div class="menu-Level-0-Links" id="sounds">
+      <button rel="sounds" >
+        <img style="position:relative; height:65px; left:0px; top:-px;" src="./Images/volume.png" alt="button for Wave1"/>    
         </button>
     </div>
 
@@ -124,13 +161,13 @@
 
    <div class="menu-Level-0-Content active" id="home">
     <div id="HomeTab" class="">
-      <h2 class="menuheader">Astromech Control</h2>
-      <table class="">
+      <h2 class="menuheadermain">Astromech Control</h2>
+      <table class="homeButtonClass">
         <tr>
           <td>
             <img
               class="homebuttonwidth"
-              src="Images/Buttons/Button-Wave1.png"
+              src="Images/Buttons/Button-Normal-Operation.png"
               alt="button for Wave1"
             />
           </td>
@@ -659,8 +696,24 @@
             id="VerticalBarstKnightRider"
           />
 
-          <h3 class="selectAll" onclick=selectALLStripsKnightRider()> A </h3>
-          <h3 class="selectNone" onclick=selectNoneStripsKnightRider()> N </h3>
+          <img
+          class="selectALLpic"
+          src="Images/Button-Select-All-GIMP.png"
+          alt="picture"
+          onclick=selectALLStripsKnightRider()
+          id="checkmarkallRSeries"
+        />
+      
+        <img
+          class="selectNonepic"
+          src="Images/Button-Select-None-GIMP.png"
+          alt="picture"
+          onclick=selectNoneStripsKnightRider()
+          id="checkmarkNoneRSeries"
+        />
+
+          <!-- <h3 class="selectAll" onclick=selectALLStripsKnightRider()> A </h3>
+          <h3 class="selectNone" onclick=selectNoneStripsKnightRider()> N </h3> -->
           <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallKnightRider"/>
           <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneKnightRider"/>
 
@@ -848,8 +901,24 @@
                 id="RearHPRainbow"
               />
 
-              <h3 class="selectAll" onclick=selectALLStripsRainbow()> A </h3>
-              <h3 class="selectNone" onclick=selectNoneStripsRainbow()> N </h3>
+              <img
+              class="selectALLpic"
+              src="Images/Button-Select-All-GIMP.png"
+              alt="picture"
+              onclick=selectALLStripsRainbow()
+              id="checkmarkallRSeries"
+            />
+          
+            <img
+              class="selectNonepic"
+              src="Images/Button-Select-None-GIMP.png"
+              alt="picture"
+              onclick=selectNoneStripsRainbow()
+              id="checkmarkNoneRSeries"
+            />
+
+              <!-- <h3 class="selectAll" onclick=selectALLStripsRainbow()> A </h3>
+              <h3 class="selectNone" onclick=selectNoneStripsRainbow()> N </h3> -->
               <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallRainbow">
               <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneRainbow">
 
@@ -940,9 +1009,24 @@
                   onclick=changeImageVerticalBarsAlternatingColors()
                   id="VerticalBarstAlternatingColors"
                 />
+                <img
+                    class="selectALLpic"
+                    src="Images/Button-Select-All-GIMP.png"
+                    alt="picture"
+                    onclick=selectALLStripsAlternatingColors()
+                    id="checkmarkallRSeries"
+                  />
+                
+                  <img
+                    class="selectNonepic"
+                    src="Images/Button-Select-None-GIMP.png"
+                    alt="picture"
+                    onclick=selectNoneStripsAlternatingColors()
+                    id="checkmarkNoneRSeries"
+                  />
 
-                <h3 class="selectAll" onclick=selectALLStripsAlternatingColors()> A </h3>
-                <h3 class="selectNone" onclick=selectNoneStripsAlternatingColors()> N </h3>
+                <!-- <h3 class="selectAll" onclick=selectALLStripsAlternatingColors()> A </h3>
+                <h3 class="selectNone" onclick=selectNoneStripsAlternatingColors()> N </h3> -->
                 <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallAlternatingColors">
                 <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneAlternatingColors">
 
@@ -1072,10 +1156,26 @@
                     name="stripSelectorDimPulse"
                     onclick=changeImageRearHPDimPulse()
                     id="RearHPDimPulse"
-                  />
+                  />              
+                  <img
+                  class="selectALLpic"
+                  src="Images/Button-Select-All-GIMP.png"
+                  alt="picture"
+                  onclick=selectALLStripsDimPulse()
+                  id="checkmarkallRSeries"
+                />
+              
+                <img
+                  class="selectNonepic"
+                  src="Images/Button-Select-None-GIMP.png"
+                  alt="picture"
+                  onclick=selectNoneStripsDimPulse()
+                  id="checkmarkNoneRSeries"
+                />
+    
 
-                  <h3 class="selectAll" onclick=selectALLStripsDimPulse()> A </h3>
-                  <h3 class="selectNone" onclick=selectNoneStripsDimPulse()> N </h3>
+                  <!-- <h3 class="selectAll" onclick=selectALLStripsDimPulse()> A </h3>
+                  <h3 class="selectNone" onclick=selectNoneStripsDimPulse()> N </h3> -->
                   <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallDimPulse">
                   <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneDimPulse">
 
@@ -1165,10 +1265,24 @@
                       onclick=changeImageVerticalBarsBouncing()
                       id="VerticalBarstBouncing"
                     />
+                    <img
+                    class="selectALLpic"
+                    src="Images/Button-Select-All-GIMP.png"
+                    alt="picture"
+                    onclick=selectALLStripsBouncing()
+                    id="checkmarkallRSeries"
+                  />
+                
+                  <img
+                    class="selectNonepic"
+                    src="Images/Button-Select-None-GIMP.png"
+                    alt="picture"
+                    onclick=selectNoneStripsBouncing()
+                    id="checkmarkNoneRSeries"
+                  />
 
-
-                    <h3 class="selectAll" onclick=selectALLStripsBouncing()> A </h3>
-                    <h3 class="selectNone" onclick=selectNoneStripsBouncing()> N </h3>
+                    <!-- <h3 class="selectAll" onclick=selectALLStripsBouncing()> A </h3>
+                    <h3 class="selectNone" onclick=selectNoneStripsBouncing()> N </h3> -->
                     <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallBouncing">
                     <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneBouncing">
 
@@ -1266,8 +1380,23 @@
                         onclick=changeImageVerticalBarsDualBounce()
                         id="VerticalBarstDualBounce"
                       />
-                      <h3 class="selectAll" onclick=selectALLStripsDualBounce()> A </h3>
-                      <h3 class="selectNone" onclick=selectNoneStripsDualBounce()> N </h3>
+                      <img
+                    class="selectALLpic"
+                    src="Images/Button-Select-All-GIMP.png"
+                    alt="picture"
+                    onclick=selectALLStripsDualBounce()
+                    id="checkmarkallRSeries"
+                  />
+                
+                  <img
+                    class="selectNonepic"
+                    src="Images/Button-Select-None-GIMP.png"
+                    alt="picture"
+                    onclick=selectNoneStripsDualBounce()
+                    id="checkmarkNoneRSeries"
+                  />
+                      <!-- <h3 class="selectAll" onclick=selectALLStripsDualBounce()> A </h3>
+                      <h3 class="selectNone" onclick=selectNoneStripsDualBounce()> N </h3> -->
                       <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallDualBounce">
                       <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneDualBounce">
 
@@ -1453,10 +1582,25 @@
                           onclick=changeImageVerticalBarsDualingColors()
                           id="VerticalBarstDualingColors"
                         />
+                        <img
+                        class="selectALLpic"
+                        src="Images/Button-Select-All-GIMP.png"
+                        alt="picture"
+                        onclick=selectALLStripsDualingColors()
+                        id="checkmarkallRSeries"
+                      />
+                    
+                      <img
+                        class="selectNonepic"
+                        src="Images/Button-Select-None-GIMP.png"
+                        alt="picture"
+                        onclick=selectNoneStripsDualingColors()
+                        id="checkmarkNoneRSeries"
+                      />
 
 
-                        <h3 class="selectAll" onclick=selectALLStripsDualingColors()> A </h3>
-                        <h3 class="selectNone" onclick=selectNoneStripsDualingColors()> N </h3>
+                        <!-- <h3 class="selectAll" onclick=selectALLStripsDualingColors()> A </h3>
+                        <h3 class="selectNone" onclick=selectNoneStripsDualingColors()> N </h3> -->
                         <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallDualingColors">
                         <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneDualingColors">
 
@@ -1596,10 +1740,24 @@
                         onclick=changeImageVerticalBarsRandomColor()
                         id="VerticalBarstRandomColor"
                       />
+                      <img
+                      class="selectALLpic"
+                      src="Images/Button-Select-All-GIMP.png"
+                      alt="picture"
+                      onclick=selectALLStripsRandomColor()
+                      id="checkmarkallRSeries"
+                    />
+                  
+                    <img
+                      class="selectNonepic"
+                      src="Images/Button-Select-None-GIMP.png"
+                      alt="picture"
+                      onclick=selectNoneStripsRandomColor()
+                      id="checkmarkNoneRSeries"
+                    />
 
-
-                      <h3 class="selectAll" onclick=selectALLStripsRandomColor()> A </h3>
-                      <h3 class="selectNone" onclick=selectNoneStripsRandomColor()> N </h3>
+                      <!-- <h3 class="selectAll" onclick=selectALLStripsRandomColor()> A </h3>
+                      <h3 class="selectNone" onclick=selectNoneStripsRandomColor()> N </h3> -->
                       <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallRandomColor">
                       <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneRandomColor">
 
@@ -1731,10 +1889,24 @@
                       onclick=changeImageVerticalBarsRandomColor2()
                       id="VerticalBarstRandomColor2"
                     />
+                    <img
+                    class="selectALLpic"
+                    src="Images/Button-Select-All-GIMP.png"
+                    alt="picture"
+                    onclick=selectALLStripsRandomColor2()
+                    id="checkmarkallRSeries"
+                  />
+                
+                  <img
+                    class="selectNonepic"
+                    src="Images/Button-Select-None-GIMP.png"
+                    alt="picture"
+                    onclick=selectNoneStripsRandomColor2()
+                    id="checkmarkNoneRSeries"
+                  />
 
-
-                    <h3 class="selectAll" onclick=selectALLStripsRandomColor2()> A </h3>
-                    <h3 class="selectNone" onclick=selectNoneStripsRandomColor2()> N </h3>
+                    <!-- <h3 class="selectAll" onclick=selectALLStripsRandomColor2()> A </h3>
+                    <h3 class="selectNone" onclick=selectNoneStripsRandomColor2()> N </h3> -->
                     <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallRandomColor2">
                     <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneRandomColor2">
 
@@ -1865,10 +2037,24 @@
                       onclick=changeImageVerticalBarsFlash()
                       id="VerticalBarstFlash"
                     />
+                    <img
+                    class="selectALLpic"
+                    src="Images/Button-Select-All-GIMP.png"
+                    alt="picture"
+                    onclick=selectALLStripsFlash()
+                    id="checkmarkallRSeries"
+                  />
+                
+                  <img
+                    class="selectNonepic"
+                    src="Images/Button-Select-None-GIMP.png"
+                    alt="picture"
+                    onclick=selectNoneStripsFlash()
+                    id="checkmarkNoneRSeries"
+                  />
 
-
-                    <h3 class="selectAll" onclick=selectALLStripsFlash()> A </h3>
-                    <h3 class="selectNone" onclick=selectNoneStripsFlash()> N </h3>
+                    <!-- <h3 class="selectAll" onclick=selectALLStripsFlash()> A </h3>
+                    <h3 class="selectNone" onclick=selectNoneStripsFlash()> N </h3> -->
                     <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallFlash">
                     <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneFlash">
 
@@ -1999,8 +2185,24 @@
                     id="DataPanelShortCircuit"
                   />
 
+                  <img
+                    class="selectALLpic"
+                    src="Images/Button-Select-All-GIMP.png"
+                    alt="picture"
+                    onclick=selectALLStripsShortCircuit()
+                    id="checkmarkallRSeries"
+                  />
+                
+                  <img
+                    class="selectNonepic"
+                    src="Images/Button-Select-None-GIMP.png"
+                    alt="picture"
+                    onclick=selectNoneStripsShortCircuit()
+                    id="checkmarkNoneRSeries"
+                  />
+<!-- 
                 <h3 class="selectAll" onclick=selectALLStripsShortCircuit()> A </h3>
-                <h3 class="selectNone" onclick=selectNoneStripsShortCircuit()> N </h3>
+                <h3 class="selectNone" onclick=selectNoneStripsShortCircuit()> N </h3> -->
                 <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallShortCircuit">
                 <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneShortCircuit">
 
@@ -2155,9 +2357,24 @@
                 onclick=changeImageRearHPSolidColor()
                 id="RearHPSolidColor"
               />
+              <img
+              class="selectALLpic"
+              src="Images/Button-Select-All-GIMP.png"
+              alt="picture"
+              onclick=selectALLStripsSolidColor()
+              id="checkmarkallRSeries"
+            />
+          
+            <img
+              class="selectNonepic"
+              src="Images/Button-Select-None-GIMP.png"
+              alt="picture"
+              onclick=selectNoneStripsSolidColor()
+              id="checkmarkNoneRSeries"
+            />
 
-              <h3 class="selectAll" onclick=selectALLStripsSolidColor()> A </h3>
-              <h3 class="selectNone" onclick=selectNoneStripsSolidColor()> N </h3>
+              <!-- <h3 class="selectAll" onclick=selectALLStripsSolidColor()> A </h3>
+              <h3 class="selectNone" onclick=selectNoneStripsSolidColor()> N </h3> -->
               <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallSolidColor">
               <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneSolidColor">
 
@@ -2241,10 +2458,24 @@
             onclick=changeImageVerticalBarsPulseBeat()
             id="VerticalBarstPulseBeat"
           />
+          <img
+          class="selectALLpic"
+          src="Images/Button-Select-All-GIMP.png"
+          alt="picture"
+          onclick=selectALLStripsPulseBeat()
+          id="checkmarkallRSeries"
+        />
+      
+        <img
+          class="selectNonepic"
+          src="Images/Button-Select-None-GIMP.png"
+          alt="picture"
+          onclick=selectNoneStripsPulseBeat()
+          id="checkmarkNoneRSeries"
+        />
 
-
-          <h3 class="selectAll" onclick=selectALLStripsPulseBeat()> A </h3>
-          <h3 class="selectNone" onclick=selectNoneStripsPulseBeat()> N </h3>
+          <!-- <h3 class="selectAll" onclick=selectALLStripsPulseBeat()> A </h3>
+          <h3 class="selectNone" onclick=selectNoneStripsPulseBeat()> N </h3> -->
           <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallPulseBeat">
           <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknonePulseBeat">
 
@@ -2334,10 +2565,24 @@
             onclick=changeImageVerticalBarsPulseBeat2()
             id="VerticalBarstPulseBeat2"
           />
+          <img
+          class="selectALLpic"
+          src="Images/Button-Select-All-GIMP.png"
+          alt="picture"
+          onclick=selectALLStripsPulseBeat2()
+          id="checkmarkallRSeries"
+        />
+      
+        <img
+          class="selectNonepic"
+          src="Images/Button-Select-None-GIMP.png"
+          alt="picture"
+          onclick=selectNoneStripsPulseBeat2()
+          id="checkmarkNoneRSeries"
+        />
 
-
-          <h3 class="selectAll" onclick=selectALLStripsPulseBeat2()> A </h3>
-          <h3 class="selectNone" onclick=selectNoneStripsPulseBeat2()> N </h3>
+          <!-- <h3 class="selectAll" onclick=selectALLStripsPulseBeat2()> A </h3>
+          <h3 class="selectNone" onclick=selectNoneStripsPulseBeat2()> N </h3> -->
           <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallPulseBeat2">
           <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknonePulseBeat2">
 
@@ -2427,10 +2672,24 @@
             onclick=changeImageVerticalBarsWigWag()
             id="VerticalBarstWigWag"
           />
+          <img
+          class="selectALLpic"
+          src="Images/Button-Select-All-GIMP.png"
+          alt="picture"
+          onclick=selectALLStripsWigWag()
+          id="checkmarkallRSeries"
+        />
+      
+        <img
+          class="selectNonepic"
+          src="Images/Button-Select-None-GIMP.png"
+          alt="picture"
+          onclick=selectNoneStripsWigWag()
+          id="checkmarkNoneRSeries"
+        />
 
-
-          <h3 class="selectAll" onclick=selectALLStripsWigWag()> A </h3>
-          <h3 class="selectNone" onclick=selectNoneStripsWigWag()> N </h3>
+          <!-- <h3 class="selectAll" onclick=selectALLStripsWigWag()> A </h3>
+          <h3 class="selectNone" onclick=selectNoneStripsWigWag()> N </h3> -->
           <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallWigWag">
           <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneWigWag">
 
@@ -2519,10 +2778,24 @@
             onclick=changeImageVerticalBarsWigWag2()
             id="VerticalBarstWigWag2"
           />
+          <img
+          class="selectALLpic"
+          src="Images/Button-Select-All-GIMP.png"
+          alt="picture"
+          onclick=selectALLStripsWigWag2()
+          id="checkmarkallRSeries"
+        />
+      
+        <img
+          class="selectNonepic"
+          src="Images/Button-Select-None-GIMP.png"
+          alt="picture"
+          onclick=selectNoneStripsWigWag2()
+          id="checkmarkNoneRSeries"
+        />
 
-
-          <h3 class="selectAll" onclick=selectALLStripsWigWag2()> A </h3>
-          <h3 class="selectNone" onclick=selectNoneStripsWigWag2()> N </h3>
+          <!-- <h3 class="selectAll" onclick=selectALLStripsWigWag2()> A </h3>
+          <h3 class="selectNone" onclick=selectNoneStripsWigWag2()> N </h3> -->
           <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallWigWag2">
           <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneWigWag2">
 
@@ -2611,10 +2884,24 @@
             onclick=changeImageVerticalBarsZigZag()
             id="VerticalBarstZigZag"
           />
+          <img
+          class="selectALLpic"
+          src="Images/Button-Select-All-GIMP.png"
+          alt="picture"
+          onclick=selectALLStripsZigZag()
+          id="checkmarkallRSeries"
+        />
+      
+        <img
+          class="selectNonepic"
+          src="Images/Button-Select-None-GIMP.png"
+          alt="picture"
+          onclick=selectNoneStripsZigZag()
+          id="checkmarkNoneRSeries"
+        />
 
-
-          <h3 class="selectAll" onclick=selectALLStripsZigZag()> A </h3>
-          <h3 class="selectNone" onclick=selectNoneStripsZigZag()> N </h3>
+          <!-- <h3 class="selectAll" onclick=selectALLStripsZigZag()> A </h3>
+          <h3 class="selectNone" onclick=selectNoneStripsZigZag()> N </h3> -->
           <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallZigZag">
           <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneZigZag">
 
@@ -2702,10 +2989,24 @@
             onclick=changeImageVerticalBarsZigZag2()
             id="VerticalBarstZigZag2"
           />
+          <img
+          class="selectALLpic"
+          src="Images/Button-Select-All-GIMP.png"
+          alt="picture"
+          onclick=selectALLStripsZigZag2()
+          id="checkmarkallRSeries"
+        />
+      
+        <img
+          class="selectNonepic"
+          src="Images/Button-Select-None-GIMP.png"
+          alt="picture"
+          onclick=selectNoneStripsZigZag2()
+          id="checkmarkNoneRSeries"
+        />
 
-
-          <h3 class="selectAll" onclick=selectALLStripsZigZag2()> A </h3>
-          <h3 class="selectNone" onclick=selectNoneStripsZigZag2()> N </h3>
+          <!-- <h3 class="selectAll" onclick=selectALLStripsZigZag2()> A </h3>
+          <h3 class="selectNone" onclick=selectNoneStripsZigZag2()> N </h3> -->
           <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallZigZag2">
           <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneZigZag2">
 
@@ -2809,9 +3110,24 @@
             onclick=changeImageVerticalBarsDimPulse2()
             id="VerticalBarstDimPulse2"
           />
+          <img
+          class="selectALLpic"
+          src="Images/Button-Select-All-GIMP.png"
+          alt="picture"
+          onclick=selectALLStripsDimPulse2()
+          id="checkmarkallRSeries"
+        />
+      
+        <img
+          class="selectNonepic"
+          src="Images/Button-Select-None-GIMP.png"
+          alt="picture"
+          onclick=selectNoneStripsDimPulse2()
+          id="checkmarkNoneRSeries"
+        />
 
-          <h3 class="selectAll" onclick=selectALLStripsDimPulse2()> A </h3>
-          <h3 class="selectNone" onclick=selectNoneStripsDimPulse2()> N </h3>
+          <!-- <h3 class="selectAll" onclick=selectALLStripsDimPulse2()> A </h3>
+          <h3 class="selectNone" onclick=selectNoneStripsDimPulse2()> N </h3> -->
           <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallDimPulse2">
           <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneDimPulse2">
 
@@ -2901,9 +3217,24 @@
             onclick=changeImageVerticalBarsDimPulse3()
             id="VerticalBarstDimPulse3"
           />
+          <img
+          class="selectALLpic"
+          src="Images/Button-Select-All-GIMP.png"
+          alt="picture"
+          onclick=selectALLStripsDimPulse3()
+          id="checkmarkallRSeries"
+        />
+      
+        <img
+          class="selectNonepic"
+          src="Images/Button-Select-None-GIMP.png"
+          alt="picture"
+          onclick=selectNoneStripsDimPulse3()
+          id="checkmarkNoneRSeries"
+        />
 
-          <h3 class="selectAll" onclick=selectALLStripsDimPulse3()> A </h3>
-          <h3 class="selectNone" onclick=selectNoneStripsDimPulse3()> N </h3>
+          <!-- <h3 class="selectAll" onclick=selectALLStripsDimPulse3()> A </h3>
+          <h3 class="selectNone" onclick=selectNoneStripsDimPulse3()> N </h3> -->
           <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallDimPulse3">
           <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneDimPulse3">
 
@@ -2994,9 +3325,23 @@
             onclick=changeImageVerticalBarsDualingColors2()
             id="VerticalBarstDualingColors2"
           />
-
-          <h3 class="selectAll" onclick=selectALLStripsDualingColors2()> A </h3>
-          <h3 class="selectNone" onclick=selectNoneStripsDualingColors2()> N </h3>
+          <img
+          class="selectALLpic"
+          src="Images/Button-Select-All-GIMP.png"
+          alt="picture"
+          onclick=selectALLStripsDualingColors2()
+          id="checkmarkallRSeries"
+        />
+      
+        <img
+          class="selectNonepic"
+          src="Images/Button-Select-None-GIMP.png"
+          alt="picture"
+          onclick=selectNoneStripsDualingColors2()
+          id="checkmarkNoneRSeries"
+        />
+          <!-- <h3 class="selectAll" onclick=selectALLStripsDualingColors2()> A </h3>
+          <h3 class="selectNone" onclick=selectNoneStripsDualingColors2()> N </h3> -->
           <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallDualingColors2">
           <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneDualingColors2">
 
@@ -3236,9 +3581,24 @@
             onclick=changeImageVerticalBarsFLD()
             id="VerticalBarstFLD"
           />
+          <img
+          class="selectALLpic"
+          src="Images/Button-Select-All-GIMP.png"
+          alt="picture"
+          onclick=selectALLStripsFLD()
+          id="checkmarkallRSeries"
+        />
+      
+        <img
+          class="selectNonepic"
+          src="Images/Button-Select-None-GIMP.png"
+          alt="picture"
+          onclick=selectNoneStripsFLD()
+          id="checkmarkNoneRSeries"
+        />
 
-          <h3 class="selectAll" onclick=selectALLStripsFLD()> A </h3>
-          <h3 class="selectNone" onclick=selectNoneStripsFLD()> N </h3>
+          <!-- <h3 class="selectAll" onclick=selectALLStripsFLD()> A </h3>
+          <h3 class="selectNone" onclick=selectNoneStripsFLD()> N </h3> -->
           <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallFLD">
           <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneFLD">
 
@@ -3305,8 +3665,24 @@
             id="VerticalBarstRLD"
           />
 
-          <h3 class="selectAll" onclick=selectALLStripsRLD()> A </h3>
-          <h3 class="selectNone" onclick=selectNoneStripsRLD()> N </h3>
+          <img
+          class="selectALLpic"
+          src="Images/Button-Select-All-GIMP.png"
+          alt="picture"
+          onclick=selectALLStripsRLD()
+          id="checkmarkallRSeries"
+        />
+      
+        <img
+          class="selectNonepic"
+          src="Images/Button-Select-None-GIMP.png"
+          alt="picture"
+          onclick=selectNoneStripsRLD()
+          id="checkmarkNoneRSeries"
+        />
+
+          <!-- <h3 class="selectAll" onclick=selectALLStripsRLD()> A </h3>
+          <h3 class="selectNone" onclick=selectNoneStripsRLD()> N </h3> -->
           <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallRLD">
           <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneRLD">
 
@@ -3371,9 +3747,23 @@
             onclick=changeImageVerticalBarsPulse()
             id="VerticalBarstPulse"
           />
-
-          <h3 class="selectAll" onclick=selectALLStripsPulse()> A </h3>
-          <h3 class="selectNone" onclick=selectNoneStripsPulse()> N </h3>
+          <img
+          class="selectALLpic"
+          src="Images/Button-Select-All-GIMP.png"
+          alt="picture"
+          onclick=selectALLStripsPulse()
+          id="checkmarkallRSeries"
+        />
+      
+        <img
+          class="selectNonepic"
+          src="Images/Button-Select-None-GIMP.png"
+          alt="picture"
+          onclick=selectNoneStripsPulse()
+          id="checkmarkNoneRSeries"
+        />
+          <!-- <h3 class="selectAll" onclick=selectALLStripsPulse()> A </h3>
+          <h3 class="selectNone" onclick=selectNoneStripsPulse()> N </h3> -->
           <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallPulse">
           <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknonePulse">
 
@@ -3462,9 +3852,24 @@
             onclick=changeImageVerticalBarsDualPulse()
             id="VerticalBarstDualPulse"
           />
-
+          <img
+          class="selectALLpic"
+          src="Images/Button-Select-All-GIMP.png"
+          alt="picture"
+          onclick=selectALLStripsDualPulse()
+          id="checkmarkallRSeries"
+        />
+      
+        <img
+          class="selectNonepic"
+          src="Images/Button-Select-None-GIMP.png"
+          alt="picture"
+          onclick=selectNoneStripsDualPulse()
+          id="checkmarkNoneRSeries"
+        />
+<!-- 
           <h3 class="selectAll" onclick=selectALLStripsDualPulse()> A </h3>
-          <h3 class="selectNone" onclick=selectNoneStripsDualPulse()> N </h3>
+          <h3 class="selectNone" onclick=selectNoneStripsDualPulse()> N </h3> -->
           <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallDualPulse">
           <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneDualPulse">
 
@@ -3554,9 +3959,23 @@
             onclick=changeImageVerticalBarsAutoSequence()
             id="VerticalBarstAutoSequence"
           />
-
-          <h3 class="selectAll" onclick=selectALLStripsAutoSequence()> A </h3>
-          <h3 class="selectNone" onclick=selectNoneStripsAutoSequence()> N </h3>
+          <img
+          class="selectALLpic"
+          src="Images/Button-Select-All-GIMP.png"
+          alt="picture"
+          onclick=selectALLStripsAutoSequence()
+          id="checkmarkallRSeries"
+        />
+      
+        <img
+          class="selectNonepic"
+          src="Images/Button-Select-None-GIMP.png"
+          alt="picture"
+          onclick=selectNoneStripsAutoSequence()
+          id="checkmarkNoneRSeries"
+        />
+          <!-- <h3 class="selectAll" onclick=selectALLStripsAutoSequence()> A </h3>
+          <h3 class="selectNone" onclick=selectNoneStripsAutoSequence()> N </h3> -->
           <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallAutoSequence">
           <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneAutoSequence">
 
@@ -3647,8 +4066,24 @@
           id="VerticalBarstEqualizer"
         />
 
-          <h3 class="selectAll" onclick=selectALLStripsEqualizer()> A </h3>
-          <h3 class="selectNone" onclick=selectNoneStripsEqualizer()> N </h3>
+        <img
+    class="selectALLpic"
+    src="Images/Button-Select-All-GIMP.png"
+    alt="picture"
+    onclick=selectALLStripsEqualizer()
+    id="checkmarkallRSeries"
+  />
+
+  <img
+    class="selectNonepic"
+    src="Images/Button-Select-None-GIMP.png"
+    alt="picture"
+    onclick=selectNoneStripsEqualizer()
+    id="checkmarkNoneRSeries"
+  />
+
+          <!-- <h3 class="selectAll" onclick=selectALLStripsEqualizer()> A </h3>
+          <h3 class="selectNone" onclick=selectNoneStripsEqualizer()> N </h3> -->
           <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallEqualizer">
           <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneEqualizer">
 
@@ -3885,7 +4320,7 @@
         <div class="menu-Level-2">
 
             <div class="menu-Level-2-Links " >
-              <button class="active" rel="DataPanelNormal"><img
+              <button class="active" rel="RSeriesHome"><img
                   class="buttonwidth"
                   id ="transparent"
                   src="Images/Buttons/Button-R-Series-Home-GIMP.png"
@@ -3893,51 +4328,27 @@
                 /></button>
             </div>
 
-          <div class="menu-Level-2-Links " >
-            <button class="" rel="DataPanelShortCircuit"><img
-                class="buttonwidth"
-                id ="transparent"
-                src="Images/Buttons/LEDFunctionButtons/Generic/Button-ShortCircuit-White.png"
-                alt="button for Large Span"
-              /></button>
-          </div>
+         
 
-        <div class="menu-Level-2-Links " >
-          <button class="" rel="DataPanelFlash"><img
-              class="buttonwidth"
-              id ="transparent"
-              src="Images/Buttons/LEDFunctionButtons/Generic/Button-Flash-White.png"
-              alt="button for Large Span"
-            /></button>
-        </div>
-
-          <div class="menu-Level-2-Content active" id="DataPanelNormal">
+          <div class="menu-Level-2-Content active" id="RSeriesHome">
             <h2 class="menuHeader-Level-2">Normal</h2>
             <div class="ColorPickerdiv">
+              
+              <img
+    class="homebuttonwidth2"
+    src="./Images/Buttons/Button-Rseries-Flash-GIMP.png"
+    alt="picture"
+    onclick=commandNoOptionsRSeries('03')
+    id="checkmarkallRSeries"
+  />
               <form class="" action="index.html" method="post">
-                <a href="#" onclick="commandNoOptions('LDP', '99','','')" class="applyButton"></a>
-                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
+                <a href="#" onclick="commandNoOptionsRSeries('03')" class="applyButton"></a>
+                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandNoOptionsRSeries('03')" class="applyButtonoff"></img>
               </form>
             </div><!--end of ColorPickerdiv div-->
           </div> <!-- end of Level 2 Conetent Option 1-->
 
-          <div class="menu-Level-2-Content " id="DataPanelShortCircuit">
-            <h2 class="menuHeader-Level-2">Short Circuit</h2>
-            <div class="ColorPickerdiv">
-              <form class="" action="index.html" method="post">
-                <a href="#" onclick="commandNoOptions('LDP', '14','','')" class="applyButton"></a>
-                </form>
-            </div><!--end of ColorPickerdiv div-->
-          </div> <!-- end of Level 2 Conetent Option 2-->
-
-          <div class="menu-Level-2-Content " id="DataPanelFlash">
-            <h2 class="menuHeader-Level-2">Flash</h2>
-            <div class="ColorPickerdiv">
-              <form class="" action="index.html" method="post">
-                <a href="#" onclick="commandNoOptions('LDP', '13','','')" class="applyButton"></a>
-                </form>
-            </div><!--end of ColorPickerdiv div-->
-          </div> <!-- end of Level 2 Conetent Option 3-->
+<!-- end of Level 2 Conetent Option 3-->
 
 
 
@@ -4211,70 +4622,106 @@
     <div class="menuheader">
       <h1 class="">periscope control</h1>
       </div>
-      <img src="./Images/periscope.png" alt="" style="position:absolute; height:600px; left:-350px;";>
+      <img src="./Images/PeriscopeLifter.png" alt="" class="periscopePicture">
   
     <div class="periscopeControl">
-      <h3 class="HPServoHeader">Perisope Control</h3>
-      <img src="Images/UpArrows.png" class="UpArrowPicture" alt="image for the dome" onclick="pericopeLifter('100')">
-      <img src="Images/DownArrows.png" class="DownArrowPicture" alt="image for the dome" onclick="pericopeLifter('0')">
-      <img src="Images/RightArrows.png" class="RightArrowPicture" alt="image for the dome">
-      <img src="Images/LeftArrows.png" class="LeftArrowPicture" alt="image for the dome">
-      <img src="Images/CenterArrows.png" class="CenterArrowPicture" alt="image for the dome" onclick="pericopeLifter('50')">
-      <!-- <img src="Images/LowerLeftArrows.png" class="LowerLeftArrowPicture" alt="image for the dome">
-      <img src="Images/UpperLeftArrows.png" class="UpperLeftArrowPicture" alt="image for the dome">
-      <img src="Images/UpperRightArrows.png" class="UpperRightArrowPicture" alt="image for the dome">
-      <img src="Images/LowerRightArrows.png" class="LowerRightArrowPicture" alt="image for the dome"> -->
+      <h3 class="PeriscopeHeightHeader">Height</h3>
+
+      <img src="Images/buttons/Button-Height-0-Grey.png" class="Height0 periscopeheightwidth" onclick="HeightSelection0('0')" alt="" id="Height0">
+      <img src="Images/buttons/Button-Height-10-Grey.png" class="Height10 periscopeheightwidth" onclick="HeightSelection10()" alt="" id="Height10">
+      <img src="Images/buttons/Button-Height-20-Grey.png"" class="Height20 periscopeheightwidth" alt=""id="Height20"onclick="HeightSelection20('20')">
+      <img src="Images/buttons/Button-Height-30-Grey.png"" class="Height30 periscopeheightwidth" alt=""id="Height30"onclick="HeightSelection30('30')">
+      <img src="Images/buttons/Button-Height-40-Grey.png"" class="Height40 periscopeheightwidth" alt=""id="Height40"onclick="HeightSelection40('40')">
+      <img src="Images/buttons/Button-Height-50-Grey.png"" class="Height50 periscopeheightwidth" alt=""id="Height50"onclick="HeightSelection50('50')">
+      <img src="Images/buttons/Button-Height-60-Grey.png"" class="Height60 periscopeheightwidth" alt=""id="Height60"onclick="HeightSelection60('60')">
+      <img src="Images/buttons/Button-Height-70-Grey.png"" class="Height70 periscopeheightwidth" alt=""id="Height70"onclick="HeightSelection70('70')">   
+      <img src="Images/buttons/Button-Height-80-Grey.png"" class="Height80 periscopeheightwidth" alt=""id="Height80"onclick="HeightSelection80('80')">
+      <img src="Images/buttons/Button-Height-90-Grey.png"" class="Height90 periscopeheightwidth" alt=""id="Height90"onclick="HeightSelection90('90')">
+      <img src="Images/buttons/Button-Height-100-Grey.png"" class="Height100 periscopeheightwidth" alt=""id="Height100"onclick="HeightSelection100('100')"> 
+      <p class="HeightSpeedText">speed</p>
+      <!-- <input  class="HeightSpeed" type="text" name="RotateCounterClockwiseRelative" id="RotateCounterClockwiseRelative" value="100"> -->
+
+      <form>
+        <!-- <label class="HeightSpeed"for='HeightSpeed'>Send command:</label> -->
+        <select class="HeightSpeed" id="HeightSpeed" name="HeightSpeed">
+        <option value="100">100</option>
+        <option value="90">90</option>
+        <option value="80">80</option>
+        <option value="70">70</option>
+        <!-- <option value="60">60</option>
+        <option value="50">50</option>
+        <option value="40">40</option>
+        <option value="30">30</option>
+        <option value="20">20</option>
+        <option value="10">10</option> -->
+      </select>
+    </form>
+
+
 
     </div>
 
-    <div class="periscopeText">
-      <iframe name="submit" style="display:none;"> </iframe>
-      <form action="http://192.168.8.142/?param0=1&" method="get" target="submit">
-    <div class="buttonspacing1">
-      <label for="param1">Command for Serial1:</label>
-      <input name="param1" id="param1" value="=:PP0:P100:P0">
-    </div>
-    <br>
-    <div>
-      <button class="periscopeCommandButton" >Submit</button>
-    </div>
+    <div style="border: 2px solid white" class="periscopeRotationControl">
+      <h3 class="PeriscopeRotateHeader">rotation</h3>
+      
+         <input class="RotateClockwiseRelativeText" type="text" name="RotateClockwiseRelative" id="RotateClockwiseRelative" value="90">
+        <img src="Images/Buttons/Button-Periscope-90deg-CW-.png" class="rotateCWPicturePeriscope homebuttonwidth2" alt="image for the dome" onclick="getPeriscope('D','RotateClockwiseRelative','RotateSpeed')">
   
-    <br>
-    <br>
-  </form>
-    </div>
-    <!-- <div class="openclosedoors">
-      <h3 class="openclosedoorsheader">Door/Pie Control</h3>
-      <img src="Images/Buttons/Button-Open-White.png" class="openButton" alt="image for the dome">
-      <img src="Images/Buttons/Button-Close-White.png" class="closeButton" alt="image for the dome">
-      <img src="Images/Buttons/Button-Cycle-White.png" class="cycleButton" alt="image for the dome">
+       <input type="submit" onclick="ESP32SendCommand('ESP32SelectionBox', 'ESP32CommandTextBox')"name="" value="" style="display: none">
 
-      <img src="Images/Buttons/Button-Alternate-White.png" class="AlternateButton" alt="image for the dome">
+  
 
+      
+      <img  src="Images/Buttons/Button-Periscope-90deg-CC-.png" class=" rotateCCPicturePeriscope homebuttonwidth2" alt="image for the dome" onclick="getPeriscope('D','RotateCounterClockwiseRelative','RotateSpeed')">
+      <input  class="RotateCounterClockwiseRelativeText" type="text" name="RotateCounterClockwiseRelative" id="RotateCounterClockwiseRelative" value="90">
 
-    </div> -->
-    <div class="periscopeRangeDiv">
-      <iframe name="submit3" style="display:none;" ></iframe>
-      <form action="http://192.168.8.142/" method="get" target="submit3">
-      <div class="" >
-      <label for="paramrange" style="position:relative; left:360px; top:-35px;">Select Height</label>
       
-      <input type="hidden" name="param1" id="paramrange" value=":PP">
-      <input class=""  type="range" id="heightRange" min="0" max="100" step="10" value="50" onchange="periscopeRange()">
-      <!-- <img src="Images/Buttons/Button-Apply.png" onclick="getRange('heightRange')" class="applyButton"></img> -->
-      
-      
-      <!-- <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="getRange('heightRange')" class="applyButton"></img> -->
-      </div>
-      <div class="buttonspacing2" id="sliderAmount" style="position:absolute; left:460px; top:40px;">50</div>
+      <img  src="Images/Button-Rotate-Absolute-0.png" class=" absolute0Periscope" alt="image for the dome" onclick="getPeriscope('A','0','RotateSpeed')">
+      <img src="Images/Button-Rotate-Absolute-90.png" class=" absolute90Periscope" alt="image for the dome" onclick="getPeriscope('A','90','RotateSpeed')">
+      <img src="Images/Button-Rotate-Absolute-180.png" class=" absolute180Periscope" alt="image for the dome" onclick="getPeriscope('A','180','RotateSpeed')">
+      <img src="Images/Button-Rotate-Absolute-270.png" class=" absolute270Periscope" alt="image for the dome" onclick="getPeriscope('A','270','RotateSpeed')">
+
+      <img src="Images/Buttons/Button-Rotate-Clockwise-GIMP.png" class="RotateClockwiseContinous homebuttonwidth2" alt="image for the dome" id="RotateClockwiseContinous" onclick="getPeriscope('R','RotateClockwiseContinous','RotateSpeed')">
+
+      <img src="Images/Buttons/Button-Rotate-CounterClockwise-GIMP.png" class=" RotateCounterClockwiseContinous homebuttonwidth2" alt="image for the dome" onclick="getPeriscope('R','RotateCounterClockwiseContinous','RotateSpeed')">
+      <p class="RotateSpeedText">Rotation Speed</p>
+      <form>
+        <!-- <label class="RotateSpeedText"for='RotateSpeed'>Rotation Speed:</label> -->
+        <select class="RotateSpeed" id="RotateSpeed" name="RotateSpeed">
+          <option value="100">100</option>
+          <option value="90">90</option>
+          <option value="80">80</option>
+          <option value="70">70</option>
+          <option value="60">60</option>
+          <option value="50">50</option>
+          <option value="40">40</option>
+          <option value="30">30</option>
+          <option value="20">20</option>
+          <option value="10">10</option>
+        </select>
       </form>
+      <!-- <img src="Images/Buttons/Button-Rotate-Home-GIMP.png" class=" RotateHome homebuttonwidth2" alt="image for the dome" onclick="getPeriscope('A','0','RotateSpeed')"> -->
+
+
 
     </div>
+
+   <div class="RandomPeriscope">
+    <img src="Images/Buttons/Button-Rotate-RotateRandom-GIMP.png" class=" RotateRandomRotate homebuttonwidth2" alt="image for the dome" onclick="getPeriscope('AR','0','RotateSpeed')">
+    <img src="Images/Buttons/Button-Rotate-HeightRandom-GIMP.png" class=" RotateRandomHeight homebuttonwidth2" alt="image for the dome" onclick="getPeriscope('PR','0','HeightSpeed')">
+
+
+   </div>
 
     <dir class="StoredSequenceDiv">
-      <img class="applyButton" style="position: absolute; top: 220px;"src="Images/Buttons/Button-Stored-Sequence1-GIMP.jpeg" alt="image for the dome" onclick="pericopeLifter('100')">
-      <img class="applyButton" style="position: absolute; top: 300px;"src="Images/Buttons/Button-Stored-Sequence2-GIMP.jpeg" alt="image for the dome" onclick="pericopeLifter('100')">
-      <img class="applyButton" style="position: absolute; top: 380px;"src="Images/Buttons/Button-Stored-Sequence3-GIMP.jpeg" alt="image for the dome" onclick="pericopeLifter('100')">
+      <p class="RandomHeader">random movement</p>
+
+      <img class="applyButtonStored" style="position: absolute; top: 120px;"src="Images/Buttons/Button-Stored-Sequence1-GIMP.png" alt="image for the dome" onclick="getPeriscope('S','1','RotateSpeed')">
+      <img class="applyButtonStored" style="position: absolute; top: 200px;"src="Images/Buttons/Button-Stored-Sequence2-GIMP.png" alt="image for the dome" onclick="getPeriscope('S','2','RotateSpeed')">
+      <img class="applyButtonStored" style="position: absolute; top: 280px;"src="Images/Buttons/Button-Stored-Sequence3-GIMP.png" alt="image for the dome" onclick="getPeriscope('S','3','RotateSpeed')">
+      <img class="applyButtonStored" style="position: absolute; top: 360px;"src="Images/Buttons/Button-Stored-Sequence4-GIMP.png" alt="image for the dome" onclick="getPeriscope('S','4','RotateSpeed')">
+      <img class="applyButtonStored" style="position: absolute; top: 440px;"src="Images/Buttons/Button-Stored-Sequence5-GIMP.png" alt="image for the dome" onclick="getPeriscope('S','5','RotateSpeed')">
+      <img class="applyButtonStored" style="position: absolute; top: 520px;"src="Images/Buttons/Button-Stored-Sequence6-GIMP.png" alt="image for the dome" onclick="getPeriscope('S','6','RotateSpeed')">
 
     </dir>
 
@@ -4282,7 +4729,33 @@
 
     </div>
 
-  </div><!--end of Level 0 Settings Content-->
+
+    <div class="menu-Level-0-Content" id="sounds">
+      <div class="menuheader">
+        <h1 class="">sounds</h1>
+      </div>
+      
+  
+  
+  
+  
+  
+  
+        </div>
+      </div>
+  
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <!-- </div>end of Level 0 Settings Content -->
   
   
         <!-- </div><end of Level 1 Menu -->
