@@ -63,10 +63,10 @@ void setup(){
 Serial.println();
 //   
   #ifdef BodyController
-    Serial.println(WiFi.softAPConfig(local_IP, gateway, subnet) ? "AP IP Configured" : "Failed!");
-    delay(200);
     Serial.println(WiFi.softAP(ssid,password) ? "AP Ready" : "Failed!");
     delay(200);
+        Serial.println(WiFi.softAPConfig(local_IP, gateway, subnet) ? "AP IP Configured" : "Failed!");
+delay(200);
      Serial.print("Soft-AP IP address = ");
       Serial.println(WiFi.softAPIP());
 
