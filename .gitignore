@@ -3,3 +3,15 @@ nodebot/
 Members.js
 views/
 routes/
+# OS generated files #
+######################
+*.*.bak
+*.orig
+*.sublime-workspace
+._*
+.build
+.DS_Store
+.DS_Store?
+.Spotlight-V100
+.Trashes
+.vs/
