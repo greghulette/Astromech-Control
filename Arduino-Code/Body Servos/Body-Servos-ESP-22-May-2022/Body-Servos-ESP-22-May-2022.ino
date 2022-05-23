@@ -330,7 +330,7 @@ boolean countUp=false;
 
 AsyncWebServer server(80);
 
-IPAddress local_IP(192,168,4,105);
+IPAddress local_IP(192,168,4,106);
 IPAddress subnet(255,255,255,0);
 IPAddress gateway(192,168,4,100);
 
