@@ -1,27 +1,18 @@
 #define USE_DEBUG
 #define USE_SERVO_DEBUG
 
-//ESP Specific Libraries
-//#include <ESP32Servo.h>
-//#include <analogWrite.h>
-//#include <tone.h>
-//#include <ESP32Tone.h>
-//#include <ESP32PWM.h>
 #include "WiFi.h"
 #include "ESPAsyncWebServer.h"
 #include <WiFiClient.h>
 #include <WiFiAP.h>
 #include "esp_wifi.h"
+#include <Adafruit_NeoPixel.h>
 
 //reeltwo libaries
 #include "ReelTwo.h"
 #include "core/DelayCall.h"
 #include "ServoDispatchDirect.h"
 
-
-
-
-#include <Adafruit_NeoPixel.h>
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///*****                                                                                                                                                           *****///
@@ -100,24 +91,24 @@ int commandLength;
 
    int doorState     = 0;
 
-   // Door Counters
+//   // Door Counters
    long int Dcounts[12] = {0,0,0,0,0,0,0,0,0,0,0,0};
    long int Dcount  = 0;
    long int D1count  = 0;
    long int Dpcount = 0;
    long int qwDuration = 800;
-
-
-   // Door Timer
+//
+//
+//   // Door Timer
    unsigned long Dmillis;
    unsigned long Doorsmillis[12] = {0,0,0,0,0,0,0,0,0,0,0,0};
    unsigned long D1millis;
    unsigned long Doors1millis[12] = {0,0,0,0,0,0,0,0,0,0,0,0};
    unsigned long D2millis;
    unsigned long Doors2millis[12] = {0,0,0,0,0,0,0,0,0,0,0,0};
-
-
-   // Door Flags
+//
+//
+//   // Door Flags
    boolean DaltToggle = true;
    boolean DWToggle   = false;
    boolean GaltToggle = true;
@@ -323,11 +314,9 @@ void loop() {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 void mainLoop() {
    if(startUp) {
-//     
-       startUp = false;
-//       cameraLED(blue, 50); // blue
-
-     Serial.println("Start");
+      closeAllDoors();
+      startUp = false;
+      Serial.println("Startup");
    }
    if(Serial.available()){
    serialEvent();
