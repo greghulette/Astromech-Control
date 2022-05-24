@@ -1,3 +1,5 @@
+#include <HTTPClient.h>
+
 //ESP Specific Libraries
 #include <ESP32Servo.h>
 #include <analogWrite.h>
@@ -9,6 +11,7 @@
 #include <WiFiClient.h>
 #include <WiFiAP.h>
 #include "esp_wifi.h"
+#include <esp_now.h>
 
 
 #include <Adafruit_NeoPixel.h>
@@ -327,7 +330,6 @@ boolean countUp=false;
 ///       WiFi Specific Setup
 ///-------------------------------------------------------------------------
 
-
 AsyncWebServer server(80);
 
 IPAddress local_IP(192,168,4,106);
@@ -340,8 +342,21 @@ const char* password =  "astromech";
 
 int serialNr = 0;  //not needed but left in to develop
 
+///-------------------------------------------------------------------------
+///       ESP-NOW Specific Setup
+///-------------------------------------------------------------------------
+uint8_t broadcastAddress[] = {0x24, 0x0a, 0xc4, 0xed, 0x31, 0xc8};  //MAC of receiver24:0A:C4:ED:31:C8
+typedef struct struct_message {
+  char a[32];
+  bool b = false;
+} struct_message;
+
+struct_message myData;
+
+esp_now_peer_info_t peerInfo;
 
 
+ 
 void setup()
 {
 
@@ -401,6 +416,28 @@ Serial.println(WiFi.config(local_IP, gateway, subnet) ? "Client IP Configured" :
       Serial.println("Connecting to WiFi..");
        Serial.println(WiFi.localIP());
     }
+
+//// Init ESP-NOW
+//  if (esp_now_init() != ESP_OK) {
+//    Serial.println("Error initializing ESP-NOW");
+//    return;
+//  }
+//
+//  // Once ESPNow is successfully Init, we will register for Send CB to
+//  // get the status of Trasnmitted packet
+//  esp_now_register_send_cb(OnDataSent);
+//  
+//  // Register peer
+//  memcpy(peerInfo.peer_addr, broadcastAddress, 6);
+//  peerInfo.channel = 0;  
+//  peerInfo.encrypt = false;
+//  
+//  // Add peer        
+//  if (esp_now_add_peer(&peerInfo) != ESP_OK){
+//    Serial.println("Failed to add peer");
+//    return;
+//  }
+
 
 
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
@@ -801,6 +838,38 @@ for (pos = 5; pos <= 175; pos += 1) { // sweep from 0 degrees to 180 degrees
   servo1.detach();
   servo2.detach();
       }
+//      strcpy(myData.a, "D003");
+//      myData.b= true;
+//        
+//    esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &myData, sizeof(myData));
+//   
+//  if (result == ESP_OK) {
+//    Serial.println("Sent with success");
+//  }
+//  else {
+//    Serial.println("Error sending the data");
+//  }
+
+ if (WiFi.status() == WL_CONNECTED) { //Check WiFi connection status
+ 
+    HTTPClient http;  //Declare an object of class HTTPClient
+ 
+    http.begin("http://192.168.4.105/?param0=0&param1=d003");  //Specify request destination
+    int httpCode = http.GET();                                  //Send the request
+ 
+    if (httpCode > 0) { //Check the returning code
+ 
+      String payload = http.getString();   //Get the request response payload
+      Serial.println(payload);             //Print the response payload
+ 
+    }
+ 
+    http.end();   //Close connection
+ 
+  }
+
+
+
   D_command[0]   = '\0';
   String positionstring = String(pos);
           Serial.println("Open Value: " + positionstring);
@@ -1004,7 +1073,7 @@ void closeAllDoors() {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////                                                                                               /////
-///////                             Serial & I2C Communication Functions                              /////
+///////                             Serial & ESP-NOW Communication Functions                              /////
 ///////                                                                                               /////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1032,119 +1101,24 @@ void closeAllDoors() {
         }
                Serial.println(inputString);
       }
-//      /////////////////////////////////////////////////////////
-//      ///*****            I2C Event Function           *****///
-//      /////////////////////////////////////////////////////////
-//      ///  This routine is run when an onRecieve event is   ///
-//      ///     triggered.  Multiple bytes of data may be     ///
-//      ///                    available.                     ///
-//      /////////////////////////////////////////////////////////
-//
-//     void i2cEvent(int howMany)
-//      {
-//         inputString = "";
-//         int receiveByte = 0;
-//         while(Wire.available())                                     // loop through all incoming bytes
-//         {
-//           char inChar = (char)Wire.read();                               // receive byte as a character
-//           if(inChar != '!') {
-//             inputString += inChar;
-//             receiveByte++;
-//           }
-//         }
-//         if(receiveByte>=3) {
-//            stringComplete = true;                             // Once done, set a flag so the main loop can do something about it.
-//         }
-//      }
-//
-////      void requestEvent() {
-////        Wire.write("hello "); // respond with message of 6 bytes // as expected by master
-////      }
-//
-//
-//
-//
-////New i2c Commands
-////----------------------------------------------------------------------------
-//void sendMasterI2Ccmd(String cmd) {              //Used to send Stealth Controller i2c commands
-//
-//  sum=0;
-//  Wire.beginTransmission(MASTERDESTI2C);
-//  for (int i=0;i<cmd.length();i++) {
-////    Serial.print("TX=");
-////    Serial.println(Packet[i]);
-//    Wire.write(cmd[i]);
-//    sum+=byte(cmd[i]);
-//  }
-////  Serial.print("Checksum=");
-////  Serial.println(sum);
-//  Wire.write(sum);
-//  Wire.endTransmission();
-//
-//}
-//
-//void sendFlthyI2Ccmd(String cmd) {              //Used to send Flthy/HP Controller i2c commands
-//
-//  sum=0;
-//  Wire.beginTransmission(FLTHYDESTI2C);
-//  for (int i=0;i<cmd.length();i++) {
-////    Serial.print("TX=");
-////    Serial.println(Packet[i]);
-//    Wire.write(cmd[i]);
-//    sum+=byte(cmd[i]);
-//  }
-////  Serial.print("Checksum=");
-////  Serial.println(sum);
-//  Wire.write(sum);
-//  Wire.endTransmission();
-//
-//}
-//
-//void sendBodyI2Ccmd(String cmd) {              //Used to send Body Servo Expander Board i2c commands
-//
-//  sum=0;
-//  Wire.beginTransmission(BODYDESTI2C);
-//  for (int i=0;i<cmd.length();i++) {
-////    Serial.print("TX=");
-////    Serial.println(Packet[i]);
-//    Wire.write(cmd[i]);
-//    sum+=byte(cmd[i]);
-//  }
-////  Serial.print("Checksum=");
-////  Serial.println(sum);
-//  Wire.write(sum);
-//  Wire.endTransmission();
-//
-//}
 
-/*void sendDomeI2Ccmd(String cmd) {              //Used to send Dome Servo Expander i2c commands
-  sum=0;
-  Wire.beginTransmission(FLTHYDESTI2C);
-  for (int i=0;i<cmd.length();i++) {
-//    Serial.print("TX=");
-//    Serial.println(Packet[i]);
-    Wire.write(cmd[i]);
-    sum+=byte(cmd[i]);
-  }
-//  Serial.print("Checksum=");
-//  Serial.println(sum);
-  Wire.write(sum);
-  Wire.endTransmission();
-}
-*/
-//void sendDomeButtonI2Ccmd(String cmd) {              //Used to send Body Servo Expander Board i2c commands
+//      /////////////////////////////////////////////////////////
+//      ///*****          ESP-NOW Event Function          *****///
+//      /////////////////////////////////////////////////////////
+//      /// This routine is run when and ESP-NOW message      ///
+//      /// is received or sent                               ///
+//      /////////////////////////////////////////////////////////
+
+void httpGET(){};
+
+
+
+
+
+
+
 //
-//  sum=0;
-//  Wire.beginTransmission(BUTTONDESTI2C);
-//  for (int i=0;i<cmd.length();i++) {
-////    Serial.print("TX=");
-////    Serial.println(Packet[i]);
-//    Wire.write(cmd[i]);
-//    sum+=byte(cmd[i]);
-//  }
-////  Serial.print("Checksum=");
-////  Serial.println(sum);
-//  Wire.write(sum);
-//  Wire.endTransmission();
-//
-//}
+//void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
+//  Serial.print("\r\nLast Packet Send Status:\t");
+//  Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
+//};
