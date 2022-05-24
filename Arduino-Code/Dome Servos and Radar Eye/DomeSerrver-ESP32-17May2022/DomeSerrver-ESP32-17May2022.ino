@@ -177,7 +177,16 @@ boolean countUp=false;
 ///       WiFi Specific Setup
 ///-------------------------------------------------------------------------
 
-
+//Raspberry Pi  192.168.4.100
+//Body Controller ESP 192.168.4.1
+//Dome Controller ESP 192.168.4.102
+//Periscope Controller ESP  192.168.4.103
+//Stealth Controller ESP  192.168.4.104
+//Dome Servo Controller 192.168.4.105     ************
+//Body Servo Controller 192.168.4.106
+//Remote  192.168.4.107
+//Developer Laptop  192.168.4.125
+  
 AsyncWebServer server(80);
 
 IPAddress local_IP(192,168,4,105);
@@ -293,7 +302,7 @@ Serial.println(WiFi.config(local_IP, gateway, subnet) ? "Client IP Configured" :
 
 //
 void loop() {
-  delay(5);
+  delay(2);
   loopTime = millis();
   // Check for new i2c command
      AnimatedEvent::process();
@@ -339,8 +348,9 @@ void mainLoop() {
             commandLength = (sizeof(inputBuffer) / sizeof(inputBuffer[0]));                     //  Determines length of command character array.
             if(commandLength >= 3) {
                 if(inputBuffer[0]=='D' || inputBuffer[0]=='d') {doorState = (inputBuffer[1]-'0')*10+(inputBuffer[2]-'0');
-                Serial.println("Here");}             //  Converts 2 Door Sequence Indentifier Characters to Integer
-                else {displayState = (inputBuffer[1]-'0')*10+(inputBuffer[2]-'0');}                        //  Converts Sequence character values into an integer.
+//                Serial.println("Here");
+                }                                                                                //  Converts 2 Door Sequence Indentifier Characters to Integer
+                else {displayState = (inputBuffer[1]-'0')*10+(inputBuffer[2]-'0');}              //  Converts Sequence character values into an integer.
 
                 if(commandLength >= 4) {
                   if(inputBuffer[0]=='U' || inputBuffer[0]=='u' || inputBuffer[0]=='R' || inputBuffer[0]=='r') {typeState = inputBuffer[3]-'0';}
@@ -375,10 +385,10 @@ void mainLoop() {
                   if(door>=0) {
                                D_command[1] = door;
                                Dcounts[door] = 0;
-                               Serial.println("inside if input buffer");
+//                               Serial.println("inside if input buffer");
                   }
                   else {Dcount = 0;}
-                  Serial.println("outside input bugger else");
+//                  Serial.println("outside input bugger else");
                 }
 
                 if(inputBuffer[0]=='R' || inputBuffer[0]=='r'){
@@ -418,7 +428,7 @@ void mainLoop() {
        if((D_command[0] == 1 || D_command[0] == 2) && D_command[1] >= 10) {
          //Serial.println("Incorrect Door Value Specified, Command Aborted!");
          D_command[0] = '\0';
-         Serial.println("wrong if");
+//         Serial.println("wrong if");
        }
        else {
          switch (D_command[0]) {
@@ -540,14 +550,14 @@ void cameraLED(uint32_t color, byte CLSpeed){
 
   void openAllDoors() {
     Serial.println("Open all Doors");
-    servoDispatch.moveServosTo(ALL_DOME_PANELS_MASK, 1.0);
+    servoDispatch.moveServosTo(ALL_DOME_PANELS_MASK, 0,1000, 1.0);
     D_command[0]   = '\0';
    }
 
   
   void closeAllDoors() {
     Serial.println("Close all doors");
-    servoDispatch.moveServosTo(ALL_DOME_PANELS_MASK, 0.0);
+    servoDispatch.moveServosTo(ALL_DOME_PANELS_MASK, 0,1000, 0.0);
     D_command[0]   = '\0';
   }
 
