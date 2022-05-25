@@ -42,11 +42,14 @@
 #define BIG_PANEL          0x0004
 #define PIE_PANEL          0x0008
 #define TOP_PIE_PANEL      0x0010
+#define SMALL_PANEL_ONE    0x000b
+#define SMALL_PANEL_TWO    0x000d
 
 #define HOLO_HSERVO        0x1000
 #define HOLO_VSERVO        0x2000
 
-#define DOME_PANELS_MASK (SMALL_PANEL|MEDIUM_PANEL|BIG_PANEL)
+#define SMALL_PANEL_MASK (SMALL_PANEL_ONE|SMALL_PANEL_TWO)
+#define DOME_PANELS_MASK (SMALL_PANEL_MASK|MEDIUM_PANEL|BIG_PANEL)
 #define PIE_PANELS_MASK         (PIE_PANEL)
 #define ALL_DOME_PANELS_MASK (DOME_PANELS_MASK|PIE_PANELS_MASK|TOP_PIE_PANEL)
 #define HOLO_SERVOS_MASK        (HOLO_HSERVO|HOLO_VSERVO)
@@ -56,8 +59,8 @@
 //
 //   Pin  Group ID,      Min,  Max
 const ServoSettings servoSettings[] PROGMEM = {
-     { 14,  700, 2400, SMALL_PANEL },  /* 0: door 4 */
-     { 16,  700, 2400, SMALL_PANEL },  /* 1: door 3 */
+     { 14,  700, 2400, SMALL_PANEL_ONE },  /* 0: door 4 */
+     { 16,  700, 2400, SMALL_PANEL_TWO }   /* 1: door 3 */
 };
 
 ServoDispatchDirect<SizeOfArray(servoSettings)>
@@ -145,23 +148,22 @@ unsigned long loopTime; // We keep track of the "time" in this variable.
 
     const uint32_t basicColors[9] = {off, red, yellow, green, cyan, blue, magenta, orange, white};
 
-
 #define NUM_CAMERA_PIXELS 12
 #define CAMERA_LENS_DATA_PIN 12
 //#define CAMERA_LENS_CLOCK_PIN 13
 int dim = 75;
 
-
 unsigned long CLMillis;
+
+unsigned long MLMillis;
+byte mainLoopDelayVar = 5;
 
 byte CLSpeed = 50;
 
 byte CL_command[4] = {0,0,0,0};
 
-
 int colorState1;
 int colorState2;
-
 
 // Set some primary and secondary default color values as a fall back in case no colors
    // are provided in input commands. This makes the ssytem much more user friendly.
@@ -198,6 +200,9 @@ const char* ssid = "R2D2_Control_Network";
 const char* password =  "astromech";
 
 int paramVar = 0;  //not needed but left in to develop
+
+
+unsigned long mainLoopTime; // We keep track of the "time" in this variable.
 
 void setup()
 {
@@ -302,7 +307,9 @@ Serial.println(WiFi.config(local_IP, gateway, subnet) ? "Client IP Configured" :
 
 //
 void loop() {
-  delay(2);
+//  delay(5);
+if (millis() - MLMillis >= mainLoopDelayVar){
+        MLMillis = millis();
   loopTime = millis();
   // Check for new i2c command
      AnimatedEvent::process();
@@ -310,7 +317,7 @@ void loop() {
 //
  mainLoop();
 
-
+}
 }
 //
 //
@@ -353,10 +360,10 @@ void mainLoop() {
                 else {displayState = (inputBuffer[1]-'0')*10+(inputBuffer[2]-'0');}              //  Converts Sequence character values into an integer.
 
                 if(commandLength >= 4) {
-                  if(inputBuffer[0]=='U' || inputBuffer[0]=='u' || inputBuffer[0]=='R' || inputBuffer[0]=='r') {typeState = inputBuffer[3]-'0';}
+                  if(inputBuffer[0]=='R' || inputBuffer[0]=='r') {typeState = inputBuffer[3]-'0';}
                 }
                 else {
-                   if(inputBuffer[0]=='U' || inputBuffer[0]=='u' || inputBuffer[0]=='R' || inputBuffer[0]=='r')  {typeState = 3;}
+                     typeState = 3;
                 }
 
                 if(commandLength >= 5) {
@@ -448,7 +455,7 @@ void mainLoop() {
      }
    if(CL_command[0]){
     switch(CL_command[0]){
-      case 1: cameraLED(basicColors[CL_command[2]], CL_command[1]);
+      case 1: cameraLED(basicColors[CL_command[2]], CL_command[3]);
       }
    }
 
@@ -481,7 +488,7 @@ void mainLoop() {
 void cameraLED(uint32_t color, byte CLSpeed){
   int CLRLow = 1;
   int CLRHigh = 50;
-       CLSpeed = map(CLSpeed, 0, 9, 1, 120);
+       CLSpeed = map(CLSpeed, 0, 9, 1, 250);
       if (millis() - CLMillis >= CLSpeed){
         CLMillis = millis();
       if(countUp == false){                   // check to see if the boolean flag is false.  If false, starting dimming the LEDs
@@ -547,22 +554,31 @@ void cameraLED(uint32_t color, byte CLSpeed){
     D_command[0]   = '\0';
   }
 
-
+#define MOVE_SPEED 250
   void openAllDoors() {
     Serial.println("Open all Doors");
-    servoDispatch.moveServosTo(ALL_DOME_PANELS_MASK, 0,1000, 1.0);
-    D_command[0]   = '\0';
+    servoDispatch.moveServosTo(ALL_DOME_PANELS_MASK, 10,MOVE_SPEED, 1.0);
+    D_command[0] = '\0';
    }
 
   
   void closeAllDoors() {
     Serial.println("Close all doors");
-    servoDispatch.moveServosTo(ALL_DOME_PANELS_MASK, 0,1000, 0.0);
-    D_command[0]   = '\0';
+    servoDispatch.moveServosTo(ALL_DOME_PANELS_MASK, 10,MOVE_SPEED, 0.0);
+    D_command[0] = '\0';
   }
 
   void alternateDoors() {
     Serial.println("Alternate All Doors");
+//    for (int i =0; i<5; i++){
+      servoDispatch.moveServosTo(SMALL_PANEL_ONE,10,MOVE_SPEED,1.0);
+//      servoDispatch.moveServosTo(SMALL_PANEL_TWO,10,MOVE_SPEED,0.0);
+//      delay(2000);
+//      servoDispatch.moveServosTo(SMALL_PANEL_ONE,10,MOVE_SPEED,0.0);
+//      servoDispatch.moveServosTo(SMALL_PANEL_TWO,10,MOVE_SPEED,1.0);
+//delay(200);
+////    }
+//      servoDispatch.moveServosTo(SMALL_PANEL_MASK,10,MOVE_SPEED,0.0);
     D_command[0]   = '\0';
   }
 
