@@ -542,11 +542,21 @@ void cameraLED(uint32_t color, byte CLSpeed){
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
+#define MOVE_SPEED 250
 
   void openDoor(int doorpos) {
     Serial.println("Open Specific Door");
-    D_command[0]   = '\0';
-  }
+        if(doorpos == 1){\
+        Serial.println("Open Door 1");
+        servoDispatch.moveServosTo(SMALL_PANEL_ONE,10,MOVE_SPEED,1.0);
+      };
+      if(doorpos == 2){
+                Serial.println("Open Door 2");
+
+        servoDispatch.moveServosTo(SMALL_PANEL_TWO,10,MOVE_SPEED,1.0);
+      };
+     D_command[0]   = '\0';
+  };
 
 
   void closeDoor(int doorpos) {
@@ -554,7 +564,7 @@ void cameraLED(uint32_t color, byte CLSpeed){
     D_command[0]   = '\0';
   }
 
-#define MOVE_SPEED 250
+
   void openAllDoors() {
     Serial.println("Open all Doors");
     servoDispatch.moveServosTo(ALL_DOME_PANELS_MASK, 10,MOVE_SPEED, 1.0);
@@ -570,15 +580,6 @@ void cameraLED(uint32_t color, byte CLSpeed){
 
   void alternateDoors() {
     Serial.println("Alternate All Doors");
-//    for (int i =0; i<5; i++){
-      servoDispatch.moveServosTo(SMALL_PANEL_ONE,10,MOVE_SPEED,1.0);
-//      servoDispatch.moveServosTo(SMALL_PANEL_TWO,10,MOVE_SPEED,0.0);
-//      delay(2000);
-//      servoDispatch.moveServosTo(SMALL_PANEL_ONE,10,MOVE_SPEED,0.0);
-//      servoDispatch.moveServosTo(SMALL_PANEL_TWO,10,MOVE_SPEED,1.0);
-//delay(200);
-////    }
-//      servoDispatch.moveServosTo(SMALL_PANEL_MASK,10,MOVE_SPEED,0.0);
     D_command[0]   = '\0';
   }
 
