@@ -1,0 +1,175 @@
+14:29:44.279 -> Client IP Configured
+14:29:45.262 -> Connecting to WiFi..
+14:29:45.308 -> 192.168.4.105
+14:29:46.281 -> Connecting to WiFi..
+14:29:46.281 -> 192.168.4.105
+14:29:47.255 -> Connecting to WiFi..
+14:29:47.300 -> 192.168.4.105
+14:29:47.300 -> Close all doors
+14:29:47.348 -> Attaching servo : 14 on PWM 6 PULSE 700
+14:29:47.348 -> PWM 0 700
+14:29:47.394 -> Attaching servo : 16 on PWM 7 PULSE 700
+14:29:47.440 -> PWM 1 700
+14:29:47.440 -> Startup
+14:29:47.804 -> PWM 0 700
+14:29:47.851 -> PWM 1 700
+14:29:56.716 -> 0
+14:29:57.506 -> 0
+14:29:58.574 -> 2
+14:29:58.574 -> Param name: param0
+14:29:58.574 -> Param value: 0
+14:29:58.574 -> 1
+14:29:58.620 -> Param = 0
+14:29:58.620 -> ------
+14:29:58.620 -> command taken
+14:29:58.620 -> Param name: param1
+14:29:58.667 -> Param value: d03
+14:29:58.667 -> 1
+14:29:58.667 -> Param = 0
+14:29:58.667 -> ------
+14:29:58.714 -> Here
+14:29:58.714 -> outside input bugger else
+14:29:58.714 -> command taken
+14:29:58.761 -> Open all Doors
+14:29:58.761 -> Attaching servo : 14 on PWM 6 PULSE 2400
+14:29:58.807 -> PWM 0 700
+14:29:58.807 -> Attaching servo : 16 on PWM 7 PULSE 2400
+14:29:58.854 -> PWM 1 700
+14:29:58.854 -> PWM 0 2400
+14:29:58.900 -> PWM 1 2400
+14:30:02.051 -> 2
+14:30:02.051 -> Param name: param0
+14:30:02.051 -> Param value: 0
+14:30:02.051 -> 1
+14:30:02.099 -> Param = 0
+14:30:02.099 -> ------
+14:30:02.099 -> command taken
+14:30:02.099 -> Param name: param1
+14:30:02.146 -> Param value: d04
+14:30:02.146 -> 1
+14:30:02.146 -> Param = 0
+14:30:02.146 -> ------
+14:30:02.191 -> Here
+14:30:02.191 -> outside input bugger else
+14:30:02.191 -> command taken
+14:30:02.237 -> Close all doors
+14:30:02.237 -> Attaching servo : 14 on PWM 6 PULSE 700
+14:30:02.284 -> PWM 0 2400
+14:30:02.284 -> Attaching servo : 16 on PWM 7 PULSE 700
+14:30:02.331 -> PWM 1 2400
+14:30:02.331 -> PWM 0 700
+14:30:02.376 -> PWM 1 700
+14:30:02.423 -> 0
+14:30:07.376 -> 0
+14:30:07.376 -> 2
+14:30:07.376 -> Param name: param0
+14:30:07.376 -> Param value: 0
+14:30:07.423 -> 1
+14:30:07.423 -> Param = 0
+14:30:07.423 -> ------
+14:30:07.423 -> command taken
+14:30:07.423 -> Param name: param1
+14:30:07.471 -> Param value: d04
+14:30:07.471 -> 1
+14:30:07.471 -> Param = 0
+14:30:07.505 -> ------
+14:30:07.505 -> Here
+14:30:07.505 -> outside input bugger else
+14:30:07.545 -> command taken
+14:30:07.545 -> Close all doors
+14:30:07.588 -> Attaching servo : 14 on PWM 6 PULSE 700
+14:30:07.634 -> PWM 0 700
+14:30:07.634 -> Attaching servo : 16 on PWM 7 PULSE 700
+14:30:07.681 -> PWM 1 700
+14:30:07.681 -> PWM 0 700
+14:30:07.681 -> PWM 1 700
+14:30:10.847 -> 2
+14:30:10.847 -> Param name: param0
+14:30:10.847 -> Param value: 0
+14:30:10.895 -> 1
+14:30:10.895 -> Param = 0
+14:30:10.895 -> ------
+14:30:10.895 -> command taken
+14:30:10.895 -> Param name: param1
+14:30:10.941 -> Param value: d03
+14:30:10.941 -> 1
+14:30:10.941 -> Param = 0
+14:30:10.988 -> ------
+14:30:10.988 -> Here
+14:30:10.988 -> outside input bugger else
+14:30:11.035 -> command taken
+14:30:11.035 -> Open all Doors
+14:30:11.035 -> Attaching servo : 14 on PWM 6 PULSE 2400
+14:30:11.078 -> PWM 0 700
+14:30:11.078 -> Attaching servo : 16 on PWM 7 PULSE 2400
+14:30:11.161 -> PWM 1 700
+14:30:11.161 -> PWM 0 2400
+14:30:11.161 -> PWM 1 2400
+14:30:12.456 -> 0
+14:30:13.099 -> 2
+14:30:13.099 -> Param name: param0
+14:30:13.099 -> Param value: 0
+14:30:13.144 -> 1
+14:30:13.144 -> Param = 0
+14:30:13.144 -> ------
+14:30:13.144 -> command taken
+14:30:13.191 -> Param name: param1
+14:30:13.191 -> Param value: d03
+14:30:13.191 -> 1
+14:30:13.191 -> Param = 0
+14:30:13.239 -> ------
+14:30:13.239 -> Here
+14:30:13.239 -> outside input bugger else
+14:30:13.285 -> command taken
+14:30:13.285 -> Open all Doors
+14:30:13.285 -> Attaching servo : 14 on PWM 6 PULSE 2400
+14:30:13.332 -> PWM 0 2400
+14:30:13.332 -> Attaching servo : 16 on PWM 7 PULSE 2400
+14:30:13.380 -> PWM 1 2400
+14:30:13.426 -> PWM 0 2400
+14:30:13.426 -> PWM 1 2400
+14:30:16.377 -> 2
+14:30:16.377 -> Param name: param0
+14:30:16.423 -> Param value: 0
+14:30:16.423 -> 1
+14:30:16.423 -> Param = 0
+14:30:16.423 -> ------
+14:30:16.423 -> command taken
+14:30:16.468 -> Param name: param1
+14:30:16.468 -> Param value: d04
+14:30:16.516 -> 1
+14:30:16.516 -> Param = 0
+14:30:16.516 -> ------
+14:30:16.516 -> Here
+14:30:16.516 -> outside input bugger else
+14:30:16.550 -> command taken
+14:30:16.550 -> Close all doors
+14:30:16.596 -> Attaching servo : 14 on PWM 6 PULSE 700
+14:30:16.644 -> PWM 0 2400
+14:30:16.644 -> Attaching servo : 16 on PWM 7 PULSE 700
+14:30:16.690 -> PWM 1 2400
+14:30:16.690 -> PWM 0 700
+14:30:16.690 -> PWM 1 700
+14:30:17.375 -> 0
+14:30:18.191 -> 2
+14:30:18.237 -> Param name: param0
+14:30:18.237 -> Param value: 0
+14:30:18.237 -> 1
+14:30:18.237 -> Param = 0
+14:30:18.284 -> ------
+14:30:18.284 -> command taken
+14:30:18.284 -> Param name: param1
+14:30:18.329 -> Param value: d04
+14:30:18.329 -> 1
+14:30:18.329 -> Param = 0
+14:30:18.329 -> ------
+14:30:18.377 -> Here
+14:30:18.377 -> outside input bugger else
+14:30:18.377 -> command taken
+14:30:18.422 -> Close all doors
+14:30:18.422 -> Attaching servo : 14 on PWM 6 PULSE 700
+14:30:18.458 -> PWM 0 700
+14:30:18.458 -> Attaching servo : 16 on PWM 7 PULSE 700
+14:30:18.504 -> PWM 1 700
+14:30:18.543 -> PWM 0 700
+14:30:18.543 -> PWM 1 700

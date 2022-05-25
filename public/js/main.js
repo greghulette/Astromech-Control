@@ -32,6 +32,10 @@ function openAllDoorsMS() {
 var BodyControllerStatus = false;
 var PerisopeLifterStatus = false;
 var DomeControllerStatus = false
+var StealthControllerStatus = false
+var DomeServoStatus = false
+var BodyServoStatus = false
+
 
 
 function checkPeriscopeLifterStatus() {
@@ -90,13 +94,28 @@ function checkBodyLEDControllerStatus() {
 
 };
 
+function resetArduino() {
+  var HPControllerSPURL = "http://192.168.4.101/?param0=ArduinoReset";
 
+  var HPLEDControllerFullURL = HPControllerSPURL;
+  console.log(HPLEDControllerFullURL);
+  // setTimeout(function () { httpGet(bodyLEDControllerFullURL); }, 500);
+  // sleep(1000);
+  if (BodyControllerStatus === true) {
+    httpGet(HPLEDControllerFullURL);
+
+  } else {
+    console.log('Dome Controller Not Online')
+  }
+
+
+}
 function checkDomeControllerStatus() {
   const before = new Date();
   var request = new XMLHttpRequest();
   request.timeout = 1000;
-  // request.open('GET', 'http://192.168.8.129', true);
-  request.open("GET", "http://AstromechRemote:8000/BatteryCapacity.txt", true);
+  request.open('GET', 'http://192.168.4.102', true);
+  // request.open("GET", "http://AstromechRemote:8000/BatteryCapacity.txt", true);
 
   request.onreadystatechange = function () {
 
@@ -111,6 +130,94 @@ function checkDomeControllerStatus() {
         document.getElementById("HPIcon").src = "./Images/Status-icon-Red.png";
         document.getElementById("HPStatusText").style.color = "white";
         DomeControllerStatus = false;
+
+      }
+    }
+  };
+
+  request.send();
+
+};
+
+function checkStealthControllerStatus() {
+  const before = new Date();
+  var request = new XMLHttpRequest();
+  request.timeout = 1000;
+  request.open('GET', 'http://192.168.4.104', true);
+  // request.open("GET", "http://AstromechRemote:8000/BatteryCapacity.txt", true);
+
+  request.onreadystatechange = function () {
+
+    if (request.readyState === 4) {
+      if (request.status === 200) {
+        document.getElementById("StealthIcon").src = "./Images/Status-icon-Green.png";
+        document.getElementById("StealthStatusText").style.color = "black";
+        StealthStatus = true;
+
+      }
+      else {
+        document.getElementById("StealthIcon").src = "./Images/Status-icon-Red.png";
+        document.getElementById("StealthStatusText").style.color = "white";
+        StealthStatus = false;
+
+      }
+    }
+  };
+
+  request.send();
+
+};
+
+function checkDomeServoStatus() {
+  const before = new Date();
+  var request = new XMLHttpRequest();
+  request.timeout = 1000;
+  request.open('GET', 'http://192.168.4.105', true);
+  // request.open("GET", "http://AstromechRemote:8000/BatteryCapacity.txt", true);
+
+  request.onreadystatechange = function () {
+
+    if (request.readyState === 4) {
+      if (request.status === 200) {
+        document.getElementById("DSIcon").src = "./Images/Status-icon-Green.png";
+        document.getElementById("DSStatusText").style.color = "black";
+        DomeServoStatus = true;
+
+      }
+      else {
+        document.getElementById("DSIcon").src = "./Images/Status-icon-Red.png";
+        document.getElementById("DSStatusText").style.color = "white";
+        DomeServoStatus = false;
+
+      }
+    }
+  };
+
+  request.send();
+
+};
+
+
+function checkBodyServoStatus() {
+  const before = new Date();
+  var request = new XMLHttpRequest();
+  request.timeout = 1000;
+  request.open('GET', 'http://192.168.4.106', true);
+  // request.open("GET", "http://AstromechRemote:8000/BatteryCapacity.txt", true);
+
+  request.onreadystatechange = function () {
+
+    if (request.readyState === 4) {
+      if (request.status === 200) {
+        document.getElementById("BSIcon").src = "./Images/Status-icon-Green.png";
+        document.getElementById("BSStatusText").style.color = "black";
+        BodyServoStatus = true;
+
+      }
+      else {
+        document.getElementById("BSIcon").src = "./Images/Status-icon-Red.png";
+        document.getElementById("BSStatusText").style.color = "white";
+        BodyServoStatus = false;
 
       }
     }
@@ -220,6 +327,9 @@ setInterval(function () {
   checkPeriscopeLifterStatus()
   checkBodyLEDControllerStatus()
   checkDomeControllerStatus()
+  // checkStealthControllerStatus()
+  checkDomeServoStatus()
+  checkBodyServoStatus()
   GetBatteryLevel()
   GetBatteryConnection()
 }, 5000)
@@ -259,6 +369,42 @@ function HPLEDFunctionExecution(t) {
 
 };
 
+function bodyServoFunctionExecution(t) {
+  var BSCommand = t;
+  var bodyServoControllerSPURL = "http://192.168.4.106/?param0=0";
+
+  var bodyServiControllerFullURL = bodyServoControllerSPURL + BSCommand;
+  console.log(bodyServiControllerFullURL);
+  // setTimeout(function () { httpGet(bodyLEDControllerFullURL); }, 500);
+  // sleep(1000); 
+  if (BodyServoStatus === true) {
+    httpGet(bodyServiControllerFullURL);
+
+  } else {
+    console.log('Body Servo ESP Not Online')
+  }
+
+
+};
+
+function domeServoFunctionExecution(t) {
+  var DSCommand = t;
+  var domeServoControllerSPURL = "http://192.168.4.105/?param0=0";
+
+  var domeServoControllerFullURL = domeServoControllerSPURL + DSCommand;
+  console.log(domeServoControllerFullURL);
+  // setTimeout(function () { httpGet(bodyLEDControllerFullURL); }, 500);
+  // sleep(1000); 
+  if (DomeServoStatus === true) {
+    httpGet(domeServoControllerFullURL);
+
+  } else {
+    console.log('Body Servo ESP Not Online')
+  }
+
+
+};
+
 
 function RSeriesLEDFunctionExecution(t) {
   var LEDCommand = t;
@@ -276,6 +422,31 @@ function RSeriesLEDFunctionExecution(t) {
   }
 
 };
+
+
+
+function servoControl(y, z) {
+  if (y === "body") {
+    let bodyServoCommandParam = "&param1=d" + z;
+    let fullBodyServoURL = bodyServoCommandParam
+    bodyServoFunctionExecution(fullBodyServoURL);
+  }
+  if (y === "dome") {
+    let domeServoCommandParam = "&param1=d" + z;
+    let fullDomeServoURL = domeServoCommandParam
+    domeServoFunctionExecution(fullDomeServoURL);
+  }
+  if (y === "both") {
+    let bodyServoCommandParam = "&param1=d" + z;
+    let fullBodyServoURL = bodyServoCommandParam
+    bodyServoFunctionExecution(fullBodyServoURL);
+    let domeServoCommandParam = "&param1=d" + z;
+    let fullDomeServoURL = domeServoCommandParam
+    domeServoFunctionExecution(fullDomeServoURL);
+  }
+}
+
+
 
 
 

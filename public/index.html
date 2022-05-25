@@ -21,8 +21,6 @@
    
    
     <div class="iconStatusPLDiv">
-       
-        
         <img
         class="iconStatusPLicon"
         src="Images/Status-Icon-Grey.png"
@@ -31,9 +29,8 @@
       />
       <p id="PLStatusText" class="PLStatusText">P</p>
     </div> 
-    <div class="StatusIconBCDiv">
- 
-     
+
+    <div class="StatusIconBCDiv"> 
       <img
       class="iconStatusBCicon"
       src="Images/Status-Icon-Grey.png"
@@ -42,21 +39,18 @@
       />
       <p id="BCStatusText" class="BCStatusText">B</p>
     </div>
-    <div class="StatusIconHPDiv">
 
-     
+    <div class="StatusIconDCDiv">
       <img
-      class="iconStatusHPicon"
+      class="iconStatusDCicon"
       src="Images/Status-Icon-Grey.png"
-      alt="button for PL Status"
+      alt="button for DC Status"
       id="HPIcon"
       />
-      <p id="HPStatusText" class="HPStatusText">D</p>
+      <p id="DCStatusText" class="DCStatusText">D</p>
     </div>
 
     <div class="StatusIconStealthDiv">
-
-     
       <img
       class="iconStatusStealth"
       src="Images/Status-Icon-Grey.png"
@@ -65,6 +59,33 @@
       />
       <p id="StealthStatusText" class="StealthStatusText">s</p>
     </div>
+
+    <div class="StatusIconDSDiv">
+      <img
+      class="iconStatusDSicon"
+      src="Images/Status-Icon-Grey.png"
+      alt="button for PL Status"
+      id="DSIcon"
+      />
+      <p id="DSStatusText" class="DSStatusText">ds</p>
+    </div>
+
+    <div class="StatusIconBSDiv">
+      <img
+      class="iconStatusBS"
+      src="Images/Status-Icon-Grey.png"
+      alt="button for BS Status"
+      id="BSIcon"
+      />
+      <p id="BSStatusText" class="BSStatusText">bs</p>
+    </div>
+
+
+
+
+
+
+
     <!-- <iframe class="battery" scrolling="no" style="overflow: hidden; color: white;" src="http://10.0.0.40:8000/BatteryCapacity.txt" frameborder="0"></iframe> -->
 <div class="StatusIconBatteryDiv">
 <!-- <img src="./Images/RemoteIcon.png" class="remoteIcon" alt=""> -->
@@ -162,7 +183,26 @@
    <div class="menu-Level-0-Content active" id="home">
     <div id="HomeTab" class="">
       <h2 class="menuheadermain">Astromech Control</h2>
-      <table class="homeButtonClass">
+      <div class="menu-Level-1">
+        <!-- <div class="menu-Level-1-Links"> -->
+          <div class="menu-Level-1-Links moveUpArrowLinks active " >
+            <button class="active " rel="home1"><img
+              class="upArrowMove"
+              id ="transparent"
+              src="Images/Blue_Left_Arrow_PNG_Transparent_Clip_Art_Image.png"
+              alt="button for Knight Rider"
+            /></button>
+        </div>
+        <div class="menu-Level-1-Links moveDownArrowLinks " >
+            <button class=" " rel="home2"><img
+              class="downArrowMove"
+              id ="transparent"
+              src="Images/Blue_Left_Arrow_PNG_Transparent_Clip_Art_Image.png"
+              alt="button for Knight Rider"
+            /></button>
+        </div>
+      <div class="menu-Level-1-Content active" id="home1">
+        <table class="homeButtonClass">
         <tr>
           <td>
             <img
@@ -317,7 +357,11 @@
         </tr>
       </table>
     </div>
+    <div class="menu-Level-1-Content" id="home2">
 
+    </div>
+    </div>
+  </div>
     </div>
 
     <div class="menu-Level-0-Content" id="led">
@@ -4447,11 +4491,11 @@
     </div>
     <div class="openclosedoors">
       <h3 class="openclosedoorsheader">Door/Pie Control</h3>
-      <img src="Images/Buttons/Button-Open-White.png" class="openButton" alt="image for the dome">
-      <img src="Images/Buttons/Button-Close-White.png" class="closeButton" alt="image for the dome">
+      <img src="Images/Buttons/Button-Open-White.png" class="openButton" alt="image for the dome" onclick="servoControl('both','03')">
+      <img src="Images/Buttons/Button-Close-White.png" class="closeButton" alt="image for the dome" onclick="servoControl('both','04')">
       <img src="Images/Buttons/Button-Cycle-White.png" class="cycleButton" alt="image for the dome">
 
-      <img src="Images/Buttons/Button-Alternate-White.png" class="AlternateButton" alt="image for the dome">
+      <img src="Images/Buttons/Button-Alternate-White.png" class="AlternateButton" alt="image for the dome" onclick="servoControl('both','05')">
 
 
     </div>
@@ -4492,42 +4536,54 @@
     <div class="menuheader">
       <h1 class="">Settings</h1>
     </div>
-    <div class="menu-Level--Content" id="SerialCommand">
-      <div class="menu-Level-">
+    <div class="menu-Level-1">
+
+
+    <div class="menu-Level-1-Links move active" >
+      <button class="active" rel="EEPROM"><img
+        class="buttonwidth"
+        id ="transparent"
+        src="Images/button-LED_Brightness.png"
+        alt="button for Knight Rider"
+      /></button>
+      </div>
+      <div class="menu-Level-1-Links move1" >
+        <button class="" rel="serialcommandstoesp"><img
+          class="buttonwidth"
+          id ="transparent"
+          src="Images/Button-Settings-Commands.png"
+          alt="button for Knight Rider"
+        /></button>
+       </div>
+       <div class="menu-Level-1-Links move2" >
+        <button class="" rel="resetButtons"><img
+          class="buttonwidth"
+          id ="transparent"
+          src="Images/Button-Settings-Reset.png"
+          alt="button for Knight Rider"
+        /></button>
+       </div>
+
+  <!-- </div> -->
+  <!-- <div class="menu-Level-1-Content active">
+    <div class="menu-Level--Content" id="SerialCommand"> -->
+      <div class="menu-Level-1-Content active  " id="EEPROM">
        
-        <form method='ESP32SendCommand('ESP32SelectionBox', 'ESP32CommandTextBox')'>
-           <label class="ESP32Picker"for='ClientESP32s'>Send command:</label>
-           <select class="ESP32Picker" id="ESP32SelectionBox" name="ClientESP32s">
-           <option value="BC">Body LED Controller- V</option>
-           <option value="PC">Periscope Controller - V</option>
-           <option value="DS">Dome Servo Controller</option>
-           <option value="HP">HP Controller - V</option>
-           <option value="BS">Body Servo Contoller</option>
-           <option value="RS">RSeries Logic</option>
-           <option value="PS">PSI Pro</option>
-           <option value="ST">Stealth</option>
-  
-         </select>
-           <input class="ESP32Pickertext" type="text" name="ESP32CommandTextBox" id="ESP32CommandTextBox" value="">
+        
 
-            <a href="#" onclick="ESP32SendCommand('ESP32SelectionBox' , 'ESP32CommandTextBox')" class="applyButtonSettings"></a>
-          <input type="submit" onclick="ESP32SendCommand('ESP32SelectionBox', 'ESP32CommandTextBox')"name="" value="" style="display: none">
-
-       </form>
-
-       <div class="LDPBrightnesRangeDiv">
+       <div class="LDPBrightnesRangeDiv ">
         <iframe name="submit3" style="display:none;" ></iframe>
         <form action="http://192.168.8.101/" method="get" target="submit3">
-        <div class="" >
-        <label for="LDPBrightnessParam" style="position:relative; left:-100px; top:8px;">LDP Brightness</label>
-        <label for="LDPBrightnessParam" style="position:relative; left:-80px; top:40px;">Dim</label>
-        <label for="LDPBrightnessParam" style="position:relative; left:430px; top:40px;">Bright</label>
+        <div class="settingsledmove" >
+        <label for="LDPBrightnessParam" style="position:relative; left:-105px; top:8px;">LDP Brightness</label>
+        <label for="LDPBrightnessParam" style="position:relative; left:-100px; top:40px;">Dim</label>
+        <label for="LDPBrightnessParam" style="position:relative; left:350px; top:40px;">Bright</label>
 
 
         <input type="hidden" name="param1" id="LDPBrightnessParam" value="">
         <input class="" type="range" id="LDPBrightnessRange" min="0" max="255" step="1" value="125" onchange="BrightnessRangeFunc('LDPBrightnessRange', 'LDPBrightnesssliderAmount', '01')">
         </div>
-        <div class="buttonspacing2" id="LDPBrightnesssliderAmount" style="position:absolute; left:460px; top:40px;">125</div>
+        <div class="buttonspacing2" id="LDPBrightnesssliderAmount" style="position:absolute; left:195px; top:40px;">125</div>
         </form>
   
       </div>
@@ -4535,14 +4591,14 @@
       <div class="MaintBrightnesRangeDiv">
         <iframe name="submit3" style="display:none;" ></iframe>
         <form action="http://192.168.8.101/" method="get" target="submit3">
-        <div class="" >
-        <label for="MaintBrightnessParam" style="position:relative; left:-215px; top:8px;">Maintenance Brightness</label>
-        <label for="MaintBrightnessParam" style="position:relative; left:-210px; top:40px;">Dim</label>
-        <label for="MaintBrightnessParam" style="position:relative; left:300px; top:40px;">Bright</label>
+        <div class="settingsledmove" >
+        <label for="MaintBrightnessParam" style="position:relative; left:-230px; top:8px;">Maintenance Brightness</label>
+        <label for="MaintBrightnessParam" style="position:relative; left:-230px; top:40px;">Dim</label>
+        <label for="MaintBrightnessParam" style="position:relative; left:225px; top:40px;">Bright</label>
         <input type="hidden" name="param1" id="MaintBrightnessParam" value="">
         <input class="" type="range" id="MaintBrightnessRange" min="0" max="255" step="1" value="" onchange="BrightnessRangeFunc('MaintBrightnessRange', 'MaintBrightnesssliderAmount', '02')">
         </div>
-        <div class="buttonspacing2" id="MaintBrightnesssliderAmount" style="position:absolute; left:460px; top:40px;">125</div>
+        <div class="buttonspacing2" id="MaintBrightnesssliderAmount" style="position:absolute; left:195px; top:40px;">125</div>
         </form>
   
       </div>
@@ -4551,7 +4607,7 @@
        <div class="VUBrightnesRangeDiv">
         <iframe name="submit3" style="display:none;" ></iframe>
         <form action="http://192.168.8.101/" method="get" target="submit3">
-        <div class="" >
+        <div class="settingsledmove" >
         <label for="VUBrightnessParam" style="position:relative; left:-75px; top:8px;">vu Brightness</label>
         <label for="VUBrightnessParam" style="position:relative; left:-70px; top:40px;">Dim</label>
         <label for="VUBrightnessParam" style="position:relative; left:440px; top:40px;">Bright</label>
@@ -4566,7 +4622,7 @@
       <div class="CoinBrightnesRangeDiv">
         <iframe name="submit3" style="display:none;" ></iframe>
         <form action="http://192.168.8.101/" method="get" target="submit3">
-        <div class="" >
+        <div class="settingsledmove" >
         <label for="CoinBrightnessParam" style="position:relative; left:-195px; top:8px;">Coin Slots Brightness</label>
         <label for="CoinBrightnessParam" style="position:relative; left:-180px; top:40px;">Dim</label>
         <label for="CoinBrightnessParam" style="position:relative; left:330px; top:40px;">Bright</label>
@@ -4581,7 +4637,7 @@
       <div class="IntOffsetRangeDiv">
         <iframe name="submit3" style="display:none;" ></iframe>
         <form action="http://192.168.8.101/" method="get" target="submit3">
-        <div class="" >
+        <div class="settingsledmove" >
         <label for="IntOffsetParam" style="position:relative; left:-195px; top:8px;">spectrum - sensitivity</label>
         <label for="IntOffsetParam" style="position:relative; left:-180px; top:40px;">High</label>
         <label for="IntOffsetParam" style="position:relative; left:350px; top:40px;">Low</label>
@@ -4596,7 +4652,7 @@
       <div class="IntBaselineRangeDiv">
         <iframe name="submit3" style="display:none;" ></iframe>
         <form action="http://192.168.8.101/" method="get" target="submit3">
-        <div class="" >
+        <div class="settingsledmove" >
         <label for="IntBaselineParam" style="position:relative; left:-290px; top:8px;">spectrum - noise adjustment</label>
         <label for="IntBaselineParam" style="position:relative; left:-280px; top:40px;">Low</label>
         <label for="IntBaselineParam" style="position:relative; left:260px; top:40px;">High</label>
@@ -4607,13 +4663,42 @@
         </form>
   
       </div>
+    </div>
+  <!-- </div>
+  
 
 
+</div> -->
+<div class="menu-Level-1-Content settingsledmove" id="serialcommandstoesp">
+  <!-- <img src="Images/Button-LED_Controller_Reset.png" alt="" class="resetLEDController " onclick="resetArduino()"> -->
+  <form class="settingsledmove" method='ESP32SendCommand('ESP32SelectionBox', 'ESP32CommandTextBox')'>
+    <label class="ESP32Picker"for='ClientESP32s'>Send command:</label>
+    <select class="ESP32Picker " id="ESP32SelectionBox" name="ClientESP32s">
+    <option value="BC">Body LED Controller- V</option>
+    <option value="PC">Periscope Controller - V</option>
+    <option value="DS">Dome Servo Controller</option>
+    <option value="HP">HP Controller - V</option>
+    <option value="BS">Body Servo Contoller</option>
+    <option value="RS">RSeries Logic</option>
+    <option value="PS">PSI Pro</option>
+    <option value="ST">Stealth</option>
 
+  </select>
+    <input class="ESP32Pickertext" type="text" name="ESP32CommandTextBox" id="ESP32CommandTextBox" value="">
 
+     <a href="#" onclick="ESP32SendCommand('ESP32SelectionBox' , 'ESP32CommandTextBox')" class="applyButtonSettings"></a>
+   <input type="submit" onclick="ESP32SendCommand('ESP32SelectionBox', 'ESP32CommandTextBox')"name="" value="" style="display: none">
 
+</form>
 
-      </div>
+</div>
+
+<div class="menu-Level-1-Content " id="resetButtons">
+  <img src="Images/Button-LED_Controller_Reset.png" alt="" class="resetLEDController " onclick="resetArduino()">
+  
+
+</div>
+
     </div>
 
     </div>

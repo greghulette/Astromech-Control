@@ -10,6 +10,53 @@ body {
 
 
 }
+.move{
+  position: absolute;
+  left: -400px;
+}
+
+.move1{
+  position: absolute;
+  left: -380px;
+  top: 120px;
+}
+.move2{
+  position: absolute;
+  left: -400px;
+  top: 220px;
+}
+.moveUpArrowLinks{
+  position: absolute;
+  left: -380px;
+  top: 120px;
+
+}
+
+.moveDownArrowLinks{
+  position: absolute;
+  left: -380px;
+  top: 420px;
+
+}
+/* .LDPBrightnesRangeDivText{
+  position: absolute;
+  left: -140px;
+  top:8px;
+  text-align: right;
+
+
+} */
+.settingsledmove{
+  position: absolute;
+  left: -200px;
+  width: 800px;
+}
+.resetLEDController{
+  position: absolute;
+  top: 700px;
+  width: 170px;
+
+}
 .remoteIcon{
   position: absolute;
   height: 50px;
@@ -28,7 +75,7 @@ body {
 
 .homeButtonClass{
   position: absolute;
-  left: -350px;
+  left: -500px;
   top: 40px;
 }
 .battery{
@@ -40,14 +87,14 @@ height: 50px;
 .statusIconsOverallDiv{
 
   position: absolute;
-  top: 650px;
+  top: 625px;
   left: 600px;
 }
 .StatusIconBatteryDiv{
 
   position: relative;
   height: 70px;
-  top: 220px;
+  top: 240px;
   left: 660px;
 }
 .batteryChargeLevelDiv{
@@ -88,45 +135,25 @@ left: 240px;
   top: 0px;
   left:20px;
 }
-.iconStatusPLDiv{
-
-  position: absolute;
-  height: 70px;
-  top: 130px;
-  left: 0px;
-}
-
-.iconStatusPLicon{
-  height: 70px;
-position: absolute;
-top: 20px;
-left: -590px;
-}
-
-.PLStatusText{
-  position: absolute;
-  top: 7px;
-  left:-570px;
-}
 
 
 .StatusIconBCDiv{
 
   position: absolute;
   height: 70px;
-  top: 0px;
+  top: -25px;
   left: 0px;
 }
 .iconStatusBCicon{
-  height: 70px;
+  height: 60px;
 position: absolute;
 top: 20px;
 left: -590px;
 }
   .BCStatusText{
     position: absolute;
-    top: 7px;
-    left:-570px;
+    top: 2px;
+    left:-573px;
   }
 
 .iconStatusBC{
@@ -137,26 +164,26 @@ left: -590px;
   left: -600px;
 }
 
-.StatusIconHPDiv{
+.StatusIconDCDiv{
 
   position: relative;
   height: 70px;
-  top: 65px;
+  top: 20px;
   left: 0px;
 }
-  .HPStatusText{
+  .DCStatusText{
     position: absolute;
-    top: 7px;
-    left:-570px;
+    top: 3px;
+    left:-572px;
     /* color: black; */
   }
-  .iconStatusHPicon{
-    height: 70px;
+  .iconStatusDCicon{
+    height: 60px;
   position: absolute;
   top: 20px;
   left: -590px;
   }
-.iconStatusHP{
+.iconStatusDC{
 
   position: absolute;
   height: 70px;
@@ -164,27 +191,105 @@ left: -590px;
   left: 340px;
 }
 
+.iconStatusPLDiv{
+
+  position: absolute;
+  height: 70px;
+  top: 120px;
+  left: 0px;
+}
+
+.iconStatusPLicon{
+  height: 60px;
+position: absolute;
+top: 20px;
+left: -590px;
+}
+
+.PLStatusText{
+  position: absolute;
+  top: 3px;
+  left:-573px;
+}
+
 
 .StatusIconStealthDiv{
 
   position: absolute;
   height: 70px;
-  top: 190px;
+  top: 70px;
   left: 0px;
 }
   .StealthStatusText{
     position: absolute;
-    top: 7px;
-    left:-570px;
+    top: 3px;
+    left:-572px;
   }
 
 .iconStatusStealth{
 
   position: absolute;
-  height: 70px;
+  height: 60px;
   top: 20px;
   left: -590px;
 }
+
+
+.StatusIconBSDiv{
+
+  position: absolute;
+  height: 60px;
+  top: 190px;
+  left: 7px;
+}
+.iconStatusBSicon{
+  height: 60px;
+position: absolute;
+top: 20px;
+left: -590px;
+}
+  .BSStatusText{
+    position: absolute;
+    top: -11px;
+    left:-587px;
+  }
+
+.iconStatusBS{
+
+  position: relative;
+  height: 70px;
+  top: 0px;
+  left: -600px;
+}
+
+.StatusIconDSDiv{
+
+  position: absolute;
+  height: 60px;
+  top: 225px;
+  left:0px;
+}
+.iconStatusDSicon{
+  height: 60px;
+position: absolute;
+top: 20px;
+left: -590px;
+}
+  .DSStatusText{
+    position: absolute;
+    top: 2px;
+    left:-580px;
+  }
+
+.iconStatusDS{
+
+  position: relative;
+  height: 70px;
+  top: 0px;
+  left: -600px;
+}
+
+
 
 .per{
   height: 40px;
@@ -265,7 +370,7 @@ span.myButton input {
 }
 
 .homebuttonwidth {
-  width: 340px;
+  width: 310px;
 }
 
 .homebuttonwidth2 {
@@ -1679,8 +1784,8 @@ width: 100%;
   /* opacity: 1; */
   /* border: 1px; */
   position: absolute;
-  top:0px;
-  left: 825px;
+  top:300px;
+  left: 275px;
   height: 60px;
   width: 150px;
 
@@ -1774,20 +1879,23 @@ label[for= ColorPicker]{
 
 .ESP32Picker {
 
-  font-size: 1.5rem;
+  font-size: 2rem;
   position:absolute;
-  left: 190px;
+  left: -60px;
+  top: 200px;
 
 }
 .ESP32Pickertext {
-  height: 25px;
-  font-size: 1.5rem;
+  /* height: 25px; */
+  font-size: 2rem;
   position: absolute;
-  left : 490px;
+  left : 360px;
+  top: 200px;
 }
 .ESP32PickerLabel{
   position: absolute;
   left: -60px;
+  top: 200px;
 }
 
 .ColorPicker1 {
@@ -2165,7 +2273,7 @@ label[for= ColorPickertab]{
   float: left;
   position: absolute;
   left: 0px;
-  top: 40px;
+  top: 20px;
   /* border: 1px solid #ccc; */
   /* background-color: black; */
   width: 85px;
@@ -2251,7 +2359,7 @@ label[for= ColorPickertab]{
    display: inline-block;
    /* left:100px;
    top: 100px; */
-   width: 190px;
+   /* width: auto; */
    height: 57px;
    overflow: visible;
    border: none;
@@ -2262,6 +2370,7 @@ label[for= ColorPickertab]{
 .menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Links button.active{
    box-shadow: 0px 0px 5px yellow;
    background-color: yellow;
+   width: auto;
    border: none;
    outline: none;
   -webkit-transform: scale(1.25);
@@ -2272,6 +2381,37 @@ label[for= ColorPickertab]{
    border: none;
    outline: none;
 
+}
+.test{
+  background-color: black;
+}
+.leftarrowHome{
+  position: absolute;
+  width: 100px;
+  top: 490px;
+  left: 10px;
+}
+.upArrowMove{
+  position: absolute;
+  width: 100px;
+  top: -20px;
+  left: 0px;
+  transform: rotate(90deg);
+}
+
+.downArrowMove{
+  position: absolute;
+  width: 100px;
+  top: 0px;
+  left: 0px;
+  transform: rotate(270deg);
+}
+.rightarrowHome{
+  position: absolute;
+  width: 100px;
+  top: 460px;
+  left: 130px;
+  rotate: 180deg;
 }
 
 .menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content{
