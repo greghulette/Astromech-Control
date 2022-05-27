@@ -11,7 +11,7 @@
 //reeltwo libaries
 #include "ReelTwo.h"
 #include "core/DelayCall.h"
-#include "ServoDispatchDirect.h"
+#include "ServoDispatchPCA9685.h"
 #include "ServoSequencer.h"
 
 
@@ -61,20 +61,20 @@
 //
 //     Pin  Min, ,Max,  Group ID
 const ServoSettings servoSettings[] PROGMEM = {
-     { 13,  600, 2400, SMALL_PANEL_ONE },       /* 0: door 1 small left door by radar eye */
-     { 14,  600, 2400, SMALL_PANEL_TWO },       /* 1: door 2 small middle door by radar eye */
-     { 15,  600, 2400, SMALL_PANEL_THREE },     /* 2: door 3 small right door by radar eye */
-     { 17,  600, 2400, MEDIUM_PANEL_PAINTED },  /* 3: door 4 medium painted door */
-     { 16,  600, 2400, MEDIUM_PANEL_SILVER },   /* 4: door 5 Medium Unpainted door*/
-     { 18,  600, 2400, BIG_PANEL },             /* 5: door 6 Big Lower door */
-     { 19,  600, 2400, PIE_PANEL_ONE },         /* 6: door 7 Pie Panel near Periscope */
-     { 21,  600, 2400, PIE_PANEL_TWO },         /* 7: door 8 Pie Panel clockwise from Periscope*/
-     { 22,  600, 2400, PIE_PANEL_THREE },       /* 8: door 9 Pie Panel clockwise-2 from Periscope */
-     { 23,  600, 2400, PIE_PANEL_FOUR }         /* 9: door 10 Pie Panel clockwise-3 from Periscope */
+     { 1,  600, 2400, SMALL_PANEL_ONE },       /* 0: door 1 small left door by radar eye */
+     { 2,  600, 2400, SMALL_PANEL_TWO },       /* 1: door 2 small middle door by radar eye */
+     { 3,  600, 2400, SMALL_PANEL_THREE },     /* 2: door 3 small right door by radar eye */
+     { 4,  600, 2400, MEDIUM_PANEL_PAINTED },  /* 3: door 4 medium painted door */
+     { 5,  600, 2400, MEDIUM_PANEL_SILVER },   /* 4: door 5 Medium Unpainted door*/
+     { 6,  600, 2400, BIG_PANEL },             /* 5: door 6 Big Lower door */
+     { 7,  600, 2400, PIE_PANEL_ONE },         /* 6: door 7 Pie Panel near Periscope */
+     { 8,  600, 2400, PIE_PANEL_TWO },         /* 7: door 8 Pie Panel clockwise from Periscope*/
+     { 9,  600, 2400, PIE_PANEL_THREE },       /* 8: door 9 Pie Panel clockwise-2 from Periscope */
+     { 10,  600, 2400, PIE_PANEL_FOUR }         /* 9: door 10 Pie Panel clockwise-3 from Periscope */
 };
 
-ServoDispatchDirect<SizeOfArray(servoSettings)>
-servoDispatch(servoSettings);
+ServoDispatchPCA9685<SizeOfArray(servoSettings)> servoDispatch(servoSettings);
+
 ServoSequencer servoSequencer(servoDispatch);
 
 
@@ -240,7 +240,7 @@ void setup()
   colorWipe(red, 255); // blue
   Serial.println("LED Setup Complete");
 
-//  REELTWO_READY();
+//      REELTWO_READY();
 
 //     SetupEvent::ready();
 
@@ -363,7 +363,9 @@ void mainLoop() {
          inputBuffer[0]=='r'           //Radar Eye LED
 
          ) {
-            commandLength = (sizeof(inputBuffer) / sizeof(inputBuffer[0]));                     //  Determines length of command character array.
+//            commandLength = (sizeof(inputBuffer) / sizeof(inputBuffer[0]));                     //  Determines length of command character array.
+            commandLength = strlen(inputBuffer);                     //  Determines length of command character array.
+
             if(commandLength >= 3) {
                 if(inputBuffer[0]=='D' || inputBuffer[0]=='d') {doorState = (inputBuffer[1]-'0')*10+(inputBuffer[2]-'0');
 //                Serial.println("Here");
