@@ -12,6 +12,7 @@
 #include "ReelTwo.h"
 #include "core/DelayCall.h"
 #include "ServoDispatchDirect.h"
+#include "ServoSequencer.h"
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -42,8 +43,8 @@
 #define BIG_PANEL          0x0004
 #define PIE_PANEL          0x0008
 #define TOP_PIE_PANEL      0x0010
-#define SMALL_PANEL_ONE    0x000b
-#define SMALL_PANEL_TWO    0x000d
+#define SMALL_PANEL_ONE    0x0020
+#define SMALL_PANEL_TWO    0x0030
 
 #define HOLO_HSERVO        0x1000
 #define HOLO_VSERVO        0x2000
@@ -65,6 +66,7 @@ const ServoSettings servoSettings[] PROGMEM = {
 
 ServoDispatchDirect<SizeOfArray(servoSettings)>
 servoDispatch(servoSettings);
+ServoSequencer servoSequencer(servoDispatch);
 
 
 //////////////////////////////////////////////////////////////////////
@@ -360,10 +362,10 @@ void mainLoop() {
                 else {displayState = (inputBuffer[1]-'0')*10+(inputBuffer[2]-'0');}              //  Converts Sequence character values into an integer.
 
                 if(commandLength >= 4) {
-                  if(inputBuffer[0]=='R' || inputBuffer[0]=='r') {typeState = inputBuffer[3]-'0';}
+                  if(inputBuffer[0]=='D' || inputBuffer[0]=='d' || inputBuffer[0]=='R' || inputBuffer[0]=='r') {typeState = inputBuffer[3]-'0';}
                 }
                 else {
-                     typeState = 3;
+                     typeState = -1;
                 }
 
                 if(commandLength >= 5) {
@@ -447,6 +449,22 @@ void mainLoop() {
            case 6:  cycleDoors();                                                       break;
            case 7:  waveAllDoors();                                                     break;
            case 8:  quickWaveAllDoors();                                                break;
+           case 10: allOpenClose();                                                     break;
+           case 11: allOpenCloseLong();                                                 break;
+           case 12: allFlutter();                                                       break;
+           case 13: allOpenCloseRepeat();                                               break;
+           case 14: panelWave();                                                     break;
+           case 15: panelWaveFast();                                                     break;
+           case 16: openCloseWave();                                                     break;
+           case 17: marchingAnts();                                                     break;
+           case 18: panelAlternate();                                                     break;
+           case 19: panelDance();                                                     break;
+           case 20: longDisco();                                                     break;
+           case 21: longHarlemShake();                                                     break;
+//           case 22: ();                                                     break;
+//           case 23: ();                                                     break;
+//           case 24: ();                                                     break;
+
            case 98: closeAllDoors();                                                    break;
            case 99: closeAllDoors();                                                    break;
            default: break;
@@ -485,7 +503,7 @@ void mainLoop() {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void cameraLED(uint32_t color, byte CLSpeed){
+void cameraLED(uint32_t color, int CLSpeed){
   int CLRLow = 1;
   int CLRHigh = 50;
        CLSpeed = map(CLSpeed, 0, 9, 1, 250);
@@ -548,12 +566,12 @@ void cameraLED(uint32_t color, byte CLSpeed){
     Serial.println("Open Specific Door");
         if(doorpos == 1){\
         Serial.println("Open Door 1");
-        servoDispatch.moveServosTo(SMALL_PANEL_ONE,10,MOVE_SPEED,1.0);
+            SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllOpen, SMALL_PANEL_ONE);
+
       };
       if(doorpos == 2){
                 Serial.println("Open Door 2");
-
-        servoDispatch.moveServosTo(SMALL_PANEL_TWO,10,MOVE_SPEED,1.0);
+            SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllOpen, SMALL_PANEL_TWO);
       };
      D_command[0]   = '\0';
   };
@@ -561,20 +579,30 @@ void cameraLED(uint32_t color, byte CLSpeed){
 
   void closeDoor(int doorpos) {
     Serial.println("Close Specific Door");
+      if(doorpos == 1){
+        Serial.println("CLose Door 1");
+            SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllClose, SMALL_PANEL_ONE);      
+            };
+      if(doorpos == 2){
+                Serial.println("Close Door 2");
+
+            SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllClose, SMALL_PANEL_TWO);
+            };
+//      };
     D_command[0]   = '\0';
   }
 
 
   void openAllDoors() {
     Serial.println("Open all Doors");
-    servoDispatch.moveServosTo(ALL_DOME_PANELS_MASK, 10,MOVE_SPEED, 1.0);
+        SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllOpen, ALL_DOME_PANELS_MASK);
     D_command[0] = '\0';
    }
 
   
   void closeAllDoors() {
     Serial.println("Close all doors");
-    servoDispatch.moveServosTo(ALL_DOME_PANELS_MASK, 10,MOVE_SPEED, 0.0);
+        SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllClose, ALL_DOME_PANELS_MASK);
     D_command[0] = '\0';
   }
 
@@ -608,7 +636,78 @@ void cameraLED(uint32_t color, byte CLSpeed){
 void shortCircuit(int count) {
 
 }
-  
+
+
+
+  //////////////  Functions to call ReelTwo animations
+
+  void allOpenClose(){
+      Serial.println("Open and Close All Doors");
+      SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllOpenClose, ALL_DOME_PANELS_MASK);
+       D_command[0]   = '\0';                                           
+      }
+      
+  void allOpenCloseLong(){
+      Serial.println("Open and Close Doors Long");
+      SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllOpenCloseLong, ALL_DOME_PANELS_MASK);
+      D_command[0]   = '\0';                                                 
+      }
+          
+  void allFlutter(){
+      Serial.println("Flutter All Doors");
+      SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllFlutter, ALL_DOME_PANELS_MASK);
+      D_command[0]   = '\0';   
+      }
+  void allOpenCloseRepeat(){
+      Serial.println("Open and Close All Doors Repeat");
+      SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllFOpenCloseRepeat, ALL_DOME_PANELS_MASK);
+      D_command[0]   = '\0';             
+             }
+  void panelWave(){
+       Serial.println("Wave");
+       SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelWave, ALL_DOME_PANELS_MASK);
+       D_command[0]   = '\0';                                             
+       }
+  void panelWaveFast(){
+       Serial.println("Wave Fast");
+       SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelWaveFast, ALL_DOME_PANELS_MASK);
+       D_command[0]   = '\0';                                             
+       }
+  void openCloseWave() {
+       Serial.println("Open Close Wave ");
+       SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelOpenCloseWave, ALL_DOME_PANELS_MASK);
+       D_command[0]   = '\0';                                             
+       }                                          
+ 
+  void marchingAnts() {
+       Serial.println("Marching Ants");
+       SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelMarchingAnts, ALL_DOME_PANELS_MASK);
+       D_command[0]   = '\0';                                             
+       }                                             
+  void panelAlternate() {
+       Serial.println("Panel Alternate");
+       SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAlternate, ALL_DOME_PANELS_MASK);
+       D_command[0]   = '\0';                                             
+       }                                                            
+
+  void panelDance() {
+       Serial.println("Panel Dance");
+       SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelDance, ALL_DOME_PANELS_MASK);
+       D_command[0]   = '\0';                                             
+       }
+
+  void longDisco() {
+         Serial.println("Panel Dance");
+         SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelLongDisco, ALL_DOME_PANELS_MASK);
+         D_command[0]   = '\0';                                             
+         }
+
+  void longHarlemShake() {
+         Serial.println("Panel Dance");
+         SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelLongHarlemShake, ALL_DOME_PANELS_MASK);
+         D_command[0]   = '\0';                                             
+         }                                                       
+                                                     
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
