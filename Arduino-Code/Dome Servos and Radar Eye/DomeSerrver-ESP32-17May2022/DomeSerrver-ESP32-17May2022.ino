@@ -50,33 +50,27 @@
 #define PIE_PANEL_THREE       0x0100 //b0100000000
 #define PIE_PANEL_FOUR        0x0200 //b1000000000
 
-
-
-#define HOLO_HSERVO        0x1000 //b01000000000000
-#define HOLO_VSERVO        0x2000 //b10000000000000
-
 #define SMALL_PANELS_MASK     (SMALL_PANEL_ONE|SMALL_PANEL_TWO|SMALL_PANEL_THREE)
 #define MEDIUM_PANELS_MASK    (MEDIUM_PANEL_PAINTED|MEDIUM_PANEL_SILVER)
-#define DOME_PANELS_MASK      (SMALL_PANEL_MASK|MEDIUM_PANELS_MASK|BIG_PANEL)
-#define PIE_PANELS_MASK       (PIE_PANEL_ONE|PIE_PANE_TWO|PIE_PANEL_TRHEE|PIE_PANEL_FOUR)
-#define ALL_DOME_PANELS_MASK  (DOME_PANELS_MASK|PIE_PANELS_MASK|TOP_PIE_PANEL)
-#define HOLO_SERVOS_MASK      (HOLO_HSERVO|HOLO_VSERVO)
+#define DOME_PANELS_MASK      (SMALL_PANELS_MASK|MEDIUM_PANELS_MASK|BIG_PANEL)
+#define PIE_PANELS_MASK       (PIE_PANEL_ONE|PIE_PANEL_TWO|PIE_PANEL_THREE|PIE_PANEL_FOUR)
+#define ALL_DOME_PANELS_MASK  (DOME_PANELS_MASK|PIE_PANELS_MASK)
 
 // Group ID is used by the ServoSequencer and some ServoDispatch functions to
 // identify a group of servos.
 //
-//   Pin  Group ID,      Min,  Max
+//     Pin  Min, ,Max,  Group ID
 const ServoSettings servoSettings[] PROGMEM = {
      { 13,  600, 2400, SMALL_PANEL_ONE },       /* 0: door 1 small left door by radar eye */
      { 14,  600, 2400, SMALL_PANEL_TWO },       /* 1: door 2 small middle door by radar eye */
      { 15,  600, 2400, SMALL_PANEL_THREE },     /* 2: door 3 small right door by radar eye */
-     { 16,  600, 2400, MEDIUM_PANEL_PAINTED },  /* 3: door 4 medium painted door */
-     { 13,  600, 2400, MEDIUM_PANEL_SILVER },   /* 4: door 1 small left door by radar eye */
-     { 14,  600, 2400, BIG_PANEL },             /* 5: door 2 small middle door by radar eye */
-     { 15,  600, 2400, PIE_PANEL_ONE },         /* 6: door 3 small right door by radar eye */
-     { 16,  600, 2400, PIE_PANEL_TWO },         /* 7: door 4 medium painted door */
-     { 15,  600, 2400, PIE_PANEL_THREE },       /* 8: door 3 small right door by radar eye */
-     { 16,  600, 2400, PIE_PANEL_FOUR }         /* 9: door 4 medium painted door */
+     { 17,  600, 2400, MEDIUM_PANEL_PAINTED },  /* 3: door 4 medium painted door */
+     { 16,  600, 2400, MEDIUM_PANEL_SILVER },   /* 4: door 5 Medium Unpainted door*/
+     { 18,  600, 2400, BIG_PANEL },             /* 5: door 6 Big Lower door */
+     { 19,  600, 2400, PIE_PANEL_ONE },         /* 6: door 7 Pie Panel near Periscope */
+     { 21,  600, 2400, PIE_PANEL_TWO },         /* 7: door 8 Pie Panel clockwise from Periscope*/
+     { 22,  600, 2400, PIE_PANEL_THREE },       /* 8: door 9 Pie Panel clockwise-2 from Periscope */
+     { 23,  600, 2400, PIE_PANEL_FOUR }         /* 9: door 10 Pie Panel clockwise-3 from Periscope */
 };
 
 ServoDispatchDirect<SizeOfArray(servoSettings)>
@@ -584,7 +578,7 @@ void cameraLED(uint32_t color, int CLSpeed){
        case 1: Serial.println("Open Door 1");SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllOpen, SMALL_PANEL_ONE);  break;
        case 2: Serial.println("Open Door 2");SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllOpen, SMALL_PANEL_TWO);  break;
        case 3: Serial.println("Open Door 3");SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllOpen, SMALL_PANEL_THREE);break;
-       case 4: Serial.println("Open Door 4");SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllOpen, SMALL_PANEL_FOUR);  break;
+       case 4: Serial.println("Open Door 4");SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllOpen, MEDIUM_PANEL_PAINTED);  break;
         }
      D_command[0]   = '\0';
   };
@@ -597,7 +591,7 @@ void cameraLED(uint32_t color, int CLSpeed){
       case 1: SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllClose, SMALL_PANEL_ONE);      break;
       case 2: SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllClose, SMALL_PANEL_TWO);      break;
       case 3: SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllClose, SMALL_PANEL_THREE);    break;
-      case 4: SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllClose, SMALL_PANEL_FOUR);     break;
+      case 4: SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllClose, MEDIUM_PANEL_PAINTED);     break;
     }
 //      if(doorpos == 1){
 //        Serial.println("CLose Door 1");
