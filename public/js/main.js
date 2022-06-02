@@ -42,7 +42,7 @@ function checkPeriscopeLifterStatus() {
   const before = new Date();
   var request = new XMLHttpRequest();
   request.timeout = 1000;
-  request.open('GET', 'http://192.168.8.142', true);
+  request.open('GET', 'http://192.168.4.103', true);
   request.onreadystatechange = function () {
 
     if (request.readyState === 4) {
@@ -10520,14 +10520,14 @@ function ESP32SendCommand(b, x) {
   // var ESP32DeviceSelected = (ESP32Device.options[ESP32Device.selectedIndex].value);
   console.log('Device: ' + ESP32DeviceSelected);
   if (ESP32DeviceSelected === "PC") {
-    var periscopeControllerIP = 'http://192.168.8.142/?param0=1&param1=';
+    var periscopeControllerIP = 'http://192.168.4.103/?param0=1&param1=';
     var periscopeLifterFullURL = periscopeControllerIP + ESP32commandUpper;
     httpGet(periscopeLifterFullURL);
     console.log(periscopeLifterFullURL);
 
   };
   if (ESP32DeviceSelected === "BC") {
-    var bodyLEDControllerIP = 'http://192.168.8.101/?param0=2&param1=';
+    var bodyLEDControllerIP = 'http://192.168.4.101/?param0=2&param1=';
     console.log('BC subselection');
     console.log(bodyLEDControllerIP)
 
@@ -10537,7 +10537,7 @@ function ESP32SendCommand(b, x) {
 
   };
   if (ESP32DeviceSelected === "HP") {
-    var DomeHPControllerIP = 'http://192.168.8.129/?param0=1&param1=';
+    var DomeHPControllerIP = 'http://192.168.4.102/?param0=1&param1=';
     console.log('BC subselection');
     console.log(DomeHPControllerIP)
 
@@ -10547,7 +10547,7 @@ function ESP32SendCommand(b, x) {
 
   };
   if (ESP32DeviceSelected === "RS") {
-    var DomeRSeriesControllerIP = 'http://192.168.8.129/?param0=1&param1=';
+    var DomeRSeriesControllerIP = 'http://192.168.4.102/?param0=1&param1=';
     console.log('RS subselection');
     console.log(DomeRSeriesControllerIP)
 
@@ -10573,7 +10573,7 @@ function BrightnessRangeFunc(a, b, c) {
 
 function getBodyLEDController(t, v) {
   var BodyBright = t;
-  var bodyLEDControllerSPURL = "http://192.168.4.100/?param0=2&param1=P";
+  var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=2&param1=P";
 
   var bodyLEDControllerFullURL = bodyLEDControllerSPURL + v + BodyBright;
   // console.log(bodyLEDControllerFullURL);
@@ -10620,33 +10620,33 @@ function getPeriscope(s, t, u) {
   let periscopeFunction = s;
   if (periscopeFunction === 'D' && t === 'RotateClockwiseRelative') {
     let periscopeRelativeDeg = document.getElementById(t).value;
-    let periscopeESPURL = "http://192.168.8.142/?param0=1&param1=:P" + periscopeFunction + '-';
+    let periscopeESPURL = "http://192.168.4.103/?param0=1&param1=:P" + periscopeFunction + '-';
     let periscopeESPFullURL = periscopeESPURL + periscopeRelativeDeg + ',' + speedValue;;
     httpGet(periscopeESPFullURL);
   } else if (periscopeFunction === 'D' && t === 'RotateCounterClockwiseRelative') {
     let periscopeRelativeDeg = document.getElementById(t).value;
-    let periscopeESPURL = "http://192.168.8.142/?param0=1&param1=:P" + periscopeFunction;
+    let periscopeESPURL = "http://192.168.4.103/?param0=1&param1=:P" + periscopeFunction;
     let periscopeESPFullURL = periscopeESPURL + periscopeRelativeDeg + ',' + speedValue;;
     httpGet(periscopeESPFullURL);
   } else if (periscopeFunction === 'R' && t === 'RotateClockwiseContinous') {
-    let periscopeESPURL = "http://192.168.8.142/?param0=1&param1=:P" + periscopeFunction + '-';
+    let periscopeESPURL = "http://192.168.4.103/?param0=1&param1=:P" + periscopeFunction + '-';
     let periscopeESPFullURL = periscopeESPURL + speedValue;;
     httpGet(periscopeESPFullURL);
   } else if (periscopeFunction === 'R' && t === 'RotateCounterClockwiseContinous') {
-    let periscopeESPURL = "http://192.168.8.142/?param0=1&param1=:P" + periscopeFunction;
+    let periscopeESPURL = "http://192.168.4.130/?param0=1&param1=:P" + periscopeFunction;
     let periscopeESPFullURL = periscopeESPURL + speedValue;;
     httpGet(periscopeESPFullURL);
   } else if (periscopeFunction === 'AR' || periscopeFunction === 'PR') {
-    let periscopeESPURL = "http://192.168.8.142/?param0=1&param1=:P" + periscopeFunction;
+    let periscopeESPURL = "http://192.168.4.103/?param0=1&param1=:P" + periscopeFunction;
     let periscopeESPFullURL = periscopeESPURL + ',' + speedValue;
     httpGet(periscopeESPFullURL);
   } else if (periscopeFunction === 'S') {
-    let periscopeESPURL = "http://192.168.8.142/?param0=1&param1=:P" + periscopeFunction;
+    let periscopeESPURL = "http://192.168.4.103/?param0=1&param1=:P" + periscopeFunction;
     let periscopeESPFullURL = periscopeESPURL + t;
     httpGet(periscopeESPFullURL);
   } else {
     var periscopeHeight = t;
-    var periscopeESPURL = "http://192.168.8.142/?param0=1&param1=:P" + periscopeFunction
+    var periscopeESPURL = "http://192.168.4.103/?param0=1&param1=:P" + periscopeFunction
     let periscopeESPFullURL = periscopeESPURL + periscopeHeight + ',' + speedValue;;
     // console.log(periscopeESPFullURL);
     httpGet(periscopeESPFullURL);
@@ -10662,7 +10662,7 @@ function getPeriscope(s, t, u) {
 
 function getPeriscopeRotateAbsolute(t) {
   var periscopeHeight = t;
-  var periscopeESPURL = "http://192.168.8.142/?param0=1&param1=:PA";
+  var periscopeESPURL = "http://192.168.4.103/?param0=1&param1=:PA";
   // var periscopeESPURLOutside = "http://10.0.0.230:8080/?param1=:PP";
 
   var periscopeESPFullURL = periscopeESPURL + periscopeHeight;
@@ -10678,7 +10678,7 @@ function getPeriscopeRotateAbsolute(t) {
 
 function getPeriscopeRotateAbsolute(t) {
   var periscopeHeight = t;
-  var periscopeESPURL = "http://192.168.8.142/?param0=1&param1=:PD";
+  var periscopeESPURL = "http://192.168.8.104/?param0=1&param1=:PD";
   // var periscopeESPURLOutside = "http://10.0.0.230:8080/?param1=:PP";
 
   var periscopeESPFullURL = periscopeESPURL + periscopeHeight;

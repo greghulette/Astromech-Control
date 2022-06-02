@@ -1,10 +1,8 @@
+#include <WiFiClient.h>
 #include "WiFi.h"
 #include "ESPAsyncWebServer.h"
-#include <WiFiClient.h>
-
 #include <WiFiAP.h>
 #include "esp_wifi.h"
-
  
 AsyncWebServer server(80);
 
@@ -13,11 +11,12 @@ AsyncWebServer server(80);
 #define RXD2 25
 #define TXD2 27 
 #define RST 4
+
 int serialNr = 0;
 
-#define BodyController
+//#define BodyController
 //#define DomeController
-//#define PeriscopeController
+#define PeriscopeController
 //#define StealthController
 
 #ifdef BodyController
@@ -65,13 +64,11 @@ Serial.println();
   #ifdef BodyController
     Serial.println(WiFi.softAP(ssid,password) ? "AP Ready" : "Failed!");
     delay(200);
-        Serial.println(WiFi.softAPConfig(local_IP, gateway, subnet) ? "AP IP Configured" : "Failed!");
-delay(200);
-     Serial.print("Soft-AP IP address = ");
-      Serial.println(WiFi.softAPIP());
-
-  #else 
-    Serial.println(WiFi.config(local_IP, gateway, subnet) ? "Client IP Configured" : "Failed!");
+    Serial.print("Soft-AP IP address = ");
+    Serial.println(WiFi.softAPIP());
+    Serial.println(WiFi.softAPConfig(local_IP, gateway, subnet) ? "AP IP Configured" : " AP Config Failed!");
+    #else 
+          Serial.println(WiFi.config(local_IP, gateway, subnet) ? "Client IP Configured" : "CLient IP Config Failed!");
 
     WiFi.begin(ssid, password);
      while (WiFi.status() != WL_CONNECTED) {
@@ -79,9 +76,9 @@ delay(200);
       Serial.println("Connecting to WiFi..");
        Serial.println(WiFi.localIP());
     }
- #endif
+   #endif
  
- WiFi.onEvent(getIPofClients, SYSTEM_EVENT_AP_STACONNECTED);
+// WiFi.onEvent(getIPofClients, SYSTEM_EVENT_AP_STACONNECTED);
  
  
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
@@ -177,39 +174,39 @@ void loop(){
   }
 
 
-void getIPofClients(WiFiEvent_t event, WiFiEventInfo_t info){
-    Serial.println("-----------");
-    delay(5000);
-  wifi_sta_list_t wifi_sta_list;
-  tcpip_adapter_sta_list_t adapter_sta_list;
- 
-  memset(&wifi_sta_list, 0, sizeof(wifi_sta_list));
-  memset(&adapter_sta_list, 0, sizeof(adapter_sta_list));
- 
-  esp_wifi_ap_get_sta_list(&wifi_sta_list);
-  tcpip_adapter_get_sta_list(&wifi_sta_list, &adapter_sta_list);
- 
-  for (int i = 0; i < adapter_sta_list.num; i++) {
- 
-    tcpip_adapter_sta_info_t station = adapter_sta_list.sta[i];
- 
-    Serial.print("Station Number ");
-    Serial.println(i);
- 
-    Serial.print("MAC: ");
- 
-    for(int i = 0; i< 6; i++){
-      
-      Serial.printf("%02X", station.mac[i]);  
-      if(i<5)Serial.print(":");
-    }
- 
-    Serial.print("\nIP: ");  
-    Serial.println(ip4addr_ntoa(&(station.ip)));    
-  }
- 
-  Serial.println("-----------");
-}
+//void getIPofClients(WiFiEvent_t event, WiFiEventInfo_t info){
+//    Serial.println("-----------");
+//    delay(5000);
+//  wifi_sta_list_t wifi_sta_list;
+//  tcpip_adapter_sta_list_t adapter_sta_list;
+// 
+//  memset(&wifi_sta_list, 0, sizeof(wifi_sta_list));
+//  memset(&adapter_sta_list, 0, sizeof(adapter_sta_list));
+// 
+//  esp_wifi_ap_get_sta_list(&wifi_sta_list);
+//  tcpip_adapter_get_sta_list(&wifi_sta_list, &adapter_sta_list);
+// 
+//  for (int i = 0; i < adapter_sta_list.num; i++) {
+// 
+//    tcpip_adapter_sta_info_t station = adapter_sta_list.sta[i];
+// 
+//    Serial.print("Station Number ");
+//    Serial.println(i);
+// 
+//    Serial.print("MAC: ");
+// 
+//    for(int i = 0; i< 6; i++){
+//      
+//      Serial.printf("%02X", station.mac[i]);  
+//      if(i<5)Serial.print(":");
+//    }
+// 
+//    Serial.print("\nIP: ");  
+//    Serial.println(ip4addr_ntoa(&(station.ip)));    
+//  }
+// 
+//  Serial.println("-----------");
+//}
 void writeString(String stringData){
   String completeString = stringData + '\r';
   for (int i=0; i<completeString.length(); i++)

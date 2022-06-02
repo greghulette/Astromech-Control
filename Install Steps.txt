@@ -74,3 +74,36 @@ This is a high level install instructions.
 13. (OPTIONAL) Install Geany - Text editor for the code (Optional)
 
 14. (OPTIONAL) install Arduino  (Optional)
+
+
+
+
+
+
+Let's say I have 4 servos in the SMALL_PANEL_MASK group and I wanted to only send the 3rd one open, would it look something like this?
+#define SMALL_PANEL        0x0001
+#define MEDIUM_PANEL       0x0002
+#define BIG_PANEL          0x0004
+#define PIE_PANEL          0x0008
+#define TOP_PIE_PANEL      0x0010
+
+
+#define HOLO_HSERVO        0x1000
+#define HOLO_VSERVO        0x2000
+
+#define DOME_PANELS_MASK (SMALL_PANEL_MASK|MEDIUM_PANEL|BIG_PANEL)
+#define PIE_PANELS_MASK         (PIE_PANEL)
+#define ALL_DOME_PANELS_MASK (DOME_PANELS_MASK|PIE_PANELS_MASK|TOP_PIE_PANEL)
+#define HOLO_SERVOS_MASK        (HOLO_HSERVO|HOLO_VSERVO)
+#define MOVE_SPEED 250 
+// Group ID is used by the ServoSequencer and some ServoDispatch functions to
+// identify a group of servos.
+//
+//   Pin  Group ID,      Min,  Max
+const ServoSettings servoSettings[] PROGMEM = {
+     { 14,  700, 2400, SMALL_PANEL_ONE },  /* 0: door 4 /
+     { 16,  700, 2400, SMALL_PANEL_TWO }   / 1: door 3 */
+    { 17,  700, 2400, SMALL_PANEL_ONE },  /* 0: door 4 /
+     { 18,  700, 2400, SMALL_PANEL_TWO }   / 1: door 3 */
+};
+{ 30,   B00100000, B00000000, B00000000, B00000000 },
