@@ -15,9 +15,20 @@ AsyncWebServer server(80);
 #define RST 4
 int serialNr = 0;
 
-#define BodyController
+//Raspberry Pi              192.168.4.100
+//Body Controller ESP       192.168.4.101
+//Dome Controller ESP       192.168.4.102
+//Periscope Controller ESP  192.168.4.103
+//Stealth Controller ESP    192.168.4.104
+//Dome Servo Controller     192.168.4.105
+//Body Servo Controller     192.168.4.106
+//Remote                    192.168.4.107
+//Developer Laptop          192.168.4.125
+
+
+//#define BodyController
 //#define DomeController
-//#define PeriscopeController
+#define PeriscopeController
 //#define StealthController
 
 #ifdef BodyController
@@ -69,6 +80,7 @@ Serial.println();
 delay(200);
      Serial.print("Soft-AP IP address = ");
       Serial.println(WiFi.softAPIP());
+ WiFi.onEvent(getIPofClients, SYSTEM_EVENT_AP_STACONNECTED);
 
   #else 
     Serial.println(WiFi.config(local_IP, gateway, subnet) ? "Client IP Configured" : "Failed!");
@@ -81,7 +93,6 @@ delay(200);
     }
  #endif
  
- WiFi.onEvent(getIPofClients, SYSTEM_EVENT_AP_STACONNECTED);
  
  
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
@@ -159,6 +170,7 @@ delay(200);
 }
  
 void loop(){
+  
   delay(50); 
 //   Serial.printf("stations connected = ", WiFi.softAPgetStationNum());
   if (serialNr == 5){
@@ -178,6 +190,8 @@ void loop(){
 
 
 void getIPofClients(WiFiEvent_t event, WiFiEventInfo_t info){
+  #ifdef BodyController
+
     Serial.println("-----------");
     delay(5000);
   wifi_sta_list_t wifi_sta_list;
@@ -209,6 +223,7 @@ void getIPofClients(WiFiEvent_t event, WiFiEventInfo_t info){
   }
  
   Serial.println("-----------");
+  #endif
 }
 void writeString(String stringData){
   String completeString = stringData + '\r';
