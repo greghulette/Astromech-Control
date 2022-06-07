@@ -121,14 +121,14 @@ function checkDomeControllerStatus() {
 
     if (request.readyState === 4) {
       if (request.status === 200) {
-        document.getElementById("HPIcon").src = "./Images/Status-icon-Green.png";
-        document.getElementById("HPStatusText").style.color = "black";
+        document.getElementById("DCIcon").src = "./Images/Status-icon-Green.png";
+        document.getElementById("DCStatusText").style.color = "black";
         DomeControllerStatus = true;
 
       }
       else {
-        document.getElementById("HPIcon").src = "./Images/Status-icon-Red.png";
-        document.getElementById("HPStatusText").style.color = "white";
+        document.getElementById("DCIcon").src = "./Images/Status-icon-Red.png";
+        document.getElementById("DCStatusText").style.color = "white";
         DomeControllerStatus = false;
 
       }
@@ -202,7 +202,7 @@ function checkBodyServoStatus() {
   const before = new Date();
   var request = new XMLHttpRequest();
   request.timeout = 1000;
-  request.open('GET', 'http://192.168.4.106', true);
+  request.open('GET', 'http://192.168.4.101', true);
   // request.open("GET", "http://AstromechRemote:8000/BatteryCapacity.txt", true);
 
   request.onreadystatechange = function () {
@@ -336,7 +336,7 @@ setInterval(function () {
 
 function bodyControllerLEDFunctionExecution(t) {
   var LEDCommand = t;
-  var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=2";
+  var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=Serial2";
 
   var bodyLEDControllerFullURL = bodyLEDControllerSPURL + LEDCommand;
   console.log(bodyLEDControllerFullURL);
@@ -354,7 +354,7 @@ function bodyControllerLEDFunctionExecution(t) {
 
 function HPLEDFunctionExecution(t) {
   var LEDCommand = t;
-  var HPControllerSPURL = "http://192.168.8.129/?param0=1";
+  var HPControllerSPURL = "http://192.168.8.129/?param0=Serial1";
 
   var HPLEDControllerFullURL = HPControllerSPURL + LEDCommand;
   console.log(HPLEDControllerFullURL);
@@ -371,7 +371,7 @@ function HPLEDFunctionExecution(t) {
 
 function bodyServoFunctionExecution(t) {
   var BSCommand = t;
-  var bodyServoControllerSPURL = "http://192.168.4.106/?param0=0";
+  var bodyServoControllerSPURL = "http://192.168.4.101/?param0=ESP";
 
   var bodyServiControllerFullURL = bodyServoControllerSPURL + BSCommand;
   console.log(bodyServiControllerFullURL);
@@ -408,7 +408,7 @@ function domeServoFunctionExecution(t) {
 
 function RSeriesLEDFunctionExecution(t) {
   var LEDCommand = t;
-  var RSeriesControllerSPURL = "http://192.168.8.129/?param0=1";
+  var RSeriesControllerSPURL = "http://192.168.8.129/?param0=Serial2";
 
   var RSeriesControllerSFullPURL = RSeriesControllerSPURL + LEDCommand;
   console.log(RSeriesControllerSFullPURL);
@@ -426,10 +426,12 @@ function RSeriesLEDFunctionExecution(t) {
 
 
 function servoControl(y, z) {
+  console.log("Servo Command Accepted")
   if (y === "body") {
     let bodyServoCommandParam = "&param1=d" + z;
     let fullBodyServoURL = bodyServoCommandParam
     bodyServoFunctionExecution(fullBodyServoURL);
+    console.log("Body Selected")
   }
   if (y === "dome") {
     let domeServoCommandParam = "&param1=d" + z;
@@ -10633,7 +10635,7 @@ function getPeriscope(s, t, u) {
     let periscopeESPFullURL = periscopeESPURL + speedValue;;
     httpGet(periscopeESPFullURL);
   } else if (periscopeFunction === 'R' && t === 'RotateCounterClockwiseContinous') {
-    let periscopeESPURL = "http://192.168.4.130/?param0=1&param1=:P" + periscopeFunction;
+    let periscopeESPURL = "http://192.168.4.103/?param0=1&param1=:P" + periscopeFunction;
     let periscopeESPFullURL = periscopeESPURL + speedValue;;
     httpGet(periscopeESPFullURL);
   } else if (periscopeFunction === 'AR' || periscopeFunction === 'PR') {
@@ -10678,7 +10680,7 @@ function getPeriscopeRotateAbsolute(t) {
 
 function getPeriscopeRotateAbsolute(t) {
   var periscopeHeight = t;
-  var periscopeESPURL = "http://192.168.8.104/?param0=1&param1=:PD";
+  var periscopeESPURL = "http://192.168.4.103/?param0=1&param1=:PD";
   // var periscopeESPURLOutside = "http://10.0.0.230:8080/?param1=:PP";
 
   var periscopeESPFullURL = periscopeESPURL + periscopeHeight;
