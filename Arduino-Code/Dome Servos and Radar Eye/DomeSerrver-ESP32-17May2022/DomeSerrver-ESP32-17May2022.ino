@@ -7,6 +7,7 @@
 #include <WiFiAP.h>
 #include "esp_wifi.h"
 #include <Adafruit_NeoPixel.h>
+#include <Wire.h>
 
 //reeltwo libaries
 #include "ReelTwo.h"
@@ -221,7 +222,7 @@ void setup()
     //***  COMMUNICATION SET UP ***///
    Serial.begin(9600);                                                                   // Initialize Serial Connection at 9600:
 
-//   Wire.begin(I2CAddress);                                                               // Start I2C Bus as Slave I2C Address
+   Wire.begin();                                                               // Start I2C Bus as Slave I2C Address
 //   Wire.onReceive(i2cEvent);                                                             // register event so when we receive something we jump to receiveEvent();
    Serial.print("READY: ");
 
@@ -242,7 +243,7 @@ void setup()
 
 //      REELTWO_READY();
 
-//     SetupEvent::ready();
+     SetupEvent::ready();
 
      
 Serial.println(WiFi.config(local_IP, gateway, subnet) ? "Client IP Configured" : "Failed!");
@@ -318,20 +319,15 @@ Serial.println(WiFi.config(local_IP, gateway, subnet) ? "Client IP Configured" :
 
 //
 void loop() {
-//  delay(5);
 if (millis() - MLMillis >= mainLoopDelayVar){
         MLMillis = millis();
   loopTime = millis();
-  // Check for new i2c command
-     AnimatedEvent::process();
-
-//
- mainLoop();
+   AnimatedEvent::process();
+//   mainLoop();
+}
 
 }
-}
-//
-//
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////                                                                                               /////
@@ -571,8 +567,6 @@ void cameraLED(uint32_t color, int CLSpeed){
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-#define MOVE_SPEED 250
-
   void openDoor(int doorpos) {
     Serial.println("Open Specific Door");
 
