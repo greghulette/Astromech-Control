@@ -45,7 +45,7 @@
       class="iconStatusDCicon"
       src="Images/Status-Icon-Grey.png"
       alt="button for DC Status"
-      id="HPIcon"
+      id="DCIcon"
       />
       <p id="DCStatusText" class="DCStatusText">D</p>
     </div>
@@ -4491,18 +4491,26 @@
     </div>
     <div class="openclosedoors">
       <h3 class="openclosedoorsheader">Door/Pie Control</h3>
-      <img src="Images/Buttons/Button-Open-White.png" class="openButton" alt="image for the dome" onclick="servoControl('both','03')">
-      <img src="Images/Buttons/Button-Close-White.png" class="closeButton" alt="image for the dome" onclick="servoControl('both','04')">
-      <img src="Images/Buttons/Button-Cycle-White.png" class="cycleButton" alt="image for the dome" onclick="servoControl('both','06')">
-
-      <img src="Images/Buttons/Button-Alternate-White.png" class="AlternateButton" alt="image for the dome" onclick="servoControl('both','05')">
+      <img src="Images/Buttons/Button-Open-White.png" class="openButton" alt="image for the dome" onclick="servoControl('body','03')">
+      <img src="Images/Buttons/Button-Close-White.png" class="closeButton" alt="image for the dome" onclick="servoControl('body','04')">
+      <img src="Images/Button-Servo-All-Panel-Dance.png" class="AllPanelDanceButton" alt="image for the dome" onclick="servoControl('both','17')">
+      <img src="Images/Button-Servo-All-Long-Disco.png" class="AllLongDiscoButton" alt="image for the dome" onclick="servoControl('both','17')">
+      <img src="Images/Button-Servo-Marching-Ants.png" class="MarchingAntsButton" alt="image for the dome" onclick="servoControl('both','17')">
+      <img src="Images/Button-Servo-All-Open.png" class="AllOpenButton" alt="image for the dome" onclick="servoControl('both','17')">
+      <img src="Images/Button-Servo-All-Close.png" class="AllCloseButton" alt="image for the dome" onclick="servoControl('both','17')">
+      <img src="Images/Button-Servo-All-Open-Close.png" class="AllOpenCloseButton" alt="image for the dome" onclick="servoControl('both','17')">
+      <img src="Images/Button-Servo-All-Open-Close-Long.png" class="AllOpenCloseLongButton" alt="image for the dome" onclick="servoControl('both','17')">
+      <img src="Images/Button-Servo-Flutter.png" class="FlutterButton" alt="image for the dome" onclick="servoControl('both','17')">
+      <img src="Images/Button-Servo-All-Open-Close-Repeat.png" class="AllOpenCloseRepeatButton" alt="image for the dome" onclick="servoControl('both','17')">
+      <img src="Images/Button-Servo-All-Panel-Wave.png" class="AllPanelWaveButton" alt="image for the dome" onclick="servoControl('both','17')">
+      <img src="Images/Button-Servo-All-Panel-Wave-Fast.png" class="AllPanelWaveFastButton" alt="image for the dome" onclick="servoControl('both','17')">
+      <img src="Images/Button-Servo-All-Open-Close-Wave.png" class="AllOpenCloseWaveButton" alt="image for the dome" onclick="servoControl('both','17')">
+      <img src="Images/Button-Servo-All-Panel-Alternate.png" class="AllPanelAlternateButton" alt="image for the dome" onclick="servoControl('both','17')">
+      <img src="Images/Button-Servo-All-Harlem-Shake.png" class="AllHarlemShake" alt="image for the dome" onclick="servoControl('both','17')">
 
 
     </div>
-    <div class="utilityArmsDiv">
-
-
-    </div>
+  
 
     <!-- <img src="Images/Dome/DomeOutline.png" class="domePicture" alt="image for the dome">
     <img src="Images/Dome/Door1Blue.png" class="domePicture" alt="image for the dome"> -->
@@ -4682,6 +4690,7 @@
     <option value="RS">RSeries Logic</option>
     <option value="PS">PSI Pro</option>
     <option value="ST">Stealth</option>
+
 
   </select>
     <input class="ESP32Pickertext" type="text" name="ESP32CommandTextBox" id="ESP32CommandTextBox" value="">

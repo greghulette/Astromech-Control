@@ -1272,7 +1272,7 @@ left: 100px;
 }
 .HPServo{
   position: absolute;
-  top: 400px;
+  top: 500px;
   left: 550px;
   border: 3px solid white;
   width: 280px;
@@ -1612,8 +1612,8 @@ left: 10px;
 
 .HPServoHeader{
   position: absolute;
-  top: -105px;
-  left: -15px;
+  top: -80px;
+  left: -10px;
   width: 350px;
 }
 
@@ -1634,17 +1634,17 @@ left: 10px;
 }
 .openclosedoors{
   position: absolute;
-  top: 400px;
+  top: 40px;
   left: 150px;
   border: 3px solid white;
-  height: 150px;
-  width: 330px;
+  height: 400px;
+  width: 650px;
 
 }
 .openclosedoorsheader{
   position: absolute;
-  top: -105px;
-  left: 10px;
+  top: -80px;
+  left: 175px;
   width: 400px;
 }
 
@@ -1749,6 +1749,112 @@ width: 100%;
   position: absolute;
   top: 80px;
   left: 170px;
+}
+.MarchingAntsButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 150px;
+  left: 10px;
+}
+
+.FlutterButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 150px;
+  left: 170px;
+}
+.AllOpenCloseRepeatButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 150px;
+  left: 330px;
+}
+.AllPanelWaveButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 150px;
+  left: 490px;
+}
+
+.AllPanelWaveFastButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 220px;
+  left: 10px;
+}
+
+.AllOpenCloseWaveButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 220px;
+  left: 170px;
+}
+.AllPanelAlternateButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 220px;
+  left: 330px;
+}
+
+.AllHarlemShake{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 220px;
+  left: 490px;
+}
+
+
+.AllPanelDanceButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 10px;
+  left: 490px;
+}
+
+.AllLongDiscoButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 10px;
+  left: 330px;
+}
+
+.AllOpenButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 80px;
+  left: 10px;
+}
+.AllCloseButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 80px;
+  left: 170px;
+}
+.AllOpenCloseButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 80px;
+  left: 330px;
+}
+.AllOpenCloseLongButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 80px;
+  left: 490px;
 }
 .applyButton{
   background-image: url(..//Images/Buttons/Button-Apply.png);

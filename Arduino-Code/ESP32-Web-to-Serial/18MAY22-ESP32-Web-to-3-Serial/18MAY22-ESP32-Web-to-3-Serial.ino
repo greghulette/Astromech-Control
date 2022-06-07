@@ -1,10 +1,8 @@
+#include <WiFiClient.h>
 #include "WiFi.h"
 #include "ESPAsyncWebServer.h"
-#include <WiFiClient.h>
-
 #include <WiFiAP.h>
 #include "esp_wifi.h"
-
  
 AsyncWebServer server(80);
 
@@ -13,18 +11,8 @@ AsyncWebServer server(80);
 #define RXD2 25
 #define TXD2 27 
 #define RST 4
+
 int serialNr = 0;
-
-//Raspberry Pi              192.168.4.100
-//Body Controller ESP       192.168.4.101
-//Dome Controller ESP       192.168.4.102
-//Periscope Controller ESP  192.168.4.103
-//Stealth Controller ESP    192.168.4.104
-//Dome Servo Controller     192.168.4.105
-//Body Servo Controller     192.168.4.106
-//Remote                    192.168.4.107
-//Developer Laptop          192.168.4.125
-
 
 //#define BodyController
 //#define DomeController
@@ -76,14 +64,13 @@ Serial.println();
   #ifdef BodyController
     Serial.println(WiFi.softAP(ssid,password) ? "AP Ready" : "Failed!");
     delay(200);
-        Serial.println(WiFi.softAPConfig(local_IP, gateway, subnet) ? "AP IP Configured" : "Failed!");
-delay(200);
-     Serial.print("Soft-AP IP address = ");
-      Serial.println(WiFi.softAPIP());
- WiFi.onEvent(getIPofClients, SYSTEM_EVENT_AP_STACONNECTED);
+    Serial.print("Soft-AP IP address = ");
+    Serial.println(WiFi.softAPIP());
+    Serial.println(WiFi.softAPConfig(local_IP, gateway, subnet) ? "AP IP Configured" : " AP Config Failed!");
+    WiFi.onEvent(getIPofClients, SYSTEM_EVENT_AP_STACONNECTED);
 
-  #else 
-    Serial.println(WiFi.config(local_IP, gateway, subnet) ? "Client IP Configured" : "Failed!");
+    #else 
+          Serial.println(WiFi.config(local_IP, gateway, subnet) ? "Client IP Configured" : "CLient IP Config Failed!");
 
     WiFi.begin(ssid, password);
      while (WiFi.status() != WL_CONNECTED) {
@@ -91,7 +78,7 @@ delay(200);
       Serial.println("Connecting to WiFi..");
        Serial.println(WiFi.localIP());
     }
- #endif
+   #endif
  
  
  
