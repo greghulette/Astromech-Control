@@ -1,0 +1,36 @@
+namespace Reeltwo {
+
+/** \reeltwoManualPage Animation Animation Scripts
+
+\reeltwoAutoToc
+
+Animation scripts provide a way to execute multi-step animation sequences without blocking the rest of the system.
+
+\code
+  ANIMATION(simpleMultiStepAnimation)
+  {
+      DO_START()
+      // Step One - fires once and waits 300ms before advancing
+      DO_SEQUENCE(SeqPanelAllOpenLong, DOME_PANELS_MASK)
+      // Step Two - fires once
+      DO_COMMAND_AND_WAIT("HPF0026|20", 100)
+      // Step Three - fires repeatedly for 200ms
+      DO_DURATION(200, {
+          DEBUG_PRINTLN(elapsedMillis);
+      })
+      // Step Four
+      DO_ONCE({ frontHolo.play("Leia.bd2"); })
+      // Step Five
+      DO_COMMAND("HPF0026|20")
+      // Step Six - repeat this step until "num" reaches 100 then rewind the animation
+      DO_FOREVER({
+          DEBUG_PRINTLN(num);
+          if (num == 100)
+             animation.rewind();
+      })
+      DO_END()
+  }
+\endcode
+*/
+
+}
