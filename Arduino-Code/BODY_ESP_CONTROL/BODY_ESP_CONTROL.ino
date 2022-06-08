@@ -56,12 +56,12 @@
 //
 //     Pin  Min, ,Max,  Group ID
 const ServoSettings servoSettings[] PROGMEM = {
-     { 1,  700, 2400, TOP_UTILITY_ARM },       /* 0: door 1 small left door by radar eye */
-     { 2,  700, 2400, BOTTOM_UTILITY_ARM },       /* 1: door 2 small middle door by radar eye */
-     { 3,  700, 2400, LARGE_LEFT_DOOR },     /* 2: door 3 small right door by radar eye */
-     { 4,  700, 2400, LARGE_RIGHT_DOOR },  /* 3: door 4 medium painted door */
-     { 5,  700, 2400, CHARGE_BAY_DOOR },   /* 4: door 5 Medium Unpainted door*/
-     { 6,  700, 2400, DATA_PANEL_DOOR }             /* 5: door 6 Big Lower door */
+     { 1,  700, 2400, TOP_UTILITY_ARM },       /* 0: Top Utility Arm */
+     { 2,  700, 2400, BOTTOM_UTILITY_ARM },    /* 1: Bottom Utility Arm */
+     { 3,  700, 2400, LARGE_LEFT_DOOR },       /* 2: Large Left Door as viewing from looking at R2 */
+     { 4,  700, 2400, LARGE_RIGHT_DOOR },      /* 3: Large Right door as viewing from looking at R2 */
+     { 5,  700, 2400, CHARGE_BAY_DOOR },       /* 4: Charge Bay Inidicator Door*/
+     { 6,  700, 2400, DATA_PANEL_DOOR }        /* 5: Data Panel Door */
     };
 
 ServoDispatchPCA9685<SizeOfArray(servoSettings)> servoDispatch(servoSettings);
@@ -121,7 +121,7 @@ int commandLength;
 //////////////////////////////////////////////////////////////////////
 
 boolean startUp = true;
-boolean isStartUp         = true;
+boolean isStartUp = true;
 
 
 
@@ -129,54 +129,37 @@ boolean isStartUp         = true;
  
 AsyncWebServer server(80);
 
+
+///-------------------------------------------------------------------------
+///       Serial Ports Specific Setup
+///-------------------------------------------------------------------------
+
 #define RXD1 19
 #define TXD1 18 
 #define RXD2 25
 #define TXD2 27 
 #define RST 4
-int paramVar = 0;
+int paramVar = 9;
+///-------------------------------------------------------------------------
+///       WiFi Specific Setup
+///-------------------------------------------------------------------------
 
 //Raspberry Pi              192.168.4.100
-//Body Controller ESP       192.168.4.101
+//Body Controller ESP       192.168.4.101  ************
 //Dome Controller ESP       192.168.4.102
 //Periscope Controller ESP  192.168.4.103
-//Stealth Controller ESP    192.168.4.104
+//Stealth Controller ESP    192.168.4.104  (Probably not going to be different then Body Controller ESP IP)
 //Dome Servo Controller     192.168.4.105  (Probably not going to be different then Dome Controller ESP IP)
 //Body Servo Controller     192.168.4.106  (Probably not going to be different then Body Controller ESP IP)
 //Remote                    192.168.4.107
 //Developer Laptop          192.168.4.125
 
 
-#define BodyController
-//#define DomeController
-//#define PeriscopeController
-//#define StealthController
-
-#ifdef BodyController
 
 IPAddress local_IP(192,168,4,101);
 IPAddress subnet(255,255,255,0);
 IPAddress gateway(192,168,4,100);
 
-#elif defined(DomeController)
-
-IPAddress local_IP(192,168,4,102);
-IPAddress subnet(255,255,255,0);
-IPAddress gateway(192,168,4,100);
-
-#elif defined(PeriscopeController)
-
-IPAddress local_IP(192,168,4,103);
-IPAddress subnet(255,255,255,0);
-IPAddress gateway(192,168,4,100);
-
-#elif defined(StealthController)
-
-IPAddress local_IP(192,168,4,104);
-IPAddress subnet(255,255,255,0);
-IPAddress gateway(192,168,4,100);
-
-#endif
 
 
  ////R2 Control Network Details
@@ -198,22 +181,14 @@ void setup(){
   Wire.begin();
   SetupEvent::ready();
 
-  #ifdef BodyController
+  
     Serial.println(WiFi.softAP(ssid,password) ? "AP Ready" : "Failed!");
     delay(200);
     Serial.println(WiFi.softAPConfig(local_IP, gateway, subnet) ? "AP IP Configured" : "Failed!");
     delay(200);
     Serial.print("Soft-AP IP address = ");
     Serial.println(WiFi.softAPIP());
-  #else 
-    Serial.println(WiFi.config(local_IP, gateway, subnet) ? "Client IP Configured" : "Failed!");
-    WiFi.begin(ssid, password);
-     while (WiFi.status() != WL_CONNECTED) {
-      delay(1000);
-      Serial.println("Connecting to WiFi..");
-      Serial.println(WiFi.localIP());
-      }
-  #endif
+  
  
  
  
@@ -293,7 +268,6 @@ void setup(){
   
   //Reset Arudino Mega
   resetArduino(500);
-//  void scan_i2c();
   }
  
 void loop(){
@@ -586,93 +560,35 @@ void shortCircuit(int count) {
                Serial.println(inputString);
       }
 
-void writeString(String stringData){
-  String completeString = stringData + '\r';
-  for (int i=0; i<completeString.length(); i++)
-  {
-    Serial.write(completeString[i]);
-  }
-}
-void writeString1(String stringData){
-  String completeString = stringData + '\r';
-  for (int i=0; i<completeString.length(); i++)
-  {
-    Serial1.write(completeString[i]);
-  }
-}
+      void writeString(String stringData){
+        String completeString = stringData + '\r';
+        for (int i=0; i<completeString.length(); i++)
+        {
+          Serial.write(completeString[i]);
+        }
+      }
+      void writeString1(String stringData){
+        String completeString = stringData + '\r';
+        for (int i=0; i<completeString.length(); i++)
+        {
+          Serial1.write(completeString[i]);
+        }
+      }
+      
+      void writeString2(String stringData){
+        String completeString = stringData + '\r';
+        for (int i=0; i<completeString.length(); i++)
+        {
+          Serial2.write(completeString[i]);
+        }
+      }
 
-void writeString2(String stringData){
-  String completeString = stringData + '\r';
-  for (int i=0; i<completeString.length(); i++)
-  {
-    Serial2.write(completeString[i]);
-  }
-}
-
-void resetArduino(int delayperiod){
-  Serial.println("Opening of reset function");
-  digitalWrite(4,LOW);
-  delay(delayperiod);
-  digitalWrite(4,HIGH);
-  Serial.println("reset witin function");
-//  paramVar = 0;
-
-}
-
-void scan_i2c()
-{
-    unsigned nDevices = 0;
-    for (byte address = 1; address < 127; address++)
-    {
-        String name = "<unknown>";
-        Wire.beginTransmission(address);
-        byte error = Wire.endTransmission();
-        if (address == 0x70)
-        {
-            // All call address for PCA9685
-            name = "PCA9685:all";
-        }
-        if (address == 0x40)
-        {
-            // Adafruit PCA9685
-            name = "PCA9685";
-        }
-        if (address == 0x14)
-        {
-            // IA-Parts magic panel
-            name = "IA-Parts Magic Panel";
-        }
-        if (address == 0x20)
-        {
-            // IA-Parts periscope
-            name = "IA-Parts Periscope";
-        }
-        if (address == 0x16)
-        {
-            // PSIPro
-            name = "PSIPro";
-        }
-
-        if (error == 0)
-        {
-            Serial.print("I2C device found at address 0x");
-            if (address < 16)
-                Serial.print("0");
-            Serial.print(address, HEX);
-            Serial.print(" ");
-            Serial.println(name);
-            nDevices++;
-        }
-        else if (error == 4)
-        {
-            Serial.print("Unknown error at address 0x");
-            if (address < 16)
-                Serial.print("0");
-            Serial.println(address, HEX);
-        }
+    void resetArduino(int delayperiod){
+      Serial.println("Opening of reset function");
+      digitalWrite(4,LOW);
+      delay(delayperiod);
+      digitalWrite(4,HIGH);
+      Serial.println("reset witin function");
+    //  paramVar = 0;
+    
     }
-    if (nDevices == 0)
-        Serial.println("No I2C devices found\n");
-    else
-        Serial.println("done\n");
-}

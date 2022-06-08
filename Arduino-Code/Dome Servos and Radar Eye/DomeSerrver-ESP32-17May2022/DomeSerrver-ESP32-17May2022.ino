@@ -71,7 +71,7 @@ const ServoSettings servoSettings[] PROGMEM = {
      { 7,  600, 2400, PIE_PANEL_ONE },         /* 6: door 7 Pie Panel near Periscope */
      { 8,  600, 2400, PIE_PANEL_TWO },         /* 7: door 8 Pie Panel clockwise from Periscope*/
      { 9,  600, 2400, PIE_PANEL_THREE },       /* 8: door 9 Pie Panel clockwise-2 from Periscope */
-     { 10,  600, 2400, PIE_PANEL_FOUR }         /* 9: door 10 Pie Panel clockwise-3 from Periscope */
+     { 10,  600, 2400, PIE_PANEL_FOUR }        /* 9: door 10 Pie Panel clockwise-3 from Periscope */
 };
 
 ServoDispatchPCA9685<SizeOfArray(servoSettings)> servoDispatch(servoSettings);
@@ -133,7 +133,7 @@ int commandLength;
 //////////////////////////////////////////////////////////////////////
 
 boolean startUp = true;
-boolean isStartUp         = true;
+boolean isStartUp = true;
 
 //////////////////////////////////////////////////////////////////////
 ///*****             Camera Lens Variables and settings       *****///
@@ -188,22 +188,34 @@ Adafruit_NeoPixel stripCL = Adafruit_NeoPixel(NUM_CAMERA_PIXELS, CAMERA_LENS_DAT
 boolean countUp=false;
 
 ///-------------------------------------------------------------------------
+///       Serial Ports Specific Setup
+///-------------------------------------------------------------------------
+
+
+#define RXD1 19
+#define TXD1 18 
+#define RXD2 25
+#define TXD2 27 
+#define RST 4
+
+
+///-------------------------------------------------------------------------
 ///       WiFi Specific Setup
 ///-------------------------------------------------------------------------
 
-//Raspberry Pi  192.168.4.100
-//Body Controller ESP 192.168.4.1
-//Dome Controller ESP 192.168.4.102
+//Raspberry Pi              192.168.4.100
+//Body Controller ESP       192.168.4.101  
+//Dome Controller ESP       192.168.4.102  ************
 //Periscope Controller ESP  192.168.4.103
-//Stealth Controller ESP  192.168.4.104
-//Dome Servo Controller 192.168.4.105     ************
-//Body Servo Controller 192.168.4.106
-//Remote  192.168.4.107
-//Developer Laptop  192.168.4.125
-  
+//Stealth Controller ESP    192.168.4.104  (Probably not going to be different then Body Controller ESP IP)
+//Dome Servo Controller     192.168.4.105  (Probably not going to be different then Dome Controller ESP IP)
+//Body Servo Controller     192.168.4.106  (Probably not going to be different then Body Controller ESP IP)
+//Remote                    192.168.4.107
+//Developer Laptop          192.168.4.125
+
 AsyncWebServer server(80);
 
-IPAddress local_IP(192,168,4,105);
+IPAddress local_IP(192,168,4,102);
 IPAddress subnet(255,255,255,0);
 IPAddress gateway(192,168,4,100);
 
@@ -211,8 +223,8 @@ IPAddress gateway(192,168,4,100);
 const char* ssid = "R2D2_Control_Network";
 const char* password =  "astromech";
 
-int paramVar = 0;  //not needed but left in to develop
 
+int paramVar = 9;  
 
 unsigned long mainLoopTime; // We keep track of the "time" in this variable.
 
@@ -223,10 +235,10 @@ void setup()
    Serial.begin(9600);                                                                   // Initialize Serial Connection at 9600:
 
    Wire.begin();                                                               // Start I2C Bus as Slave I2C Address
-//   Wire.onReceive(i2cEvent);                                                             // register event so when we receive something we jump to receiveEvent();
    Serial.print("READY: ");
 
 
+   SetupEvent::ready();
 
    inputString.reserve(20);                                                              // Reserve 100 bytes for the inputString:
    autoInputString.reserve(20);
@@ -241,9 +253,8 @@ void setup()
   colorWipe(red, 255); // blue
   Serial.println("LED Setup Complete");
 
-//      REELTWO_READY();
 
-     SetupEvent::ready();
+
 
      
 Serial.println(WiFi.config(local_IP, gateway, subnet) ? "Client IP Configured" : "Failed!");
@@ -272,18 +283,22 @@ Serial.println(WiFi.config(local_IP, gateway, subnet) ? "Client IP Configured" :
 //////////                                                                //////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
         
-        if ((p->name())== "param0" & (p->value()) == "0"){
+        if ((p->name())== "param0" & (p->value()) == "Serial0"){
 //        Serial.println("Serial0 Chosen with If Statement");
+        paramVar = 0;
+        };
+    if ((p->name())== "param0" & (p->value()) == "Serial1"){
+//        Serial.println("Serial 1 Chosen with If Statement");
         paramVar = 1;
         };
-    if ((p->name())== "param0" & (p->value()) == "1"){
-//        Serial.println("Serial 1 Chosen with If Statement");
-        paramVar = 2;
-        };
-    if ((p->name())== "param0" & (p->value()) == "2"){
+    if ((p->name())== "param0" & (p->value()) == "Serial2"){
 //      Serial.println("Serial 2 Chosen with If Statement");
-          paramVar = 3;
+        paramVar = 2;
     };
+     if ((p->name())== "param0" & (p->value()) == "ESP"){
+//      Serial.println("ESP(Self) Chosen with If Statement");
+          paramVar = 3;
+     };
     if ((p->name())== "param0" & (p->value()) == "ESPReset"){
         Serial.println("Reset ESP and Arduino Chosen with If Statement");
         ESP.restart();
@@ -295,13 +310,22 @@ Serial.println(WiFi.config(local_IP, gateway, subnet) ? "Client IP Configured" :
         Serial.println(p->value());
         Serial.println(paramVar);
   
-        if (paramVar == 1){
-          Serial.println("Param = 0");      
-//          writeString(p->value());         
-            inputString = (p->value());
-//          if (inChar == '\r') {               // if the incoming character is a carriage return (\r)
-            stringComplete = true;  
-
+        if (paramVar == 0){
+          Serial.println("Writing to Serial 0");      
+          writeString(p->value());
+        };
+         if (paramVar == 1){
+          Serial.println("Writing to Serial 1");      
+          writeString1(p->value());
+        } ;      
+          if (paramVar == 2){
+          Serial.println("Writing to Serial 2");      
+          writeString2(p->value());
+        };
+         if (paramVar == 3){
+          Serial.println("Executing on self");      
+          inputString = (p->value());
+          stringComplete = true;  
         };
          
         Serial.println("------");
@@ -324,19 +348,7 @@ if (millis() - MLMillis >= mainLoopDelayVar){
   loopTime = millis();
    AnimatedEvent::process();
 //   mainLoop();
-}
-
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////                                                                                               /////
-///////                        Main Loop for Running the System in Normal Mode                        /////
-///////                                                                                               /////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-void mainLoop() {
-   if(startUp) {
+ if(startUp) {
       closeAllDoors();
       startUp = false;
       Serial.println("Startup");
@@ -491,6 +503,19 @@ void mainLoop() {
         delay(500);
 //        digitalWrite(OEPIN, HIGH);
     }
+}
+
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////                                                                                               /////
+///////                        Main Loop for Running the System in Normal Mode                        /////
+///////                                                                                               /////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+void mainLoop() {
+  
   }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -750,4 +775,27 @@ void shortCircuit(int count) {
 
         }
                Serial.println(inputString);
+      }
+
+      void writeString(String stringData){
+        String completeString = stringData + '\r';
+        for (int i=0; i<completeString.length(); i++)
+        {
+          Serial.write(completeString[i]);
+        }
+      }
+      void writeString1(String stringData){
+        String completeString = stringData + '\r';
+        for (int i=0; i<completeString.length(); i++)
+        {
+          Serial1.write(completeString[i]);
+        }
+      }
+      
+      void writeString2(String stringData){
+        String completeString = stringData + '\r';
+        for (int i=0; i<completeString.length(); i++)
+        {
+          Serial2.write(completeString[i]);
+        }
       }
