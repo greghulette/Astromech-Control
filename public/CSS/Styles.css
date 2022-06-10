@@ -2139,7 +2139,7 @@ input[type="range"]::before {
 
   left: 0%;
   top: 120%;
-}
+};
 
 input[type="range"]::-webkit-slider-runnable-track {
   width: 100%;
@@ -2151,7 +2151,7 @@ input[type="range"]::-webkit-slider-runnable-track {
   border-radius: 9px;
   border: 1px solid #000000;
   b
-}
+};
 input[type="range"]::-webkit-slider-thumb {
   box-shadow: 0px 0px 25px black;
   border: 2px solid black;
@@ -2163,7 +2163,7 @@ input[type="range"]::-webkit-slider-thumb {
   cursor: pointer;
   -webkit-appearance: none;
   margin-top: -11px;
-}
+};
 input[type="range"]:focus::-webkit-slider-runnable-track {
   background: Yellow;
 }
