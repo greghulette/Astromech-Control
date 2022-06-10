@@ -1,5 +1,5 @@
-#define USE_DEBUG
-#define USE_SERVO_DEBUG
+//#define USE_DEBUG
+//#define USE_SERVO_DEBUG
 
 #include "WiFi.h"
 #include "ESPAsyncWebServer.h"
@@ -8,6 +8,7 @@
 #include "esp_wifi.h"
 #include <Adafruit_NeoPixel.h>
 #include <Wire.h>
+#include <esp_now.h>
 
 //reeltwo libaries
 #include "ReelTwo.h"
@@ -16,29 +17,91 @@
 #include "ServoSequencer.h"
 
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///*****                                                                                                                                                           *****///
 ///*****                                                     Created by Greg Hulette.  I started with the code from flthymcnsty
 ///*****                                                                                                                                                           *****///
 ///*****                                                         So exactly what does this all do.....?                                                            *****///
-///*****                       - Controls the Dome servos and the Camera Light                                                                                     *****///
+///*****                       - Controls the Dome servos                                                                                     *****///
+///*****                       - Controls the Camera Light                                                                                     *****///
+///*****                       - Sends Serial commands to the HPs and RSeries                                   *****///
 ///*****                                                                                                                                                           *****///
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///*****                                                                                                                                                           *****///
-///*****                                                                                                                                                           *****///
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
+  String inputString;         // a string to hold incoming data
+  volatile boolean stringComplete  = false;      // whether the serial string is complete
 
 /////////////////////////////////////////////////////////////////////////
-///*****                                                         *****///
+///*****              ESP NOW Set Up                       *****///
+/////////////////////////////////////////////////////////////////////////
+
+  // REPLACE WITH THE MAC Address of your receiver 
+//    uint8_t broadcastAddress[] = {0x30, 0xC6, 0xF7, 0x2F, 0xAE, 0xF8};
+    uint8_t broadcastAddress[] = {0x32, 0xAE, 0xA4, 0x07, 0x0D, 0x67};
+
+//    uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+    // Set your new MAC Address
+
+  // Define variables to store commands to be sent
+    String destination;
+    String command;
+
+  // Define variables to store incoming commands
+    String incomingDestination;
+    String incomingCommand;
+    
+  // Variable to store if sending data was successful
+    String success;
+
+  //Structure example to send data
+  //Must match the receiver structure
+    typedef struct struct_message {
+        String dest;
+        String comm;
+    } struct_message;
+
+  // Create a struct_message calledcommandsTosend to hold variables that will be sent
+    struct_message commandsToSend;
+
+  // Create a struct_message to hold incoming commands from the Body
+    struct_message commandsToReceive;
+
+    esp_now_peer_info_t peerInfo;
+
+  // Callback when data is sent
+    void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
+      Serial.print("\r\nLast Packet Send Status:\t");
+      Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
+      Serial.println(status);
+      if (status ==0){
+        success = "Delivery Success :)";
+      }
+      else{
+        success = "Delivery Fail :(";
+      }
+    }
+
+  // Callback when data is received
+    void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
+      memcpy(&commandsToReceive, incomingData, sizeof(commandsToReceive));
+      Serial.print("Bytes received from Dome: ");
+      Serial.println(len);
+      incomingDestination = commandsToReceive.dest;
+      incomingCommand = commandsToReceive.comm;
+      Serial.print("Destination = ");
+      Serial.println(incomingDestination);
+      Serial.print("Command = ");
+      Serial.println(incomingCommand);   
+      inputString = incomingCommand;
+      stringComplete = true;     
+      
+    }
+ 
+
+/////////////////////////////////////////////////////////////////////////
 ///*****              ReelTwo Servo Set Up                       *****///
-///*****                                                         *****///
-
 /////////////////////////////////////////////////////////////////////////
-
-
 
 #define SMALL_PANEL_ONE       0x0001 //b0000000001
 #define SMALL_PANEL_TWO       0x0002 //b0000000010
@@ -59,7 +122,7 @@
 
 // Group ID is used by the ServoSequencer and some ServoDispatch functions to
 // identify a group of servos.
-//
+
 //     Pin  Min, ,Max,  Group ID
 const ServoSettings servoSettings[] PROGMEM = {
      { 1,  600, 2400, SMALL_PANEL_ONE },       /* 0: door 1 small left door by radar eye */
@@ -75,77 +138,66 @@ const ServoSettings servoSettings[] PROGMEM = {
 };
 
 ServoDispatchPCA9685<SizeOfArray(servoSettings)> servoDispatch(servoSettings);
-
 ServoSequencer servoSequencer(servoDispatch);
-
 
 //////////////////////////////////////////////////////////////////////
 ///*****        Command Varaiables, Containers & Flags        *****///
 //////////////////////////////////////////////////////////////////////
 
-char inputBuffer[10];
-String inputString;         // a string to hold incoming data
-String autoInputString;         // a string to hold incoming data
-volatile boolean stringComplete  = false;      // whether the serial string is complete
-volatile boolean autoComplete    = false;    // whether an Auto command is setA
-int displayState;
-int typeState;
-int commandLength;
-
-
-
-
+  char inputBuffer[10];
+  String autoInputString;         // a string to hold incoming data
+  volatile boolean autoComplete    = false;    // whether an Auto command is setA
+  int displayState;
+  int typeState;
+  int commandLength;
+  int paramVar = 9;  
+  
 //////////////////////////////////////////////////////////////////////
 ///*****   Door Values, Containers, Flags & Timers   *****///
 //////////////////////////////////////////////////////////////////////
    int door = -1;
-
-   // Door Command Container
+  // Door Command Container
    uint32_t D_command[6]  = {0,0,0,0,0,0};
-
-
    int doorState     = 0;
-
-//   // Door Counters
+  // Door Counters
    long int Dcounts[12] = {0,0,0,0,0,0,0,0,0,0,0,0};
    long int Dcount  = 0;
    long int D1count  = 0;
    long int Dpcount = 0;
    long int qwDuration = 800;
-//
-//
-//   // Door Timer
+  // Door Timer
    unsigned long Dmillis;
    unsigned long Doorsmillis[12] = {0,0,0,0,0,0,0,0,0,0,0,0};
    unsigned long D1millis;
    unsigned long Doors1millis[12] = {0,0,0,0,0,0,0,0,0,0,0,0};
    unsigned long D2millis;
    unsigned long Doors2millis[12] = {0,0,0,0,0,0,0,0,0,0,0,0};
-//
-//
-//   // Door Flags
+  // Door Flags
    boolean DaltToggle = true;
    boolean DWToggle   = false;
    boolean GaltToggle = true;
 
 //////////////////////////////////////////////////////////////////////
-///*****             Startup Variables                        *****///
+///*****       Startup and Loop Variables                     *****///
 //////////////////////////////////////////////////////////////////////
-
-boolean startUp = true;
-boolean isStartUp = true;
+  
+  boolean startUp = true;
+  boolean isStartUp = true;
+  
+  unsigned long mainLoopTime; // We keep track of the "Main Loop time" in this variable.
+  unsigned long MLMillis;
+  byte mainLoopDelayVar = 5;
 
 //////////////////////////////////////////////////////////////////////
 ///*****             Camera Lens Variables and settings       *****///
 //////////////////////////////////////////////////////////////////////
-unsigned long loopTime; // We keep track of the "time" in this variable.
+  
+  unsigned long loopTime; // We keep track of the "time" in this variable.
 
 // -------------------------------------------------
 // Define some constants to help reference objects,
-// pins, servos, leds etc by name instead of numbers
+// pins, leds, colors etc by name instead of numbers
 // -------------------------------------------------
-
-///-------------------------------------------------------------------------
 //    CAMERA LENS LED VARIABLES
     const uint32_t red     = 0xFF0000;
     const uint32_t orange  = 0xFF8000;
@@ -157,51 +209,42 @@ unsigned long loopTime; // We keep track of the "time" in this variable.
     const uint32_t white   = 0xFFFFFF;
     const uint32_t off     = 0x000000;
 
-
     const uint32_t basicColors[9] = {off, red, yellow, green, cyan, blue, magenta, orange, white};
 
 #define NUM_CAMERA_PIXELS 12
 #define CAMERA_LENS_DATA_PIN 12
-//#define CAMERA_LENS_CLOCK_PIN 13
-int dim = 75;
+  //#define CAMERA_LENS_CLOCK_PIN 13
+  int dim = 75;
+  unsigned long CLMillis;
+  byte CLSpeed = 50;
+  
+  byte CL_command[4] = {0,0,0,0};
+  
+  int colorState1;
+  int colorState2;
 
-unsigned long CLMillis;
-
-unsigned long MLMillis;
-byte mainLoopDelayVar = 5;
-
-byte CLSpeed = 50;
-
-byte CL_command[4] = {0,0,0,0};
-
-int colorState1;
-int colorState2;
-
-// Set some primary and secondary default color values as a fall back in case no colors
-   // are provided in input commands. This makes the ssytem much more user friendly.
+  // Set some primary and secondary default color values as a fall back in case no colors
+  // are provided in input commands. This makes the ssytem much more user friendly.
 
     byte defaultPrimaryColorInt     = 5;          //1 Integer color value from list above
     byte defaultSecondaryColorInt   = 1;          //5 Integer color value from list above
 
-Adafruit_NeoPixel stripCL = Adafruit_NeoPixel(NUM_CAMERA_PIXELS, CAMERA_LENS_DATA_PIN, NEO_GRB + NEO_KHZ800);
+  Adafruit_NeoPixel stripCL = Adafruit_NeoPixel(NUM_CAMERA_PIXELS, CAMERA_LENS_DATA_PIN, NEO_GRB + NEO_KHZ800);
 
-boolean countUp=false;
+  boolean countUp=false;
 
-///-------------------------------------------------------------------------
-///       Serial Ports Specific Setup
-///-------------------------------------------------------------------------
-
+//////////////////////////////////////////////////////////////////////
+///******       Serial Ports Specific Setup                   *****///
+//////////////////////////////////////////////////////////////////////
 
 #define RXD1 19
 #define TXD1 18 
 #define RXD2 25
 #define TXD2 27 
-#define RST 4
 
-
-///-------------------------------------------------------------------------
-///       WiFi Specific Setup
-///-------------------------------------------------------------------------
+//////////////////////////////////////////////////////////////////////
+///******             WiFi Specific Setup                     *****///
+//////////////////////////////////////////////////////////////////////
 
 //Raspberry Pi              192.168.4.100
 //Body Controller ESP       192.168.4.101  
@@ -213,8 +256,7 @@ boolean countUp=false;
 //Remote                    192.168.4.107
 //Developer Laptop          192.168.4.125
 
-AsyncWebServer server(80);
-
+// IP Address config of local ESP
 IPAddress local_IP(192,168,4,102);
 IPAddress subnet(255,255,255,0);
 IPAddress gateway(192,168,4,100);
@@ -223,10 +265,10 @@ IPAddress gateway(192,168,4,100);
 const char* ssid = "R2D2_Control_Network";
 const char* password =  "astromech";
 
+AsyncWebServer server(80);
 
-int paramVar = 9;  
+uint8_t newMACAddress[] = {0x32, 0xAE, 0xA4, 0x07, 0x0D, 0x66};
 
-unsigned long mainLoopTime; // We keep track of the "time" in this variable.
 
 void setup()
 {
@@ -250,60 +292,63 @@ void setup()
 
   stripCL.begin();
   stripCL.show(); // Initialize all pixels to 'off'
-  colorWipe(red, 255); // blue
+  colorWipe(red, 255); // red during bootup
   Serial.println("LED Setup Complete");
 
 
 
 
      
-Serial.println(WiFi.config(local_IP, gateway, subnet) ? "Client IP Configured" : "Failed!");
 
     WiFi.begin(ssid, password);
-     while (WiFi.status() != WL_CONNECTED) {
+     Serial.println(WiFi.config(local_IP, gateway, subnet) ? "Client IP Configured" : "Failed!");
+      while (WiFi.status() != WL_CONNECTED) {
       delay(1000);
       Serial.println("Connecting to WiFi..");
-       Serial.println(WiFi.localIP());
+      Serial.println(WiFi.localIP());
+      Serial.print("Local MAC address = ");
+      Serial.println(WiFi.macAddress());
+      
     }
+esp_wifi_set_mac(WIFI_IF_STA, &newMACAddress[0]);
+Serial.println(WiFi.macAddress());
 
-
+ //Setup the webpage and accept the GET requests, and parses the variables 
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
  
     int paramsNr = request->params();               // Gets the number of parameters sent
-    Serial.println(paramsNr);
-                                   // Variable for selecting which Serial port to send out
+    Serial.println(paramsNr);                       // Variable for selecting which Serial port to send out
     for(int i=0;i<paramsNr;i++){                    //Loops through all the paramaters
- 
-        AsyncWebParameter* p = request->getParam(i);
+         AsyncWebParameter* p = request->getParam(i);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////                                                                //////////////////////////        
-//////////  These If statements choose the Serial port to utilize.        //////////////////////////
+//////////  These If statements choose where to send the commands         //////////////////////////
 //////////  This way we can control multiple serial ports from one ESP32. //////////////////////////
 //////////                                                                //////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-        
-        if ((p->name())== "param0" & (p->value()) == "Serial0"){
-//        Serial.println("Serial0 Chosen with If Statement");
+ 
+    if ((p->name())== "param0" & (p->value()) == "Serial0"){
+        //Serial.println("Serial0 Chosen with If Statement");
         paramVar = 0;
         };
     if ((p->name())== "param0" & (p->value()) == "Serial1"){
-//        Serial.println("Serial 1 Chosen with If Statement");
+        //Serial.println("Serial 1 Chosen with If Statement");
         paramVar = 1;
         };
     if ((p->name())== "param0" & (p->value()) == "Serial2"){
-//      Serial.println("Serial 2 Chosen with If Statement");
-        paramVar = 2;
-    };
+        //Serial.println("Serial 2 Chosen with If Statement");
+          paramVar = 2;
+        };
      if ((p->name())== "param0" & (p->value()) == "ESP"){
-//      Serial.println("ESP(Self) Chosen with If Statement");
+        //Serial.println("ESP(Self) Chosen with If Statement");
           paramVar = 3;
-     };
+        };
     if ((p->name())== "param0" & (p->value()) == "ESPReset"){
         Serial.println("Reset ESP and Arduino Chosen with If Statement");
         ESP.restart();
         };
-        
+               
         Serial.print("Param name: ");
         Serial.println(p->name());
         Serial.print("Param value: ");
@@ -329,17 +374,43 @@ Serial.println(WiFi.config(local_IP, gateway, subnet) ? "Client IP Configured" :
         };
          
         Serial.println("------");
-        delay(50);
+//        delay(50);
+
     }
  
     request->send(200, "text/plain", "message received");
   });
-  DefaultHeaders::Instance().addHeader("Access-Control-Allow-Origin", "*");
-  server.begin();
-
-
   
-}
+  //Enable Access-Control-Allow-Origin to mitigate errors from website polling
+  DefaultHeaders::Instance().addHeader("Access-Control-Allow-Origin", "*");
+
+  //Initialize the AsycWebServer
+  server.begin();
+//Initialize ESP-NOW
+  
+  if (esp_now_init() != ESP_OK) {
+    Serial.println("Error initializing ESP-NOW");
+  return;
+  }
+  // Once ESPNow is successfully Init, we will register for Send CB to
+  // get the status of Trasnmitted packet
+  esp_now_register_send_cb(OnDataSent);
+  
+  // Register peer
+  memcpy(peerInfo.peer_addr, broadcastAddress, 6);
+  peerInfo.channel = 2;  
+  peerInfo.encrypt = true;
+//  peerInfo.ifidx=WIFI_IF_STA;
+
+  // Add peer        
+  if (esp_now_add_peer(&peerInfo) != ESP_OK){
+    Serial.println("Failed to add peer");
+    return;
+  }
+  // Register for a callback function that will be called when data is received
+  esp_now_register_recv_cb(OnDataRecv);
+
+}  // end of Setup
 
 //
 void loop() {
@@ -356,7 +427,7 @@ if (millis() - MLMillis >= mainLoopDelayVar){
    if(Serial.available()){
    serialEvent();
    }
-   cameraLED(blue, 50); // blue
+   cameraLED(blue, 5); // blue
 //       Serial.println("looping");
 
 //
@@ -371,7 +442,6 @@ if (millis() - MLMillis >= mainLoopDelayVar){
          inputBuffer[0]=='r'           //Radar Eye LED
 
          ) {
-//            commandLength = (sizeof(inputBuffer) / sizeof(inputBuffer[0]));                     //  Determines length of command character array.
             commandLength = strlen(inputBuffer);                     //  Determines length of command character array.
 
             if(commandLength >= 3) {
@@ -425,7 +495,7 @@ if (millis() - MLMillis >= mainLoopDelayVar){
                   CL_command[1] = typeState;
                   CL_command[2] = colorState1;
                   CL_command[3] = colorState2;
-//                  CLMillis = millis();
+                  CLMillis = millis();
                 
                   
                 }
@@ -483,7 +553,7 @@ if (millis() - MLMillis >= mainLoopDelayVar){
 //           case 22: ();                                                     break;
 //           case 23: ();                                                     break;
 //           case 24: ();                                                     break;
-
+           case 50: testESPNOW();                                                                 break;
            case 98: closeAllDoors();                                                    break;
            case 99: closeAllDoors();                                                    break;
            default: break;
@@ -799,3 +869,36 @@ void shortCircuit(int count) {
           Serial2.write(completeString[i]);
         }
       }
+
+
+      //////////////////////////////////////////////////////////////////////
+///*****             ESP-NOW Functions                        *****///
+//////////////////////////////////////////////////////////////////////
+ 
+  void sendESPNOWCommand(String sdest,String scomm){
+    Serial.println("sendESPNOWCommand Function called");
+    destination = sdest;
+    command = scomm;
+    commandsToSend.dest = destination;
+    commandsToSend.comm = command;
+    // Send message via ESP-NOW
+    esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &commandsToSend, sizeof(commandsToSend));
+   if (result == ESP_OK) {
+    Serial.println("Sent with success");
+    }
+    else {
+      Serial.println(result);
+      Serial.println("Error sending the data");
+    }
+   }
+
+  void parseESPNOWCommand(String idest, String icomm){
+    
+  }
+
+  void testESPNOW(){
+    sendESPNOWCommand("ESP","d03");
+//    Serial.println("testESPNOW Function called");
+    D_command[0] = '\0';
+
+  }
