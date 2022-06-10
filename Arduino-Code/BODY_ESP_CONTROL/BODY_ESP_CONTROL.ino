@@ -253,11 +253,9 @@ void setup(){
     delay(200);
     Serial.print("Soft-AP IP address = ");
     Serial.println(WiFi.softAPIP());
+    esp_wifi_set_mac(WIFI_IF_AP, &newMACAddress[0]);
     Serial.print("Local MAC address = ");
     Serial.println(WiFi.softAPmacAddress());
-
-  esp_wifi_set_mac(WIFI_IF_AP, &newMACAddress[0]);
-  Serial.println(WiFi.softAPmacAddress());
  //Setup the webpage and accept the GET requests, and parses the variables 
     server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
       
@@ -527,6 +525,8 @@ void loop(){
   void openAllDoors() {
     Serial.println("Open all Doors");
         SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllOpen, ALL_SERVOS_MASK);
+         DelayCall::schedule([] {sendESPNOWCommand("ESP","do3");}, 4000);
+//    sendESPNOWCommand("ESP","do3");
     D_command[0] = '\0';
    }
 
