@@ -143,7 +143,7 @@ function checkStealthControllerStatus() {
   const before = new Date();
   var request = new XMLHttpRequest();
   request.timeout = 1000;
-  request.open('GET', 'http://192.168.4.104', true);
+  request.open('GET', 'http://192.168.4.101', true);
   // request.open("GET", "http://AstromechRemote:8000/BatteryCapacity.txt", true);
 
   request.onreadystatechange = function () {
@@ -172,7 +172,7 @@ function checkDomeServoStatus() {
   const before = new Date();
   var request = new XMLHttpRequest();
   request.timeout = 1000;
-  request.open('GET', 'http://192.168.4.105', true);
+  request.open('GET', 'http://192.168.4.102', true);
   // request.open("GET", "http://AstromechRemote:8000/BatteryCapacity.txt", true);
 
   request.onreadystatechange = function () {
@@ -354,7 +354,7 @@ function bodyControllerLEDFunctionExecution(t) {
 
 function HPLEDFunctionExecution(t) {
   var LEDCommand = t;
-  var HPControllerSPURL = "http://192.168.8.129/?param0=Serial1";
+  var HPControllerSPURL = "http://192.168.8.102/?param0=Serial1";
 
   var HPLEDControllerFullURL = HPControllerSPURL + LEDCommand;
   console.log(HPLEDControllerFullURL);
@@ -389,7 +389,7 @@ function bodyServoFunctionExecution(t) {
 
 function domeServoFunctionExecution(t) {
   var DSCommand = t;
-  var domeServoControllerSPURL = "http://192.168.4.105/?param0=0";
+  var domeServoControllerSPURL = "http://192.168.4.102/?param0=ESP";
 
   var domeServoControllerFullURL = domeServoControllerSPURL + DSCommand;
   console.log(domeServoControllerFullURL);
@@ -408,7 +408,7 @@ function domeServoFunctionExecution(t) {
 
 function RSeriesLEDFunctionExecution(t) {
   var LEDCommand = t;
-  var RSeriesControllerSPURL = "http://192.168.8.129/?param0=Serial2";
+  var RSeriesControllerSPURL = "http://192.168.8.102/?param0=Serial2";
 
   var RSeriesControllerSFullPURL = RSeriesControllerSPURL + LEDCommand;
   console.log(RSeriesControllerSFullPURL);
@@ -10529,7 +10529,7 @@ function ESP32SendCommand(b, x) {
 
   };
   if (ESP32DeviceSelected === "BC") {
-    var bodyLEDControllerIP = 'http://192.168.4.101/?param0=2&param1=';
+    var bodyLEDControllerIP = 'http://192.168.4.101/?param0=Serial2&param1=';
     console.log('BC subselection');
     console.log(bodyLEDControllerIP)
 
@@ -10556,6 +10556,16 @@ function ESP32SendCommand(b, x) {
     var DomeRSeriesControllerFullURL = DomeRSeriesControllerIP + ESP32commandUpper;
     httpGet(DomeRSeriesControllerFullURL);
     console.log(DomeRSeriesControllerFullURL);
+
+  };
+  if (ESP32DeviceSelected === "BS") {
+    var bodyLEDControllerIP = 'http://192.168.4.101/?param0=ESP&param1=';
+    console.log('BC subselection');
+    console.log(bodyLEDControllerIP)
+
+    var bodyLEDControllerFullURL = bodyLEDControllerIP + ESP32commandUpper;
+    httpGet(bodyLEDControllerFullURL);
+    console.log(bodyLEDControllerFullURL);
 
   };
 };
