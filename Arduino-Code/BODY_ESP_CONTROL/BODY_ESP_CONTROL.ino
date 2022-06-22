@@ -194,8 +194,8 @@ ServoSequencer servoSequencer(servoDispatch);
   ///******       Serial Ports Specific Setup                   *****///
   //////////////////////////////////////////////////////////////////////
 
-  #define RXD1 14
-  #define TXD1 15 
+  #define RXD1 15
+  #define TXD1 16 
   #define RXD2 25
   #define TXD2 26 
 
@@ -240,6 +240,13 @@ void setup(){
   Serial.begin(9600);
   Serial1.begin(9600, SERIAL_8N1, RXD1, TXD1);
   Serial2.begin(9600, SERIAL_8N1, RXD2, TXD2);
+  Serial.println(" ");
+  Serial.println(" ");
+  Serial.println(" ");
+  Serial.println("----------------------------------------");
+  Serial.println("Booting up the Body LED/Servo Controller");
+
+  
   
   //Configure the Reset Pins for the arduinoReset() function
   pinMode(4, OUTPUT);
@@ -252,6 +259,7 @@ void setup(){
   SetupEvent::ready();
 
   //Initialize the Soft Access Point
+  WiFi.mode(WIFI_AP);
     Serial.println(WiFi.softAP(ssid,password,6,0,8) ? "AP Ready" : "Failed!");
     delay(200);
     Serial.println(WiFi.softAPConfig(local_IP, gateway, subnet) ? "AP IP Configured" : "Failed!");
@@ -330,8 +338,14 @@ void setup(){
           writeString(p->value());
         };
          if (paramVar == 1){
-          Serial.println("Writing to Serial 1");      
-          writeString1(p->value());
+          Serial.println("Writing to Serial 1"); 
+          delay(100);     
+         if ((p->name())== "param0" & (p->value()) == "Serial1"){
+            Serial.println("Skipping param 0 in the SerialWrite");
+          } 
+          else {
+                      writeString1(p->value());
+          };
         } ;      
           if (paramVar == 2){
           Serial.println("Writing to Serial 2");      
@@ -404,11 +418,10 @@ void loop(){
   if (stringComplete || autoComplete) {
     if(stringComplete) {inputString.toCharArray(inputBuffer, 10);inputString="";}
      else if (autoComplete) {autoInputString.toCharArray(inputBuffer, 10);autoInputString="";}
-//     if(inputBuffer[0]=='S'  || inputBuffer[0]=='s') {inputBuffer[0]='E' || inputBuffer[0]=='e';}
-     if( inputBuffer[0]=='D' ||        // Door Designator
-         inputBuffer[0]=='d' ||        // Door Designator
-         inputBuffer[0] =='E' ||          // Command designatore for internal ESP functions
-         inputBuffer[0] =='e'           // Command designatore for internal ESP functions
+     if( inputBuffer[0]=='D'  ||       // Door Designator
+         inputBuffer[0]=='d'  ||       // Door Designator
+         inputBuffer[0]=='E'  ||       // Command designatore for internal ESP functions
+         inputBuffer[0]=='e'           // Command designatore for internal ESP functions
 
 
          ) {
@@ -474,6 +487,11 @@ void loop(){
   if(ESP_command[0]){
     switch (ESP_command[0]){
       case 1: Serial.println("Body ESP Controller");   
+              ESP_command[0]   = '\0'; break;
+      case 2: Serial.println("Resetting the ESP in 5 Seconds");
+              DelayCall::schedule([] {ESP.restart();}, 5000);
+              ESP_command[0]   = '\0'; break;
+      case 3: writeString1("DCE01"); 
               ESP_command[0]   = '\0'; break;
     }
   }
@@ -720,7 +738,7 @@ void shortCircuit(int count) {
         {
           Serial1.write(completeString[i]);
         }
-        Serial.println(completeString);
+//        Serial.println(completeString);
       }
       
       void writeString2(String stringData){
