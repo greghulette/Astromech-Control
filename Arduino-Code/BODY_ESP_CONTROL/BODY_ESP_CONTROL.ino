@@ -1,3 +1,7 @@
+#include <AsyncElegantOTA.h>
+#include <elegantWebpage.h>
+#include <Hash.h>
+
 //#define USE_DEBUG
 //#define USE_SERVO_DEBUG
 //#include <WiFi.h>
@@ -366,6 +370,8 @@ void setup(){
   
   //Enable Access-Control-Allow-Origin to mitigate errors from website polling
   DefaultHeaders::Instance().addHeader("Access-Control-Allow-Origin", "*");
+
+  AsyncElegantOTA.begin(&server);    // Start ElegantOTA
 
   //Initialize the AsycWebServer
   server.begin();
