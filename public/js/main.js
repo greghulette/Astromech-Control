@@ -42,7 +42,7 @@ function checkPeriscopeLifterStatus() {
   const before = new Date();
   var request = new XMLHttpRequest();
   request.timeout = 1000;
-  request.open('GET', 'http://192.168.4.103', true);
+  request.open('GET', 'http://192.168.4.101', true);
   request.onreadystatechange = function () {
 
     if (request.readyState === 4) {
@@ -114,7 +114,7 @@ function checkDomeControllerStatus() {
   const before = new Date();
   var request = new XMLHttpRequest();
   request.timeout = 1000;
-  request.open('GET', 'http://192.168.4.102', true);
+  request.open('GET', 'http://192.168.4.101', true);
   // request.open("GET", "http://AstromechRemote:8000/BatteryCapacity.txt", true);
 
   request.onreadystatechange = function () {
@@ -172,7 +172,7 @@ function checkDomeServoStatus() {
   const before = new Date();
   var request = new XMLHttpRequest();
   request.timeout = 1000;
-  request.open('GET', 'http://192.168.4.102', true);
+  request.open('GET', 'http://192.168.4.101', true);
   // request.open("GET", "http://AstromechRemote:8000/BatteryCapacity.txt", true);
 
   request.onreadystatechange = function () {
@@ -328,15 +328,15 @@ setInterval(function () {
   checkBodyLEDControllerStatus()
   checkDomeControllerStatus()
   // checkStealthControllerStatus()
-  checkDomeServoStatus()
-  checkBodyServoStatus()
+  // checkDomeServoStatus()
+  // checkBodyServoStatus()
   GetBatteryLevel()
   GetBatteryConnection()
 }, 5000)
 
 function bodyControllerLEDFunctionExecution(t) {
   var LEDCommand = t;
-  var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=Serial2";
+  var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=bcSerial";
 
   var bodyLEDControllerFullURL = bodyLEDControllerSPURL + LEDCommand;
   console.log(bodyLEDControllerFullURL);
@@ -354,7 +354,7 @@ function bodyControllerLEDFunctionExecution(t) {
 
 function HPLEDFunctionExecution(t) {
   var LEDCommand = t;
-  var HPControllerSPURL = "http://192.168.8.102/?param0=Serial1";
+  var HPControllerSPURL = "http://192.168.4.101/?param0=enSerial";
 
   var HPLEDControllerFullURL = HPControllerSPURL + LEDCommand;
   console.log(HPLEDControllerFullURL);
@@ -377,7 +377,7 @@ function bodyServoFunctionExecution(t) {
   console.log(bodyServiControllerFullURL);
   // setTimeout(function () { httpGet(bodyLEDControllerFullURL); }, 500);
   // sleep(1000); 
-  if (BodyServoStatus === true) {
+  if (BodyControllerStatus === true) {
     httpGet(bodyServiControllerFullURL);
 
   } else {
@@ -389,13 +389,13 @@ function bodyServoFunctionExecution(t) {
 
 function domeServoFunctionExecution(t) {
   var DSCommand = t;
-  var domeServoControllerSPURL = "http://192.168.4.102/?param0=ESP";
+  var domeServoControllerSPURL = "http://192.168.4.101/?param0=enSerial";
 
   var domeServoControllerFullURL = domeServoControllerSPURL + DSCommand;
   console.log(domeServoControllerFullURL);
   // setTimeout(function () { httpGet(bodyLEDControllerFullURL); }, 500);
   // sleep(1000); 
-  if (DomeServoStatus === true) {
+  if (DomeControllerStatus === true) {
     httpGet(domeServoControllerFullURL);
 
   } else {
@@ -408,7 +408,7 @@ function domeServoFunctionExecution(t) {
 
 function RSeriesLEDFunctionExecution(t) {
   var LEDCommand = t;
-  var RSeriesControllerSPURL = "http://192.168.8.102/?param0=Serial2";
+  var RSeriesControllerSPURL = "http://192.168.4.101/?param0=enSerial&param1=S02RS";
 
   var RSeriesControllerSFullPURL = RSeriesControllerSPURL + LEDCommand;
   console.log(RSeriesControllerSFullPURL);
@@ -428,23 +428,23 @@ function RSeriesLEDFunctionExecution(t) {
 function servoControl(y, z) {
   console.log("Servo Command Accepted")
   if (y === "body") {
-    let bodyServoCommandParam = "&param1=d" + z;
+    let bodyServoCommandParam = "&param1=D1" + z;
     let fullBodyServoURL = bodyServoCommandParam
     bodyServoFunctionExecution(fullBodyServoURL);
     console.log("Body Selected")
   }
   if (y === "dome") {
-    let domeServoCommandParam = "&param1=d" + z;
+    let domeServoCommandParam = "&param1=S02DSD" + z;
     let fullDomeServoURL = domeServoCommandParam
     domeServoFunctionExecution(fullDomeServoURL);
   }
   if (y === "both") {
-    let bodyServoCommandParam = "&param1=d" + z;
+    let bodyServoCommandParam = "&param1=d3" + z;
     let fullBodyServoURL = bodyServoCommandParam
     bodyServoFunctionExecution(fullBodyServoURL);
-    let domeServoCommandParam = "&param1=d" + z;
-    let fullDomeServoURL = domeServoCommandParam
-    domeServoFunctionExecution(fullDomeServoURL);
+    // let domeServoCommandParam = "&param1=S02DSD" + z;
+    // let fullDomeServoURL = domeServoCommandParam
+    // domeServoFunctionExecution(fullDomeServoURL);
   }
 }
 
@@ -613,11 +613,11 @@ function commandNoOptionsRSeries(t) {
     // };
   };
 
-  let rldCommandParam = "&param1=" + RLDSeriescommandString;
-  let fldtCommandParam = "&param2=" + FLDTRSeriesCommandString;
-  let fldbCommandParam = "&param3=" + FLDBRSeriesCommandString;
-  let rpsiCommandParam = "&param4=" + rpsicommandstring;
-  let fpsiCommandParam = "&param5=" + fpsicommandstring;
+  let rldCommandParam = "&param1=S02RS" + RLDSeriescommandString;
+  let fldtCommandParam = "&param2=S02RS" + FLDTRSeriesCommandString;
+  let fldbCommandParam = "&param3=S02RS" + FLDBRSeriesCommandString;
+  let rpsiCommandParam = "&param4=S02RS" + rpsicommandstring;
+  let fpsiCommandParam = "&param5=S02RS" + fpsicommandstring;
 
   let fullURL = rldCommandParam + fldtCommandParam + fldbCommandParam + rpsiCommandParam + fpsiCommandParam;
   RSeriesLEDFunctionExecution(fullURL);
@@ -1366,9 +1366,9 @@ function commandNoOptionsRainbow(y, t, u) {
   let vuCommandParam = "&param4=" + vucommandstring;
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  let hpFrontParam = "&param1=" + hpfcommandstring;
-  let hpTopParam = "&param2=" + hptcommandstring;
-  let hpRearParam = "&param3=" + hprcommandstring;
+  let hpFrontParam = "&param1=S02HP" + hpfcommandstring;
+  let hpTopParam = "&param2=S02HP" + hptcommandstring;
+  let hpRearParam = "&param3=S02HP" + hprcommandstring;
   let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
@@ -1641,21 +1641,17 @@ function commandSingleColorSolidColor(y, t, z, u) {
     };
   };
 
-
   let ldpCommandParam = "&param1=" + ldpcommandstring;
   let maintCommandParam = "&param2=" + mcommandstring;
   let coinCommandParam = "&param3=" + coincommandstring;
   let vuCommandParam = "&param4=" + vucommandstring;
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  let hpFrontParam = "&param1=" + hpfcommandstring;
-  let hpTopParam = "&param2=" + hptcommandstring;
-  let hpRearParam = "&param3=" + hprcommandstring;
+  let hpFrontParam = "&param1=S02HP" + hpfcommandstring;
+  let hpTopParam = "&param2=S02HP" + hptcommandstring;
+  let hpRearParam = "&param3=S02HP" + hprcommandstring;
   let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   HPLEDFunctionExecution(fullHPLEDControllerURL);
-
-
-
 };
 
 
@@ -1879,9 +1875,9 @@ function commandTwoColorsAlternatingColors(y, t, z, s, u) {
   let vuCommandParam = "&param4=" + vucommandstring;
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // let hpFrontParam = "&param1=" + hpfcommandstring;
-  // let hpTopParam = "&param2=" + hptcommandstring;
-  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let hpFrontParam = "&param1=S02HP" + hpfcommandstring;
+  // let hpTopParam = "&param2=S02HP" + hptcommandstring;
+  // let hpRearParam = "&param3=S02HP" + hprcommandstring;
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
@@ -2155,9 +2151,9 @@ function commandOneColorAndSpeedDimPulse(y, t, z, u) {
   let vuCommandParam = "&param4=" + vucommandstring;
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  let hpFrontParam = "&param1=" + hpfcommandstring;
-  let hpTopParam = "&param2=" + hptcommandstring;
-  let hpRearParam = "&param3=" + hprcommandstring;
+  let hpFrontParam = "&param1=S02HP" + hpfcommandstring;
+  let hpTopParam = "&param2=S02HP" + hptcommandstring;
+  let hpRearParam = "&param3=S02HP" + hprcommandstring;
   let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
@@ -2431,9 +2427,9 @@ function commandOneColorAndSpeedDimPulse2(y, t, z, u) {
   let vuCommandParam = "&param4=" + vucommandstring;
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // let hpFrontParam = "&param1=" + hpfcommandstring;
-  // let hpTopParam = "&param2=" + hptcommandstring;
-  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let hpFrontParam = "&param1=S02HP" + hpfcommandstring;
+  // let hpTopParam = "&param2=S02HP" + hptcommandstring;
+  // let hpRearParam = "&param3=S02HP" + hprcommandstring;
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
@@ -2703,9 +2699,9 @@ function commandOneColorAndSpeedDimPulse3(y, t, z, u) {
   let vuCommandParam = "&param4=" + vucommandstring;
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // let hpFrontParam = "&param1=" + hpfcommandstring;
-  // let hpTopParam = "&param2=" + hptcommandstring;
-  // let hpRearParam = "&param3=" + hprcommandstring;
+  // let hpFrontParam = "&param1=S02HP" + hpfcommandstring;
+  // let hpTopParam = "&param2=S02HP" + hptcommandstring;
+  // let hpRearParam = "&param3=S02HP" + hprcommandstring;
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
@@ -4838,9 +4834,9 @@ function commandTwoColorsNoSliderShortCircuit(y, t, z, s, u) {
   let dataportCommandParam = "&param6=" + dcommandstring;
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam + cbiCommandParam + dataportCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  let hpFrontParam = "&param1=" + hpfcommandstring;
-  let hpTopParam = "&param2=" + hptcommandstring;
-  let hpRearParam = "&param3=" + hprcommandstring;
+  let hpFrontParam = "&param1=S02HP" + hpfcommandstring;
+  let hpTopParam = "&param2=S02HP" + hptcommandstring;
+  let hpRearParam = "&param3=S02HP" + hprcommandstring;
   let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   HPLEDFunctionExecution(fullHPLEDControllerURL);
   //
@@ -4914,9 +4910,9 @@ function commandNoOptionsShortCircuit(y, t, u) {
   let dataportCommandParam = "&param6=" + dcommandstring;
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam + cbiCommandParam + dataportCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  let hpFrontParam = "&param1=" + hpfcommandstring;
-  let hpTopParam = "&param2=" + hptcommandstring;
-  let hpRearParam = "&param3=" + hprcommandstring;
+  let hpFrontParam = "&param1=S02HP" + hpfcommandstring;
+  let hpTopParam = "&param2=S02HP" + hptcommandstring;
+  let hpRearParam = "&param3=S02HP" + hprcommandstring;
   let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   HPLEDFunctionExecution(fullHPLEDControllerURL);
 
@@ -10522,14 +10518,14 @@ function ESP32SendCommand(b, x) {
   // var ESP32DeviceSelected = (ESP32Device.options[ESP32Device.selectedIndex].value);
   console.log('Device: ' + ESP32DeviceSelected);
   if (ESP32DeviceSelected === "PC") {
-    var periscopeControllerIP = 'http://192.168.4.103/?param0=1&param1=';
+    var periscopeControllerIP = 'http://192.168.4.101/?param0=enSerial&param1=S02PC';
     var periscopeLifterFullURL = periscopeControllerIP + ESP32commandUpper;
     httpGet(periscopeLifterFullURL);
     console.log(periscopeLifterFullURL);
 
   };
   if (ESP32DeviceSelected === "BC") {
-    var bodyLEDControllerIP = 'http://192.168.4.101/?param0=Serial2&param1=';
+    var bodyLEDControllerIP = 'http://192.168.4.101/?param0=bcSerial&param1=';
     console.log('BC subselection');
     console.log(bodyLEDControllerIP)
 
@@ -10538,8 +10534,18 @@ function ESP32SendCommand(b, x) {
     console.log(bodyLEDControllerFullURL);
 
   };
+  if (ESP32DeviceSelected === "DS") {
+    var domeServoControllerIP = 'http://192.168.4.101/?param0=enSerial&param1=S02DS';
+    console.log('DS subselection');
+    console.log(domeServoControllerIP)
+
+    var domeServoControllerFullURL = domeServoControllerIP + ESP32commandUpper;
+    httpGet(domeServoControllerFullURL);
+    console.log(domeServoControllerFullURL);
+
+  };
   if (ESP32DeviceSelected === "HP") {
-    var DomeHPControllerIP = 'http://192.168.4.102/?param0=1&param1=';
+    var DomeHPControllerIP = 'http://192.168.4.101/?param0=enSerial&param1=S02HP';
     console.log('BC subselection');
     console.log(DomeHPControllerIP)
 
@@ -10549,7 +10555,7 @@ function ESP32SendCommand(b, x) {
 
   };
   if (ESP32DeviceSelected === "RS") {
-    var DomeRSeriesControllerIP = 'http://192.168.4.102/?param0=1&param1=';
+    var DomeRSeriesControllerIP = 'http://192.168.4.101/?param0=enSerial&param1=S02RS';
     console.log('RS subselection');
     console.log(DomeRSeriesControllerIP)
 
@@ -10578,14 +10584,14 @@ function BrightnessRangeFunc(a, b, c) {
     sliderDiv.innerHTML = this.value;
     let slidervalue1 = this.value;
     console.log(slidervalue1);
-    getBodyLEDController(slidervalue1, c);
+    sendEEPROMBodyLEDController(slidervalue1, c);
   }
 }
 
 
-function getBodyLEDController(t, v) {
+function sendEEPROMBodyLEDController(t, v) {
   var BodyBright = t;
-  var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=2&param1=P";
+  var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=bcSerial&param1=P";
 
   var bodyLEDControllerFullURL = bodyLEDControllerSPURL + v + BodyBright;
   // console.log(bodyLEDControllerFullURL);
@@ -10632,33 +10638,33 @@ function getPeriscope(s, t, u) {
   let periscopeFunction = s;
   if (periscopeFunction === 'D' && t === 'RotateClockwiseRelative') {
     let periscopeRelativeDeg = document.getElementById(t).value;
-    let periscopeESPURL = "http://192.168.4.103/?param0=1&param1=:P" + periscopeFunction + '-';
+    let periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=S02PC:P" + periscopeFunction + '-';
     let periscopeESPFullURL = periscopeESPURL + periscopeRelativeDeg + ',' + speedValue;;
     httpGet(periscopeESPFullURL);
   } else if (periscopeFunction === 'D' && t === 'RotateCounterClockwiseRelative') {
     let periscopeRelativeDeg = document.getElementById(t).value;
-    let periscopeESPURL = "http://192.168.4.103/?param0=1&param1=:P" + periscopeFunction;
+    let periscopeESPURL = "hhttp://192.168.4.101/?param0=enSerial&param1=S02PC:P" + periscopeFunction;
     let periscopeESPFullURL = periscopeESPURL + periscopeRelativeDeg + ',' + speedValue;;
     httpGet(periscopeESPFullURL);
   } else if (periscopeFunction === 'R' && t === 'RotateClockwiseContinous') {
-    let periscopeESPURL = "http://192.168.4.103/?param0=1&param1=:P" + periscopeFunction + '-';
+    let periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=S02PC:P" + periscopeFunction + '-';
     let periscopeESPFullURL = periscopeESPURL + speedValue;;
     httpGet(periscopeESPFullURL);
   } else if (periscopeFunction === 'R' && t === 'RotateCounterClockwiseContinous') {
-    let periscopeESPURL = "http://192.168.4.103/?param0=1&param1=:P" + periscopeFunction;
+    let periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=S02PC:P" + periscopeFunction;
     let periscopeESPFullURL = periscopeESPURL + speedValue;;
     httpGet(periscopeESPFullURL);
   } else if (periscopeFunction === 'AR' || periscopeFunction === 'PR') {
-    let periscopeESPURL = "http://192.168.4.103/?param0=1&param1=:P" + periscopeFunction;
+    let periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=S02PC:P" + periscopeFunction;
     let periscopeESPFullURL = periscopeESPURL + ',' + speedValue;
     httpGet(periscopeESPFullURL);
   } else if (periscopeFunction === 'S') {
-    let periscopeESPURL = "http://192.168.4.103/?param0=1&param1=:P" + periscopeFunction;
+    let periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=S02PC:P" + periscopeFunction;
     let periscopeESPFullURL = periscopeESPURL + t;
     httpGet(periscopeESPFullURL);
   } else {
     var periscopeHeight = t;
-    var periscopeESPURL = "http://192.168.4.103/?param0=1&param1=:P" + periscopeFunction
+    var periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=S02PC:P" + periscopeFunction
     let periscopeESPFullURL = periscopeESPURL + periscopeHeight + ',' + speedValue;;
     // console.log(periscopeESPFullURL);
     httpGet(periscopeESPFullURL);
@@ -10674,7 +10680,7 @@ function getPeriscope(s, t, u) {
 
 function getPeriscopeRotateAbsolute(t) {
   var periscopeHeight = t;
-  var periscopeESPURL = "http://192.168.4.103/?param0=1&param1=:PA";
+  var periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=S02PC:PA";
   // var periscopeESPURLOutside = "http://10.0.0.230:8080/?param1=:PP";
 
   var periscopeESPFullURL = periscopeESPURL + periscopeHeight;
@@ -10690,7 +10696,7 @@ function getPeriscopeRotateAbsolute(t) {
 
 function getPeriscopeRotateAbsolute(t) {
   var periscopeHeight = t;
-  var periscopeESPURL = "http://192.168.4.103/?param0=1&param1=:PD";
+  var periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=S02PC:PD";
   // var periscopeESPURLOutside = "http://10.0.0.230:8080/?param1=:PP";
 
   var periscopeESPFullURL = periscopeESPURL + periscopeHeight;

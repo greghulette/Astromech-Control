@@ -2106,7 +2106,7 @@ input[type="range"] {
   margin: 10px 0;
   position: absolute;
   width: 75%;
-  top: 10 5%;
+  top: 1 05%;
   left: 15%;
   background: transparent;
   opacity: 0.7;
@@ -2122,7 +2122,7 @@ input[type="range"]:hover {
   opacity: 1;
 }
 input[type="range"]::after {
-  content: "";
+  content:"";
   color: White;
   font-size: 2rem;
   position: absolute;
@@ -2139,19 +2139,19 @@ input[type="range"]::before {
 
   left: 0%;
   top: 120%;
-};
+}
 
 input[type="range"]::-webkit-slider-runnable-track {
   width: 100%;
   height: 20px;
   cursor: pointer;
-  animate: 0.2s;
+  /* animate: 0.2s; */
   box-shadow: 0px 0px 25px lightyellow;
   background: Yellow;
   border-radius: 9px;
   border: 1px solid #000000;
   b
-};
+}
 input[type="range"]::-webkit-slider-thumb {
   box-shadow: 0px 0px 25px black;
   border: 2px solid black;
