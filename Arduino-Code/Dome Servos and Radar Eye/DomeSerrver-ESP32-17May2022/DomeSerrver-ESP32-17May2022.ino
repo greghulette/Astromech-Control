@@ -1,5 +1,5 @@
-//#define USE_DEBUG
-//#define USE_SERVO_DEBUG
+#define USE_DEBUG
+#define USE_SERVO_DEBUG
 
 #include "WiFi.h"
 #include "ESPAsyncWebServer.h"
@@ -37,10 +37,9 @@
 /////////////////////////////////////////////////////////////////////////
 
   // REPLACE WITH THE MAC Address of your receiver 
-//    uint8_t broadcastAddress[] = {0x30, 0xC6, 0xF7, 0x2F, 0xAE, 0xF8};
-    uint8_t broadcastAddress[] = {0x32, 0xAE, 0xA4, 0x07, 0x0D, 0x67};
-
-//    uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+//    uint8_t broadcastAddress[] = {0x30, 0xC6, 0xF7, 0x2F, 0xAE, 0xF9}; //built in MAC of body ESP
+    uint8_t broadcastAddress[] = {0x04, 0x00, 0xC0, 0xA8, 0x04, 0x65};  //Manually configured MAC of bodey ESP
+//    uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};  //Broadcast MAC of entire ESP-NOW Network
     // Set your new MAC Address
 
   // Define variables to store commands to be sent
@@ -151,6 +150,9 @@ ServoSequencer servoSequencer(servoDispatch);
   int typeState;
   int commandLength;
   int paramVar = 9;  
+
+  uint32_t ESP_command[6]  = {0,0,0,0,0,0};
+  int commandState     = 0;
   
 //////////////////////////////////////////////////////////////////////
 ///*****   Door Values, Containers, Flags & Timers   *****///
@@ -160,22 +162,22 @@ ServoSequencer servoSequencer(servoDispatch);
    uint32_t D_command[6]  = {0,0,0,0,0,0};
    int doorState     = 0;
   // Door Counters
-   long int Dcounts[12] = {0,0,0,0,0,0,0,0,0,0,0,0};
-   long int Dcount  = 0;
-   long int D1count  = 0;
-   long int Dpcount = 0;
-   long int qwDuration = 800;
+//   long int Dcounts[12] = {0,0,0,0,0,0,0,0,0,0,0,0};
+//   long int Dcount  = 0;
+//   long int D1count  = 0;
+//   long int Dpcount = 0;
+//   long int qwDuration = 800;
   // Door Timer
-   unsigned long Dmillis;
-   unsigned long Doorsmillis[12] = {0,0,0,0,0,0,0,0,0,0,0,0};
-   unsigned long D1millis;
-   unsigned long Doors1millis[12] = {0,0,0,0,0,0,0,0,0,0,0,0};
-   unsigned long D2millis;
-   unsigned long Doors2millis[12] = {0,0,0,0,0,0,0,0,0,0,0,0};
-  // Door Flags
-   boolean DaltToggle = true;
-   boolean DWToggle   = false;
-   boolean GaltToggle = true;
+//   unsigned long Dmillis;
+//   unsigned long Doorsmillis[12] = {0,0,0,0,0,0,0,0,0,0,0,0};
+//   unsigned long D1millis;
+//   unsigned long Doors1millis[12] = {0,0,0,0,0,0,0,0,0,0,0,0};
+//   unsigned long D2millis;
+//   unsigned long Doors2millis[12] = {0,0,0,0,0,0,0,0,0,0,0,0};
+//  // Door Flags
+//   boolean DaltToggle = true;
+//   boolean DWToggle   = false;
+//   boolean GaltToggle = true;
 
 //////////////////////////////////////////////////////////////////////
 ///*****       Startup and Loop Variables                     *****///
@@ -211,8 +213,8 @@ ServoSequencer servoSequencer(servoDispatch);
 
     const uint32_t basicColors[9] = {off, red, yellow, green, cyan, blue, magenta, orange, white};
 
-#define NUM_CAMERA_PIXELS 12
-#define CAMERA_LENS_DATA_PIN 12
+  #define NUM_CAMERA_PIXELS 12
+  #define CAMERA_LENS_DATA_PIN 12
   //#define CAMERA_LENS_CLOCK_PIN 13
   int dim = 75;
   unsigned long CLMillis;
@@ -233,41 +235,42 @@ ServoSequencer servoSequencer(servoDispatch);
 
   boolean countUp=false;
 
-//////////////////////////////////////////////////////////////////////
-///******       Serial Ports Specific Setup                   *****///
-//////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////
+  ///******       Serial Ports Specific Setup                   *****///
+  //////////////////////////////////////////////////////////////////////
+  
+  #define RXD1 19
+  #define TXD1 18 
+  #define RXD2 25
+  #define TXD2 27 
+  
+  //////////////////////////////////////////////////////////////////////
+  ///******             WiFi Specific Setup                     *****///
+  //////////////////////////////////////////////////////////////////////
+  
+  //Raspberry Pi              192.168.4.100
+  //Body Controller ESP       192.168.4.101  
+  //Dome Controller ESP       192.168.4.102  ************
+  //Periscope Controller ESP  192.168.4.103
+  //Stealth Controller ESP    192.168.4.104  (Probably not going to be different then Body Controller ESP IP)
+  //Dome Servo Controller     192.168.4.105  (Probably not going to be different then Dome Controller ESP IP)
+  //Body Servo Controller     192.168.4.106  (Probably not going to be different then Body Controller ESP IP)
+  //Remote                    192.168.4.107
+  //Developer Laptop          192.168.4.125
+  
+  // IP Address config of local ESP
+  IPAddress local_IP(192,168,4,102);
+  IPAddress subnet(255,255,255,0);
+  IPAddress gateway(192,168,4,100);
+  
+uint8_t newMACAddress[] = {0x04, 0x00, 0xC0, 0xA8, 0x04, 0x66};
 
-#define RXD1 19
-#define TXD1 18 
-#define RXD2 25
-#define TXD2 27 
-
-//////////////////////////////////////////////////////////////////////
-///******             WiFi Specific Setup                     *****///
-//////////////////////////////////////////////////////////////////////
-
-//Raspberry Pi              192.168.4.100
-//Body Controller ESP       192.168.4.101  
-//Dome Controller ESP       192.168.4.102  ************
-//Periscope Controller ESP  192.168.4.103
-//Stealth Controller ESP    192.168.4.104  (Probably not going to be different then Body Controller ESP IP)
-//Dome Servo Controller     192.168.4.105  (Probably not going to be different then Dome Controller ESP IP)
-//Body Servo Controller     192.168.4.106  (Probably not going to be different then Body Controller ESP IP)
-//Remote                    192.168.4.107
-//Developer Laptop          192.168.4.125
-
-// IP Address config of local ESP
-IPAddress local_IP(192,168,4,102);
-IPAddress subnet(255,255,255,0);
-IPAddress gateway(192,168,4,100);
-
- ////R2 Control Network Details
-const char* ssid = "R2D2_Control_Network";
-const char* password =  "astromech";
-
-AsyncWebServer server(80);
-
-uint8_t newMACAddress[] = {0x32, 0xAE, 0xA4, 0x07, 0x0D, 0x66};
+   ////R2 Control Network Details
+  const char* ssid = "R2D2_Control_Network";
+  const char* password =  "astromech";
+  
+  AsyncWebServer server(80);
+  
 
 
 void setup()
@@ -294,28 +297,96 @@ void setup()
   stripCL.show(); // Initialize all pixels to 'off'
   colorWipe(red, 255); // red during bootup
   Serial.println("LED Setup Complete");
-
-
-
-
-     
-
+  WiFi.mode(WIFI_AP_STA);
+//WiFi.softAP();
     WiFi.begin(ssid, password);
      Serial.println(WiFi.config(local_IP, gateway, subnet) ? "Client IP Configured" : "Failed!");
       while (WiFi.status() != WL_CONNECTED) {
       delay(1000);
       Serial.println("Connecting to WiFi..");
-      Serial.println(WiFi.localIP());
-      Serial.print("Local MAC address = ");
-      Serial.println(WiFi.macAddress());
+//      Serial.println(WiFi.localIP());
+//      Serial.print("Local MAC address = ");
+//      Serial.println(WiFi.macAddress());
       
     }
-esp_wifi_set_mac(WIFI_IF_STA, &newMACAddress[0]);
-Serial.println(WiFi.macAddress());
+      esp_wifi_set_mac(WIFI_IF_AP, &newMACAddress[0]);
+      Serial.print("Local IP address = ");
+      Serial.println(WiFi.localIP());
+      Serial.print("Local STA MAC address = ");
+      Serial.println(WiFi.softAPmacAddress());
+//     Serial.println(WiFi.softAPmacAddress());
 
  //Setup the webpage and accept the GET requests, and parses the variables 
-  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
- 
+//  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
+// 
+//    int paramsNr = request->params();               // Gets the number of parameters sent
+//    Serial.println(paramsNr);                       // Variable for selecting which Serial port to send out
+//    for(int i=0;i<paramsNr;i++){                    //Loops through all the paramaters
+//         AsyncWebParameter* p = request->getParam(i);
+//
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////                                                                //////////////////////////        
+////////////  These If statements choose where to send the commands         //////////////////////////
+////////////  This way we can control multiple serial ports from one ESP32. //////////////////////////
+////////////                                                                //////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// 
+//    if ((p->name())== "param0" & (p->value()) == "Serial0"){
+//        //Serial.println("Serial0 Chosen with If Statement");
+//        paramVar = 0;
+//        };
+//    if ((p->name())== "param0" & (p->value()) == "Serial1"){
+//        //Serial.println("Serial 1 Chosen with If Statement");
+//        paramVar = 1;
+//        };
+//    if ((p->name())== "param0" & (p->value()) == "Serial2"){
+//        //Serial.println("Serial 2 Chosen with If Statement");
+//          paramVar = 2;
+//        };
+//     if ((p->name())== "param0" & (p->value()) == "ESP"){
+//        //Serial.println("ESP(Self) Chosen with If Statement");
+//          paramVar = 3;
+//        };
+//    if ((p->name())== "param0" & (p->value()) == "ESPReset"){
+//        Serial.println("Reset ESP and Arduino Chosen with If Statement");
+//        ESP.restart();
+//        };
+//               
+//        Serial.print("Param name: ");
+//        Serial.println(p->name());
+//        Serial.print("Param value: ");
+//        Serial.println(p->value());
+//        Serial.println(paramVar);
+//  
+//        if (paramVar == 0){
+//          Serial.println("Writing to Serial 0");      
+//          writeString(p->value());
+//        };
+//         if (paramVar == 1){
+//          Serial.println("Writing to Serial 1");      
+//          writeString1(p->value());
+//        } ;      
+//          if (paramVar == 2){
+//          Serial.println("Writing to Serial 2");      
+//          writeString2(p->value());
+//        };
+//         if (paramVar == 3){
+//          Serial.println("Executing on self");      
+//          inputString = (p->value());
+//          stringComplete = true;  
+//        };
+//         
+//        Serial.println("------");
+////        delay(50);
+//
+//    }
+// 
+//    request->send(200, "text/plain", "message received");
+//  });
+//  
+ //Setup the webpage and accept the GET requests, and parses the variables 
+    server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
+      
     int paramsNr = request->params();               // Gets the number of parameters sent
     Serial.println(paramsNr);                       // Variable for selecting which Serial port to send out
     for(int i=0;i<paramsNr;i++){                    //Loops through all the paramaters
@@ -327,28 +398,29 @@ Serial.println(WiFi.macAddress());
 //////////  This way we can control multiple serial ports from one ESP32. //////////////////////////
 //////////                                                                //////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
- 
+        
     if ((p->name())== "param0" & (p->value()) == "Serial0"){
-        //Serial.println("Serial0 Chosen with If Statement");
+//        Serial.println("Serial0 Chosen with If Statement");
         paramVar = 0;
         };
     if ((p->name())== "param0" & (p->value()) == "Serial1"){
-        //Serial.println("Serial 1 Chosen with If Statement");
+//        Serial.println("Serial 1 Chosen with If Statement");
         paramVar = 1;
         };
     if ((p->name())== "param0" & (p->value()) == "Serial2"){
-        //Serial.println("Serial 2 Chosen with If Statement");
+//      Serial.println("Serial 2 Chosen with If Statement");
           paramVar = 2;
-        };
+    };
      if ((p->name())== "param0" & (p->value()) == "ESP"){
-        //Serial.println("ESP(Self) Chosen with If Statement");
+//      Serial.println("ESP(Self) Chosen with If Statement");
           paramVar = 3;
-        };
+    };
+
     if ((p->name())== "param0" & (p->value()) == "ESPReset"){
         Serial.println("Reset ESP and Arduino Chosen with If Statement");
         ESP.restart();
         };
-               
+        
         Serial.print("Param name: ");
         Serial.println(p->name());
         Serial.print("Param value: ");
@@ -372,10 +444,9 @@ Serial.println(WiFi.macAddress());
           inputString = (p->value());
           stringComplete = true;  
         };
-         
+
         Serial.println("------");
 //        delay(50);
-
     }
  
     request->send(200, "text/plain", "message received");
@@ -386,6 +457,9 @@ Serial.println(WiFi.macAddress());
 
   //Initialize the AsycWebServer
   server.begin();
+//   Serial.println(server.begin() ? "Web Server Ready" : " Web Server Failed!");
+
+
 //Initialize ESP-NOW
   
   if (esp_now_init() != ESP_OK) {
@@ -398,9 +472,9 @@ Serial.println(WiFi.macAddress());
   
   // Register peer
   memcpy(peerInfo.peer_addr, broadcastAddress, 6);
-  peerInfo.channel = 2;  
-  peerInfo.encrypt = true;
-//  peerInfo.ifidx=WIFI_IF_STA;
+  peerInfo.channel = 6;  
+  peerInfo.encrypt = false;
+  peerInfo.ifidx=WIFI_IF_AP;
 
   // Add peer        
   if (esp_now_add_peer(&peerInfo) != ESP_OK){
@@ -435,11 +509,13 @@ if (millis() - MLMillis >= mainLoopDelayVar){
   if (stringComplete || autoComplete) {
     if(stringComplete) {inputString.toCharArray(inputBuffer, 10);inputString="";}
      else if (autoComplete) {autoInputString.toCharArray(inputBuffer, 10);autoInputString="";}
-     if(inputBuffer[0]=='S'  || inputBuffer[0]=='s') {inputBuffer[0]='E' || inputBuffer[0]=='e';}
+//     if(inputBuffer[0]=='S'  || inputBuffer[0]=='s') {inputBuffer[0]='E' || inputBuffer[0]=='e';}
      if( inputBuffer[0]=='D' ||        // Door Designator
          inputBuffer[0]=='d' ||        // Door Designator
          inputBuffer[0]=='R' ||        //Radar Eye LED
-         inputBuffer[0]=='r'           //Radar Eye LED
+         inputBuffer[0]=='r'  ||         //Radar Eye LED
+         inputBuffer[0] =='E' ||          // Command designatore for internal ESP functions
+         inputBuffer[0] =='e'           // Command designatore for internal ESP functions
 
          ) {
             commandLength = strlen(inputBuffer);                     //  Determines length of command character array.
@@ -447,7 +523,11 @@ if (millis() - MLMillis >= mainLoopDelayVar){
             if(commandLength >= 3) {
                 if(inputBuffer[0]=='D' || inputBuffer[0]=='d') {doorState = (inputBuffer[1]-'0')*10+(inputBuffer[2]-'0');
 //                Serial.println("Here");
-                }                                                                                //  Converts 2 Door Sequence Indentifier Characters to Integer
+                }    
+              else if(inputBuffer[0]=='E' || inputBuffer[0]=='e') {
+                commandState = (inputBuffer[1]-'0')*10+(inputBuffer[2]-'0');
+                  }                                                                               //  Converts 2 Door Sequence Indentifier Characters to Integer
+                                                                                                  //  Converts 2 Door Sequence Indentifier Characters to Integer
                 else {displayState = (inputBuffer[1]-'0')*10+(inputBuffer[2]-'0');}              //  Converts Sequence character values into an integer.
 
                 if(commandLength >= 4) {
@@ -460,7 +540,7 @@ if (millis() - MLMillis >= mainLoopDelayVar){
                 if(commandLength >= 5) {
                   if(inputBuffer[0]=='D' || inputBuffer[0]=='d') {door = (inputBuffer[3]-'0')*10+(inputBuffer[4]-'0');}
                   else {colorState1 = inputBuffer[4]-'0';} 
-                }
+                 }
                 else {colorState1 = -1;}
 
                 if(colorState1 < 0 || colorState1 > 9) {
@@ -478,15 +558,11 @@ if (millis() - MLMillis >= mainLoopDelayVar){
                
                 if(inputBuffer[0]=='D' || inputBuffer[0]=='d') {
                   D_command[0]   = '\0';                                                            // Flushes Array
-                  DaltToggle = true;
                   D_command[0] = doorState;
                   if(door>=0) {
-                               D_command[1] = door;
-                               Dcounts[door] = 0;
-//                               Serial.println("inside if input buffer");
+                     D_command[1] = door;
+                     Serial.println(door);
                   }
-                  else {Dcount = 0;}
-//                  Serial.println("outside input bugger else");
                 }
 
                 if(inputBuffer[0]=='R' || inputBuffer[0]=='r'){
@@ -496,8 +572,12 @@ if (millis() - MLMillis >= mainLoopDelayVar){
                   CL_command[2] = colorState1;
                   CL_command[3] = colorState2;
                   CLMillis = millis();
+                      
+                }
                 
-                  
+                if(inputBuffer[0]=='E' || inputBuffer[0] == 'e') {
+                  ESP_command[0]   = '\0';                                                            // Flushes Array
+                  ESP_command[0] = commandState;
                 }
               }
             }
@@ -519,11 +599,18 @@ if (millis() - MLMillis >= mainLoopDelayVar){
      }
 
 
-
-
+      if(ESP_command[0]){
+          switch (ESP_command[0]){
+            case 1: Serial.println("Controller: Dome ESP Controller");   
+                    ESP_command[0]   = '\0'; break;
+            case 2: Serial.println("Resetting the ESP in 5 Seconds");
+                    DelayCall::schedule([] {ESP.restart();}, 5000);
+                    ESP_command[0]   = '\0'; break;
+          }
+        }
 
   if(D_command[0]) {
-       if((D_command[0] == 1 || D_command[0] == 2) && D_command[1] >= 10) {
+       if((D_command[0] == 1 || D_command[0] == 2) && D_command[1] >= 11) {
          //Serial.println("Incorrect Door Value Specified, Command Aborted!");
          D_command[0] = '\0';
 //         Serial.println("wrong if");
@@ -664,12 +751,18 @@ void cameraLED(uint32_t color, int CLSpeed){
 //
   void openDoor(int doorpos) {
     Serial.println("Open Specific Door");
-
        switch (doorpos){
-       case 1: Serial.println("Open Door 1");SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllOpen, SMALL_PANEL_ONE);  break;
-       case 2: Serial.println("Open Door 2");SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllOpen, SMALL_PANEL_TWO);  break;
-       case 3: Serial.println("Open Door 3");SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllOpen, SMALL_PANEL_THREE);break;
-       case 4: Serial.println("Open Door 4");SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllOpen, MEDIUM_PANEL_PAINTED);  break;
+       case 1: Serial.println("Open SMALL_PANEL_ONE");SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllOpen, SMALL_PANEL_ONE);  break;
+       case 2: Serial.println("Open SMALL_PANEL_TWO");SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllOpen, SMALL_PANEL_TWO);  break;
+       case 3: Serial.println("Open SMALL_PANEL_THREE");SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllOpen, SMALL_PANEL_THREE);break;
+       case 4: Serial.println("Open MEDIUM_PANEL_PAINTED");SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllOpen, MEDIUM_PANEL_PAINTED);  break;
+       case 5: Serial.println("Open MEDIUM_PANEL_SILVER");SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllOpen, MEDIUM_PANEL_SILVER);  break;
+       case 6: Serial.println("Open BIG_PANEL");SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllOpen, BIG_PANEL);  break;
+       case 7: Serial.println("Open PIE_PANEL_ONE");SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllOpen, PIE_PANEL_ONE);break;
+       case 8: Serial.println("Open PIE_PANEL_TWO");SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllOpen, PIE_PANEL_TWO);  break;
+       case 9: Serial.println("Open PIE_PANEL_THREE");SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllOpen, PIE_PANEL_THREE);break;
+       case 10: Serial.println("Open PIE_PANEL_FOUR");SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllOpen, PIE_PANEL_FOUR);  break;
+
         }
      D_command[0]   = '\0';
   };
@@ -679,22 +772,18 @@ void cameraLED(uint32_t color, int CLSpeed){
     Serial.println("Close Specific Door");
 
     switch(doorpos){
-      case 1: SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllClose, SMALL_PANEL_ONE);      break;
-      case 2: SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllClose, SMALL_PANEL_TWO);      break;
-      case 3: SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllClose, SMALL_PANEL_THREE);    break;
-      case 4: SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllClose, MEDIUM_PANEL_PAINTED);     break;
+      case 1: Serial.println("Close SMALL_PANEL_ONE");SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllClose, SMALL_PANEL_ONE);  break;
+       case 2: Serial.println("Close SMALL_PANEL_TWO");SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllClose, SMALL_PANEL_TWO);  break;
+       case 3: Serial.println("Close SMALL_PANEL_THREE");SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllClose, SMALL_PANEL_THREE);break;
+       case 4: Serial.println("Close MEDIUM_PANEL_PAINTED");SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllClose, MEDIUM_PANEL_PAINTED);  break;
+       case 5: Serial.println("Close MEDIUM_PANEL_SILVER");SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllClose, MEDIUM_PANEL_SILVER);  break;
+       case 6: Serial.println("Close BIG_PANEL");SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllClose, BIG_PANEL);  break;
+       case 7: Serial.println("Close PIE_PANEL_ONE");SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllClose, PIE_PANEL_ONE);break;
+       case 8: Serial.println("Close PIE_PANEL_TWO");SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllClose, PIE_PANEL_TWO);  break;
+       case 9: Serial.println("Close PIE_PANEL_THREE");SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllClose, PIE_PANEL_THREE);break;
+       case 10: Serial.println("Close PIE_PANEL_FOUR");SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllClose, PIE_PANEL_FOUR);  break;
     }
-//      if(doorpos == 1){
-//        Serial.println("CLose Door 1");
-//            SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllClose, SMALL_PANEL_ONE);      
-//            };
-//      if(doorpos == 2){
-//                Serial.println("Close Door 2");
-//
-//            SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllClose, SMALL_PANEL_TWO);
-//            };
-////      };
-    D_command[0]   = '\0';
+   D_command[0]   = '\0';
   }
 
 
@@ -749,12 +838,15 @@ void shortCircuit(int count) {
   void allOpenClose(){
       Serial.println("Open and Close All Doors");
       SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllOpenClose, ALL_DOME_PANELS_MASK);
-       D_command[0]   = '\0';                                           
+//      DelayCall::schedule([] {sendESPNOWCommand("ESP","d10");}, 4000);
+ D_command[0]   = '\0';                                           
       }
       
   void allOpenCloseLong(){
       Serial.println("Open and Close Doors Long");
       SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllOpenCloseLong, ALL_DOME_PANELS_MASK);
+//      DelayCall::schedule([] {sendESPNOWCommand("ESP","d11");}, 4000);
+
       D_command[0]   = '\0';                                                 
       }
           
@@ -876,7 +968,7 @@ void shortCircuit(int count) {
 //////////////////////////////////////////////////////////////////////
  
   void sendESPNOWCommand(String sdest,String scomm){
-    Serial.println("sendESPNOWCommand Function called");
+//    Serial.println("sendESPNOWCommand Function called");
     destination = sdest;
     command = scomm;
     commandsToSend.dest = destination;

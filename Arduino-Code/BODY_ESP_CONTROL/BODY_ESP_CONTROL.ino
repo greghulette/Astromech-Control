@@ -1,14 +1,17 @@
+#include <AsyncElegantOTA.h>
+#include <elegantWebpage.h>
+#include <Hash.h>
+
 //#define USE_DEBUG
 //#define USE_SERVO_DEBUG
-
-#include "WiFi.h"
+//#include <WiFi.h>
 #include "ESPAsyncWebServer.h"
-#include <WiFiClient.h>
+//#include <WiFiClient.h>
 
-#include <WiFiAP.h>
+//#include <WiFiAP.h>
 #include "esp_wifi.h"
 #include <Wire.h>
-#include <esp_now.h>
+//#include <esp_now.h>
 
 
 //reeltwo libaries
@@ -16,6 +19,7 @@
 #include "core/DelayCall.h"
 #include "ServoDispatchPCA9685.h"
 #include "ServoSequencer.h"
+#include "core/Animation.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -32,71 +36,70 @@
 String inputString;         // a string to hold incoming data
 volatile boolean stringComplete  = false;      // whether the serial string is complete
 
-/////////////////////////////////////////////////////////////////////////
-///*****              ESP NOW Set Up                       *****///
-/////////////////////////////////////////////////////////////////////////
-
-  // REPLACE WITH THE MAC Address of your receiver 
-//    uint8_t broadcastAddress[] = {0x24, 0x0A, 0xC4, 0xEC, 0xA1, 0x08};
-        uint8_t broadcastAddress[] = {0x32, 0xAE, 0xA4, 0x07, 0x0D, 0x66};
-
-//    uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
-
-  // Define variables to store commands to be sent
-    String destination;
-    String command;
-
-  // Define variables to store incoming commands
-    String incomingDestination;
-    String incomingCommand;
-    
-  // Variable to store if sending data was successful
-    String success;
-
-  //Structure example to send data
-  //Must match the receiver structure
-    typedef struct struct_message {
-        String dest;
-        String comm;
-    } struct_message;
-
-  // Create a struct_message calledcommandsTosend to hold variables that will be sent
-    struct_message commandsToSend;
-
-  // Create a struct_message to hold incoming commands from the Dome
-    struct_message commandsToReceive;
-
-    esp_now_peer_info_t peerInfo;
-
-  // Callback when data is sent
-    void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
-      Serial.print("\r\nLast Packet Send Status:\t");
-      Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
-      Serial.println(status);
-      if (status ==0){
-        success = "Delivery Success :)";
-      }
-      else{
-        success = "Delivery Fail :(";
-      }
-    }
-
-  // Callback when data is received
-  void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
-      memcpy(&commandsToReceive, incomingData, sizeof(commandsToReceive));
-      Serial.print("Bytes received from Dome: ");
-      Serial.println(len);
-      incomingDestination = commandsToReceive.dest;
-      incomingCommand = commandsToReceive.comm;
-      Serial.print("Destination = ");
-      Serial.println(incomingDestination);
-      Serial.print("Command = ");
-      Serial.println(incomingCommand);   
-      inputString = incomingCommand;
-      stringComplete = true;     
-      
-    }
- 
+///////////////////////////////////////////////////////////////////////////
+/////*****              ESP NOW Set Up                       *****///
+///////////////////////////////////////////////////////////////////////////
+//
+//  // REPLACE WITH THE MAC Address of your receiver 
+////    uint8_t broadcastAddress[] = {0x24, 0x0A, 0xC4, 0xEC, 0xA1, 0x08};
+//    uint8_t broadcastAddress[] = {0x04, 0x00, 0xC0, 0xA8, 0x04, 0x66};
+////    uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+//
+//  // Define variables to store commands to be sent
+//    String destination;
+//    String command;
+//
+//  // Define variables to store incoming commands
+//    String incomingDestination;
+//    String incomingCommand;
+//    
+//  // Variable to store if sending data was successful
+//    String success;
+//
+//  //Structure example to send data
+//  //Must match the receiver structure
+//    typedef struct struct_message {
+//        String dest;
+//        String comm;
+//    } struct_message;
+//
+//  // Create a struct_message calledcommandsTosend to hold variables that will be sent
+//    struct_message commandsToSend;
+//
+//  // Create a struct_message to hold incoming commands from the Dome
+//    struct_message commandsToReceive;
+//
+//    esp_now_peer_info_t peerInfo;
+//
+//  // Callback when data is sent
+//    void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
+//      Serial.print("\r\nLast Packet Send Status:\t");
+//      Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
+//      Serial.println(status);
+//      if (status ==0){
+//        success = "Delivery Success :)";
+//      }
+//      else{
+//        success = "Delivery Fail :(";
+//      }
+//    }
+//
+//  // Callback when data is received
+//  void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
+//      memcpy(&commandsToReceive, incomingData, sizeof(commandsToReceive));
+//      Serial.print("Bytes received from Dome: ");
+//      Serial.println(len);
+//      incomingDestination = commandsToReceive.dest;
+//      incomingCommand = commandsToReceive.comm;
+//      Serial.print("Destination = ");
+//      Serial.println(incomingDestination);
+//      Serial.print("Command = ");
+//      Serial.println(incomingCommand);   
+//      inputString = incomingCommand;
+//      stringComplete = true;     
+//      
+//    }
+// 
 
 /////////////////////////////////////////////////////////////////////////
 ///*****              ReelTwo Servo Set Up                       *****///
@@ -152,6 +155,9 @@ ServoSequencer servoSequencer(servoDispatch);
     int commandLength;
     int paramVar = 9;
 
+    uint32_t ESP_command[6]  = {0,0,0,0,0,0};
+    int commandState     = 0;
+
   //////////////////////////////////////////////////////////////////////
   ///*****   Door Values, Containers, Flags & Timers   *****///
   //////////////////////////////////////////////////////////////////////
@@ -192,10 +198,10 @@ ServoSequencer servoSequencer(servoDispatch);
   ///******       Serial Ports Specific Setup                   *****///
   //////////////////////////////////////////////////////////////////////
 
-  #define RXD1 19
-  #define TXD1 18 
+  #define RXD1 15
+  #define TXD1 16 
   #define RXD2 25
-  #define TXD2 27 
+  #define TXD2 26 
 
   //////////////////////////////////////////////////////////////////////
   ///******      Arduino Mega Reset Pin Specific Setup          *****///
@@ -221,12 +227,15 @@ ServoSequencer servoSequencer(servoDispatch);
 IPAddress local_IP(192,168,4,101);
 IPAddress subnet(255,255,255,0);
 IPAddress gateway(192,168,4,100);
-uint8_t newMACAddress[] = {0x32, 0xAE, 0xA4, 0x07, 0x0D, 0x67};
+uint8_t newMACAddress[] = {0x04, 0x00, 0xC0, 0xA8, 0x04, 0x65};
 
 
  ////R2 Control Network Details
 const char* ssid = "R2D2_Control_Network";
 const char* password =  "astromech";
+int channel =  0;
+int broadcastNetwork = 0;
+int maxConnections = 8;
 
 AsyncWebServer server(80);
 
@@ -235,6 +244,13 @@ void setup(){
   Serial.begin(9600);
   Serial1.begin(9600, SERIAL_8N1, RXD1, TXD1);
   Serial2.begin(9600, SERIAL_8N1, RXD2, TXD2);
+  Serial.println(" ");
+  Serial.println(" ");
+  Serial.println(" ");
+  Serial.println("----------------------------------------");
+  Serial.println("Booting up the Body LED/Servo Controller");
+
+  
   
   //Configure the Reset Pins for the arduinoReset() function
   pinMode(4, OUTPUT);
@@ -247,21 +263,40 @@ void setup(){
   SetupEvent::ready();
 
   //Initialize the Soft Access Point
-    Serial.println(WiFi.softAP(ssid,password,2) ? "AP Ready" : "Failed!");
+  WiFi.mode(WIFI_AP);
+    Serial.println(WiFi.softAP(ssid,password,6,0,8) ? "AP Ready" : "Failed!");
     delay(200);
     Serial.println(WiFi.softAPConfig(local_IP, gateway, subnet) ? "AP IP Configured" : "Failed!");
     delay(200);
     Serial.print("Soft-AP IP address = ");
     Serial.println(WiFi.softAPIP());
+//    WiFi.begin();  //allows ESP-NOW to work on the Station interface
+
+//    Serial.println(WiFi.macAddress());
+
     esp_wifi_set_mac(WIFI_IF_AP, &newMACAddress[0]);
-    Serial.print("Local MAC address = ");
+    delay(2000);
+    Serial.print("Local AP MAC address = ");
     Serial.println(WiFi.softAPmacAddress());
+//    WiFi.mode(WIFI_AP_STA);
+//    WiFi.softAP(ssid, password,6,0,8);
+//    delay(500);
+//    Serial.println(WiFi.softAPConfig(local_IP, gateway, subnet) ? "AP IP Configured" : "Failed!");
+//    delay(500);
+//    Serial.print("Soft-AP IP address = ");
+//    Serial.println(WiFi.softAPIP());
+
+
+//    esp_wifi_set_mac(WIFI_IF_STA, &newMACAddress[0]);
+//    Serial.print("Local AP MAC address = ");
+//    Serial.println(WiFi.softAPmacAddress());
+ 
  //Setup the webpage and accept the GET requests, and parses the variables 
     server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
       
     int paramsNr = request->params();               // Gets the number of parameters sent
     Serial.println(paramsNr);                       // Variable for selecting which Serial port to send out
-    for(int i=0;i<paramsNr;i++){                    //Loops through all the paramaters
+    for(int i=0;i<paramsNr;i++){                     //Loops through all the paramaters
          AsyncWebParameter* p = request->getParam(i);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -307,8 +342,14 @@ void setup(){
           writeString(p->value());
         };
          if (paramVar == 1){
-          Serial.println("Writing to Serial 1");      
-          writeString1(p->value());
+          Serial.println("Writing to Serial 1"); 
+          delay(100);     
+         if ((p->name())== "param0" & (p->value()) == "Serial1"){
+            Serial.println("Skipping param 0 in the SerialWrite");
+          } 
+          else {
+                      writeString1(p->value());
+          };
         } ;      
           if (paramVar == 2){
           Serial.println("Writing to Serial 2");      
@@ -330,36 +371,39 @@ void setup(){
   //Enable Access-Control-Allow-Origin to mitigate errors from website polling
   DefaultHeaders::Instance().addHeader("Access-Control-Allow-Origin", "*");
 
+  AsyncElegantOTA.begin(&server);    // Start ElegantOTA
+
   //Initialize the AsycWebServer
   server.begin();
-  
+   
   //Reset Arudino Mega
   resetArduino(500);
 
-  //Initialize ESP-NOW
-  
-  if (esp_now_init() != ESP_OK) {
-    Serial.println("Error initializing ESP-NOW");
-  return;
-  }
-  // Once ESPNow is successfully Init, we will register for Send CB to
-  // get the status of Trasnmitted packet
-  esp_now_register_send_cb(OnDataSent);
-  
-  // Register peer
-  memcpy(peerInfo.peer_addr, broadcastAddress, 6);
-  peerInfo.channel = 2;  
-  peerInfo.encrypt = true;
-  peerInfo.ifidx=WIFI_IF_AP;
-  
-  // Add peer        
-  if (esp_now_add_peer(&peerInfo) != ESP_OK){
-    Serial.println("Failed to add peer");
-    return;
-  }
-  // Register for a callback function that will be called when data is received
-  esp_now_register_recv_cb(OnDataRecv);
-  
+//  //Initialize ESP-NOW
+////  
+////    esp_now_init();
+//  if (esp_now_init() != ESP_OK) {
+//    Serial.println("Error initializing ESP-NOW");
+//  return;
+//  }
+////  // Once ESPNow is successfully Init, we will register for Send CB to
+////  // get the status of Trasnmitted packet
+//  esp_now_register_send_cb(OnDataSent);
+////  
+////  // Register peer
+//  memcpy(peerInfo.peer_addr, broadcastAddress, 6);
+//  peerInfo.channel = 6;  
+//  peerInfo.encrypt = false;
+//  peerInfo.ifidx=WIFI_IF_AP;
+//////  
+////  // Add peer        
+//  if (esp_now_add_peer(&peerInfo) != ESP_OK){
+//    Serial.println("Failed to add peer");
+//    return;
+//  }
+////  // Register for a callback function that will be called when data is received
+//  esp_now_register_recv_cb(OnDataRecv);
+////  
   }   // end of setup
  
 void loop(){
@@ -380,9 +424,10 @@ void loop(){
   if (stringComplete || autoComplete) {
     if(stringComplete) {inputString.toCharArray(inputBuffer, 10);inputString="";}
      else if (autoComplete) {autoInputString.toCharArray(inputBuffer, 10);autoInputString="";}
-     if(inputBuffer[0]=='S'  || inputBuffer[0]=='s') {inputBuffer[0]='E' || inputBuffer[0]=='e';}
-     if( inputBuffer[0]=='D' ||        // Door Designator
-         inputBuffer[0]=='d'         // Door Designator
+     if( inputBuffer[0]=='D'  ||       // Door Designator
+         inputBuffer[0]=='d'  ||       // Door Designator
+         inputBuffer[0]=='E'  ||       // Command designatore for internal ESP functions
+         inputBuffer[0]=='e'           // Command designatore for internal ESP functions
 
 
          ) {
@@ -390,7 +435,9 @@ void loop(){
 
             if(commandLength >= 3) {
                 if(inputBuffer[0]=='D' || inputBuffer[0]=='d') {doorState = (inputBuffer[1]-'0')*10+(inputBuffer[2]-'0');
-                }                                                                                //  Converts 2 Door Sequence Indentifier Characters to Integer
+               
+                }  
+               if(inputBuffer[0]=='E' || inputBuffer[0]=='e') {commandState = (inputBuffer[1]-'0')*10+(inputBuffer[2]-'0');};       //  Converts 2 Door Sequence Indentifier Characters to Integer
                 if(commandLength >= 4) {
                   if(inputBuffer[0]=='D' || inputBuffer[0]=='d' ) {typeState = inputBuffer[3]-'0';}
                 }
@@ -416,7 +463,16 @@ void loop(){
                   }
                   else {Dcount = 0;}
                 }
-
+                if(inputBuffer[0]=='E' || inputBuffer[0] == 'e') {
+                  ESP_command[0]   = '\0';                                                            // Flushes Array
+//                  DaltToggle = true;
+                  ESP_command[0] = commandState;
+//                  if(door>=0) {
+//                   D_command[1] = commandState;
+//                               Dcounts[door] = 0;
+//                  }
+//                  else {Dcount = 0;}
+                }
 
               }
             }
@@ -433,6 +489,18 @@ void loop(){
        Serial.println("command Proccessed");
 
      }
+
+  if(ESP_command[0]){
+    switch (ESP_command[0]){
+      case 1: Serial.println("Body ESP Controller");   
+              ESP_command[0]   = '\0'; break;
+      case 2: Serial.println("Resetting the ESP in 5 Seconds");
+              DelayCall::schedule([] {ESP.restart();}, 5000);
+              ESP_command[0]   = '\0'; break;
+      case 3: writeString1("DCE01"); 
+              ESP_command[0]   = '\0'; break;
+    }
+  }
 
   if(D_command[0]) {
        if((D_command[0] == 1 || D_command[0] == 2) && D_command[1] >= 10) {
@@ -524,21 +592,27 @@ void loop(){
 
   void openAllDoors() {
     Serial.println("Open all Doors");
-        SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllOpen, ALL_SERVOS_MASK);
-         DelayCall::schedule([] {sendESPNOWCommand("ESP","do3");}, 4000);
-//    sendESPNOWCommand("ESP","do3");
+//    sendESPNOWCommand("ESP","d03");
+    SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllOpen, ALL_SERVOS_MASK);
+//    DelayCall::schedule([] {sendESPNOWCommand("ESP","d03");}, 0);
     D_command[0] = '\0';
    }
 
   
   void closeAllDoors() {
     Serial.println("Close all doors");
-        SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllClose, ALL_SERVOS_MASK);
+//    sendESPNOWCommand("ESP","d04");
+    SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllClose, ALL_SERVOS_MASK);
+//    DelayCall::schedule([] {sendESPNOWCommand("ESP","d04");}, 1);
+
     D_command[0] = '\0';
   }
 
   void alternateDoors() {
     Serial.println("Alternate All Doors");
+        SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllClose, ALL_SERVOS_MASK);
+//    sendESPNOWCommand("ESP","d03");
+
     D_command[0]   = '\0';
   }
 
@@ -587,6 +661,7 @@ void shortCircuit(int count) {
   void allFlutter(){
       Serial.println("Flutter All Doors");
       SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllFlutter, ALL_SERVOS_MASK);
+//      sendESPNOWCommand("ESP","d12");
       D_command[0]   = '\0';   
       }
   void allOpenCloseRepeat(){
@@ -597,6 +672,8 @@ void shortCircuit(int count) {
   void panelWave(){
        Serial.println("Wave");
        SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelWave, ALL_SERVOS_MASK);
+//       DelayCall::schedule([] {sendESPNOWCommand("ESP","d14");}, 2000);
+
        D_command[0]   = '\0';                                             
        }
   void panelWaveFast(){
@@ -667,6 +744,7 @@ void shortCircuit(int count) {
         {
           Serial1.write(completeString[i]);
         }
+//        Serial.println(completeString);
       }
       
       void writeString2(String stringData){
@@ -688,34 +766,56 @@ void shortCircuit(int count) {
     }
 
 //////////////////////////////////////////////////////////////////////
-///*****             ESP-NOW Functions                        *****///
+///*****             Test Functions                        *****///
 //////////////////////////////////////////////////////////////////////
- 
-  void sendESPNOWCommand(String sdest,String scomm){
-    Serial.println("sendESPNOWCommand Function called");
-    destination = sdest;
-    command = scomm;
-    commandsToSend.dest = destination;
-    commandsToSend.comm = command;
-    // Send message via ESP-NOW
-    esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &commandsToSend, sizeof(commandsToSend));
-   if (result == ESP_OK) {
-    Serial.println("Sent with success");
-    }
-    else {
-      Serial.println(result);
-      Serial.println("Error sending the data");
-    }
-   }
-
-  void parseESPNOWCommand(String idest, String icomm){
-    
-  }
-
+// 
+//  void sendESPNOWCommand(String sdest,String scomm){
+////    Serial.println("sendESPNOWCommand Function called");
+//    destination = sdest;
+//    command = scomm;
+//    commandsToSend.dest = destination;
+//    commandsToSend.comm = command;
+//    // Send message via ESP-NOW
+//    esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &commandsToSend, sizeof(commandsToSend));
+//   if (result == ESP_OK) {
+//    Serial.println("Sent with success");
+//    }
+//    else {
+//      Serial.println(result);
+//      Serial.println("Error sending the data");
+//    }
+//   }
+//
+//  void parseESPNOWCommand(String idest, String icomm){
+//    
+//  }
+AnimationPlayer player(servoSequencer);
   void testESPNOW(){
-    sendESPNOWCommand("ESP","d03");
+//    sendESPNOWCommand("ESP","d03");
 //    Serial.println("testESPNOW Function called");
     D_command[0] = '\0';
+    ANIMATION_PLAY_ONCE(player, WaveFullBody);
 
-  }
-    
+    };
+
+
+
+  ANIMATION(WaveFullBody)
+  {
+    DO_START()
+//    DO_SEQUENCE(SeqPanelWave,ALL_SERVOS_MASK)
+//      {
+DO_ONCE_AND_WAIT({SEQUENCE_PLAY_ONCE(servoSequencer, SeqPanelAllFlutter, ALL_SERVOS_MASK);
+ ; }, 2100)
+
+//    DO_ONCE_LABEL(looping, {
+//        printf("Looping all over again\n");
+//    })
+//    DO_WHILE_SEQUENCE(looping)
+    DO_ONCE_AND_WAIT({
+//       sendESPNOWCommand("ESP","d14");
+//        StealthCommand("tmprnd=60");
+    }, 10)
+    DO_END()
+}
+  
