@@ -10517,16 +10517,16 @@ function ESP32SendCommand(b, x) {
   var ESP32DeviceSelected = getcolor1(b);
   // var ESP32DeviceSelected = (ESP32Device.options[ESP32Device.selectedIndex].value);
   console.log('Device: ' + ESP32DeviceSelected);
-  if (ESP32DeviceSelected === "PC") {
-    var periscopeControllerIP = 'http://192.168.4.101/?param0=enSerial&param1=S02PC';
+  if (ESP32DeviceSelected === "PL") {
+    var periscopeControllerIP = 'http://192.168.4.101/?param0=enSerial&param1=S02PL';
     var periscopeLifterFullURL = periscopeControllerIP + ESP32commandUpper;
     httpGet(periscopeLifterFullURL);
     console.log(periscopeLifterFullURL);
 
   };
-  if (ESP32DeviceSelected === "BC") {
-    var bodyLEDControllerIP = 'http://192.168.4.101/?param0=bcSerial&param1=';
-    console.log('BC subselection');
+  if (ESP32DeviceSelected === "BL") {
+    var bodyLEDControllerIP = 'http://192.168.4.101/?param0=blSerial&param1=';
+    console.log('BL subselection');
     console.log(bodyLEDControllerIP)
 
     var bodyLEDControllerFullURL = bodyLEDControllerIP + ESP32commandUpper;
@@ -10566,7 +10566,7 @@ function ESP32SendCommand(b, x) {
   };
   if (ESP32DeviceSelected === "BS") {
     var bodyLEDControllerIP = 'http://192.168.4.101/?param0=ESP&param1=';
-    console.log('BC subselection');
+    console.log('BS subselection');
     console.log(bodyLEDControllerIP)
 
     var bodyLEDControllerFullURL = bodyLEDControllerIP + ESP32commandUpper;
@@ -10638,33 +10638,33 @@ function getPeriscope(s, t, u) {
   let periscopeFunction = s;
   if (periscopeFunction === 'D' && t === 'RotateClockwiseRelative') {
     let periscopeRelativeDeg = document.getElementById(t).value;
-    let periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=S02PC:P" + periscopeFunction + '-';
+    let periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=S02PL:P" + periscopeFunction + '-';
     let periscopeESPFullURL = periscopeESPURL + periscopeRelativeDeg + ',' + speedValue;;
     httpGet(periscopeESPFullURL);
   } else if (periscopeFunction === 'D' && t === 'RotateCounterClockwiseRelative') {
     let periscopeRelativeDeg = document.getElementById(t).value;
-    let periscopeESPURL = "hhttp://192.168.4.101/?param0=enSerial&param1=S02PC:P" + periscopeFunction;
+    let periscopeESPURL = "hhttp://192.168.4.101/?param0=enSerial&param1=S02PL:P" + periscopeFunction;
     let periscopeESPFullURL = periscopeESPURL + periscopeRelativeDeg + ',' + speedValue;;
     httpGet(periscopeESPFullURL);
   } else if (periscopeFunction === 'R' && t === 'RotateClockwiseContinous') {
-    let periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=S02PC:P" + periscopeFunction + '-';
+    let periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=S02PL:P" + periscopeFunction + '-';
     let periscopeESPFullURL = periscopeESPURL + speedValue;;
     httpGet(periscopeESPFullURL);
   } else if (periscopeFunction === 'R' && t === 'RotateCounterClockwiseContinous') {
-    let periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=S02PC:P" + periscopeFunction;
+    let periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=S02PL:P" + periscopeFunction;
     let periscopeESPFullURL = periscopeESPURL + speedValue;;
     httpGet(periscopeESPFullURL);
   } else if (periscopeFunction === 'AR' || periscopeFunction === 'PR') {
-    let periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=S02PC:P" + periscopeFunction;
+    let periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=S02PL:P" + periscopeFunction;
     let periscopeESPFullURL = periscopeESPURL + ',' + speedValue;
     httpGet(periscopeESPFullURL);
   } else if (periscopeFunction === 'S') {
-    let periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=S02PC:P" + periscopeFunction;
+    let periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=S02PL:P" + periscopeFunction;
     let periscopeESPFullURL = periscopeESPURL + t;
     httpGet(periscopeESPFullURL);
   } else {
     var periscopeHeight = t;
-    var periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=S02PC:P" + periscopeFunction
+    var periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=S02PL:P" + periscopeFunction
     let periscopeESPFullURL = periscopeESPURL + periscopeHeight + ',' + speedValue;;
     // console.log(periscopeESPFullURL);
     httpGet(periscopeESPFullURL);
@@ -10680,7 +10680,7 @@ function getPeriscope(s, t, u) {
 
 function getPeriscopeRotateAbsolute(t) {
   var periscopeHeight = t;
-  var periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=S02PC:PA";
+  var periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=S02PL:PA";
   // var periscopeESPURLOutside = "http://10.0.0.230:8080/?param1=:PP";
 
   var periscopeESPFullURL = periscopeESPURL + periscopeHeight;
@@ -10696,7 +10696,7 @@ function getPeriscopeRotateAbsolute(t) {
 
 function getPeriscopeRotateAbsolute(t) {
   var periscopeHeight = t;
-  var periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=S02PC:PD";
+  var periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=S02PL:PD";
   // var periscopeESPURLOutside = "http://10.0.0.230:8080/?param1=:PP";
 
   var periscopeESPFullURL = periscopeESPURL + periscopeHeight;

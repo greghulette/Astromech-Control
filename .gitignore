@@ -14,4 +14,4 @@ routes/
 .DS_Store?
 .Spotlight-V100
 .Trashes
-.vs/
+.vs/.DS_Store
