@@ -1,7 +1,7 @@
 Features or ESP32's 
 1. Add turn on/off Wifi into function
 2. Add OTA on the 4 ESP Boards
-3. Create Periscope Controller Sketch
+3. P̶e̶r̶i̶s̶c̶o̶p̶e̶ B̶a̶s̶i̶c̶ C̶o̶n̶t̶r̶o̶l̶l̶e̶r̶ S̶k̶e̶t̶c̶h̶
 4. Clean up commented out code 
 5. Switch serial.print with debug_print statements
 6. Add board case in the dome controller 
@@ -14,6 +14,7 @@ Features or ESP32's
     2. Add serial writes to all door functions to pass commands up to dome
 12. Change IP addresses on ESP-NOW boards so they don't conflict with DHCP >109
 13. Figure out how to get status of remote boards (ESP initially and then eventually Arduinos/Stealth)
+14. Change Baud Rate 
 
 
 To-Do for website

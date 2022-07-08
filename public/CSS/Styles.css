@@ -1849,6 +1849,68 @@ width: 100%;
   top: 80px;
   left: 330px;
 }
+.BodyServoButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 10px;
+  left: 700px;
+}
+.BodyServoButton.active{
+  box-shadow: 0px 0px 9px yellow;
+}
+
+.DomeServoButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 80px;
+  left: 700px;
+}
+.DomeServoButton.active{
+  box-shadow: 0px 0px 9px yellow;
+
+}
+.BothServoButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 150px;
+  left: 700px;
+}
+
+.BothServoButton.active{
+  box-shadow: 0px 0px 9px yellow;
+}
+
+
+
+.BodyFirstRadio{
+  position: absolute;
+  width: 20px;
+  -webkit-transform: scale(2);
+  top: 250px;
+  left: 700px;
+}
+.BodyFirstRadioLabel{
+  position: absolute;
+  width: 200px;
+  top: 240px;
+  left: 750px;
+}
+.DomeFirstRadio{
+  position: absolute;
+  width: 20px;
+  -webkit-transform: scale(2);
+  top: 280px;
+  left: 700px;
+}
+.DomeFirstRadioLabel{
+  position: absolute;
+  width: 200px;
+  top: 280px;
+  left: 750px;
+}
 .AllOpenCloseLongButton{
   height: 60px;
   width: 150px;

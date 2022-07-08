@@ -427,19 +427,27 @@ function RSeriesLEDFunctionExecution(t) {
 
 function servoControl(y, z) {
   console.log("Servo Command Accepted")
-  if (y === "body") {
+  if (servoBoardSelectorGlobal == 'body') {
     let bodyServoCommandParam = "&param1=D1" + z;
     let fullBodyServoURL = bodyServoCommandParam
     bodyServoFunctionExecution(fullBodyServoURL);
     console.log("Body Selected")
   }
-  if (y === "dome") {
-    let domeServoCommandParam = "&param1=S02DSD" + z;
+  if (servoBoardSelectorGlobal == 'dome') {
+    let domeServoCommandParam = "&param1=D2" + z;
     let fullDomeServoURL = domeServoCommandParam
     domeServoFunctionExecution(fullDomeServoURL);
   }
-  if (y === "both") {
-    let bodyServoCommandParam = "&param1=d3" + z;
+  if (CurrentDirection == 'BodyFirst') {
+    let bodyServoCommandParam = "&param1=D3" + z;
+    let fullBodyServoURL = bodyServoCommandParam
+    bodyServoFunctionExecution(fullBodyServoURL);
+    // let domeServoCommandParam = "&param1=S02DSD" + z;
+    // let fullDomeServoURL = domeServoCommandParam
+    // domeServoFunctionExecution(fullDomeServoURL);
+  }
+  if (CurrentDirection == 'DomeFirst') {
+    let bodyServoCommandParam = "&param1=D4" + z;
     let fullBodyServoURL = bodyServoCommandParam
     bodyServoFunctionExecution(fullBodyServoURL);
     // let domeServoCommandParam = "&param1=S02DSD" + z;
@@ -448,7 +456,56 @@ function servoControl(y, z) {
   }
 }
 
+var servoBoardSelectorGlobal = 'BodyFirst';
+function servoBoardSelector(x) {
+  // let tmpBodyServoBoard
+  // let tmpDomeServoBoard
+  // let tmpBothServoBoard
+  // console.log(servoBoardSelectorGlobal)
+  if (x == 'body') {
+    servoBoardSelectorGlobal = 'body';
+    console.log("body selected " + servoBoardSelectorGlobal)
+    let tmpBodyServoBoard = document.getElementById("BodyServo")
+    tmpBodyServoBoard.classList.add('active')
+    let tmpDomeServoBoard = document.getElementById("DomeServo")
+    tmpDomeServoBoard.classList.remove('active')
+    let tmpBothServoBoard = document.getElementById("BothServo")
+    tmpBothServoBoard.classList.remove('active')
+  } else if (x == 'dome') {
+    servoBoardSelectorGlobal = 'dome';
+    console.log('Dome Selected ' + servoBoardSelectorGlobal)
+    let tmpBodyServoBoard = document.getElementById("BodyServo")
+    tmpBodyServoBoard.classList.remove('active')
+    let tmpDomeServoBoard = document.getElementById("DomeServo")
+    tmpDomeServoBoard.classList.add('active')
+    let tmpBothServoBoard = document.getElementById("BothServo")
+    tmpBothServoBoard.classList.remove('active')
+  } else if (x == 'both') {
 
+    if (CurrentDirection == "BodyFirst") {
+      servoBoardSelectorGlobal = 'BodyFirst';
+    }
+    if (CurrentDirection == "DomeFirst") {
+      servoBoardSelectorGlobal = 'DomeFirst';
+    }
+    console.log('both servo boards selected in direction of ' + servoBoardSelectorGlobal)
+    let tmpBodyServoBoard = document.getElementById("BodyServo")
+    tmpBodyServoBoard.classList.add('active')
+    let tmpDomeServoBoard = document.getElementById("DomeServo")
+    tmpDomeServoBoard.classList.add('active')
+    let tmpBothServoBoard = document.getElementById("BothServo")
+    tmpBothServoBoard.classList.add('active')
+
+  }
+}
+var CurrentDirection = 'BodyFirst';
+
+function ServoOrderDirection(ServoOrder) {
+  // console.log(CurrentDirection);
+  let newDirection = ServoOrder.value;
+  console.log(newDirection)
+  CurrentDirection = newDirection;
+}
 
 
 
@@ -11286,4 +11343,5 @@ function HeightSelection100(t) {
   document.getElementById("Height100").src = tmppic100;
   tmp100.classList.add('active');
   getPeriscope('P', '100', 'HeightSpeed');
-} 
+}
+

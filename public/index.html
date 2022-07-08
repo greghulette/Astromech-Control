@@ -4506,8 +4506,13 @@
       <img src="Images/Button-Servo-All-Open-Close-Wave.png" class="AllOpenCloseWaveButton" alt="image for the dome" onclick="servoControl('both','16')">
       <img src="Images/Button-Servo-All-Panel-Alternate.png" class="AllPanelAlternateButton" alt="image for the dome" onclick="servoControl('both','18')">
       <img src="Images/Button-Servo-All-Harlem-Shake.png" class="AllHarlemShake" alt="image for the dome" onclick="servoControl('both','21')">
-
-
+      <img src="Images/Buttons/Button-Body-Servos-GIMP.png" class="BodyServoButton active" alt="Body Servo Bords" id="BodyServo" onclick="servoBoardSelector('body')">
+      <img src="Images/Buttons/Button-Dome-Servos-GIMP.png" class="DomeServoButton active" alt="Dome Servo Bords" id="DomeServo" onclick="servoBoardSelector('dome')">
+      <img src="Images/Buttons/Button-Both-Servos-GIMP.png" class="BothServoButton active" alt="Both Servo Bords" id="BothServo" onclick="servoBoardSelector('both')">
+      <input type="radio" id="BodyFirst" class="BodyFirstRadio" value="BodyFirst" name="ServoOrder" checked onclick="ServoOrderDirection(this)">
+      <label for="BodyFirst" class="BodyFirstRadioLabel" >Body First</label>
+      <input type="radio" id="DomeFirst" class="DomeFirstRadio" value="DomeFirst" name="ServoOrder" onclick="ServoOrderDirection(this)">
+      <label for="DomeFirst" class="DomeFirstRadioLabel">Dome First</label>
     </div>
   
 
