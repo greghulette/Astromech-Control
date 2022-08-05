@@ -6,7 +6,7 @@
   <title>Astromech Control</title>
   <meta
     name="description"
-    content="This is a website dedicated to R2 LED Control"
+    content="This is a website dedicated to R2 Control"
   />
   <link rel="shortcut icon" href="./Images/r2-d2.ico" type="image/x-icon"/>
   <link rel="stylesheet" href="./CSS/Styles.css" />
@@ -214,8 +214,9 @@
           <td>
             <img
               class="homebuttonwidth"
-              src="Images/Buttons/Button-Wave2.png"
+              src="Images/Button-Servo-All-Panel-Wave.png"
               alt="button for Wave2"
+              onclick="animateServo('D310D02125')"
             />
           </td>
           <td>
@@ -253,15 +254,17 @@
           <td>
             <img
               class="homebuttonwidth"
-              src="Images/Buttons/Button-Blank.png"
+              src="Images/Button-Servo-All-Harlem-Shake.png"
               alt="button for Wave1"
+              onclick="playSound('176'); servoControl('13');"
             />
           </td>
           <td>
             <img
               class="homebuttonwidth"
-              src="Images/Buttons/Button-Blank.png"
+              src="Images/Button-Servo-All-Close.png"
               alt="button for Wave1"
+              onclick="animateServo('D304')"
             />
           </td>
         </tr>
@@ -4254,7 +4257,7 @@
 
         </div><!--end of Level 2 Menu-->
       </div> <!-- end of Serial Command-->
-16
+      
       <div class="menu-Level-1-Content" id="DataPanel">
         <h1 class="menuHeader-Level-1">Data Panel/CBi</h1>
         <div class="menu-Level-2">
@@ -4490,22 +4493,22 @@
     </div>
     <div class="openclosedoors">
       <h3 class="openclosedoorsheader">Door/Pie Control</h3>
-      <img src="Images/Buttons/Button-Open-White.png" class="openButton" alt="image for the dome" onclick="servoControl('body','03')">
-      <img src="Images/Buttons/Button-Close-White.png" class="closeButton" alt="image for the dome" onclick="servoControl('body','04')">
-      <img src="Images/Button-Servo-All-Panel-Dance.png" class="AllPanelDanceButton" alt="image for the dome" onclick="servoControl('both','19')">
-      <img src="Images/Button-Servo-All-Long-Disco.png" class="AllLongDiscoButton" alt="image for the dome" onclick="servoControl('both','20')">
-      <img src="Images/Button-Servo-Marching-Ants.png" class="MarchingAntsButton" alt="image for the dome" onclick="servoControl('both','17')">
-      <img src="Images/Button-Servo-All-Open.png" class="AllOpenButton" alt="image for the dome" onclick="servoControl('both','03')">
-      <img src="Images/Button-Servo-All-Close.png" class="AllCloseButton" alt="image for the dome" onclick="servoControl('both','04')">
-      <img src="Images/Button-Servo-All-Open-Close.png" class="AllOpenCloseButton" alt="image for the dome" onclick="servoControl('both','10')">
-      <img src="Images/Button-Servo-All-Open-Close-Long.png" class="AllOpenCloseLongButton" alt="image for the dome" onclick="servoControl('both','11')">
-      <img src="Images/Button-Servo-Flutter.png" class="FlutterButton" alt="image for the dome" onclick="servoControl('both','12')">
-      <img src="Images/Button-Servo-All-Open-Close-Repeat.png" class="AllOpenCloseRepeatButton" alt="image for the dome" onclick="servoControl('both','13')">
-      <img src="Images/Button-Servo-All-Panel-Wave.png" class="AllPanelWaveButton" alt="image for the dome" onclick="servoControl('body','14')">
-      <img src="Images/Button-Servo-All-Panel-Wave-Fast.png" class="AllPanelWaveFastButton" alt="image for the dome" onclick="servoControl('both','15')">
-      <img src="Images/Button-Servo-All-Open-Close-Wave.png" class="AllOpenCloseWaveButton" alt="image for the dome" onclick="servoControl('both','16')">
-      <img src="Images/Button-Servo-All-Panel-Alternate.png" class="AllPanelAlternateButton" alt="image for the dome" onclick="servoControl('both','18')">
-      <img src="Images/Button-Servo-All-Harlem-Shake.png" class="AllHarlemShake" alt="image for the dome" onclick="servoControl('both','21')">
+      <img src="Images/Buttons/Button-Open-White.png" class="openButton" alt="image for the dome" onclick="servoControl('01')">
+      <img src="Images/Buttons/Button-Close-White.png" class="closeButton" alt="image for the dome" onclick="servoControl('02')">
+      <img src="Images/Button-Servo-All-Panel-Dance.png" class="AllPanelDanceButton" alt="image for the dome" onclick="servoControl('15')">
+      <img src="Images/Button-Servo-All-Long-Disco.png" class="AllLongDiscoButton" alt="image for the dome" onclick="servoControl('16')">
+      <img src="Images/Button-Servo-Marching-Ants.png" class="MarchingAntsButton" alt="image for the dome" onclick="servoControl('13')">
+      <img src="Images/Button-Servo-All-Open.png" class="AllOpenButton" alt="image for the dome" onclick="servoControl('03')">
+      <img src="Images/Button-Servo-All-Close.png" class="AllCloseButton" alt="image for the dome" onclick="servoControl('04')">
+      <img src="Images/Button-Servo-All-Open-Close.png" class="AllOpenCloseButton" alt="image for the dome" onclick="servoControl('06')">
+      <img src="Images/Button-Servo-All-Open-Close-Long.png" class="AllOpenCloseLongButton" alt="image for the dome" onclick="servoControl('07')">
+      <img src="Images/Button-Servo-Flutter.png" class="FlutterButton" alt="image for the dome" onclick="servoControl('08')">
+      <img src="Images/Button-Servo-All-Open-Close-Repeat.png" class="AllOpenCloseRepeatButton" alt="image for the dome" onclick="servoControl('09')">
+      <img src="Images/Button-Servo-All-Panel-Wave.png" class="AllPanelWaveButton" alt="image for the dome" onclick="servoControl('10')">
+      <img src="Images/Button-Servo-All-Panel-Wave-Fast.png" class="AllPanelWaveFastButton" alt="image for the dome" onclick="servoControl('11')">
+      <img src="Images/Button-Servo-All-Open-Close-Wave.png" class="AllOpenCloseWaveButton" alt="image for the dome" onclick="servoControl('12')">
+      <img src="Images/Button-Servo-All-Panel-Alternate.png" class="AllPanelAlternateButton" alt="image for the dome" onclick="servoControl('14')">
+      <img src="Images/Button-Servo-All-Harlem-Shake.png" class="AllHarlemShake" alt="image for the dome" onclick="servoControl('17')">
       <img src="Images/Buttons/Button-Body-Servos-GIMP.png" class="BodyServoButton active" alt="Body Servo Bords" id="BodyServo" onclick="servoBoardSelector('body')">
       <img src="Images/Buttons/Button-Dome-Servos-GIMP.png" class="DomeServoButton active" alt="Dome Servo Bords" id="DomeServo" onclick="servoBoardSelector('dome')">
       <img src="Images/Buttons/Button-Both-Servos-GIMP.png" class="BothServoButton active" alt="Both Servo Bords" id="BothServo" onclick="servoBoardSelector('both')">
@@ -4513,8 +4516,66 @@
       <label for="BodyFirst" class="BodyFirstRadioLabel" >Body First</label>
       <input type="radio" id="DomeFirst" class="DomeFirstRadio" value="DomeFirst" name="ServoOrder" onclick="ServoOrderDirection(this)">
       <label for="DomeFirst" class="DomeFirstRadioLabel">Dome First</label>
+
     </div>
-  
+    <div class="servoEasingOptions">
+      <h3 class="servoOptionsHeader">options</h3>
+      <form class="servoEasingMethod" method=''>
+        <label class="ServoEasingLabel"for='ServoEasingList'>Servo Easing Method:</label>
+        <select class="ServoEasingPicker " id="ServoEasingSelectionBox" name="ServoEasingList">
+        <option value="00"> ------------------ </option>
+        <option value="01">LinearInterpolation</option>
+        <option value="02">QuadraticEaseIn</option>
+        <option value="03">QuadraticEaseOut</option>
+        <option value="04">QuadraticEaseInOut</option>
+        <option value="05">CubicEaseIn</option>
+        <option value="06">CubicEaseOut</option>
+        <option value="07">CubicEaseInOut</option>
+        <option value="08">QuarticEaseIn</option>
+        <option value="09">QuarticEaseOut</option>
+        <option value="10">QuarticEaseInOut</option>
+        <option value="11">QuinticEaseIn</option>
+        <option value="12">QuinticEaseOut</option>
+        <option value="13">QuinticEaseInOut</option>
+        <option value="14">SineEaseIn</option>
+        <option value="15">SineEaseOut</option>
+        <option value="16">SineEaseInOut</option>
+        <option value="17">CircularEaseIn</option>
+        <option value="18">CircularEaseOut</option> 
+        <option value="19">CircularEaseInOut</option>
+        <option value="20">ExponentialEaseIn</option>
+        <option value="21">ExponentialEaseOut</option>
+        <option value="22">ExponentialEaseInOut</option>
+        <option value="23">ElasticEaseIn</option>
+        <option value="24">ElasticEaseOut</option>
+        <option value="25">ElasticEaseInOut</option>
+        <option value="26">BackEaseIn</option>
+        <option value="27">BackEaseOut</option>
+        <option value="28">BackEaseInOut</option>
+        <option value="29">BounceEaseIn</option>
+        <option value="30">BounceEaseOut</option>
+        <option value="31">BounceEaseInOut</option>
+       </select>
+      </form>
+      <label class="varSpeedMinLabel" for="ESP32varSpeedMinTextBox">Duration/Min</label>
+      <input class="ESP32VarSpeedMintext" type="text" name="ESP32CommandVarSpeedMinBox" id="ESP32varSpeedMinTextBox" value="0000">
+
+      <label class="varSpeedMaxLabel" for="ESP32varSpeedMaxTextBox">varSpeed Max</label>
+      <input class="ESP32VarSpeedMaxtext" type="text" name="ESP32CommandVarSpeedMaxBox" id="ESP32varSpeedMaxTextBox" value="0000">
+
+      <label class="delayCallLabel" for="ESP32DelayCallTextBox">delay call duration</label>
+      <input class="ESP32DelayCallText" type="text" name="ESP32CommandDelayCallBox" id="ESP32DelayCallTextBox" value="00000">
+      <img src="Images/Button-Clear-Options-GIMP.png" class="clearOptions" id="clearOptions" onclick="clearOptions()"> 
+      <img src="Images/Button-Saved1-Options-GIMP.png" class="savedOptions1" id="savedOptions1" onclick="savedOptions1()"> 
+      <img src="Images/Button-Saved2-Options-GIMP.png" class="savedOptions2" id="savedOptions2" onclick="savedOptions2()"> 
+      <img src="Images/Button-Saved3-Options-GIMP.png" class="savedOptions3" id="savedOptions3" onclick="savedOptions3()"> 
+    </div>
+
+    <!-- <div class="delayCallDiv">
+      <label class="delayCallLabel" for="ESP32DelayCallTextBox">delay call duration</label>
+      <input class="ESP32DelayCallText" type="text" name="ESP32CommandDelayCallBox" id="ESP32DelayCallTextBox" value="00000">
+
+    </div> -->
 
     <!-- <img src="Images/Dome/DomeOutline.png" class="domePicture" alt="image for the dome">
     <img src="Images/Dome/Door1Blue.png" class="domePicture" alt="image for the dome"> -->
@@ -4833,17 +4894,143 @@
       <div class="menuheader">
         <h1 class="">sounds</h1>
       </div>
-      
-  
-  
-  
-  
-  
-  
+
+      <div class="menu-Level-1">
+        <div class="menu-Level-1-Links active move " >
+          <button class="active" rel="GeneralSounds"><img
+            class="buttonwidth"
+            id ="transparent"
+            src="Images/Button-Sound-General.png"
+            alt="button for General Sound"
+          /></button>
         </div>
+
+        <div class="menu-Level-1-Links move1 " >
+          <button class="" rel="chatSounds"><img
+            class="buttonwidth"
+            id ="transparent"
+            src="Images/Button-Sound-chat.png"
+            alt="button for General Sound"
+          /></button>
+        </div>
+        <div class="menu-Level-1-Links move2 " >
+          <button class="" rel="HappySadSounds"><img
+            class="buttonwidth"
+            id ="transparent"
+            src="Images/Button-Sound-happySad.png"
+            alt="button for General Sound"
+          /></button>
+        </div>
+        <div class="menu-Level-1-Links move3 " >
+          <button class="" rel="ScreamWhistleSounds"><img
+            class="buttonwidth"
+            id ="transparent"
+            src="Images/Button-Sound-ScreamWhistle.png"
+            alt="button for General Sound"
+          /></button>
+        </div>
+        <div class="menu-Level-1-Links move4 " >
+          <button class="" rel="MusicSounds"><img
+            class="buttonwidth"
+            id ="transparent"
+            src="Images/Button-Sound-Music.png"
+            alt="button for General Sound"
+          /></button>
+        </div>
+
+        <div class="menu-Level-1-Content active" id="GeneralSounds">
+          <h2 class="genSoundHeader">general</h2>
+          <img src="Images/Button-Sound-Gen1.png" class="genSound1" id="genSound1" onclick="playSound('001')"> 
+          <img src="Images/Button-Sound-Gen2.png" class="genSound2" id="genSound2" onclick="playSound('002')"> 
+          <img src="Images/Button-Sound-Gen3.png" class="genSound3" id="genSound3" onclick="playSound('003')"> 
+          <img src="Images/Button-Sound-Gen4.png" class="genSound4" id="genSound4" onclick="playSound('004')"> 
+          <img src="Images/Button-Sound-Gen5.png" class="genSound5" id="genSound5" onclick="playSound('005')"> 
+          <img src="Images/Button-Sound-Gen6.png" class="genSound6" id="genSound6" onclick="playSound('006')"> 
+          <img src="Images/Button-Sound-Gen7.png" class="genSound7" id="genSound7" onclick="playSound('007')"> 
+          <img src="Images/Button-Sound-Gen8.png" class="genSound8" id="genSound8" onclick="playSound('008')"> 
+          <img src="Images/Button-Sound-Gen9.png" class="genSound9" id="genSound9" onclick="playSound('009')"> 
+          <img src="Images/Button-Sound-Gen10.png" class="genSound10" id="genSound10" onclick="playSound('010')"> 
+          <img src="Images/Button-Sound-Gen11.png" class="genSound11" id="genSound11" onclick="playSound('011')"> 
+          <img src="Images/Button-Sound-Gen12.png" class="genSound12" id="genSound12" onclick="playSound('012')"> 
+          <img src="Images/Button-Sound-Gen13.png" class="genSound13" id="genSound13" onclick="playSound('013')"> 
+          <img src="Images/Button-Sound-Gen14.png" class="genSound14" id="genSound14" onclick="playSound('014')"> 
+          <img src="Images/Button-Sound-Gen15.png" class="genSound15" id="genSound15" onclick="playSound('015')"> 
+          <img src="Images/Button-Sound-Gen16.png" class="genSound16" id="genSound16" onclick="playSound('016')"> 
+          <img src="Images/Button-Sound-Gen17.png" class="genSound17" id="genSound17" onclick="playSound('017')"> 
+          <img src="Images/Button-Sound-Gen18.png" class="genSound18" id="genSound18" onclick="playSound('018')"> 
+          <img src="Images/Button-Sound-Gen19.png" class="genSound19" id="genSound19" onclick="playSound('019')"> 
+        </div>
+
+        <div class="menu-Level-1-Content " id="chatSounds">
+          <h2 class="chatSoundHeader">chat</h2>
+          <img src="Images/Button-Sound-Gen1.png" class="genSound1" id="genSound1" onclick="playSound('026')"> 
+          <img src="Images/Button-Sound-Gen2.png" class="genSound2" id="genSound2" onclick="playSound('027')"> 
+          <img src="Images/Button-Sound-Gen3.png" class="genSound3" id="genSound3" onclick="playSound('028')"> 
+          <img src="Images/Button-Sound-Gen4.png" class="genSound4" id="genSound4" onclick="playSound('029')"> 
+          <img src="Images/Button-Sound-Gen5.png" class="genSound5" id="genSound5" onclick="playSound('030')"> 
+          <img src="Images/Button-Sound-Gen6.png" class="genSound6" id="genSound6" onclick="playSound('031')"> 
+          <img src="Images/Button-Sound-Gen7.png" class="genSound7" id="genSound7" onclick="playSound('032')"> 
+          <img src="Images/Button-Sound-Gen8.png" class="genSound8" id="genSound8" onclick="playSound('033')"> 
+          <img src="Images/Button-Sound-Gen9.png" class="genSound9" id="genSound9" onclick="playSound('034')"> 
+          <img src="Images/Button-Sound-Gen10.png" class="genSound10" id="genSound10" onclick="playSound('035')"> 
+          <img src="Images/Button-Sound-Gen11.png" class="genSound11" id="genSound11" onclick="playSound('036')"> 
+          <img src="Images/Button-Sound-Gen12.png" class="genSound12" id="genSound12" onclick="playSound('037')"> 
+          <img src="Images/Button-Sound-Gen13.png" class="genSound13" id="genSound13" onclick="playSound('038')"> 
+          <img src="Images/Button-Sound-Gen14.png" class="genSound14" id="genSound14" onclick="playSound('039')"> 
+          <img src="Images/Button-Sound-Gen15.png" class="genSound15" id="genSound15" onclick="playSound('040')"> 
+          <img src="Images/Button-Sound-Gen16.png" class="genSound16" id="genSound16" onclick="playSound('041')"> 
+          <img src="Images/Button-Sound-Gen17.png" class="genSound17" id="genSound17" onclick="playSound('042')"> 
+          <img src="Images/Button-Sound-Gen18.png" class="genSound18" id="genSound18" onclick="playSound('043')"> 
+        </div>
+
+        <div class="menu-Level-1-Content " id="HappySadSounds">
+          <h2 class="chatSoundHeader">happy</h2>
+          <img src="Images/Button-Sound-Gen1.png" class="genSound1" id="genSound1" onclick="playSound('051')"> 
+          <img src="Images/Button-Sound-Gen2.png" class="genSound2" id="genSound2" onclick="playSound('052')"> 
+          <img src="Images/Button-Sound-Gen3.png" class="genSound3" id="genSound3" onclick="playSound('053')"> 
+          <img src="Images/Button-Sound-Gen4.png" class="genSound4" id="genSound4" onclick="playSound('054')"> 
+          <img src="Images/Button-Sound-Gen5.png" class="genSound5" id="genSound5" onclick="playSound('055')"> 
+          <img src="Images/Button-Sound-Gen6.png" class="genSound6" id="genSound6" onclick="playSound('056')"> 
+          <img src="Images/Button-Sound-Gen7.png" class="genSound7" id="genSound7" onclick="playSound('057')"> 
+          <h2 class="sadSoundHeader">sad</h2>
+          <img src="Images/Button-Sound-Gen1.png" class="sadSound1" id="genSound8" onclick="playSound('076')"> 
+          <img src="Images/Button-Sound-Gen2.png" class="sadSound2" id="genSound8" onclick="playSound('077')"> 
+          <img src="Images/Button-Sound-Gen3.png" class="sadSound3" id="genSound8" onclick="playSound('078')"> 
+          <img src="Images/Button-Sound-Gen4.png" class="sadSound4" id="genSound8" onclick="playSound('079')"> 
+        </div>
+
+        <div class="menu-Level-1-Content " id="ScreamWhistleSounds">
+          <h2 class="chatSoundHeader">screams</h2>
+          <img src="Images/Button-Sound-Gen1.png" class="genSound1" id="genSound1" onclick="playSound('126')"> 
+          <img src="Images/Button-Sound-Gen2.png" class="genSound2" id="genSound2" onclick="playSound('127')"> 
+          <img src="Images/Button-Sound-Gen3.png" class="genSound3" id="genSound3" onclick="playSound('128')"> 
+          <h2 class="sadSoundHeader">whistle</h2>
+          <img src="Images/Button-Sound-Gen1.png" class="sadSound1" id="genSound8" onclick="playSound('101')"> 
+          <img src="Images/Button-Sound-Gen2.png" class="sadSound2" id="genSound8" onclick="playSound('102')"> 
+          <img src="Images/Button-Sound-Gen3.png" class="sadSound3" id="genSound8" onclick="playSound('103')"> 
+        </div>
+
+        <div class="menu-Level-1-Content " id="MusicSounds">
+          <h2 class="chatSoundHeader">music</h2>
+          <img src="Images/Button-Sound-Gen1.png" class="genSound1" id="genSound1" onclick="playSound('176')"> 
+          <img src="Images/Button-Sound-Gen2.png" class="genSound2" id="genSound2" onclick="playSound('177')"> 
+          <img src="Images/Button-Sound-Gen3.png" class="genSound3" id="genSound3" onclick="playSound('178')"> 
+          <img src="Images/Button-Sound-Gen4.png" class="genSound4" id="genSound4" onclick="playSound('179')"> 
+          <img src="Images/Button-Sound-Gen5.png" class="genSound5" id="genSound5" onclick="playSound('180')"> 
+          <img src="Images/Button-Sound-Gen6.png" class="genSound6" id="genSound6" onclick="playSound('181')"> 
+          <img src="Images/Button-Sound-Gen7.png" class="genSound7" id="genSound7" onclick="playSound('255')"> 
+          <h2 class="sadSoundHeader">leia sounds</h2>
+          <img src="Images/Button-Sound-Gen1.png" class="sadSound1" id="genSound8" onclick="playSound('151')"> 
+          <img src="Images/Button-Sound-Gen2.png" class="sadSound2" id="genSound8" onclick="playSound('152')"> 
+          <img src="Images/Button-Sound-Gen3.png" class="sadSound3" id="genSound8" onclick="playSound('153')"> 
+        </div>
+  
       </div>
   
     </div>
+  </div>
+  
+</div>
 
 
 

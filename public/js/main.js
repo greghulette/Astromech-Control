@@ -371,7 +371,7 @@ function HPLEDFunctionExecution(t) {
 
 function bodyServoFunctionExecution(t) {
   var BSCommand = t;
-  var bodyServoControllerSPURL = "http://192.168.4.101/?param0=ESP";
+  var bodyServoControllerSPURL = "http://192.168.4.101/?param0=enSerial";
 
   var bodyServiControllerFullURL = bodyServoControllerSPURL + BSCommand;
   console.log(bodyServiControllerFullURL);
@@ -425,29 +425,52 @@ function RSeriesLEDFunctionExecution(t) {
 
 
 
-function servoControl(y, z) {
+function servoControl(z) {
   console.log("Servo Command Accepted")
+  var easingMethod = document.getElementById('ServoEasingSelectionBox');
+  var easingMethodSelection = (easingMethod.options[easingMethod.selectedIndex].value);
+  var varspeedMin = document.getElementById('ESP32varSpeedMinTextBox').value;
+  var varspeedMinInt = parseInt(varspeedMin);
+  var varspeedMinText = (varspeedMinInt).toLocaleString('en-US', { minimumIntegerDigits: 4, useGrouping: false });
+
+  var varspeedMax = document.getElementById('ESP32varSpeedMaxTextBox').value;
+  var varspeedMaxInt = parseInt(varspeedMax);
+  var varspeedMaxText = (varspeedMaxInt).toLocaleString('en-US', { minimumIntegerDigits: 4, useGrouping: false });
+
+  var delayCallID = document.getElementById('ESP32DelayCallTextBox').value;
+  var delayCallInt = parseInt(delayCallID);
+  var delayCallText = (delayCallInt).toLocaleString('en-US', { minimumIntegerDigits: 5, useGrouping: false });
+
+  console.log("Easing Method: " + easingMethodSelection);
+  console.log(typeof (easingMethodSelection));
+  console.log("Min Int: " + varspeedMinInt);
+  console.log("Min Text: " + varspeedMinText);
+  console.log("Max Int: " + varspeedMaxInt);
+  console.log("Max Text: " + varspeedMaxText);
+  console.log("Delay call: " + delayCallText);
+
+  console.log(varspeedMax);
   if (servoBoardSelectorGlobal == 'body') {
-    let bodyServoCommandParam = "&param1=D1" + z;
+    let bodyServoCommandParam = "&param1=D1" + z + "E" + easingMethodSelection + varspeedMinText + varspeedMaxText;
     let fullBodyServoURL = bodyServoCommandParam
     bodyServoFunctionExecution(fullBodyServoURL);
     console.log("Body Selected")
   }
-  if (servoBoardSelectorGlobal == 'dome') {
-    let domeServoCommandParam = "&param1=D2" + z;
-    let fullDomeServoURL = domeServoCommandParam
-    domeServoFunctionExecution(fullDomeServoURL);
+  else if (servoBoardSelectorGlobal == 'dome') {
+    let bodyServoCommandParam = "&param1=D2" + z + "E" + easingMethodSelection + varspeedMinText + varspeedMaxText;
+    let fullBodyServoURL = bodyServoCommandParam
+    bodyServoFunctionExecution(fullBodyServoURL);
   }
-  if (CurrentDirection == 'BodyFirst') {
-    let bodyServoCommandParam = "&param1=D3" + z;
+  else if (CurrentDirection == 'BodyFirst') {
+    let bodyServoCommandParam = "&param1=D3" + z + "B" + easingMethodSelection + varspeedMinText + varspeedMaxText + delayCallText;
     let fullBodyServoURL = bodyServoCommandParam
     bodyServoFunctionExecution(fullBodyServoURL);
     // let domeServoCommandParam = "&param1=S02DSD" + z;
     // let fullDomeServoURL = domeServoCommandParam
     // domeServoFunctionExecution(fullDomeServoURL);
   }
-  if (CurrentDirection == 'DomeFirst') {
-    let bodyServoCommandParam = "&param1=D4" + z;
+  else if (CurrentDirection == 'DomeFirst') {
+    let bodyServoCommandParam = "&param1=D4" + z + "B" + easingMethodSelection + varspeedMinText + varspeedMaxText + delayCallText;
     let fullBodyServoURL = bodyServoCommandParam
     bodyServoFunctionExecution(fullBodyServoURL);
     // let domeServoCommandParam = "&param1=S02DSD" + z;
@@ -455,6 +478,53 @@ function servoControl(y, z) {
     // domeServoFunctionExecution(fullDomeServoURL);
   }
 }
+function clearOptions() {
+  document.getElementById('ServoEasingSelectionBox').value = "00";
+  document.getElementById('ESP32varSpeedMinTextBox').value = "0000";
+  document.getElementById('ESP32varSpeedMaxTextBox').value = "0000";
+  document.getElementById('ESP32DelayCallTextBox').value = "00000";
+}
+function savedOptions1() {
+  document.getElementById('ServoEasingSelectionBox').value = "30";
+  document.getElementById('ESP32varSpeedMinTextBox').value = "1000";
+  document.getElementById('ESP32varSpeedMaxTextBox').value = "0000";
+  document.getElementById('ESP32DelayCallTextBox').value = "00050";
+}
+
+function savedOptions2() {
+  document.getElementById('ServoEasingSelectionBox').value = "30";
+  document.getElementById('ESP32varSpeedMinTextBox').value = "1000";
+  document.getElementById('ESP32varSpeedMaxTextBox').value = "2500";
+  document.getElementById('ESP32DelayCallTextBox').value = "00050";
+}
+function savedOptions3() {
+  document.getElementById('ServoEasingSelectionBox').value = "31";
+  document.getElementById('ESP32varSpeedMinTextBox').value = "2000";
+  document.getElementById('ESP32varSpeedMaxTextBox').value = "4000";
+  document.getElementById('ESP32DelayCallTextBox').value = "00050";
+}
+
+function animateServo(t) {
+  var animationURL = "http://192.168.4.101/?param0=enSerial&param1=";
+  let animationFullURL = animationURL + t;
+  console.log(animationFullURL);
+  httpGet(animationFullURL);
+
+}
+
+function playSound(t) {
+  var sound = t;
+  var playsoundURL = "http://192.168.4.101/?param0=ESP&param1=SMPt";
+  var playSoundFullPURL = playsoundURL + sound;
+  console.log(playSoundFullPURL);
+  if (DomeControllerStatus === true) {
+    httpGet(playSoundFullPURL);
+
+  } else {
+    console.log('Dome Controller Not Online')
+  }
+
+};
 
 var servoBoardSelectorGlobal = 'BodyFirst';
 function servoBoardSelector(x) {
@@ -10575,7 +10645,7 @@ function ESP32SendCommand(b, x) {
   // var ESP32DeviceSelected = (ESP32Device.options[ESP32Device.selectedIndex].value);
   console.log('Device: ' + ESP32DeviceSelected);
   if (ESP32DeviceSelected === "PL") {
-    var periscopeControllerIP = 'http://192.168.4.101/?param0=enSerial&param1=S02PL';
+    var periscopeControllerIP = 'http://192.168.4.101/?param0=enSerial&param1=N02PL';
     var periscopeLifterFullURL = periscopeControllerIP + ESP32commandUpper;
     httpGet(periscopeLifterFullURL);
     console.log(periscopeLifterFullURL);
@@ -10695,33 +10765,33 @@ function getPeriscope(s, t, u) {
   let periscopeFunction = s;
   if (periscopeFunction === 'D' && t === 'RotateClockwiseRelative') {
     let periscopeRelativeDeg = document.getElementById(t).value;
-    let periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=S02PL:P" + periscopeFunction + '-';
+    let periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=N01PL:P" + periscopeFunction + '-';
     let periscopeESPFullURL = periscopeESPURL + periscopeRelativeDeg + ',' + speedValue;;
     httpGet(periscopeESPFullURL);
   } else if (periscopeFunction === 'D' && t === 'RotateCounterClockwiseRelative') {
     let periscopeRelativeDeg = document.getElementById(t).value;
-    let periscopeESPURL = "hhttp://192.168.4.101/?param0=enSerial&param1=S02PL:P" + periscopeFunction;
+    let periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=N01PL:P" + periscopeFunction;
     let periscopeESPFullURL = periscopeESPURL + periscopeRelativeDeg + ',' + speedValue;;
     httpGet(periscopeESPFullURL);
   } else if (periscopeFunction === 'R' && t === 'RotateClockwiseContinous') {
-    let periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=S02PL:P" + periscopeFunction + '-';
+    let periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=N01PL:P" + periscopeFunction + '-';
     let periscopeESPFullURL = periscopeESPURL + speedValue;;
     httpGet(periscopeESPFullURL);
   } else if (periscopeFunction === 'R' && t === 'RotateCounterClockwiseContinous') {
-    let periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=S02PL:P" + periscopeFunction;
+    let periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=N01PL:P" + periscopeFunction;
     let periscopeESPFullURL = periscopeESPURL + speedValue;;
     httpGet(periscopeESPFullURL);
   } else if (periscopeFunction === 'AR' || periscopeFunction === 'PR') {
-    let periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=S02PL:P" + periscopeFunction;
+    let periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=N01PL:P" + periscopeFunction;
     let periscopeESPFullURL = periscopeESPURL + ',' + speedValue;
     httpGet(periscopeESPFullURL);
   } else if (periscopeFunction === 'S') {
-    let periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=S02PL:P" + periscopeFunction;
+    let periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=N01PL:P" + periscopeFunction;
     let periscopeESPFullURL = periscopeESPURL + t;
     httpGet(periscopeESPFullURL);
   } else {
     var periscopeHeight = t;
-    var periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=S02PL:P" + periscopeFunction
+    var periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=N01PL:P" + periscopeFunction
     let periscopeESPFullURL = periscopeESPURL + periscopeHeight + ',' + speedValue;;
     // console.log(periscopeESPFullURL);
     httpGet(periscopeESPFullURL);
@@ -10737,7 +10807,7 @@ function getPeriscope(s, t, u) {
 
 function getPeriscopeRotateAbsolute(t) {
   var periscopeHeight = t;
-  var periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=S02PL:PA";
+  var periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=N01PL:PA";
   // var periscopeESPURLOutside = "http://10.0.0.230:8080/?param1=:PP";
 
   var periscopeESPFullURL = periscopeESPURL + periscopeHeight;
@@ -10753,7 +10823,7 @@ function getPeriscopeRotateAbsolute(t) {
 
 function getPeriscopeRotateAbsolute(t) {
   var periscopeHeight = t;
-  var periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=S02PL:PD";
+  var periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=N01PL:PD";
   // var periscopeESPURLOutside = "http://10.0.0.230:8080/?param1=:PP";
 
   var periscopeESPFullURL = periscopeESPURL + periscopeHeight;

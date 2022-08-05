@@ -17,13 +17,28 @@ body {
 
 .move1{
   position: absolute;
-  left: -380px;
+  left: -400px;
   top: 120px;
 }
 .move2{
   position: absolute;
   left: -400px;
   top: 220px;
+}
+.move3{
+  position: absolute;
+  left: -400px;
+  top: 320px;
+}
+.move4{
+  position: absolute;
+  left: -400px;
+  top: 420px;
+}
+.move5{
+  position: absolute;
+  left: -400px;
+  top: 520px;
 }
 .moveUpArrowLinks{
   position: absolute;
@@ -1273,7 +1288,7 @@ left: 100px;
 .HPServo{
   position: absolute;
   top: 500px;
-  left: 550px;
+  left: 750px;
   border: 3px solid white;
   width: 280px;
   height: 280px;
@@ -1635,7 +1650,7 @@ left: 10px;
 .openclosedoors{
   position: absolute;
   top: 40px;
-  left: 150px;
+  left: 100px;
   border: 3px solid white;
   height: 400px;
   width: 650px;
@@ -1889,27 +1904,27 @@ width: 100%;
   position: absolute;
   width: 20px;
   -webkit-transform: scale(2);
-  top: 250px;
-  left: 700px;
+  top: 253px;
+  left: 680px;
 }
 .BodyFirstRadioLabel{
   position: absolute;
   width: 200px;
   top: 240px;
-  left: 750px;
+  left: 720px;
 }
 .DomeFirstRadio{
   position: absolute;
   width: 20px;
   -webkit-transform: scale(2);
-  top: 280px;
-  left: 700px;
+  top: 290px;
+  left: 680px;
 }
 .DomeFirstRadioLabel{
   position: absolute;
   width: 200px;
   top: 280px;
-  left: 750px;
+  left: 720px;
 }
 .AllOpenCloseLongButton{
   height: 60px;
@@ -2225,7 +2240,7 @@ input[type="range"]::-webkit-slider-thumb {
   cursor: pointer;
   -webkit-appearance: none;
   margin-top: -11px;
-};
+}
 input[type="range"]:focus::-webkit-slider-runnable-track {
   background: Yellow;
 }
@@ -2721,3 +2736,383 @@ display: contents;
   top: -100px;
 
 }*/
+
+/* .servoEasingMethod { */
+  /* position:relative; */
+  /* top: 0px; */
+  /* left: 0px; */
+/* }; */
+
+.servoEasingOptions{
+  position: absolute;
+  border:  2px solid white;
+  top: 505px;
+  left: 100px;
+  width: 550px;
+  height: 255px;
+}
+.servoOptionsHeader{
+  position: absolute;
+  top: -70px;
+  left: 150px;
+}
+.ServoEasingPicker{
+  position: absolute;
+  top: 20px;
+  left: 350px;
+}
+
+.ESP32VarSpeedMintext{
+  position:absolute;
+  /* width: 0px; */
+  left: 240px;
+  top: 60px;
+}
+.ServoEasingLabel{
+  position: absolute;
+  top: 9px;
+  left: 15px;
+}
+.varSpeedMinLabel{
+  position: absolute;
+  top: 50px;
+  left: 15px;
+}
+
+.ESP32VarSpeedMaxtext{
+  position:absolute;
+  /* width: 0px; */
+  left: 240px;
+  top: 100px;
+}
+
+.varSpeedMaxLabel{
+  position: absolute;
+  top: 90px;
+  left: 15px;
+}
+
+
+
+.delayCallDiv{
+  position: absolute;
+  border: 2px solid white;
+  top: 700px;
+  left: 100px;
+  width: 500px;
+  height: 100px;
+}
+.ESP32DelayCallText{
+  position:absolute;
+  /* width: 0px; */
+  left: 340px;
+  top: 140px;
+}
+
+.delayCallLabel{
+  position: absolute;
+  top: 130px;
+  left: 15px;
+}
+.clearOptions{
+  position: absolute;
+  left:100px;
+  top: 190px;
+  height: 50px;
+}
+
+.savedOptions1{
+  position: absolute;
+  left: 175px;
+  top: 190px;
+  height: 50px;
+}
+
+.savedOptions2{
+  position: absolute;
+  left: 250px;
+  top: 190px;
+  height: 50px;
+}
+.savedOptions3{
+  position: absolute;
+  left: 325px;
+  top: 190px;
+  height: 50px;
+}
+
+
+
+
+
+
+
+.genSoundHeader{
+  position: absolute;
+  left: -300px;
+  top: 00px;
+}
+.chatSoundHeader{
+  position: absolute;
+  top: 0px;
+  left: -300px;
+}
+
+.sadSoundHeader{
+  position: absolute;
+  top: 300px;
+  left: -300px;
+}
+
+
+
+
+
+.genSound1{
+  position: absolute;
+  top: 150px;
+  left: -300px;
+  height: 100px;
+}
+.genSound2{
+  position: absolute;
+  top: 150px;
+  left: -200px;
+  height: 100px;
+}
+.genSound3{
+  position: absolute;
+  top: 150px;
+  left: -100px;
+  height: 100px;
+}
+.genSound4{
+  position: absolute;
+  top: 150px;
+  left: 0px;
+  height: 100px;
+}
+.genSound5{
+  position: absolute;
+  top: 150px;
+  left: 100px;
+  height: 100px;
+}
+.genSound6{
+  position: absolute;
+  top: 150px;
+  left: 200px;
+  height: 100px;
+}
+.genSound7{
+  position: absolute;
+  top: 150px;
+  left: 300px;
+  height: 100px;
+}
+.genSound8{
+  position: absolute;
+  top: 150px;
+  left: 400px;
+  height: 100px;
+}
+.genSound9{
+  position: absolute;
+  top: 150px;
+  left: 500px;
+  height: 100px;
+}
+.genSound10{
+  position: absolute;
+  top: 150px;
+  left: 600px;
+  height: 100px;
+}
+.genSound11{
+  position: absolute;
+  top: 270px;
+  left: -300px;
+  height: 100px;
+}
+.genSound12{
+  position: absolute;
+  top:270px;
+  left: -200px;
+  height: 100px;
+}
+.genSound13{
+  position: absolute;
+  top:270px;
+  left: -100px;
+  height: 100px;
+}
+.genSound14{
+  position: absolute;
+  top:270px;
+  left: 0px;
+  height: 100px;
+}
+.genSound15{
+  position: absolute;
+  top:270px;
+  left: 100px;
+  height: 100px;
+}
+.genSound16{
+  position: absolute;
+  top:270px;
+  left: 200px;
+  height: 100px;
+}
+.genSound17{
+  position: absolute;
+  top:270px;
+  left: 300px;
+  height: 100px;
+}
+.genSound18{
+  position: absolute;
+  top:270px;
+  left: 400px;
+  height: 100px;
+}
+.genSound19{
+  position: absolute;
+  top:270px;
+  left: 500px;
+  height: 100px;
+}
+
+.chatSound1{
+  position: absolute;
+  left: -300px;
+  top: 150px;
+  height: 100px;
+}
+.chatSound2{
+  position: absolute;
+  left: -200px;
+  top: 150px;
+  height: 100px;
+}
+.chatSound3{
+  position: absolute;
+  left: -100px;
+  top: 150px;
+  height: 100px;
+}
+.chatSound4{
+  position: absolute;
+  left: 0px;
+  top: 150px;
+  height: 100px;
+}
+.chatSound5{
+  position: absolute;
+  left: 100px;
+  top: 150px;
+  height: 100px;
+}
+.chatSound6{
+  position: absolute;
+  left: 200px;
+  top: 150px;
+  height: 100px;
+}
+.chatSound7{
+  position: absolute;
+  left: 300px;
+  top: 150px;
+  height: 100px;
+}
+.chatSound8{
+  position: absolute;
+  left: 400px;
+  top: 150px;
+  height: 100px;
+}
+.chatSound9{
+  position: absolute;
+  left: 500px;
+  top: 150px;
+  height: 100px;
+}
+.chatSound10{
+  position: absolute;
+  left: 600px;
+  top: 150px;
+  height: 100px;
+}
+.chatSound11{
+  position: absolute;
+  left: -300px;
+  top: 270px;
+  height: 100px;
+}
+.chatSound12{
+  position: absolute;
+  left: 110px;
+  top: 410px;
+  height: 100px;
+}
+.chatSound13{
+  position: absolute;
+  left: 210px;
+  top: 270px;
+  height: 100px;
+}
+.chatSound14{
+  position: absolute;
+  left: 310px;
+  top: 410px;
+  height: 100px;
+}
+.chatSound15{
+  position: absolute;
+  left: 410px;
+  top: 410px;
+  height: 100px;
+}
+.chatSound16{
+  position: absolute;
+  left: 510px;
+  top: 410px;
+  height: 100px;
+}
+.chatSound17{
+  position: absolute;
+  left: 610px;
+  top: 410px;
+  height: 100px;
+}
+.chatSound18{
+  position: absolute;
+  left: 7100px;
+  top: 410px;
+  height: 100px;
+}
+
+.sadSound1{
+  position: absolute;
+  top: 405px;
+  left: -300px;
+  height: 100px;
+}
+.sadSound2{
+  position: absolute;
+  top: 405px;
+  left: -200px;
+  height: 100px;
+}
+.sadSound3{
+  position: absolute;
+  top: 405px;
+  left: -100px;
+  height: 100px;
+}
+.sadSound4{
+  position: absolute;
+  top: 405px;
+  left: 00px;
+  height: 100px;
+}

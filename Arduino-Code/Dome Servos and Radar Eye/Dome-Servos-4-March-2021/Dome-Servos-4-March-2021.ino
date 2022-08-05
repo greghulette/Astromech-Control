@@ -233,7 +233,7 @@ int doors[][10] = { //{Board Position, Closed Value, Opened Value, Alt Group, St
                      { 7,360,250,0,0,325,-1},   // Pie Panel over radar ey aNd front logic
                      { 8,365,250,1,0,325,-1},   // Pie Panel over radar eye and front HP
                      { 9,360,250,0,0,325,-1},   // Pie Panel next to HP over Medium Painted Door
-                 };
+                  };
 int doorCount = (sizeof(doors) / sizeof(doors[0]));   //  Determines number of doors.
 
 
