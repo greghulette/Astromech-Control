@@ -7,3 +7,6 @@ To-Do for website
 1. create icons for camera, PSI's, and all dome panels
 2. add enable wifi for all esp-now boards
 3. Add Reset for all Boards 
+4. write functionality for door servo 
+5. create led function for radar eye 
+6. create led function for PSI 
