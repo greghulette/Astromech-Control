@@ -1113,6 +1113,17 @@ shadow: 2px, 4px 15px blue;
   height:40px;
 }
 
+.r2menupictureLargePanel{
+  position: absolute;
+  left: -395px;
+  top: 165px;
+  height: 165px;
+  transform: rotate(329deg);
+}
+
+
+
+
 .selectNone {
   position: absolute;
   left: -815px;
