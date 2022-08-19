@@ -30,69 +30,164 @@ function openAllDoorsMS() {
 
 
 var BodyControllerStatus = false;
+var PeriscopeControllerStatus = false;
 var PerisopeLifterStatus = false;
 var DomeControllerStatus = false
 var StealthControllerStatus = false
 var DomeServoStatus = false
-var BodyServoStatus = false
+var BodyServoControllerStatus = false
+var batteryPercent = 0
+var LDPBright = 0
+var MaintBright = 0
+var VUBright = 0
+var CoinBright = 0
+var VUIntOffset = 0
+var VUIntBaseline = 0
+var VUExtOffset = 0
+var VUExtBaseline = 0
 
-
-
-function checkPeriscopeLifterStatus() {
-  const before = new Date();
-  var request = new XMLHttpRequest();
-  request.timeout = 1000;
-  request.open('GET', 'http://192.168.4.101', true);
-  request.onreadystatechange = function () {
-
-    if (request.readyState === 4) {
-      if (request.status === 200) {
-        document.getElementById("PeriscopeLifterIcon").src = "./Images/Status-icon-Green.png";
-        document.getElementById("PLStatusText").style.color = "black";
-
-        PerisopeLifterStatus = true;
-      }
-      else {
-        document.getElementById("PeriscopeLifterIcon").src = "./Images/Status-icon-Red.png";
-        document.getElementById("PLStatusText").style.color = "white";
-
-        PerisopeLifterStatus = false;
-      }
+function httpGetStatus() {
+  let theStatusURL = "http://192.168.4.101/status"
+  var req = new XMLHttpRequest();
+  req.responseType = 'json';
+  req.open('GET', theStatusURL, true);
+  req.onload = function () {
+    var jsonResponse = req.response;
+    // do something with jsonResponse
+    // console.log(typeof (jsonResponse));
+    console.log(jsonResponse);
+    if (jsonResponse.BodyController == "Online") {
+      // console.log("Body Controller Online");
+      BodyControllerStatus = true;
+    } else {
+      console.log("Body Controller Offline");
+      BodyControllerStatus = false;
     }
-  };
+    if (jsonResponse.BodyServo == "Online") {
+      // console.log("Body Servo Controller Online");
+      BodyServoControllerStatus = true;
 
-  request.send();
+    } else {
+      console.log("Body Servo Controller Offline");
+      BodyServoControllerStatus = false;
+    }
+    if (jsonResponse.Dome == "Online") {
+      // console.log("Dome Controller Online");
+      DomeControllerStatus = true;
+
+    } else {
+      console.log("Dome Controller Offline");
+      DomeControllerStatus = false;
+    }
+    if (jsonResponse.Periscope == "Online") {
+      // console.log("Persicope Controller Online");
+      PeriscopeControllerStatus = true;
+    } else {
+      console.log("Periscope Controller Offline");
+      PeriscopeControllerStatus = false;
+    }
+    if (jsonResponse.LDPBright > 0) {
+      // console.log("Dome Controller Online");
+      var ldpBright = jsonResponse.LDPBright;
+      // console.log(ldpBright);
+
+    } else {
+      console.log("nothing Controller Offline");
+    };
+    if (jsonResponse.BatteryVoltage > 0) {
+      // console.log("Dome Controller Online");
+      var batteryVoltage = jsonResponse.BatteryVoltage;
+      // console.log(batteryVoltage);
+      document.getElementById('droidBatteryPar').innerText = batteryVoltage.toFixed(2);
+
+    } else {
+      console.log("No Battery Voltage");
+    }
+    if (jsonResponse.BatteryPercent > 0) {
+      // console.log("Dome Controller Online");
+      batteryPercent = jsonResponse.BatteryPercent;
+      // console.log(batteryPercent);
+      document.getElementById('DroidbatteryChargeLevelDiv').innerHTML = batteryPercent;
+
+    } else {
+      document.getElementById('DroidbatteryChargeLevelDiv').innerText = "--";
+
+      console.log("No Battery percentage");
+    }
+    if (jsonResponse.LDPBright > 0) {
+      LDPBright = jsonResponse.LDPBright;
+      document.getElementById('LDPBrightnessRange').value = LDPBright;
+      document.getElementById('LDPBrightnesssliderAmount').innerHTML = LDPBright;
+    }
+    if (jsonResponse.MaintBright > 0) {
+      MaintBright = jsonResponse.MaintBright;
+      document.getElementById('MaintBrightnessRange').value = MaintBright;
+      document.getElementById('MaintBrightnesssliderAmount').innerHTML = MaintBright;
+    }
+    if (jsonResponse.VUBright > 0) {
+      VUBright = jsonResponse.VUBright;
+      document.getElementById('VUBrightnessRange').value = VUBright;
+      document.getElementById('VUBrightnesssliderAmount').innerHTML = VUBright;
+    }
+    if (jsonResponse.CoinBright > 0) {
+      CoinBright = jsonResponse.CoinBright;
+      document.getElementById('CoinBrightnessRange').value = CoinBright;
+      document.getElementById('CoinBrightnesssliderAmount').innerHTML = CoinBright;
+    }
+    if (jsonResponse.VUIntOffset > 0) {
+      VUIntOffset = jsonResponse.VUIntOffset;
+      document.getElementById('IntOffsetParam').value = VUIntOffset;
+      document.getElementById('IntOffsetsliderAmount').innerHTML = VUIntOffset;
+    }
+    if (jsonResponse.VUIntBaseline > 0) {
+      VUIntBaseline = jsonResponse.VUIntBaseline;
+      document.getElementById('IntBaselineParam').value = VUIntBaseline;
+      document.getElementById('IntBaselinesliderAmount').innerHTML = VUIntBaseline;
+    }
+    if (jsonResponse.VUExtOffset > 0) {
+      VUExtOffset = jsonResponse.VUExtOffset;
+      document.getElementById('ExtOffsetParam').value = VUExtOffset;
+      document.getElementById('ExtOffsetsliderAmount').innerHTML = VUExtOffset;
+    }
+    if (jsonResponse.VUExtBaseline > 0) {
+      VUExtBaseline = jsonResponse.VUExtBaseline;
+      document.getElementById('ExtBaselineParam').value = VUExtBaseline;
+      document.getElementById('ExtBaselinesliderAmount').innerHTML = VUExtBaseline;
+    }
+  }
+  req.onerror = function (error) {
+    // console.log(error);
+    BodyServoControllerStatus = false;
+    BodyControllerStatus = false;
+    PeriscopeControllerStatus = false;
+    DomeControllerStatus = false;
+    batteryPercent = 0;
+  }
+  req.send(null)
+}
+function checkPeriscopeLifterStatus() {
+  if (PeriscopeControllerStatus == true) {
+    document.getElementById("PeriscopeLifterIcon").src = "./Images/Status-icon-Green.png";
+    document.getElementById("PLStatusText").style.color = "black";
+  }
+  else {
+    document.getElementById("PeriscopeLifterIcon").src = "./Images/Status-icon-Red.png";
+    document.getElementById("PLStatusText").style.color = "white";
+  }
 };
-
 
 function checkBodyLEDControllerStatus() {
-  const before = new Date();
-  var request = new XMLHttpRequest();
-  request.timeout = 1000;
-  request.open('GET', 'http://192.168.4.101', true);
-  request.onreadystatechange = function () {
+  if (BodyControllerStatus == true) {
 
-    if (request.readyState === 4) {
-      if (request.status === 200) {
-        document.getElementById("BodyLEDControllerIcon").src = "./Images/Status-icon-Green.png";
-        document.getElementById("BCStatusText").style.color = "black";
-
-        BodyControllerStatus = true;
-
-      }
-      else {
-        document.getElementById("BodyLEDControllerIcon").src = "./Images/Status-icon-Red.png";
-        document.getElementById("BCStatusText").style.color = "white";
-
-        BodyControllerStatus = false;
-
-      }
-    }
-  };
-
-  request.send();
-
+    document.getElementById("BodyLEDControllerIcon").src = "./Images/Status-icon-Green.png";
+    document.getElementById("BCStatusText").style.color = "black";
+  }
+  else {
+    document.getElementById("BodyLEDControllerIcon").src = "./Images/Status-icon-Red.png";
+    document.getElementById("BCStatusText").style.color = "white";
+  }
 };
+
 
 function resetArduino() {
   var HPControllerSPURL = "http://192.168.4.101/?param0=ArduinoReset";
@@ -107,125 +202,86 @@ function resetArduino() {
   } else {
     console.log('Dome Controller Not Online')
   }
-
-
 }
 function checkDomeControllerStatus() {
-  const before = new Date();
-  var request = new XMLHttpRequest();
-  request.timeout = 1000;
-  request.open('GET', 'http://192.168.4.101', true);
-  // request.open("GET", "http://AstromechRemote:8000/BatteryCapacity.txt", true);
+  if (DomeControllerStatus === true) {
 
-  request.onreadystatechange = function () {
-
-    if (request.readyState === 4) {
-      if (request.status === 200) {
-        document.getElementById("DCIcon").src = "./Images/Status-icon-Green.png";
-        document.getElementById("DCStatusText").style.color = "black";
-        DomeControllerStatus = true;
-
-      }
-      else {
-        document.getElementById("DCIcon").src = "./Images/Status-icon-Red.png";
-        document.getElementById("DCStatusText").style.color = "white";
-        DomeControllerStatus = false;
-
-      }
-    }
-  };
-
-  request.send();
-
+    document.getElementById("DCIcon").src = "./Images/Status-icon-Green.png";
+    document.getElementById("DCStatusText").style.color = "black";
+  }
+  else {
+    document.getElementById("DCIcon").src = "./Images/Status-icon-Red.png";
+    document.getElementById("DCStatusText").style.color = "white";
+  }
 };
-
-function checkStealthControllerStatus() {
-  const before = new Date();
-  var request = new XMLHttpRequest();
-  request.timeout = 1000;
-  request.open('GET', 'http://192.168.4.101', true);
-  // request.open("GET", "http://AstromechRemote:8000/BatteryCapacity.txt", true);
-
-  request.onreadystatechange = function () {
-
-    if (request.readyState === 4) {
-      if (request.status === 200) {
-        document.getElementById("StealthIcon").src = "./Images/Status-icon-Green.png";
-        document.getElementById("StealthStatusText").style.color = "black";
-        StealthStatus = true;
-
-      }
-      else {
-        document.getElementById("StealthIcon").src = "./Images/Status-icon-Red.png";
-        document.getElementById("StealthStatusText").style.color = "white";
-        StealthStatus = false;
-
-      }
-    }
-  };
-
-  request.send();
-
-};
-
-function checkDomeServoStatus() {
-  const before = new Date();
-  var request = new XMLHttpRequest();
-  request.timeout = 1000;
-  request.open('GET', 'http://192.168.4.101', true);
-  // request.open("GET", "http://AstromechRemote:8000/BatteryCapacity.txt", true);
-
-  request.onreadystatechange = function () {
-
-    if (request.readyState === 4) {
-      if (request.status === 200) {
-        document.getElementById("DSIcon").src = "./Images/Status-icon-Green.png";
-        document.getElementById("DSStatusText").style.color = "black";
-        DomeServoStatus = true;
-
-      }
-      else {
-        document.getElementById("DSIcon").src = "./Images/Status-icon-Red.png";
-        document.getElementById("DSStatusText").style.color = "white";
-        DomeServoStatus = false;
-
-      }
-    }
-  };
-
-  request.send();
-
-};
-
 
 function checkBodyServoStatus() {
-  const before = new Date();
-  var request = new XMLHttpRequest();
-  request.timeout = 1000;
-  request.open('GET', 'http://192.168.4.101', true);
-  // request.open("GET", "http://AstromechRemote:8000/BatteryCapacity.txt", true);
+  if (BodyServoControllerStatus === true) {
 
-  request.onreadystatechange = function () {
+    document.getElementById("BSIcon").src = "./Images/Status-icon-Green.png";
+    document.getElementById("BSStatusText").style.color = "black";
 
-    if (request.readyState === 4) {
-      if (request.status === 200) {
-        document.getElementById("BSIcon").src = "./Images/Status-icon-Green.png";
-        document.getElementById("BSStatusText").style.color = "black";
-        BodyServoStatus = true;
+  }
+  else {
+    document.getElementById("BSIcon").src = "./Images/Status-icon-Red.png";
+    document.getElementById("BSStatusText").style.color = "white";
 
-      }
-      else {
-        document.getElementById("BSIcon").src = "./Images/Status-icon-Red.png";
-        document.getElementById("BSStatusText").style.color = "white";
-        BodyServoStatus = false;
+  }
 
-      }
-    }
-  };
-
-  request.send();
 
 };
+
+function GetDroidBatteryLevel() {
+  // // var req = new XMLHttpRequest();
+  // // req.open('GET', 'http://10.0.0.40:8000/BatteryCapacity.txt', true);
+  // // req.send();
+  // // // if (req.status == 200) {
+  // // //   dump(req.responseText);
+  // // // }
+  // var connected = "good";
+  // var textLower = "";
+  // var file = new XMLHttpRequest();
+  // // var batteryLevelInt;
+  var greenLevel = 40;
+  var yellowLevel = 20;
+  var redLevel = 19;
+
+  // file.timeout = 1000;
+  // file.open("GET", "http://AstromechRemote:8000/BatteryCapacity.txt", true);
+  // file.onreadystatechange = function () {
+  //   // console.log("Something")
+  //   if (file.readyState === 4) {
+  //     if (file.status == 200) {
+  //       text = file.responseText;
+  // let droidBatteryLevelInt = parseInt(batteryPercent)
+  // console.log(batteryLevelInt);
+  document.getElementById("DroidbatteryChargeLevelDiv").innerHTML = batteryPercent;
+  // console.log("Droid Battery: " + batteryPercent);
+  if (greenLevel < batteryPercent && batteryPercent <= 100) {
+    // console.log("Green Level Selected");
+    document.getElementById("DroidbatteryIcon").src = "./Images/batteryIcon-Green.png";
+  } else if (yellowLevel < batteryPercent && batteryPercent < greenLevel) {
+    // console.log("Yellow Level Selected");
+    document.getElementById("DroidbatteryIcon").src = "./Images/batteryIcon-Yellow.png";
+
+  } else if (1 < batteryPercent && batteryPercent < redLevel) {
+    // console.log("Yellow Level Selected");
+    document.getElementById("DroidbatteryIcon").src = "./Images/batteryIcon-Red.png";
+
+  }
+  else {
+    // console.log("Not Communicating")
+    document.getElementById("DroidbatteryIcon").src = "./Images/batteryIcon-Grey.png";
+  }
+  // if (textLower.includes(connected)) {
+  //   console.log("Yes")
+  //   document.getElementById("batteryIcon").src = "./Images/Status-Icon-Green.png";
+  // };
+
+  // console.log(text);
+}
+
+
 
 function GetBatteryLevel() {
   // var req = new XMLHttpRequest();
@@ -272,8 +328,13 @@ function GetBatteryLevel() {
 
         // console.log(text);
       }
+      else {
+        document.getElementById("batteryIcon").src = "./Images/batteryIcon-Grey.png";
+        document.getElementById("batteryChargeLevel").innerText = "--";
+      }
     }
     else {
+
 
 
     }
@@ -324,19 +385,20 @@ function GetBatteryConnection() {
 };
 
 setInterval(function () {
+  httpGetStatus()
   checkPeriscopeLifterStatus()
   checkBodyLEDControllerStatus()
   checkDomeControllerStatus()
-  // checkStealthControllerStatus()
-  // checkDomeServoStatus()
-  // checkBodyServoStatus()
+
+  checkBodyServoStatus()
   GetBatteryLevel()
   GetBatteryConnection()
+  GetDroidBatteryLevel()
 }, 5000)
 
 function bodyControllerLEDFunctionExecution(t) {
   var LEDCommand = t;
-  var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=bcSerial";
+  var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=blSerial";
 
   var bodyLEDControllerFullURL = bodyLEDControllerSPURL + LEDCommand;
   console.log(bodyLEDControllerFullURL);
@@ -987,7 +1049,10 @@ function commandNoOptionsKnightRider(y, t, u) {
 
   document.getElementById(u).src = "Images/checkmark.png";
   setTimeout(function () { document.getElementById(u).src = "Images/blankcheckmark.png"; }, 2000)
-
+  // var ldpcommandstring = "";
+  // var mcommandstring = "";
+  // var coincommandstring = "";
+  // var vucommandstring = "";
 
 
   for (var i = 0; i < checkedItemsKnightRider.length; i++) {
@@ -1042,10 +1107,14 @@ function commandNoOptionsKnightRider(y, t, u) {
     // };
   };
 
-  let ldpCommandParam = "&param1=" + ldpcommandstring;
-  let maintCommandParam = "&param2=" + mcommandstring;
-  let coinCommandParam = "&param3=" + coincommandstring;
-  let vuCommandParam = "&param4=" + vucommandstring;
+  // let ldpCommandParam = "&param1=" + ldpcommandstring;
+  // let maintCommandParam = "&param2=" + mcommandstring;
+  // let coinCommandParam = "&param3=" + coincommandstring;
+  // let vuCommandParam = "&param4=" + vucommandstring;
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + vucommandstring; } else { var vuCommandParam = "" };
   let fullURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullURL);
 
@@ -1055,6 +1124,10 @@ function commandNoOptionsKnightRider(y, t, u) {
 
 function commandSingleColorKnightRider(y, t, z, u) {
   let colorValues = getcolor1(z);
+  // ldpcommandstring = "";
+  // mcommandstring = "";
+  // coincommandstring = "";
+  // vucommandstring = "";
 
   document.getElementById(u).src = "Images/checkmark.png";
   setTimeout(function () { document.getElementById(u).src = "Images/blankcheckmark.png"; }, 2000)
@@ -1086,22 +1159,18 @@ function commandSingleColorKnightRider(y, t, z, u) {
 
     };
   };
-
-  let ldpCommandParam = "&param1=" + ldpcommandstring;
-  let maintCommandParam = "&param2=" + mcommandstring;
-  let coinCommandParam = "&param3=" + coincommandstring;
-  let vuCommandParam = "&param4=" + vucommandstring;
+  ///////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////
+  // works to only send the parameters that have variables assigned.
+  ///////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + vucommandstring; } else { var vuCommandParam = "" };
   let fullURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullURL);
 
-
-
-  // socket.emit('command', {
-  //   ldpcommandstring: ldpcommandstring,
-  //   coincommandstring: coincommandstring,
-  //   vucommandstring: vucommandstring,
-  //   mcommandstring: mcommandstring
-  // });
 };
 
 function commandStripOffKnightRider(y, t, u) {
@@ -1163,10 +1232,10 @@ function commandStripOffKnightRider(y, t, u) {
     // };
   };
 
-  let ldpCommandParam = "&param1=" + ldpcommandstring;
-  let maintCommandParam = "&param2=" + mcommandstring;
-  let coinCommandParam = "&param3=" + coincommandstring;
-  let vuCommandParam = "&param4=" + vucommandstring;
+  if (ldpcommandstring != undefined) { let ldpCommandParam = "&param1=" + ldpcommandstring; }
+  if (ldpcommandstring != undefined) { let maintCommandParam = "&param2=" + mcommandstring; }
+  if (ldpcommandstring != undefined) { let coinCommandParam = "&param3=" + coincommandstring; }
+  if (ldpcommandstring != undefined) { let vuCommandParam = "&param4=" + vucommandstring; }
   let fullURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullURL);
 
@@ -1427,6 +1496,11 @@ function changeapply(u) {
 
 function commandNoOptionsRainbow(y, t, u) {
   // var bodyLEDi2cdest = "Bl"
+  ldpcommandstring = "";
+  mcommandstring = "";
+  coincommandstring = "";
+  vucommandstring = "";
+
   let tmp = u;
   document.getElementById(u).src = "Images/checkmark.png";
   // setTimeout(changeapply(), 2000, u);
@@ -1487,10 +1561,14 @@ function commandNoOptionsRainbow(y, t, u) {
   };
 
 
-  let ldpCommandParam = "&param1=" + ldpcommandstring;
-  let maintCommandParam = "&param2=" + mcommandstring;
-  let coinCommandParam = "&param3=" + coincommandstring;
-  let vuCommandParam = "&param4=" + vucommandstring;
+  // let ldpCommandParam = "&param1=" + ldpcommandstring;
+  // let maintCommandParam = "&param2=" + mcommandstring;
+  // let coinCommandParam = "&param3=" + coincommandstring;
+  // let vuCommandParam = "&param4=" + vucommandstring;
+  if (ldpcommandstring != undefined) { let ldpCommandParam = "&param1=" + ldpcommandstring; }
+  if (ldpcommandstring != undefined) { let maintCommandParam = "&param2=" + mcommandstring; }
+  if (ldpcommandstring != undefined) { let coinCommandParam = "&param3=" + coincommandstring; }
+  if (ldpcommandstring != undefined) { let vuCommandParam = "&param4=" + vucommandstring; }
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
   let hpFrontParam = "&param1=S02HP" + hpfcommandstring;
@@ -1768,10 +1846,14 @@ function commandSingleColorSolidColor(y, t, z, u) {
     };
   };
 
-  let ldpCommandParam = "&param1=" + ldpcommandstring;
-  let maintCommandParam = "&param2=" + mcommandstring;
-  let coinCommandParam = "&param3=" + coincommandstring;
-  let vuCommandParam = "&param4=" + vucommandstring;
+  // let ldpCommandParam = "&param1=" + ldpcommandstring;
+  // let maintCommandParam = "&param2=" + mcommandstring;
+  // let coinCommandParam = "&param3=" + coincommandstring;
+  // let vuCommandParam = "&param4=" + vucommandstring;
+  if (ldpcommandstring != undefined) { let ldpCommandParam = "&param1=" + ldpcommandstring; }
+  if (ldpcommandstring != undefined) { let maintCommandParam = "&param2=" + mcommandstring; }
+  if (ldpcommandstring != undefined) { let coinCommandParam = "&param3=" + coincommandstring; }
+  if (ldpcommandstring != undefined) { let vuCommandParam = "&param4=" + vucommandstring; }
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
   let hpFrontParam = "&param1=S02HP" + hpfcommandstring;
@@ -10846,6 +10928,9 @@ function httpGet(theUrl) {
   return xmlHttp.responseText;
 
 }
+
+
+
 
 function HeightSelection(t) {
   let tmp = document.querySelector('#Height' + t);

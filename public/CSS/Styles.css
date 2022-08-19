@@ -100,7 +100,6 @@ height: 50px;
 
 }
 .statusIconsOverallDiv{
-
   position: absolute;
   top: 625px;
   left: 600px;
@@ -109,13 +108,27 @@ height: 50px;
 
   position: relative;
   height: 70px;
-  top: 240px;
-  left: 660px;
+  width: 500px;
+  top: 875px;
+  left: 1060px;
+  /* border: solid 2px white; */
 }
 .batteryChargeLevelDiv{
-  position: relative;
-  top: -107px;
-  left: 228px;
+  position: absolute;
+  top: 14px;
+  left: 350px;
+  color: black;
+  font-size: 1.5rem;
+  text-align: center;
+  text-shadow: 0px 0px 10px yellow;
+  width: 75px;
+  /* border: solid 2px white; */
+
+}
+.DroidbatteryChargeLevelDiv{
+  position: absolute;
+  top: 012px;
+  left: 144px;
   color: black;
   font-size: 1.5rem;
   text-align: center;
@@ -124,25 +137,43 @@ height: 50px;
 }
 
 .iconStatusBatteryicon{
-  height: 70px;
+height: 70px;
 position: relative;
-top: -73px;
+top: -0px;
 left: 185px;
 }
-
+.droidBatteryClass{
+  position: absolute;
+  top: 800px;
+  left: 290px;
+}
 .iconStatusBatteryiconconst{
   height: 40px;
 position: relative;
-top: -55px;
-left: 240px;
+top: -2px;
+left: 270px;
 }
 .iconStatusBatteryiconIndicator{
-  position: absolute;
+  position: relative;
   /* border: 2px solid white; */
-  left: 297px;
-  top: -48px;
+  left: 230px;
+  top: -6px;
   width: 15px;
   height: 30px;
+  /* border: solid 2px white; */
+}
+.iconStatusDroidBattery{
+  height:60px;
+  position: relative;
+  top: 2px;
+  left: -190px;
+
+}
+.iconStatusBatteryiconDroidIndicator{
+  position: relative;
+  height: 40px;
+  top: -5px;
+  left: -170px;
 }
 
 .BatteryStatusText{
@@ -151,6 +182,13 @@ left: 240px;
   left:20px;
 }
 
+.DroidBatteryStatusText{
+  position: relative;
+  top: 25px;
+  left:20px;
+  /* border: solid 2px white; */
+
+}
 
 .StatusIconBCDiv{
 
@@ -168,7 +206,7 @@ left: -590px;
   .BCStatusText{
     position: absolute;
     top: 2px;
-    left:-573px;
+    left:-582px;
   }
 
 .iconStatusBC{
@@ -183,7 +221,7 @@ left: -590px;
 
   position: relative;
   height: 70px;
-  top: 20px;
+  top: 70px;
   left: 0px;
 }
   .DCStatusText{
@@ -254,7 +292,7 @@ left: -590px;
 
   position: absolute;
   height: 60px;
-  top: 190px;
+  top: 30px;
   left: 7px;
 }
 .iconStatusBSicon{
@@ -263,17 +301,17 @@ position: absolute;
 top: 20px;
 left: -590px;
 }
-  .BSStatusText{
-    position: absolute;
-    top: -11px;
-    left:-587px;
-  }
+.BSStatusText{
+  position: absolute;
+  top: -8px;
+  left:-590px;
+}
 
 .iconStatusBS{
 
   position: relative;
-  height: 70px;
-  top: 0px;
+  height: 60px;
+  top: 10px;
   left: -600px;
 }
 
@@ -304,7 +342,22 @@ left: -590px;
   left: -600px;
 }
 
+.droidBatteryPar{
+  position: absolute;
+  top: 0px;
+  left: 140px;
+}
+ .droidBatteryPercentParLabel{
+  position: absolute;
+  top: 0px;
+  left: 250px;
+ }
 
+.droidBatteryPercentPar{
+  position: absolute;
+  top: 0px;
+  left: 450px;
+} 
 
 .per{
   height: 40px;
@@ -912,12 +965,11 @@ shadow: 2px, 4px 15px blue;
 
 
 .r2menuRseriesRLD {
-  width: 70px;
-  /* height: 20px; */
+  height: 93px;
   position: absolute;
-  left: -663px;
-  top: 01px;
-  /* background: url("../Images/Body/LDPBlue.png"); */
+  left: -639px;
+  top: -12px;
+  transform: rotate(46deg);
 }
 .r2menuRseriesRLD.active{
 }
@@ -1120,6 +1172,58 @@ shadow: 2px, 4px 15px blue;
   height: 165px;
   transform: rotate(329deg);
 }
+
+
+
+
+/* Logics Front Bottom */
+.r2menupictureFrontLogicsBottomBlueSelector{
+position: absolute;
+top: 320px;
+left: -660px;
+height: 60px;
+}
+.r2menupictureFrontLogicsBottomBlueIcon{
+  position: absolute;
+  top: 328px;
+  left: -579px;
+  height: 14px;
+  transform: rotate(19deg);
+}
+.r2menupictureFrontLogicsBottomBlueLine{
+  position: absolute;
+  top: 345px;
+  left: -610px;
+  height: 14px;
+  transform: rotate(0deg);
+  transform: rotateY(180deg);
+}
+
+/* Logics Front Top */
+.r2menupictureFrontLogicsTopBlueSelector{
+  position: absolute;
+  top: 220px;
+  left: -630px;
+  height: 60px;
+  }
+  .r2menupictureFrontLogicsTopBlueIcon{
+    position: absolute;
+    top: 318px;
+    left: -575px;
+    height: 14px;
+    transform: rotate(19deg);
+  }
+  .r2menupictureFrontLogicsTopBlueLine{
+    position: absolute;
+    top: 290px;
+    left: -600px;
+    height: 14px;
+    /* transform: rotate(45deg); */
+    transform: rotateY(180deg);
+    transform: rotateZ(210deg);
+  }
+
+
 
 
 
@@ -1694,21 +1798,21 @@ left: 10px;
   height: 120px;
   width: 900px;
   position: absolute;
-  top: 100px;
+  top: 20px;
   left: 60px;
 }
 .MaintBrightnesRangeDiv{
   height: 120px;
   width: 900px;
   position: absolute;
-  top: 190px;
+  top: 120px;
   left: 60px;
 }
 .VUBrightnesRangeDiv{
   height: 120px;
   width: 900px;
   position: absolute;
-  top: 370px;
+  top: 220px;
   left: 60px;
 }
 
@@ -1716,21 +1820,36 @@ left: 10px;
   height: 120px;
   width: 900px;
   position: absolute;
-  top: 280px;
+  top: 320px;
   left: 60px;
 }
 .IntBaselineRangeDiv{
   height: 120px;
   width: 900px;
   position: absolute;
-  top: 550px;
+  top: 520px;
   left: 60px;
 }
 .IntOffsetRangeDiv{
   height: 120px;
   width: 900px;
   position: absolute;
-  top: 460px;
+  top: 420px;
+  left: 60px;
+}
+
+.ExtBaselineRangeDiv{
+  height: 120px;
+  width: 900px;
+  position: absolute;
+  top: 720px;
+  left: 60px;
+}
+.ExtOffsetRangeDiv{
+  height: 120px;
+  width: 900px;
+  position: absolute;
+  top: 620px;
   left: 60px;
 }
  .img-wrapper img {
