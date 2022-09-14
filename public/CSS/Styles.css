@@ -99,38 +99,92 @@ height: 50px;
 
 
 }
+.testingPie{
+  position: absolute;
+  top: 110px;
+  left: -184px;
+}
+.testbody{
+  border: solid 2px white;
+  overflow: hidden;
+  position: absolute;
+  height: 947px;
+  width: 1620px;
+  z-index: -50;
+  top: 0px;
+  left: 0px;
+}
 .statusIconsOverallDiv{
   position: absolute;
   top: 625px;
   left: 600px;
 }
-.StatusIconBatteryDiv{
 
-  position: relative;
-  height: 70px;
-  width: 500px;
-  top: 875px;
+
+
+
+
+.BatteryStatusDiv{
+  position: absolute;
+  height: 75px;
+  width: 600px;
+  top: 800px;
   left: 1060px;
+  /* z-index: 51; */
   /* border: solid 2px white; */
 }
-.batteryChargeLevelDiv{
+.remoteBatteryIcon{
+  /* height: 40px; */
+position: absolute;
+height: 60px;
+top: -2px;
+left: 270px;
+}
+.remoteBatteryPowerColor{
+  height: 50px;
+position: absolute;
+top: 5px;
+left: 390px;
+}
+.remoteChargingIndicator{
   position: absolute;
-  top: 14px;
-  left: 350px;
+  /* border: 2px solid white; */
+  left: 470px;
+  top: 8px;
+  height: 40px;
+  border: solid 2px white;
+}
+.RemoteBatteryChargeLevelInt{
+  position: absolute;
+  top: 1px;
+  left: 395px;
   color: black;
-  font-size: 1.5rem;
+  font-size: 2rem;
   text-align: center;
   text-shadow: 0px 0px 10px yellow;
   width: 75px;
   /* border: solid 2px white; */
 
 }
+.droidBatteryIcon{
+  position: absolute;
+  top: -7px;
+  left: 0px;
+  /* border: solid 2px white; */
+  height: 70px;
+}
+.droidBatteryPowerColor{
+  position: absolute;
+  height: 50px;
+  top: 3px;
+  left: 100px;
+}
 .DroidbatteryChargeLevelDiv{
   position: absolute;
-  top: 012px;
-  left: 144px;
+  top: 02px;
+  left: 124px;
   color: black;
-  font-size: 1.5rem;
+  font-size: 2rem;
   text-align: center;
   text-shadow: 0px 0px 10px yellow;
 
@@ -147,34 +201,10 @@ left: 185px;
   top: 800px;
   left: 290px;
 }
-.iconStatusBatteryiconconst{
-  height: 40px;
-position: relative;
-top: -2px;
-left: 270px;
-}
-.iconStatusBatteryiconIndicator{
-  position: relative;
-  /* border: 2px solid white; */
-  left: 230px;
-  top: -6px;
-  width: 15px;
-  height: 30px;
-  /* border: solid 2px white; */
-}
-.iconStatusDroidBattery{
-  height:60px;
-  position: relative;
-  top: 2px;
-  left: -190px;
 
-}
-.iconStatusBatteryiconDroidIndicator{
-  position: relative;
-  height: 40px;
-  top: -5px;
-  left: -170px;
-}
+
+
+
 
 .BatteryStatusText{
   position: relative;
@@ -184,7 +214,7 @@ left: 270px;
 
 .DroidBatteryStatusText{
   position: relative;
-  top: 25px;
+  top: 20px;
   left:20px;
   /* border: solid 2px white; */
 
@@ -201,7 +231,7 @@ left: 270px;
   height: 60px;
 position: absolute;
 top: 20px;
-left: -590px;
+left: -595px;
 }
   .BCStatusText{
     position: absolute;
@@ -234,7 +264,7 @@ left: -590px;
     height: 60px;
   position: absolute;
   top: 20px;
-  left: -590px;
+  left: -595px;
   }
 .iconStatusDC{
 
@@ -243,7 +273,9 @@ left: -590px;
   top: 0px;
   left: 340px;
 }
-
+.hidden{
+  display: none;
+}
 .iconStatusPLDiv{
 
   position: absolute;
@@ -256,7 +288,7 @@ left: -590px;
   height: 60px;
 position: absolute;
 top: 20px;
-left: -590px;
+left: -595px;
 }
 
 .PLStatusText{
@@ -299,7 +331,7 @@ left: -590px;
   height: 60px;
 position: absolute;
 top: 20px;
-left: -590px;
+left: -59px;
 }
 .BSStatusText{
   position: absolute;
@@ -312,8 +344,7 @@ left: -590px;
   position: relative;
   height: 60px;
   top: 10px;
-  left: -600px;
-}
+  left: -600px;}
 
 .StatusIconDSDiv{
 
@@ -884,7 +915,9 @@ span.myButton input {
 
 
 
-
+ .seethrough{
+  opacity: .35;
+ }
 
 
 .hideexcess{
@@ -908,7 +941,7 @@ shadow: 2px, 4px 15px blue;
   /* border: 4px solid blue; */
   position: absolute;
   top: 0px;
-  left: 120px;
+  left: 0px;
   width: 300px;
   height: 625px;
   /* top: 5%;
@@ -2064,15 +2097,15 @@ width: 100%;
   left: 490px;
 }
 .applyButton{
-  background-image: url(..//Images/Buttons/Button-Apply.png);
-  background-size: cover;
+  /* background-image: url(..//Images/Buttons/Button-Apply.png); */
+  /* background-size: cover; */
   /* opacity: 1; */
   /* border: 1px; */
   position: absolute;
   top:225px;
   left: 25px;
-  height: 60px;
-  width: 170px;
+  height: 75px;
+  width: 190px;
 
   opacity: .9;
 }
@@ -2132,8 +2165,8 @@ width: 100%;
   position: absolute;
   top:225px;
   left: 220px;
-  height: 70px;
-  width: 180px;
+  height: 75px;
+  width: 190px;
   box-shadow: 0px 0px 15px black;
   opacity: .9;
 }
