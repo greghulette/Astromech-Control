@@ -1,15 +1,115 @@
 body {
   background-color: Black;
-  background-image: url(..//Images/darkbluebackground4.jpg);
+  background-image: url(..//Images/General/Background.jpg);
   background-size:cover;
   /* background-repeat:repeat; */
   background-position: top center;
   font-size: 1.5rem;
   color: lightyellow;
   font-family: 'Star Jedi', 'Starjedi', arial, camb;
-
+  overflow: hidden;
 
 }
+
+.shadowtext{
+  position:relative;
+  top: -155px;
+  /* left: 60px; */
+  text-align: center;
+  text-shadow: 0 4px 10px black;
+  text-decoration: solid;
+  font-size: 3rem;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
+.shadowtext2Lines{
+  position:relative;
+  top: -155px;
+  /* left: 60px; */
+  text-align: center;
+  text-shadow: 0 4px 10px black;
+  text-decoration: solid;
+line-height: 2.5rem;
+  font-size: 2.75rem;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
+.shadowtext2Lines-2{
+  position:relative;
+  top: -170px;
+  /* left: 60px; */
+  text-align: center;
+  text-shadow: 0 4px 10px black;
+  text-decoration: solid;
+line-height: 3rem;
+  font-size: 3rem;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
+.shadowtext2LinesLED{
+  position:relative;
+  top: -110px;
+  /* left: -10px; */
+  width: 190px;
+  font-family: 'Star Jedi', 'Starjedi', arial, camb;
+  color: lightyellow;
+  /* left: 60px; */
+  text-align: center;
+  text-shadow: 0 4px 10px black;
+  text-decoration: solid;
+line-height: 2rem;
+  font-size: 2rem;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
+.shadowtext2LinesLongLED{
+  position:relative;
+  top: -90px;
+  /* left: -10px; */
+  width: 190px;
+  font-family: 'Star Jedi', 'Starjedi', arial, camb;
+  color: lightyellow;
+  /* left: 60px; */
+  text-align: center;
+  text-shadow: 0 4px 10px black;
+  text-decoration: solid;
+line-height: 1.5rem;
+  font-size: 1.5rem;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
+.shadowtext1LineLED{
+  position:relative;
+  top: -95px;
+  /* left: -10px; */
+  width: 190px;
+  font-family: 'Star Jedi', 'Starjedi', arial, camb;
+  color: lightyellow;
+  /* left: 60px; */
+  text-align: center;
+  text-shadow: 0 4px 10px black;
+  text-decoration: solid;
+line-height: 2rem;
+  font-size: 2rem;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
+
+
+.buttonwidthLED {
+  width: 190px;
+  position: relative;
+  top: -2px;
+  left: 0px;
+}
+.ButtonBlank{
+height: 110px;
+/* border: yellow solid 2px; */
+}
+.ButtonBlankLED{
+  height: 65px;
+  /* border: yellow solid 2px; */
+  }
 .move{
   position: absolute;
   left: -400px;
@@ -116,7 +216,7 @@ height: 50px;
 }
 .statusIconsOverallDiv{
   position: absolute;
-  top: 625px;
+  top: 725px;
   left: 600px;
 }
 
@@ -128,7 +228,7 @@ height: 50px;
   position: absolute;
   height: 75px;
   width: 600px;
-  top: 800px;
+  top: 900px;
   left: 1060px;
   /* z-index: 51; */
   /* border: solid 2px white; */
@@ -152,7 +252,7 @@ left: 390px;
   left: 470px;
   top: 8px;
   height: 40px;
-  border: solid 2px white;
+  /* border: solid 2px white; */
 }
 .RemoteBatteryChargeLevelInt{
   position: absolute;
@@ -467,6 +567,7 @@ span.myButton input {
 .buttonwidth {
   width: 195px;
 }
+
 
 .homebuttonwidth {
   width: 310px;
@@ -818,6 +919,13 @@ span.myButton input {
   top: -40px;
 }
 
+.LEDTabDomeOutline{
+  position: absolute;
+  height: 400px;
+  left: -430px;
+  top: -40px;
+}
+
 .domeLittleDoor1Target {
   position: absolute;
   top: 360px;
@@ -948,6 +1056,13 @@ shadow: 2px, 4px 15px blue;
   left: 5%; */
 }
  .r2menupicture {
+  width: 350px;
+  position: absolute;
+  left: -420px;
+  top: 390px;
+}
+
+.LEDTabBodyOutline {
   width: 350px;
   position: absolute;
   left: -420px;
@@ -1257,7 +1372,11 @@ height: 60px;
   }
 
 
-
+.dometabicon{
+  position: relative;
+  width: 75px;
+  top: -0px;
+}
 
 
 
@@ -1420,6 +1539,13 @@ left: 100px;
   position: absolute;
   top: 305px;
   left: 75px;
+  height: 90px;
+  width: 80px;
+}
+.checkmarkoff{
+  position: absolute;
+  top: 305px;
+  left: 275px;
   height: 90px;
   width: 80px;
 }
@@ -2154,8 +2280,8 @@ width: 100%;
 }
 .applyButton:hover{
   opacity: 1.0;
-  box-shadow: 0px 0px 15px blue;
-  scale: 1.2;
+  /* box-shadow: 0px 0px 15px blue; */
+  scale: 1.15;
 }
 .applyButtonoff{
   /* background-image: url(..//Images/Buttons/Button-Off-White.png);
@@ -2172,8 +2298,8 @@ width: 100%;
 }
 .applyButtonoff:hover{
   opacity: 1.0;
-  scale: 1.2;
-  box-shadow: 0px 0px 15px blue;
+  scale: 1.15;
+  /* box-shadow: 0px 0px 15px blue; */
 
 }
 INPUT[type="submit"] {
@@ -2714,15 +2840,18 @@ label[for= ColorPickertab]{
 }
 
 .menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Links button.active{
-   box-shadow: 0px 0px 5px yellow;
-   background-color: yellow;
+   /* box-shadow: 0px 0px 5px yellow; */
+   /* background-color: yellow; */
+   /* color: yellow; */
+   /* -webkit-text-fill-color: #7CFC00; */
+   -webkit-text-fill-color: yellow;
    width: auto;
    border: none;
    outline: none;
-  -webkit-transform: scale(1.25);
+  -webkit-transform: scale(1.15);
 }
 .menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Links button.active:hover{
-   box-shadow: 0px 0px 55px yellow;
+   /* box-shadow: 0px 0px 55px yellow; */
    /* background-color: yellow; */
    border: none;
    outline: none;
@@ -2794,11 +2923,13 @@ background-color: black;
 }
 
 .menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content .menu-Level-2 .menu-Level-2-Links button.active{
- box-shadow: 0px 0px 75px yellow;
- background-color: yellow;
+ /* box-shadow: 0px 0px 75px yellow; */
+ /* background-color: yellow; */
+ -webkit-text-fill-color: yellow;
+
  border: none;
  outline: none;
--webkit-transform: scale(1.25);
+-webkit-transform: scale(1.15);
 }
 
 .menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content .menu-Level-2 .menu-Level-2-Content{

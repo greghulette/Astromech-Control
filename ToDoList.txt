@@ -1,12 +1,20 @@
 Features or ESP32's 
 10. Figure out how to updated code to Arduinos via the ESP32's 
 13. Figure out how to get status of remote boards (ESP initially and then eventually Arduinos/Stealth)
+3. Figure out Status and eeprom readins from Mega
+
 
 
 To-Do for website
 1. create icons for camera, PSI's, and all dome panels
 2. add enable wifi for all esp-now boards
 3. Add Reset for all Boards 
-4. write functionality for door servo 
+4. Add RSSI for LoRa Link
 5. create led function for radar eye 
 6. create led function for PSI 
+7. Update Status logics
+8. Add Roam a Dome Home Tab
+9. Add wiring diagram to settings tab
+10. Fix all Logics to work with new ESP system (Completed only Knight Rider and Rainbow so far)
+11. Add RSeries full control functionality
+12. 

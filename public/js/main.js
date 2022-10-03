@@ -56,7 +56,7 @@ function httpGetStatus() {
     // do something with jsonResponse
     // console.log(typeof (jsonResponse));
     console.log(jsonResponse);
-    if (jsonResponse.BodyController == "Online") {
+    if (jsonResponse.remoteLoRaControllerStatus == "Online") {
       // console.log("Body Controller Online");
       BodyControllerStatus = true;
     } else {
@@ -332,8 +332,8 @@ function GetRemoteBatteryLevel() {
   var file = new XMLHttpRequest();
   // var batteryLevelInt;
   var greenLevel = 65;
-  var yellowLevel = 35;
-  var redLevel = 35;
+  var yellowLevel = 20;
+  var redLevel = 21;
 
   file.timeout = 2000;
   file.open("GET", "http://127.0.0.1:5500/public/BatteryCapacity.txt", true);
@@ -393,6 +393,11 @@ function GetRemoteBatteryLevel() {
 
 };
 
+
+function consoleLog(x) {
+  console.log(x);
+}
+
 function GetRemoteBatteryConnection() {
   // var req = new XMLHttpRequest();
   // req.open('GET', 'http://10.0.0.40:8000/BatteryCapacity.txt', true);
@@ -449,7 +454,7 @@ setInterval(function () {
 
 function bodyControllerLEDFunctionExecution(t) {
   var LEDCommand = t;
-  var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=blSerial";
+  var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=DL";
 
   var bodyLEDControllerFullURL = bodyLEDControllerSPURL + LEDCommand;
   console.log(bodyLEDControllerFullURL);
@@ -467,7 +472,7 @@ function bodyControllerLEDFunctionExecution(t) {
 
 function HPLEDFunctionExecution(t) {
   var LEDCommand = t;
-  var HPControllerSPURL = "http://192.168.4.101/?param0=enSerial";
+  var HPControllerSPURL = "http://192.168.4.101/?param0=DL";
 
   var HPLEDControllerFullURL = HPControllerSPURL + LEDCommand;
   console.log(HPLEDControllerFullURL);
@@ -484,7 +489,7 @@ function HPLEDFunctionExecution(t) {
 
 function bodyServoFunctionExecution(t) {
   var BSCommand = t;
-  var bodyServoControllerSPURL = "http://192.168.4.101/?param0=enSerial";
+  var bodyServoControllerSPURL = "http://192.168.4.101/?param0=DL";
 
   var bodyServiControllerFullURL = bodyServoControllerSPURL + BSCommand;
   console.log(bodyServiControllerFullURL);
@@ -502,7 +507,7 @@ function bodyServoFunctionExecution(t) {
 
 function domeServoFunctionExecution(t) {
   var DSCommand = t;
-  var domeServoControllerSPURL = "http://192.168.4.101/?param0=enSerial";
+  var domeServoControllerSPURL = "http://192.168.4.101/?param0=DL";
 
   var domeServoControllerFullURL = domeServoControllerSPURL + DSCommand;
   console.log(domeServoControllerFullURL);
@@ -521,7 +526,8 @@ function domeServoFunctionExecution(t) {
 
 function RSeriesLEDFunctionExecution(t) {
   var LEDCommand = t;
-  var RSeriesControllerSPURL = "http://192.168.4.101/?param0=enSerial&param1=S02RS";
+  // var RSeriesControllerSPURL = "http://192.168.4.101/?param0=enSerial&param1=S02RS";
+  var RSeriesControllerSPURL = "http://192.168.4.101/?param0=DL";
 
   var RSeriesControllerSFullPURL = RSeriesControllerSPURL + LEDCommand;
   console.log(RSeriesControllerSFullPURL);
@@ -564,18 +570,18 @@ function servoControl(z) {
 
   console.log(varspeedMax);
   if (servoBoardSelectorGlobal == 'body') {
-    let bodyServoCommandParam = "&param1=D1" + z + "E" + easingMethodSelection + varspeedMinText + varspeedMaxText;
+    let bodyServoCommandParam = "&param1=DSD1" + z + "E" + easingMethodSelection + varspeedMinText + varspeedMaxText;
     let fullBodyServoURL = bodyServoCommandParam
     bodyServoFunctionExecution(fullBodyServoURL);
     console.log("Body Selected")
   }
   else if (servoBoardSelectorGlobal == 'dome') {
-    let bodyServoCommandParam = "&param1=D2" + z + "E" + easingMethodSelection + varspeedMinText + varspeedMaxText;
+    let bodyServoCommandParam = "&param1=DSD2" + z + "E" + easingMethodSelection + varspeedMinText + varspeedMaxText;
     let fullBodyServoURL = bodyServoCommandParam
     bodyServoFunctionExecution(fullBodyServoURL);
   }
   else if (CurrentDirection == 'BodyFirst') {
-    let bodyServoCommandParam = "&param1=D3" + z + "B" + easingMethodSelection + varspeedMinText + varspeedMaxText + delayCallText;
+    let bodyServoCommandParam = "&param1=DSD3" + z + "B" + easingMethodSelection + varspeedMinText + varspeedMaxText + delayCallText;
     let fullBodyServoURL = bodyServoCommandParam
     bodyServoFunctionExecution(fullBodyServoURL);
     // let domeServoCommandParam = "&param1=S02DSD" + z;
@@ -583,7 +589,7 @@ function servoControl(z) {
     // domeServoFunctionExecution(fullDomeServoURL);
   }
   else if (CurrentDirection == 'DomeFirst') {
-    let bodyServoCommandParam = "&param1=D4" + z + "B" + easingMethodSelection + varspeedMinText + varspeedMaxText + delayCallText;
+    let bodyServoCommandParam = "&param1=DSD4" + z + "B" + easingMethodSelection + varspeedMinText + varspeedMaxText + delayCallText;
     let fullBodyServoURL = bodyServoCommandParam
     bodyServoFunctionExecution(fullBodyServoURL);
     // let domeServoCommandParam = "&param1=S02DSD" + z;
@@ -618,7 +624,7 @@ function savedOptions3() {
 }
 
 function animateServo(t) {
-  var animationURL = "http://192.168.4.101/?param0=enSerial&param1=";
+  var animationURL = "http://192.168.4.101/?param0=DL&param1=BS";
   let animationFullURL = animationURL + t;
   console.log(animationFullURL);
   httpGet(animationFullURL);
@@ -627,10 +633,10 @@ function animateServo(t) {
 
 function playSound(t) {
   var sound = t;
-  var playsoundURL = "http://192.168.4.101/?param0=ESP&param1=SMPt";
+  var playsoundURL = "http://192.168.4.101/?param0=DL&param1=BCSMPt";
   var playSoundFullPURL = playsoundURL + sound;
   console.log(playSoundFullPURL);
-  if (DomeControllerStatus === true) {
+  if (DomeControllerStatus === false) {
     httpGet(playSoundFullPURL);
 
   } else {
@@ -1033,16 +1039,9 @@ function changeImageVerticalBarsKnightRider() {
 
 
 function commandNoOptionsKnightRider(y, t, u) {
-  document.getElementById("checkmarkapplyKnightRider1").classList.remove('hidden');
-  setTimeout('document.getElementById("checkmarkapplyKnightRider1").classList.add("hidden") ', 2000);
-  document.getElementById("checkmarkapplyKnightRider2").classList.remove('hidden');
-  setTimeout('document.getElementById("checkmarkapplyKnightRider2").classList.add("hidden") ', 2000);
-  document.getElementById("checkmarkapplyKnightRider3").classList.remove('hidden');
-  setTimeout('document.getElementById("checkmarkapplyKnightRider3").classList.add("hidden") ', 2000);
-  document.getElementById("checkmarkapplyKnightRider4").classList.remove('hidden');
-  setTimeout('document.getElementById("checkmarkapplyKnightRider4").classList.add("hidden") ', 2000);
-  // ent.getElementById(u).src = "Images/checkmark.png";
-  // setTimeout(function () { document.getElementById(u).src = "Images/blankcheckmark.png"; }, 2000)
+  var checkmark = document.getElementById(u)
+  checkmark.classList.remove('hidden');
+  setTimeout(function () { checkmark.classList.add('hidden') }, 2000);
 
   for (var i = 0; i < checkedItemsKnightRider.length; i++) {
     if (checkedItemsKnightRider[i] === "LDPKnightRiderGreen") {
@@ -1069,10 +1068,10 @@ function commandNoOptionsKnightRider(y, t, u) {
       console.log(mcommandstring);
     };
   }
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=BL" + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=BL" + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=BL" + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=BL" + vucommandstring; } else { var vuCommandParam = "" };
   let fullURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullURL);
 };
@@ -1080,8 +1079,9 @@ function commandNoOptionsKnightRider(y, t, u) {
 
 function commandSingleColorKnightRider(y, t, z, u) {
   let colorValues = getcolor1(z);
-  document.getElementById("checkmarkapplyKnightRider").classList.remove('hidden');
-  setTimeout('document.getElementById("checkmarkapplyKnightRider").classList.add("hidden") ', 2000);
+  var checkmark = document.getElementById(u)
+  checkmark.classList.remove('hidden');
+  setTimeout(function () { checkmark.classList.add('hidden') }, 2000);
 
   // document.getElementById(u).src = "Images/checkmark.png";
   // setTimeout(function () { document.getElementById(u).src = "Images/blankcheckmark.png"; }, 2000)
@@ -1118,18 +1118,26 @@ function commandSingleColorKnightRider(y, t, z, u) {
   // works to only send the parameters that have variables assigned.
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + vucommandstring; } else { var vuCommandParam = "" };
-  let fullURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
-  bodyControllerLEDFunctionExecution(fullURL);
-
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=BL" + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=BL" + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=BL" + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=BL" + vucommandstring; } else { var vuCommandParam = "" };
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
 };
 
-function commandStripOffKnightRider() {
-  // document.getElementById(u).src = "Images/checkmark.png";
-  // setTimeout(function () { document.getElementById(u).src = "Images/blankcheckmark.png"; }, 2000)
+function commandStripOffKnightRider(u) {
+  var checkmark = document.getElementById(u)
+  checkmark.classList.remove('hidden');
+  setTimeout(function () { checkmark.classList.add('hidden') }, 2000);
+  // document.getElementById(u).classList.remove('hidden');
+  // setTimeout('document.getElementById("checkmarkoffKnightRider1").classList.add("hidden") ', 2000);
+  // document.getElementById("checkmarkoffKnightRider2").classList.remove('hidden');
+  // setTimeout('document.getElementById("checkmarkoffKnightRider2").classList.add("hidden") ', 2000);
+  // document.getElementById("checkmarkoffKnightRider3").classList.remove('hidden');
+  // setTimeout('document.getElementById("checkmarkoffKnightRider3").classList.add("hidden") ', 2000);
+  // document.getElementById("checkmarkoffKnightRider4").classList.remove('hidden');
+  // setTimeout('document.getElementById("checkmarkoffKnightRider4").classList.add("hidden") ', 2000);
   for (var i = 0; i < checkedItemsKnightRider.length; i++) {
     if (checkedItemsKnightRider[i] === "LDPKnightRiderGreen") {
       // console.log("L selected");
@@ -1160,8 +1168,8 @@ function commandStripOffKnightRider() {
   if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + mcommandstring; } else { var maintCommandParam = "" };
   if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + coincommandstring; } else { var coinCommandParam = "" };
   if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + vucommandstring; } else { var vuCommandParam = "" };
-  let fullURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
-  bodyControllerLEDFunctionExecution(fullURL);
+  let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
 };
 
 
@@ -1259,9 +1267,6 @@ function selectALLStripsRainbow() {
 
   document.getElementById("checkmarkallRainbow").classList.remove('hidden');
   setTimeout('document.getElementById("checkmarkallRainbow").classList.add("hidden") ', 2000);
-
-
-
 
   let ldptemp = document.querySelector('#LDPRainbowGreen');
   ldptemp.classList.add('active');
@@ -1423,7 +1428,10 @@ function changeapply(u) {
   document.getElementById(u).src = "Images/blankcheckmark.png";
 
 }
-function commandStripOffRainbow() {
+function commandStripOffRainbow(u) {
+  var checkmark = document.getElementById(u)
+  checkmark.classList.remove('hidden');
+  setTimeout(function () { checkmark.classList.add('hidden') }, 2000);
   // document.getElementById(u).src = "Images/checkmark.png";
   // setTimeout(function () { document.getElementById(u).src = "Images/blankcheckmark.png"; }, 2000)
   for (var i = 0; i < checkedItemsRainbow.length; i++) {
@@ -1451,6 +1459,21 @@ function commandStripOffRainbow() {
       var mcommandstring = "M98";
       console.log(mcommandstring);
     };
+    if (checkedItemsRainbow[i] === "FrontHPRainbowGreen") {
+      // console.log("M selected");
+      var hpfcommandstring = "F0" + "98";
+      console.log(hpfcommandstring);
+    };
+    if (checkedItemsRainbow[i] === "TopHPRainbowGreen") {
+      // console.log("M selected");
+      var hptcommandstring = "T0" + "98";
+      console.log(hptcommandstring);
+    };
+    if (checkedItemsRainbow[i] === "RearHPRainbowGreen") {
+      // console.log("M selected");
+      var hprcommandstring = "R0" + "98";
+      console.log(hprcommandstring);
+    };
   };
   if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + ldpcommandstring; } else { var ldpCommandParam = "" };
   if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + mcommandstring; } else { var maintCommandParam = "" };
@@ -1458,6 +1481,11 @@ function commandStripOffRainbow() {
   if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + vucommandstring; } else { var vuCommandParam = "" };
   let fullURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullURL);
+  if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + hpfcommandstring; } else { var hpFrontParam = "" };
+  if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + hptcommandstring; } else { var hpTopParam = "" };
+  if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + hprcommandstring; } else { var hpRearParam = "" };
+  let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
+  HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
 
 function commandNoOptionsRainbow(y, t, u) {
@@ -1467,12 +1495,9 @@ function commandNoOptionsRainbow(y, t, u) {
   coincommandstring = "";
   vucommandstring = "";
 
-  let tmp = u;
-  document.getElementById(u).src = "Images/checkmark.png";
-  // setTimeout(changeapply(), 2000, u);
-  setTimeout(function () { document.getElementById(u).src = "Images/blankcheckmark.png"; }, 2000)
-
-
+  var checkmark = document.getElementById(u)
+  checkmark.classList.remove('hidden');
+  setTimeout(function () { checkmark.classList.add('hidden') }, 2000);
 
   for (var i = 0; i < checkedItemsRainbow.length; i++) {
     if (checkedItemsRainbow[i] === "LDPRainbowGreen") {
@@ -1499,16 +1524,6 @@ function commandNoOptionsRainbow(y, t, u) {
       var mcommandstring = "M" + y + t;
       console.log(mcommandstring);
     };
-    if (checkedItemsRainbow[i] === "D") {
-      // console.log("M selected");
-      var dcommandstring = checkedItems[i] + y + t;
-      console.log(dcommandstring);
-    };
-    if (checkedItemsRainbow[i] === "I") {
-      // console.log("M selected");
-      var icommandstring = checkedItems[i] + y + t;
-      console.log(icommandstring);
-    };
     if (checkedItemsRainbow[i] === "FrontHPRainbowGreen") {
       // console.log("M selected");
       var hpfcommandstring = "F0" + y;
@@ -1530,7 +1545,7 @@ function commandNoOptionsRainbow(y, t, u) {
   if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + mcommandstring; } else { var maintCommandParam = "" };
   if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + coincommandstring; } else { var coinCommandParam = "" };
   if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + vucommandstring; } else { var vuCommandParam = "" };
-  let fullURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
+  // let fullURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
   if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + hpfcommandstring; } else { var hpFrontParam = "" };
@@ -1540,13 +1555,12 @@ function commandNoOptionsRainbow(y, t, u) {
   HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
 
-
 //SolidColor stuff
 var checkedItemsSolidColor = new Array();
 var imgArraySolidColor = [];
 
 function ldptoggleSolidColor() {
-  let tmp = document.querySelector('#LDPSolidColor');
+  let tmp = document.querySelector('#LDPSolidColorGreen');
   tmp.classList.toggle('active');
   if (tmp.classList.contains('active')) {
   }
@@ -1555,7 +1569,7 @@ function ldptoggleSolidColor() {
 };
 
 function cointoggleSolidColor() {
-  let tmp = document.querySelector('#CoinSolidColor');
+  let tmp = document.querySelector('#CoinSolidColorGreen');
   tmp.classList.toggle('active');
   if (tmp.classList.contains('active')) {
   }
@@ -1564,7 +1578,7 @@ function cointoggleSolidColor() {
 };
 
 function mainttoggleSolidColor() {
-  let tmp = document.querySelector('#MaintSolidColor');
+  let tmp = document.querySelector('#MaintSolidColorGreen');
   tmp.classList.toggle('active');
   if (tmp.classList.contains('active')) {
   }
@@ -1572,7 +1586,7 @@ function mainttoggleSolidColor() {
 };
 
 function verticaltoggleSolidColor() {
-  let tmp = document.querySelector('#VerticalBarstSolidColor');
+  let tmp = document.querySelector('#VerticalBarstSolidColorGreen');
   tmp.classList.toggle('active');
   if (tmp.classList.contains('active')) {
   }
@@ -1580,7 +1594,7 @@ function verticaltoggleSolidColor() {
 };
 
 function frontHPtoggleSolidColor() {
-  let tmp = document.querySelector('#FrontHPSolidColor');
+  let tmp = document.querySelector('#FrontHPSolidColorGreen');
   tmp.classList.toggle('active');
   if (tmp.classList.contains('active')) {
   }
@@ -1588,14 +1602,14 @@ function frontHPtoggleSolidColor() {
 };
 
 function topHPtoggleSolidColor() {
-  let tmp = document.querySelector('#TopHPSolidColor');
+  let tmp = document.querySelector('#TopHPSolidColorGreen');
   tmp.classList.toggle('active');
   if (tmp.classList.contains('active')) {
   }
   getCheckedElementSolidColor()
 };
 function rearHPtoggleSolidColor() {
-  let tmp = document.querySelector('#RearHPSolidColor');
+  let tmp = document.querySelector('#RearHPSolidColorGreen');
   tmp.classList.toggle('active');
   if (tmp.classList.contains('active')) {
   }
@@ -1616,29 +1630,37 @@ function getCheckedElementSolidColor() {
 
 
 function selectALLStripsSolidColor() {
-  document.getElementById("LDPSolidColor").src = "./Images/Body/LDPGreen.png";
-  document.getElementById("CoinSolidColor").src = "Images/Body/CoinSlotsGreen.png";
-  document.getElementById("MaintSolidColor").src = "Images/Body/SkirtGreen.png";
-  document.getElementById("VerticalBarstSolidColor").src = "Images/Body/DataPanelVerticalGreen.png";
-  document.getElementById("FrontHPSolidColor").src = "Images/Dome/FrontHPGreen.png";
-  document.getElementById("TopHPSolidColor").src = "Images/Dome/TopHPGreen.png";
-  document.getElementById("RearHPSolidColor").src = "Images/Dome/RearHPGreen.png";
-  document.getElementById("checkmarkallSolidColor").src = "Images/checkmark.png";
-  setTimeout('document.getElementById("checkmarkallSolidColor").src = "Images/blankcheckmark.png"', 2000);
+  document.getElementById("LDPSolidColorBlue").classList.add('hidden');
+  document.getElementById("LDPSolidColorGreen").classList.remove('hidden');
+  document.getElementById('CoinSolidColorBlue').classList.add('hidden');
+  document.getElementById('CoinSolidColorGreen').classList.remove('hidden');
+  document.getElementById("MaintSolidColorBlue").classList.add('hidden');
+  document.getElementById("MaintSolidColorGreen").classList.remove('hidden');
+  document.getElementById('VerticalBarstSolidColorBlue').classList.add('hidden');
+  document.getElementById('VerticalBarstSolidColorGreen').classList.remove('hidden');
+  document.getElementById('FrontHPSolidColorBlue').classList.add('hidden');
+  document.getElementById('FrontHPSolidColorGreen').classList.remove('hidden');
+  document.getElementById("TopHPSolidColorBlue").classList.add('hidden');
+  document.getElementById("TopHPSolidColorGreen").classList.remove('hidden');
+  document.getElementById('RearHPSolidColorBlue').classList.add('hidden');
+  document.getElementById('RearHPSolidColorGreen').classList.remove('hidden');
 
-  let ldptemp = document.querySelector('#LDPSolidColor');
+  document.getElementById("checkmarkallSolidColor").classList.remove('hidden');
+  setTimeout('document.getElementById("checkmarkallSolidColor").classList.add("hidden") ', 2000);
+
+  let ldptemp = document.querySelector('#LDPSolidColorGreen');
   ldptemp.classList.add('active');
-  let cointemp = document.querySelector('#CoinSolidColor');
+  let cointemp = document.querySelector('#CoinSolidColorGreen');
   cointemp.classList.add('active');
-  let mainttemp = document.querySelector('#MaintSolidColor');
+  let mainttemp = document.querySelector('#MaintSolidColorGreen');
   mainttemp.classList.add('active');
-  let vutemp = document.querySelector('#VerticalBarstSolidColor');
+  let vutemp = document.querySelector('#VerticalBarstSolidColorGreen');
   vutemp.classList.add('active');
-  let frontHPtemp = document.querySelector('#FrontHPSolidColor');
+  let frontHPtemp = document.querySelector('#FrontHPSolidColorGreen');
   frontHPtemp.classList.add('active');
-  let topHPtemp = document.querySelector('#TopHPSolidColor');
+  let topHPtemp = document.querySelector('#TopHPSolidColorGreen');
   topHPtemp.classList.add('active');
-  let rearHPtemp = document.querySelector('#RearHPSolidColor');
+  let rearHPtemp = document.querySelector('#RearHPSolidColorGreen');
   rearHPtemp.classList.add('active');
 
   getCheckedElementSolidColor()
@@ -1646,110 +1668,137 @@ function selectALLStripsSolidColor() {
 
 
 function selectNoneStripsSolidColor() {
-  document.getElementById("LDPSolidColor").src = "./Images/Body/LDPBlue.png";
-  document.getElementById("CoinSolidColor").src = "Images/Body/CoinSlotsBlue.png";
-  document.getElementById("MaintSolidColor").src = "Images/Body/SkirtBlue.png";
-  document.getElementById("VerticalBarstSolidColor").src = "Images/Body/DataPanelVerticalBlue.png";
-  document.getElementById("FrontHPSolidColor").src = "Images/Dome/FrontHPBlue.png";
-  document.getElementById("TopHPSolidColor").src = "Images/Dome/TopHPBlue.png";
-  document.getElementById("RearHPSolidColor").src = "Images/Dome/RearHPBlue.png";
-  document.getElementById("checkmarknoneSolidColor").src = "Images/checkmark.png";
-  setTimeout('document.getElementById("checkmarknoneSolidColor").src = "Images/blankcheckmark.png"', 2000);
+  document.getElementById("LDPSolidColorBlue").classList.remove('hidden');
+  document.getElementById("LDPSolidColorGreen").classList.add('hidden');
+  document.getElementById('CoinSolidColorBlue').classList.remove('hidden');
+  document.getElementById('CoinSolidColorGreen').classList.add('hidden');
+  document.getElementById("MaintSolidColorBlue").classList.remove('hidden');
+  document.getElementById("MaintSolidColorGreen").classList.add('hidden');
+  document.getElementById('VerticalBarstSolidColorBlue').classList.remove('hidden');
+  document.getElementById('VerticalBarstSolidColorGreen').classList.add('hidden');
+  document.getElementById('FrontHPSolidColorBlue').classList.remove('hidden');
+  document.getElementById('FrontHPSolidColorGreen').classList.add('hidden');
+  document.getElementById("TopHPSolidColorBlue").classList.remove('hidden');
+  document.getElementById("TopHPSolidColorGreen").classList.add('hidden');
+  document.getElementById('RearHPSolidColorBlue').classList.remove('hidden');
+  document.getElementById('RearHPSolidColorGreen').classList.add('hidden');
+
+  document.getElementById("checkmarknoneSolidColor").classList.remove('hidden');
+  setTimeout('document.getElementById("checkmarknoneSolidColor").classList.add("hidden") ', 2000);
 
 
-  let ldptemp = document.querySelector('#LDPSolidColor');
+  let ldptemp = document.querySelector('#LDPSolidColorGreen');
   ldptemp.classList.remove('active');
-  let cointemp = document.querySelector('#CoinSolidColor');
+  let cointemp = document.querySelector('#CoinSolidColorGreen');
   cointemp.classList.remove('active');
-  let mainttemp = document.querySelector('#MaintSolidColor');
+  let mainttemp = document.querySelector('#MaintSolidColorGreen');
   mainttemp.classList.remove('active');
-  let vutemp = document.querySelector('#VerticalBarstSolidColor');
+  let vutemp = document.querySelector('#VerticalBarstSolidColorGreen');
   vutemp.classList.remove('active');
-  let frontHPtemp = document.querySelector('#FrontHPSolidColor');
+  let frontHPtemp = document.querySelector('#FrontHPSolidColorGreen');
   frontHPtemp.classList.remove('active');
-  let topHPtemp = document.querySelector('#TopHPSolidColor');
+  let topHPtemp = document.querySelector('#TopHPSolidColorGreen');
   topHPtemp.classList.remove('active');
-  let rearHPtemp = document.querySelector('#RearHPSolidColor');
+  let rearHPtemp = document.querySelector('#RearHPSolidColorGreen');
   rearHPtemp.classList.remove('active');
 
   getCheckedElementSolidColor()
 }
 function changeImageLDPSolidColor() {
+  let Blue = document.getElementById('LDPSolidColorBlue')
+  let Green = document.getElementById('LDPSolidColorGreen')
 
-  if (document.getElementById("LDPSolidColor").src.match("LDPBlue.png")) {
-    document.getElementById("LDPSolidColor").src = "./Images/Body/LDPGreen.png";
-    // console.log("Changed to Green");
+  if (Blue.classList.contains('hidden')) {
+    Blue.classList.remove('hidden');
+    Green.classList.add('hidden');
   } else {
-    document.getElementById("LDPSolidColor").src = "Images/Body/LDPBlue.png";
-    // console.log("Change to Blue");
+    Blue.classList.add('hidden');
+    Green.classList.remove('hidden');
   }
   ldptoggleSolidColor()
 };
 
 function changeImageCoinSolidColor() {
+  let Blue = document.getElementById('CoinSolidColorBlue')
+  let Green = document.getElementById('CoinSolidColorGreen')
 
-  if (document.getElementById("CoinSolidColor").src.match("CoinSLotsBlue.png")) {
-    document.getElementById("CoinSolidColor").src = "Images/Body/CoinSlotsGreen.png";
-    // console.log("Changed to Green");
+  if (Blue.classList.contains('hidden')) {
+    Blue.classList.remove('hidden');
+    Green.classList.add('hidden');
   } else {
-    document.getElementById("CoinSolidColor").src = "Images/Body/CoinSLotsBlue.png";
-    // console.log("Change to Blue");
+    Blue.classList.add('hidden');
+    Green.classList.remove('hidden');
   }
   cointoggleSolidColor()
 };
 function changeImageMaintSolidColor() {
 
-  if (document.getElementById("MaintSolidColor").src.match("SkirtBlue.png")) {
-    document.getElementById("MaintSolidColor").src = "Images/Body/SkirtGreen.png";
-    // console.log("Changed to Green");
+  let Blue = document.getElementById('MaintSolidColorBlue')
+  let Green = document.getElementById('MaintSolidColorGreen')
+
+  if (Blue.classList.contains('hidden')) {
+    Blue.classList.remove('hidden');
+    Green.classList.add('hidden');
   } else {
-    document.getElementById("MaintSolidColor").src = "Images/Body/SkirtBlue.png";
-    // console.log("Change to Blue");
+    Blue.classList.add('hidden');
+    Green.classList.remove('hidden');
   }
   mainttoggleSolidColor()
 };
 function changeImageVerticalBarsSolidColor() {
 
-  if (document.getElementById("VerticalBarstSolidColor").src.match("DataPanelVerticalBlue.png")) {
-    document.getElementById("VerticalBarstSolidColor").src = "Images/Body/DataPanelVerticalGreen.png";
-    // console.log("Changed to Green");
+  let Blue = document.getElementById('VerticalBarstSolidColorBlue')
+  let Green = document.getElementById('VerticalBarstSolidColorGreen')
+
+  if (Blue.classList.contains('hidden')) {
+    Blue.classList.remove('hidden');
+    Green.classList.add('hidden');
   } else {
-    document.getElementById("VerticalBarstSolidColor").src = "Images/Body/DataPanelVerticalBlue.png";
-    // console.log("Change to Blue");
+    Blue.classList.add('hidden');
+    Green.classList.remove('hidden');
   }
   verticaltoggleSolidColor()
 };
 
 function changeImageFrontHPSolidColor() {
 
-  if (document.getElementById("FrontHPSolidColor").src.match("FrontHPBlue.png")) {
-    document.getElementById("FrontHPSolidColor").src = "Images/Dome/FrontHPGreen.png";
-    // console.log("Changed to Green");
+  let Blue = document.getElementById('FrontHPSolidColorBlue')
+  let Green = document.getElementById('FrontHPSolidColorGreen')
+
+  if (Blue.classList.contains('hidden')) {
+    Blue.classList.remove('hidden');
+    Green.classList.add('hidden');
   } else {
-    document.getElementById("FrontHPSolidColor").src = "Images/Dome/FrontHPBlue.png";
-    // console.log("Change to Blue");
+    Blue.classList.add('hidden');
+    Green.classList.remove('hidden');
   }
   frontHPtoggleSolidColor()
 };
 function changeImageTopHPSolidColor() {
 
-  if (document.getElementById("TopHPSolidColor").src.match("TopHPBlue.png")) {
-    document.getElementById("TopHPSolidColor").src = "Images/Dome/TopHPGreen.png";
-    // console.log("Changed to Green");
+  let Blue = document.getElementById('TopHPSolidColorBlue')
+  let Green = document.getElementById('TopHPSolidColorGreen')
+
+  if (Blue.classList.contains('hidden')) {
+    Blue.classList.remove('hidden');
+    Green.classList.add('hidden');
   } else {
-    document.getElementById("TopHPSolidColor").src = "Images/Dome/TopHPBlue.png";
-    // console.log("Change to Blue");
+    Blue.classList.add('hidden');
+    Green.classList.remove('hidden');
   }
   topHPtoggleSolidColor()
 };
 function changeImageRearHPSolidColor() {
 
-  if (document.getElementById("RearHPSolidColor").src.match("RearHPBlue.png")) {
-    document.getElementById("RearHPSolidColor").src = "Images/Dome/RearHPGreen.png";
-    // console.log("Changed to Green");
+  let Blue = document.getElementById('RearHPSolidColorBlue')
+  let Green = document.getElementById('RearHPSolidColorGreen')
+
+  if (Blue.classList.contains('hidden')) {
+    Blue.classList.remove('hidden');
+    Green.classList.add('hidden');
   } else {
-    document.getElementById("RearHPSolidColor").src = "Images/Dome/RearHPBlue.png";
-    // console.log("Change to Blue");
+    Blue.classList.add('hidden');
+    Green.classList.remove('hidden');
   }
   rearHPtoggleSolidColor()
 };
@@ -1760,67 +1809,63 @@ function commandSingleColorSolidColor(y, t, z, u) {
   // var bodyLEDi2cdest = "Bl"
   let colorValues = getcolor1(z);
   // let tmp = u;
-  document.getElementById(u).src = "Images/checkmark.png";
-  // // setTimeout(changeapply(), 2000, u);
-  setTimeout(function () { document.getElementById(u).src = "Images/blankcheckmark.png"; }, 2000)
+  // document.getElementById(u).src = "Images/checkmark.png";
+  // // // setTimeout(changeapply(), 2000, u);
+  // setTimeout(function () { document.getElementById(u).src = "Images/blankcheckmark.png"; }, 2000)
 
 
 
   for (var i = 0; i < checkedItemsSolidColor.length; i++) {
-    if (checkedItemsSolidColor[i] === "LDPSolidColor") {
+    if (checkedItemsSolidColor[i] === "LDPSolidColorGreen") {
       // console.log("L selected");
       var ldpcommandstring = "L" + y + t + colorValues;
 
       console.log(ldpcommandstring);
     };
 
-    if (checkedItemsSolidColor[i] === "CoinSolidColor") {
+    if (checkedItemsSolidColor[i] === "CoinSolidColorGreen") {
       // console.log("C selected");
       var coincommandstring = "C" + y + t + colorValues;
       console.log(coincommandstring);
     };
 
-    if (checkedItemsSolidColor[i] === "VerticalBarstSolidColor") {
+    if (checkedItemsSolidColor[i] === "VerticalBarstSolidColorGreen") {
       // console.log("V selected");
       var vucommandstring = "V" + y + t + colorValues;
       console.log(vucommandstring);
     };
 
-    if (checkedItemsSolidColor[i] === "MaintSolidColor") {
+    if (checkedItemsSolidColor[i] === "MaintSolidColorGreen") {
       // console.log("M selected");
       var mcommandstring = "M" + y + t + colorValues;
       console.log(mcommandstring);
     };
-    if (checkedItemsSolidColor[i] === "FrontHPSolidColor") {
+    if (checkedItemsSolidColor[i] === "FrontHPSolidColorGreen") {
       // console.log("M selected");
       var hpfcommandstring = "F0" + y + colorValues;
       console.log(hpfcommandstring);
     };
-    if (checkedItemsSolidColor[i] === "TopHPSolidColor") {
+    if (checkedItemsSolidColor[i] === "TopHPSolidColorGreen") {
       // console.log("M selected");
       var hptcommandstring = "T0" + y + colorValues;
       console.log(hptcommandstring);
     };
-    if (checkedItemsSolidColor[i] === "RearHPSolidColor") {
+    if (checkedItemsSolidColor[i] === "RearHPSolidColorGreen") {
       // console.log("M selected");
       var hprcommandstring = "R0" + y + colorValues;
       console.log(hprcommandstring);
     };
   };
 
-  // let ldpCommandParam = "&param1=" + ldpcommandstring;
-  // let maintCommandParam = "&param2=" + mcommandstring;
-  // let coinCommandParam = "&param3=" + coincommandstring;
-  // let vuCommandParam = "&param4=" + vucommandstring;
-  if (ldpcommandstring != undefined) { let ldpCommandParam = "&param1=" + ldpcommandstring; }
-  if (ldpcommandstring != undefined) { let maintCommandParam = "&param2=" + mcommandstring; }
-  if (ldpcommandstring != undefined) { let coinCommandParam = "&param3=" + coincommandstring; }
-  if (ldpcommandstring != undefined) { let vuCommandParam = "&param4=" + vucommandstring; }
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  let hpFrontParam = "&param1=S02HP" + hpfcommandstring;
-  let hpTopParam = "&param2=S02HP" + hptcommandstring;
-  let hpRearParam = "&param3=S02HP" + hprcommandstring;
+  if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + hpfcommandstring; } else { var hpFrontParam = "" };
+  if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + hptcommandstring; } else { var hpTopParam = "" };
+  if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + hprcommandstring; } else { var hpRearParam = "" };
   let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
@@ -10069,40 +10114,40 @@ function geti2CDevice(g) {
 };
 
 
-function getStripName() {
+// function getStripName() {
 
-  for (var i = 0; i < checkedItems.length; i++) {
+//   for (var i = 0; i < checkedItems.length; i++) {
 
-    if (checkedItems[i] === "L") {
-      console.log("L selected");
-      return checkedItems[i];
-    };
-    if (checkedItems[i] === "LDPSolidColor") {
-      console.log("L selected");
-      return checkedItems[i];
-    };
-    if (checkedItems[i] === "C") {
-      console.log("C selected");
-      return checkedItems[i];
-    };
-    if (checkedItems[i] === "V") {
-      console.log("V selected");
-      return checkedItems[i];
-    };
-    if (checkedItems[i] === "M") {
-      console.log("M selected");
-      return checkedItems[i];
-    };
-    if (checkedItems[i] === "I") {
-      console.log("I selected");
-      return checkedItems[i];
-    };
-    if (checkedItems[i] === "D") {
-      console.log("D selected");
-      return checkedItems[i];
-    };
-  };
-};
+//     if (checkedItems[i] === "L") {
+//       console.log("L selected");
+//       return checkedItems[i];
+//     };
+//     if (checkedItems[i] === "LDPSolidColor") {
+//       console.log("L selected");
+//       return checkedItems[i];
+//     };
+//     if (checkedItems[i] === "C") {
+//       console.log("C selected");
+//       return checkedItems[i];
+//     };
+//     if (checkedItems[i] === "V") {
+//       console.log("V selected");
+//       return checkedItems[i];
+//     };
+//     if (checkedItems[i] === "M") {
+//       console.log("M selected");
+//       return checkedItems[i];
+//     };
+//     if (checkedItems[i] === "I") {
+//       console.log("I selected");
+//       return checkedItems[i];
+//     };
+//     if (checkedItems[i] === "D") {
+//       console.log("D selected");
+//       return checkedItems[i];
+//     };
+//   };
+// };
 //var socket = io.connect('http://astromech.local:5000');
 // var socket = io();
 // var socket = io.connect();
