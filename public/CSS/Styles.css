@@ -95,9 +95,32 @@ line-height: 2rem;
   -webkit-text-stroke-color: black;
 }
 
-
+.shadowtext1LineLEDShort{
+  position:relative;
+  top: -115px;
+  left: -0px;
+  width: 70px;
+  font-family: 'Star Jedi', 'Starjedi', arial, camb;
+  color: lightyellow;
+  /* left: 60px; */
+  text-align: center;
+  text-shadow: 0 4px 10px black;
+  text-decoration: solid;
+line-height: 2rem;
+  font-size: 3rem;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
 .buttonwidthLED {
-  width: 190px;
+  width:190px;
+  position: relative;
+  top: -2px;
+  left: 0px;
+}
+
+.buttonwidthLEDRD {
+  width: 70px;
+  height: 70px;
   position: relative;
   top: -2px;
   left: 0px;
@@ -199,6 +222,9 @@ height: 50px;
 
 
 }
+
+
+
 .testingPie{
   position: absolute;
   top: 110px;
@@ -3409,4 +3435,93 @@ display: contents;
   top: 405px;
   left: 00px;
   height: 100px;
+}
+
+.volumeslider{
+  position: absolute;
+  top: 500px;
+  left: -300px;
+  width: 20px;
+  height: 300px;
+}
+.volumeslider .slider{
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  top: 50%;
+  -webkit-appearance: none;
+  width: 300px;
+  height: 20px;
+  outline:none;
+  transform: rotate(90deg) translate(-50%,-50%);
+  transform-origin: 0 0;
+  background-color: rgba(0,0,0,1);
+}
+
+.volumeslider .bar,
+.volumeslider .fill{
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+.volumeslider .bar{
+  z-index: 1;
+  top: 10px;
+  bottom: 10px;
+  background-color: rgba(0,0,0,2);
+}
+
+.volumeslider.fill{
+  z-index: 2;
+  bottom: 0;
+  height: 50%;
+  overflow: hidden;
+
+}
+
+.volumeslider .fill::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 300;
+  bottom: 0;
+  background-image: linear-gradient(0deg, #ffe53b, 0%, #ff2525 100%);
+
+}
+
+.rulers{
+  position: absolute;
+  right: 150%;
+  top: 15px;
+  bottom: 15px;
+  width: 100%;
+  background-color: rgba(0, ,0 ,0 , 2);
+  border-top: 1px solid white;
+
+
+}
+
+.rulers::before{
+  content:'';
+  position: absolute;
+  left: 0; right: 0; top: 0; bottom: 0;
+  background: linear-gradient(to top, white 1px, transparent 2px);
+  background-size: 100% 10%;;
+}
+
+.rulers::after{
+  content:'';
+  position: absolute;
+  left: 30%; right: 0; top: 0; bottom: 0;
+  background: linear-gradient(to top, white 1px, transparent 2px);
+  background-size: 100% 2%;;
+}
+
+.volumeTextDivClass{
+  position: absolute;
+  top: 150px;
+  left: -80px;
+
 }
