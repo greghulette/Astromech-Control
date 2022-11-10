@@ -346,7 +346,7 @@ function GetRemoteBatteryLevel() {
 
   file.timeout = 2000;
   // file.open("GET", "http://127.0.0.1:5500/public/BatteryCapacity.txt", true);
-  file.open("GET", "http://10.0.0.40:8000/BatteryCapacity.txt", true);
+  file.open("GET", "http://127.0.0.1:8000/BatteryCapacity.txt", true);
 
   file.onreadystatechange = function () {
     // console.log("Something")
@@ -422,7 +422,7 @@ function GetRemoteBatteryConnection() {
   var file = new XMLHttpRequest();
   // file.timeout = 1000;
   // file.open("GET", "http://127.0.0.1:5500/public/ConnectedStatus.txt", true);
-  file.open("GET", "http://10.0.0.40:8000/ConnectedStatus.txt", true);
+  file.open("GET", "http://127.0.0.1:8000/ConnectedStatus.txt", true);
 
   file.onreadystatechange = function () {
     // console.log("Something")
