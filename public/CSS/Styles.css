@@ -111,6 +111,184 @@ line-height: 2rem;
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: black;
 }
+
+.shadowtext1LinesLEDLong{
+  position:relative;
+  top: -90px;
+  left:10px;
+  width: 70px;
+  font-family: 'Star Jedi', 'Starjedi', arial, camb;
+  color: lightyellow;
+  /* left: 60px; */
+  text-align: center;
+  text-shadow: 0 4px 10px black;
+  text-decoration: solid;
+line-height: 2rem;
+  font-size: 1.75rem;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
+
+.shadowtext1PosShort{
+  position:relative;
+  top: -95px;
+  left: -0px;
+  width: 70px;
+  font-family: 'Star Jedi', 'Starjedi', arial, camb;
+  color: lightyellow;
+  /* left: 60px; */
+  text-align: center;
+  text-shadow: 0 4px 10px black;
+  text-decoration: solid;
+line-height: 2rem;
+  font-size: 2rem;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
+.paddingTopBottom{
+  padding: 5px;
+}
+.psibuttons{
+  position: absolute;
+  top: 50px;
+  left: -200px;
+}
+.psibuttonsrow2{
+  position: absolute;
+  top: 50px;
+  left: 00px;
+}
+.psibuttonsrow3{
+  position: absolute;
+  top: 50px;
+  left: 200px;
+}
+.psibuttonsrow4{
+  position: absolute;
+  top: 50px;
+  left:400px;
+}
+.buttonwidthLEDRD{
+  position: absolute;
+  left: 25px;
+}
+
+.rseriesbuttonsrow1{
+  position: absolute;
+  top: 350px;
+  left: -200px;
+}
+.rseriesbuttonsrow2{
+  position: absolute;
+  top: 350px;
+  left: 00px;
+}
+.rseriesbuttonsrow3{
+  position: absolute;
+  top: 350px;
+  left: 200px;
+}
+.rseriesbuttonsrow4{
+  position: absolute;
+  top: 350px;
+  left: 400px;
+}
+
+.RDAbsoluteTotal{
+  position: absolute;
+  top: 50px;
+  left:-325px;
+  height: 250px;
+}
+
+.RDAbsoluteHeader{
+  position: relative;
+  top: -10px;
+  left: -10px;
+}
+.RDAbsolute{
+  width: 90px;
+  height: 310px;
+  border: 2px solid white;
+}
+
+.RDRelativeHeader{
+  position: absolute;
+  top: 45px;
+  left: -65px;
+}
+.RDRelative{
+  width: 400px;
+  height: 310px;
+  position: absolute;
+  left: -200px;
+  top: 89px;
+  border: 2px solid white;
+}
+
+
+.RDRelativeClockwiseHeader{
+  position: relative;
+  top: 0px;
+  left: 10px;
+}
+.RDRelativeClockwise{
+  width: 90px;
+  position: relative;
+  top: -40px;
+  /* border: 2px solid white; */
+}
+
+.RDRelativeCounterClockwiseHeader{
+  position: relative;
+  top: -285px;
+  left: 200px;
+}
+.RDRelativeCounterClockwise{
+  width: 90px;
+  position: relative;
+  top: -40px;
+  /* border: 2px solid white; */
+}
+
+.FLDImage{
+  position: absolute;
+  top: 50px;
+  width: 150px;
+}
+.RLDImage{
+  position: absolute;
+  top: 300px;
+  left: -200px;
+  width: 350px;
+
+}
+.FLDTopText{
+  position: absolute;
+  top: 75px;
+  left: 175px;
+  font-size: 1.5rem;
+}
+
+.FLDBottomText{
+  position: absolute;
+  top: 175px;
+  left: 175px;
+  font-size: 1.5rem;
+}
+
+.RLDText{
+  position: absolute;
+  top: 315px;
+  left: 175px;
+  font-size: 1.5rem;
+}
+.rseriesTextApplyMove{
+  position: absolute;
+  top: 550px;
+  left: 200px;
+}
+
 .buttonwidthLED {
   width:190px;
   position: relative;
@@ -130,7 +308,89 @@ height: 110px;
 /* border: yellow solid 2px; */
 }
 .ButtonBlankLED{
+
   height: 65px;
+  /* border: yellow solid 2px; */
+  }
+
+  .ButtonBlankRD{
+    height: 65px;
+    position: relative;
+    /* top: 10px; */
+    /* padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px; */
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    /* border: yellow solid 2px; */
+    }
+
+.ButtonBlankRDRClockwise{
+  height: 70px;
+  position: relative;
+  top: 29px;
+  left: 30px; 
+  padding-left: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  /* padding: 30px;
+  /* border: yellow solid 2px; */
+  }
+.RDStoredDiv{
+  position: absolute;
+  top: 400px;
+  left: -120px;
+
+}
+.RDOptions{
+  position: absolute;
+  top: 400px;
+  left: 200px;
+}
+
+.RDTextCommandInput{
+  position: absolute;
+  top: 600px;
+  left: 700px;
+  height: 40px;
+  width: 300px;  
+}
+.RDTextInput{
+  font-size: 1.5rem;
+}
+.RDTextInputLabel{
+  position: relative;
+  top: 40px;
+  left: -230px;
+  
+
+}
+.RDSpeedSlider{
+  position: absolute;
+  top: 620px;
+  left: 300px;
+  width: 600px;
+}
+.RDTextMove{
+  position: relative;
+  top: -50px;
+  left: 290px;
+  height: 40px;
+}
+.ButtonBlankRDRCounterClockwise{
+  height: 65px;
+  position: relative;
+  top: -280px;
+  left: 230px; 
+  padding-left: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  /* padding: 30px;
   /* border: yellow solid 2px; */
   }
 .move{
@@ -2261,6 +2521,19 @@ width: 100%;
 
   opacity: .9;
 }
+.applyButton1{
+  background-image: url(..//Images/Buttons/Button-Apply.png);
+  background-size: cover;
+  /* opacity: 1; */
+  /* border: 1px; */
+  position: absolute;
+  top:225px;
+  left: 25px;
+  height: 75px;
+  width: 190px;
+
+  opacity: .9;
+}
 
 .applyButtonStored{
   background-image: url(..//Images/Buttons/Button-Apply.png);
@@ -2344,6 +2617,27 @@ INPUT[type="submit"] {
   left: 625px; */
   width: 450px;
   font-size: 35 px;
+}
+
+.ColorPickerdivRseries {
+  position: absolute;
+  /* border: 3px blue solid; */
+  top: 0px;
+  /* top: 360px;
+  left: 625px; */
+  width: 450px;
+  font-size: 35 px;
+}
+
+.rseriesTextInput{
+  position: absolute;
+  top: 175px;
+  left: 100px;
+}
+.rseriesTextInputLabel{
+position: absolute;
+top: 165px;
+left: -50px;
 }
 .ColorPicker {
   /* border: 3px green solid; */
@@ -3525,3 +3819,85 @@ display: contents;
   left: -80px;
 
 }
+
+.circularSliderPos{
+  position: absolute;
+  top: 20px;
+  left: 300px;
+}
+
+.volumesliderbehindtext{
+  position: absolute;
+  height: 300px;
+  width: 300px;
+  top: 200px;
+  left: 460px;
+  border-radius: 100%;
+  background-color: blue;
+
+  /* border: 2px solid blue; */
+  
+
+}
+
+.jcs {
+  position: relative;
+  border-style: dotted;
+  border-radius: 100%;   
+  border-color: yellow;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border-width: 10px;
+  cursor: pointer;
+}
+
+.jcs-value {
+  position: absolute;
+  border-style: none;
+  border-radius: 100%;
+/* border: 2px solid rgb(0, 0, 0); */
+text-align : center;
+  text-shadow: 0 4px 10px black;
+  /* font-size: 20px; */
+pointer-events: none;
+line-height: 4rem;
+color: white;
+/* background-color: blue; */
+outline: none;
+}
+
+.jcs-indicator {
+  
+  position: absolute;
+  border-radius: 100%;
+  background-color: blue;
+border: 13px solid rgb(255, 255, 255);
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  pointer-events : none;
+}
+.jcs-panel {
+  position: relative;
+  display: inline-block;
+  border-style: solid;
+  border-color: transparent;
+  cursor: pointer;
+}
+
+
+.jcs-value img {
+  border-radius: 100%;
+  background: transparent;
+width: inherit;
+height: inherit;
+}
+
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+

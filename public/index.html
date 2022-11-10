@@ -11,6 +11,9 @@
   <link rel="shortcut icon" href="./Images/r2-d2.ico" type="image/x-icon"/>
   <link rel="stylesheet" href="./CSS/Styles.css" />
   <meta name="viewport" content="width=device-width, initial-scale=.5" />
+  <script src="//code.jquery.com/jquery-3.2.0.min.js"></script>
+  <script src="./js/circular-slider.js"></script>
+<!-- <script src="circular-slider.min.js"></script> -->
 </head>
 
 <body scroll="no" >
@@ -1122,12 +1125,21 @@
 
         <div class="menu-Level-1-Content" id="DimPulse">
           <h1 class="menuHeader-Level-1">Dim Pulse</h1>
+          <!-- Body -->
           <img class="r2menupictureLDP1" src="Images/Body/LDPBlue.png" name="stripSelectorDimPulse" onclick=changeImageLDPDimPulse() id="LDPDimPulse"/>
           <img class="r2menupictureCoin" src="Images/Body/CoinSLotsBlue.png" name="stripSelectorDimPulse" onclick=changeImageCoinDimPulse() id="CoinDimPulse"/>
           <img class="r2menupictureMaint" src="Images/Body/SkirtBlue.png" name="stripSelectorDimPulse"onclick=changeImageMaintDimPulse() id="MaintDimPulse"/>
           <img class="r2menupictureDataPanelVerticalBars" src="Images/Body/DataPanelVerticalBlue.png" name="stripSelectorDimPulse" onclick=changeImageVerticalBarsDimPulse() id="VerticalBarsDimPulse"/>
-          <img class="selectALLpic" src="Images/Button-Select-All-GIMP.png" alt="picture" onclick=selectALLStripsDimPulse() id="checkmarkallRSeries"/>
-          <img class="selectNonepic" src="Images/Button-Select-None-GIMP.png" onclick=selectNoneStripsDimPulse() id="checkmarkNoneRSeries"/>
+          <!-- Dome -->
+          <img class="r2menupictureFrontHP" src="Images/Dome/FrontHPBlue.png" name="stripSelectorDimPulse" onclick=changeImageFrontHPDimPulse() id="FrontHPDimPulse" />
+          <img class="r2menupictureTopHP" src="Images/Dome/TopHPBlue.png" name="stripSelectorDimPulse"  onclick=changeImageTopHPDimPulse() id="TopHPDimPulse" />
+          <img  class="r2menupictureRearHP" src="Images/Dome/RearHPBlue.png" name="stripSelectorDimPulse" onclick=changeImageRearHPDimPulse() id="RearHPDimPulse">
+          <!-- Check Mark All -->
+          <img class="selectALLpic" src="Images/Button-Select-All-GIMP.png" alt="picture" onclick="selectALLStripsDimPulse('checkmarkallDimPulse')" id="checkmarkallRSeries"/>
+          <img id="checkmarkallDimPulse" class="checkmarkall hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+          Chech Mark None
+          <img class="selectNonepic" src="Images/Button-Select-None-GIMP.png" onclick="selectNoneStripsDimPulse('checkmarknoneDimPulse')" id="checkmarknoneDimPul"/>
+          <img id="checkmarknoneDimPulse" class="checkmarknone hidden" src="./Images/LEDTab/Selectors/checkmark.png">
 
           <div class="menu-Level-2">
 
@@ -1145,28 +1157,20 @@
               <div class="ColorPickerdiv">
                 <form class="" action="index.html" method="post">
                   <label for="ColorPicker">Choose a color:</label>
-                    <select class="ColorPicker" id="DimPulseColorChoiceColorSelect" name="ColorPicker">
-                    <option value="5">Blue</option>
-                    <option value="1">Red</option>
-                    <option value="2">Yellow</option>
-                    <option value="3">Green</option>
-                    <option value="4">Cyan</option>
-                    <option value="6">Magenta</option>
-                    <option value="7">Orange</option>
-                    <option value="8">White</option>
-                    <option value="0">Off</option>
+                  <select class="ColorPicker" id="DimPulseColorChoiceColorSelect" name="ColorPicker">
+                  <option value="5">Blue</option>
+                  <option value="1">Red</option>
+                  <option value="2">Yellow</option>
+                  <option value="3">Green</option>
+                  <option value="4">Cyan</option>
+                  <option value="6">Magenta</option>
+                  <option value="7">Orange</option>
+                  <option value="8">White</option>
+                  <option value="0">Off</option>
                   </select>
                   <br />
                   <br />
-                  <input
-                    class="slider"
-                    id="DimPulseSlider"
-                    type="range"
-                    name="LDPSpeed"
-                    value="1"
-                    min="1"
-                    max="3"
-                  />
+                  <input class="slider" id="DimPulseSlider" type="range" name="LDPSpeed" value="1" min="1" max="3" />
                   <!-- Apply Button-->
                   <div id="DimPulseApply" class="applyButton" onclick="commandOneColorAndSpeedDimPulse('07','DimPulseSlider', 'DimPulseColorChoiceColorSelect', 'checkmarkapplyDimPulse')">
                     <img id="DimPulseApplyImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
@@ -1177,14 +1181,11 @@
                     <img id="RDimPulseOffImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
                   <p class="shadowtext1LineLED">off</p>
                   </div>
-                    <!-- <a href="#" onclick="commandOneColorAndSpeedDimPulse('07','DimPulseSlider', 'DimPulseColorChoiceColorSelect', 'checkmarkapplyDimPulse')" class="applyButton"></a>
-                    <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff()"  class="applyButtonoff"></img> -->
-                    </form>
-                    <img id="checkmarkapplyDimPulse" class="checkmarkapply hidden" src="./Images/LEDTab/Selectors/checkmark.png">
-                    <img id="checkmarkoffDimPulse" class="checkmarkoff hidden" src="./Images/LEDTab/Selectors/checkmark.png">  
-                    <!-- <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyDimPulse"> -->
-                  </div>
-                </div>
+                </form>
+                  <img id="checkmarkapplyDimPulse" class="checkmarkapply hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+                  <img id="checkmarkoffDimPulse" class="checkmarkoff hidden" src="./Images/LEDTab/Selectors/checkmark.png">  
+              </div>
+            </div>
 
               </div>
             </div>
@@ -1242,6 +1243,7 @@
                               <option value="0">Off</option>
                             </select>
                             <br />
+                            <!-- Apply Button-->
                             <div id="BounceApply" class="applyButton" onclick="commandTwoColorsNoSliderBouncing('08','1', 'BounceFirstColorSelctionBox', 'BounceSecondColorSelectionBox', 'checkmarkapplyBounce')">
                               <img id="BounceApplyImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
                               <p class="shadowtext1LineLED">apply</p>
@@ -1321,37 +1323,37 @@
 
                     <div class="menu-Level-2">
                       <div class="menu-Level-2-Links " >
-                        <button class="active" rel="MeetInMiddle"><img
-                            class="buttonwidth"
-                            id ="transparent"
-                            src="Images/Buttons/LEDFunctionButtons/DualBounce/Button-DualBounce-MeetInMiddle-White.png"
-                            alt="button for Dual Bouncing"
-                          /></button>
+                        <button class="active" rel="MeetInMiddle">
+                          <div class="ButtonBlankLED" onclick="">
+                            <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                            <p class="shadowtext2LinesLED">meet in middle</p>
+                          </div>                        
+                        </button> 
                       </div>
                       <div class="menu-Level-2-Links " >
-                          <button class="" rel="ConvergeinMiddle"><img
-                              class="buttonwidth"
-                              id ="transparent"
-                              src="Images/Buttons/LEDFunctionButtons/DualBounce/Button-DualBounce-ConvergeInMiddle-White.png"
-                              alt="button for Dual Bouncing"
-                            /></button>
+                        <button class="" rel="ConvergeinMiddle">
+                          <div class="ButtonBlankLED" onclick="">
+                            <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                            <p class="shadowtext2LinesLED">converge in middle</p>
+                          </div>                        
+                        </button> 
                         </div>
                         <div class="menu-Level-2-Links " >
-                            <button class="" rel="InAndOut"><img
-                                class="buttonwidth"
-                                id ="transparent"
-                                src="Images/Buttons/LEDFunctionButtons/DualBounce/Button-DualBounce-InAndOut-White.png"
-                                alt="button for Dual Bouncing"
-                              /></button>
-                          </div>
+                          <button class="" rel="InAndOut">
+                            <div class="ButtonBlankLED" onclick="">
+                            <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                            <p class="shadowtext2LinesLED">in and out</p>
+                          </div>                        
+                        </button> 
+                        </div>
                         <div class="menu-Level-2-Links " >
-                            <button class="" rel="DotsToTheMiddle"><img
-                                class="buttonwidth"
-                                id ="transparent"
-                                src="Images/Buttons/LEDFunctionButtons/DualBounce/Button-DualBounce-DotsToTheMiddle-White.png"
-                                alt="button for Dual Bouncing"
-                              /></button>
-                          </div>
+                          <button class="" rel="DotsToTheMiddle">
+                            <div class="ButtonBlankLED" onclick="">
+                            <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                            <p class="shadowtext2LinesLED">dots to middle</p>
+                          </div>                        
+                        </button> 
+                        </div>
                         <div class="menu-Level-2-Content active" id="MeetInMiddle">
                           <h2 class="menuHeader-Level-2"> Meet in Middle</h2>
                           <div class="ColorPickerdiv">
@@ -1370,12 +1372,27 @@
                               </select>
                               <br />
                               <br />
-                              <a href="#" onclick="commandSingleColorDualBounce('09','2', 'MeetInMiddleColorChoiceColorSelect', 'checkmarkapplyDualBounceMeetInMiddle')" class="applyButton"></a>
-                              <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img>
+                            <!-- Apply Button-->
+                            <div id="BounceApply" class="applyButton" onclick="commandSingleColorDualBounce('09','2', 'MeetInMiddleColorChoiceColorSelect', 'checkmarkapplyDualBounce')">
+                              <img id="BounceApplyImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                              <p class="shadowtext1LineLED">apply</p>
+                            </div>
+                            <!-- Off Button-->
+                            <div id="DualBounceOff" class="applyButtonoff" onclick="commandStripOffDualBounce('checkmarkoffDualBounce')">
+                              <img id="RBounceOffImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                            <p class="shadowtext1LineLED">off</p>
+                            </div>
+                          </form>
+                          <img id="checkmarkapplyDualBounce" class="checkmarkapply hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+                          <img id="checkmarkoffDualBounce" class="checkmarkoff hidden" src="./Images/LEDTab/Selectors/checkmark.png"> 
+
+                              <!-- <a href="#" onclick="commandSingleColorDualBounce('09','2', 'MeetInMiddleColorChoiceColorSelect', 'checkmarkapplyDualBounceMeetInMiddle')" class="applyButton"></a>
+                              <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img> -->
 
                             </form>
-                            <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyDualBounceMeetInMiddle">
-
+                            <!-- <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyDualBounceMeetInMiddle"> -->
+                            <img id="checkmarkapplyBounce" class="checkmarkapply hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+                            <img id="checkmarkoffBounce" class="checkmarkoff hidden" src="./Images/LEDTab/Selectors/checkmark.png"> 
                           </div>
                         </div>
 
@@ -1397,12 +1414,23 @@
                             </select>
                             <br />
                             <br />
-                            <a href="#" onclick="commandSingleColorDualBounce('09',3, 'ConvergeinMiddleColorChoiceColorSelect', 'checkmarkapplyDualBounceConvergeinMiddle')" class="applyButton"></a>
-                            <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img>
+                            <!-- Apply Button-->
+                            <div id="BounceApply" class="applyButton" onclick="commandSingleColorDualBounce('09',3, 'ConvergeinMiddleColorChoiceColorSelect', 'checkmarkapplyBounce')">
+                              <img id="BounceApplyImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                              <p class="shadowtext1LineLED">apply</p>
+                            </div>
+                            <!-- Off Button-->
+                            <div id="BounceOff" class="applyButtonoff" onclick="commandStripOffDualBounce('checkmarkoffBounce')">
+                              <img id="RBounceOffImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                            <p class="shadowtext1LineLED">off</p>
+                          </div>
+
+                            <!-- <a href="#" onclick="commandSingleColorDualBounce('09',3, 'ConvergeinMiddleColorChoiceColorSelect', 'checkmarkapplyDualBounceConvergeinMiddle')" class="applyButton"></a> -->
+                            <!-- <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img> -->
 
                           </form>
-                          <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyDualBounceConvergeinMiddle">
-
+                          <img id="checkmarkapplyBounce" class="checkmarkapply hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+                          <img id="checkmarkoffBounce" class="checkmarkoff hidden" src="./Images/LEDTab/Selectors/checkmark.png"> 
                         </div>
                       </div>
                       <div class="menu-Level-2-Content" id="InAndOut">
@@ -1423,7 +1451,7 @@
                             </select>
                             <br />
                             <br />
-                            <a href="#" onclick="commandSingleColorDualBounce('09',4, 'InAndOutColorChoiceColorSelect', 'checkmarkapplyDualBounceInAndOut')" class="applyButton"></a>
+                            <a href="#" onclick="commandSingleColorDualBounce('09',4, 'InAndOutColorChoiceColorSelect', 'checkmarkapplyDualBounceInAndOut')" class="applyButton1"></a>
                             <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img>
 
                           </form>
@@ -1449,7 +1477,7 @@
                             </select>
                             <br />
                             <br />
-                            <a href="#" onclick="commandSingleColorDualBounce('09',5, 'DotsToTheMiddleColorChoiceColorSelect', 'checkmarkapplyDualBounceDotsToTheMiddle')" class="applyButton"></a>
+                            <a href="#" onclick="commandSingleColorDualBounce('09',5, 'DotsToTheMiddleColorChoiceColorSelect', 'checkmarkapplyDualBounceDotsToTheMiddle')" class="applyButton1"></a>
                             <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img>
 
                           </form>
@@ -1573,7 +1601,7 @@
                                     <option value="0">Off</option>
                                   </select>
                                 <br />
-                                <a href="#" onclick="commandTwoColorsNoSliderDualingColors('10', '2', 'BackandForthFirstColorSelctionBox', 'BackandForthSecondColorSelectionBox', 'checkmarkapplyDualingColorsBacknadForth')" class="applyButton"></a>
+                                <a href="#" onclick="commandTwoColorsNoSliderDualingColors('10', '2', 'BackandForthFirstColorSelctionBox', 'BackandForthSecondColorSelectionBox', 'checkmarkapplyDualingColorsBacknadForth')" class="applyButton1"></a>
                                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
                               </form>
                               <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyDualingColorsBacknadForth">
@@ -1612,7 +1640,7 @@
                                   <option value="0">Off</option>
                                 </select>
                               <br />
-                              <a href="#" onclick="commandTwoColorsNoSliderDualingColors('10', '3', 'InandOut2FirstColorSelctionBox', 'InandOut2SecondColorSelectionBox', 'checkmarkapplyDualingColorsInandOut')" class="applyButton"></a>
+                              <a href="#" onclick="commandTwoColorsNoSliderDualingColors('10', '3', 'InandOut2FirstColorSelctionBox', 'InandOut2SecondColorSelectionBox', 'checkmarkapplyDualingColorsInandOut')" class="applyButton1"></a>
                               <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
                             </form><!--end of form-->
                             <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyDualingColorsInandOut">
@@ -1709,7 +1737,7 @@
                           <h2 class="menuHeader-Level-2">Random</h2>
                           <div class="ColorPickerdiv">
                             <form class="" action="index.html" method="post">
-                              <a href="#" onclick="commandNoOptionsRandomColor('11','4','checkmarkapplyRandomColorRandom')" class="applyButton"></a>
+                              <a href="#" onclick="commandNoOptionsRandomColor('11','4','checkmarkapplyRandomColorRandom')" class="applyButton1"></a>
                               <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
                             </form><!--end of form-->
                             <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyRandomColorRandom">
@@ -1749,7 +1777,7 @@
                                 <option value="0">Off</option>
                               </select>
                             <br />
-                            <a href="#" onclick="commandTwoColorsNoSliderRandomColor('11', '1', 'ColorChoiceRandomFirstColorSelctionBox', 'ColorChoiceRandomSecondColorSelectionBox', 'checkmarkapplyRandomColorChoice')" class="applyButton"></a>
+                            <a href="#" onclick="commandTwoColorsNoSliderRandomColor('11', '1', 'ColorChoiceRandomFirstColorSelctionBox', 'ColorChoiceRandomSecondColorSelectionBox', 'checkmarkapplyRandomColorChoice')" class="applyButton1"></a>
                             <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
                           </form>
                           <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyRandomColorChoice">
@@ -1760,7 +1788,7 @@
                         <h2 class="menuHeader-Level-2">Red/Blue</h2>
                         <div class="ColorPickerdiv">
                           <form class="" action="index.html" method="post">
-                            <a href="#" onclick="commandNoOptionsRandomColor('12','1','checkmarkapplyRandomColorRedBlue')" class="applyButton"></a>
+                            <a href="#" onclick="commandNoOptionsRandomColor('12','1','checkmarkapplyRandomColorRedBlue')" class="applyButton1"></a>
                             <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
                           </form>
                           <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyRandomColorRedBlue">
@@ -1858,7 +1886,7 @@
                         <h2 class="menuHeader-Level-2">Random</h2>
                         <div class="ColorPickerdiv">
                           <form class="" action="index.html" method="post">
-                            <a href="#" onclick="commandNoOptionsRandomColor2('12','3','checkmarkapplyRandomColor2Random')" class="applyButton"></a>
+                            <a href="#" onclick="commandNoOptionsRandomColor2('12','3','checkmarkapplyRandomColor2Random')" class="applyButton1"></a>
                             <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
                           </form><!--end of form-->
                           <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyRandomColor2Random">
@@ -1897,7 +1925,7 @@
                               <option value="0">Off</option>
                             </select>
                           <br />
-                          <a href="#" onclick="commandTwoColorsNoSliderRandomColor2('12', '1', 'ColorChoiceRandom2FirstColorSelctionBox', 'ColorChoiceRandom2SecondColorSelectionBox', 'checkmarkapplyRandomColor2ColorChoice')" class="applyButton"></a>
+                          <a href="#" onclick="commandTwoColorsNoSliderRandomColor2('12', '1', 'ColorChoiceRandom2FirstColorSelctionBox', 'ColorChoiceRandom2SecondColorSelectionBox', 'checkmarkapplyRandomColor2ColorChoice')" class="applyButton1"></a>
                           <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
                         </form>
                         <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyRandomColor2ColorChoice">
@@ -1908,7 +1936,7 @@
                       <h2 class="menuHeader-Level-2">Red/Blue</h2>
                       <div class="ColorPickerdiv">
                         <form class="" action="index.html" method="post">
-                          <a href="#" onclick="commandNoOptionsRandomColor2('12','1','checkmarkapplyRandomColor2RedBlue')" class="applyButton"></a>
+                          <a href="#" onclick="commandNoOptionsRandomColor2('12','1','checkmarkapplyRandomColor2RedBlue')" class="applyButton1"></a>
                           <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
                         </form>
                         <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyRandomColor2RedBlue">
@@ -2014,7 +2042,7 @@
                             min="0"
                             max="9"
                           />
-                          <a href="#" onclick="commandOneColorAndSpeedFlash('13','Flash1Slider', 'Flash1ColorChoiceColorSelect', 'checkmarkapplyFlash')" class="applyButton"></a>
+                          <a href="#" onclick="commandOneColorAndSpeedFlash('13','Flash1Slider', 'Flash1ColorChoiceColorSelect', 'checkmarkapplyFlash')" class="applyButton1"></a>
                           <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff()"  class="applyButtonoff"></img>
                         </form>
                         <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyFlash">
@@ -2156,7 +2184,7 @@
                   <h2 class="menuHeader-Level-2">Red/Blue</h2>
                   <div class="ColorPickerdiv">
                        <form class="" action="index.html" method="post">
-                        <a href="#" onclick="commandNoOptionsShortCircuit('14','1','checkmarkapplyShortCircuitRedBlue')" class="applyButton"></a>
+                        <a href="#" onclick="commandNoOptionsShortCircuit('14','1','checkmarkapplyShortCircuitRedBlue')" class="applyButton1"></a>
                         <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
                       </form>
                       <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyShortCircuitRedBlue">
@@ -2166,7 +2194,7 @@
                 <h2 class="menuHeader-Level-2">Red/Blue</h2>
                 <div class="ColorPickerdiv">
                    <form class="" action="index.html" method="post">
-                    <a href="#" onclick="commandNoOptionsShortCircuit('14','2','checkmarkapplyShortCircuitRandomeColor')" class="applyButton"></a>
+                    <a href="#" onclick="commandNoOptionsShortCircuit('14','2','checkmarkapplyShortCircuitRandomeColor')" class="applyButton1"></a>
                     <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
                   </form>
                   <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyShortCircuitRandomeColor">
@@ -2204,7 +2232,7 @@
                       <option value="0">Off</option>
                     </select>
                   <br />
-                <a href="#" onclick="commandTwoColorsNoSliderShortCircuit('14', '1', 'ShortCircuitColorChoiceFirstColorSelctionBox', 'ShortCircuitColorChoiceSecondColorSelectionBox', 'checkmarkapplyShortCircuitColorChoice')" class="applyButton"></a>
+                <a href="#" onclick="commandTwoColorsNoSliderShortCircuit('14', '1', 'ShortCircuitColorChoiceFirstColorSelctionBox', 'ShortCircuitColorChoiceSecondColorSelectionBox', 'checkmarkapplyShortCircuitColorChoice')" class="applyButton1"></a>
                   <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
                 </form>
                 <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyShortCircuitColorChoice">
@@ -2312,7 +2340,7 @@
                   value="3"
                   min="0"
                   max="9"
-                /><a href="#" onclick="commandOneColorAndSpeedPulseBeat('16','PulseBeat123Slider', 'PulseBeat123ColorChoiceColorSelect', 'checkmarkapplyPulseBeat')" class="applyButton"></a>
+                /><a href="#" onclick="commandOneColorAndSpeedPulseBeat('16','PulseBeat123Slider', 'PulseBeat123ColorChoiceColorSelect', 'checkmarkapplyPulseBeat')" class="applyButton1"></a>
                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff()"  class="applyButtonoff"></img>
               </form>
               <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyPulseBeat">
@@ -2419,7 +2447,7 @@
                   value="3"
                   min="0"
                   max="9"
-                /><a href="#" onclick="commandOneColorAndSpeedPulseBeat2('17','PulseBeat2123Slider', 'PulseBeat2123ColorChoiceColorSelect', 'checkmarkapplyPulseBeat2')" class="applyButton"></a>
+                /><a href="#" onclick="commandOneColorAndSpeedPulseBeat2('17','PulseBeat2123Slider', 'PulseBeat2123ColorChoiceColorSelect', 'checkmarkapplyPulseBeat2')" class="applyButton1"></a>
                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff()"  class="applyButtonoff"></img>
               </form>
               <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyPulseBeat2">
@@ -2525,7 +2553,7 @@
                   value="3"
                   min="0"
                   max="9"
-                /><a href="#" onclick="commandOneColorAndSpeedWigWag('18','WigWag123Slider', 'WigWag123ColorChoiceColorSelect', 'checkmarkapplyWigWag')" class="applyButton"></a>
+                /><a href="#" onclick="commandOneColorAndSpeedWigWag('18','WigWag123Slider', 'WigWag123ColorChoiceColorSelect', 'checkmarkapplyWigWag')" class="applyButton1"></a>
                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff()"  class="applyButtonoff"></img>
               </form>
               <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyWigWag">
@@ -2630,7 +2658,7 @@
                   value="3"
                   min="0"
                   max="9"
-                /><a href="#" onclick="commandOneColorAndSpeedWigWag2('18','WigWag2123Slider', 'WigWag2123ColorChoiceColorSelect' , 'checkmarkapplyWigWag2')" class="applyButton"></a>
+                /><a href="#" onclick="commandOneColorAndSpeedWigWag2('18','WigWag2123Slider', 'WigWag2123ColorChoiceColorSelect' , 'checkmarkapplyWigWag2')" class="applyButton1"></a>
                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff()"  class="applyButtonoff"></img>
               </form>
               <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyWigWag2">
@@ -2736,7 +2764,7 @@
                   value="3"
                   min="0"
                   max="9"
-                /><a href="#" onclick="commandOneColorAndSpeedZigZag('19','ZigZag123Slider', 'ZigZag123ColorChoiceColorSelect', 'checkmarkapplyZigZag')" class="applyButton"></a>
+                /><a href="#" onclick="commandOneColorAndSpeedZigZag('19','ZigZag123Slider', 'ZigZag123ColorChoiceColorSelect', 'checkmarkapplyZigZag')" class="applyButton1"></a>
                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff()"  class="applyButtonoff"></img>
               </form>
               <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyZigZag">
@@ -2856,7 +2884,7 @@
                   min="0"
                   max="8"
                 />
-                <a href="#" onclick="commandTwoColorsZigZag2('21','ZigZag2123Slider', 'ZigZag2123FirstColorSelctionBox', 'ZigZag2123econdColorSelectionBox', 'checkmarkapplyZigZag2')" class="applyButton"></a>
+                <a href="#" onclick="commandTwoColorsZigZag2('21','ZigZag2123Slider', 'ZigZag2123FirstColorSelctionBox', 'ZigZag2123econdColorSelectionBox', 'checkmarkapplyZigZag2')" class="applyButton1"></a>
                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
               </form>
               <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyZigZag2">
@@ -2963,7 +2991,7 @@
                   min="1"
                   max="3"
                 />
-                <a href="#" onclick="commandOneColorAndSpeedDimPulse2('22','DimPulse12Slider', 'DimPulse12ColorChoiceColorSelect', 'checkmarkapplyDimPulse2')" class="applyButton"></a>
+                <a href="#" onclick="commandOneColorAndSpeedDimPulse2('22','DimPulse12Slider', 'DimPulse12ColorChoiceColorSelect', 'checkmarkapplyDimPulse2')" class="applyButton1"></a>
                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff()"  class="applyButtonoff"></img>
               </form>
               <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyDimPulse2">
@@ -3070,7 +3098,7 @@
                   min="1"
                   max="3"
                 />
-                <a href="#" onclick="commandOneColorAndSpeedDimPulse3('23','DimPulse13Slider', 'DimPulse13ColorChoiceColorSelect', 'checkmarkapplyDimPulse3')" class="applyButton"></a>
+                <a href="#" onclick="commandOneColorAndSpeedDimPulse3('23','DimPulse13Slider', 'DimPulse13ColorChoiceColorSelect', 'checkmarkapplyDimPulse3')" class="applyButton1"></a>
                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff()"  class="applyButtonoff"></img>
               </form>
               <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyDimPulse3">
@@ -3210,7 +3238,7 @@
                     <option value="0">Off</option>
                   </select>
                 <br />
-                <a href="#" onclick="commandTwoColorsNoSliderDualingColors2('25','1', 'Option1FirstColorSelctionBox', 'Option1SecondColorSelectionBox', 'checkmarkapplyDualingColors2Option1')" class="applyButton"></a>
+                <a href="#" onclick="commandTwoColorsNoSliderDualingColors2('25','1', 'Option1FirstColorSelctionBox', 'Option1SecondColorSelectionBox', 'checkmarkapplyDualingColors2Option1')" class="applyButton1"></a>
                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
               </form>
               <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyDualingColors2Option1">
@@ -3249,7 +3277,7 @@
                     <option value="0">Off</option>
                   </select>
                 <br />
-                <a href="#" onclick="commandTwoColorsNoSliderDualingColors2('25','2', 'Option2FirstColorSelctionBox', 'Option2SecondColorSelectionBox', 'checkmarkapplyDualingColors2Option2')" class="applyButton"></a>
+                <a href="#" onclick="commandTwoColorsNoSliderDualingColors2('25','2', 'Option2FirstColorSelctionBox', 'Option2SecondColorSelectionBox', 'checkmarkapplyDualingColors2Option2')" class="applyButton1"></a>
                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
               </form>
               <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyDualingColors2Option2">
@@ -3288,7 +3316,7 @@
                     <option value="0">Off</option>
                   </select>
                 <br />
-                <a href="#" onclick="commandTwoColorsNoSliderDualingColors2('25','3', 'Option3FirstColorSelctionBox', 'Option3SecondColorSelectionBox', 'checkmarkapplyDualingColors2Option3')" class="applyButton"></a>
+                <a href="#" onclick="commandTwoColorsNoSliderDualingColors2('25','3', 'Option3FirstColorSelctionBox', 'Option3SecondColorSelectionBox', 'checkmarkapplyDualingColors2Option3')" class="applyButton1"></a>
                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
               </form>
               <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyDualingColors2Option3">
@@ -3327,7 +3355,7 @@
                     <option value="0">Off</option>
                   </select>
                 <br />
-                <a href="#" onclick="commandTwoColorsNoSliderDualingColors2('25','4', 'Option4FirstColorSelctionBox', 'Option4SecondColorSelectionBox', 'checkmarkapplyDualingColors2Option4')" class="applyButton"></a>
+                <a href="#" onclick="commandTwoColorsNoSliderDualingColors2('25','4', 'Option4FirstColorSelctionBox', 'Option4SecondColorSelectionBox', 'checkmarkapplyDualingColors2Option4')" class="applyButton1"></a>
                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
               </form>
               <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyDualingColors2Option4">
@@ -3410,7 +3438,7 @@
           <div class="menu-Level-2-Content active" id="FLD1">
             <h2 class="menuHeader-Level-2"></h2>
             <div class="ColorPickerdiv">
-              <a href="#" onclick="commandNoOptionsFLD('70','5','checkmarkapplyFLD')" class="applyButton"></a>
+              <a href="#" onclick="commandNoOptionsFLD('70','5','checkmarkapplyFLD')" class="applyButton1"></a>
                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
               </form>
               <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyFLD">
@@ -3494,7 +3522,7 @@
           <div class="menu-Level-2-Content active" id="RLD1">
             <h2 class="menuHeader-Level-2"></h2>
             <div class="ColorPickerdiv">
-              <a href="#" onclick="commandNoOptionsRLD('71','5','checkmarkapplyRLD')" class="applyButton"></a>
+              <a href="#" onclick="commandNoOptionsRLD('71','5','checkmarkapplyRLD')" class="applyButton1"></a>
                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
               </form>
               <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyRLD">
@@ -3599,7 +3627,7 @@
                   min="1"
                   max="3"
                 />
-                <a href="#" onclick="commandOneColorAndSpeedPulse('72','Pulse1Slider', 'Pulse1ColorChoiceColorSelect', 'checkmarkapplyPulse')" class="applyButton"></a>
+                <a href="#" onclick="commandOneColorAndSpeedPulse('72','Pulse1Slider', 'Pulse1ColorChoiceColorSelect', 'checkmarkapplyPulse')" class="applyButton1"></a>
                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff()"  class="applyButtonoff"></img>
               </form>
               <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyPulse">
@@ -3705,7 +3733,7 @@
                   min="1"
                   max="3"
                 />
-                <a href="#" onclick="commandOneColorAndSpeedDualPulse('73','DualPulseSlider', 'DualPulseColorChoiceColorSelect', 'checkmarkapplyDualPulse')" class="applyButton"></a>
+                <a href="#" onclick="commandOneColorAndSpeedDualPulse('73','DualPulseSlider', 'DualPulseColorChoiceColorSelect', 'checkmarkapplyDualPulse')" class="applyButton1"></a>
                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff()"  class="applyButtonoff"></img>
               </form>
               <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyDualPulse">
@@ -3797,7 +3825,7 @@
               <form class="" action="index.html" method="post">
                 <br />
                 <br />
-                <a href="#" onclick="commandNoOptionsAutoSequence('99','','checkmarkapplyAutoSequenceEnable')" class="applyButton"></a>
+                <a href="#" onclick="commandNoOptionsAutoSequence('99','','checkmarkapplyAutoSequenceEnable')" class="applyButton1"></a>
                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img>
               </form>
               <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyAutoSequenceEnable">
@@ -3811,7 +3839,7 @@
               <form class="" action="index.html" method="post">
                 <br />
                 <br />
-                <a href="#" onclick="commandNoOptionsAutoSequence('98','','checkmarkapplyAutoSequenceDisable')" class="applyButton"></a>
+                <a href="#" onclick="commandNoOptionsAutoSequence('98','','checkmarkapplyAutoSequenceDisable')" class="applyButton1"></a>
                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img>
               </form>
               <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyAutoSequenceDisable">
@@ -3923,7 +3951,7 @@
             <h2 class="menuHeader-Level-2">option 1</h2>
             <div class="ColorPickerdiv">
               <form class="" action="index.html" method="post">
-                <a href="#" onclick="commandNoOptionsEqualizer('02','1','checkmarkapplyEqualizerOption1')" class="applyButton"></a>
+                <a href="#" onclick="commandNoOptionsEqualizer('02','1','checkmarkapplyEqualizerOption1')" class="applyButton1"></a>
                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img>
 
               </form>
@@ -3935,7 +3963,7 @@
             <h2 class="menuHeader-Level-2">option 2</h2>
             <div class="ColorPickerdiv">
               <form class="" action="index.html" method="post">
-                <a href="#" onclick="commandNoOptionsEqualizer('02','2','checkmarkapplyEqualizerOption2')" class="applyButton"></a>
+                <a href="#" onclick="commandNoOptionsEqualizer('02','2','checkmarkapplyEqualizerOption2')" class="applyButton1"></a>
                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img>
 
               </form>
@@ -3948,7 +3976,7 @@
             <h2 class="menuHeader-Level-2">option 3</h2>
             <div class="ColorPickerdiv">
               <form class="" action="index.html" method="post">
-                <a href="#" onclick="commandNoOptionsEqualizer('02','3','checkmarkapplyEqualizerOption3')" class="applyButton"></a>
+                <a href="#" onclick="commandNoOptionsEqualizer('02','3','checkmarkapplyEqualizerOption3')" class="applyButton1"></a>
                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img>
 
               </form>
@@ -3961,7 +3989,7 @@
             <h2 class="menuHeader-Level-2">option 4</h2>
             <div class="ColorPickerdiv">
               <form class="" action="index.html" method="post">
-                <a href="#" onclick="commandNoOptionsEqualizer('02','4','checkmarkapplyEqualizerOption4')" class="applyButton"></a>
+                <a href="#" onclick="commandNoOptionsEqualizer('02','4','checkmarkapplyEqualizerOption4')" class="applyButton1"></a>
                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img>
 
               </form>
@@ -3995,7 +4023,7 @@
                 <br>
                 <br>
                 <p>Enter your serial command: <input type="text" name="SerialCommandTextBox" id="SerialCommandTextBox" value=""> </p>
-                <a href="#" onclick="sendSerialCommand('SerialCommandTextBox')" class="applyButton"></a>
+                <a href="#" onclick="sendSerialCommand('SerialCommandTextBox')" class="applyButton1"></a>
                 <input type="submit" onclick="sendSerialCommand('SerialCommandTextBox')"name="" value="" style="display: none">
                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img>
               </form>
@@ -4040,7 +4068,7 @@
             <h2 class="menuHeader-Level-2">Normal</h2>
             <div class="ColorPickerdiv">
               <form class="" action="index.html" method="post">
-                <a href="#" onclick="commandNoOptions('LDP', '99','','')" class="applyButton"></a>
+                <a href="#" onclick="commandNoOptions('LDP', '99','','')" class="applyButton1"></a>
                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
               </form>
             </div><!--end of ColorPickerdiv div-->
@@ -4050,7 +4078,7 @@
             <h2 class="menuHeader-Level-2">Short Circuit</h2>
             <div class="ColorPickerdiv">
               <form class="" action="index.html" method="post">
-                <a href="#" onclick="commandNoOptions('LDP', '14','','')" class="applyButton"></a>
+                <a href="#" onclick="commandNoOptions('LDP', '14','','')" class="applyButton1"></a>
                 </form>
             </div><!--end of ColorPickerdiv div-->
           </div> <!-- end of Level 2 Conetent Option 2-->
@@ -4059,7 +4087,7 @@
             <h2 class="menuHeader-Level-2">Flash</h2>
             <div class="ColorPickerdiv">
               <form class="" action="index.html" method="post">
-                <a href="#" onclick="commandNoOptions('LDP', '13','','')" class="applyButton"></a>
+                <a href="#" onclick="commandNoOptions('LDP', '13','','')" class="applyButton1"></a>
                 </form>
             </div><!--end of ColorPickerdiv div-->
           </div> <!-- end of Level 2 Conetent Option 3-->
@@ -4069,8 +4097,10 @@
 
         </div><!--end of Level 2 Menu-->
       </div> <!-- end of Dualing Colors 2-->
+
+
       <div class="menu-Level-1-Content" id="RSeriesLogic">
-        <h1 class="menuHeader-Level-1">Data Panel/CBi</h1>
+        <!-- <h1 class="menuHeader-Level-1">Data Panel/CBi</h1> -->
         <img
         class="r2menuRseriesRLD"
         src="Images/LogicsRearBlue.png"
@@ -4168,43 +4198,341 @@ id="FrontLogicsTopBlueSelector"
 
         <div class="menu-Level-2">
 
-            <div class="menu-Level-2-Links " >
-              <button class="active" rel="RSeriesHome"><img
+            <!-- <div class="menu-Level-2-Links " > -->
+              <!-- <button class="active" rel="RSeriesHome"><img
                   class="buttonwidth"
                   id ="transparent"
                   src="Images/Buttons/Button-R-Series-Home-GIMP.png"
                   alt="button for Large Span"
                 /></button>
             </div>
+            <div class="menu-Level-2-Links " >
+              <button class="" rel="rseriesAnimations">
+                <div class="ButtonBlankLED" onclick="">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext1LinesLEDLong">home</p>
+                </div>  
+              </button>
+            </div> -->
+            <div class="menu-Level-2-Links " >
+              <button class=" active" rel="rseriesAnimations">
+                <div class="ButtonBlankLED" onclick="">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext1LinesLEDLong">animations</p>
+                </div>  
+              </button>
+            </div>
+            <div class="menu-Level-2-Links " >
+              <button class="" rel="rseriestext">
+                <div class="ButtonBlankLED" onclick="">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext1LineLED">text</p>
+                </div>  
+              </button>
+            </div>
 
          
 
-          <div class="menu-Level-2-Content active" id="RSeriesHome">
-            <h2 class="menuHeader-Level-2">Normal</h2>
-            <div class="ColorPickerdiv">
+          <div class="menu-Level-2-Content active" id="rseriesAnimations">
+            <!-- <h2 class="menuHeader-Level-2">Normal</h2> -->
+            <div class="ColorPickerdivRseries">
+              <div class="ColorPickerdiv">
+                <form class="" action="index.html" method="post">
+                  <label for="ColorPicker">Choose a color:</label>
+                    <select class="ColorPicker" id="rseriesColorChoiceColorSelect" name="ColorPicker">
+                    <option value="0">Default</option>
+                    <option value="6">Blue</option>
+                    <option value="1">Red</option>
+                    <option value="2">Orange</option>
+                    <option value="3">Yellow</option>
+                    <option value="4">Green</option>
+                    <option value="5">Cyan</option>
+                    <option value="7">Purple</option>
+                    <option value="8">Magenta</option>
+                    <option value="9">Pink</option>
+                  </select>
+                  <br />
+                  <label class="rseriesTextInputLabel"  for="rseriestime">duration</label>
+                  <input class="rseriesTextInput" type="text" id="rseriestime" value="30">
+                  <br />
+                  <input class="slider" id="rseriesSlider" type="range" name="LDPSpeed" value="5" min="0" max="9"/>
+                  
+                  <!-- <a href="#" onclick="commandOneColorAndSpeedRadarEye('01','RadarEyeSlider', 'RadarEyeColorChoiceColorSelect', 'checkmarkapplyRadarEye')" class="applyButton1"></a> -->
+                  <!-- <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff()"  class="applyButtonoff"></img> -->
+                </form>
+                <!-- <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyRadarEye"> -->
+              </div><!--end of ColorPickerdiv div-->
+
               
-              <img
-    class="homebuttonwidth2"
-    src="./Images/Buttons/Button-Rseries-Flash-GIMP.png"
-    alt="picture"
-    onclick=commandNoOptionsRSeries('03')
-    id="checkmarkallRSeries"
-  />
-              <form class="" action="index.html" method="post">
-                <a href="#" onclick="commandNoOptionsRSeries('03')" class="applyButton"></a>
+              <div class="rseriesbuttonsrow1">
+                <div class="ButtonBlankLED paddingTopBottom" onclick="rseriesCommand('0','rseriesColorChoiceColorSelect', 'rseriesSlider', 'rseriestime')">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2LinesLED">normal</p>
+                </div>       
+                <div class="ButtonBlankLED paddingTopBottom" onclick="rseriesCommand('1','rseriesColorChoiceColorSelect', 'rseriesSlider', 'rseriestime')">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2LinesLED">alarm</p>
+                </div>   
+                <div class="ButtonBlankLED paddingTopBottom" onclick="rseriesCommand('2','rseriesColorChoiceColorSelect', 'rseriesSlider', 'rseriestime')">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2LinesLED">failure</p>
+                </div> 
+                <div class="ButtonBlankLED paddingTopBottom" onclick="rseriesCommand('3','rseriesColorChoiceColorSelect', 'rseriesSlider', 'rseriestime')">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2LinesLED">leia</p>
+                </div>   
+                <div class="ButtonBlankLED paddingTopBottom" onclick="rseriesCommand('4','rseriesColorChoiceColorSelect', 'rseriesSlider', 'rseriestime')">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2LinesLED">march</p>
+                </div>      
+              </div> 
+              <div class="rseriesbuttonsrow2"'>
+                <div class="ButtonBlankLED paddingTopBottom" onclick="rseriesCommand('5','rseriesColorChoiceColorSelect', 'rseriesSlider', 'rseriestime')">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2LinesLED">single color</p>
+                </div>       
+                <div class="ButtonBlankLED paddingTopBottom" onclick="rseriesCommand('6','rseriesColorChoiceColorSelect', 'rseriesSlider', 'rseriestime')">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2LinesLED">flashing color</p>
+                </div>   
+                <div class="ButtonBlankLED paddingTopBottom" onclick="rseriesCommand('7','rseriesColorChoiceColorSelect', 'rseriesSlider', 'rseriestime')">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2LinesLED">flip flop color</p>
+                </div> 
+                <div class="ButtonBlankLED paddingTopBottom" onclick="rseriesCommand('9','rseriesColorChoiceColorSelect', 'rseriesSlider', 'rseriestime')">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2LinesLED">color swap</p>
+                </div>   
+                <div class="ButtonBlankLED paddingTopBottom" onclick="rseriesCommand('10','rseriesColorChoiceColorSelect', 'rseriesSlider', 'rseriestime')">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2LinesLED">rainbow</p>
+                </div>      
+              </div> 
+              <div class="rseriesbuttonsrow3"'>
+                <div class="ButtonBlankLED paddingTopBottom" onclick="rseriesCommand('11','rseriesColorChoiceColorSelect', 'rseriesSlider', 'rseriestime')">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2LinesLED">red alert</p>
+                </div>       
+                <div class="ButtonBlankLED paddingTopBottom" onclick="rseriesCommand('14','rseriesColorChoiceColorSelect', 'rseriesSlider', 'rseriestime')">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2LinesLED">lights out</p>
+                </div>   
+                <div class="ButtonBlankLED paddingTopBottom" onclick="rseriesCommand('19','rseriesColorChoiceColorSelect', 'rseriesSlider', 'rseriestime')">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2LinesLED">roaming pixel</p>
+                </div> 
+                <div class="ButtonBlankLED paddingTopBottom" onclick="rseriesCommand('21','rseriesColorChoiceColorSelect', 'rseriesSlider', 'rseriestime')">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2LinesLongLED">vertical scan line</p>
+                </div>   
+                <div class="ButtonBlankLED paddingTopBottom" onclick="rseriesCommand('22','rseriesColorChoiceColorSelect', 'rseriesSlider', 'rseriestime')">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2LinesLED">fire</p>
+                </div>      
+              </div> 
+              <div class="rseriesbuttonsrow4"'>
+                <div class="ButtonBlankLED paddingTopBottom" onclick="rseriesCommand('23','rseriesColorChoiceColorSelect', 'rseriesSlider', 'rseriestime')">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2LinesLED">psi style</p>
+                </div>       
+                <div class="ButtonBlankLED paddingTopBottom" onclick="rseriesCommand('99','rseriesColorChoiceColorSelect', 'rseriesSlider', 'rseriestime')">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2LinesLED">random</p>
+                </div>   
+                <div class="ButtonBlankLED paddingTopBottom" onclick="">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2LinesLED"></p>
+                </div> 
+                <div class="ButtonBlankLED paddingTopBottom" onclick="">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2LinesLED"></p>
+                </div>   
+                <div class="ButtonBlankLED paddingTopBottom" onclick="">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2LinesLED"></p>
+                </div>      
+              </div> 
+
+              <!-- <form class="" action="index.html" method="post">
+                <a href="#" onclick="commandNoOptionsRSeries('03')" class="applyButton1"></a>
                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandNoOptionsRSeries('03')" class="applyButtonoff"></img>
-              </form>
+              </form> -->
             </div><!--end of ColorPickerdiv div-->
           </div> <!-- end of Level 2 Conetent Option 1-->
 
+          <div class="menu-Level-2-Content " id="rseriestext">
+            <!-- <h2 class="menuHeader-Level-2">Normal</h2> -->
+            <div class="ColorPickerdiv">
+              <img src="./Images/LEDTab/RSeries/teeces_fld_layout.jpeg" alt="" class="FLDImage">
+                  <input class="FLDTopText" id="FLDTopText"type="text">
+                  <input class="FLDBottomText" id="FLDBottomText"type="text">
+              <img src="./Images/LEDTab/RSeries/teeces_rld_layout.jpeg" class="RLDImage" alt="">
+              <input class="RLDText" id="RLDText" type="text">
+                </div>                     
+                <div class="ButtonBlankLED paddingTopBottom rseriesTextApplyMove" onclick="rseriesText('FLDTopText', 'FLDBottomText', 'RLDText')">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2LinesLED">apply</p>
+                </div>
+              <!-- <form class="" action="index.html" method="post">
+                <a href="#" onclick="commandNoOptionsRSeries('03')" class="applyButton1"></a>
+                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandNoOptionsRSeries('03')" class="applyButtonoff"></img>
+              </form> -->
+            </div><!--end of ColorPickerdiv div-->
+          </div> <!-- end of Level 2 Conetent Option 1-->
 <!-- end of Level 2 Conetent Option 3-->
 
 
 
 
         </div><!--end of Level 2 Menu-->
-      </div> <!-- end of Dualing Colors 2-->
+      <!-- </div> end of Dualing Colors 2 -->
+      <div class="menu-Level-1-Content" id="RadarEye">
+        <h1 class="menuHeader-Level-1">radar eye</h1>
+        
 
+        <div class="menu-Level-2">
+
+
+          <div class="menu-Level-2-Content active" id="RadarEye1">
+            <h2 class="menuHeader-Level-2"></h2>
+            <div class="ColorPickerdiv">
+              <form class="" action="index.html" method="post">
+                <label for="ColorPicker">Choose a color:</label>
+                  <select class="ColorPicker" id="RadarEyeColorChoiceColorSelect" name="ColorPicker">
+                  <option value="5">Blue</option>
+                  <option value="1">Red</option>
+                  <option value="2">Yellow</option>
+                  <option value="3">Green</option>
+                  <option value="4">Cyan</option>
+                  <option value="6">Magenta</option>
+                  <option value="7">Orange</option>
+                  <option value="8">White</option>
+                  <option value="0">Off</option>
+                </select>
+                <br />
+                <br />
+                <input
+                  class="slider"
+                  id="RadarEyeSlider"
+                  type="range"
+                  name="LDPSpeed"
+                  value="5"
+                  min="0"
+                  max="9"
+                /><a href="#" onclick="commandOneColorAndSpeedRadarEye('01','RadarEyeSlider', 'RadarEyeColorChoiceColorSelect', 'checkmarkapplyRadarEye')" class="applyButton1"></a>
+                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff()"  class="applyButtonoff"></img>
+              </form>
+              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyRadarEye">
+            </div><!--end of ColorPickerdiv div-->
+          </div> <!-- end of Level 2 Conetent Wig Wag-->
+
+        </div><!--end of Level 2 Menu-->
+      </div> <!-- end of WigWag-->
+
+
+      <div class="menu-Level-1-Content" id="PSI">
+        <h1 class="menuHeader-Level-1">psi pro</h1>
+        
+
+        <div class="menu-Level-2">
+
+
+          <div class="menu-Level-2-Content active" id="PSIPro1">
+            <h2 class="menuHeader-Level-2"></h2>
+            <div class="psibuttons">
+            <div class="ButtonBlankLED paddingTopBottom" onclick="PSICommand('0T0')">
+              <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext2LinesLED">off</p>
+            </div>       
+            <div class="ButtonBlankLED paddingTopBottom" onclick="PSICommand('0T1')">
+              <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext2LinesLED">normal</p>
+            </div>   
+            <div class="ButtonBlankLED paddingTopBottom" onclick="PSICommand('0T2')">
+              <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext2LinesLED">flash</p>
+            </div> 
+            <div class="ButtonBlankLED paddingTopBottom" onclick="PSICommand('0T3')">
+              <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext2LinesLED">alarm</p>
+            </div>   
+            <div class="ButtonBlankLED paddingTopBottom" onclick="PSICommand('0T4')">
+              <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext2LinesLED">short circuit</p>
+            </div>      
+          </div> 
+          <div class="psibuttonsrow2"'>
+            <div class="ButtonBlankLED paddingTopBottom" onclick="PSICommand('0T5')">
+              <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext2LinesLED">scream</p>
+            </div>       
+            <div class="ButtonBlankLED paddingTopBottom" onclick="PSICommand('0T6')">
+              <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext2LinesLED">leia</p>
+            </div>   
+            <div class="ButtonBlankLED paddingTopBottom" onclick="PSICommand('0T7')">
+              <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext2LinesLED">heart</p>
+            </div> 
+            <div class="ButtonBlankLED paddingTopBottom" onclick="PSICommand('0T9')">
+              <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext2LinesLED">flashing heart</p>
+            </div>   
+            <div class="ButtonBlankLED paddingTopBottom" onclick="PSICommand('0T8')">
+              <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext2LinesLongLED">quater panel</p>
+            </div>      
+          </div> 
+          <div class="psibuttonsrow3"'>
+            <div class="ButtonBlankLED paddingTopBottom" onclick="PSICommand('0T10')">
+              <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext2LinesLED">star wars text</p>
+            </div>       
+            <div class="ButtonBlankLED paddingTopBottom" onclick="PSICommand('0T11')">
+              <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext2LinesLED">imperial march</p>
+            </div>   
+            <div class="ButtonBlankLED paddingTopBottom" onclick="PSICommand('0T12')">
+              <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext2LinesLongLED">disco ball</p>
+            </div> 
+            <div class="ButtonBlankLED paddingTopBottom" onclick="PSICommand('0T13')">
+              <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext2LinesLED">disco ball infinity/p>
+            </div>   
+            <div class="ButtonBlankLED paddingTopBottom" onclick="PSICommand('0T14')">
+              <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext2LinesLongLED">rebel symbol</p>
+            </div>      
+          </div> 
+          <div class="psibuttonsrow4"'>
+            <div class="ButtonBlankLED paddingTopBottom" onclick="PSICommand('0T15')">
+              <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext2LinesLongLED">knight rider</p>
+            </div>       
+            <div class="ButtonBlankLED paddingTopBottom" onclick="PSICommand('0T19')">
+              <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext2LinesLongLED">lgith saber battle</p>
+            </div>   
+            <div class="ButtonBlankLED paddingTopBottom" onclick="PSICommand('0T20')">
+              <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext2LinesLED">star wars intro</p>
+            </div> 
+            <div class="ButtonBlankLED paddingTopBottom" onclick="PSICommand('0T21')">
+              <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext2LinesLongLED">vu meter</p>
+            </div>   
+            <div class="ButtonBlankLED paddingTopBottom" onclick="PSICommand('0T92')">
+              <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext2LinesLED">vu meter infinity</p>
+            </div>      
+          </div> 
+          
+
+          </div> <!-- end of Level 2 Conetent Wig Wag-->
+
+        </div><!--end of Level 2 Menu-->
+      </div> <!-- end of WigWag-->
     <!--                      end of Level 1 Menu -->
      </div>
      <!--                      end of Level 0 LED Content -->
@@ -4804,26 +5132,122 @@ id="FrontLogicsTopBlueSelector"
       <div id="HomeTab" class="">
         <h2 class="menuheadermain">roam-a-dome-home</h2>
         <!------------------------------- Start of Menu Level 1 for the Home Content   ------------------->  
-<br>
-
-        <div class="ButtonBlankLED" onclick="">
+        <br>
+        <div class="RDAbsoluteTotal">
+        <div class="RDAbsoluteHeader">absolute</div>
+        <div class="RDAbsolute">
+          <div class="ButtonBlankRD" onclick="rdCommand(':DPA0')">
           <img id="ColorChangingLink" class="buttonwidthLEDRD"  src="./Images/HomeTab/Button-Blank.png">
-          <p class="shadowtext1LineLEDShort">0</p>
+          <p class="shadowtext1PosShort">0</p>
         </div> 
-        <br>
-        <div class="ButtonBlankLED" onclick="">
+        
+        <div class="ButtonBlankRD" onclick="rdCommand(':DPA90')">
           <img id="ColorChangingLink" class="buttonwidthLEDRD"  src="./Images/HomeTab/Button-Blank.png">
-          <p class="shadowtext1LineLEDShort">90</p>
+          <p class="shadowtext1PosShort">90</p>
         </div>
-        <br>
-        <div class="ButtonBlankLED" onclick="">
+        <div class="ButtonBlankRD" onclick="rdCommand(':DPA90')">
           <img id="ColorChangingLink" class="buttonwidthLEDRD"  src="./Images/HomeTab/Button-Blank.png">
-          <p class="shadowtext1LineLEDShort">270</p>
-        </div>  
+          <p class="shadowtext1PosShort">180</p>
+        </div>
+        <div class="ButtonBlankRD" onclick="rdCommand(':DPA270')">
+          <img id="ColorChangingLink" class="buttonwidthLEDRD"  src="./Images/HomeTab/Button-Blank.png">
+          <p class="shadowtext1PosShort">270</p>
+        </div>
+      </div> 
+    </div>
+        <div class="RDRelativeHeader">relative  </div>
+        <div class="RDRelative">
+          <br>
+          <div class="RDRelativeClockwise">
+            <div class="RDRelativeClockwiseHeader">clockwise</div>
+          <div class="ButtonBlankRDRClockwise" onclick="rdCommand(':DPD45')">
+            <img id="ColorChangingLink" class="buttonwidthLEDRD"  src="./Images/HomeTab/Button-Blank.png">
+            <p class="shadowtext1PosShort">45</p>
+          </div> 
+        
+          <div class="ButtonBlankRDRClockwise" onclick="rdCommand(':DPD90')">
+            <img id="ColorChangingLink" class="buttonwidthLEDRD"  src="./Images/HomeTab/Button-Blank.png">
+            <p class="shadowtext1PosShort">90</p>
+          </div>
+          <div class="ButtonBlankRDRClockwise" onclick="rdCommand(':DPD180')">
+            <img id="ColorChangingLink" class="buttonwidthLEDRD"  src="./Images/HomeTab/Button-Blank.png">
+            <p class="shadowtext1PosShort">180</p>
+          </div> 
+        </div>
+        <div class="RDRelativeCounterClockwise">
+          <div class="RDRelativeCounterClockwiseHeader">counter clockwise</div>
+        <div class="ButtonBlankRDRCounterClockwise" onclick="rdCommand(':DPD-45')">
+          <img id="ColorChangingLink" class="buttonwidthLEDRD"  src="./Images/HomeTab/Button-Blank.png">
+          <p class="shadowtext1PosShort">45</p>
+        </div> 
+      
+        <div class="ButtonBlankRDRCounterClockwise" onclick="rdCommand(':DPD-90')">
+          <img id="ColorChangingLink" class="buttonwidthLEDRD"  src="./Images/HomeTab/Button-Blank.png">
+          <p class="shadowtext1PosShort">90</p>
+        </div>
+        <div class="ButtonBlankRDRCounterClockwise" onclick="rdCommand(':DPD-180')">
+          <img id="ColorChangingLink" class="buttonwidthLEDRD"  src="./Images/HomeTab/Button-Blank.png">
+          <p class="shadowtext1PosShort">180</p>
+        </div> 
+      </div>
+      <div class="RDStoredDiv">
+      <div class="ButtonBlankLED paddingTopBottom" onclick="rdCommand(':DPS1')">
+        <img id="ColorChangingLink" class="buttonwidthLED"  src="./Images/HomeTab/Button-Blank.png">
+        <p class="shadowtext1LineLED">Stored 1</p>
+      </div> 
+      <div class="ButtonBlankLED paddingTopBottom" onclick="rdCommand(':DPS2')">
+        <img id="ColorChangingLink" class="buttonwidthLED"  src="./Images/HomeTab/Button-Blank.png">
+        <p class="shadowtext1LineLED">Stored 2</p>
+      </div> 
+      <div class="ButtonBlankLED paddingTopBottom" onclick="rdCommand(':DPS3')">
+        <img id="ColorChangingLink" class="buttonwidthLED"  src="./Images/HomeTab/Button-Blank.png">
+        <p class="shadowtext1LineLED">Stored 3</p>
+      </div> 
+      <div class="ButtonBlankLED paddingTopBottom" onclick="rdCommand(':DPS4')">
+        <img id="ColorChangingLink" class="buttonwidthLED"  src="./Images/HomeTab/Button-Blank.png">
+        <p class="shadowtext1LineLED">Stored 4</p>
+      </div> 
+    </div>
 
+    <div class="RDOptions">
+      <div class="ButtonBlankLED paddingTopBottom" onclick="rdCommand('%23DPAUTO1')">
+        <img id="ColorChangingLink" class="buttonwidthLED"  src="./Images/HomeTab/Button-Blank.png">
+        <p class="shadowtext2LinesLED">Enable Auto</p>
+      </div> 
+      <div class="ButtonBlankLED paddingTopBottom" onclick="rdCommand('%23DPAUTO0')">
+        <img id="ColorChangingLink" class="buttonwidthLED"  src="./Images/HomeTab/Button-Blank.png">
+        <p class="shadowtext2LinesLED">Disable Auto</p>
+      </div> 
+
+    </div>
+    <div class="RDTextCommandInput">
+      <label for="RDTextInput" class="RDTextInputLabel">send command: </label>
+      <input type="text" class="RDTextInput" id="RDTextInput">
+      <div class="ButtonBlankLED paddingTopBottom RDTextMove" onclick="rdCommandText('RDTextInput')">
+        <img id="ColorChangingLink" class="buttonwidthLED"  src="./Images/HomeTab/Button-Blank.png">
+        <p class="shadowtext2LinesLED">submit</p>
+      </div> 
+    </div>
+      </div>
+
+
+
+
+
+        <div class="volumesliderbehindtext"></div>
+        <div class="RDSpeedSlider"><input class="" type="range" name="" id="RDSpeedSlider"></div>
+        <div class="circularSliderPos" id="slider123"></div>
 
       </div>
     </div>
+
+
+
+
+
+
+
+
     <div class="menu-Level-0-Content" id="sounds">
       <div class="menuheader">
         <h1 class="">sounds</h1>
