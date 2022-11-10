@@ -345,7 +345,9 @@ function GetRemoteBatteryLevel() {
   var redLevel = 21;
 
   file.timeout = 2000;
-  file.open("GET", "http://127.0.0.1:5500/public/BatteryCapacity.txt", true);
+  // file.open("GET", "http://127.0.0.1:5500/public/BatteryCapacity.txt", true);
+  file.open("GET", "http://10.0.0.40:8000/BatteryCapacity.txt", true);
+
   file.onreadystatechange = function () {
     // console.log("Something")
     if (file.readyState === 4) {
@@ -391,7 +393,7 @@ function GetRemoteBatteryLevel() {
         remotePowerColorGreen.classList.add('hidden');
         remotePowerColorYellow.classList.add('hidden');
         remotePowerColorRed.classList.add('hidden');
-        document.getElementById("batteryChargeLevel").innerText = "--";
+        document.getElementById("batteryChargeLevelInt").innerText = "--";
       }
 
     }
@@ -419,12 +421,14 @@ function GetRemoteBatteryConnection() {
   var textLower = "";
   var file = new XMLHttpRequest();
   // file.timeout = 1000;
-  file.open("GET", "http://127.0.0.1:5500/public/ConnectedStatus.txt", true);
+  // file.open("GET", "http://127.0.0.1:5500/public/ConnectedStatus.txt", true);
+  file.open("GET", "http://10.0.0.40:8000/ConnectedStatus.txt", true);
+
   file.onreadystatechange = function () {
     // console.log("Something")
     if (file.readyState === 4) {
       if (file.status == 200) {
-        text = file.responseText;
+        text = file.responseText; ``
         textLower = text.toLowerCase();
         // document.getElementById("batteryChargeLevel").innerHTML = textLower
 
@@ -11081,7 +11085,7 @@ function ESP32SendCommand(b, x) {
 
   };
   if (ESP32DeviceSelected === "BS") {
-    var bodyLEDControllerIP = 'http://192.168.4.101/?param0=ESP&param1=';
+    var bodyLEDControllerIP = 'http://192.168.4.101/?param0=enSerial&param1=';
     console.log('BS subselection');
     console.log(bodyLEDControllerIP)
 
