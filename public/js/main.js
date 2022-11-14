@@ -727,6 +727,16 @@ function animateServo(t) {
 
 }
 
+function animateDome(a) {
+
+  var animationURL = "http://192.168.4.101/?param0=enSerial&param1=SFU:DP" + a;
+  httpGet(animationURL);
+}
+
+function animatePeriscope(a) {
+  var animationURL = "http://192.168.4.101/?param0=enSerial&param1=NPL" + a;
+  httpGet(animationURL);
+}
 
 
 function playSound(t) {
