@@ -663,6 +663,14 @@
             </div> 
           </button>
         </div>
+        <div class="menu-Level-1-Links">
+          <button class="" rel="HoloProjector">
+            <div class="ButtonBlankLED" onclick="">
+              <img id="RadarEyeLink" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext2LinesLongLED">Holo Projector</p>
+            </div> 
+          </button>
+        </div>
 
 
             <!-- Below is the content for Menu Level 1 -->
@@ -4420,6 +4428,40 @@ id="FrontLogicsTopBlueSelector"
                   min="0"
                   max="9"
                 /><a href="#" onclick="commandOneColorAndSpeedRadarEye('01','RadarEyeSlider', 'RadarEyeColorChoiceColorSelect', 'checkmarkapplyRadarEye')" class="applyButton1"></a>
+                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff()"  class="applyButtonoff"></img>
+              </form>
+              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyRadarEye">
+            </div><!--end of ColorPickerdiv div-->
+          </div> <!-- end of Level 2 Conetent Wig Wag-->
+
+        </div><!--end of Level 2 Menu-->
+      </div> <!-- end of WigWag-->
+      <div class="menu-Level-1-Content" id="HoloProjector">
+        <h1 class="menuHeader-Level-1">holo projector</h1>
+        
+
+        <div class="menu-Level-2">
+
+
+          <div class="menu-Level-2-Content active" id="RadarEye1">
+            <h2 class="menuHeader-Level-2"></h2>
+            <div class="ColorPickerdiv">
+              <form class="" action="index.html" method="post">
+                <label for="ColorPicker">Choose a color:</label>
+                  <select class="ColorPicker" id="HPColorChoiceColorSelect" name="ColorPicker">
+                  <option value="5">Blue</option>
+                  <option value="1">Red</option>
+                  <option value="2">Yellow</option>
+                  <option value="3">Green</option>
+                  <option value="4">Cyan</option>
+                  <option value="6">Magenta</option>
+                  <option value="7">Orange</option>
+                  <option value="8">White</option>
+                  <option value="0">Off</option>
+                </select>
+                <br />
+                <br />
+                <a href="#" onclick="commandOneColorHP('02','HPColorChoiceColorSelect', 'checkmarkapplyRadarEye')" class="applyButton1"></a>
                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff()"  class="applyButtonoff"></img>
               </form>
               <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyRadarEye">

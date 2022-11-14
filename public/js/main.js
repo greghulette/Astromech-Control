@@ -532,6 +532,16 @@ function HPLEDFunctionExecution(t) {
 
 };
 
+function commandOneColorHP(a, b, c) {
+
+  let HPColor = getcolor1(b);
+
+  var HPControllerSPURL = "http://192.168.4.101/?param0=enSerial&param1=NHPA0";
+  var HPLEDControllerFullURL = HPControllerSPURL + a + HPColor;
+  httpGet(HPLEDControllerFullURL);
+
+}
+
 function bodyServoFunctionExecution(t) {
   var BSCommand = t;
   // var bodyServoControllerSPURL = "http://192.168.4.101/?param0=DL";
@@ -588,6 +598,8 @@ function radarEyeCommandExecution(t) {
   //   console.log('Body Servo ESP Not Online')
   // }
 };
+
+
 
 function RSeriesLEDFunctionExecution(t) {
   var LEDCommand = t;
@@ -707,7 +719,7 @@ function savedOptions3() {
 }
 
 function animateServo(t) {
-  var animationURL = "http://192.168.4.101/?param0=DL&param1=BS";
+  var animationURL = "http://192.168.4.101/?param0=enSerial&param1=";
   let animationFullURL = animationURL + t;
   console.log(animationFullURL);
   httpGet(animationFullURL);
