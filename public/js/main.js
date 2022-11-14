@@ -58,7 +58,7 @@ function httpGetStatus() {
     // console.log(typeof (jsonResponse));
     console.log(jsonResponse);
     // if (jsonResponse.remoteLoRaControllerStatus == "Online") {
-    if (jsonResponse.BodyControllerStatus == "Online") {
+    if (jsonResponse.BodyController == "Online") {
 
       // console.log("Body Controller Online");
       BodyControllerStatus = true;
@@ -551,7 +551,7 @@ function bodyServoFunctionExecution(t) {
   console.log(bodyServiControllerFullURL);
   // setTimeout(function () { httpGet(bodyLEDControllerFullURL); }, 500);
   // sleep(1000); 
-  if (BodyControllerStatus === false) {
+  if (BodyControllerStatus === true) {
     httpGet(bodyServiControllerFullURL);
 
   } else {
@@ -725,6 +725,11 @@ function animateServo(t) {
   httpGet(animationFullURL);
 
 
+}
+function batteryLevel() {
+
+  var animationURL = "http://192.168.4.101/?param0=blSerial&param1=C01";
+  httpGet(animationURL);
 }
 
 function animateDome(a) {

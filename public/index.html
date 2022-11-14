@@ -671,6 +671,14 @@
             </div> 
           </button>
         </div>
+        <div class="menu-Level-1-Links">
+          <button class="" rel="Battery">
+            <div class="ButtonBlankLED" onclick="">
+              <img id="RadarEyeLink" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext2LinesLongLED">battery level</p>
+            </div> 
+          </button>
+        </div>
 
 
             <!-- Below is the content for Menu Level 1 -->
@@ -4471,7 +4479,29 @@ id="FrontLogicsTopBlueSelector"
         </div><!--end of Level 2 Menu-->
       </div> <!-- end of WigWag-->
 
+      <div class="menu-Level-1-Content" id="Battery">
+        <h1 class="menuHeader-Level-1">battery level</h1>
+        
 
+        <div class="menu-Level-2">
+
+
+          <div class="menu-Level-2-Content active" id="RadarEye1">
+            <h2 class="menuHeader-Level-2"></h2>
+            <div class="ColorPickerdiv">
+              <form class="" action="index.html" method="post">
+
+                <br />
+                <br />
+                <a href="#" onclick="batteryLevel()" class="applyButton1"></a>
+                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff()"  class="applyButtonoff"></img>
+              </form>
+              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyRadarEye">
+            </div><!--end of ColorPickerdiv div-->
+          </div> <!-- end of Level 2 Conetent Wig Wag-->
+
+        </div><!--end of Level 2 Menu-->
+      </div> <!-- end of WigWag-->
       <div class="menu-Level-1-Content" id="PSI">
         <h1 class="menuHeader-Level-1">psi pro</h1>
         
@@ -5118,7 +5148,7 @@ id="FrontLogicsTopBlueSelector"
       <input  class="RotateCounterClockwiseRelativeText" type="text" name="RotateCounterClockwiseRelative" id="RotateCounterClockwiseRelative" value="90">
 
       
-      <img  src="Images/Button-Rotate-Absolute-0.png" class=" absolute0Periscope" alt="image for the dome" onclick="getPeriscope('A','0','RotateSpeed')">
+      <img  src="Images/Button-Rotate-Absolute-0.png" class=" absolute0Periscope" alt="image for the dome" onclick="getPeriscope('A','1','RotateSpeed')">
       <img src="Images/Button-Rotate-Absolute-90.png" class=" absolute90Periscope" alt="image for the dome" onclick="getPeriscope('A','90','RotateSpeed')">
       <img src="Images/Button-Rotate-Absolute-180.png" class=" absolute180Periscope" alt="image for the dome" onclick="getPeriscope('A','180','RotateSpeed')">
       <img src="Images/Button-Rotate-Absolute-270.png" class=" absolute270Periscope" alt="image for the dome" onclick="getPeriscope('A','270','RotateSpeed')">
@@ -5187,7 +5217,7 @@ id="FrontLogicsTopBlueSelector"
           <img id="ColorChangingLink" class="buttonwidthLEDRD"  src="./Images/HomeTab/Button-Blank.png">
           <p class="shadowtext1PosShort">90</p>
         </div>
-        <div class="ButtonBlankRD" onclick="rdCommand(':DPA90')">
+        <div class="ButtonBlankRD" onclick="rdCommand(':DPA180')">
           <img id="ColorChangingLink" class="buttonwidthLEDRD"  src="./Images/HomeTab/Button-Blank.png">
           <p class="shadowtext1PosShort">180</p>
         </div>
