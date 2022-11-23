@@ -24,7 +24,7 @@
     "serial-io": "^1.2.0",
     "serialport": "^9.0.0",
     "socket-io": "^1.0.0",
-    "socket.io": "^2.4.1",
+    "socket.io": "^2.5.0",
     "uuid": "^8.1.0"
   },
   "devDependencies": {
