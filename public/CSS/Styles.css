@@ -295,6 +295,128 @@ line-height: 2rem;
   top: -2px;
   left: 0px;
 }
+.soundbuttons{
+  position: relative;
+  top: 350px;
+  left: 0px;
+}
+.buttonSound{
+  width: 150px;
+
+}
+.moreScared{
+  position: absolute;
+  left: -125px;
+  top: 0px
+}
+
+.lessScared{
+  position: absolute;
+  left: -125px;
+  top: 160px;
+}
+
+.moreMad{
+  position: absolute;
+  left: 70px;
+  top: 0px
+}
+
+.lessMad{
+  position: absolute;
+  left: 70px;
+  top: 160px
+}
+
+.moreSad{
+  position: absolute;
+  left: 250px;
+  top: 0px;
+}
+
+.lessSad{
+  position: absolute;
+  left: 250px;
+  top: 160px
+}
+
+.moreHappy{
+  position: absolute;
+  left: 430px;
+  top: 0px;
+}
+
+.lessHappy{
+  position: absolute;
+  left: 430px;
+  top: 160px
+}
+.scaredicons{
+  position: absolute;
+  top: -320px;
+  left: -75px;
+
+}
+.madicons{
+  position: absolute;
+  top: -320px;
+  left: 125px;
+
+}
+
+.sadicons{
+  position: absolute;
+  top: -320px;
+  left: 305px;
+
+}
+
+.happyicons{
+  position: absolute;
+  top: -320px;
+  left: 485px;
+
+}
+.soundicon{
+  position: relative;
+  width: 40px;
+
+}
+
+.icon1{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+.icon2{
+  position: absolute;
+  top: 40px;
+
+}
+.icon3{
+  position: absolute;
+  top: 80px;
+}
+.icon4{
+  position: absolute;
+  top: 120px;
+}
+.icon5{
+  position: absolute;
+  top: 160px;
+}
+.icon6{
+  position: absolute;
+  top: 200px;
+}
+.icon7{
+  position: absolute;
+  top: 240px;
+}
+.icon8{
+  position: absolute;
+  top: 280px;
+}
 
 .buttonwidthLEDRD {
   width: 70px;

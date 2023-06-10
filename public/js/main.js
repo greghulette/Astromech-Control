@@ -45,8 +45,10 @@ var VUIntBaseline = 0
 var VUExtOffset = 0
 var VUExtBaseline = 0
 var mp3TriggerVolume = 0
-var BSB = ""
-var BSHP = "NHP"
+var BLCommandPrefix = ":EBC:L"
+var HPCommandPrefix = ":EHP:"
+var RSCommandPrefix = "EDC:SRS"
+var PSCommandPrefix = ":EDC:SFU"
 function httpGetStatus() {
   let theStatusURL = "http://192.168.4.101/status"
   var req = new XMLHttpRequest();
@@ -467,7 +469,7 @@ setInterval(function () {
 
 function bodyControllerLEDFunctionExecution(t) {
   var LEDCommand = t;
-  var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=blSerial";
+  var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=:";
 
   var bodyLEDControllerFullURL = bodyLEDControllerSPURL + LEDCommand;
   console.log(bodyLEDControllerFullURL);
@@ -490,7 +492,7 @@ var slider123 = $('#slider123').CircularSlider({
 
 function rdSliderOnChange(t) {
   // var LEDCommand = t;
-  var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=enSerial&param1=SFU:DPA" + t;
+  var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=:&param1=:EBC:RA" + t;
 
   // var bodyLEDControllerFullURL = bodyLEDControllerSPURL + LEDCommand;
   console.log(bodyLEDControllerSPURL);
@@ -500,14 +502,14 @@ function rdSliderOnChange(t) {
   httpGet(bodyLEDControllerSPURL);
 }
 function rdCommand(t) {
-  var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=enSerial&param1=SFU" + t;
+  var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=:&param1=:EBC:R" + t;
   console.log(bodyLEDControllerSPURL);
   httpGet(bodyLEDControllerSPURL);
 }
 
 function rdCommandText(t) {
   let command12 = document.getElementById(t).value
-  var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=enSerial&param1=SFU" + command12;
+  var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=:&param1=:EBC:R" + command12;
   console.log(bodyLEDControllerSPURL);
   httpGet(bodyLEDControllerSPURL);
 }
@@ -516,7 +518,7 @@ function rdCommandText(t) {
 function HPLEDFunctionExecution(t) {
   var LEDCommand = t;
   // var HPControllerSPURL = "http://192.168.4.101/?param0=DL";
-  var HPControllerSPURL = "http://192.168.4.101/?param0=enSerial";
+  var HPControllerSPURL = "http://192.168.4.101/?param0=:";
 
 
   var HPLEDControllerFullURL = HPControllerSPURL + t;
@@ -536,7 +538,7 @@ function commandOneColorHP(a, b, c) {
 
   let HPColor = getcolor1(b);
 
-  var HPControllerSPURL = "http://192.168.4.101/?param0=enSerial&param1=NHPA0";
+  var HPControllerSPURL = "http://192.168.4.101/?param0=:&param1=:EHPA0";
   var HPLEDControllerFullURL = HPControllerSPURL + a + HPColor;
   httpGet(HPLEDControllerFullURL);
 
@@ -545,7 +547,7 @@ function commandOneColorHP(a, b, c) {
 function bodyServoFunctionExecution(t) {
   var BSCommand = t;
   // var bodyServoControllerSPURL = "http://192.168.4.101/?param0=DL";
-  var bodyServoControllerSPURL = "http://192.168.4.101/?param0=enSerial";
+  var bodyServoControllerSPURL = "http://192.168.4.101/?param0=:";
 
   var bodyServiControllerFullURL = bodyServoControllerSPURL + BSCommand;
   console.log(bodyServiControllerFullURL);
@@ -564,7 +566,7 @@ function bodyServoFunctionExecution(t) {
 function domeServoFunctionExecution(t) {
   var DSCommand = t;
   // var domeServoControllerSPURL = "http://192.168.4.101/?param0=DL";
-  var bodyServoControllerSPURL = "http://192.168.4.101/?param0=enSerial";
+  var bodyServoControllerSPURL = "http://192.168.4.101/?param0=:";
 
 
   var domeServoControllerFullURL = bodyServoControllerSPURL + DSCommand;
@@ -584,7 +586,7 @@ function domeServoFunctionExecution(t) {
 function radarEyeCommandExecution(t) {
   var RECommand = t;
   // var domeServoControllerSPURL = "http://192.168.4.101/?param0=DL";
-  var RadarEyeControllerSPURL = "http://192.168.4.101/?param0=enSerial&param1=NDS";
+  var RadarEyeControllerSPURL = "http://192.168.4.101/?param0=:&param1=:EDC:R";
 
 
   var RadarEyeControllerSFullURL = RadarEyeControllerSPURL + RECommand;
@@ -603,8 +605,8 @@ function radarEyeCommandExecution(t) {
 
 function RSeriesLEDFunctionExecution(t) {
   var LEDCommand = t;
-  // var RSeriesControllerSPURL = "http://192.168.4.101/?param0=enSerial&param1=S02RS";
-  var RSeriesControllerSPURL = "http://192.168.4.101/?param0=enSerial&param1=NDSSRS";
+  // var RSeriesControllerSPURL = "http://192.168.4.101/?param0=:&param1=S02RS";
+  var RSeriesControllerSPURL = "http://192.168.4.101/?param0=:&param1=:EDC:SRS";
 
   var RSeriesControllerSFullPURL = RSeriesControllerSPURL + LEDCommand;
   console.log(RSeriesControllerSFullPURL);
@@ -621,8 +623,8 @@ function RSeriesLEDFunctionExecution(t) {
 
 function PSICommand(t) {
   var LEDCommand = t;
-  // var RSeriesControllerSPURL = "http://192.168.4.101/?param0=enSerial&param1=S02RS";
-  var RSeriesControllerSPURL = "http://192.168.4.101/?param0=enSerial&param1=NDSSFU";
+  // var RSeriesControllerSPURL = "http://192.168.4.101/?param0=:&param1=S02RS";
+  var RSeriesControllerSPURL = "http://192.168.4.101/?param0=:&param1=:EDC:SFU";
 
   var RSeriesControllerSFullPURL = RSeriesControllerSPURL + LEDCommand;
   console.log(RSeriesControllerSFullPURL);
@@ -665,18 +667,18 @@ function servoControl(z) {
 
   console.log(varspeedMax);
   if (servoBoardSelectorGlobal == 'body') {
-    let bodyServoCommandParam = "&param1=D1" + z + "E" + easingMethodSelection + varspeedMinText + varspeedMaxText;
+    let bodyServoCommandParam = "&param1=:EBS:D1" + z + "E" + easingMethodSelection + varspeedMinText + varspeedMaxText;
     let fullBodyServoURL = bodyServoCommandParam
     bodyServoFunctionExecution(fullBodyServoURL);
     console.log("Body Selected")
   }
   else if (servoBoardSelectorGlobal == 'dome') {
-    let bodyServoCommandParam = "&param1=D2" + z + "E" + easingMethodSelection + varspeedMinText + varspeedMaxText;
+    let bodyServoCommandParam = "&param1=:EDC:D2" + z + "E" + easingMethodSelection + varspeedMinText + varspeedMaxText;
     let fullBodyServoURL = bodyServoCommandParam
     bodyServoFunctionExecution(fullBodyServoURL);
   }
   else if (CurrentDirection == 'BodyFirst') {
-    let bodyServoCommandParam = "&param1=D3" + z + "B" + easingMethodSelection + varspeedMinText + varspeedMaxText + delayCallText;
+    let bodyServoCommandParam = "&param1=:EBS:D3" + z + "B" + easingMethodSelection + varspeedMinText + varspeedMaxText + delayCallText;
     let fullBodyServoURL = bodyServoCommandParam
     bodyServoFunctionExecution(fullBodyServoURL);
     // let domeServoCommandParam = "&param1=S02DSD" + z;
@@ -684,7 +686,7 @@ function servoControl(z) {
     // domeServoFunctionExecution(fullDomeServoURL);
   }
   else if (CurrentDirection == 'DomeFirst') {
-    let bodyServoCommandParam = "&param1=D4" + z + "B" + easingMethodSelection + varspeedMinText + varspeedMaxText + delayCallText;
+    let bodyServoCommandParam = "&param1=:EDC:D4" + z + "B" + easingMethodSelection + varspeedMinText + varspeedMaxText + delayCallText;
     let fullBodyServoURL = bodyServoCommandParam
     bodyServoFunctionExecution(fullBodyServoURL);
     // let domeServoCommandParam = "&param1=S02DSD" + z;
@@ -719,13 +721,21 @@ function savedOptions3() {
 }
 
 function animateServo(t) {
-  var animationURL = "http://192.168.4.101/?param0=enSerial&param1=";
+  var animationURL = "http://192.168.4.101/?param0=:&param1=:EBS:";
   let animationFullURL = animationURL + t;
   console.log(animationFullURL);
   httpGet(animationFullURL);
 
 
 }
+
+function animateSequence(t) {
+  var animationURL = "http://192.168.4.101/?param0=:&param1=:EBC:"
+  let animationFullURL = animationURL + t;
+  console.log(animationFullURL);
+  httpGet(animationFullURL);
+}
+
 function batteryLevel() {
 
   var animationURL = "http://192.168.4.101/?param0=blSerial&param1=C01";
@@ -734,12 +744,12 @@ function batteryLevel() {
 
 function animateDome(a) {
 
-  var animationURL = "http://192.168.4.101/?param0=enSerial&param1=SFU:DP" + a;
+  var animationURL = "http://192.168.4.101/?param0=:&param1=:EBC:R" + a;
   httpGet(animationURL);
 }
 
 function animatePeriscope(a) {
-  var animationURL = "http://192.168.4.101/?param0=enSerial&param1=NPL" + a;
+  var animationURL = "http://192.168.4.101/?param0=:&param1=:EDP:SUS" + a;
   httpGet(animationURL);
 }
 
@@ -748,7 +758,7 @@ function playSound(t) {
   var sound = t;
   // var playsoundURL = "http://192.168.4.101/?param0=DL&param1=BCSMPt";
 
-  var playsoundURL = "http://192.168.4.101/?param0=ESP&param1=SMPt";
+  var playsoundURL = "http://192.168.4.101/?param0=:&param1=:EBC:M";
   var playSoundFullPURL = playsoundURL + sound;
   console.log(playSoundFullPURL);
   // if (DomeControllerStatus === false) {
@@ -765,7 +775,7 @@ function changeVolume(t) {
 
   // var playsoundURL = "http://192.168.4.101/?param0=DL&param1=BCSMPt";
 
-  var playsoundURL = "http://192.168.4.101/?param0=ESP&param1=SMPv";
+  var playsoundURL = "http://192.168.4.101/?param0=:&param1=:EBC:M";
   var playSoundFullPURL = playsoundURL + volumeLevel;
   console.log(playSoundFullPURL);
   // if (DomeControllerStatus === false) {
@@ -1008,11 +1018,11 @@ function commandNoOptionsRSeries(t) {
     // };
   };
 
-  let rldCommandParam = "&param1=S02RS" + RLDSeriescommandString;
-  let fldtCommandParam = "&param2=S02RS" + FLDTRSeriesCommandString;
-  let fldbCommandParam = "&param3=S02RS" + FLDBRSeriesCommandString;
-  let rpsiCommandParam = "&param4=S02RS" + rpsicommandstring;
-  let fpsiCommandParam = "&param5=S02RS" + fpsicommandstring;
+  let rldCommandParam = "&param1=" + RSCommandPrefix + RLDSeriescommandString;
+  let fldtCommandParam = "&param2=" + RSCommandPrefix + FLDTRSeriesCommandString;
+  let fldbCommandParam = "&param3=" + RSCommandPrefix + FLDBRSeriesCommandString;
+  let rpsiCommandParam = "&param4=" + PSCommandPrefix + rpsicommandstring;
+  let fpsiCommandParam = "&param5=" + PSCommandPrefix + fpsicommandstring;
 
   let fullURL = rldCommandParam + fldtCommandParam + fldbCommandParam + rpsiCommandParam + fpsiCommandParam;
   RSeriesLEDFunctionExecution(fullURL);
@@ -1236,10 +1246,10 @@ function commandNoOptionsKnightRider(y, t, u) {
       console.log(mcommandstring);
     };
   }
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullURL);
 };
@@ -1287,10 +1297,10 @@ function commandSingleColorKnightRider(y, t, z, u) {
   // works to only send the parameters that have variables assigned.
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
 };
@@ -1332,10 +1342,10 @@ function commandStripOffKnightRider(u) {
       console.log(mcommandstring);
     };
   };
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
 };
@@ -1643,15 +1653,15 @@ function commandStripOffRainbow(u) {
       console.log(hprcommandstring);
     };
   };
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
-  let fullURL = ldpCommandParam + maintCommandParam + coinCommandParam + BSB + vuCommandParam;
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
+  let fullURL = ldpCommandParam + maintCommandParam + coinCommandParam + BLCommandPrefix + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullURL);
-  if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
@@ -1710,16 +1720,16 @@ function commandNoOptionsRainbow(y, t, u) {
     };
   };
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   // let fullURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
@@ -2022,15 +2032,15 @@ function commandSingleColorSolidColor(y, t, z, u) {
     };
   };
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
@@ -2082,15 +2092,15 @@ function commandStripOffSolidColor(u) {
       console.log(hprcommandstring);
     };
   };
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullURL);
-  if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
@@ -2302,10 +2312,10 @@ function commandTwoColorsAlternatingColors(y, t, z, s, u) {
       console.log(mcommandstring);
     };
   };
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
@@ -2357,15 +2367,15 @@ function commandStripOffAlternatingColors(u) {
       console.log(hprcommandstring);
     };
   };
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullURL);
-  if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
@@ -2632,15 +2642,15 @@ function commandOneColorAndSpeedDimPulse(y, t, z, u) {
   };
 
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullURL);
-  if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
@@ -2692,15 +2702,15 @@ function commandStripOffDimPulse(u) {
       console.log(hprcommandstring);
     };
   };
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullURL);
-  if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
@@ -2967,16 +2977,16 @@ function commandOneColorAndSpeedDimPulse2(y, t, z, u) {
   };
 
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   // let fullURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
@@ -3240,15 +3250,15 @@ function commandOneColorAndSpeedDimPulse3(y, t, z, u) {
   };
 
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
@@ -3798,15 +3808,15 @@ function commandTwoColorsNoSliderDualBounce(y, t, z, s, u) {
     };
   };
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
@@ -3842,15 +3852,15 @@ function commandSingleColorDualBounce(y, t, z, u) {
     };
   };
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
@@ -4103,15 +4113,15 @@ function commandTwoColorsNoSliderDualingColors(y, t, z, s, u) {
     };
   };
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
@@ -4363,15 +4373,15 @@ function commandTwoColorsNoSliderRandomColor(y, t, z, s, u) {
     };
   };
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
@@ -4411,15 +4421,15 @@ function commandNoOptionsRandomColor(y, t, u) {
   };
 
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
@@ -4670,15 +4680,15 @@ function commandTwoColorsNoSliderRandomColor2(y, t, z, s, u) {
     };
   };
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
@@ -4718,15 +4728,15 @@ function commandNoOptionsRandomColor2(y, t, u) {
   };
 
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
@@ -4978,15 +4988,15 @@ function commandTwoColorsNoSliderFlash(y, t, z, s, u) {
     };
   };
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
@@ -5026,15 +5036,15 @@ function commandNoOptionsFlash(y, t, u) {
   };
 
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
@@ -5084,15 +5094,15 @@ function commandOneColorAndSpeedFlash(y, t, z, u) {
   };
 
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
@@ -5419,15 +5429,15 @@ function commandTwoColorsNoSliderShortCircuit(y, t, z, s, u) {
     };
   };
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=NHP" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  if (hptcommandstring != undefined) { var hpTopParam = "&param6=NHP" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  if (hprcommandstring != undefined) { var hpRearParam = "&param7=NHP" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=NHP" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  if (hptcommandstring != undefined) { var hpTopParam = "&param6=NHP" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  if (hprcommandstring != undefined) { var hpRearParam = "&param7=NHP" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   HPLEDFunctionExecution(fullHPLEDControllerURL);
 
@@ -5493,15 +5503,15 @@ function commandNoOptionsShortCircuit(y, t, u) {
   };
 
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=NHP" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  if (hptcommandstring != undefined) { var hpTopParam = "&param6=NHP" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  if (hprcommandstring != undefined) { var hpRearParam = "&param7=NHP" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=NHP" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  if (hptcommandstring != undefined) { var hpTopParam = "&param6=NHP" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  if (hprcommandstring != undefined) { var hpRearParam = "&param7=NHP" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   HPLEDFunctionExecution(fullHPLEDControllerURL);
 
@@ -5552,15 +5562,15 @@ function commandOneColorAndSpeedShortCircuit(y, t, z, u) {
   };
 
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=NHP" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  if (hptcommandstring != undefined) { var hpTopParam = "&param6=NHP" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  if (hprcommandstring != undefined) { var hpRearParam = "&param7=NHP" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=NHP" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  if (hptcommandstring != undefined) { var hpTopParam = "&param6=NHP" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  if (hprcommandstring != undefined) { var hpRearParam = "&param7=NHP" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
@@ -5823,15 +5833,15 @@ function commandOneColorAndSpeedPulseBeat(y, t, z, u) {
   };
 
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
@@ -6094,15 +6104,15 @@ function commandOneColorAndSpeedPulseBeat2(y, t, z, u) {
   };
 
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
@@ -6365,15 +6375,15 @@ function commandOneColorAndSpeedWigWag(y, t, z, u) {
   };
 
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
@@ -6635,15 +6645,15 @@ function commandOneColorAndSpeedWigWag2(y, t, z, u) {
   };
 
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
@@ -6905,15 +6915,15 @@ function commandOneColorAndSpeedZigZag(y, t, z, u) {
   };
 
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
@@ -7175,15 +7185,15 @@ function commandOneColorAndSpeedZigZag2(y, t, z, u) {
   };
 
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
@@ -7220,15 +7230,15 @@ function commandTwoColorsZigZag2(y, t, z, s, u) {
     };
   };
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
@@ -7491,15 +7501,15 @@ function commandOneColorAndSpeedDualingColors2(y, t, z, u) {
   };
 
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
@@ -7536,15 +7546,15 @@ function commandTwoColorsDualingColors2(y, t, z, s, u) {
     };
   };
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
@@ -7582,15 +7592,15 @@ function commandTwoColorsNoSliderDualingColors2(y, t, z, s, u) {
     };
   };
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
   //
@@ -7853,15 +7863,15 @@ function commandOneColorAndSpeedFLD(y, t, z, u) {
   };
 
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
@@ -7898,15 +7908,15 @@ function commandTwoColorsFLD(y, t, z, s, u) {
     };
   };
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
@@ -7944,15 +7954,15 @@ function commandTwoColorsNoSliderFLD(y, t, z, s, u) {
     };
   };
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
   //
@@ -8017,15 +8027,15 @@ function commandNoOptionsFLD(y, t, u) {
   };
 
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
@@ -8290,15 +8300,15 @@ function commandOneColorAndSpeedRLD(y, t, z, u) {
   };
 
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
@@ -8335,15 +8345,15 @@ function commandTwoColorsRLD(y, t, z, s, u) {
     };
   };
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
@@ -8381,15 +8391,15 @@ function commandTwoColorsNoSliderRLD(y, t, z, s, u) {
     };
   };
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
   //
@@ -8454,15 +8464,15 @@ function commandNoOptionsRLD(y, t, u) {
   };
 
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
@@ -8726,15 +8736,15 @@ function commandOneColorAndSpeedPulse(y, t, z, u) {
   };
 
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
@@ -8818,15 +8828,15 @@ function commandTwoColorsNoSliderPulse(y, t, z, s, u) {
     };
   };
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
@@ -8891,15 +8901,15 @@ function commandNoOptionsPulse(y, t, u) {
   };
 
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
@@ -9163,15 +9173,15 @@ function commandOneColorAndSpeedDualPulse(y, t, z, u) {
   };
 
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
@@ -9209,15 +9219,15 @@ function commandTwoColorsDualPulse(y, t, z, s, u) {
     };
   };
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
@@ -9255,15 +9265,15 @@ function commandTwoColorsNoSliderDualPulse(y, t, z, s, u) {
     };
   };
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
@@ -9328,15 +9338,15 @@ function commandNoOptionsDualPulse(y, t, u) {
   };
 
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
@@ -9599,15 +9609,15 @@ function commandOneColorAndSpeedAutoSequence(y, t, z, u) {
   };
 
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
@@ -9644,15 +9654,15 @@ function commandTwoColorsAutoSequence(y, t, z, s, u) {
     };
   };
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
@@ -9690,15 +9700,15 @@ function commandTwoColorsNoSliderAutoSequence(y, t, z, s, u) {
     };
   };
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
   //
@@ -9763,15 +9773,15 @@ function commandNoOptionsAutoSequence(y, t, u) {
   };
 
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
@@ -10042,15 +10052,15 @@ function commandOneColorAndSpeedEqualizer(y, t, z, u) {
   };
 
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
@@ -10088,15 +10098,15 @@ function commandTwoColorsEqualizer(y, t, z, s, u) {
     };
   };
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
@@ -10134,15 +10144,15 @@ function commandTwoColorsNoSliderEqualizer(y, t, z, s, u) {
     };
   };
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
@@ -10207,15 +10217,15 @@ function commandNoOptionsEqualizer(y, t, u) {
   };
 
 
-  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   let fullBodyControllerURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 
@@ -10233,15 +10243,15 @@ function commandOneColorAndSpeedRadarEye(y, t, z, u) {
   console.log(radarEyeCommand);
   radarEyeCommandExecution(radarEyeCommand);
 
-  // if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BSB + ldpcommandstring; } else { var ldpCommandParam = "" };
-  // if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BSB + mcommandstring; } else { var maintCommandParam = "" };
-  // if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BSB + coincommandstring; } else { var coinCommandParam = "" };
-  // if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BSB + vucommandstring; } else { var vuCommandParam = "" };
+  // if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
+  // if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
+  // if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
+  // if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
   // let fullURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
   // bodyControllerLEDFunctionExecution(fullURL);
-  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + BSHP + hpfcommandstring; } else { var hpFrontParam = "" };
-  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + BSHP + hptcommandstring; } else { var hpTopParam = "" };
-  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + BSHP + hprcommandstring; } else { var hpRearParam = "" };
+  // if (hpfcommandstring != undefined) { var hpFrontParam = "&param5=" + HPCommandPrefix + hpfcommandstring; } else { var hpFrontParam = "" };
+  // if (hptcommandstring != undefined) { var hpTopParam = "&param6=" + HPCommandPrefix + hptcommandstring; } else { var hpTopParam = "" };
+  // if (hprcommandstring != undefined) { var hpRearParam = "&param7=" + HPCommandPrefix + hprcommandstring; } else { var hpRearParam = "" };
   // let fullHPLEDControllerURL = hpFrontParam + hpTopParam + hpRearParam
   // HPLEDFunctionExecution(fullHPLEDControllerURL);
 };
@@ -11066,7 +11076,7 @@ function ESP32SendCommand(b, x) {
   // var ESP32DeviceSelected = (ESP32Device.options[ESP32Device.selectedIndex].value);
   console.log('Device: ' + ESP32DeviceSelected);
   if (ESP32DeviceSelected === "PL") {
-    var periscopeControllerIP = 'http://192.168.4.101/?param0=enSerial&param1=NPL';
+    var periscopeControllerIP = 'http://192.168.4.101/?param0=:&param1=NPL';
     var periscopeLifterFullURL = periscopeControllerIP + ESP32commandUpper;
     httpGet(periscopeLifterFullURL);
     console.log(periscopeLifterFullURL);
@@ -11083,7 +11093,7 @@ function ESP32SendCommand(b, x) {
 
   };
   if (ESP32DeviceSelected === "DS") {
-    var domeServoControllerIP = 'http://192.168.4.101/?param0=enSerial&param1=SDS';
+    var domeServoControllerIP = 'http://192.168.4.101/?param0=:&param1=SDS';
     console.log('DS subselection');
     console.log(domeServoControllerIP)
 
@@ -11093,7 +11103,7 @@ function ESP32SendCommand(b, x) {
 
   };
   if (ESP32DeviceSelected === "HP") {
-    var DomeHPControllerIP = 'http://192.168.4.101/?param0=enSerial&param1=NHP';
+    var DomeHPControllerIP = 'http://192.168.4.101/?param0=:&param1=NHP';
     console.log('BC subselection');
     console.log(DomeHPControllerIP)
 
@@ -11103,7 +11113,7 @@ function ESP32SendCommand(b, x) {
 
   };
   if (ESP32DeviceSelected === "RS") {
-    var DomeRSeriesControllerIP = 'http://192.168.4.101/?param0=enSerial&param1=NRS';
+    var DomeRSeriesControllerIP = 'http://192.168.4.101/?param0=:&param1=NRS';
     console.log('RS subselection');
     console.log(DomeRSeriesControllerIP)
 
@@ -11113,7 +11123,7 @@ function ESP32SendCommand(b, x) {
 
   };
   if (ESP32DeviceSelected === "BS") {
-    var bodyLEDControllerIP = 'http://192.168.4.101/?param0=enSerial&param1=';
+    var bodyLEDControllerIP = 'http://192.168.4.101/?param0=:&param1=';
     console.log('BS subselection');
     console.log(bodyLEDControllerIP)
 
@@ -11139,7 +11149,7 @@ function BrightnessRangeFunc(a, b, c) {
 
 function sendEEPROMBodyLEDController(t, v) {
   var BodyBright = t;
-  var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=bcSerial&param1=P";
+  var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=:&param1=:EBC%23E";
 
   var bodyLEDControllerFullURL = bodyLEDControllerSPURL + v + BodyBright;
   // console.log(bodyLEDControllerFullURL);
@@ -11186,33 +11196,33 @@ function getPeriscope(s, t, u) {
   let periscopeFunction = s;
   if (periscopeFunction === 'D' && t === 'RotateClockwiseRelative') {
     let periscopeRelativeDeg = document.getElementById(t).value;
-    let periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=NPL:P" + periscopeFunction;
+    let periscopeESPURL = "http://192.168.4.101/?param0=:&param1=:EDP:SUS:P" + periscopeFunction;
     let periscopeESPFullURL = periscopeESPURL + periscopeRelativeDeg + ',' + speedValue;;
     httpGet(periscopeESPFullURL);
   } else if (periscopeFunction === 'D' && t === 'RotateCounterClockwiseRelative') {
     let periscopeRelativeDeg = document.getElementById(t).value;
-    let periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=NPL:P" + periscopeFunction + '-';
+    let periscopeESPURL = "http://192.168.4.101/?param0=:&param1=:EDP:SUS:P" + periscopeFunction + '-';
     let periscopeESPFullURL = periscopeESPURL + periscopeRelativeDeg + ',' + speedValue;;
     httpGet(periscopeESPFullURL);
   } else if (periscopeFunction === 'R' && t === 'RotateClockwiseContinous') {
-    let periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=NPL:P" + periscopeFunction;
+    let periscopeESPURL = "http://192.168.4.101/?param0=:&param1=:EDP:SUS:P" + periscopeFunction;
     let periscopeESPFullURL = periscopeESPURL + speedValue;;
     httpGet(periscopeESPFullURL);
   } else if (periscopeFunction === 'R' && t === 'RotateCounterClockwiseContinous') {
-    let periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=NPL:P" + periscopeFunction + '-';
+    let periscopeESPURL = "http://192.168.4.101/?param0=:&param1=:EDP:SUS:P" + periscopeFunction + '-';
     let periscopeESPFullURL = periscopeESPURL + speedValue;;
     httpGet(periscopeESPFullURL);
   } else if (periscopeFunction === 'AR' || periscopeFunction === 'PR') {
-    let periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=NPL:P" + periscopeFunction;
+    let periscopeESPURL = "http://192.168.4.101/?param0=:&param1=:EDP:SUS:P" + periscopeFunction;
     let periscopeESPFullURL = periscopeESPURL + ',' + speedValue;
     httpGet(periscopeESPFullURL);
   } else if (periscopeFunction === 'S') {
-    let periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=NPL:P" + periscopeFunction;
+    let periscopeESPURL = "http://192.168.4.101/?param0=:&param1=:EDP:SUS:P" + periscopeFunction;
     let periscopeESPFullURL = periscopeESPURL + t;
     httpGet(periscopeESPFullURL);
   } else {
     var periscopeHeight = t;
-    var periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=NPL:P" + periscopeFunction
+    var periscopeESPURL = "http://192.168.4.101/?param0=:&param1=:EDP:SUS:P" + periscopeFunction
     let periscopeESPFullURL = periscopeESPURL + periscopeHeight + ',' + speedValue;;
     // console.log(periscopeESPFullURL);
     httpGet(periscopeESPFullURL);
@@ -11228,7 +11238,7 @@ function getPeriscope(s, t, u) {
 
 function getPeriscopeRotateAbsolute(t) {
   var periscopeHeight = t;
-  var periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=N01PL:PA";
+  var periscopeESPURL = "http://192.168.4.101/?param0=:&param1=N01PL:PA";
   // var periscopeESPURLOutside = "http://10.0.0.230:8080/?param1=:PP";
 
   var periscopeESPFullURL = periscopeESPURL + periscopeHeight;
@@ -11244,7 +11254,7 @@ function getPeriscopeRotateAbsolute(t) {
 
 function getPeriscopeRotateAbsolute(t) {
   var periscopeHeight = t;
-  var periscopeESPURL = "http://192.168.4.101/?param0=enSerial&param1=N01PL:PD";
+  var periscopeESPURL = "http://192.168.4.101/?param0=:&param1=:EDP:SUS:PD";
   // var periscopeESPURLOutside = "http://10.0.0.230:8080/?param1=:PP";
 
   var periscopeESPFullURL = periscopeESPURL + periscopeHeight;

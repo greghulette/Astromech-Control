@@ -1,5 +1,0 @@
-<map id="ServoDispatch" name="ServoDispatch">
-<area shape="rect" id="node1" title="Servo interace implemented eitehr by ServoDispatchPCA9685 or ServoDispatchDirect." alt="" coords="5,46,113,73"/>
-<area shape="rect" id="node2" href="$classServoDispatchDirect.html" title="Implements ServoDispatch dirctly on PWM enabled outputs." alt="" coords="195,5,338,47"/>
-<area shape="rect" id="node3" href="$classServoDispatchPCA9685.html" title="Implements ServoDispatch over i2c to PCA9685." alt="" coords="161,71,372,112"/>
-</map>

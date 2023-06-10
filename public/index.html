@@ -138,25 +138,26 @@
               <table class="homeButtonClass">
                 <tr>
                   <td>
-                    <div class="ButtonBlank" onclick="consoleLog('Normal Operations Button Pressed')">
+                    <div class="ButtonBlank" onclick="animateSequence('A01')">
                       <img id="HomeTab-NormalOperations" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
                       <p class="shadowtext2Lines">normal operations</p>
+
                     </div>
                   </td>
                   <td>
-                    <div class="ButtonBlank" onclick="animateServo('D310D02125')">
+                    <div class="ButtonBlank" onclick="animateSequence('A02')">
                       <img id="HomeTab-PanelWave" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
                       <p class="shadowtext2Lines-2">Panel Wave</p>
                     </div>
                   </td>
                   <td>
-                    <div class="ButtonBlank" onclick="animateServo('D311D01000')">
+                    <div class="ButtonBlank" onclick="animateSequence('A03')">
                       <img id="HomeTab-PanelWaveFast" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
                       <p class="shadowtext2Lines-2">Panel Wave fast</p>
                     </div>
                   </td>
                   <td>
-                    <div class="ButtonBlank" onclick="animateDome('S4'); animatePeriscope(':PS8')">
+                    <div class="ButtonBlank" onclick="animateSequence('A04')">
                       <img id="HomeTab-BLank1" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
                       <p class="shadowtext2Lines-2">dome periscope</p>
                     </div>
@@ -164,7 +165,7 @@
                 </tr>
                 <tr>
                   <td>
-                    <div class="ButtonBlank" onclick="servoControl('06')">
+                    <div class="ButtonBlank" onclick="animateSequence('A05')">
                       <img id="HomeTab-AllOpenClose" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
                       <p class="shadowtext2Lines-2">all open close</p>
                     </div>
@@ -176,13 +177,13 @@
                     </div>                  
                   </td>
                   <td>
-                    <div class="ButtonBlank" onclick="playSound('176'); servoControl('13')">
+                    <div class="ButtonBlank" onclick="animateSequence('A06')">
                       <img id="HomeTab-HarlemShake" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
                       <p class="shadowtext2Lines-2">harlem shake</p>
                     </div>
                   </td>
                   <td>
-                    <div class="ButtonBlank" onclick="animateServo('D304')">
+                    <div class="ButtonBlank" onclick="animateSequence('A07')">
                       <img id="HomeTabAllClose" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
                       <p class="shadowtext">all close</p>
                     </div>  
@@ -3691,7 +3692,7 @@
             id="VerticalBarstDualPulse"
           />
           <img
-          class="selectALLpic"
+          class="selectALLpic"  
           src="Images/Button-Select-All-GIMP.png"
           alt="picture"
           onclick=selectALLStripsDualPulse()
@@ -5376,8 +5377,62 @@ id="FrontLogicsTopBlueSelector"
       </div>
 
         <div class="menu-Level-1-Content active" id="GeneralSounds">
-          <h2 class="genSoundHeader">general</h2>
-          <img src="Images/Button-Sound-Gen1.png" class="genSound1" id="genSound1" onclick="playSound('001')"> 
+          <!-- <h2 class="genSoundHeader">general</h2> -->
+          <div class="soundbuttons">
+          <img id="DualBounceLink" class="buttonSound moreScared"  src="./Images/Sounds/MoreScared.png">
+          <img id="DualBounceLink" class="buttonSound lessScared"  src="./Images/Sounds/LessScared.png">
+          <div class="scaredicons">
+            <img id="" class="soundicon icon1" src="./Images/General/Status-Icon-Grey.png">
+            <img id="" class="soundicon icon2" src="./Images/General/Status-Icon-Grey.png">
+            <img id="" class="soundicon icon3" src="./Images/General/Status-Icon-Grey.png">
+            <img id="" class="soundicon icon4" src="./Images/General/Status-Icon-Grey.png">
+            <img id="" class="soundicon icon5" src="./Images/General/Status-Icon-Grey.png">
+            <img id="" class="soundicon icon6" src="./Images/General/Status-Icon-Grey.png">
+            <img id="" class="soundicon icon7" src="./Images/General/Status-Icon-Grey.png">
+            <img id="" class="soundicon icon8" src="./Images/General/Status-Icon-Grey.png">
+          </div>
+
+          <img id="DualBounceLink" class="buttonSound moreMad"  src="./Images/Sounds/MoreMad.png">
+          <img id="DualBounceLink" class="buttonSound lessMad"  src="./Images/Sounds/LessMad.png">
+          <div class="madicons">
+            <img id="" class="soundicon icon1" src="./Images/General/Status-Icon-Grey.png">
+            <img id="" class="soundicon icon2" src="./Images/General/Status-Icon-Grey.png">
+            <img id="" class="soundicon icon3" src="./Images/General/Status-Icon-Grey.png">
+            <img id="" class="soundicon icon4" src="./Images/General/Status-Icon-Grey.png">
+            <img id="" class="soundicon icon5" src="./Images/General/Status-Icon-Grey.png">
+            <img id="" class="soundicon icon6" src="./Images/General/Status-Icon-Grey.png">
+            <img id="" class="soundicon icon7" src="./Images/General/Status-Icon-Grey.png">
+            <img id="" class="soundicon icon8" src="./Images/General/Status-Icon-Grey.png">
+          </div>
+          <img id="DualBounceLink" class="buttonSound moreSad"  src="./Images/Sounds/MoreSad.png">
+          <img id="DualBounceLink" class="buttonSound lessSad"  src="./Images/Sounds/LessSad.png">
+          <div class="sadicons">
+            <img id="" class="soundicon icon1" src="./Images/General/Status-Icon-Grey.png">
+            <img id="" class="soundicon icon2" src="./Images/General/Status-Icon-Grey.png">
+            <img id="" class="soundicon icon3" src="./Images/General/Status-Icon-Grey.png">
+            <img id="" class="soundicon icon4" src="./Images/General/Status-Icon-Grey.png">
+            <img id="" class="soundicon icon5" src="./Images/General/Status-Icon-Grey.png">
+            <img id="" class="soundicon icon6" src="./Images/General/Status-Icon-Grey.png">
+            <img id="" class="soundicon icon7" src="./Images/General/Status-Icon-Grey.png">
+            <img id="" class="soundicon icon8" src="./Images/General/Status-Icon-Grey.png">
+          </div>
+          <img id="DualBounceLink" class="buttonSound moreHappy"  src="./Images/Sounds/MoreHappy.png">
+          <img id="DualBounceLink" class="buttonSound lessHappy"  src="./Images/Sounds/LessHappy.png">
+          <div class="happyicons">
+            <img id="" class="soundicon icon1" src="./Images/General/Status-Icon-Grey.png">
+            <img id="" class="soundicon icon2" src="./Images/General/Status-Icon-Grey.png">
+            <img id="" class="soundicon icon3" src="./Images/General/Status-Icon-Grey.png">
+            <img id="" class="soundicon icon4" src="./Images/General/Status-Icon-Grey.png">
+            <img id="" class="soundicon icon5" src="./Images/General/Status-Icon-Grey.png">
+            <img id="" class="soundicon icon6" src="./Images/General/Status-Icon-Grey.png">
+            <img id="" class="soundicon icon7" src="./Images/General/Status-Icon-Grey.png">
+            <img id="" class="soundicon icon8" src="./Images/General/Status-Icon-Grey.png">
+          </div>
+        </div>
+          <!-- <p class="shadowtext2LinesLED">More Scared</p> -->
+          <!-- <img id="DualBounceLink" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png"> -->
+          <!-- <p class="shadowtext2LinesLED">Less scared</p> -->
+          <!-- <img src="Images/Button-Sound-Gen1.png" class="genSound1" id="genSound1" onclick="playSound('001')"> 
           <img src="Images/Button-Sound-Gen2.png" class="genSound2" id="genSound2" onclick="playSound('002')"> 
           <img src="Images/Button-Sound-Gen3.png" class="genSound3" id="genSound3" onclick="playSound('003')"> 
           <img src="Images/Button-Sound-Gen4.png" class="genSound4" id="genSound4" onclick="playSound('004')"> 
@@ -5395,7 +5450,7 @@ id="FrontLogicsTopBlueSelector"
           <img src="Images/Button-Sound-Gen16.png" class="genSound16" id="genSound16" onclick="playSound('016')"> 
           <img src="Images/Button-Sound-Gen17.png" class="genSound17" id="genSound17" onclick="playSound('017')"> 
           <img src="Images/Button-Sound-Gen18.png" class="genSound18" id="genSound18" onclick="playSound('018')"> 
-          <img src="Images/Button-Sound-Gen19.png" class="genSound19" id="genSound19" onclick="playSound('019')"> 
+          <img src="Images/Button-Sound-Gen19.png" class="genSound19" id="genSound19" onclick="playSound('019')">  -->
         </div>
 
         <div class="menu-Level-1-Content " id="chatSounds">
