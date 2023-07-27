@@ -28,13 +28,17 @@ function openAllDoorsMS() {
   };
 };
 
-var BodyControllerStatus = false;
-var PeriscopeControllerStatus = false;
-var PerisopeLifterStatus = false;
-var DomeControllerStatus = false
-var StealthControllerStatus = false
-var DomeServoStatus = false
-var BodyServoControllerStatus = false
+// localStorage.key()
+var droidgatewayControllerStatus = false;
+var relayStatus = false;
+var bodyControllerStatus = false;
+var bodyLEDControllerStatus = false;
+var bodyServoControllerStatus = false;
+var domePlateControllerStatus = false;
+var domeControllerStatus = false;
+var hpControllerStatus = false;
+var droidremoteControllerStatus = false;
+
 var batteryPercent = 0
 var LDPBright = 0
 var MaintBright = 0
@@ -45,10 +49,10 @@ var VUIntBaseline = 0
 var VUExtOffset = 0
 var VUExtBaseline = 0
 var mp3TriggerVolume = 0
-var BLCommandPrefix = ":EBC:L"
-var HPCommandPrefix = ":EHP:"
-var RSCommandPrefix = "EDC:SRS"
-var PSCommandPrefix = ":EDC:SFU"
+var BLCommandPrefix = ":L:EBC:L"
+var HPCommandPrefix = ":L:EHP:"
+var RSCommandPrefix = ":L:EDC:SRS"
+var PSCommandPrefix = ":L:EDC:SFU"
 function httpGetStatus() {
   let theStatusURL = "http://192.168.4.101/status"
   var req = new XMLHttpRequest();
@@ -60,57 +64,88 @@ function httpGetStatus() {
     // console.log(typeof (jsonResponse));
     console.log(jsonResponse);
     // if (jsonResponse.remoteLoRaControllerStatus == "Online") {
-    if (jsonResponse.BodyController == "Online") {
+    if (jsonResponse.droidremoteControllerStatus == true) {
 
       // console.log("Body Controller Online");
-      BodyControllerStatus = true;
+      droidremoteControllerStatus = true;
+    } else {
+      console.log("Droid Remote Offline");
+      droidremoteControllerStatus = false;
+    }
+    if (jsonResponse.droidgatewayControllerStatus == true) {
+
+      // console.log("Body Controller Online");
+      droidgatewayControllerStatus = true;
     } else {
       console.log("Body Controller Offline");
-      BodyControllerStatus = false;
+      droidgatewayControllerStatus = false;
     }
-    if (jsonResponse.BodyServo == "Online") {
+    if (jsonResponse.bodyControllerStatus == true) {
+
+      // console.log("Body Controller Online");
+      bodyControllerStatus = true;
+    } else {
+      console.log("Body Controller Offline");
+      bodyControllerStatus = false;
+    }
+    if (jsonResponse.bodyServoControllerStatus == true) {
       // console.log("Body Servo Controller Online");
-      BodyServoControllerStatus = true;
+      bodyServoControllerStatus = true;
 
     } else {
       console.log("Body Servo Controller Offline");
-      BodyServoControllerStatus = false;
+      bodyServoControllerStatus = false;
     }
-    if (jsonResponse.Dome == "Online") {
+    if (jsonResponse.domeControllerStatus == true) {
       // console.log("Dome Controller Online");
-      DomeControllerStatus = true;
+      domeControllerStatus = true;
 
     } else {
       console.log("Dome Controller Offline");
-      DomeControllerStatus = false;
+      domeControllerStatus = false;
     }
-    if (jsonResponse.Periscope == "Online") {
-      // console.log("Persicope Controller Online");
-      PeriscopeControllerStatus = true;
-    } else {
-      console.log("Periscope Controller Offline");
-      PeriscopeControllerStatus = false;
-    }
-    if (jsonResponse.LDPBright > 0) {
+    if (jsonResponse.hpControllerStatus == true) {
       // console.log("Dome Controller Online");
-      var ldpBright = jsonResponse.LDPBright;
-      // console.log(ldpBright);
+      hpControllerStatus = true;
 
     } else {
-      console.log("nothing Controller Offline");
-    };
-    if (jsonResponse.BatteryVoltage > 0) {
+      console.log("HP Controller Offline");
+      hpControllerStatus = false;
+    }
+    if (jsonResponse.domePlateControllerStatus == true) {
+      // console.log("Persicope Controller Online");
+      domePlateControllerStatus = true;
+    } else {
+      console.log("Dome Plate Controller Offline");
+      domePlateControllerStatus = false;
+    }
+    if (jsonResponse.hpControllerStatus == true) {
+      // console.log("Persicope Controller Online");
+      hpControllerStatus = true;
+    } else {
+      console.log("Droid Gateway Offline");
+      hpControllerStatus = false;
+    }
+    if (jsonResponse.relayStatus == true) {
+      // console.log("Persicope Controller Online");
+      relayStatus = true;
+    } else {
+      console.log("Droid Gateway Offline");
+      relayStatus = false;
+    }
+
+    if (jsonResponse.BL_BatteryVoltage > 0) {
       // console.log("Dome Controller Online");
-      var batteryVoltage = jsonResponse.BatteryVoltage;
+      var batteryVoltage = jsonResponse.BL_BatteryVoltage;
       // console.log(batteryVoltage);
       document.getElementById('droidBatteryPar').innerText = batteryVoltage.toFixed(2);
 
     } else {
       console.log("No Battery Voltage");
     }
-    if (jsonResponse.BatteryPercent > 0) {
+    if (jsonResponse.BL_BatteryPercentage > 0) {
       // console.log("Dome Controller Online");
-      batteryPercent = jsonResponse.BatteryPercent;
+      batteryPercent = jsonResponse.BL_BatteryPercentage;
       // console.log(batteryPercent);
       document.getElementById('DroidbatteryChargeLevelDiv').innerHTML = batteryPercent;
 
@@ -119,43 +154,43 @@ function httpGetStatus() {
 
       console.log("No Battery percentage");
     }
-    if (jsonResponse.LDPBright > 0) {
-      LDPBright = jsonResponse.LDPBright;
+    if (jsonResponse.BL_LDP_Bright > 0) {
+      LDPBright = jsonResponse.BL_LDP_Bright;
       document.getElementById('LDPBrightnessRange').value = LDPBright;
       document.getElementById('LDPBrightnesssliderAmount').innerHTML = LDPBright;
     }
-    if (jsonResponse.MaintBright > 0) {
-      MaintBright = jsonResponse.MaintBright;
+    if (jsonResponse.BL_MAINT_Bright > 0) {
+      MaintBright = jsonResponse.BL_MAINT_Bright;
       document.getElementById('MaintBrightnessRange').value = MaintBright;
       document.getElementById('MaintBrightnesssliderAmount').innerHTML = MaintBright;
     }
-    if (jsonResponse.VUBright > 0) {
-      VUBright = jsonResponse.VUBright;
+    if (jsonResponse.BL_VU_Bright > 0) {
+      VUBright = jsonResponse.BL_VU_Bright;
       document.getElementById('VUBrightnessRange').value = VUBright;
       document.getElementById('VUBrightnesssliderAmount').innerHTML = VUBright;
     }
-    if (jsonResponse.CoinBright > 0) {
-      CoinBright = jsonResponse.CoinBright;
+    if (jsonResponse.BL_CS_Bright > 0) {
+      CoinBright = jsonResponse.BL_CS_Bright;
       document.getElementById('CoinBrightnessRange').value = CoinBright;
       document.getElementById('CoinBrightnesssliderAmount').innerHTML = CoinBright;
     }
-    if (jsonResponse.VUIntOffset > 0) {
-      VUIntOffset = jsonResponse.VUIntOffset;
+    if (jsonResponse.BL_vuOffsetInt > 0) {
+      VUIntOffset = jsonResponse.BL_vuOffsetInt;
       document.getElementById('IntOffsetParam').value = VUIntOffset;
       document.getElementById('IntOffsetsliderAmount').innerHTML = VUIntOffset;
     }
-    if (jsonResponse.VUIntBaseline > 0) {
-      VUIntBaseline = jsonResponse.VUIntBaseline;
+    if (jsonResponse.BL_vuBaselineInt > 0) {
+      VUIntBaseline = jsonResponse.BL_vuBaselineInt;
       document.getElementById('IntBaselineParam').value = VUIntBaseline;
       document.getElementById('IntBaselinesliderAmount').innerHTML = VUIntBaseline;
     }
-    if (jsonResponse.VUExtOffset > 0) {
-      VUExtOffset = jsonResponse.VUExtOffset;
+    if (jsonResponse.BL_vuOffsetExt > 0) {
+      VUExtOffset = jsonResponse.BL_vuOffsetExt;
       document.getElementById('ExtOffsetParam').value = VUExtOffset;
       document.getElementById('ExtOffsetsliderAmount').innerHTML = VUExtOffset;
     }
-    if (jsonResponse.VUExtBaseline > 0) {
-      VUExtBaseline = jsonResponse.VUExtBaseline;
+    if (jsonResponse.BL_vuBaselineExt > 0) {
+      VUExtBaseline = jsonResponse.BL_vuBaselineExt;
       document.getElementById('ExtBaselineParam').value = VUExtBaseline;
       document.getElementById('ExtBaselinesliderAmount').innerHTML = VUExtBaseline;
     }
@@ -168,33 +203,41 @@ function httpGetStatus() {
   }
   req.onerror = function (error) {
     // console.log(error);
-    BodyServoControllerStatus = false;
-    BodyControllerStatus = false;
-    PeriscopeControllerStatus = false;
-    DomeControllerStatus = false;
+    droidgatewayControllerStatus = false;
+    relayStatus = false;
+    bodyControllerStatus = false;
+    bodyLEDControllerStatus = false;
+    bodyServoControllerStatus = false;
+    domePlateControllerStatus = false;
+    domeControllerStatus = false;
+    hpControllerStatus = false;
+    checkDroidGatewayStatus = false;
     batteryPercent = 0;
   }
   req.send(null)
 }
-function checkPeriscopeLifterStatus() {
-  let StatusGrey = document.getElementById('PeriscopeLifterIconGrey')
-  let StatusGreen = document.getElementById('PeriscopeLifterIconGreen')
-  let StatusRed = document.getElementById('PeriscopeLifterIconRed')
-  if (PeriscopeControllerStatus == true) {
+
+
+
+function checkDomePlateStatus() {
+  let StatusGrey = document.getElementById('domePlateControllerIconGrey')
+  let StatusGreen = document.getElementById('domePlateControllerIconGreen')
+  let StatusRed = document.getElementById('domePlateControllerIconRed')
+  if (domePlateControllerStatus == true) {
 
     StatusGrey.classList.add('hidden');
     StatusGreen.classList.remove('hidden');
     StatusRed.classList.add("hidden");
 
     // document.getElementById("PeriscopeLifterIcon").src = "./Images/Status-icon-Green.png";
-    document.getElementById("PLStatusText").style.color = "black";
+    document.getElementById("DPStatusText").style.color = "black";
   }
   else {
     StatusGrey.classList.add('hidden');
     StatusGreen.classList.add('hidden');
     StatusRed.classList.remove("hidden");
     // document.getElementById("PeriscopeLifterIcon").src = "./Images/Status-icon-Red.png";
-    document.getElementById("PLStatusText").style.color = "white";
+    document.getElementById("DPStatusText").style.color = "white";
   }
 };
 
@@ -202,7 +245,7 @@ function checkBodyLEDControllerStatus() {
   let StatusGrey = document.getElementById('BodyControllerIconGrey')
   let StatusGreen = document.getElementById('BodyControllerIconGreen')
   let StatusRed = document.getElementById('BodyControllerIconRed')
-  if (BodyControllerStatus == true) {
+  if (bodyControllerStatus == true) {
     StatusGrey.classList.add('hidden');
     StatusGreen.classList.remove('hidden');
     StatusRed.classList.add("hidden");
@@ -219,25 +262,34 @@ function checkBodyLEDControllerStatus() {
 };
 
 
-function resetArduino() {
-  var HPControllerSPURL = "http://192.168.4.101/?param0=ArduinoReset";
+function resetArduino(a) {
+  var HPControllerSPURL = "http://192.168.4.101/?param0=";
 
-  var HPLEDControllerFullURL = HPControllerSPURL;
+  var HPLEDControllerFullURL = HPControllerSPURL + a;
   console.log(HPLEDControllerFullURL);
   // setTimeout(function () { httpGet(bodyLEDControllerFullURL); }, 500);
   // sleep(1000);
-  if (BodyControllerStatus === true) {
-    httpGet(HPLEDControllerFullURL);
+  // if (BodyControllerStatus === true) {
+  httpGet(HPLEDControllerFullURL);
 
-  } else {
-    console.log('Dome Controller Not Online')
-  }
+  // } else {
+  //   console.log('Dome Controller Not Online')
+  // }
 }
+
+function resetESP(a) {
+  var HPControllerSPURL = "http://192.168.4.101/?param0=:&param1=";
+  var HPLEDControllerFullURL = HPControllerSPURL + a;
+  console.log(HPLEDControllerFullURL);
+  httpGet(HPLEDControllerFullURL);
+}
+
+
 function checkDomeControllerStatus() {
   let StatusGrey = document.getElementById('DCIconGrey')
   let StatusGreen = document.getElementById('DCIconGreen')
   let StatusRed = document.getElementById('DCIconRed')
-  if (DomeControllerStatus === true) {
+  if (domeControllerStatus === true) {
     StatusGrey.classList.add('hidden');
     StatusGreen.classList.remove('hidden');
     StatusRed.classList.add("hidden");
@@ -258,7 +310,7 @@ function checkBodyServoStatus() {
   let StatusGreen = document.getElementById('BSIconGreen')
   let StatusRed = document.getElementById('BSIconRed')
 
-  if (BodyServoControllerStatus === true) {
+  if (bodyServoControllerStatus === true) {
     StatusGrey.classList.add('hidden');
     StatusGreen.classList.remove('hidden');
     StatusRed.classList.add('hidden');
@@ -278,19 +330,96 @@ function checkBodyServoStatus() {
 
 };
 
+
+function checkDroidGatewayStatus() {
+  let StatusGrey = document.getElementById('DroidGatewayIconGrey')
+  let StatusGreen = document.getElementById('DroidGatewayIconGreen')
+  let StatusRed = document.getElementById('DroidGatewayIconRed')
+
+  if (droidgatewayControllerStatus === true) {
+    StatusGrey.classList.add('hidden');
+    StatusGreen.classList.remove('hidden');
+    StatusRed.classList.add('hidden');
+    // document.getElementById("BSIcon").src = "./Images/Status-icon-Green.png";
+    document.getElementById("DGStatusText").style.color = "black";
+  }
+  else {
+    StatusGrey.classList.add('hidden');
+    StatusGreen.classList.add('hidden');
+    StatusRed.classList.remove('hidden');
+    // document.getElementById("BSIcon").src = "./Images/Status-icon-Red.png";
+    document.getElementById("DGStatusText").style.color = "white";
+  }
+};
+
+function checkRelayStatus() {
+  let statusGreen = document.getElementById('greenStopSign');
+  let statusRed = document.getElementById('redStopSign');
+  if (relayStatus == true) {
+    statusGreen.classList.remove('hidden');
+    statusRed.classList.add('hidden');
+  } else {
+    statusGreen.classList.add('hidden');
+    statusRed.classList.remove('hidden');
+  }
+
+}
+function checkDroidRemoteStatus() {
+  let StatusGrey = document.getElementById('DroidRemoteIconGrey')
+  let StatusGreen = document.getElementById('DroidRemoteIconGreen')
+  let StatusRed = document.getElementById('DroidRemoteIconRed')
+
+  if (droidremoteControllerStatus === true) {
+    StatusGrey.classList.add('hidden');
+    StatusGreen.classList.remove('hidden');
+    StatusRed.classList.add('hidden');
+    // document.getElementById("BSIcon").src = "./Images/Status-icon-Green.png";
+    document.getElementById("DRStatusText").style.color = "black";
+  }
+  else {
+    StatusGrey.classList.add('hidden');
+    StatusGreen.classList.add('hidden');
+    StatusRed.classList.remove('hidden');
+    // document.getElementById("BSIcon").src = "./Images/Status-icon-Red.png";
+    document.getElementById("DRStatusText").style.color = "white";
+  }
+};
+
+function checkHPControllerStatus() {
+  let StatusGrey = document.getElementById('HPIconGrey')
+  let StatusGreen = document.getElementById('HPIconGreen')
+  let StatusRed = document.getElementById('HPIconRed')
+
+  if (hpControllerStatus === true) {
+    StatusGrey.classList.add('hidden');
+    StatusGreen.classList.remove('hidden');
+    StatusRed.classList.add('hidden');
+    // document.getElementById("BSIcon").src = "./Images/Status-icon-Green.png";
+    document.getElementById("HPStatusText").style.color = "black";
+  }
+  else {
+    StatusGrey.classList.add('hidden');
+    StatusGreen.classList.add('hidden');
+    StatusRed.classList.remove('hidden');
+    // document.getElementById("BSIcon").src = "./Images/Status-icon-Red.png";
+    document.getElementById("HPStatusText").style.color = "white";
+  }
+};
+
+
 function GetDroidBatteryLevel() {
   let PowerColorGrey = document.getElementById('droidPowerColorGrey');
   let PowerColorGreen = document.getElementById('droidPowerColorGreen');
   let PowerColorYellow = document.getElementById('droidPowerColorYellow');
   let PowerColorRed = document.getElementById('droidPowerColorRed');
 
-  var greenLevel = 39;
+  var greenLevel = 50;
   var yellowLevel = 20;
   var redLevel = 21;
 
   document.getElementById("DroidbatteryChargeLevelDiv").innerHTML = batteryPercent;
-  // console.log("Droid Battery: " + batteryPercent);
-  if (greenLevel < batteryPercent && batteryPercent <= 135) {
+  console.log("Droid Battery: " + batteryPercent);
+  if (greenLevel < batteryPercent && batteryPercent <= 195) {
     // console.log("Green Level Selected");
     PowerColorGrey.classList.add('hidden');
     PowerColorGreen.classList.remove('hidden');
@@ -395,7 +524,7 @@ function GetRemoteBatteryLevel() {
         remotePowerColorGreen.classList.add('hidden');
         remotePowerColorYellow.classList.add('hidden');
         remotePowerColorRed.classList.add('hidden');
-        document.getElementById("batteryChargeLevelInt").innerText = "--";
+        document.getElementById("remoteBatteryChargeLevelInt").innerText = '--';
       }
 
     }
@@ -457,14 +586,17 @@ function GetRemoteBatteryConnection() {
 
 setInterval(function () {
   httpGetStatus()
-  checkPeriscopeLifterStatus()
+  checkDomePlateStatus()
   checkBodyLEDControllerStatus()
   checkDomeControllerStatus()
-
+  checkDroidGatewayStatus()
+  checkDroidRemoteStatus()
+  checkHPControllerStatus()
   checkBodyServoStatus()
   GetRemoteBatteryLevel()
   GetRemoteBatteryConnection()
   GetDroidBatteryLevel()
+  checkRelayStatus()
 }, 5000)
 
 function bodyControllerLEDFunctionExecution(t) {
@@ -489,6 +621,15 @@ var slider123 = $('#slider123').CircularSlider({
   onSlideEnd: function (ui, value) { rdSliderOnChange(value) },
 }
 );
+
+
+//SOUNDS
+function moreScared() {
+
+
+}
+
+
 
 function rdSliderOnChange(t) {
   // var LEDCommand = t;
@@ -770,13 +911,28 @@ function playSound(t) {
 
 };
 
-function changeVolume(t) {
+function shutOffRelay() {
+  console.log("Shut off the relay");
+  document.getElementById('redStopSign').classList.add('hidden');
+  document.getElementById('greenStopSign').classList.remove('hidden');
+  httpGet("http://192.168.4.101/?param0=&param1=:L%23L06");
+}
+
+function turnOnRelay() {
+  console.log("Turn on the Relay");
+  document.getElementById('redStopSign').classList.remove('hidden');
+  document.getElementById('greenStopSign').classList.add('hidden');
+  httpGet("http://192.168.4.101/?param0=:&param1=:L%23L05");
+
+}
+
+function changeVolume(a, t) {
   var volumeLevel = lpad(t, 3);
 
   // var playsoundURL = "http://192.168.4.101/?param0=DL&param1=BCSMPt";
 
-  var playsoundURL = "http://192.168.4.101/?param0=:&param1=:EBC:M";
-  var playSoundFullPURL = playsoundURL + volumeLevel;
+  var playsoundURL = "http://192.168.4.101/?param0=:&param1=:EBC:M17,"
+  var playSoundFullPURL = playsoundURL + + a + "," + t;;
   console.log(playSoundFullPURL);
   // if (DomeControllerStatus === false) {
   httpGet(playSoundFullPURL);
@@ -792,15 +948,15 @@ function lpad(value, padding) {
   return (zeroes + value).slice(-padding);
 }
 
-function volumeChange(a, b) {
+function volumeChange(a, b, c) {
   var VUslide = document.getElementById(a),
     sliderDiv = document.getElementById(b);
 
   VUslide.onchange = function () {
     sliderDiv.innerHTML = this.value;
-    let slidervalue1 = 100 - this.value;
+    let slidervalue1 = this.value;
     console.log(slidervalue1);
-    changeVolume(slidervalue1);
+    changeVolume(c, slidervalue1);
     // sendEEPROMBodyLEDController(slidervalue1, c);
   }
 }
@@ -11149,7 +11305,7 @@ function BrightnessRangeFunc(a, b, c) {
 
 function sendEEPROMBodyLEDController(t, v) {
   var BodyBright = t;
-  var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=:&param1=:EBC%23E";
+  var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=:&param1=:L:EBC%23EA";
 
   var bodyLEDControllerFullURL = bodyLEDControllerSPURL + v + BodyBright;
   // console.log(bodyLEDControllerFullURL);
@@ -11162,7 +11318,19 @@ function sendEEPROMBodyLEDController(t, v) {
 
 
 
+function periscopeHeightSliderFunction(a, b) {
+  var VUslide = document.getElementById(a),
+    sliderDiv = document.getElementById(b);
 
+  VUslide.onchange = function () {
+    sliderDiv.innerHTML = this.value;
+    let slidervalue1 = this.value;
+    console.log(slidervalue1);
+    httpGet("http://192.168.4.101/?param0=:L:EDP:SUS:PP" + slidervalue1);
+    // changeVolume(slidervalue1);
+    // sendEEPROMBodyLEDController(slidervalue1, c);
+  }
+}
 
 
 function pericopeLifter(s, t) {
