@@ -727,7 +727,7 @@ function domeServoFunctionExecution(t) {
 function radarEyeCommandExecution(t) {
   var RECommand = t;
   // var domeServoControllerSPURL = "http://192.168.4.101/?param0=DL";
-  var RadarEyeControllerSPURL = "http://192.168.4.101/?param0=:&param1=:EDC:R";
+  var RadarEyeControllerSPURL = "http://192.168.4.101/?param0=:&param1=:L:EDC:";
 
 
   var RadarEyeControllerSFullURL = RadarEyeControllerSPURL + RECommand;
@@ -747,7 +747,7 @@ function radarEyeCommandExecution(t) {
 function RSeriesLEDFunctionExecution(t) {
   var LEDCommand = t;
   // var RSeriesControllerSPURL = "http://192.168.4.101/?param0=:&param1=S02RS";
-  var RSeriesControllerSPURL = "http://192.168.4.101/?param0=:&param1=:EDC:SRS";
+  var RSeriesControllerSPURL = "http://192.168.4.101/?param0=:&param1=:L:EDC:SRS";
 
   var RSeriesControllerSFullPURL = RSeriesControllerSPURL + LEDCommand;
   console.log(RSeriesControllerSFullPURL);
@@ -765,7 +765,7 @@ function RSeriesLEDFunctionExecution(t) {
 function PSICommand(t) {
   var LEDCommand = t;
   // var RSeriesControllerSPURL = "http://192.168.4.101/?param0=:&param1=S02RS";
-  var RSeriesControllerSPURL = "http://192.168.4.101/?param0=:&param1=:EDC:SFU";
+  var RSeriesControllerSPURL = "http://192.168.4.101/?param0=:&param1=:L:EDC:SPS";
 
   var RSeriesControllerSFullPURL = RSeriesControllerSPURL + LEDCommand;
   console.log(RSeriesControllerSFullPURL);
