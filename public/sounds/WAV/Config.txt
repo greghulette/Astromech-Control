@@ -1,0 +1,6 @@
+VolumeVocalizer=4
+VolumeWavA=2
+VolumeWavB=100
+Connection=Serial1
+DeviceID=0
+BaudRate=9600

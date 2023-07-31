@@ -1,0 +1,5 @@
+Canon=0
+MemStrict=0
+MuseWaitMax=4
+MuseWaitMin=2
+PersonalityOverride=0

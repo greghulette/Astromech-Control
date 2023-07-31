@@ -64,6 +64,11 @@ line-height: 2rem;
   top: 100px;
   left: -400px;
 }
+.musicTable{
+  position: relative;
+  top: 100px;
+  left: -300px;
+}
 .shadowtext2LinesLED{
   position:relative;
   top: -110px;

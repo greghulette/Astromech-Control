@@ -5110,15 +5110,20 @@ id="FrontLogicsTopBlueSelector"
   <form class="settingsledmove" method='ESP32SendCommand('ESP32SelectionBox', 'ESP32CommandTextBox')'>
     <label class="ESP32Picker"for='ClientESP32s'>Send command:</label>
     <select class="ESP32Picker " id="ESP32SelectionBox" name="ClientESP32s">
-    <option value="BL">Body LED Controller- V</option>
-    <option value="PL">Periscope Lifter - V</option>
-    <option value="DS">Dome Servo Controller</option>
-    <option value="HP">HP Controller - V</option>
+    <option value="DR">Droid Remote</option>
+    <option value="DG">Droid Gateway</option>
+    <option value="BC">Body Controller</option>
     <option value="BS">Body Servo Contoller</option>
+    <option value="RD">Roam A Dome Home</option>
+    <option value="PL">Dome Plate Controller</option>
+    <option value="US">Uppity Spinner</option>
+    <option value="DS">Dome Controller</option>
+    <option value="HP">HP Controller - V</option>
     <option value="RS">RSeries Logic</option>
     <option value="PS">PSI Pro</option>
     <option value="ST">Stealth</option>
-    <option value="PC">Periscope Controller</option>
+    <option value="HC">HCR</option>
+
 
 
   </select>
@@ -5453,14 +5458,14 @@ id="FrontLogicsTopBlueSelector"
           /></button>
         </div>
 
-        <div class="menu-Level-1-Links move1 " >
+        <!-- <div class="menu-Level-1-Links move1 " >
           <button class="" rel="chatSounds"><img
             class="buttonwidth"
             id ="transparent"
             src="Images/Button-Sound-chat.png"
             alt="button for General Sound"
           /></button>
-        </div>
+        </div> -->
         <!-- <div class="menu-Level-1-Links move2 " >
           <button class="" rel="HappySadSounds"><img
             class="buttonwidth"
@@ -5477,7 +5482,7 @@ id="FrontLogicsTopBlueSelector"
             alt="button for General Sound"
           /></button>
         </div> -->
-        <div class="menu-Level-1-Links move2 " >
+        <div class="menu-Level-1-Links move1 " >
           <button class="" rel="MusicSounds"><img
             class="buttonwidth"
             id ="transparent"
@@ -5512,8 +5517,8 @@ id="FrontLogicsTopBlueSelector"
           <!-- <h2 class="genSoundHeader">general</h2> -->
           <div class="soundbuttons">
 
-          <img id="DualBounceLink" class="buttonSound moreScared" onclick="moreScared()" src="./Images/Sounds/MoreScared.png">
-          <img id="DualBounceLink" class="buttonSound lessScared"  src="./Images/Sounds/LessScared.png">
+          <img id="DualBounceLink" class="buttonSound moreScared" onclick="playEmotion('3','1')" src="./Images/Sounds/MoreScared.png">
+          <img id="DualBounceLink" class="buttonSound lessScared" onclick="playEmotion('3','0')" src="./Images/Sounds/LessScared.png">
           <div class="scaredicons">
             <img id="ScaredIcon1" class="soundicon icon1" src="./Images/General/Status-Icon-Grey.png">
             <img id="ScaredIcon2" class="soundicon icon2" src="./Images/General/Status-Icon-Grey.png">
@@ -5525,8 +5530,8 @@ id="FrontLogicsTopBlueSelector"
             <img id="ScaredIcon8" class="soundicon icon8" src="./Images/General/Status-Icon-Grey.png">
           </div>
 
-          <img id="DualBounceLink" class="buttonSound moreMad"  src="./Images/Sounds/MoreMad.png">
-          <img id="DualBounceLink" class="buttonSound lessMad"  src="./Images/Sounds/LessMad.png">
+          <img id="DualBounceLink" class="buttonSound moreMad"  onclick="playEmotion('2','1')" src="./Images/Sounds/MoreMad.png">
+          <img id="DualBounceLink" class="buttonSound lessMad"  onclick="playEmotion('2','0')"src="./Images/Sounds/LessMad.png">
           <div class="madicons">
             <img id="MadIcon1" class="soundicon icon1" src="./Images/General/Status-Icon-Grey.png">
             <img id="MadIcon2" class="soundicon icon2" src="./Images/General/Status-Icon-Grey.png">
@@ -5538,8 +5543,8 @@ id="FrontLogicsTopBlueSelector"
             <img id="MadIcon8" class="soundicon icon8" src="./Images/General/Status-Icon-Grey.png">
           </div>
 
-          <img id="DualBounceLink" class="buttonSound moreSad"  src="./Images/Sounds/MoreSad.png">
-          <img id="DualBounceLink" class="buttonSound lessSad"  src="./Images/Sounds/LessSad.png">
+          <img id="DualBounceLink" class="buttonSound moreSad" onclick="playEmotion('1','1')" src="./Images/Sounds/MoreSad.png">
+          <img id="DualBounceLink" class="buttonSound lessSad" onclick="playEmotion('1','0')" src="./Images/Sounds/LessSad.png">
           <div class="sadicons">
             <img id="SadIcon1" class="soundicon icon1" src="./Images/General/Status-Icon-Grey.png">
             <img id="SadIcon2" class="soundicon icon2" src="./Images/General/Status-Icon-Grey.png">
@@ -5551,8 +5556,8 @@ id="FrontLogicsTopBlueSelector"
             <img id="SadIcon8" class="soundicon icon8" src="./Images/General/Status-Icon-Grey.png">
           </div>
 
-          <img id="DualBounceLink" class="buttonSound moreHappy"  src="./Images/Sounds/MoreHappy.png">
-          <img id="DualBounceLink" class="buttonSound lessHappy"  src="./Images/Sounds/LessHappy.png">
+          <img id="DualBounceLink" class="buttonSound moreHappy" onclick="playEmotion('0','1')" src="./Images/Sounds/MoreHappy.png">
+          <img id="DualBounceLink" class="buttonSound lessHappy" onclick="playEmotion('0','0')" src="./Images/Sounds/LessHappy.png">
           <div class="happyicons">
             <img id="HappyIcon1" class="soundicon icon1" src="./Images/General/Status-Icon-Grey.png">
             <img id="HappyIcon2" class="soundicon icon2" src="./Images/General/Status-Icon-Grey.png">
@@ -5639,7 +5644,96 @@ id="FrontLogicsTopBlueSelector"
 
         <div class="menu-Level-1-Content " id="MusicSounds">
           <h2 class="chatSoundHeader">music</h2>
-          <img src="Images/Button-Sound-Gen1.png" class="genSound1" id="genSound1" onclick="playSound('176')"> 
+
+          <table class="musicTable">
+            <tr>
+              <td>
+                <div class="ButtonBlank" onclick="playHCRWave('1800')">
+                  <img id="Reset_Remote_ESP" class="buttonwidthReset "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2Lines-Reset">star wars</p>
+                </div>  
+              </td>
+              <td>
+                <div class="ButtonBlank" onclick="playHCRWave('0181')">
+                  <img id="Reset_Remote_ESP" class="buttonwidthReset "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2Lines-Reset">staying alive</p>
+                </div>  
+              </td>
+              <td>
+                <div class="ButtonBlank" onclick="playHCRWave('0152')">
+                  <img id="Reset_Remote_ESP" class="buttonwidthReset "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2Lines-Reset">leia</p>
+                </div>  
+              </td>
+              <td>
+                <div class="ButtonBlank" onclick="playHCRWave('0003')">
+                  <img id="Reset_Remote_ESP" class="buttonwidthReset "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2Lines-Reset">leia -2 </p>
+                </div>  
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ButtonBlank" onclick="playHCRWave('0010')">
+                  <img id="Reset_Remote_ESP" class="buttonwidthReset "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2Lines-Reset">phillies song</p>
+                </div>  
+              </td>
+              <td>
+                <div class="ButtonBlank" onclick="playHCRWave('0001')">
+                  <img id="Reset_Remote_ESP" class="buttonwidthReset "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2Lines-Reset">star wars theme</p>
+                </div>  
+              </td>
+              <td>
+                <div class="ButtonBlank" onclick="playHCRWave('0002')">
+                  <img id="Reset_Remote_ESP" class="buttonwidthReset "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2Lines-Reset">vadar theme</p>
+                </div>  
+              </td>
+              <td>
+                <div class="ButtonBlank" onclick="playHCRWave('0006')">
+                  <img id="Reset_Remote_ESP" class="buttonwidthReset "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2Lines-Reset">Cantina</p>
+                </div>  
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ButtonBlank" onclick="playHCRWave('0005')">
+                  <img id="Reset_Remote_ESP" class="buttonwidthReset "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2Lines-Reset">dance</p>
+                </div>  
+              </td>
+              <td>
+                <div class="ButtonBlank" onclick="playHCRWave('0179')">
+                  <img id="Reset_Remote_ESP" class="buttonwidthReset "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2Lines-Reset">mumble</p>
+                </div>  
+              </td>
+              <td>
+                <div class="ButtonBlank" onclick="playHCRWave('0004')">
+                  <img id="Reset_Remote_ESP" class="buttonwidthReset "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2Lines-Reset">fart</p>
+                </div>  
+              </td>
+              <td>
+                <div class="ButtonBlank" onclick="playHCRWave('1')">
+                  <img id="Reset_Remote_ESP" class="buttonwidthReset "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2Lines-Reset"></p>
+                </div>  
+              </td>
+              </tr>
+              <tr>
+              <td>
+                <div class="ButtonBlank" onclick="stopHCRWave('1')">
+                  <img id="Reset_Remote_ESP" class="buttonwidthReset "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2Lines-Reset">stop</p>
+                </div>  
+              </td>
+            </tr>
+          </table>
+          <!-- <img src="Images/Button-Sound-Gen1.png" class="genSound1" id="genSound1" onclick="playSound('176')"> 
           <img src="Images/Button-Sound-Gen2.png" class="genSound2" id="genSound2" onclick="playSound('177')"> 
           <img src="Images/Button-Sound-Gen3.png" class="genSound3" id="genSound3" onclick="playSound('178')"> 
           <img src="Images/Button-Sound-Gen4.png" class="genSound4" id="genSound4" onclick="playSound('179')"> 
@@ -5649,7 +5743,7 @@ id="FrontLogicsTopBlueSelector"
           <h2 class="sadSoundHeader">leia sounds</h2>
           <img src="Images/Button-Sound-Gen1.png" class="sadSound1" id="genSound8" onclick="playSound('151')"> 
           <img src="Images/Button-Sound-Gen2.png" class="sadSound2" id="genSound8" onclick="playSound('152')"> 
-          <img src="Images/Button-Sound-Gen3.png" class="sadSound3" id="genSound8" onclick="playSound('153')"> 
+          <img src="Images/Button-Sound-Gen3.png" class="sadSound3" id="genSound8" onclick="playSound('153')">  -->
         </div>
   
       </div>

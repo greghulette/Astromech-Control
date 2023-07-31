@@ -50,7 +50,7 @@ var VUExtOffset = 0
 var VUExtBaseline = 0
 var mp3TriggerVolume = 0
 var BLCommandPrefix = ":L:EBC:L"
-var HPCommandPrefix = ":L:EHP:"
+var HPCommandPrefix = ":L:EHP:H"
 var RSCommandPrefix = ":L:EDC:SRS"
 var PSCommandPrefix = ":L:EDC:SFU"
 function httpGetStatus() {
@@ -62,14 +62,14 @@ function httpGetStatus() {
     var jsonResponse = req.response;
     // do something with jsonResponse
     // console.log(typeof (jsonResponse));
-    console.log(jsonResponse);
+    // console.log(jsonResponse);
     // if (jsonResponse.remoteLoRaControllerStatus == "Online") {
     if (jsonResponse.droidremoteControllerStatus == true) {
 
       // console.log("Body Controller Online");
       droidremoteControllerStatus = true;
     } else {
-      console.log("Droid Remote Offline");
+      // console.log("Droid Remote Offline");
       droidremoteControllerStatus = false;
     }
     if (jsonResponse.droidgatewayControllerStatus == true) {
@@ -77,7 +77,7 @@ function httpGetStatus() {
       // console.log("Body Controller Online");
       droidgatewayControllerStatus = true;
     } else {
-      console.log("Body Controller Offline");
+      // console.log("Body Controller Offline");
       droidgatewayControllerStatus = false;
     }
     if (jsonResponse.bodyControllerStatus == true) {
@@ -85,7 +85,7 @@ function httpGetStatus() {
       // console.log("Body Controller Online");
       bodyControllerStatus = true;
     } else {
-      console.log("Body Controller Offline");
+      // console.log("Body Controller Offline");
       bodyControllerStatus = false;
     }
     if (jsonResponse.bodyServoControllerStatus == true) {
@@ -93,7 +93,7 @@ function httpGetStatus() {
       bodyServoControllerStatus = true;
 
     } else {
-      console.log("Body Servo Controller Offline");
+      // console.log("Body Servo Controller Offline");
       bodyServoControllerStatus = false;
     }
     if (jsonResponse.domeControllerStatus == true) {
@@ -101,7 +101,7 @@ function httpGetStatus() {
       domeControllerStatus = true;
 
     } else {
-      console.log("Dome Controller Offline");
+      // console.log("Dome Controller Offline");
       domeControllerStatus = false;
     }
     if (jsonResponse.hpControllerStatus == true) {
@@ -109,28 +109,28 @@ function httpGetStatus() {
       hpControllerStatus = true;
 
     } else {
-      console.log("HP Controller Offline");
+      // console.log("HP Controller Offline");
       hpControllerStatus = false;
     }
     if (jsonResponse.domePlateControllerStatus == true) {
       // console.log("Persicope Controller Online");
       domePlateControllerStatus = true;
     } else {
-      console.log("Dome Plate Controller Offline");
+      // console.log("Dome Plate Controller Offline");
       domePlateControllerStatus = false;
     }
     if (jsonResponse.hpControllerStatus == true) {
       // console.log("Persicope Controller Online");
       hpControllerStatus = true;
     } else {
-      console.log("Droid Gateway Offline");
+      // console.log("Droid Gateway Offline");
       hpControllerStatus = false;
     }
     if (jsonResponse.relayStatus == true) {
       // console.log("Persicope Controller Online");
       relayStatus = true;
     } else {
-      console.log("Droid Gateway Offline");
+      // console.log("Droid Gateway Offline");
       relayStatus = false;
     }
 
@@ -141,7 +141,7 @@ function httpGetStatus() {
       document.getElementById('droidBatteryPar').innerText = batteryVoltage.toFixed(2);
 
     } else {
-      console.log("No Battery Voltage");
+      // console.log("No Battery Voltage");
     }
     if (jsonResponse.BL_BatteryPercentage > 0) {
       // console.log("Dome Controller Online");
@@ -152,7 +152,7 @@ function httpGetStatus() {
     } else {
       document.getElementById('DroidbatteryChargeLevelDiv').innerText = "--";
 
-      console.log("No Battery percentage");
+      // console.log("No Battery percentage");
     }
     if (jsonResponse.BL_LDP_Bright > 0) {
       LDPBright = jsonResponse.BL_LDP_Bright;
@@ -418,7 +418,7 @@ function GetDroidBatteryLevel() {
   var redLevel = 21;
 
   document.getElementById("DroidbatteryChargeLevelDiv").innerHTML = batteryPercent;
-  console.log("Droid Battery: " + batteryPercent);
+  // console.log("Droid Battery: " + batteryPercent);
   if (greenLevel < batteryPercent && batteryPercent <= 195) {
     // console.log("Green Level Selected");
     PowerColorGrey.classList.add('hidden');
@@ -597,7 +597,7 @@ setInterval(function () {
   GetRemoteBatteryConnection()
   GetDroidBatteryLevel()
   checkRelayStatus()
-}, 5000)
+}, 500)
 
 function bodyControllerLEDFunctionExecution(t) {
   var LEDCommand = t;
@@ -624,16 +624,12 @@ var slider123 = $('#slider123').CircularSlider({
 
 
 //SOUNDS
-function moreScared() {
-
-
-}
 
 
 
 function rdSliderOnChange(t) {
   // var LEDCommand = t;
-  var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=:&param1=:EBC:RA" + t;
+  var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=:&param1=::LEBC:RA" + t;
 
   // var bodyLEDControllerFullURL = bodyLEDControllerSPURL + LEDCommand;
   console.log(bodyLEDControllerSPURL);
@@ -643,14 +639,14 @@ function rdSliderOnChange(t) {
   httpGet(bodyLEDControllerSPURL);
 }
 function rdCommand(t) {
-  var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=:&param1=:EBC:R" + t;
+  var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=:&param1=:L:EBC:R" + t;
   console.log(bodyLEDControllerSPURL);
   httpGet(bodyLEDControllerSPURL);
 }
 
 function rdCommandText(t) {
   let command12 = document.getElementById(t).value
-  var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=:&param1=:EBC:R" + command12;
+  var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=:&param1=:L:EBC:R" + command12;
   console.log(bodyLEDControllerSPURL);
   httpGet(bodyLEDControllerSPURL);
 }
@@ -679,7 +675,7 @@ function commandOneColorHP(a, b, c) {
 
   let HPColor = getcolor1(b);
 
-  var HPControllerSPURL = "http://192.168.4.101/?param0=:&param1=:EHPA0";
+  var HPControllerSPURL = "http://192.168.4.101/?param0=:&param1=::LEHPA0";
   var HPLEDControllerFullURL = HPControllerSPURL + a + HPColor;
   httpGet(HPLEDControllerFullURL);
 
@@ -862,7 +858,7 @@ function savedOptions3() {
 }
 
 function animateServo(t) {
-  var animationURL = "http://192.168.4.101/?param0=:&param1=:EBS:";
+  var animationURL = "http://192.168.4.101/?param0=:&param1=::LEBS:";
   let animationFullURL = animationURL + t;
   console.log(animationFullURL);
   httpGet(animationFullURL);
@@ -871,7 +867,7 @@ function animateServo(t) {
 }
 
 function animateSequence(t) {
-  var animationURL = "http://192.168.4.101/?param0=:&param1=:EBC:"
+  var animationURL = "http://192.168.4.101/?param0=:&param1=:L:EBC:"
   let animationFullURL = animationURL + t;
   console.log(animationFullURL);
   httpGet(animationFullURL);
@@ -890,7 +886,7 @@ function animateDome(a) {
 }
 
 function animatePeriscope(a) {
-  var animationURL = "http://192.168.4.101/?param0=:&param1=:EDP:SUS" + a;
+  var animationURL = "http://192.168.4.101/?param0=:&param1=:L:EDP:SUS" + a;
   httpGet(animationURL);
 }
 
@@ -899,7 +895,7 @@ function playSound(t) {
   var sound = t;
   // var playsoundURL = "http://192.168.4.101/?param0=DL&param1=BCSMPt";
 
-  var playsoundURL = "http://192.168.4.101/?param0=:&param1=:EBC:M";
+  var playsoundURL = "http://192.168.4.101/?param0=:&param1=:L:EBC:M";
   var playSoundFullPURL = playsoundURL + sound;
   console.log(playSoundFullPURL);
   // if (DomeControllerStatus === false) {
@@ -910,6 +906,32 @@ function playSound(t) {
   // }
 
 };
+
+
+function playEmotion(a, b) {
+  let emotion = a;
+  let emotionLevel = b;
+  var playsoundURL = "http://192.168.4.101/?param0=:&param1=:L:EBC:M04,";
+  var playSoundFullPURL = playsoundURL + emotion + "," + emotionLevel;
+  httpGet(playSoundFullPURL);
+
+}
+
+var HCRCHannel = 1;
+function playHCRWave(a) {
+  var playsoundURL = "http://192.168.4.101/?param0=:&param1=:L:EBC:M14,";
+  // if (HCRCHannel == 1) { HCRCHannel = 2 } else (HCRCHannel = 1);
+  var playSoundFullPURL = playsoundURL + HCRCHannel + "," + a;
+  httpGet(playSoundFullPURL);
+}
+
+function stopHCRWave(a) {
+  var playsoundURL = "http://192.168.4.101/?param0=:&param1=:L:EBC:M16,";
+  // if (HCRCHannel == 1) { HCRCHannel = 2 } else (HCRCHannel = 1);
+  var playSoundFullPURL = playsoundURL + a;
+  httpGet(playSoundFullPURL);
+}
+
 
 function shutOffRelay() {
   console.log("Shut off the relay");
@@ -931,7 +953,7 @@ function changeVolume(a, t) {
 
   // var playsoundURL = "http://192.168.4.101/?param0=DL&param1=BCSMPt";
 
-  var playsoundURL = "http://192.168.4.101/?param0=:&param1=:EBC:M17,"
+  var playsoundURL = "http://192.168.4.101/?param0=:&param1=:L:EBC:M17,"
   var playSoundFullPURL = playsoundURL + + a + "," + t;;
   console.log(playSoundFullPURL);
   // if (DomeControllerStatus === false) {
@@ -11232,14 +11254,14 @@ function ESP32SendCommand(b, x) {
   // var ESP32DeviceSelected = (ESP32Device.options[ESP32Device.selectedIndex].value);
   console.log('Device: ' + ESP32DeviceSelected);
   if (ESP32DeviceSelected === "PL") {
-    var periscopeControllerIP = 'http://192.168.4.101/?param0=:&param1=NPL';
+    var periscopeControllerIP = 'http://192.168.4.101/?param0=:&param1=:L:DP:';
     var periscopeLifterFullURL = periscopeControllerIP + ESP32commandUpper;
     httpGet(periscopeLifterFullURL);
     console.log(periscopeLifterFullURL);
 
   };
   if (ESP32DeviceSelected === "BL") {
-    var bodyLEDControllerIP = 'http://192.168.4.101/?param0=blSerial&param1=';
+    var bodyLEDControllerIP = 'http://192.168.4.101/?param0=:l&param1=:L:';
     console.log('BL subselection');
     console.log(bodyLEDControllerIP)
 
