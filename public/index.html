@@ -11,7 +11,7 @@
   <link rel="shortcut icon" href="./Images/r2-d2.ico" type="image/x-icon"/>
   <link rel="stylesheet" href="./CSS/Styles.css" />
   <meta name="viewport" content="width=device-width, initial-scale=.5" />
-  <script src="//code.jquery.com/jquery-3.2.0.min.js"></script>
+  <script src="./js/jquery-3.5.1.min.js"></script>
   <script src="./js/circular-slider.js"></script>
 <!-- <script src="circular-slider.min.js"></script> -->
 </head>
@@ -4963,6 +4963,14 @@ id="FrontLogicsTopBlueSelector"
           alt="button for Knight Rider"
         /></button>
        </div>
+       <div class="menu-Level-1-Links move3" >
+        <button class="" rel="OTAButtons">
+          <div>
+            <img id="Reset_Remote_ESP" class="buttonwidth "  src="./Images/HomeTab/Button-Blank.png">
+            <p class="shadowtext2Lines-OTA">ota</p>
+          </div>
+        </button>
+       </div>
 
        <div id="droidBattery" class="droidBatteryClass">
         <p id="droidBatteryVoltagePar">voltage: </p>
@@ -5117,12 +5125,12 @@ id="FrontLogicsTopBlueSelector"
     <option value="RD">Roam A Dome Home</option>
     <option value="PL">Dome Plate Controller</option>
     <option value="US">Uppity Spinner</option>
-    <option value="DS">Dome Controller</option>
+    <option value="DC">Dome Controller</option>
     <option value="HP">HP Controller - V</option>
-    <option value="RS">RSeries Logic</option>
+    <option value="DL">Dome Logics</option>
     <option value="PS">PSI Pro</option>
     <option value="ST">Stealth</option>
-    <option value="HC">HCR</option>
+    <option value="HC">HCR (C++ API)</option>
 
 
 
@@ -5189,6 +5197,66 @@ id="FrontLogicsTopBlueSelector"
         <div class="ButtonBlank" onclick="resetESP(':L:EDL%23L02')">
           <img id="Reset_Remote_ESP" class="buttonwidthReset "  src="./Images/HomeTab/Button-Blank.png">
           <p class="shadowtext2Lines-Reset">Dome Logics</p>
+        </div>
+      </td>
+     </tr>
+  </table>
+
+</div>
+
+<div class="menu-Level-1-Content " id="OTAButtons">
+  <!-- <img src="Images/Button-LED_Controller_Reset.png" alt="" class="resetLEDController " onclick="resetArduino()"> -->
+  <h2>enable ota</h2>
+  <table class="resetTable">
+    <tr>
+      <td>
+        <div class="ButtonBlank" onclick="resetESP('%23L03')">
+          <img id="Reset_Remote_ESP" class="buttonwidthOTA "  src="./Images/HomeTab/Button-Blank.png">
+          <p class="shadowtext2Lines-OTATable">Remote ESP 192.168.4.101</p>
+        </div>  
+      </td>
+      <td>
+        <div class="ButtonBlank" onclick="resetESP(':L:EDG%23L03')">
+          <img id="Reset_Remote_ESP" class="buttonwidthOTA "  src="./Images/HomeTab/Button-Blank.png">
+          <p class="shadowtext2Lines-OTATable">Droid Gateway 192.168.4.108</p>
+        </div>
+      </td>
+      <td>
+        <div class="ButtonBlank" onclick="resetESP(':L:EBC%23L03')">
+          <img id="Reset_Remote_ESP" class="buttonwidthOTA "  src="./Images/HomeTab/Button-Blank.png">
+          <p class="shadowtext2Lines-OTATable">body controller 192.168.4.109</p>
+        </div>
+      </td>
+      <td>
+        <div class="ButtonBlank" onclick="resetESP(':L:EBS%23L03')">
+          <img id="Reset_Remote_ESP" class="buttonwidthOTA "  src="./Images/HomeTab/Button-Blank.png">
+          <p class="shadowtext2Lines-OTATable">body servo 192.168.4.110</p>
+        </div>
+      </td>
+     </tr>
+     <tr>
+      <td>
+        <div class="ButtonBlank" onclick="resetESP(':L:EDP%23L03')">
+          <img id="Reset_Remote_ESP" class="buttonwidthOTA "  src="./Images/HomeTab/Button-Blank.png">
+          <p class="shadowtext2Lines-OTATable">dome plate 192.168.4.112</p>
+        </div>
+      </td>
+      <td>
+        <div class="ButtonBlank" onclick="resetESP(':L:EDC%23L03')">
+          <img id="Reset_Remote_ESP" class="buttonwidthOTA "  src="./Images/HomeTab/Button-Blank.png">
+          <p class="shadowtext2Lines-OTATable">dome controller 192.168.4.111</p>
+        </div>
+      </td>
+      <td>
+        <div class="ButtonBlank" onclick="resetESP(':L:EHP%23L03')">
+          <img id="Reset_Remote_ESP" class="buttonwidthOTA "  src="./Images/HomeTab/Button-Blank.png">
+          <p class="shadowtext2Lines-OTATable">HP Controller 192.168.4.113</p>
+        </div>
+      </td>
+      <td>
+        <div class="ButtonBlank" onclick="resetESP('')">
+          <img id="Reset_Remote_ESP" class="buttonwidthOTA "  src="./Images/HomeTab/Button-Blank.png">
+          <p class="shadowtext2Lines-OTATable"></p>
         </div>
       </td>
      </tr>

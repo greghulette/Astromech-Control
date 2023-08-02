@@ -26,6 +26,8 @@ body {
   position:relative;
   top: -155px;
   /* left: 60px; */
+  font-family: 'Star Jedi', 'Starjedi', arial, camb;
+
   text-align: center;
   text-shadow: 0 4px 10px black;
   text-decoration: solid;
@@ -38,6 +40,8 @@ line-height: 2.5rem;
   position:relative;
   top: -170px;
   /* left: 60px; */
+  font-family: 'Star Jedi', 'Starjedi', arial, camb;
+
   text-align: center;
   text-shadow: 0 4px 10px black;
   text-decoration: solid;
@@ -51,11 +55,46 @@ line-height: 3rem;
   position:relative;
   top: -120px;
   left: 0px;
+  font-family: 'Star Jedi', 'Starjedi', arial, camb;
+
   text-align: center;
   text-shadow: 0 4px 10px black;
   text-decoration: solid;
 line-height: 2rem;
   font-size: 2rem;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
+
+.shadowtext2Lines-OTATable{
+  position:relative;
+  top: -150px;
+  left: 0px;
+  font-family: 'Star Jedi', 'Starjedi', arial, camb;
+
+  text-align: center;
+  text-shadow: 0 4px 10px black;
+  text-decoration: solid;
+line-height: 2rem;
+  font-size: 2rem;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
+
+
+.shadowtext2Lines-OTA{
+  position:relative;
+  top: -110px;
+  left: 20px;
+  width: 120px;
+  word-wrap: normal;
+  font-family: 'Star Jedi', 'Starjedi', arial, camb;
+-webkit-text-fill-color: white;
+  text-align: center;
+  text-shadow: 0 4px 10px black;
+  text-decoration: solid;
+line-height: 2.5rem;
+  font-size: 2.5rem;
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: black;
 }
@@ -1130,6 +1169,11 @@ span.myButton input {
 }
 .buttonwidthReset{
   width: 240px;
+}
+
+.buttonwidthOTA{
+  width: 260px;
+height: 120px;
 }
 .homebuttonwidth2 {
   width: 160px;

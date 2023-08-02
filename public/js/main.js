@@ -51,8 +51,12 @@ var VUExtBaseline = 0
 var mp3TriggerVolume = 0
 var BLCommandPrefix = ":L:EBC:L"
 var HPCommandPrefix = ":L:EHP:H"
-var RSCommandPrefix = ":L:EDC:SRS"
+var DLCommandPrefix = ":L:EDC:SDL"
 var PSCommandPrefix = ":L:EDC:SFU"
+
+var statusQueryLength = 500
+
+
 function httpGetStatus() {
   let theStatusURL = "http://192.168.4.101/status"
   var req = new XMLHttpRequest();
@@ -597,7 +601,7 @@ setInterval(function () {
   GetRemoteBatteryConnection()
   GetDroidBatteryLevel()
   checkRelayStatus()
-}, 500)
+}, statusQueryLength)
 
 function bodyControllerLEDFunctionExecution(t) {
   var LEDCommand = t;
@@ -629,7 +633,7 @@ var slider123 = $('#slider123').CircularSlider({
 
 function rdSliderOnChange(t) {
   // var LEDCommand = t;
-  var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=:&param1=::LEBC:RA" + t;
+  var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=:&param1=:L:EBC:R:DPA" + t;
 
   // var bodyLEDControllerFullURL = bodyLEDControllerSPURL + LEDCommand;
   console.log(bodyLEDControllerSPURL);
@@ -675,7 +679,7 @@ function commandOneColorHP(a, b, c) {
 
   let HPColor = getcolor1(b);
 
-  var HPControllerSPURL = "http://192.168.4.101/?param0=:&param1=::LEHPA0";
+  var HPControllerSPURL = "http://192.168.4.101/?param0=:&param1=:L:EHP:HA0";
   var HPLEDControllerFullURL = HPControllerSPURL + a + HPColor;
   httpGet(HPLEDControllerFullURL);
 
@@ -743,7 +747,7 @@ function radarEyeCommandExecution(t) {
 function RSeriesLEDFunctionExecution(t) {
   var LEDCommand = t;
   // var RSeriesControllerSPURL = "http://192.168.4.101/?param0=:&param1=S02RS";
-  var RSeriesControllerSPURL = "http://192.168.4.101/?param0=:&param1=:L:EDC:SRS";
+  var RSeriesControllerSPURL = "http://192.168.4.101/?param0=:&param1=:L:EDC:SDL";
 
   var RSeriesControllerSFullPURL = RSeriesControllerSPURL + LEDCommand;
   console.log(RSeriesControllerSFullPURL);
@@ -875,7 +879,7 @@ function animateSequence(t) {
 
 function batteryLevel() {
 
-  var animationURL = "http://192.168.4.101/?param0=blSerial&param1=C01";
+  var animationURL = "http://192.168.4.101/?param0=:&param1=:L:EBC:LL01";
   httpGet(animationURL);
 }
 
@@ -1196,9 +1200,9 @@ function commandNoOptionsRSeries(t) {
     // };
   };
 
-  let rldCommandParam = "&param1=" + RSCommandPrefix + RLDSeriescommandString;
-  let fldtCommandParam = "&param2=" + RSCommandPrefix + FLDTRSeriesCommandString;
-  let fldbCommandParam = "&param3=" + RSCommandPrefix + FLDBRSeriesCommandString;
+  let rldCommandParam = "&param1=" + DLCommandPrefix + RLDSeriescommandString;
+  let fldtCommandParam = "&param2=" + DLCommandPrefix + FLDTRSeriesCommandString;
+  let fldbCommandParam = "&param3=" + DLCommandPrefix + FLDBRSeriesCommandString;
   let rpsiCommandParam = "&param4=" + PSCommandPrefix + rpsicommandstring;
   let fpsiCommandParam = "&param5=" + PSCommandPrefix + fpsicommandstring;
 
@@ -11253,62 +11257,83 @@ function ESP32SendCommand(b, x) {
   var ESP32DeviceSelected = getcolor1(b);
   // var ESP32DeviceSelected = (ESP32Device.options[ESP32Device.selectedIndex].value);
   console.log('Device: ' + ESP32DeviceSelected);
-  if (ESP32DeviceSelected === "PL") {
-    var periscopeControllerIP = 'http://192.168.4.101/?param0=:&param1=:L:DP:';
-    var periscopeLifterFullURL = periscopeControllerIP + ESP32commandUpper;
-    httpGet(periscopeLifterFullURL);
-    console.log(periscopeLifterFullURL);
-
+  if (ESP32DeviceSelected === "DR") {
+    var URLtoSendCommandTo = 'http://192.168.4.101/?param0=:&param1=';
+    var FullURLtoSendCommandTo = URLtoSendCommandTo + ESP32commandUpper;
+    httpGet(FullURLtoSendCommandTo);
+    console.log(FullURLtoSendCommandTo);
   };
-  if (ESP32DeviceSelected === "BL") {
-    var bodyLEDControllerIP = 'http://192.168.4.101/?param0=:l&param1=:L:';
-    console.log('BL subselection');
-    console.log(bodyLEDControllerIP)
-
-    var bodyLEDControllerFullURL = bodyLEDControllerIP + ESP32commandUpper;
-    httpGet(bodyLEDControllerFullURL);
-    console.log(bodyLEDControllerFullURL);
-
+  if (ESP32DeviceSelected === "DG") {
+    var URLtoSendCommandTo = 'http://192.168.4.101/?param0=:&param1=:L';
+    var FullURLtoSendCommandTo = URLtoSendCommandTo + ESP32commandUpper;
+    httpGet(FullURLtoSendCommandTo);
+    console.log(FullURLtoSendCommandTo);
   };
-  if (ESP32DeviceSelected === "DS") {
-    var domeServoControllerIP = 'http://192.168.4.101/?param0=:&param1=SDS';
-    console.log('DS subselection');
-    console.log(domeServoControllerIP)
-
-    var domeServoControllerFullURL = domeServoControllerIP + ESP32commandUpper;
-    httpGet(domeServoControllerFullURL);
-    console.log(domeServoControllerFullURL);
-
-  };
-  if (ESP32DeviceSelected === "HP") {
-    var DomeHPControllerIP = 'http://192.168.4.101/?param0=:&param1=NHP';
-    console.log('BC subselection');
-    console.log(DomeHPControllerIP)
-
-    var DomeHPControllerFullURL = DomeHPControllerIP + ESP32commandUpper;
-    httpGet(DomeHPControllerFullURL);
-    console.log(DomeHPControllerFullURL);
-
-  };
-  if (ESP32DeviceSelected === "RS") {
-    var DomeRSeriesControllerIP = 'http://192.168.4.101/?param0=:&param1=NRS';
-    console.log('RS subselection');
-    console.log(DomeRSeriesControllerIP)
-
-    var DomeRSeriesControllerFullURL = DomeRSeriesControllerIP + ESP32commandUpper;
-    httpGet(DomeRSeriesControllerFullURL);
-    console.log(DomeRSeriesControllerFullURL);
-
+  if (ESP32DeviceSelected === "BC") {
+    var URLtoSendCommandTo = 'http://192.168.4.101/?param0=:&param1=:L:EBC';
+    var FullURLtoSendCommandTo = URLtoSendCommandTo + ESP32commandUpper;
+    httpGet(FullURLtoSendCommandTo);
+    console.log(FullURLtoSendCommandTo);
   };
   if (ESP32DeviceSelected === "BS") {
-    var bodyLEDControllerIP = 'http://192.168.4.101/?param0=:&param1=';
-    console.log('BS subselection');
-    console.log(bodyLEDControllerIP)
-
-    var bodyLEDControllerFullURL = bodyLEDControllerIP + ESP32commandUpper;
-    httpGet(bodyLEDControllerFullURL);
-    console.log(bodyLEDControllerFullURL);
-
+    var URLtoSendCommandTo = 'http://192.168.4.101/?param0=:&param1=:L:EBS';
+    var FullURLtoSendCommandTo = URLtoSendCommandTo + ESP32commandUpper;
+    httpGet(FullURLtoSendCommandTo);
+    console.log(FullURLtoSendCommandTo);
+  };
+  if (ESP32DeviceSelected === "RD") {
+    var URLtoSendCommandTo = 'http://192.168.4.101/?param0=:&param1=:L:EBC:R';
+    var FullURLtoSendCommandTo = URLtoSendCommandTo + ESP32commandUpper;
+    httpGet(FullURLtoSendCommandTo);
+    console.log(FullURLtoSendCommandTo);
+  };
+  if (ESP32DeviceSelected === "DP") {
+    var URLtoSendCommandTo = 'http://192.168.4.101/?param0=:&param1=:L:EDP';
+    var FullURLtoSendCommandTo = URLtoSendCommandTo + ESP32commandUpper;
+    httpGet(FullURLtoSendCommandTo);
+    console.log(FullURLtoSendCommandTo);
+  };
+  if (ESP32DeviceSelected === "US") {
+    var URLtoSendCommandTo = 'http://192.168.4.101/?param0=:&param1=:L:EDP:SUS';
+    var FullURLtoSendCommandTo = URLtoSendCommandTo + ESP32commandUpper;
+    httpGet(FullURLtoSendCommandTo);
+    console.log(FullURLtoSendCommandTo);
+  };
+  if (ESP32DeviceSelected === "DC") {
+    var URLtoSendCommandTo = 'http://192.168.4.101/?param0=:&param1=:L:EDC';
+    var FullURLtoSendCommandTo = URLtoSendCommandTo + ESP32commandUpper;
+    httpGet(FullURLtoSendCommandTo);
+    console.log(FullURLtoSendCommandTo);
+  };
+  if (ESP32DeviceSelected === "HP") {
+    var URLtoSendCommandTo = 'http://192.168.4.101/?param0=:&param1=:L:EDC:SHP';
+    var FullURLtoSendCommandTo = URLtoSendCommandTo + ESP32commandUpper;
+    httpGet(FullURLtoSendCommandTo);
+    console.log(FullURLtoSendCommandTo);
+  };
+  if (ESP32DeviceSelected === "DL") {
+    var URLtoSendCommandTo = 'http://192.168.4.101/?param0=:&param1=:L:EDC:SDL';
+    var FullURLtoSendCommandTo = URLtoSendCommandTo + ESP32commandUpper;
+    httpGet(FullURLtoSendCommandTo);
+    console.log(FullURLtoSendCommandTo);
+  };
+  if (ESP32DeviceSelected === "PS") {
+    var URLtoSendCommandTo = 'http://192.168.4.101/?param0=:&param1=:L:EDC:SPS';
+    var FullURLtoSendCommandTo = URLtoSendCommandTo + ESP32commandUpper;
+    httpGet(FullURLtoSendCommandTo);
+    console.log(FullURLtoSendCommandTo);
+  };
+  if (ESP32DeviceSelected === "ST") {
+    var URLtoSendCommandTo = 'http://192.168.4.101/?param0=:&param1=:L:EBC:SST';
+    var FullURLtoSendCommandTo = URLtoSendCommandTo + ESP32commandUpper;
+    httpGet(FullURLtoSendCommandTo);
+    console.log(FullURLtoSendCommandTo);
+  };
+  if (ESP32DeviceSelected === "HC") {
+    var URLtoSendCommandTo = 'http://192.168.4.101/?param0=:&param1=:L:EBC';
+    var FullURLtoSendCommandTo = URLtoSendCommandTo + ESP32commandUpper;
+    httpGet(FullURLtoSendCommandTo);
+    console.log(FullURLtoSendCommandTo);
   };
 };
 
@@ -11386,33 +11411,33 @@ function getPeriscope(s, t, u) {
   let periscopeFunction = s;
   if (periscopeFunction === 'D' && t === 'RotateClockwiseRelative') {
     let periscopeRelativeDeg = document.getElementById(t).value;
-    let periscopeESPURL = "http://192.168.4.101/?param0=:&param1=:EDP:SUS:P" + periscopeFunction;
+    let periscopeESPURL = "http://192.168.4.101/?param0=:&param1=:L:EDP:SUS:P" + periscopeFunction;
     let periscopeESPFullURL = periscopeESPURL + periscopeRelativeDeg + ',' + speedValue;;
     httpGet(periscopeESPFullURL);
   } else if (periscopeFunction === 'D' && t === 'RotateCounterClockwiseRelative') {
     let periscopeRelativeDeg = document.getElementById(t).value;
-    let periscopeESPURL = "http://192.168.4.101/?param0=:&param1=:EDP:SUS:P" + periscopeFunction + '-';
+    let periscopeESPURL = "http://192.168.4.101/?param0=:&param1=:L:EDP:SUS:P" + periscopeFunction + '-';
     let periscopeESPFullURL = periscopeESPURL + periscopeRelativeDeg + ',' + speedValue;;
     httpGet(periscopeESPFullURL);
   } else if (periscopeFunction === 'R' && t === 'RotateClockwiseContinous') {
-    let periscopeESPURL = "http://192.168.4.101/?param0=:&param1=:EDP:SUS:P" + periscopeFunction;
+    let periscopeESPURL = "http://192.168.4.101/?param0=:&param1=:L:EDP:SUS:P" + periscopeFunction;
     let periscopeESPFullURL = periscopeESPURL + speedValue;;
     httpGet(periscopeESPFullURL);
   } else if (periscopeFunction === 'R' && t === 'RotateCounterClockwiseContinous') {
-    let periscopeESPURL = "http://192.168.4.101/?param0=:&param1=:EDP:SUS:P" + periscopeFunction + '-';
+    let periscopeESPURL = "http://192.168.4.101/?param0=:&param1=:L:EDP:SUS:P" + periscopeFunction + '-';
     let periscopeESPFullURL = periscopeESPURL + speedValue;;
     httpGet(periscopeESPFullURL);
   } else if (periscopeFunction === 'AR' || periscopeFunction === 'PR') {
-    let periscopeESPURL = "http://192.168.4.101/?param0=:&param1=:EDP:SUS:P" + periscopeFunction;
+    let periscopeESPURL = "http://192.168.4.101/?param0=:&param1=:L:EDP:SUS:P" + periscopeFunction;
     let periscopeESPFullURL = periscopeESPURL + ',' + speedValue;
     httpGet(periscopeESPFullURL);
   } else if (periscopeFunction === 'S') {
-    let periscopeESPURL = "http://192.168.4.101/?param0=:&param1=:EDP:SUS:P" + periscopeFunction;
+    let periscopeESPURL = "http://192.168.4.101/?param0=:&param1=:L:EDP:SUS:P" + periscopeFunction;
     let periscopeESPFullURL = periscopeESPURL + t;
     httpGet(periscopeESPFullURL);
   } else {
     var periscopeHeight = t;
-    var periscopeESPURL = "http://192.168.4.101/?param0=:&param1=:EDP:SUS:P" + periscopeFunction
+    var periscopeESPURL = "http://192.168.4.101/?param0=:&param1=:L:EDP:SUS:P" + periscopeFunction
     let periscopeESPFullURL = periscopeESPURL + periscopeHeight + ',' + speedValue;;
     // console.log(periscopeESPFullURL);
     httpGet(periscopeESPFullURL);
@@ -11428,7 +11453,7 @@ function getPeriscope(s, t, u) {
 
 function getPeriscopeRotateAbsolute(t) {
   var periscopeHeight = t;
-  var periscopeESPURL = "http://192.168.4.101/?param0=:&param1=N01PL:PA";
+  var periscopeESPURL = "http://192.168.4.101/?param0=:&param1=:L:EDP:SUS:PA";
   // var periscopeESPURLOutside = "http://10.0.0.230:8080/?param1=:PP";
 
   var periscopeESPFullURL = periscopeESPURL + periscopeHeight;
@@ -11444,7 +11469,7 @@ function getPeriscopeRotateAbsolute(t) {
 
 function getPeriscopeRotateAbsolute(t) {
   var periscopeHeight = t;
-  var periscopeESPURL = "http://192.168.4.101/?param0=:&param1=:EDP:SUS:PD";
+  var periscopeESPURL = "http://192.168.4.101/?param0=:&param1=:L:EDP:SUS:PD";
   // var periscopeESPURLOutside = "http://10.0.0.230:8080/?param1=:PP";
 
   var periscopeESPFullURL = periscopeESPURL + periscopeHeight;
