@@ -54,7 +54,7 @@ var HPCommandPrefix = ":L:EHP:H"
 var DLCommandPrefix = ":L:EDC:SDL"
 var PSCommandPrefix = ":L:EDC:SFU"
 
-var statusQueryLength = 500
+var statusQueryLength = 2000
 
 
 function httpGetStatus() {
@@ -808,18 +808,18 @@ function servoControl(z) {
 
   console.log(varspeedMax);
   if (servoBoardSelectorGlobal == 'body') {
-    let bodyServoCommandParam = "&param1=:EBS:D1" + z + "E" + easingMethodSelection + varspeedMinText + varspeedMaxText;
+    let bodyServoCommandParam = "&param1=:L:EBS:D1" + z + "E" + easingMethodSelection + varspeedMinText + varspeedMaxText;
     let fullBodyServoURL = bodyServoCommandParam
     bodyServoFunctionExecution(fullBodyServoURL);
     console.log("Body Selected")
   }
   else if (servoBoardSelectorGlobal == 'dome') {
-    let bodyServoCommandParam = "&param1=:EDC:D2" + z + "E" + easingMethodSelection + varspeedMinText + varspeedMaxText;
+    let bodyServoCommandParam = "&param1=:L:EDC:D2" + z + "E" + easingMethodSelection + varspeedMinText + varspeedMaxText;
     let fullBodyServoURL = bodyServoCommandParam
     bodyServoFunctionExecution(fullBodyServoURL);
   }
   else if (CurrentDirection == 'BodyFirst') {
-    let bodyServoCommandParam = "&param1=:EBS:D3" + z + "B" + easingMethodSelection + varspeedMinText + varspeedMaxText + delayCallText;
+    let bodyServoCommandParam = "&param1=:L:EBS:D3" + z + "B" + easingMethodSelection + varspeedMinText + varspeedMaxText + delayCallText;
     let fullBodyServoURL = bodyServoCommandParam
     bodyServoFunctionExecution(fullBodyServoURL);
     // let domeServoCommandParam = "&param1=S02DSD" + z;
@@ -827,7 +827,7 @@ function servoControl(z) {
     // domeServoFunctionExecution(fullDomeServoURL);
   }
   else if (CurrentDirection == 'DomeFirst') {
-    let bodyServoCommandParam = "&param1=:EDC:D4" + z + "B" + easingMethodSelection + varspeedMinText + varspeedMaxText + delayCallText;
+    let bodyServoCommandParam = "&param1=:L:EDC:D4" + z + "B" + easingMethodSelection + varspeedMinText + varspeedMaxText + delayCallText;
     let fullBodyServoURL = bodyServoCommandParam
     bodyServoFunctionExecution(fullBodyServoURL);
     // let domeServoCommandParam = "&param1=S02DSD" + z;
@@ -862,7 +862,7 @@ function savedOptions3() {
 }
 
 function animateServo(t) {
-  var animationURL = "http://192.168.4.101/?param0=:&param1=::LEBS:";
+  var animationURL = "http://192.168.4.101/?param0=:&param1=:L:EBS:";
   let animationFullURL = animationURL + t;
   console.log(animationFullURL);
   httpGet(animationFullURL);
@@ -879,13 +879,13 @@ function animateSequence(t) {
 
 function batteryLevel() {
 
-  var animationURL = "http://192.168.4.101/?param0=:&param1=:L:EBC:LL01";
+  var animationURL = "http://192.168.4.101/?param0=:&param1=:L:EBC:LC01";
   httpGet(animationURL);
 }
 
 function animateDome(a) {
 
-  var animationURL = "http://192.168.4.101/?param0=:&param1=:EBC:R" + a;
+  var animationURL = "http://192.168.4.101/?param0=:&param1=:L:EBC:R" + a;
   httpGet(animationURL);
 }
 
@@ -1436,6 +1436,77 @@ function commandNoOptionsKnightRider(y, t, u) {
   bodyControllerLEDFunctionExecution(fullURL);
 };
 
+// var ldpcommandstring;
+// var coincommandstring;
+// var vucommandstring;
+// var mcommandstring;
+// var check;
+function commandNoOptionsKnightRiderTest(y, t, u) {
+  var checkmark = document.getElementById(u)
+  checkmark.classList.remove('hidden');
+  setTimeout(function () { checkmark.classList.add('hidden') }, 2000);
+
+  for (var i = 0; i < checkedItemsKnightRider.length; i++) {
+    if (checkedItemsKnightRider[i] === "LDPKnightRiderGreen") {
+      // console.log("L selected");
+      var ldpcommandstring = true;
+      console.log(ldpcommandstring);
+    };
+
+    if (checkedItemsKnightRider[i] === "CoinKnightRiderGreen") {
+      // console.log("C selected");
+      var coincommandstring = true;
+      console.log(coincommandstring);
+    };
+
+    if (checkedItemsKnightRider[i] === "VerticalBarstKnightRiderGreen") {
+      // console.log("V selected");
+      var vucommandstring = true;
+      console.log(vucommandstring);
+    };
+
+    if (checkedItemsKnightRider[i] === "MaintKnightRiderGreen") {
+      // console.log("M selected");
+      var mcommandstring = true;
+      console.log(mcommandstring);
+    };
+
+  }
+
+  var check = getcheckedElementsforCommand(ldpcommandstring, mcommandstring, coincommandstring, vucommandstring);
+  console.log("Check: " + check);
+  let commandtoSend = "&param1=" + BLCommandPrefix + check + y + t;
+  let fullURL = commandtoSend;
+  bodyControllerLEDFunctionExecution(commandtoSend);
+  setTimeout(function () { bodyControllerLEDFunctionExecution(commandtoSend) }, 2000);
+};
+
+function getcheckedElementsforCommand(l, m, c, v) {
+  console.log("LDP: " + l);
+  console.log("Maint: " + m);
+  console.log("Coin: " + c);
+  console.log("VU: " + v);
+  if (l == undefined) { l = false; };
+  if (m == undefined) { m = false; };
+  if (c == undefined) { c = false; };
+  if (v == undefined) { v = false; };
+
+  if (l == true & m == false & c == false & v == false) { return "L"; }
+  else if (l == false & m == true & c == false & v == false) { return "M"; }
+  else if (l == false & m == false & c == true & v == false) { return "C"; }
+  else if (l == false & m == false & c == false & v == true) { return "V"; }
+  else if (l == true & m == true & c == true & v == true) { return "A"; }
+  else if (l == true & m == false & c == true & v == false) { return "X"; }
+  else if (l == false & m == false & c == true & v == true) { return "Y"; }
+  else if (l == true & m == false & c == false & v == true) { return "Z"; }
+  console.log("Second Time LDP: " + l);
+
+
+
+
+
+
+}
 
 function commandSingleColorKnightRider(y, t, z, u) {
   let colorValues = getcolor1(z);

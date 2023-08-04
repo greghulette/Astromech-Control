@@ -1,20 +1,51 @@
 Features or ESP32's 
 10. Figure out how to updated code to Arduinos via the ESP32's 
 13. Figure out how to get status of remote boards (ESP initially and then eventually Arduinos/Stealth)
-3. Figure out Status and eeprom readins from Mega
 
 
 
 To-Do for website
 1. create icons for camera, PSI's, and all dome panels
-2. add enable wifi for all esp-now boards
-3. Add Reset for all Boards 
 4. Add RSSI for LoRa Link
 5. create led function for radar eye 
 6. create led function for PSI 
-7. Update Status logics
-8. Add Roam a Dome Home Tab
 9. Add wiring diagram to settings tab
 10. Fix all Logics to work with new ESP system (Completed only Knight Rider and Rainbow so far)
 11. Add RSeries full control functionality
 12. 
+
+
+
+
+03448742
+
+
+Weight Blanket 
+https://www.autism-products.com/product/wipe-clean-weighted-blanket/
+Size: medium 
+SKU: WCWB01-0004
+Price $249.00
+
+
+Straw Tent Connectors
+https://www.autism-products.com/product/straws-and-connectors-building-kit/
+SKU: 234068
+Price: $35.39
+
+
+Noise Cancelling Headphones
+https://www.amazon.com/INFURTURE-Cancelling-Headphones%EF%BC%8COver-Bluetooth-Headphones/dp/B0BZ7X1PY9/ref=sr_1_30?keywords=Kids+Noise+Cancelling+Headphones&qid=1691072645&sr=8-30
+Item Number: BH112AB
+Price: 39.99
+
+
+Picasso Tiles 
+https://www.amazon.com/PicassoTiles-PicassoToys-Educational-Construction-Development/dp/B09VJ7JZ72/ref=sr_1_19?crid=1ZB26LEK4ZDR8&keywords=magnetic%2Btiles&qid=1691076402&refinements=p_89%3APicassoTiles&rnid=2528832011&s=toys-and-games&sprefix=magnetic%2Btile%2Caps%2C259&sr=1-19&ufe=app_do%3Aamzn1.fos.006c50ae-5d4c-4777-9bc0-4513d670b6bc&th=1
+Size: 108piece
+Item Number: PTG108
+Price: $59.99
+
+
+
+
+avrdude -p atmega2560 -P /dev/cu.usbserial-AB6ZMBRD -c avr109 -b 115200 -U flash:w:SRC_1_0_15.hex
