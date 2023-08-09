@@ -1,0 +1,4429 @@
+body {
+  background-color: Black;
+  background-image: url(..//Images/General/Background.jpg);
+  background-size:cover;
+  /* background-repeat:repeat; */
+  background-position: top center;
+  font-size: 1.5rem;
+  color: lightyellow;
+  font-family: 'Star Jedi', 'Starjedi', arial, camb;
+  overflow: hidden;
+
+}
+
+.shadowtext{
+  position:relative;
+  top: -155px;
+  /* left: 60px; */
+  text-align: center;
+  text-shadow: 0 4px 10px black;
+  text-decoration: solid;
+  font-size: 3rem;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
+.shadowtext2Lines{
+  position:relative;
+  top: -155px;
+  /* left: 60px; */
+  font-family: 'Star Jedi', 'Starjedi', arial, camb;
+
+  text-align: center;
+  text-shadow: 0 4px 10px black;
+  text-decoration: solid;
+line-height: 2.5rem;
+  font-size: 2.75rem;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
+.shadowtext2Lines-2{
+  position:relative;
+  top: -170px;
+  /* left: 60px; */
+  font-family: 'Star Jedi', 'Starjedi', arial, camb;
+
+  text-align: center;
+  text-shadow: 0 4px 10px black;
+  text-decoration: solid;
+line-height: 3rem;
+  font-size: 3rem;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
+
+.shadowtext2Lines-Reset{
+  position:relative;
+  top: -120px;
+  left: 0px;
+  font-family: 'Star Jedi', 'Starjedi', arial, camb;
+
+  text-align: center;
+  text-shadow: 0 4px 10px black;
+  text-decoration: solid;
+line-height: 2rem;
+  font-size: 2rem;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
+
+.shadowtext2Lines-OTATable{
+  position:relative;
+  top: -150px;
+  left: 0px;
+  font-family: 'Star Jedi', 'Starjedi', arial, camb;
+
+  text-align: center;
+  text-shadow: 0 4px 10px black;
+  text-decoration: solid;
+line-height: 2rem;
+  font-size: 2rem;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
+
+
+.shadowtext2Lines-OTA{
+  position:relative;
+  top: -110px;
+  left: 20px;
+  width: 120px;
+  word-wrap: normal;
+  font-family: 'Star Jedi', 'Starjedi', arial, camb;
+-webkit-text-fill-color: white;
+  text-align: center;
+  text-shadow: 0 4px 10px black;
+  text-decoration: solid;
+line-height: 2.5rem;
+  font-size: 2.5rem;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
+.resetTable{
+  position: relative;
+  top: 100px;
+  left: -400px;
+}
+.musicTable{
+  position: relative;
+  top: 100px;
+  left: -300px;
+}
+.shadowtext2LinesLED{
+  position:relative;
+  top: -110px;
+  /* left: -10px; */
+  width: 190px;
+  font-family: 'Star Jedi', 'Starjedi', arial, camb;
+  color: lightyellow;
+  /* left: 60px; */
+  text-align: center;
+  text-shadow: 0 4px 10px black;
+  text-decoration: solid;
+line-height: 2rem;
+  font-size: 2rem;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
+.shadowtext2LinesLongLED{
+  position:relative;
+  top: -90px;
+  /* left: -10px; */
+  width: 190px;
+  font-family: 'Star Jedi', 'Starjedi', arial, camb;
+  color: lightyellow;
+  /* left: 60px; */
+  text-align: center;
+  text-shadow: 0 4px 10px black;
+  text-decoration: solid;
+line-height: 1.5rem;
+  font-size: 1.5rem;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
+.shadowtext1LineLED{
+  position:relative;
+  top: -95px;
+  /* left: -10px; */
+  width: 190px;
+  font-family: 'Star Jedi', 'Starjedi', arial, camb;
+  color: lightyellow;
+  /* left: 60px; */
+  text-align: center;
+  text-shadow: 0 4px 10px black;
+  text-decoration: solid;
+line-height: 2rem;
+  font-size: 2rem;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
+
+.shadowtext1LineLEDShort{
+  position:relative;
+  top: -115px;
+  left: -0px;
+  width: 70px;
+  font-family: 'Star Jedi', 'Starjedi', arial, camb;
+  color: lightyellow;
+  /* left: 60px; */
+  text-align: center;
+  text-shadow: 0 4px 10px black;
+  text-decoration: solid;
+line-height: 2rem;
+  font-size: 3rem;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
+
+.shadowtext1LinesLEDLong{
+  position:relative;
+  top: -90px;
+  left:10px;
+  width: 70px;
+  font-family: 'Star Jedi', 'Starjedi', arial, camb;
+  color: lightyellow;
+  /* left: 60px; */
+  text-align: center;
+  text-shadow: 0 4px 10px black;
+  text-decoration: solid;
+line-height: 2rem;
+  font-size: 1.75rem;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
+
+.shadowtext1PosShort{
+  position:relative;
+  top: -95px;
+  left: -0px;
+  width: 70px;
+  font-family: 'Star Jedi', 'Starjedi', arial, camb;
+  color: lightyellow;
+  /* left: 60px; */
+  text-align: center;
+  text-shadow: 0 4px 10px black;
+  text-decoration: solid;
+line-height: 2rem;
+  font-size: 2rem;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
+.paddingTopBottom{
+  padding: 5px;
+}
+.psibuttons{
+  position: absolute;
+  top: 50px;
+  left: -200px;
+}
+.psibuttonsrow2{
+  position: absolute;
+  top: 50px;
+  left: 00px;
+}
+.psibuttonsrow3{
+  position: absolute;
+  top: 50px;
+  left: 200px;
+}
+.psibuttonsrow4{
+  position: absolute;
+  top: 50px;
+  left:400px;
+}
+.buttonwidthLEDRD{
+  position: absolute;
+  left: 25px;
+}
+
+.rseriesbuttonsrow1{
+  position: absolute;
+  top: 350px;
+  left: -200px;
+}
+.rseriesbuttonsrow2{
+  position: absolute;
+  top: 350px;
+  left: 00px;
+}
+.rseriesbuttonsrow3{
+  position: absolute;
+  top: 350px;
+  left: 200px;
+}
+.rseriesbuttonsrow4{
+  position: absolute;
+  top: 350px;
+  left: 400px;
+}
+
+.RDAbsoluteTotal{
+  position: absolute;
+  top: 50px;
+  left:-325px;
+  height: 250px;
+}
+
+.RDAbsoluteHeader{
+  position: relative;
+  top: -10px;
+  left: -10px;
+}
+.RDAbsolute{
+  width: 90px;
+  height: 310px;
+  border: 2px solid white;
+}
+
+.RDRelativeHeader{
+  position: absolute;
+  top: 45px;
+  left: -65px;
+}
+.RDRelative{
+  width: 400px;
+  height: 310px;
+  position: absolute;
+  left: -200px;
+  top: 89px;
+  border: 2px solid white;
+}
+
+
+.RDRelativeClockwiseHeader{
+  position: relative;
+  top: 0px;
+  left: 10px;
+}
+.RDRelativeClockwise{
+  width: 90px;
+  position: relative;
+  top: -40px;
+  /* border: 2px solid white; */
+}
+
+.RDRelativeCounterClockwiseHeader{
+  position: relative;
+  top: -285px;
+  left: 200px;
+}
+.RDRelativeCounterClockwise{
+  width: 90px;
+  position: relative;
+  top: -40px;
+  /* border: 2px solid white; */
+}
+
+.FLDImage{
+  position: absolute;
+  top: 50px;
+  width: 150px;
+}
+.RLDImage{
+  position: absolute;
+  top: 300px;
+  left: -200px;
+  width: 350px;
+
+}
+.FLDTopText{
+  position: absolute;
+  top: 75px;
+  left: 175px;
+  font-size: 1.5rem;
+}
+
+.FLDBottomText{
+  position: absolute;
+  top: 175px;
+  left: 175px;
+  font-size: 1.5rem;
+}
+
+.RLDText{
+  position: absolute;
+  top: 315px;
+  left: 175px;
+  font-size: 1.5rem;
+}
+.rseriesTextApplyMove{
+  position: absolute;
+  top: 550px;
+  left: 200px;
+}
+
+.buttonwidthLED {
+  width:190px;
+  position: relative;
+  top: -2px;
+  left: 0px;
+}
+.soundbuttons{
+  position: relative;
+  top: 350px;
+  left: 0px;
+}
+.buttonSound{
+  width: 150px;
+
+}
+.moreScared{
+  position: absolute;
+  left: -125px;
+  top: 0px
+}
+
+.lessScared{
+  position: absolute;
+  left: -125px;
+  top: 160px;
+}
+
+.moreMad{
+  position: absolute;
+  left: 70px;
+  top: 0px
+}
+
+.lessMad{
+  position: absolute;
+  left: 70px;
+  top: 160px
+}
+
+.moreSad{
+  position: absolute;
+  left: 250px;
+  top: 0px;
+}
+
+.lessSad{
+  position: absolute;
+  left: 250px;
+  top: 160px
+}
+
+.moreHappy{
+  position: absolute;
+  left: 430px;
+  top: 0px;
+}
+
+.lessHappy{
+  position: absolute;
+  left: 430px;
+  top: 160px
+}
+.scaredicons{
+  position: absolute;
+  top: -320px;
+  left: -75px;
+
+}
+.madicons{
+  position: absolute;
+  top: -320px;
+  left: 125px;
+
+}
+
+.sadicons{
+  position: absolute;
+  top: -320px;
+  left: 305px;
+
+}
+
+.happyicons{
+  position: absolute;
+  top: -320px;
+  left: 485px;
+
+}
+.soundicon{
+  position: relative;
+  width: 40px;
+
+}
+
+.icon1{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+.icon2{
+  position: absolute;
+  top: 40px;
+
+}
+.icon3{
+  position: absolute;
+  top: 80px;
+}
+.icon4{
+  position: absolute;
+  top: 120px;
+}
+.icon5{
+  position: absolute;
+  top: 160px;
+}
+.icon6{
+  position: absolute;
+  top: 200px;
+}
+.icon7{
+  position: absolute;
+  top: 240px;
+}
+.icon8{
+  position: absolute;
+  top: 280px;
+}
+
+.buttonwidthLEDRD {
+  width: 70px;
+  height: 70px;
+  position: relative;
+  top: -2px;
+  left: 0px;
+}
+.ButtonBlank{
+height: 110px;
+/* border: yellow solid 2px; */
+}
+.ButtonBlankLED{
+
+  height: 65px;
+  /* border: yellow solid 2px; */
+  }
+
+  .ButtonBlankRD{
+    height: 65px;
+    position: relative;
+    /* top: 10px; */
+    /* padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px; */
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    /* border: yellow solid 2px; */
+    }
+
+.ButtonBlankRDRClockwise{
+  height: 70px;
+  position: relative;
+  top: 29px;
+  left: 30px; 
+  padding-left: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  /* padding: 30px;
+  /* border: yellow solid 2px; */
+  }
+.RDStoredDiv{
+  position: absolute;
+  top: 400px;
+  left: -120px;
+
+}
+.RDOptions{
+  position: absolute;
+  top: 400px;
+  left: 200px;
+}
+
+.RDTextCommandInput{
+  position: absolute;
+  top: 620px;
+  left: 700px;
+  height: 40px;
+  width: 300px;  
+}
+.RDTextInput{
+  font-size: 1.5rem;
+}
+.RDTextInputLabel{
+  position: relative;
+  top: 40px;
+  left: -230px;
+  
+
+}
+.RDSpeedSlider{
+  position: absolute;
+  top: 670px;
+  left: 300px;
+  width: 600px;
+}
+.RDTextMove{
+  position: relative;
+  top: -50px;
+  left: 290px;
+  height: 40px;
+}
+.ButtonBlankRDRCounterClockwise{
+  height: 65px;
+  position: relative;
+  top: -280px;
+  left: 230px; 
+  padding-left: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  /* padding: 30px;
+  /* border: yellow solid 2px; */
+  }
+.move{
+  position: absolute;
+  left: -400px;
+}
+
+.move1{
+  position: absolute;
+  left: -400px;
+  top: 120px;
+}
+.move2{
+  position: absolute;
+  left: -400px;
+  top: 220px;
+}
+.move3{
+  position: absolute;
+  left: -400px;
+  top: 320px;
+}
+.move4{
+  position: absolute;
+  left: -400px;
+  top: 420px;
+}
+.move5{
+  position: absolute;
+  left: -400px;
+  top: 520px;
+}
+.moveUpArrowLinks{
+  position: absolute;
+  left: -380px;
+  top: 120px;
+
+}
+
+.moveDownArrowLinks{
+  position: absolute;
+  left: -380px;
+  top: 420px;
+
+}
+/* .LDPBrightnesRangeDivText{
+  position: absolute;
+  left: -140px;
+  top:8px;
+  text-align: right;
+
+
+} */
+.settingsledmove{
+  position: absolute;
+  left: -200px;
+  width: 800px;
+}
+.resetLEDController{
+  position: absolute;
+  top: 700px;
+  width: 170px;
+
+}
+.remoteIcon{
+  position: absolute;
+  height: 50px;
+  top: -60px;
+  left: 130px;
+}
+.menuheadermain{
+
+    position: absolute;
+    top: -135px;
+    left: -40px;
+    font-size: 4rem;
+    text-shadow: 0px 1px 2px yellow;
+
+    /* -webkit-text-stroke-width: .1px;
+    -webkit-text-stroke-color: black; */
+
+
+}
+
+.homeButtonClass{
+  position: absolute;
+  left: -500px;
+  top: 40px;
+}
+.battery{
+width: 90px;
+height: 50px;
+
+
+}
+
+.StopSign{
+  position: relative;
+  top: -10px;
+  left: 2px;
+  height: 90px;
+}
+
+
+.testingPie{
+  position: absolute;
+  top: 110px;
+  left: -184px;
+}
+.testbody{
+  border: solid 2px white;
+  overflow: hidden;
+  position: absolute;
+  height: 947px;
+  width: 1620px;
+  z-index: -50;
+  top: 0px;
+  left: 0px;
+}
+
+
+
+
+
+
+.BatteryStatusDiv{
+  position: absolute;
+  height: 75px;
+  width: 600px;
+  top: 900px;
+  left: 1060px;
+  /* z-index: 51; */
+  /* border: solid 2px white; */
+}
+.remoteBatteryIcon{
+  /* height: 40px; */
+position: absolute;
+height: 60px;
+top: -2px;
+left: 270px;
+}
+.remoteBatteryPowerColor{
+  height: 50px;
+position: absolute;
+top: 5px;
+left: 390px;
+}
+.remoteChargingIndicator{
+  position: absolute;
+  /* border: 2px solid white; */
+  left: 470px;
+  top: 8px;
+  height: 40px;
+  /* border: solid 2px white; */
+}
+.RemoteBatteryChargeLevelInt{
+  position: absolute;
+  top: 1px;
+  left: 395px;
+  color: black;
+  font-size: 2rem;
+  text-align: center;
+  text-shadow: 0px 0px 10px yellow;
+  width: 75px;
+  /* border: solid 2px white; */
+
+}
+.droidBatteryIcon{
+  position: absolute;
+  top: -7px;
+  left: 30px;
+  /* border: solid 2px white; */
+  height: 70px;
+}
+.droidBatteryPowerColor{
+  position: absolute;
+  height: 50px;
+  top: 3px;
+  left: 100px;
+}
+.DroidbatteryChargeLevelDiv{
+  position: absolute;
+  top: 02px;
+  left: 124px;
+  color: black;
+  font-size: 2rem;
+  text-align: center;
+  text-shadow: 0px 0px 10px yellow;
+
+}
+
+.iconStatusBatteryicon{
+height: 70px;
+position: relative;
+top: -0px;
+left: 185px;
+}
+.droidBatteryClass{
+  position: absolute;
+  top: 815px;
+  left: -170px;
+}
+
+
+
+
+
+.BatteryStatusText{
+  position: relative;
+  top: 0px;
+  left:20px;
+}
+
+.DroidBatteryStatusText{
+  position: relative;
+  top: 20px;
+  left:20px;
+  /* border: solid 2px white; */
+
+}
+
+.stopsign:before{
+  content: " ";
+  /* width: 0; height: 0; */
+  border-right: 15px solid red;
+  border-top: 28px solid transparent;
+  border-bottom: 28px solid transparent;
+float: left;
+position: absolute;
+   /* top: -30px; */
+  left: -15px;
+
+}
+
+.stopsign{
+  position: absolute;
+  /* float: left; */
+  top:750px;
+  left: 40px;
+  font-size: 30px;
+  text-align: center;
+  width: 30px;
+  height: 55px;
+  background-color: red;
+  border-bottom: 2px solid yellow;
+  border-top: 2px solid yellow;
+
+}
+
+.stopsign:after{
+  content: " ";
+  /* float: left; */
+  /* width: 0; height: 0; */
+  border-left: 15px solid red;
+  border-top: 28px solid transparent;
+  border-bottom: 28px solid transparent;
+  position: absolute;
+  top: 0px;
+  left:30px;
+}
+
+.stopsignword{
+
+
+
+  position: absolute;
+  top: 830px;
+  left: 20px;
+  font-size: 2.25rem;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  -webkit-text-drop-shadow: 2px 2px 2px yellow;
+  
+  
+}
+
+.statusIconsOverallDiv{
+  position: absolute;
+  top: 897px;
+  left: 710px;
+}
+
+.StatusIconDRDiv{
+  position: relative;
+  height: 0px;
+  top: 0px;
+  left: -60px;
+}
+.iconStatusDRicon{
+  height: 70px;
+  position: relative;
+  top: -0px;
+  left: -60px;
+}
+.DRStatusText{
+  position: relative;
+  top: -92px;
+  left: -50px;
+  font-size: 1.5rem;
+}
+
+.StatusIconDGDiv{
+  position: relative;
+  height: 0px;
+  top: 0px;
+  left: -60px;
+}
+.iconStatusDGicon{
+  height: 70px;
+  position: relative;
+  top: 0px;
+  left: 0px;
+}
+
+.DGStatusText{
+  position: relative;
+  top: -92px;
+  left: 10px;
+  font-size: 1.5rem;
+}
+
+
+.StatusIconBCDiv{
+  position: relative;
+  height: 70px;
+  top: 0px;
+  left: 0px;
+}
+.iconStatusBCicon{
+    height: 70px;
+  position: relative;
+  top: 0px;
+  left: 0px;
+}
+.BCStatusText{
+  position: relative;
+  top: -92px;
+  left: 10px;
+  font-size: 1.5rem;
+}
+
+.StatusIconBSDiv{
+  position: relative;
+  height: 70px;
+  top: -70px;
+  left: 60px;
+}
+.iconStatusBSicon{
+  position: relative;
+  height: 70px;
+top: 0px;
+left: 0px;
+}
+.BSStatusText{
+  position: relative;
+  top: -92px;
+  left:12px;
+  font-size: 1.5rem;
+}
+
+
+.StatusIconDCDiv{
+  position: relative;
+  height: 70px;
+  top: -160px;
+  left: 120px;
+}
+.iconStatusDCicon{
+  height: 70px;
+position: relative;
+top: 20px;
+left: 0px;
+}
+  .DCStatusText{
+    position: relative;
+    top: -71px;
+    left: 11px;
+    font-size: 1.5rem;
+  }
+
+.hidden{
+  display: none;
+}
+.iconStatusPLDiv{
+  position: relative;
+  height: 70px;
+  top: -210px;
+  left: 180px;
+}
+.iconStatusPLicon{
+  height: 70px;
+position: relative;
+top: 0px;
+left: 0px;
+}
+.DPStatusText{
+  position: relative;
+  top: -90px;
+  left:11px;
+  font-size: 1.5rem;
+}
+
+.iconStatusHPDiv{
+  position: relative;
+  height: 70px;
+  top: -280px;
+  left: 240px;
+}
+.iconStatusHPicon{
+  height: 70px;
+position: relative;
+top: 0px;
+left: 0px;
+}
+.HPStatusText{
+  position: relative;
+  top: -90px;
+  left:13px;
+  font-size: 1.5rem;
+}
+
+.iconStatusDLDiv{
+  position: relative;
+  height: 70px;
+  top: -350px;
+  left: 299px;
+}
+.iconStatusDLicon{
+  height: 70px;
+position: relative;
+top: 0px;
+left: 0px;
+}
+.DLStatusText{
+  position: relative;
+  top: -90px;
+  left:13px;
+  font-size: 1.5rem;
+}
+
+
+
+
+.StatusIconStealthDiv{
+
+  position: absolute;
+  height: 70px;
+  top: 70px;
+  left: 0px;
+}
+  .StealthStatusText{
+    position: absolute;
+    top: 3px;
+    left:-572px;
+  }
+
+.iconStatusStealth{
+
+  position: absolute;
+  height: 60px;
+  top: 20px;
+  left: -590px;
+}
+
+
+
+.StatusIconDSDiv{
+
+  position: absolute;
+  height: 60px;
+  top: 225px;
+  left:0px;
+}
+.iconStatusDSicon{
+  height: 60px;
+position: absolute;
+top: 20px;
+left: -590px;
+}
+  .DSStatusText{
+    position: absolute;
+    top: 2px;
+    left:-580px;
+  }
+
+.iconStatusDS{
+
+  position: relative;
+  height: 70px;
+  top: 0px;
+  left: -600px;
+}
+
+.droidBatteryPar{
+  position: absolute;
+  top: 0px;
+  left: 140px;
+}
+ .droidBatteryPercentParLabel{
+  position: absolute;
+  top: 0px;
+  left: 250px;
+ }
+
+.droidBatteryPercentPar{
+  position: absolute;
+  top: 0px;
+  left: 450px;
+} 
+
+.per{
+  height: 40px;
+  width: 60px;
+}
+
+
+.iframe { 
+  position: absolute;
+  left: 200px;
+  top: 50px;
+  width: 700px;
+  height: 900px;
+  border-radius: 5px;
+  border-color: blue;
+  box-shadow: 0px 0px 50px white;
+  
+ transform: rotate(90deg);
+  /* box-shadow: inset 0px, 0px, 25px, 2px, blue; */
+}
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+::-webkit-scrollbar-thumb-horizontal {
+  background: blue;
+  height: 3px;
+}
+
+.SubMenuLabelPosition {
+  position: relative;
+  /* border: 2px solid blue; */
+  color: lightyellow;
+  top: 10px;
+  left: 130px;
+  width: 800px;
+  font-size: 30px;
+  font-family: 'Star Jedi', arial;
+
+}
+
+.SubMenuLabelPosition1 {
+  position: relative;
+  /* border: 2px solid blue; */
+  color: lightyellow;
+  top: 10px;
+  left: 00px;
+  width: 800px;
+  font-size: 30px;
+  font-family: 'Star Jedi', arial;
+
+}
+
+.SubMenuLabelPosition2 {
+  position: inherit;
+  /* border: 2px solid blue; */
+  color: lightyellow;
+  top: 10px;
+  left: 00px;
+  width: 800px;
+  font-size: 30px;
+  font-family: 'Star Jedi', arial;
+
+}
+
+
+span.myButton input {
+  /* background-image: url(..//Images/Buttons/Button-Apply.png); */
+  background-size: cover;
+  position: absolute;
+  top: 550px;
+  left: 150px;
+  width: 150px;
+  height: 55px;
+}
+.buttonwidth {
+  width: 195px;
+}
+
+
+.homebuttonwidth {
+  width: 310px;
+}
+.buttonwidthReset{
+  width: 240px;
+}
+
+.buttonwidthOTA{
+  width: 260px;
+height: 120px;
+}
+.homebuttonwidth2 {
+  width: 160px;
+}
+
+
+#buttons {
+  /* border: 4px solid blue; */
+  position: absolute;
+  top: 100px;
+  left: 450px;
+  padding-right: 100px;
+}
+.buttons {
+  /* border: 4px solid blue; */
+  position: absolute;
+  top: 130px;
+  left: -50px;
+  padding-right: 100px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.ldpTarget {
+  position: absolute;
+  top: 75px;
+  left: -160px;
+}
+.coinTarget{
+  position: absolute;
+  left: -350px;
+  top: -47px;
+}
+.vuTarget{
+  position: absolute;
+  left: -350px;
+  top: -47px;
+}
+.maintTarget{
+  position: absolute;
+  left: -150px;
+  top: 100px;
+}
+
+.DPTarget{
+  position: absolute;
+  left: -65px;
+  top: -95px;
+}
+.CBITarget{
+  position: absolute;
+  left: -210px;
+  top: -100px;
+}
+
+
+.blankBorderLDP{
+  border: 4px solid blue;
+  box-shadow:  0px 0px 25px white, 0px 0px 10px white inset;
+  width: 130px;
+  height: 22px;
+  border-radius: 7p x;
+  background-color: transparent;
+  position: absolute;
+  top: 2px;
+  left: -110px;
+  outline: none;
+}
+
+.blankBorderLDP.active{
+  border: 4px solid yellow;
+  box-shadow: 0px 0px 15px yellow;
+  width: 130px;
+  height: 17px;
+  border-radius: 5px;
+
+  background-color: transparent;
+  position: absolute;
+  top: 2px;
+  left: -110px;
+  outline: none;
+
+}
+
+.blankBorderCoin{
+  border: 3px solid blue;
+  box-shadow: 0px 0px 15px blue;
+  width: 30px;
+  height: 60px;
+  border-radius: 5px;
+
+  background-color: transparent;
+  position: absolute;
+  top: 227px;
+  left: 77px;
+  outline: none;
+}
+
+.blankBorderCoin.active{
+  border: 3px solid yellow;
+  box-shadow: 0px 0px 15px yellow;
+  outline: none;
+  border-radius: 5px;
+
+
+}
+
+.blankBorderVU{
+  border: 3px solid blue;
+  box-shadow: 0px 0px 15px blue;
+  width: 45px;
+  height: 95px;
+  border-radius: 5px;
+  border-radius: 5px;
+
+  background-color: transparent;
+  position: absolute;
+  top: 192px;
+  left: 170px;
+  outline: none;
+}
+
+.blankBorderVU.active{
+  border: 3px solid yellow;
+  box-shadow: 0px 0px 15px yellow;
+  outline: none;
+  border-radius: 5px;
+
+}
+
+.blankBorderMaint{
+  border: 3px solid blue;
+  box-shadow: 0px 0px 15px blue;
+  width: 45px;
+  height: 45px;
+  border-radius: 5px;
+
+  background-color: transparent;
+  position: absolute;
+  top: 240px;
+  left: -70px;
+  outline: none;
+  color: blue;
+  font-size: 2rem;
+}
+
+.blankBorderMaint.active{
+  border: 3px solid yellow;
+  box-shadow: 0px 0px 15px yellow;
+  outline: none;
+    color: Yellow;
+    border-radius: 5px;
+
+}
+
+.blankBorderDP{
+  border: 3px solid blue;
+  box-shadow: 0px 0px 15px blue;
+  width: 45px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: transparent;
+  position: absolute;
+  top: 240px;
+  left: -70px;
+  outline: none;
+  color: blue;
+  font-size: 2rem;
+}
+
+.blankBorderDP.active{
+  border: 3px solid yellow;
+  box-shadow: 0px 0px 15px yellow;
+  outline: none;
+    color: Yellow;
+    border-radius: 5px;
+}
+
+.blankBorderCBI{
+  border: 3px solid blue;
+  box-shadow: 0px 0px 15px blue;
+  width: 45px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: transparent;
+  position: absolute;
+  top: 240px;
+  left: -70px;
+  outline: none;
+  color: blue;
+  font-size: 2rem;
+}
+
+.blankBorderCBI.active{
+  border: 3px solid yellow;
+  box-shadow: 0px 0px 15px yellow;
+  outline: none;
+    color: Yellow;
+    border-radius: 5px;
+}
+
+
+
+
+.leftDoorTarget {
+  position: absolute;
+  top: 89px;
+  left: -185px;
+}
+
+.blankBorderLeftDoor{
+  border: 4px solid blue;
+  box-shadow:  0px 0px 25px white, 0px 0px 10px white inset;
+  width: 30px;
+  height: 150px;
+  border-radius: 7px;
+  background-color: transparent;
+  position: absolute;
+  top: 2px;
+  left: -110px;
+  outline: none;
+}
+
+.blankBorderLeftDoor.active{
+  border: 4px solid yellow;
+  box-shadow: 0px 0px 15px yellow;
+  background-color: transparent;
+  outline: none;
+
+}
+
+.rightDoorTarget {
+  position: absolute;
+  top: 89px;
+  left: -27px;
+}
+
+.blankBorderRightDoor{
+  border: 4px solid blue;
+  box-shadow:  0px 0px 25px white, 0px 0px 10px white inset;
+  width: 30px;
+  height: 150px;
+  border-radius: 7px;
+  background-color: transparent;
+  position: absolute;
+  top: 2px;
+  left: -110px;
+  outline: none;
+}
+
+.blankBorderRightDoor.active{
+  border: 4px solid yellow;
+  box-shadow: 0px 0px 15px yellow;
+  background-color: transparent;
+  outline: none;
+
+}
+
+.DPDoorTarget {
+  position: absolute;
+  top: 140px;
+  left: -75px;
+}
+
+.blankBorderDPDoor{
+  border: 4px solid blue;
+  box-shadow:  0px 0px 25px white, 0px 0px 10px white inset;
+  width: 50px;
+  height: 100px;
+  border-radius: 7px;
+  background-color: transparent;
+  position: absolute;
+  top: 2px;
+  left: -110px;
+  outline: none;
+}
+
+.blankBorderDPDoor.active{
+  border: 4px solid yellow;
+  box-shadow: 0px 0px 15px yellow;
+  background-color: transparent;
+  outline: none;
+
+}
+
+.CBIDoorTarget {
+  position: absolute;
+  top: 145px;
+  left: -157px;
+}
+
+.blankBorderCBIDoor{
+  border: 4px solid blue;
+  box-shadow:  0px 0px 25px white, 0px 0px 10px white inset;
+  width: 50px;
+  height: 40px;
+  border-radius: 7px;
+  background-color: transparent;
+  position: absolute;
+  top: 2px;
+  left: -110px;
+  outline: none;
+}
+
+.blankBorderCBIDoor.active{
+  border: 4px solid yellow;
+  box-shadow: 0px 0px 15px yellow;
+  background-color: transparent;
+  outline: none;
+
+}
+
+
+
+
+.domePicture{
+  position: absolute;
+  height: 400px;
+  left: -430px;
+  top: -40px;
+}
+
+.LEDTabDomeOutline{
+  position: absolute;
+  height: 400px;
+  left: -430px;
+  top: -40px;
+}
+
+.domeLittleDoor1Target {
+  position: absolute;
+  top: 360px;
+  left: 370px;
+}
+
+.domeLittleDoor1{
+  border: 4px solid blue;
+  box-shadow:  0px 0px 25px white, 0px 0px 10px white inset;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: transparent;
+  position: absolute;
+  top: 2px;
+  left: -110px;
+  outline: none;
+}
+
+.domeLittleDoor1.active{
+  border: 4px solid yellow;
+  box-shadow: 0px 0px 15px yellow;
+  background-color: transparent;
+  outline: none;
+
+}
+
+.domeLittleDoor2Target {
+  position: absolute;
+  top: 380px;
+  left: 410px;
+}
+
+.domeLittleDoor2{
+  border: 4px solid blue;
+  box-shadow:  0px 0px 25px white, 0px 0px 10px white inset;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: transparent;
+  position: absolute;
+  top: 2px;
+  left: -110px;
+  outline: none;
+}
+
+.domeLittleDoor2.active{
+  border: 4px solid yellow;
+  box-shadow: 0px 0px 15px yellow;
+  background-color: transparent;
+  outline: none;
+
+}
+
+.domeLittleDoor3Target {
+  position: absolute;
+  top: 340px;
+  left: 430px;
+}
+
+.domeLittleDoor3{
+  border: 4px solid blue;
+  box-shadow:  0px 0px 25px white, 0px 0px 10px white inset;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: transparent;
+  position: absolute;
+  top: 2px;
+  left: -110px;
+  outline: none;
+  color: white;
+}
+
+.domeLittleDoor3.active{
+  border: 4px solid yellow;
+  box-shadow: 0px 0px 15px yellow;
+  background-color: transparent;
+  outline: none;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ .seethrough{
+  opacity: .35;
+ }
+
+
+.hideexcess{
+  overflow: hidden;
+  width: 85px;
+  height: 100px;
+}
+
+#ldptargetpicture {
+  width: 130px;
+  height: 20px;
+  opacity: 0.9;
+shadow: 2px, 4px 15px blue;
+
+}
+#ldptargetpicture:hover{
+  opacity: 1;
+  shadow: 2px, 4px 15px black;
+}
+.r2menu {
+  /* border: 4px solid blue; */
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 300px;
+  height: 625px;
+  /* top: 5%;
+  left: 5%; */
+}
+ .r2menupicture {
+  width: 350px;
+  position: absolute;
+  left: -420px;
+  top: 390px;
+}
+
+.LEDTabBodyOutline {
+  width: 350px;
+  position: absolute;
+  left: -420px;
+  top: 390px;
+}
+
+.r2menupicture21 {
+ width: 350px;
+ position: absolute;
+ left: -620px;
+ top: -90px;
+}
+
+.r2menupicture1 {
+ width: 350px;
+ position: absolute;
+ left: -370px;
+ top: -30px;
+}
+.r2menupictureLDP {
+  width: 189px;
+  position: absolute;
+  left: -289px;
+  top: 315px;
+  /* background: url("../Images/Body/LDPBlue.png"); */
+}
+
+.r2menupictureLDP.active{
+
+/* background: url("../Images/Body/LDPGreen.png"); */
+
+}
+
+.r2menupictureLDP1 {
+  width: 190px;
+  height: 20px;
+  position: absolute;
+  left: -616px;
+  top: 405px;
+  /* background: url("../Images/Body/LDPBlue.png"); */
+}
+
+.r2menupictureLDP1.active{
+
+/* background: url("../Images/Body/LDPGreen.png"); */
+
+}
+
+
+.r2menuRseriesRLD {
+  height: 93px;
+  position: absolute;
+  left: -639px;
+  top: -12px;
+  transform: rotate(46deg);
+}
+.r2menuRseriesRLD.active{
+}
+
+.r2menuRseriesFLD {
+  width: 40px;
+  /* height: 20px; */
+  position: absolute;
+  left: -580px;
+  top: 313px;
+  /* background: url("../Images/Body/LDPBlue.png"); */
+}
+.r2menuRseriesFLD.active{
+}
+
+
+
+.r2menupictureCoin {
+  width: 30px;
+  position: absolute;
+  left: -633px;
+  top: 577px;
+}
+
+.r2menupictureCoin.active{
+}
+.r2menupictureMaint {
+  width: 290px;
+  position: absolute;
+  left: -665px;
+  top: 760px;
+}
+.r2menupictureCoin {
+  width: 30px;
+  position: absolute;
+  left: -633px;
+  top: 577px;
+}
+
+.r2menupictureMaint {
+  width: 290px;
+  position: absolute;
+  left: -665px;
+  top: 760px;
+}
+
+
+.r2menupictureMaint.active{
+}
+.r2menupictureDataPanelVerticalBars {
+  width: 40px;
+  position: absolute;
+  left: -480px;
+  top: 555px;
+}
+
+.r2menupictureDataPanelVerticalBars.active{
+}
+.r2menupictureFrontHP {
+  width: 46px;
+  position: absolute;
+  left: -466px;
+  top: 300px;
+}
+
+.r2menupictureFrontHP.active{
+}
+
+.r2menupictureTopHP {
+  width: 46px;
+  position: absolute;
+  left: -494px;
+  top: 67px;
+}
+
+.r2menupictureTopHP.active{
+}
+
+.r2menupictureRearHP {
+  width: 46px;
+  position: absolute;
+  left: -552px;
+  top: -40px;
+}
+
+.r2menupictureRearHP.active{
+}
+
+.r2menupictureCBI {
+  width: 68px;
+  position: absolute;
+  left: -629px;
+  top: 518px;
+}
+
+.r2menupictureCBI.active{
+}
+
+.r2menupictureCBIServo {
+  width: 68px;
+  position: absolute;
+  left: -356px;
+  top: 518px;
+}
+
+.r2menupictureCBIServo.active{
+}
+
+.r2menupictureDPServo {
+  width: 71px;
+  position: absolute;
+  left: -207px;
+  top: 518px;
+}
+
+.r2menupictureDPServo.active{
+}
+
+.r2menupictureLeftLargeDoorServo {
+  width: 39px;
+  position: absolute;
+  left: -402px;
+  top: 420px;
+}
+
+.r2menupictureLeftLargeDoorServo.active{
+}
+
+.r2menupictureRightLargeDoorServo {
+  width: 39px;
+  position: absolute;
+  left: -129px;
+  top: 420px;
+}
+
+.r2menupictureRightLargeDoorServo.active{
+}
+
+.r2menupictureDataPanelLED1 {
+  width: 68px;
+  position: absolute;
+  left: -339px;
+  top: 518px;
+  /* box-shadow: 0px, 0px, 3px, 3px, white; */
+}
+
+.r2menupictureDataPanelLED1.active{
+}
+
+.r2menupictureTopUtilityArm {
+  width: 184px;
+  position: absolute;
+  left: -340px;
+  top: 429px;
+}
+
+.r2menupictureTopUtilityArm.active{
+}
+.r2menupictureBottomUtilityArm {
+  width: 184px;
+  position: absolute;
+  left: -338px;
+  top: 473px;
+  transform: rotate(180deg);
+}
+
+.r2menupictureTopUtilityArm.active{
+}
+
+.r2menupictureDoor1Servo {
+  width: 41px;
+  position: absolute;
+  left: -150px;
+  top: 292px;
+  transform: rotate(-34deg);
+}
+
+.r2menupictureDoor1Servo.active{
+}
+
+.selectAll {
+  position: absolute;
+  left: -815px;
+  top: 600px;
+  font-size: 35px;
+  text-align: center;
+  border: 5px blue solid;
+  /* padding-left: 15px;
+  padding-right: 15 px;
+  padding-top: 5px;
+  padding-bottom: 5px; */
+  width: 40px;
+  height:40px;
+}
+
+.r2menupictureLargePanel{
+  position: absolute;
+  left: -395px;
+  top: 165px;
+  height: 165px;
+  transform: rotate(329deg);
+}
+
+
+
+
+/* Logics Front Bottom */
+.r2menupictureFrontLogicsBottomBlueSelector{
+position: absolute;
+top: 320px;
+left: -660px;
+height: 60px;
+}
+.r2menupictureFrontLogicsBottomBlueIcon{
+  position: absolute;
+  top: 328px;
+  left: -579px;
+  height: 14px;
+  transform: rotate(19deg);
+}
+.r2menupictureFrontLogicsBottomBlueLine{
+  position: absolute;
+  top: 345px;
+  left: -610px;
+  height: 14px;
+  transform: rotate(0deg);
+  transform: rotateY(180deg);
+}
+
+/* Logics Front Top */
+.r2menupictureFrontLogicsTopBlueSelector{
+  position: absolute;
+  top: 220px;
+  left: -630px;
+  height: 60px;
+  }
+  .r2menupictureFrontLogicsTopBlueIcon{
+    position: absolute;
+    top: 318px;
+    left: -575px;
+    height: 14px;
+    transform: rotate(19deg);
+  }
+  .r2menupictureFrontLogicsTopBlueLine{
+    position: absolute;
+    top: 290px;
+    left: -600px;
+    height: 14px;
+    /* transform: rotate(45deg); */
+    transform: rotateY(180deg);
+    transform: rotateZ(210deg);
+  }
+
+
+.dometabicon{
+  position: relative;
+  width: 75px;
+  top: -0px;
+}
+
+
+
+.selectNone {
+  position: absolute;
+  left: -815px;
+  top: 680px;
+  font-size: 35px;
+  text-align: center;
+  border: 5px blue solid;
+  /* padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px; */
+  width: 60px;
+  height: 60px;
+
+}
+.checkmarkall{
+  position: absolute;
+  top: 715px;
+  left: -735px;
+  height: 60px;
+  width: 60px;
+}
+
+.selectALLpic{
+  position: absolute;
+  top: 780px;
+  left: -725px;
+  height: 50px;
+  width: 50px;
+}
+.checkmarkallpic{
+  position: absolute;
+  top: 575px;
+  left: -705px;
+  height: 50px;
+  width: 50px;
+}
+
+.selectNonepic{
+  position: absolute;
+  top: 780px;
+  left: -365px;
+  height: 50px;
+  width: 50px;
+}
+.checkmarkNonepic{
+  position: absolute;
+  top: 575px;
+  left: -705px;
+  height: 70px;
+  width: 70px;
+}
+
+.UpArrowPicture{
+  position: absolute;
+  top: 10px;
+  left: 100px;
+  height: 80px;
+  width: 80px;
+}
+
+.UpArrowPicturePeriscope{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  height: 80px;
+  width: 80px;
+}
+.CenterArrowPicturePeriscope{
+  position: absolute;
+  top: 100px;
+  left: 10px;
+  height: 80px;
+  width: 80px;
+  /* transform: rotate(270deg); */
+}
+.DownArrowPicturePeriscope{
+  position: absolute;
+  top: 190px;
+  left: 10px;
+  height: 80px;
+  width: 80px;
+  /* transform: rotate(180deg); */
+}
+.DownArrowPicture{
+  position: absolute;
+  top: 190px;
+  left: 100px;
+  height: 80px;
+  width: 80px;
+  /* transform: rotate(180deg); */
+}
+.RightArrowPicture{
+  position: absolute;
+top: 100px;
+left: 190px;
+  height: 80px;
+  width: 80px;
+  /* transform: rotate(90deg); */
+}
+.LeftArrowPicture{
+  position: absolute;
+top: 100px;
+left: 10px;
+  height: 80px;
+  width: 80px;
+  /* transform: rotate(270deg); */
+}
+.CenterArrowPicture{
+  position: absolute;
+top: 100px;
+left: 100px;
+  height: 80px;
+  width: 80px;
+  /* transform: rotate(270deg); */
+}
+.UpperRightArrowPicture{
+  position: absolute;
+  top: 10px;
+  left: 190px;
+  height: 80px;
+  width: 80px;
+  /* transform: rotate(270deg); */
+}
+.LowerLeftArrowPicture{
+  position: absolute;
+  top: 190px;
+  left: 10px;
+  height: 80px;
+  width: 80px;
+  /* transform: rotate(270deg); */
+}
+.UpperLeftArrowPicture{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  height: 80px;
+  width: 80px;
+  /* transform: rotate(270deg); */
+}
+.LowerRightArrowPicture{
+  position: absolute;
+  top: 190px;
+  left: 190px;
+  height: 80px;
+  width: 80px;
+  /* transform: rotate(270deg); */
+}
+.checkmarknone{
+  position: absolute;
+  top: 715px;
+  left: -345px;
+  height: 60px;
+  width: 60px;
+}
+.checkmarkapply{
+  position: absolute;
+  top: 305px;
+  left: 75px;
+  height: 90px;
+  width: 80px;
+}
+.checkmarkoff{
+  position: absolute;
+  top: 305px;
+  left: 275px;
+  height: 90px;
+  width: 80px;
+}
+.r2menu  .img-wrapper {
+  display: inline-block;
+  overflow: hidden;
+}
+
+.r2menupicturedome {
+ width: 300px;
+ position: absolute;
+ left: -220px;
+}
+.HPServo{
+  position: absolute;
+  top: 500px;
+  left: 750px;
+  border: 3px solid white;
+  width: 280px;
+  height: 280px;
+}
+
+.periscopeControl{
+  position: absolute;
+  top: 70px;
+  left: 390px;
+  border: 3px solid white;
+  width:110px;
+  height: 640px;
+}
+
+.periscopeRotationControl{
+  position: absolute;
+  top: 70px;
+  left: 580px;
+  border: 3px solid white;
+  width: 360px;
+  height: 370px;
+}
+.RandomHeader{
+  position: absolute;
+  top: 530px;
+  left: 500px;
+  width: 265px;
+}
+.RotateClockwiseContinous{
+  position: absolute;
+  top: 240px;
+  left: 10px;
+
+}
+
+.RotateCounterClockwiseContinous{
+  position: absolute;
+  top: 240px;
+  left: 180px;
+
+}
+.rotateCCPicturePeriscope{
+position: absolute;
+top: 10px;
+left: 10px;
+
+}
+
+.rotateCWPicturePeriscope{
+  position: absolute;
+  top: 10px;
+  left: 180px;
+  
+  }
+
+  .absolute0Periscope{
+    position: absolute;
+    top: 130px;
+    left: 10px;
+    height: 70px;
+    width: 70px;
+  }
+
+  .absolute90Periscope{
+    position: absolute;
+    top: 130px;
+    left: 100px;
+    height: 70px;
+    width: 70px;
+  }
+  .absolute180Periscope{
+    position: absolute;
+    top: 130px;
+    left: 185px;
+    height: 70px;
+    width: 70px;
+  }
+  .absolute270Periscope{
+    position: absolute;
+    top: 130px;
+    left: 270px;
+    height: 70px;
+    width: 70px;
+  }
+
+  .RotateHome{
+    position: absolute;
+    top: 360px;
+    left: 180px;
+  }
+
+  .RotateRandom{
+    position: absolute;
+    top: 360px;
+    left: 10px;
+  }
+  .RotateClockwiseRelativeText{
+    position: absolute;
+    top: 80px;
+    left: 60px;
+    width: 50px;
+    font-size: 1.7rem;
+  }
+  .RotateCounterClockwiseRelativeText{
+    position: absolute;
+    top: 80px;
+    left: 220px;
+    font-size: 1.7rem;
+    width: 50px;
+  }
+  .RandomPeriscope{
+    position: absolute;
+    top: 530px;
+    left: 580px;
+    border: 2px solid white;
+    height: 80px;
+    width: 360px;
+  }
+  .RotateRandomHeight{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+  .RotateRandomRotate{
+    position: absolute;
+    top: 10px;
+    left: 180px;
+  }
+  .Height0{
+    position: absolute;
+    /* content: url(../Images/Buttons/Button-Height-0-Grey.png); */
+    top: 510px;
+    left: 10px;
+    width: 90px;
+  }
+  .Height0 :active{
+     /* content: url(../Images/Buttons/Button-Height-0.png); */
+    opacity: 1.0;
+    box-shadow: 0px 0px 20px yellow;
+    scale:10px ;
+  }
+ 
+
+  .Height10{
+    position: absolute;
+    /* content: url(../Images/Buttons/Button-Height-10-Grey.png); */
+
+    top: 460px;
+    left: 10px;
+    width: 90px;
+    /* border: 2px solid blueviolet; */
+  }
+  .Height10:active{
+    /* content: url(../Images/Buttons/Button-Height-10.png); */
+
+  }
+  .Height10:hover{
+    opacity: 1.0;
+    box-shadow: 0px 0px 45px yellow;
+    scale: 1.2;
+    }
+
+   .Height20{
+    position: absolute;
+    top: 410px;
+    left: 10px;
+    width: 90px;
+  }
+  .Height20:active{
+    opacity: 1.0;
+    box-shadow: 0px 0px 20px yellow;
+    scale: 2;
+  }
+  
+   .Height30{
+    position: absolute;
+    top: 360px;
+    left: 10px;
+    width: 90px;
+  }
+  .Height30:active{
+    opacity: 1.0;
+    box-shadow: 0px 0px 20px yellow;
+    scale: 2;
+  }
+ 
+  .Height40{
+    position: absolute;
+    top: 310px;
+    left: 10px;
+    width: 90px;
+  }
+  .Height40:active{
+    opacity: 1.0;
+    box-shadow: 0px 0px 20px yellow;
+    scale: 2;
+  }
+  
+  .Height50{
+    position: absolute;
+    top: 260px;
+    left: 10px;
+    width: 90px;
+  }
+  .Height50:active{
+    opacity: 1.0;
+    box-shadow: 0px 0px 20px yellow;
+    scale: 2;
+  }
+ 
+  .Height60{
+    position: absolute;
+    top: 210px;
+    left: 10px;
+    width: 90px;
+  }
+  .Height60:active{
+    opacity: 1.0;
+    box-shadow: 0px 0px 20px yellow;
+    scale: 2;
+  }
+  
+  .Height70{
+    position: absolute;
+    top: 160px;
+    left: 10px;
+    width: 90px;
+  }
+  .Height70:active{
+    opacity: 1.0;
+    box-shadow: 0px 0px 40px yellow;
+    scale: 2;
+  }
+ 
+  .Height80{
+    position: absolute;
+    top: 110px;
+    left: 10px;
+    width: 90px;
+  }
+  .Height80:active{
+    opacity: 1.0;
+    box-shadow: 0px 0px 20px yellow;
+    scale: 2;
+  }
+ 
+
+
+  .Height90{
+    position: absolute;
+    top: 60px;
+    left: 10px;
+    width: 90px;
+  }
+  .Height90active{
+    opacity: 1.0;
+    box-shadow: 0px 0px 20px yellow;
+    scale: 2;
+  }
+ 
+  /* .Height100{
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    width: 60px;
+  } */
+
+  .Height100{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 90px;
+    /* border: 2px solid white; */
+  }
+  .Height100:active{
+    opacity: 1.0;
+    box-shadow: 0px 0px 20px yellow;
+    scale: 2;
+  }
+
+.HeightSpeed{
+  position: absolute;
+  top: 590px;
+  left: 10px;
+  width: 90px;
+  font-size: 1.7rem;
+}
+.RotateSpeed{
+  position: absolute;
+  top: 320px;
+  left: 262px;
+  width: 90px;
+  font-size: 1.7rem;
+}
+.RotateSpeedText{
+  position: absolute;
+  top: 285px;
+  left: 5px;
+  width: 255px;
+  font-size: 1.7rem;
+}
+.HeightSpeedText{
+  position: absolute;
+  top: 525px;
+  left: 10px;
+  width: 90px;
+  font-size: 1.6rem;
+}
+
+.periscopeText{
+  position: absolute;
+  top: 645px;
+  left: 300px;
+  /* border: 3px solid white; */
+  width: 580px;
+  height: 280px;
+}
+.periscopeCommandButton{
+
+  position: absolute;
+  top: 70px;
+  left: 200px;
+  /* border: 3px solid white; */
+  width: 100px;
+  height: 28px;
+}
+
+.StoredSequenceDiv{
+  position: absolute;
+  top:-90px;
+  left: 130px;
+  /* border: 2px solid white; */
+}
+
+
+
+.HPServoHeader{
+  position: absolute;
+  top: -80px;
+  left: -10px;
+  width: 350px;
+}
+
+.PeriscopeHeightHeader{
+  position: absolute;
+  top: -80px;
+  left: -10px;
+  width: 130px;
+}
+
+.PeriscopeRotateHeader{
+  position: absolute;
+  top: -80px;
+  left: 105px;
+  width: 130px;
+  /* border: 2px solid white; */
+
+}
+.openclosedoors{
+  position: absolute;
+  top: 40px;
+  left: 100px;
+  border: 3px solid white;
+  height: 400px;
+  width: 650px;
+
+}
+.openclosedoorsheader{
+  position: absolute;
+  top: -80px;
+  left: 175px;
+  width: 400px;
+}
+
+
+.utilityArmsDiv{
+  height: 150px;
+  width: 900px;
+  position: absolute;
+  top: 50px;
+  left: 60px;
+}
+
+.periscopeRangeDiv{
+  height: 150px;
+  width: 900px;
+  position: absolute;
+  top: 50px;
+  left: 60px;
+}
+.LDPBrightnesRangeDiv{
+  height: 120px;
+  width: 900px;
+  position: absolute;
+  top: 20px;
+  left: 60px;
+}
+.MaintBrightnesRangeDiv{
+  height: 120px;
+  width: 900px;
+  position: absolute;
+  top: 120px;
+  left: 60px;
+}
+.VUBrightnesRangeDiv{
+  height: 120px;
+  width: 900px;
+  position: absolute;
+  top: 220px;
+  left: 60px;
+}
+
+.CoinBrightnesRangeDiv{
+  height: 120px;
+  width: 900px;
+  position: absolute;
+  top: 320px;
+  left: 60px;
+}
+.IntBaselineRangeDiv{
+  height: 120px;
+  width: 900px;
+  position: absolute;
+  top: 520px;
+  left: 60px;
+}
+.IntOffsetRangeDiv{
+  height: 120px;
+  width: 900px;
+  position: absolute;
+  top: 420px;
+  left: 60px;
+}
+
+.ExtBaselineRangeDiv{
+  height: 120px;
+  width: 900px;
+  position: absolute;
+  top: 720px;
+  left: 60px;
+}
+.ExtOffsetRangeDiv{
+  height: 120px;
+  width: 900px;
+  position: absolute;
+  top: 620px;
+  left: 60px;
+}
+ .img-wrapper img {
+-webkit-transition: all .2s ease;
+width: 100%;
+}
+ /* .img-wrapper img:hover {
+-webkit-transform: scale(1.5);
+} */
+
+
+#homeback {
+  position: absolute;
+  top: 475px;
+  left: 155px;
+}
+
+.openButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+.closeButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 10px;
+  left: 170px;
+}
+.cycleButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 80px;
+  left: 10px;
+}
+.AlternateButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 80px;
+  left: 170px;
+}
+.MarchingAntsButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 150px;
+  left: 10px;
+}
+
+.FlutterButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 150px;
+  left: 170px;
+}
+.AllOpenCloseRepeatButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 150px;
+  left: 330px;
+}
+.AllPanelWaveButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 150px;
+  left: 490px;
+}
+
+.AllPanelWaveFastButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 220px;
+  left: 10px;
+}
+
+.AllOpenCloseWaveButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 220px;
+  left: 170px;
+}
+.AllPanelAlternateButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 220px;
+  left: 330px;
+}
+
+.AllHarlemShake{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 220px;
+  left: 490px;
+}
+
+
+.AllPanelDanceButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 10px;
+  left: 490px;
+}
+
+.AllLongDiscoButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 10px;
+  left: 330px;
+}
+
+.AllOpenButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 80px;
+  left: 10px;
+}
+.AllCloseButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 80px;
+  left: 170px;
+}
+.AllOpenCloseButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 80px;
+  left: 330px;
+}
+.BodyServoButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 10px;
+  left: 700px;
+}
+.BodyServoButton.active{
+  box-shadow: 0px 0px 9px yellow;
+}
+
+.DomeServoButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 80px;
+  left: 700px;
+}
+.DomeServoButton.active{
+  box-shadow: 0px 0px 9px yellow;
+
+}
+.BothServoButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 150px;
+  left: 700px;
+}
+
+.BothServoButton.active{
+  box-shadow: 0px 0px 9px yellow;
+}
+
+
+
+.BodyFirstRadio{
+  position: absolute;
+  width: 20px;
+  -webkit-transform: scale(2);
+  top: 253px;
+  left: 680px;
+}
+.BodyFirstRadioLabel{
+  position: absolute;
+  width: 200px;
+  top: 240px;
+  left: 720px;
+}
+.DomeFirstRadio{
+  position: absolute;
+  width: 20px;
+  -webkit-transform: scale(2);
+  top: 290px;
+  left: 680px;
+}
+.DomeFirstRadioLabel{
+  position: absolute;
+  width: 200px;
+  top: 280px;
+  left: 720px;
+}
+.AllOpenCloseLongButton{
+  height: 60px;
+  width: 150px;
+  position: absolute;
+  top: 80px;
+  left: 490px;
+}
+.applyButton{
+  /* background-image: url(..//Images/Buttons/Button-Apply.png); */
+  /* background-size: cover; */
+  /* opacity: 1; */
+  /* border: 1px; */
+  position: absolute;
+  top:225px;
+  left: 25px;
+  height: 75px;
+  width: 190px;
+
+  opacity: .9;
+}
+.applyButton1{
+  background-image: url(..//Images/Buttons/Button-Apply.png);
+  background-size: cover;
+  /* opacity: 1; */
+  /* border: 1px; */
+  position: absolute;
+  top:225px;
+  left: 25px;
+  height: 75px;
+  width: 190px;
+
+  opacity: .9;
+}
+
+.applyButtonStored{
+  background-image: url(..//Images/Buttons/Button-Apply.png);
+  background-size: cover;
+  /* opacity: 1; */
+  /* border: 1px; */
+  position: absolute;
+  top:225px;
+  left: 25px;
+  height: 75px;
+  width: 190px;
+
+  opacity: .9;
+}
+
+.applyButtonSettings{
+  background-image: url(..//Images/Buttons/Button-Apply.png);
+  background-size: cover;
+  /* opacity: 1; */
+  /* border: 1px; */
+  position: absolute;
+  top:300px;
+  left: 275px;
+  height: 60px;
+  width: 150px;
+
+  opacity: .9;
+}
+.periscopePicture{
+  position: absolute;
+  height: 625px;
+  left: -400px;
+  top: 30px;
+
+}
+.periscopeheightwidth{
+  width: 80px;
+}
+.applyButtonSettings:hover{
+  opacity: 1.0;
+  box-shadow: 0px 0px 15px blue;
+  scale: 1.2;
+}
+.applyButton:hover{
+  opacity: 1.0;
+  /* box-shadow: 0px 0px 15px blue; */
+  scale: 1.15;
+}
+.applyButtonoff{
+  /* background-image: url(..//Images/Buttons/Button-Off-White.png);
+  background-size: cover; */
+  /* opacity: 1; */
+  /* border: 1px; */
+  position: absolute;
+  top:225px;
+  left: 220px;
+  height: 75px;
+  width: 190px;
+  box-shadow: 0px 0px 15px black;
+  opacity: .9;
+}
+.applyButtonoff:hover{
+  opacity: 1.0;
+  scale: 1.15;
+  /* box-shadow: 0px 0px 15px blue; */
+
+}
+INPUT[type="submit"] {
+  background: url(..//Images/Buttons/Button-Apply.png);
+
+  display: inline;
+  position: absolute;
+  height: 40px;
+  width: 150px;
+}
+.ColorPickerdiv {
+  position: absolute;
+  /* border: 3px blue solid; */
+  top: 100px;
+  /* top: 360px;
+  left: 625px; */
+  width: 450px;
+  font-size: 35 px;
+}
+
+.ColorPickerdivRseries {
+  position: absolute;
+  /* border: 3px blue solid; */
+  top: 0px;
+  /* top: 360px;
+  left: 625px; */
+  width: 450px;
+  font-size: 35 px;
+}
+
+.rseriesTextInput{
+  position: absolute;
+  top: 175px;
+  left: 100px;
+}
+.rseriesTextInputLabel{
+position: absolute;
+top: 165px;
+left: -50px;
+}
+.ColorPicker {
+  /* border: 3px green solid; */
+  align-items: center;
+  /* justify-content: center; */
+  position:absolute;
+  top: 10px;
+  left: 100px;
+  /* width: 25%; */
+  font-size: 1.5rem;
+  /* overflow: auto; */
+}
+label[for= ColorPicker]{
+  position: absolute;
+  left: 20px;
+  top: -45px;
+  width: 450px;
+  font-size: 2rem;
+
+}
+
+.i2CPicker {
+
+  font-size: 1.5rem;
+
+}
+.i2CPickertext {
+  height: 25px;
+  font-size: 1.5rem;
+}
+
+.ESP32Picker {
+
+  font-size: 2rem;
+  position:absolute;
+  left: -60px;
+  top: 200px;
+
+}
+.ESP32Pickertext {
+  /* height: 25px; */
+  font-size: 2rem;
+  position: absolute;
+  left : 360px;
+  top: 200px;
+}
+.ESP32PickerLabel{
+  position: absolute;
+  left: -60px;
+  top: 200px;
+}
+
+.ColorPicker1 {
+  /* border: 3px green solid; */
+  align-items: center;
+  /* justify-content: center; */
+  position:absolute;
+  top: -35px;
+  left: 280px;
+  width: 25%;
+  font-size: 1.5rem;
+  /* overflow: auto; */
+}
+label[for= ColorPicker1]{
+  position: absolute;
+  left: 10px;
+  top: -50px;
+  font-size: 2rem;
+
+}
+
+.ColorPicker2 {
+  /* border: 3px green solid; */
+  align-items: center;
+  /* justify-content: center; */
+  position:absolute;
+  top: 50px;
+  left: 280px;
+  width: 25%;
+  font-size: 1.5rem;
+  /* overflow: auto; */
+}
+label[for= ColorPicker2]{
+  position: absolute;
+  left: -10px;
+  top: 35px;
+
+  font-size: 2rem;
+
+}
+
+.ColorPicker1Bounce {
+  /* border: 3px green solid; */
+  align-items: center;
+  /* justify-content: center; */
+  position:absolute;
+  top: 5%;
+  left: 100px;
+  width: 25%;
+  font-size: 1.5rem;
+  /* overflow: auto; */
+}
+label[for= ColorPicker1Bounce]{
+  position: absolute;
+  left: 0%;
+  top: -60px;
+  font-size: 2rem;
+
+}
+
+.ColorPicker2Bounce {
+  /* border: 3px green solid; */
+  align-items: center;
+  /* justify-content: center; */
+  position:absolute;
+  top: 100px;
+  left: 100px;
+  width: 25%;
+  font-size: 1.5rem;
+  /* overflow: auto; */
+}
+label[for= ColorPicker2Bounce]{
+  position: absolute;
+  left: 100px;
+  top: 50px;
+  font-size: 2rem;
+
+}
+
+
+
+
+.WhiteText {
+  color: white;
+  background: black;
+  font-size: 30px;
+
+}
+.KnightRiderSliderPosition {
+  /* position: absolute; */
+  top: 80px;
+  lef: 450px;
+  border: 3px red solid;
+}
+
+
+
+input[type="range"] {
+  height: 40px;
+  -webkit-appearance: none;
+  /* justify-content: center; */
+  margin: 10px 0;
+  position: absolute;
+  width: 75%;
+  top: 1 05%;
+  left: 15%;
+  background: transparent;
+  opacity: 0.7;
+
+
+}
+input[type="range"]:focus {
+  outline: none;
+
+}
+input[type="range"]:hover {
+  outline: none;
+  opacity: 1;
+}
+input[type="range"]::after {
+  content:"";
+  color: White;
+  font-size: 2rem;
+  position: absolute;
+  text-shadow: 0px 3px 15px blue;
+  left: 80%;
+  top: 120%;
+}
+input[type="range"]::before {
+  content: "";
+  color: White;
+  font-size: 2rem;
+  position: absolute;
+  text-shadow: 0px 0px 10px blue;
+
+  left: 0%;
+  top: 120%;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 20px;
+  cursor: pointer;
+  /* animate: 0.2s; */
+  box-shadow: 0px 0px 25px lightyellow;
+  background: Yellow;
+  border-radius: 9px;
+  border: 1px solid #000000;
+  b
+}
+input[type="range"]::-webkit-slider-thumb {
+  box-shadow: 0px 0px 25px black;
+  border: 2px solid black;
+  height: 45px;
+  width: 15px;
+  border-radius: 5px;
+  background: lightblue;
+
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -11px;
+}
+input[type="range"]:focus::-webkit-slider-runnable-track {
+  background: Yellow;
+}
+input[type="range"]::-moz-range-track {
+  width: 100%;
+  height: 20px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 1px 1px 1px #000000;
+  background: yellow;
+  border-radius: 5px;
+  border: 1px solid #000000;
+}
+input[type="range"]::-moz-range-thumb {
+  box-shadow: 1px 1px 1px #000000;
+  border: 1px solid black;
+  height: 30px;
+  width: 15px;
+  border-radius: 5px;
+  background: black;
+  cursor: pointer;
+}
+input[type="range"]::-ms-track {
+  width: 100%;
+  height: 10px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type="range"]::-ms-fill-lower {
+  background: #3071a9;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px #000000;
+}
+input[type="range"]::-ms-fill-upper {
+  background: #3071a9;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px #000000;
+}
+input[type="range"]::-ms-thumb {
+  margin-top: 1px;
+  box-shadow: 1px 1px 1px #000000;
+  border: 1px solid #000000;
+  height: 30px;
+  width: 15px;
+  border-radius: 5px;
+  background: #000000;
+  cursor: pointer;
+}
+input[type="range"]:focus::-ms-fill-lower {
+  background: #3071a9;
+}
+input[type="range"]:focus::-ms-fill-upper {
+  background: #3071a9;
+}
+
+.LEDselectorTable{
+  position: absolute;
+  top: 175px;
+  left: 325px;
+}
+.LEDselectorButtons{
+  width: 75px;
+  height: 75px;
+}
+
+#statusDiv {
+  position: relative;
+  top: 450px;
+  left: 350px;
+  color: white;
+}
+
+
+
+
+div.cap {display: block;height: 100px;width: 40px;/* background: url("https://d33wubrfki0l68.cloudfront.net/572492a49d39a2d0b9950e45d934fe77e3464261/d9a70/playground/playground/osx-dock/dock-background-left.png") bottom left no-repeat; */}
+
+		div.cap.left { position: absolute; bottom: 0px; left: 0px; }
+		div.cap.right { background-position: right bottom; position: absolute; top: 0px; right: 0px; }
+		ul.osx-dock {display: inline-block;height: 500px;padding: 0 40px 0 0;/* background: url("https://d33wubrfki0l68.cloudfront.net/572492a49d39a2d0b9950e45d934fe77e3464261/d9a70/playground/playground/osx-dock/dock-background-left.png") no-repeat right bottom; */overflow:;margin: 0 0 0 40px;}
+		ul.osx-dock li { display: block; position: relative; float: left 30px; width: 65px; height: 50px; margin: 40px 0 4px 0; -webkit-transition: 0.15s linear; -webkit-transition-property: -webkit-transform margin; text-align: center; }
+
+		ul.osx-dock li a { display: block; height: 50px; padding: 0 1px; -webkit-transition: 0.15s linear; -webkit-transition-property: -webkit-transform margin; margin: 0;
+		-webkit-box-reflect: below 2px
+			-webkit-gradient(linear, left top, left bottom, from(transparent),
+			color-stop(0.45, transparent), to(rgba(255, 255, 255, 0.25)));
+		}
+		ul.osx-dock li a img { width: 55px; -webkit-transform: scale(1.3);}
+
+		ul.osx-dock li:hover {
+			margin-left: 12px; margin-right: 9px;
+			z-index: 200;
+		}
+		ul.osx-dock li:hover a {
+			-webkit-transform-origin: center right;
+			-webkit-transform: scale(1.6);
+		}
+		ul.osx-dock li.nearby {
+			margin-left: 6px; margin-right: 6px;
+			z-index: 100;
+		}
+		ul.osx-dock li.nearby a {
+			-webkit-transform-origin: center right;
+			-webkit-transform: scale(1.25);
+		}
+
+		ul.osx-dock li span {background: rgba(0,0,0,0.75);position: absolute;bottom: 80px;left: 100px;margin: 0 auto;display: none;width: 100px;font-size: 16px;font-weight: bold;padding: 3px 6px;-webkit-border-radius: 6px;color: #fff;text-align: right;}
+		ul.osx-dock li:hover span { display: block; }
+
+		div#dockContainer {position: fixed;right: 12px;height: 300px;padding: 50px 0 0;text-align: -webkit-right;-webkit-border-radius: 6px;-moz-border-radiu;width: 10%;height: 50%;: 100%;line-height: 1;z-index: 100;}
+		div#dockWrapper {width: auto;height: 50%;display: inline-block;position: relative;border-right: solid 2px rgba(255,255,255,.35);line-height: 0;}
+    #dockContainer, #dockContainer * {
+      -webkit-box-sizing: content-box;
+      -moz-box-sizing: content-box;
+      box-sizing: content-box;
+      }
+
+      #transparent {
+        opacity: .9;
+      }
+
+      #transparent:hover {
+        opacity: 1.0;
+        scale: 1.25;
+        position: relative;
+        z-index: 1;
+        box-shadow: 0px 0px 30px blue;
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.ColorPickerdivtab {
+  position: absolute;
+  /* border: 3px blue solid; */
+  top: 300px;
+  /* top: 360px;
+  left: 625px; */
+  width: 765px;
+  font-size: 35 px;
+}
+.ColorPickertab {
+  /* border: 3px green solid; */
+  align-items: center;
+  /* justify-content: center; */
+  position:absolute;
+  top: 10%;
+  left: 47%;
+  width: 25%;
+  font-size: 1.5rem;
+  /* overflow: auto; */
+}
+label[for= ColorPickertab]{
+  position: absolute;
+  left: 0%;
+  top: -5%;
+  font-size: 2rem;
+
+}
+.SubMenuLabelPositiontab {
+  position: absolute;
+  /* border: 2px solid blue; */
+  color: lightyellow;
+  top: -300px;
+  left: 75px;
+  width: 800px;
+  font-size: 30px;
+  font-family: 'Star Jedi', arial;
+
+
+}
+
+.w3-animate-top{position:relative;animation:animatetop 0.4s}@keyframes animatetop{from{top:-300px;opacity:0} to{top:0;opacity:1}}
+
+.menuheader{
+  position: absolute;
+  top: -120px;
+}
+.menuHeader-Level-1{
+  position: absolute;
+  top: -120px;
+  left: 205px;
+  width: 600px;
+}
+.menuHeader-Level-2{
+  position: absolute;
+  top: -65px;
+  left: 20px;
+  width: 450px;
+}
+.menu-Level-0 {
+  float: left;
+  position: absolute;
+  left: 0px;
+  top: 20px;
+  /* border: 1px solid #ccc; */
+  /* background-color: black; */
+  width: 85px;
+  height: 100%;
+}
+
+/* Style the buttons that are used to open the tab content */
+.menu-Level-0 .menu-Level-0-Links button {
+  display: block;
+  background-color: inherit;
+  color: black;
+  padding: 15px 6px;
+  width: 100%;
+  height: 100px;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s;
+  border-top: 1px solid white;
+  border-right: 1px solid white;
+  border-bottom: 1px solid white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px blue;
+}
+
+/* Change background color of buttons on hover */
+.menu-Level-0 .menu-Level-0-Links button:hover {
+  background-color: #778899;
+}
+
+/* Create an active/current "tab button" class */
+.menu-Level-0 .menu-Level-0-Links button.active {
+  box-shadow: (25px 0px 145px yellow);
+  background-color: #696969;
+  display: block;
+}
+
+/* Style the tab content */
+.menu-Level-0  .menu-Level-0-Content {
+  position: absolute;
+  display: none;
+  left: 550px;
+  top: 50px;
+  padding: 5px 12px;
+  /* border: 1px solid #ccc; */
+  width: 800px;
+  border-left: none;
+  height: 100%;
+}
+.menu-Level-0  .menu-Level-0-Content.active{
+  display: block;
+}
+
+
+
+
+
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1{
+  width: 240px;
+  height: 700px;
+  overflow-y: auto;
+  overflow-x: visible;
+  padding-left: 37px;
+  padding-top: 25px;
+
+}
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1::-webkit-scrollbar {
+  height: 1rem;
+}
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1::-webkit-scrollbar-track{
+  box-shadow: inset 0 0 7px blue;
+
+}
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1::-webkit-scrollbar-thumb {
+  background-color: yellow;
+  outline: 1px solid slategrey;
+  border-radius: .4rem;
+  opacity:0.7;
+}
+
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Links button{
+   display: inline-block;
+   /* left:100px;
+   top: 100px; */
+   /* width: auto; */
+   height: 57px;
+   overflow: visible;
+   border: none;
+   padding-top: 0px;
+   background-color: black;
+}
+
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Links button.active{
+   /* box-shadow: 0px 0px 5px yellow; */
+   /* background-color: yellow; */
+   /* color: yellow; */
+   /* -webkit-text-fill-color: #7CFC00; */
+   -webkit-text-fill-color: yellow;
+   width: auto;
+   border: none;
+   outline: none;
+  -webkit-transform: scale(1.15);
+}
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Links button.active:hover{
+   /* box-shadow: 0px 0px 55px yellow; */
+   /* background-color: yellow; */
+   border: none;
+   outline: none;
+
+}
+.test{
+  background-color: black;
+}
+.leftarrowHome{
+  position: absolute;
+  width: 100px;
+  top: 490px;
+  left: 10px;
+}
+.upArrowMove{
+  position: absolute;
+  width: 100px;
+  top: -20px;
+  left: 0px;
+  transform: rotate(90deg);
+}
+
+.downArrowMove{
+  position: absolute;
+  width: 100px;
+  top: 0px;
+  left: 0px;
+  transform: rotate(270deg);
+}
+.rightarrowHome{
+  position: absolute;
+  width: 100px;
+  top: 460px;
+  left: 130px;
+  rotate: 180deg;
+}
+
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content{
+  width: 400px;
+  position:  absolute;
+  top: 0px;
+  left: 275px;
+  display: none;
+}
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content.active{
+  display: block;
+  outline: none;
+  border: none;
+}
+
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-2{
+  width: 200px;
+  height: 400px;
+  overflow: visible;
+  padding-left: 25px;
+  padding-top: 25px;
+}
+
+
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content .menu-Level-2 .menu-Level-2-Links button{
+ display: inline-block;
+ width: 170px;
+ height: 54px;
+ overflow: visible;
+border: none;
+padding-top: 0px;
+background-color: black;
+/* padding-left: -25px; */
+}
+
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content .menu-Level-2 .menu-Level-2-Links button.active{
+ /* box-shadow: 0px 0px 75px yellow; */
+ /* background-color: yellow; */
+ -webkit-text-fill-color: yellow;
+
+ border: none;
+ outline: none;
+-webkit-transform: scale(1.15);
+}
+
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content .menu-Level-2 .menu-Level-2-Content{
+  width: 400px;
+  position:  absolute;
+  top: 0px;
+  left: 250px;
+  display: none;
+}
+
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content .menu-Level-2 .menu-Level-2-Content.active{
+display: block;
+}
+
+
+
+
+
+/*.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content button{
+ position: absolute;
+
+ background: none;
+ width: 200px;
+ height: 400px;
+ display: none;
+}
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content button.active{
+ display: block;
+
+ width: 200px;
+ height: 400px;
+
+
+}
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content  .ledControlSubMenuControl .ledControlSubMenu{
+
+ background: none;
+ width: 160px;
+ height: 55px;
+ border: none;
+ outline: none;
+}
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content  .ledControlSubMenuControl .ledControlSubMenu.active{
+-webkit-transform: scale(1.25);
+box-shadow: 0px 0px 15px yellow;
+}
+
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content .ledControlSubMenuControl .tabSubMenu {
+width: 200px;
+height: 400px;
+display: contents;
+}
+
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content  .ledControlSubMenuControl.tabSubMenu .tablinks button {
+  display: block;
+  background-color: inherit;
+  color: black;
+  padding: 15px 6px;
+  width: 100%;
+  height: 100px;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s;
+  border-top: 1px solid white;
+  border-right: 1px solid white;
+  border-radius: 10px;
+  box-shadow: 5px 0px 7px blue;
+}
+
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content  .ledControlSubMenuControl .tabSubMenu .tablinks button:hover {
+  background-color: #778899;
+}
+
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content  .ledControlSubMenuControl .tabSubMenu .tablinks button.active {
+  box-shadow: (5px 0px 25px yellow);
+  background-color: #696969;
+  display: block;
+}
+
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content  .menu-Level-2 .menu-Level-2-Links{
+  position: absolute;
+  display: none;
+  left: 500px;
+  top: 60px;
+  padding: 0px 12px;
+  width: 800px;
+  border-left: none;
+  height: 100%;
+}
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content  .menu-Level-2 .menu-Level-2-Link.active{
+  display: block;
+}
+
+.menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content  .ledControlSubMenuControl .tabSubMenu .tabcontentmenu.header{
+  position: absolute;
+  top: -100px;
+
+}*/
+
+/* .servoEasingMethod { */
+  /* position:relative; */
+  /* top: 0px; */
+  /* left: 0px; */
+/* }; */
+
+.servoEasingOptions{
+  position: absolute;
+  border:  2px solid white;
+  top: 505px;
+  left: 100px;
+  width: 550px;
+  height: 255px;
+}
+.servoOptionsHeader{
+  position: absolute;
+  top: -70px;
+  left: 150px;
+}
+.ServoEasingPicker{
+  position: absolute;
+  top: 20px;
+  left: 350px;
+}
+
+.ESP32VarSpeedMintext{
+  position:absolute;
+  /* width: 0px; */
+  left: 240px;
+  top: 60px;
+}
+.ServoEasingLabel{
+  position: absolute;
+  top: 9px;
+  left: 15px;
+}
+.varSpeedMinLabel{
+  position: absolute;
+  top: 50px;
+  left: 15px;
+}
+
+.ESP32VarSpeedMaxtext{
+  position:absolute;
+  /* width: 0px; */
+  left: 240px;
+  top: 100px;
+}
+
+.varSpeedMaxLabel{
+  position: absolute;
+  top: 90px;
+  left: 15px;
+}
+
+
+
+.delayCallDiv{
+  position: absolute;
+  border: 2px solid white;
+  top: 700px;
+  left: 100px;
+  width: 500px;
+  height: 100px;
+}
+.ESP32DelayCallText{
+  position:absolute;
+  /* width: 0px; */
+  left: 340px;
+  top: 140px;
+}
+
+.delayCallLabel{
+  position: absolute;
+  top: 130px;
+  left: 15px;
+}
+.clearOptions{
+  position: absolute;
+  left:100px;
+  top: 190px;
+  height: 50px;
+}
+
+.savedOptions1{
+  position: absolute;
+  left: 175px;
+  top: 190px;
+  height: 50px;
+}
+
+.savedOptions2{
+  position: absolute;
+  left: 250px;
+  top: 190px;
+  height: 50px;
+}
+.savedOptions3{
+  position: absolute;
+  left: 325px;
+  top: 190px;
+  height: 50px;
+}
+
+
+
+
+
+
+
+.genSoundHeader{
+  position: absolute;
+  left: -300px;
+  top: 00px;
+}
+.chatSoundHeader{
+  position: absolute;
+  top: 0px;
+  left: -300px;
+}
+
+.sadSoundHeader{
+  position: absolute;
+  top: 300px;
+  left: -300px;
+}
+
+
+
+
+
+.genSound1{
+  position: absolute;
+  top: 150px;
+  left: -300px;
+  height: 100px;
+}
+.genSound2{
+  position: absolute;
+  top: 150px;
+  left: -200px;
+  height: 100px;
+}
+.genSound3{
+  position: absolute;
+  top: 150px;
+  left: -100px;
+  height: 100px;
+}
+.genSound4{
+  position: absolute;
+  top: 150px;
+  left: 0px;
+  height: 100px;
+}
+.genSound5{
+  position: absolute;
+  top: 150px;
+  left: 100px;
+  height: 100px;
+}
+.genSound6{
+  position: absolute;
+  top: 150px;
+  left: 200px;
+  height: 100px;
+}
+.genSound7{
+  position: absolute;
+  top: 150px;
+  left: 300px;
+  height: 100px;
+}
+.genSound8{
+  position: absolute;
+  top: 150px;
+  left: 400px;
+  height: 100px;
+}
+.genSound9{
+  position: absolute;
+  top: 150px;
+  left: 500px;
+  height: 100px;
+}
+.genSound10{
+  position: absolute;
+  top: 150px;
+  left: 600px;
+  height: 100px;
+}
+.genSound11{
+  position: absolute;
+  top: 270px;
+  left: -300px;
+  height: 100px;
+}
+.genSound12{
+  position: absolute;
+  top:270px;
+  left: -200px;
+  height: 100px;
+}
+.genSound13{
+  position: absolute;
+  top:270px;
+  left: -100px;
+  height: 100px;
+}
+.genSound14{
+  position: absolute;
+  top:270px;
+  left: 0px;
+  height: 100px;
+}
+.genSound15{
+  position: absolute;
+  top:270px;
+  left: 100px;
+  height: 100px;
+}
+.genSound16{
+  position: absolute;
+  top:270px;
+  left: 200px;
+  height: 100px;
+}
+.genSound17{
+  position: absolute;
+  top:270px;
+  left: 300px;
+  height: 100px;
+}
+.genSound18{
+  position: absolute;
+  top:270px;
+  left: 400px;
+  height: 100px;
+}
+.genSound19{
+  position: absolute;
+  top:270px;
+  left: 500px;
+  height: 100px;
+}
+
+.chatSound1{
+  position: absolute;
+  left: -300px;
+  top: 150px;
+  height: 100px;
+}
+.chatSound2{
+  position: absolute;
+  left: -200px;
+  top: 150px;
+  height: 100px;
+}
+.chatSound3{
+  position: absolute;
+  left: -100px;
+  top: 150px;
+  height: 100px;
+}
+.chatSound4{
+  position: absolute;
+  left: 0px;
+  top: 150px;
+  height: 100px;
+}
+.chatSound5{
+  position: absolute;
+  left: 100px;
+  top: 150px;
+  height: 100px;
+}
+.chatSound6{
+  position: absolute;
+  left: 200px;
+  top: 150px;
+  height: 100px;
+}
+.chatSound7{
+  position: absolute;
+  left: 300px;
+  top: 150px;
+  height: 100px;
+}
+.chatSound8{
+  position: absolute;
+  left: 400px;
+  top: 150px;
+  height: 100px;
+}
+.chatSound9{
+  position: absolute;
+  left: 500px;
+  top: 150px;
+  height: 100px;
+}
+.chatSound10{
+  position: absolute;
+  left: 600px;
+  top: 150px;
+  height: 100px;
+}
+.chatSound11{
+  position: absolute;
+  left: -300px;
+  top: 270px;
+  height: 100px;
+}
+.chatSound12{
+  position: absolute;
+  left: 110px;
+  top: 410px;
+  height: 100px;
+}
+.chatSound13{
+  position: absolute;
+  left: 210px;
+  top: 270px;
+  height: 100px;
+}
+.chatSound14{
+  position: absolute;
+  left: 310px;
+  top: 410px;
+  height: 100px;
+}
+.chatSound15{
+  position: absolute;
+  left: 410px;
+  top: 410px;
+  height: 100px;
+}
+.chatSound16{
+  position: absolute;
+  left: 510px;
+  top: 410px;
+  height: 100px;
+}
+.chatSound17{
+  position: absolute;
+  left: 610px;
+  top: 410px;
+  height: 100px;
+}
+.chatSound18{
+  position: absolute;
+  left: 7100px;
+  top: 410px;
+  height: 100px;
+}
+
+.sadSound1{
+  position: absolute;
+  top: 405px;
+  left: -300px;
+  height: 100px;
+}
+.sadSound2{
+  position: absolute;
+  top: 405px;
+  left: -200px;
+  height: 100px;
+}
+.sadSound3{
+  position: absolute;
+  top: 405px;
+  left: -100px;
+  height: 100px;
+}
+.sadSound4{
+  position: absolute;
+  top: 405px;
+  left: 00px;
+  height: 100px;
+}
+
+
+
+
+.PeriscopeHeightSlider{
+  position: absolute;
+  top: 0px;
+  left: 50px;
+  width: 20px;
+  height: 500px;
+}
+.PeriscopeHeightSlider .slider{
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  top: 50%;
+  -webkit-appearance: none;
+  width: 500px;
+  height: 20px;
+  outline:none;
+  transform: rotate(270deg) translate(-50%,-50%);
+  transform-origin: 0 0;
+  background-color: rgba(0,0,0,1);
+}
+
+.PeriscopeHeightSlider .bar,
+.PeriscopeHeightSlider .fill{
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+.PeriscopeHeightSlider .bar{
+  z-index: 1;
+  top: 10px;
+  bottom: 10px;
+  background-color: rgba(0,0,0,2);
+}
+
+.PeriscopeHeightSlider.fill{
+  z-index: 2;
+  bottom: 0;
+  height: 50%;
+  overflow: hidden;
+
+}
+
+.PeriscopeHeightSlider .fill::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 500;
+  bottom: 0;
+  background-image: linear-gradient(0deg, #ffe53b, 0%, #ff2525 100%);
+
+}
+
+.PeriscopeHeightSliderValue{
+  position: absolute;
+  bottom: -50px;
+  left: -15px;
+  font-size: 2rem;
+}
+
+
+
+.volumeslider{
+  position: absolute;
+  top: 500px;
+  left: -370px;
+  width: 20px;
+  height: 300px;
+}
+.volumeslider .slider{
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  top: 50%;
+  -webkit-appearance: none;
+  width: 300px;
+  height: 20px;
+  outline:none;
+  transform: rotate(270deg) translate(-50%,-50%);
+  transform-origin: 0 0;
+  background-color: rgba(0,0,0,1);
+}
+
+.volumeslider .bar,
+.volumeslider .fill{
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+.volumeslider .bar{
+  z-index: 1;
+  top: 10px;
+  bottom: 10px;
+  background-color: rgba(0,0,0,2);
+}
+
+.volumeslider.fill{
+  z-index: 2;
+  bottom: 0;
+  height: 50%;
+  overflow: hidden;
+
+}
+
+.volumeslider .fill::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 300;
+  bottom: 0;
+  background-image: linear-gradient(0deg, #ffe53b, 0%, #ff2525 100%);
+
+}
+.volumesliderA{
+  position: absolute;
+  top: 500px;
+  left: -270px;
+  width: 20px;
+  height: 300px;
+}
+.volumesliderA .slider{
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  top: 50%;
+  -webkit-appearance: none;
+  width: 300px;
+  height: 20px;
+  outline:none;
+  transform: rotate(270deg) translate(-50%,-50%);
+  transform-origin: 0 0;
+  background-color: rgba(0,0,0,1);
+  
+}
+
+.volumesliderA .bar,
+.volumesliderA .fill{
+  position: absolute;
+  left: 0;
+  right: 0;  
+
+}
+
+.volumesliderA .bar{
+  z-index: 1;
+  top: 10px;
+  bottom: 10px;
+  background-color: rgba(0,0,0,2);
+}
+
+.volumesliderA .fill{
+  z-index: 2;
+  bottom: 0;
+  height: 50%;
+  overflow: hidden;
+
+
+}
+
+.volumesliderA .fill::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 300;
+  bottom: 0;
+  background-image: linear-gradient(0deg, #ffe53b, 0%, #ff2525 100%);
+  
+
+}
+
+.HCRVolumeHeaderV{
+  position: relative;
+  top: -75px;
+  left: -5px;;
+}
+
+.HCRVolumeHeaderA{
+  position: relative;
+  top: -75px;
+  left: -5px;;
+}
+
+.HCRVolumeHeaderB{
+  position: relative;
+  top: -75px;
+  left: -5px;;
+}
+
+
+.volumesliderB{
+  position: absolute;
+  top: 500px;
+  left: -160px;
+  width: 20px;
+  height: 300px;
+}
+.volumesliderB .slider{
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  top: 50%;
+  -webkit-appearance: none;
+  width: 300px;
+  height: 20px;
+  outline:none;
+  transform: rotate(270deg) translate(-50%,-50%);
+  transform-origin: 0 0;
+  background-color: rgba(0,0,0,1);
+}
+
+.volumesliderB .bar,
+.volumesliderB .fill{
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+.volumesliderB .bar{
+  z-index: 1;
+  top: 10px;
+  bottom: 10px;
+  background-color: rgba(0,0,0,2);
+}
+
+.volumesliderB.fill{
+  z-index: 2;
+  bottom: 0;
+  height: 50%;
+  overflow: hidden;
+
+}
+
+.volumesliderB .fill::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 300;
+  bottom: 0;
+  background-image: linear-gradient(0deg, #ffe53b, 0%, #ff2525 100%);
+
+}
+
+.rulers{
+  position: absolute;
+  right: 150%;
+  top: 15px;
+  bottom: 15px;
+  width: 100%;
+  background-color: rgba(0, ,0 ,0 , 2);
+  border-top: 1px solid white;
+
+
+}
+
+.rulers::before{
+  content:'';
+  position: absolute;
+  left: 0; right: 0; top: 0; bottom: 0;
+  background: linear-gradient(to top, white 1px, transparent 2px);
+  background-size: 100% 10%;;
+}
+
+.rulers::after{
+  content:'';
+  position: absolute;
+  left: 30%; right: 0; top: 0; bottom: 0;
+  background: linear-gradient(to top, white 1px, transparent 2px);
+  background-size: 100% 2%;;
+}
+
+.volumeTextDivClass{
+  position: absolute;
+  top: 310px;
+  left: -10px;
+
+}
+
+.volumeTextDivClassA{
+  position: absolute;
+  top: 310px;
+  left: -10px;
+
+}
+
+.volumeTextDivClassB{
+  position: absolute;
+  top: 310px;
+  left: -10px;
+
+}
+
+.circularSliderPos{
+  position: absolute;
+  top: 60px;
+  left: 307px;
+}
+
+.volumesliderbehindtext{
+  position: absolute;
+  height: 300px;
+  width: 300px;
+  top: 200px;
+  left: 460px;
+  border-radius: 100%;
+  background-color: blue;
+
+  /* border: 2px solid blue; */
+  
+
+}
+
+.jcs {
+  position: relative;
+  border-style: dotted;
+  border-radius: 100%;   
+  border-color: yellow;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border-width: 10px;
+  cursor: pointer;
+}
+
+.jcs-value {
+  position: absolute;
+  border-style: none;
+  border-radius: 100%;
+/* border: 2px solid rgb(0, 0, 0); */
+text-align : center;
+  text-shadow: 0 4px 10px black;
+  /* font-size: 20px; */
+pointer-events: none;
+line-height: 4rem;
+color: white;
+/* background-color: blue; */
+outline: none;
+}
+
+.jcs-indicator {
+  
+  position: absolute;
+  border-radius: 100%;
+  background-color: blue;
+border: 13px solid rgb(255, 255, 255);
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  pointer-events : none;
+}
+.jcs-panel {
+  position: relative;
+  display: inline-block;
+  border-style: solid;
+  border-color: transparent;
+  cursor: pointer;
+}
+
+
+.jcs-value img {
+  border-radius: 100%;
+  background: transparent;
+width: inherit;
+height: inherit;
+}
+
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+

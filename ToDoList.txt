@@ -12,7 +12,7 @@ To-Do for website
 9. Add wiring diagram to settings tab
 10. Fix all Logics to work with new ESP system (Completed only Knight Rider and Rainbow so far)
 11. Add RSeries full control functionality
-12. 
+12. dim pulse 1, 2, 3 off button
 
 
 
@@ -49,3 +49,6 @@ Price: $59.99
 
 
 avrdude -p atmega2560 -P /dev/cu.usbserial-AB6ZMBRD -c avr109 -b 115200 -U flash:w:SRC_1_0_15.hex
+
+"/Users/gregoryhulette/Library/Arduino15/packages/arduino/tools/avrdude/6.3.0-arduino17/bin/avrdude" "-C/Users/gregoryhulette/Library/Arduino15/packages/arduino/tools/avrdude/6.3.0-arduino17/etc/avrdude.conf" -v -V -patmega2560 -cavr109 "-P/dev/cu.usbserial-AB6ZMBRD" -b115200 -D "-Uflash:w:/private/var/folders/dv/fmc3qlt9101c_mfjbl19twzw0000gn/T/arduino/sketches/BCC4639460B6EEFDB3F43E9F047B0A72/AmidalaFirmware.ino.hex:i"
+"/Users/gregoryhulette/Library/Arduino15/packages/arduino/tools/avrdude/6.3.0-arduino17/bin/avrdude" "-C/Users/gregoryhulette/Library/Arduino15/packages/arduino/tools/avrdude/6.3.0-arduino17/etc/avrdude.conf" -v -V -patmega2560 -cavr109 "-P/dev/cu.usbserial-AB6ZMBRD" -b115200 -D "-Uflash:w:/Users/gregoryhulette/Documents/GitHub/Arduino-Code/AmidalaFirmware/build/arduino.avr.mega/AmidalaFirmware.ino.hex:i"

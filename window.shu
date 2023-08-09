@@ -1,1 +1,0 @@
-lxterminal -e "./start.sh"
