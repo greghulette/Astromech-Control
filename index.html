@@ -173,6 +173,20 @@
         <div id="HomeTab" class="">
           <h2 class="menuheadermain">Astromech Control</h2>
           <!------------------------------- Start of Menu Level 1 for the Home Content   ------------------->  
+          <div class="HomeSounds">
+            <img src="./Images/Sounds/MoreHappy.png" class="HomeMoreHappyPic" onclick="playEmotion('0','1')">
+            <img src="./Images/Sounds/LessHappy.png" class="HomeLessHappyPic" onclick="playEmotion('0','0')">
+
+            <img src="./Images/Sounds/MoreSad.png" class="HomeMoreSadPic" onclick="playEmotion('1','1')">
+            <img src="./Images/Sounds/LessSad.png" class="HomeLessSadPic" onclick="playEmotion('1','0')">
+           
+            <img src="./Images/Sounds/MoreScared.png" class="HomeMoreScaredPic" onclick="playEmotion('3','1')">
+            <img src="./Images/Sounds/LessScared.png" class="HomeLessScardPic" onclick="playEmotion('3','0')">
+           
+            <img src="./Images/Sounds/MoreMad.png" class="HomeMoreMadPic" onclick="playEmotion('2','1')">
+            <img src="./Images/Sounds/LessMad.png" class="HomeLessMadPic" onclick="playEmotion('2','0')">
+
+          </div>
           <div class="menu-Level-1">
             <div class="menu-Level-1-Links moveUpArrowLinks active " >
               <button class="active " rel="home1">
@@ -233,9 +247,9 @@
                     </div>
                   </td>
                   <td>
-                    <div class="ButtonBlank" onclick="animateSequence('A07')">
+                    <div class="ButtonBlank" onclick="animateSequence('')">
                       <img id="HomeTabAllClose" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
-                      <p class="shadowtext">all close</p>
+                      <p class="shadowtext"></p>
                     </div>  
                   </td>
                 </tr>
@@ -295,25 +309,25 @@
                   <td>
                     <div class="ButtonBlank" onclick="animateSequence('LE98')">
                       <img id="HomeTab-BLank2" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
-                      <p class="shadowtext2Lines-2">light's off</p>
+                      <p class="shadowtext">light's off</p>
                     </div>                    
                   </td>
                   <td>
                     <div class="ButtonBlank" onclick="animateSequence('LK99')">
                       <img id="HomeTab-BLank2" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
-                      <p class="shadowtext2Lines-2">light's on</p>
+                      <p class="shadowtext">light's on</p>
                     </div>                   
                   </td>
                   <td>
-                    <div class="ButtonBlank" onclick="">
-                      <img id="HomeTab-Blank1" class="homebuttonwidth seethrough"  src="./Images/HomeTab/Button-Blank.png">
-                      <p class="shadowtext"></p>
+                    <div class="ButtonBlank" onclick="animateSequence('A11')">
+                      <img id="HomeTab-Blank1" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
+                      <p class="shadowtext">all open</p>
                     </div>
                   </td>
                   <td>
-                    <div class="ButtonBlank" onclick="">
-                      <img id="HomeTab-BLank2" class="homebuttonwidth seethrough"  src="./Images/HomeTab/Button-Blank.png">
-                      <p class="shadowtext2Lines-2"></p>
+                    <div class="ButtonBlank" onclick="animateSequence('A07')">
+                      <img id="HomeTab-BLank2" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
+                      <p class="shadowtext">all close</p>
                     </div>                    
                   </td>
                 </tr>
