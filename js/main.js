@@ -54,8 +54,8 @@ var HPCommandPrefix = ":L:EHP:H"
 var DLCommandPrefix = ":L:EDC:SDL"
 var PSCommandPrefix = ":L:EDC:SFU"
 
-var statusQueryLength = 200000
-var delaySecondHTTPGet = 2000
+var statusQueryLength = 2000
+var delaySecondHTTPGet = 750
 
 function httpGetStatus() {
   let theStatusURL = "http://192.168.4.101/status"
@@ -659,7 +659,7 @@ function rdCommandText(t) {
 function HPLEDFunctionExecution(t) {
   var LEDCommand = t;
   // var HPControllerSPURL = "http://192.168.4.101/?param0=DL";
-  var HPControllerSPURL = "http://192.168.4.101/?param0=:";
+  var HPControllerSPURL = "http://192.168.4.101/?param0=:&param1=:L:EHP:H";
 
 
   var HPLEDControllerFullURL = HPControllerSPURL + t;
@@ -690,12 +690,12 @@ function bodyServoFunctionExecution(t) {
   // var bodyServoControllerSPURL = "http://192.168.4.101/?param0=DL";
   var bodyServoControllerSPURL = "http://192.168.4.101/?param0=:";
 
-  var bodyServiControllerFullURL = bodyServoControllerSPURL + BSCommand;
-  console.log(bodyServiControllerFullURL);
+  var bodyServoControllerFullURL = bodyServoControllerSPURL + BSCommand;
+  console.log(bodyServoControllerFullURL);
   // setTimeout(function () { httpGet(bodyLEDControllerFullURL); }, 500);
   // sleep(1000); 
-  if (BodyControllerStatus === true) {
-    httpGet(bodyServiControllerFullURL);
+  if (bodyServoControllerStatus === true) {
+    httpGet(bodyServoControllerFullURL);
 
   } else {
     console.log('Body Servo ESP Not Online')
@@ -1340,6 +1340,9 @@ function selectNoneStripsKnightRider() {
 }
 
 
+
+
+
 function changeImageLDPKnightRider() {
   let Blue = document.getElementById('LDPKnightRiderBlue')
   let Green = document.getElementById('LDPKnightRiderGreen')
@@ -1398,115 +1401,53 @@ function changeImageVerticalBarsKnightRider() {
 };
 
 
-function commandNoOptionsKnightRider(y, t, u) {
-  var checkmark = document.getElementById(u)
-  checkmark.classList.remove('hidden');
-  setTimeout(function () { checkmark.classList.add('hidden') }, 2000);
+var checkedItemsKnightRider = new Array();
+var imgArrayKnightRider = [];
 
-  // for (var i = 0; i < checkedItemsKnightRider.length; i++) {
-  //   if (checkedItemsKnightRider[i] === "LDPKnightRiderGreen") {
-  //     // console.log("L selected");
-  //     var ldpcommandstring = "L" + y + t;
-  //     console.log(ldpcommandstring);
-  //   };
-
-  //   if (checkedItemsKnightRider[i] === "CoinKnightRiderGreen") {
-  //     // console.log("C selected");
-  //     var coincommandstring = "C" + y + t;
-  //     console.log(coincommandstring);
-  //   };
-
-  //   if (checkedItemsKnightRider[i] === "VerticalBarstKnightRiderGreen") {
-  //     // console.log("V selected");
-  //     var vucommandstring = "V" + y + t;
-  //     console.log(vucommandstring);
-  //   };
-
-  //   if (checkedItemsKnightRider[i] === "MaintKnightRiderGreen") {
-  //     // console.log("M selected");
-  //     var mcommandstring = "M" + y + t;
-  //     console.log(mcommandstring);
-  //   };
-  // }
-  for (var i = 0; i < checkedItemsKnightRider.length; i++) {
-    if (checkedItemsKnightRider[i] === "LDPKnightRiderGreen") {
-      // console.log("L selected");
-      var ldpcommandstring = true;
-      console.log(ldpcommandstring);
-    };
-
-    if (checkedItemsKnightRider[i] === "CoinKnightRiderGreen") {
-      // console.log("C selected");
-      var coincommandstring = true;
-      console.log(coincommandstring);
-    };
-
-    if (checkedItemsKnightRider[i] === "VerticalBarstKnightRiderGreen") {
-      // console.log("V selected");
-      var vucommandstring = true;
-      console.log(vucommandstring);
-    };
-
-    if (checkedItemsKnightRider[i] === "MaintKnightRiderGreen") {
-      // console.log("M selected");
-      var mcommandstring = true;
-      console.log(mcommandstring);
-    };
-
+function toogleImage(y, z) {
+  let tmp1 = '#' + y + z + 'Green'
+  let tmp = document.querySelector(tmp1);
+  tmp.classList.toggle('active');
+  if (tmp.classList.contains('active')) {
   }
-  var check = getcheckedElementsforBodyController(ldpcommandstring, mcommandstring, coincommandstring, vucommandstring);
-  console.log("Check: " + check);
-  let commandtoSend = "&param1=" + BLCommandPrefix + check + y + t;
-  // let fullURL = commandtoSend;
-  bodyControllerLEDFunctionExecution(commandtoSend);
-  // setTimeout(function () { bodyControllerLEDFunctionExecution(commandtoSend) }, 2000);
-
-  // if (ldpcommandstring != undefined) { var ldpCommandParam = "&param1=" + BLCommandPrefix + ldpcommandstring; } else { var ldpCommandParam = "" };
-  // if (mcommandstring != undefined) { var maintCommandParam = "&param2=" + BLCommandPrefix + mcommandstring; } else { var maintCommandParam = "" };
-  // if (coincommandstring != undefined) { var coinCommandParam = "&param3=" + BLCommandPrefix + coincommandstring; } else { var coinCommandParam = "" };
-  // if (vucommandstring != undefined) { var vuCommandParam = "&param4=" + BLCommandPrefix + vucommandstring; } else { var vuCommandParam = "" };
-  // let fullURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
-  // bodyControllerLEDFunctionExecution(fullURL);
+  getCheckedElement(z);
 };
 
-// var ldpcommandstring;
-// var coincommandstring;
-// var vucommandstring;
-// var mcommandstring;
-// var check;
-function commandNoOptionsKnightRiderTest(y, t, u) {
+
+
+function changeImage(y, z) {
+  let BlueVariable = y + z + 'Blue';
+  let GreenVariable = y + z + 'Green';
+  let Blue = document.getElementById(BlueVariable);
+  let Green = document.getElementById(GreenVariable);
+
+  if (Blue.classList.contains('hidden')) {
+    Blue.classList.remove('hidden');
+    Green.classList.add('hidden');
+  } else {
+    Blue.classList.add('hidden');
+    Green.classList.remove('hidden');
+  }
+  toogleImage(y, z)
+};
+
+function getCheckedElement(y, z) {
+  var imgArray = document.getElementsByName('stripSelector' + z);
+  checkedItemsKnightRider.length = 0;
+  for (var i = 0; i < imgArray.length; i++) {
+    var tmp = imgArray[i].classList.toString();
+    if (tmp.indexOf('active') != -1) {
+      checkedItemsKnightRider.push(imgArray[i].id.toString());
+    }
+  }
+};
+
+function commandNoOptionsBodyOnly(y, t, u, z) {
   var checkmark = document.getElementById(u)
   checkmark.classList.remove('hidden');
   setTimeout(function () { checkmark.classList.add('hidden') }, 2000);
 
-  for (var i = 0; i < checkedItemsKnightRider.length; i++) {
-    if (checkedItemsKnightRider[i] === "LDPKnightRiderGreen") {
-      // console.log("L selected");
-      var ldpcommandstring = true;
-      console.log(ldpcommandstring);
-    };
-
-    if (checkedItemsKnightRider[i] === "CoinKnightRiderGreen") {
-      // console.log("C selected");
-      var coincommandstring = true;
-      console.log(coincommandstring);
-    };
-
-    if (checkedItemsKnightRider[i] === "VerticalBarstKnightRiderGreen") {
-      // console.log("V selected");
-      var vucommandstring = true;
-      console.log(vucommandstring);
-    };
-
-    if (checkedItemsKnightRider[i] === "MaintKnightRiderGreen") {
-      // console.log("M selected");
-      var mcommandstring = true;
-      console.log(mcommandstring);
-    };
-
-  }
-
-  var check = getcheckedElementsforBodyController(ldpcommandstring, mcommandstring, coincommandstring, vucommandstring);
+  var check = getcheckedElementsforBodyController(z);
   console.log("Check: " + check);
   let commandtoSend = "&param1=" + BLCommandPrefix + check + y + t;
   let fullURL = commandtoSend;
@@ -1514,39 +1455,297 @@ function commandNoOptionsKnightRiderTest(y, t, u) {
   // setTimeout(function () { bodyControllerLEDFunctionExecution(commandtoSend) }, 2000);
 };
 
-function getcheckedElementsforBodyController(l, m, c, v) {
+function commandNoOptionsBodyandDome(y, t, u, z) {
+  var checkmark = document.getElementById(u)
+  checkmark.classList.remove('hidden');
+  setTimeout(function () { checkmark.classList.add('hidden') }, 2000);
+
+  var check = getcheckedElementsforBodyController(z);
+  console.log("Check: " + check);
+  let commandtoSend = "&param1=" + BLCommandPrefix + check + y + t;
+  let fullURL = commandtoSend;
+  bodyControllerLEDFunctionExecution(commandtoSend);
+
+
+  var checkHP = getcheckedElementsforHPController(z);
+  let commandtoSendtoHPController = checkHP + y;
+  setTimeout(function () { HPLEDFunctionExecution(commandtoSendtoHPController) }, delaySecondHTTPGet);
+
+};
+
+function commandSingleColorBodyOnly(y, t, z, u, x) {
+  let colorValues = getcolor1(z);
+  var checkmark = document.getElementById(u)
+  checkmark.classList.remove('hidden');
+  setTimeout(function () { checkmark.classList.add('hidden') }, 2000);
+
+
+  var check = getcheckedElementsforBodyController(x);
+  console.log("Check: " + check);
+  let commandtoSend = "&param1=" + BLCommandPrefix + check + y + t + colorValues;
+  let fullURL = commandtoSend;
+  bodyControllerLEDFunctionExecution(commandtoSend);
+
+
+};
+
+function commandSingleColorBodyandDome(y, t, z, u, x) {
+  let colorValues = getcolor1(z);
+  var checkmark = document.getElementById(u)
+  checkmark.classList.remove('hidden');
+  setTimeout(function () { checkmark.classList.add('hidden') }, 2000);
+
+
+  var check = getcheckedElementsforBodyController(x);
+  console.log("Check: " + check);
+  let commandtoSend = "&param1=" + BLCommandPrefix + check + y + t + colorValues;
+  let fullURL = commandtoSend;
+  bodyControllerLEDFunctionExecution(commandtoSend);
+
+  setTimeout(function () { bodyControllerLEDFunctionExecution(commandtoSend) }, 2000);
+
+};
+
+function getcheckedElementsforBodyController(z) {
+  // checkedItemsKnightRider
+  var l = false;
+  var m = false;
+  var c = false;
+  var v = false;
+  var i = false;
+  var d = false;
+  var arrayName = "checkedItems" + z;
+  if (z == "KnightRider") { var arrayName2 = checkedItemsKnightRider.slice(); }
+  else if (z == "Rainbow") { var arrayName2 = checkedItemsRainbow.slice(); }
+  else if (z == "SolidColor") { var arrayName2 = checkedItemsSolidColor.slice(); }
+  else if (z == "AlternatingColors") { var arrayName2 = checkedItemsAlternatingColors.slice(); }
+  else if (z == "DimPulse") { var arrayName2 = checkedItemsDimPulse.slice(); }
+  else if (z == "DimPulse2") { var arrayName2 = checkedItemsDimPulse2.slice(); }
+  else if (z == "DimPulse3") { var arrayName2 = checkedItemsDimPulse3.slice(); }
+  else if (z == "Bounce") { var arrayName2 = checkedItemsBouncing.slice(); }
+  else if (z == "DualBounce") { var arrayName2 = checkedItemsDualBounce.slice(); }
+  else if (z == "DualingColors") { var arrayName2 = checkedItemsDualingColors.slice(); }
+  else if (z == "RandomColors") { var arrayName2 = checkedItemsRandomColor.slice(); }
+  else if (z == "RandomColors2") { var arrayName2 = checkedItemsRandomColor2.slice(); }
+  else if (z == "Flash") { var arrayName2 = checkedItemsFlash.slice(); }
+  else if (z == "ShortCircuit") { var arrayName2 = checkedItemsShortCircuit.slice(); }
+  else if (z == "PulseBeat") { var arrayName2 = checkedItemsPulseBeat.slice(); }
+  else if (z == "PulseBeat2") { var arrayName2 = checkedItemsPulseBeat2.slice(); }
+  else if (z == "WigWag") { var arrayName2 = checkedItemsWigWag.slice(); }
+  else if (z == "WigWag2") { var arrayName2 = checkedItemsWigWag2.slice(); }
+  else if (z == "ZigZag") { var arrayName2 = checkedItemsZigZag.slice(); }
+  else if (z == "ZigZg2") { var arrayName2 = checkedItemsZigZag2.slice(); }
+  else if (z == "FLD") { var arrayName2 = checkedItemsFLD.slice(); }
+  else if (z == "RLD") { var arrayName2 = checkedItemsRLD.slice(); }
+  else if (z == "Pulse") { var arrayName2 = checkedItemsPulse.slice(); }
+  else if (z == "DualPulse") { var arrayName2 = checkedItemsDualPulse.slice(); }
+  else if (z == "AutoSequence") { var arrayName2 = checkedItemsAutoSequence.slice(); }
+  else if (z == "Equalizer") { var arrayName2 = checkedItemsEqualizer.slice(); }
+
+  // console.log(arrayName2);
+  var checkLDP = "LDP" + z + "Green";
+  var checkMaint = "Maint" + z + "Green";
+  var checkCoin = "Coin" + z + "Green";
+  var checkVU = "VerticalBarst" + z + "Green";
+  var checkCBI = "CBI" + z + "Green";
+  var checkDP = "DataPanel" + z + "Green";
+  // console.log("Arrray test: " + arrayName2[0]);
+  console.log(arrayName2.length);
+  for (var b = 0; b < arrayName2.length; b++) {
+    if (arrayName2[b] === checkLDP) {
+      console.log("L selected");
+      l = true;
+      console.log(l);
+    } else { };
+
+    if (arrayName2[b] === checkCoin) {
+      console.log("C selected");
+      c = true;
+      console.log(c);
+    } else { };
+
+    if (arrayName2[b] === checkVU) {
+      console.log("V selected");
+      v = true;
+      console.log(v);
+    } else { };
+
+    if (arrayName2[b] === checkMaint) {
+      console.log("M selected");
+      m = true;
+      console.log(m);
+    } else { };
+
+    if (arrayName2[b] === checkCBI) {
+      console.log("I selected");
+      i = true;
+      console.log(m);
+    } else { };
+    if (arrayName2[b] === checkDP) {
+      console.log("D selected");
+      d = true;
+      console.log(m);
+    } else { };
+
+  }
+
   console.log("LDP: " + l);
   console.log("Maint: " + m);
   console.log("Coin: " + c);
   console.log("VU: " + v);
+  console.log("CBI: " + i);
+  console.log("DataPanel: " + d);
+  // if (l == undefined) { l = false; };
+  // if (m == undefined) { m = false; };
+  // if (c == undefined) { c = false; };
+  // if (v == undefined) { v = false; };
+  // if (i == undefined) { i = false; };
+  // if (d == undefined) { d = false; };
+  if (l == true & m == true & c == true & v == true & i == false & d == false) { return "A"; }
+  else if (l == false & m == false & c == false & v == false & i == false & d == false) { return "B"; }
+  else if (l == false & m == false & c == true & v == false & i == false & d == false) { return "C"; }
+  else if (l == false & m == false & c == false & v == false & i == false & d == true) { return "D"; }
+  else if (l == true & m == true & c == true & v == true & i == true & d == true) { return "E"; }
+  else if (l == true & m == false & c == true & v == true & i == false & d == false) { return "F"; }
+  else if (l == true & m == true & c == false & v == true & i == false & d == false) { return "G"; }
+  else if (l == false & m == false & c == false & v == true & i == false & d == true) { return "H"; }
+  else if (l == false & m == false & c == false & v == false & i == true & d == false) { return "I"; }
+  else if (l == false & m == false & c == false & v == true & i == true & d == true) { return "J"; }
+  else if (l == true & m == false & c == true & v == true & i == true & d == true) { return "K"; }
+  else if (l == true & m == false & c == false & v == false & i == false & d == false) { return "L"; }
+  else if (l == false & m == true & c == false & v == false & i == false & d == false) { return "M"; }
+  // else if (l == true & m == true & c == false & v == true & i == false & d == false) { return "N"; }
+  // else if (l == true & m == true & c == true & v == true & i == false & d == false) { return "O"; }
+  // else if (l == true & m == true & c == true & v == true & i == false & d == false) { return "P"; }
+  else if (l == false & m == true & c == true & v == true & i == false & d == false) { return "Q"; }
+  else if (l == true & m == true & c == true & v == false & i == false & d == false) { return "R"; }
+  else if (l == true & m == true & c == true & v == true & i == true & d == true) { return "S"; }
+  else if (l == true & m == true & c == false & v == false & i == false & d == false) { return "T"; }
+  else if (l == false & m == true & c == true & v == false & i == false & d == false) { return "U"; }
+  else if (l == false & m == false & c == false & v == true & i == false & d == false) { return "V"; }
+  else if (l == false & m == true & c == false & v == true & i == false & d == false) { return "W"; }
+  else if (l == true & m == false & c == true & v == false & i == false & d == false) { return "X"; }
+  else if (l == false & m == false & c == true & v == true & i == false & d == false) { return "Y"; }
+  else if (l == true & m == false & c == false & v == true & i == false & d == false) { return "Z"; }
+
+
+}
+
+
+
+
+
+
+
+
+
+function getcheckedElementsforBodyControllerOld(l, m, c, v, i = undefined, d = undefined) {
+  console.log("LDP: " + l);
+  console.log("Maint: " + m);
+  console.log("Coin: " + c);
+  console.log("VU: " + v);
+  console.log("CBI: " + i);
+  console.log("DataPanel: " + d);
   if (l == undefined) { l = false; };
   if (m == undefined) { m = false; };
   if (c == undefined) { c = false; };
   if (v == undefined) { v = false; };
+  if (i == undefined) { i = false; };
+  if (d == undefined) { d = false; };
+  if (l == true & m == true & c == true & v == true & i == false & d == false) { return "A"; }
+  else if (l == false & m == false & c == false & v == false & i == false & d == false) { return "B"; }
+  else if (l == false & m == false & c == true & v == false & i == false & d == false) { return "C"; }
+  else if (l == false & m == false & c == false & v == false & i == false & d == true) { return "D"; }
+  else if (l == true & m == true & c == true & v == true & i == true & d == true) { return "E"; }
+  else if (l == true & m == false & c == true & v == true & i == false & d == false) { return "F"; }
+  else if (l == true & m == true & c == false & v == true & i == false & d == false) { return "G"; }
+  else if (l == false & m == false & c == false & v == true & i == false & d == true) { return "H"; }
+  else if (l == false & m == false & c == false & v == false & i == true & d == false) { return "I"; }
+  else if (l == false & m == false & c == false & v == true & i == true & d == true) { return "J"; }
+  else if (l == true & m == false & c == true & v == true & i == true & d == true) { return "K"; }
+  else if (l == true & m == false & c == false & v == false & i == false & d == false) { return "L"; }
+  else if (l == false & m == true & c == false & v == false & i == false & d == false) { return "M"; }
+  // else if (l == true & m == true & c == false & v == true & i == false & d == false) { return "N"; }
+  // else if (l == true & m == true & c == true & v == true & i == false & d == false) { return "O"; }
+  // else if (l == true & m == true & c == true & v == true & i == false & d == false) { return "P"; }
+  else if (l == false & m == true & c == true & v == true & i == false & d == false) { return "Q"; }
+  else if (l == true & m == true & c == true & v == false & i == false & d == false) { return "R"; }
+  else if (l == true & m == true & c == true & v == true & i == true & d == true) { return "S"; }
+  else if (l == true & m == true & c == false & v == false & i == false & d == false) { return "T"; }
+  else if (l == false & m == true & c == true & v == false & i == false & d == false) { return "U"; }
+  else if (l == false & m == false & c == false & v == true & i == false & d == false) { return "V"; }
+  else if (l == false & m == true & c == false & v == true & i == false & d == false) { return "W"; }
+  else if (l == true & m == false & c == true & v == false & i == false & d == false) { return "X"; }
+  else if (l == false & m == false & c == true & v == true & i == false & d == false) { return "Y"; }
+  else if (l == true & m == false & c == false & v == true & i == false & d == false) { return "Z"; }
 
-  if (l == true & m == false & c == false & v == false) { return "L"; }
-  else if (l == false & m == true & c == false & v == false) { return "M"; }
-  else if (l == false & m == false & c == true & v == false) { return "C"; }
-  else if (l == false & m == false & c == false & v == true) { return "V"; }
-  else if (l == true & m == true & c == true & v == true) { return "A"; }
-  else if (l == true & m == false & c == true & v == false) { return "X"; }
-  else if (l == false & m == false & c == true & v == true) { return "Y"; }
-  else if (l == true & m == false & c == false & v == true) { return "Z"; }
-  else if (l == true & m == true & c == false & v == false) { return "T"; }
-  else if (l == false & m == true & c == true & v == false) { return "U"; }
-  else if (l == false & m == true & c == false & v == true) { return "W"; }
-  else if (l == true & m == false & c == true & v == true) { return "F"; }
 
 }
 
-function getcheckedElementsforHPController(f, t, r) {
+function getcheckedElementsforHPController(z) {
+  var t = false;
+  var f = false;
+  var r = false;
+
+  if (z == "KnightRider") { var arrayHP = checkedItemsKnightRider.slice(); }
+  else if (z == "Rainbow") { var arrayHP = checkedItemsRainbow.slice(); }
+  else if (z == "SolidColor") { var arrayHP = checkedItemsSolidColor.slice(); }
+  else if (z == "AlternatingColors") { var arrayHP = checkedItemsAlternatingColors.slice(); }
+  else if (z == "DimPulse") { var arrayHP = checkedItemsDimPulse.slice(); }
+  else if (z == "DimPulse2") { var arrayHP = checkedItemsDimPulse2.slice(); }
+  else if (z == "DimPulse3") { var arrayHP = checkedItemsDimPulse3.slice(); }
+  else if (z == "Bounce") { var arrayHP = checkedItemsBouncing.slice(); }
+  else if (z == "DualBounce") { var arrayHP = checkedItemsDualBounce.slice(); }
+  else if (z == "DualingColors") { var arrayHP = checkedItemsDualingColors.slice(); }
+  else if (z == "RandomColors") { var arrayHP = checkedItemsRandomColor.slice(); }
+  else if (z == "RandomColors2") { var arrayHP = checkedItemsRandomColor2.slice(); }
+  else if (z == "Flash") { var arrayHP = checkedItemsFlash.slice(); }
+  else if (z == "ShortCircuit") { var arrayHP = checkedItemsShortCircuit.slice(); }
+  else if (z == "PulseBeat") { var arrayHP = checkedItemsPulseBeat.slice(); }
+  else if (z == "PulseBeat2") { var arrayHP = checkedItemsPulseBeat2.slice(); }
+  else if (z == "WigWag") { var arrayHP = checkedItemsWigWag.slice(); }
+  else if (z == "WigWag2") { var arrayHP = checkedItemsWigWag2.slice(); }
+  else if (z == "ZigZag") { var arrayHP = checkedItemsZigZag.slice(); }
+  else if (z == "ZigZg2") { var arrayHP = checkedItemsZigZag2.slice(); }
+  else if (z == "FLD") { var arrayHP = checkedItemsFLD.slice(); }
+  else if (z == "RLD") { var arrayHP = checkedItemsRLD.slice(); }
+  else if (z == "Pulse") { var arrayHP = checkedItemsPulse.slice(); }
+  else if (z == "DualPulse") { var arrayHP = checkedItemsDualPulse.slice(); }
+  else if (z == "AutoSequence") { var arrayHP = checkedItemsAutoSequence.slice(); }
+  else if (z == "Equalizer") { var arrayHP = checkedItemsEqualizer.slice(); }
+
+
+  var checkFrontHP = "FrontHP" + z + "Green";
+  var checkTopHP = "TopHP" + z + "Green";
+  var checkRearHP = "RearHP" + z + "Green";
+
+  console.log(arrayHP.length);
+  for (var b = 0; b < arrayHP.length; b++) {
+    if (arrayHP[b] === checkFrontHP) {
+      console.log("Front HP selected");
+      f = true;
+      console.log(f);
+    } else { };
+
+    if (arrayHP[b] === checkTopHP) {
+      console.log("Top HP selected");
+      t = true;
+      console.log(t);
+    } else { };
+
+    if (arrayHP[b] === checkRearHP) {
+      console.log("Rear HP selected");
+      r = true;
+      console.log(r);
+    } else { };
+
+
+  }
+
   console.log("HP Front: " + f);
   console.log("HP Top: " + t);
   console.log("HP Rear: " + r);
 
-  if (f == undefined) { f = false; };
-  if (t == undefined) { t = false; };
-  if (r == undefined) { r = false; };
 
   if (f == true & t == false & r == false) { return "F"; }
   else if (f == false & t == true & r == false) { return "T0"; }
@@ -1560,47 +1759,6 @@ function getcheckedElementsforHPController(f, t, r) {
 
 
 
-function commandSingleColorKnightRider(y, t, z, u) {
-  let colorValues = getcolor1(z);
-  var checkmark = document.getElementById(u)
-  checkmark.classList.remove('hidden');
-  setTimeout(function () { checkmark.classList.add('hidden') }, 2000);
-
-  for (var i = 0; i < checkedItemsKnightRider.length; i++) {
-    if (checkedItemsKnightRider[i] === "LDPKnightRiderGreen") {
-      // console.log("L selected");
-      var ldpcommandstring = true;
-      console.log(ldpcommandstring);
-    };
-
-    if (checkedItemsKnightRider[i] === "CoinKnightRiderGreen") {
-      // console.log("C selected");
-      var coincommandstring = true;
-      console.log(coincommandstring);
-    };
-
-    if (checkedItemsKnightRider[i] === "VerticalBarstKnightRiderGreen") {
-      // console.log("V selected");
-      var vucommandstring = true;
-      console.log(vucommandstring);
-    };
-
-    if (checkedItemsKnightRider[i] === "MaintKnightRiderGreen") {
-      // console.log("M selected");
-      var mcommandstring = true;
-      console.log(mcommandstring);
-    };
-
-  }
-
-  var check = getcheckedElementsforBodyController(ldpcommandstring, mcommandstring, coincommandstring, vucommandstring);
-  console.log("Check: " + check);
-  let commandtoSend = "&param1=" + BLCommandPrefix + check + y + t + colorValues;
-  let fullURL = commandtoSend;
-  bodyControllerLEDFunctionExecution(commandtoSend);
-
-
-};
 
 function commandStripOffKnightRider(u) {
   var checkmark = document.getElementById(u)
@@ -10664,53 +10822,53 @@ function getCheckedElements3() {
 
 
 
-function changeImageLDP(f) {
-  let func = "LDP" + f;
-  if (document.getElementById(func).src.match("LDPBlue.png")) {
-    document.getElementById(func).src = "Images/Body/LDPGreen.png";
-    // console.log("Changed to Green");
-  } else {
-    document.getElementById(func).src = "Images/Body/LDPBlue.png";
-    // console.log("Change to Blue");
-  }
-  ldptoggle(f)
-};
+// function changeImageLDP(f) {
+//   let func = "LDP" + f;
+//   if (document.getElementById(func).src.match("LDPBlue.png")) {
+//     document.getElementById(func).src = "Images/Body/LDPGreen.png";
+//     // console.log("Changed to Green");
+//   } else {
+//     document.getElementById(func).src = "Images/Body/LDPBlue.png";
+//     // console.log("Change to Blue");
+//   }
+//   ldptoggle(f)
+// };
 
-function changeImageCoinSlots() {
+// function changeImageCoinSlots() {
 
-  if (document.getElementById("C").src.match("CoinSLotsBlue.png")) {
-    document.getElementById("C").src = "Images/Body/CoinSlotsGreen.png";
-    // console.log("Changed to Green");
-  } else {
-    document.getElementById("C").src = "Images/Body/CoinSLotsBlue.png";
-    // console.log("Change to Blue");
-  }
-  cointoggle()
-}
+//   if (document.getElementById("C").src.match("CoinSLotsBlue.png")) {
+//     document.getElementById("C").src = "Images/Body/CoinSlotsGreen.png";
+//     // console.log("Changed to Green");
+//   } else {
+//     document.getElementById("C").src = "Images/Body/CoinSLotsBlue.png";
+//     // console.log("Change to Blue");
+//   }
+//   cointoggle()
+// }
 
-function changeImageMaint() {
+// function changeImageMaint() {
 
-  if (document.getElementById("M").src.match("SkirtBlue.png")) {
-    document.getElementById("M").src = "Images/Body/SkirtGreen.png";
-    // console.log("Changed to Green");
-  } else {
-    document.getElementById("M").src = "Images/Body/SkirtBlue.png";
-    // console.log("Change to Blue");
-  }
-  mainttoggle()
-}
+//   if (document.getElementById("M").src.match("SkirtBlue.png")) {
+//     document.getElementById("M").src = "Images/Body/SkirtGreen.png";
+//     // console.log("Changed to Green");
+//   } else {
+//     document.getElementById("M").src = "Images/Body/SkirtBlue.png";
+//     // console.log("Change to Blue");
+//   }
+//   mainttoggle()
+// }
 
-function changeImageDataPanelVerticalBars() {
+// function changeImageDataPanelVerticalBars() {
 
-  if (document.getElementById("V").src.match("DataPanelVerticalBlue.png")) {
-    document.getElementById("V").src = "Images/Body/DataPanelVerticalGreen.png";
-    // console.log("Changed to Green");
-  } else {
-    document.getElementById("V").src = "Images/Body/DataPanelVerticalBlue.png";
-    // console.log("Change to Blue");
-  }
-  vutoggle()
-}
+//   if (document.getElementById("V").src.match("DataPanelVerticalBlue.png")) {
+//     document.getElementById("V").src = "Images/Body/DataPanelVerticalGreen.png";
+//     // console.log("Changed to Green");
+//   } else {
+//     document.getElementById("V").src = "Images/Body/DataPanelVerticalBlue.png";
+//     // console.log("Change to Blue");
+//   }
+//   vutoggle()
+// }
 
 
 
@@ -11482,7 +11640,7 @@ function periscopeHeightSliderFunction(a, b) {
     sliderDiv.innerHTML = this.value;
     let slidervalue1 = this.value;
     console.log(slidervalue1);
-    httpGet("http://192.168.4.101/?param0=:L:EDP:SUS:PP" + slidervalue1);
+    httpGet("http://192.168.4.101/?param0=:&param1=:L:EDP:SUS:PP" + slidervalue1);
     // changeVolume(slidervalue1);
     // sendEEPROMBodyLEDController(slidervalue1, c);
   }
