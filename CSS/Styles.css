@@ -10,6 +10,159 @@ body {
   overflow: hidden;
 
 }
+
+/* html,
+body {
+  background: #274d83;
+  color: #FFF;
+  font: 400 18px/1.2 'Open Sans', sans-serif;
+} */
+.scale{
+  position: absolute;
+  left: -390px;
+  top: 125px;
+}
+
+.scale1{
+  position: absolute;
+  left: -390px;
+  top: 185px;
+}
+.canvaseClass{
+  position: absolute;
+  top: 100px;
+  left: -400px;
+  height: 600px;
+  width: 1100px;
+}
+.s-loader {
+  animation: loading 4s ease-in-out 2s forwards infinite;
+  left: 50%;
+  position: absolute;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  transition: opacity .3s ease-in-out, visibility .3s ease-in-out;
+  top: 50%;
+}
+
+.button-group {
+  position: absolute;
+  left: 700px;
+  top: 200px
+}
+
+button,
+button:hover,
+button:active,
+button:focus {
+  border: none;
+  cursor: pointer;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  user-select: none;
+  outline: none;
+}
+
+button {
+  background: #003c5b;
+  color: #FFF;
+  display: block;
+  font-size: 35px;
+  height: 55px;
+  line-height: 30px;
+  margin-bottom: 5px;
+  padding: 5px;
+  text-align: center;
+  width: 55px;
+  transition: background .3s ease-in-out;
+}
+
+button:hover,
+button:focus {
+  background: #274d83
+}
+
+button:disabled {
+  color: #7d99d5;
+  cursor: default
+}
+
+canvas {
+  cursor: all-scroll;
+  display: block;
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+}
+
+canvas.loaded {
+  opacity: 1
+}
+
+canvas.loaded + .s-loader {
+  animation: none;
+  opacity: 0;
+  visibility: hidden
+}
+
+@keyframes loading {
+  0,
+  40%,
+  50%,
+  100% {
+    opacity: 1
+  }
+  45% {
+    opacity: 0
+  }
+}
+
+
+/*
+    TOUCH DEVICES
+*/
+
+.info {
+  background: #274d83;
+  display: none;
+  left: 50%;
+  padding: 20px;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(90% - 40px);
+}
+
+.touch .button-group {
+  display: none
+}
+
+.touch canvas.loaded ~ .info:not(.hidden) {
+  display: block
+}
+
+
+
+
+
+
+
+
+
+
+
+.gesturesheaders{
+  position: absolute;
+  width: 700px;
+
+}
+.Gestures_Quick_Reference{
+  position: absolute;
+  top: 100px;
+  left: -300px;
+  width: 1000px;
+}
 .HomeSounds{
   position: absolute;
   top: 675px;
@@ -681,6 +834,11 @@ height: 110px;
   left: -380px;
   top: 120px;
 
+}
+.canvas{
+  position: absolute;
+  left: -400px;
+  top: 100px;
 }
 
 .moveDownArrowLinks{

@@ -28,6 +28,431 @@ function openAllDoorsMS() {
   };
 };
 
+var canvas = document.getElementById("canvas"),
+  ctx = canvas.getContext("2d"),
+  image = new Image(),
+  imageWidth,
+  imageHeight,
+  scaling = false,
+  scale = 1,
+  maxScale,
+  scaleFactor = 1.1,
+  scaleDown = false,
+  scaleUp = false,
+  scaleDraw,
+  distance,
+  lastDistance = 0,
+  canDrag = false,
+  isDragging = false,
+  startCoords = {
+    x: 0,
+    y: 0
+  },
+  last = {
+    x: 0,
+    y: 0
+  },
+  moveX = 0,
+  moveY = 0,
+  redraw;
+
+function isTouchDevice() {
+  return typeof window.ontouchstart !== "undefined";
+}
+
+function hideTooltip() {
+  $(".info").addClass("hidden");
+}
+
+function scaleCanvas() {
+  if (scaling === "down") {
+    scale = scale / scaleFactor;
+    scale < 1 ? 1 : scale;
+  } else if (scaling === "up") {
+    scale = scale * scaleFactor;
+    scale > maxScale ? maxScale : scale;
+  }
+
+  redraw = requestAnimationFrame(canvasDraw);
+}
+
+function scaleCanvasTouch() {
+  if (lastDistance > distance) {
+    scale = scale / scaleFactor;
+    if (scale < 1) scale = 1;
+  } else if (lastDistance < distance) {
+    scale = scale * scaleFactor;
+    if (scale > maxScale) scale = maxScale;
+  }
+
+  redraw = requestAnimationFrame(canvasDraw);
+
+  lastDistance = distance;
+}
+
+function canvasDraw() {
+  (imageWidth = image.width * ratio * scale),
+    (imageHeight = image.height * ratio * scale);
+
+  var offsetX = (imageWidth - canvas.width) / 2,
+    offsetY = (imageHeight - canvas.height) / 2;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  if (moveX > offsetX) {
+    moveX = offsetX;
+  }
+
+  if (moveX < -(imageWidth - offsetX - canvas.width)) {
+    moveX = -(imageWidth - offsetX - canvas.width);
+  }
+
+  if (moveY > offsetY) {
+    moveY = offsetY;
+  }
+
+  if (moveY < -(imageHeight - offsetY - canvas.height)) {
+    moveY = -(imageHeight - offsetY - canvas.height);
+  }
+
+  ctx.drawImage(
+    image,
+    -offsetX + moveX,
+    -offsetY + moveY,
+    imageWidth,
+    imageHeight
+  );
+}
+
+function resizeCanvas(width, height) {
+  canvas.width = width;
+  canvas.height = height;
+
+  maxScale = Math.min(image.height / canvas.height, image.width / canvas.width);
+  ratio = Math.max(canvas.height / image.height, canvas.width / image.width);
+
+  redraw = requestAnimationFrame(canvasDraw);
+}
+
+function canvasInit(src) {
+  image.src = src;
+  image.onload = function () {
+    resizeCanvas($(window).width(), $(window).height());
+    $("canvas").addClass("loaded");
+  };
+}
+
+/*
+    POINTER EVENTS
+*/
+
+function pointerEvents(e) {
+  var pos = {
+    x: 0,
+    y: 0
+  };
+
+  if (e.type == "touchstart" || e.type == "touchmove" || e.type == "touchend") {
+    var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+    pos.x = touch.pageX;
+    pos.y = touch.pageY;
+  } else if (
+    e.type == "mousedown" ||
+    e.type == "mouseup" ||
+    e.type == "mousemove"
+  ) {
+    pos.x = e.pageX;
+    pos.y = e.pageY;
+  }
+
+  return pos;
+}
+
+$(window).on("resize", function () {
+  resizeCanvas($(window).width(), $(window).height());
+});
+
+$("document").ready(function () {
+  //show info tooltip if is mobile
+  if (isTouchDevice()) {
+    scaleFactor = 1.02;
+    $("body")
+      .addClass("touch")
+      .on("touchstart", function () {
+        hideTooltip();
+      });
+  }
+
+  canvasInit("../Images/R2D2-Wiring-Diagram.png");
+
+  $(".scale").on("click", function () {
+    if ($(this).data("scale") === "down") {
+      scaling = "down";
+    } else {
+      scaling = "up";
+    }
+
+    scaleDraw = requestAnimationFrame(scaleCanvas);
+
+    scale < maxScale
+      ? $('[data-scale="up"]').removeAttr("disabled")
+      : $('[data-scale="up"]').attr("disabled", "true");
+    scale >= 1
+      ? $('[data-scale="down"]').removeAttr("disabled")
+      : $('[data-scale="down"]').attr("disabled", "true");
+  });
+
+  $("canvas")
+    .on("mousedown touchstart", function (e) {
+      var position = pointerEvents(e),
+        touch = e.originalEvent.touches || e.originalEvent.changedTouches;
+
+      if (e.type === "touchstart" && touch.length === 2) {
+        scaling = true;
+
+        // Pinch detection credits: http://stackoverflow.com/questions/11183174/simplest-way-to-detect-a-pinch/11183333#11183333
+        lastDistance = Math.sqrt(
+          (touch[0].clientX - touch[1].clientX) *
+          (touch[0].clientX - touch[1].clientX) +
+          (touch[0].clientY - touch[1].clientY) *
+          (touch[0].clientY - touch[1].clientY)
+        );
+      } else {
+        canDrag = true;
+        isDragging = scaling = false;
+
+        startCoords = {
+          x: position.x - $(this).offset().left - last.x,
+          y: position.y - $(this).offset().top - last.y
+        };
+      }
+    })
+    .on("mousemove touchmove", function (e) {
+      e.preventDefault();
+
+      isDragging = true;
+
+      if (isDragging && canDrag && scaling === false) {
+        var position = pointerEvents(e),
+          offset = e.type === "touchmove" ? 1.3 : 1;
+
+        moveX = (position.x - $(this).offset().left - startCoords.x) * offset;
+        moveY = (position.y - $(this).offset().top - startCoords.y) * offset;
+
+        redraw = requestAnimationFrame(canvasDraw);
+      } else if (scaling === true) {
+        var touch = e.originalEvent.touches || e.originalEvent.changedTouches;
+
+        //Pinch detection credits: http://stackoverflow.com/questions/11183174/simplest-way-to-detect-a-pinch/11183333#11183333
+        distance = Math.sqrt(
+          (touch[0].clientX - touch[1].clientX) *
+          (touch[0].clientX - touch[1].clientX) +
+          (touch[0].clientY - touch[1].clientY) *
+          (touch[0].clientY - touch[1].clientY)
+        );
+
+        scaleDraw = requestAnimationFrame(scaleCanvasTouch);
+      }
+    })
+    .on("mouseup touchend", function (e) {
+      var position = pointerEvents(e);
+
+      canDrag = isDragging = scaling = false;
+
+      last = {
+        x: position.x - $(this).offset().left - startCoords.x,
+        y: position.y - $(this).offset().top - startCoords.y
+      };
+
+      cancelAnimationFrame(scaleDraw);
+      cancelAnimationFrame(redraw);
+    });
+});
+
+// var canv = document.getElementById('WiringDiagramCanvas'),
+//   ctx = canv.getContext('2d'),
+//   rect = {},
+//   drag = true,
+//   img = loadImage(init); // pass the init function as a callback
+
+// function loadImage(cb) {
+//   var img = new Image();
+//   img.onload = cb;
+//   img.src = '../Images/R2D2-Wiring-Diagram.png'
+//   return img;
+// }
+
+// function draw() {
+//   ctx.clearRect(0, 0, canv.width, canv.height); // clear
+//   ctx.drawImage(img, 0, 0, 400, 600); // draw bg
+//   drawRect(); // draw rect
+// }
+
+// function drawRect() {
+//   ctx.strokeRect(rect.startX, rect.startY, rect.w, rect.h);
+// }
+
+// function mouseDown(e) {
+//   rect.startX = e.pageX - this.offsetLeft;
+//   rect.startY = e.pageY - this.offsetTop;
+//   drag = true;
+// }
+
+// function mouseUp() {
+//   drag = true;
+// }
+
+// function mouseMove(e) {
+//   if (drag) {
+//     rect.w = (e.pageX - this.offsetLeft) - rect.startX;
+//     rect.h = (e.pageY - this.offsetTop) - rect.startY;
+//     draw();
+//   }
+// }
+
+// function init() {
+//   canv.addEventListener('mousedown', mouseDown, false);
+//   canv.addEventListener('mouseup', mouseUp, false);
+//   canv.addEventListener('mousemove', mouseMove, false);
+//   draw();
+// }
+// // Import stylesheets
+// // import './style.css';
+
+// let canvasEl;
+// let ctx;
+// let image;
+// let isDragging;
+// let isMousedown;
+// let startPanX = 0;
+// let startPanY = 0;
+// let zoom = 1;
+// let panX = 0;
+// let panY = 0;
+
+// init();
+// loadImage(canv, ctx);
+
+// function init() {
+//   canvasEl = document.getElementById('WiringDiagramCanvas');
+//   ctx = canvasEl.getContext('2d');
+
+//   loadImage('./Images/R2D2-Wiring-Diagram.png').then((img) => {
+//     image = img;
+//     ctx.drawImage(img, 0, 0);
+//     setupListeners(canvasEl);
+//   });
+// }
+
+// function loadImage(src, width, height) {
+//   const image = new Image();
+//   image.src = src;
+//   image.width = width;
+//   image.height = height;
+
+//   return new Promise((resolve) => {
+//     image.onload = () => {
+//       resolve(image);
+//     }
+//   })
+// }
+
+// function setupListeners(canvasEl) {
+
+//   canvasEl.addEventListener('mousedown', (e) => handleMouseDown(e));
+//   canvasEl.addEventListener('mouseup', () => handleMouseUp());
+//   canvasEl.addEventListener('mousemove', (e) => handleMouseMove(e));
+//   canvasEl.addEventListener('mousewheel', (e) => handleMouseWheel(e), { passive: true });
+
+//   // For mobile
+//   canvasEl.addEventListener('touchstart', (e) => handleMouseDown(e), { passive: true });
+//   canvasEl.addEventListener('touchend', (e) => handleMouseUp(e));
+//   canvasEl.addEventListener('touchmove', (e) => handleMouseMove(e), { passive: true });
+// }
+
+// function handleMouseDown(event) {
+//   event.preventDefault;
+//   isMousedown = true;
+//   startPanX = event.clientX;
+//   startPanY = event.clientY;
+// }
+
+// function handleMouseMove(event) {
+//   if (!isMousedown) {
+//     return;
+//   }
+//   event.preventDefault;
+
+//   const deltaX = (startPanX - event.clientX);
+//   const deltaY = (startPanY - event.clientY);
+//   panX += deltaX;
+//   panY += deltaY;
+//   startPanX = event.clientX;
+//   startPanY = event.clientY;
+//   redraw(image, zoom);
+// }
+
+// function handleMouseWheel(event) {
+//   event.preventDefault;
+//   isMousedown = false;
+//   const zoomChange = -event.deltaY;
+//   zoom += (zoomChange / 4);
+
+//   if (zoom < 0.75) { zoom = 0.75; }
+//   if (zoom > 3) { zoom = 3; }
+//   redraw(image, zoom);
+// }
+
+// function redraw(image, zoom) {
+//   if (!ctx) { return; }
+//   ctx.clearRect(0, 0, canvasEl.width, canvasEl.height); // Clear canvas
+//   const perceivedWidth = image.width * zoom;
+//   const perceivedHeight = image.height * zoom;
+
+//   let dx = 0;
+//   let dy = 0;
+
+//   // Center the image as you zoom in using dx and dy offsets
+//   if (zoom > 1) {
+//     dx = -perceivedWidth / 4;
+//     dy = -perceivedHeight / 4;
+//   } else {
+//     dx = 0;
+//     dy = 0;
+//   }
+
+//   boundPan();
+//   ctx.drawImage(image, panX, panY, image.width, image.height, dx, dy, perceivedWidth, perceivedHeight);
+// }
+
+// function boundPan() {
+//   const padding = 50 * zoom;
+//   if ((panX - padding) < -image.width) {
+//     panX = -image.width + padding;
+//   }
+
+//   if ((panX + padding) > image.width) {
+//     panX = image.width - padding;
+//   }
+
+//   if ((panY - padding) < -image.height) {
+//     panY = -image.height + padding;
+//   }
+
+//   if ((panY + padding) > image.height) {
+//     panY = image.height - padding;
+//   }
+// }
+
+// function handleMouseUp() {
+//   isMousedown = false;
+//   isDragging = false;
+// }
+
+
+
+
+
 // localStorage.key()
 var droidgatewayControllerStatus = false;
 var relayStatus = false;
@@ -54,8 +479,8 @@ var HPCommandPrefix = ":L:EHP:H"
 var DLCommandPrefix = ":L:EDC:SDL"
 var PSCommandPrefix = ":L:EDC:SFU"
 
-var statusQueryLength = 2000
-var delaySecondHTTPGet = 750
+var statusQueryLength = 200000
+var delaySecondHTTPGet = 1000
 
 function httpGetStatus() {
   let theStatusURL = "http://192.168.4.101/status"
@@ -1201,13 +1626,14 @@ function commandNoOptionsRSeries(t) {
   };
 
   let rldCommandParam = "&param1=" + DLCommandPrefix + RLDSeriescommandString;
-  let fldtCommandParam = "&param2=" + DLCommandPrefix + FLDTRSeriesCommandString;
-  let fldbCommandParam = "&param3=" + DLCommandPrefix + FLDBRSeriesCommandString;
+  let fldtCommandParam = "&param1=" + DLCommandPrefix + FLDTRSeriesCommandString;
+  let fldbCommandParam = "&param1=" + DLCommandPrefix + FLDBRSeriesCommandString;
   let rpsiCommandParam = "&param4=" + PSCommandPrefix + rpsicommandstring;
   let fpsiCommandParam = "&param5=" + PSCommandPrefix + fpsicommandstring;
 
   let fullURL = rldCommandParam + fldtCommandParam + fldbCommandParam + rpsiCommandParam + fpsiCommandParam;
-  RSeriesLEDFunctionExecution(fullURL);
+  RSeriesLEDFunctionExecution(fldtCommandParam);
+  setTimeout(function () { RSeriesLEDFunctionExecution(fldbCommandParam) }, 1000)
 
 
 
@@ -1232,10 +1658,10 @@ function rseriesText(a, b, c) {
   RSeriesLEDFunctionExecution(topFull);
   let bottom = document.getElementById(b).value;
   let bottomFull = "@2M" + bottom;
-  RSeriesLEDFunctionExecution(bottomFull);
+  setTimeout(function () { RSeriesLEDFunctionExecution(bottomFull) }, 2550);
   let rld = document.getElementById(c).value;
   let rldFull = "@3M" + rld;
-  RSeriesLEDFunctionExecution(rldFull);
+  setTimeout(function () { RSeriesLEDFunctionExecution(rldFull) }, 4500);
 }
 
 
@@ -1245,173 +1671,115 @@ function rseriesText(a, b, c) {
 var checkedItemsKnightRider = new Array();
 var imgArrayKnightRider = [];
 
-function ldptoggleKnightRider() {
-  let tmp = document.querySelector('#LDPKnightRiderGreen');
-  tmp.classList.toggle('active');
-  if (tmp.classList.contains('active')) {
-  }
-  getCheckedElementKnightRider();
-};
 
-function cointoggleKnightRider() {
-  let tmp = document.querySelector('#CoinKnightRiderGreen');
-  tmp.classList.toggle('active');
-  if (tmp.classList.contains('active')) {
-  }
-  getCheckedElementKnightRider();
-};
+function selectALLStrips(z, x = 'noDome', y = 'noBodyLogics') {
 
-function mainttoggleKnightRider() {
-  let tmp = document.querySelector('#MaintKnightRiderGreen');
-  tmp.classList.toggle('active');
-  if (tmp.classList.contains('active')) {
-  }
-  getCheckedElementKnightRider()
-};
-
-function verticaltoggleKnightRider() {
-  let tmp = document.querySelector('#VerticalBarstKnightRiderGreen');
-  tmp.classList.toggle('active');
-  if (tmp.classList.contains('active')) {
-  }
-  getCheckedElementKnightRider()
-};
-
-function getCheckedElementKnightRider() {
-  var imgArrayKnightRider = document.getElementsByName('stripSelectorKnightRider');
-  checkedItemsKnightRider.length = 0;
-  for (var i = 0; i < imgArrayKnightRider.length; i++) {
-    var tmp = imgArrayKnightRider[i].classList.toString();
-    if (tmp.indexOf('active') != -1) {
-      checkedItemsKnightRider.push(imgArrayKnightRider[i].id.toString());
-    }
-  }
-};
-
-function selectALLStripsKnightRider() {
-
-  document.getElementById("LDPKnightRiderBlue").classList.add('hidden');
-  document.getElementById("LDPKnightRiderGreen").classList.remove('hidden');
-  document.getElementById('CoinKnightRiderBlue').classList.add('hidden');
-  document.getElementById('CoinKnightRiderGreen').classList.remove('hidden');
-  document.getElementById("MaintKnightRiderBlue").classList.add('hidden');
-  document.getElementById("MaintKnightRiderGreen").classList.remove('hidden');
-  document.getElementById('VerticalBarstKnightRiderBlue').classList.add('hidden');
-  document.getElementById('VerticalBarstKnightRiderGreen').classList.remove('hidden');
-
-  document.getElementById("checkmarkallKnightRider").classList.remove('hidden');
-  setTimeout('document.getElementById("checkmarkallKnightRider").classList.add("hidden") ', 2000);
-
-  let ldptemp = document.querySelector('#LDPKnightRiderGreen');
+  document.getElementById("LDP" + z + "Blue").classList.add('hidden');
+  document.getElementById("LDP" + z + "Green").classList.remove('hidden');
+  document.getElementById("Coin" + z + "Blue").classList.add('hidden');
+  document.getElementById("Coin" + z + "Green").classList.remove('hidden');
+  document.getElementById("Maint" + z + "Blue").classList.add('hidden');
+  document.getElementById("Maint" + z + "Green").classList.remove('hidden');
+  document.getElementById("VU" + z + "Blue").classList.add('hidden');
+  document.getElementById("VU" + z + "Green").classList.remove('hidden');
+  let ldptemp = document.querySelector('#LDP' + z + 'Green');
   ldptemp.classList.add('active');
-  let cointemp = document.querySelector('#CoinKnightRiderGreen');
+  let cointemp = document.querySelector('#Coin' + z + 'Green');
   cointemp.classList.add('active');
-  let mainttemp = document.querySelector('#MaintKnightRiderGreen');
+  let mainttemp = document.querySelector('#Maint' + z + 'Green');
   mainttemp.classList.add('active');
-  let vutemp = document.querySelector('#VerticalBarstKnightRiderGreen');
+  let vutemp = document.querySelector('#VU' + z + 'Green');
   vutemp.classList.add('active');
-  getCheckedElementKnightRider()
+
+  if (x == 'hasDome') {
+    document.getElementById("FrontHP" + z + "Blue").classList.add('hidden');
+    document.getElementById("FrontHP" + z + "Green").classList.remove('hidden');
+
+    document.getElementById("TopHP" + z + "Blue").classList.add('hidden');
+    document.getElementById("TopHP" + z + "Green").classList.remove('hidden');
+
+    document.getElementById("RearHP" + z + "Blue").classList.add('hidden');
+    document.getElementById("RearHP" + z + "Green").classList.remove('hidden');
+    let fptemp = document.querySelector('#FrontHP' + z + 'Green');
+    fptemp.classList.add('active');
+    let tHtemp = document.querySelector('#TopHP' + z + 'Green');
+    tHtemp.classList.add('active');
+    let rhtemp = document.querySelector('#RearHP' + z + 'Green');
+    rhtemp.classList.add('active');
+  }
+
+  if (y == 'hasBodyLogics') {
+    document.getElementById("CBI" + z + "Blue").classList.add('hidden');
+    document.getElementById("CBI" + z + "Green").classList.remove('hidden');
+    let cbitemp = document.querySelector('#CBI' + z + 'Green');
+    cbitemp.classList.add('active');
+    document.getElementById("DP" + z + "Blue").classList.add('hidden');
+    document.getElementById("DP" + z + "Green").classList.remove('hidden');
+    let dptemp = document.querySelector('#DP' + z + 'Green');
+    dptemp.classList.add('active');
+  }
+
+
+
+  var tmpcheck = "checkmarkall" + z;
+  document.getElementById(tmpcheck).classList.remove('hidden');
+  setTimeout(() => { document.getElementById(tmpcheck).classList.add('hidden'); }, 2000);
+  getCheckedElementUniversal(z)
 }
 
 
-function selectNoneStripsKnightRider() {
-  document.getElementById("LDPKnightRiderBlue").classList.remove('hidden');
-  document.getElementById("LDPKnightRiderGreen").classList.add('hidden');
-  document.getElementById('CoinKnightRiderBlue').classList.remove('hidden');
-  document.getElementById('CoinKnightRiderGreen').classList.add('hidden');
-  document.getElementById("MaintKnightRiderBlue").classList.remove('hidden');
-  document.getElementById("MaintKnightRiderGreen").classList.add('hidden');
-  document.getElementById('VerticalBarstKnightRiderBlue').classList.remove('hidden');
-  document.getElementById('VerticalBarstKnightRiderGreen').classList.add('hidden');
+function selectNoneStrips(z, x = 'noDome', y = 'noBodyLogics') {
+  document.getElementById("LDP" + z + "Blue").classList.remove('hidden');
+  document.getElementById("LDP" + z + "Green").classList.add('hidden');
+  document.getElementById("Coin" + z + "Blue").classList.remove('hidden');
+  document.getElementById("Coin" + z + "Green").classList.add('hidden');
+  document.getElementById("Maint" + z + "Blue").classList.remove('hidden');
+  document.getElementById("Maint" + z + "Green").classList.add('hidden');
+  document.getElementById("VU" + z + "Blue").classList.remove('hidden');
+  document.getElementById("VU" + z + "Green").classList.add('hidden');
+  if (x == 'hasDome') {
+    document.getElementById("FrontHP" + z + "Blue").classList.remove('hidden');
+    document.getElementById("FrontHP" + z + "Green").classList.add('hidden');
+    document.getElementById("TopHP" + z + "Blue").classList.remove('hidden');
+    document.getElementById("TopHP" + z + "Green").classList.add('hidden');
+    document.getElementById("RearHP" + z + "Blue").classList.remove('hidden');
+    document.getElementById("RearHP" + z + "Green").classList.add('hidden');
+    let fptemp = document.querySelector('#FrontHP' + z + 'Green');
+    fptemp.classList.remove('active');
+    let tptemp = document.querySelector('#TopHP' + z + 'Green');
+    tptemp.classList.remove('active');
+    let rptemp = document.querySelector('#RearHP' + z + 'Green');
+    rptemp.classList.remove('active');
+  }
 
-  document.getElementById("checkmarknoneKnightRider").classList.remove('hidden');
-  setTimeout('document.getElementById("checkmarknoneKnightRider").classList.add("hidden") ', 2000);
-  // setTimeout('document.getElementById("checkmarknoneKnightRider").src = "Images/blankcheckmark.png"', 2000);
+  if (y == 'hasBodyLogics') {
+    document.getElementById("CBI" + z + "Blue").classList.remove('hidden');
+    document.getElementById("CBI" + z + "Green").classList.add('hidden');
+    let cbitemp = document.querySelector('#CBI' + z + 'Green');
+    cbitemp.classList.remove('active');
+    document.getElementById("DP" + z + "Blue").classList.remove('hidden');
+    document.getElementById("DP" + z + "Green").classList.add('hidden');
+    let dptemp = document.querySelector('#DP' + z + 'Green');
+    dptemp.classList.remove('active');
+  }
 
-  let ldptemp = document.querySelector('#LDPKnightRiderGreen');
+
+  var tmpcheck = "checkmarknone" + z;
+  document.getElementById(tmpcheck).classList.remove('hidden');
+  setTimeout(() => { document.getElementById(tmpcheck).classList.add('hidden'); }, 2000);
+
+  let ldptemp = document.querySelector('#LDP' + z + 'Green');
   ldptemp.classList.remove('active');
-  let cointemp = document.querySelector('#CoinKnightRiderGreen');
+  let cointemp = document.querySelector('#Coin' + z + 'Green');
   cointemp.classList.remove('active');
-  let mainttemp = document.querySelector('#MaintKnightRiderGreen');
+  let mainttemp = document.querySelector('#Maint' + z + 'Green');
   mainttemp.classList.remove('active');
-  let vutemp = document.querySelector('#VerticalBarstKnightRiderGreen');
+  let vutemp = document.querySelector('#VU' + z + 'Green');
   vutemp.classList.remove('active');
-  getCheckedElementKnightRider()
+
+  getCheckedElementUniversal(z)
 }
 
-
-
-
-
-function changeImageLDPKnightRider() {
-  let Blue = document.getElementById('LDPKnightRiderBlue')
-  let Green = document.getElementById('LDPKnightRiderGreen')
-
-  if (Blue.classList.contains('hidden')) {
-    Blue.classList.remove('hidden');
-    Green.classList.add('hidden');
-  } else {
-    Blue.classList.add('hidden');
-    Green.classList.remove('hidden');
-  }
-  ldptoggleKnightRider()
-};
-
-function changeImageCoinKnightRider() {
-  let Blue = document.getElementById('CoinKnightRiderBlue')
-  let Green = document.getElementById('CoinKnightRiderGreen')
-
-  if (Blue.classList.contains('hidden')) {
-    Blue.classList.remove('hidden');
-    Green.classList.add('hidden');
-  } else {
-    Blue.classList.add('hidden');
-    Green.classList.remove('hidden');
-  }
-  cointoggleKnightRider()
-};
-
-function changeImageMaintKnightRider() {
-
-  let Blue = document.getElementById('MaintKnightRiderBlue')
-  let Green = document.getElementById('MaintKnightRiderGreen')
-
-  if (Blue.classList.contains('hidden')) {
-    Blue.classList.remove('hidden');
-    Green.classList.add('hidden');
-  } else {
-    Blue.classList.add('hidden');
-    Green.classList.remove('hidden');
-  }
-  mainttoggleKnightRider()
-};
-function changeImageVerticalBarsKnightRider() {
-
-  let Blue = document.getElementById('VerticalBarstKnightRiderBlue')
-  let Green = document.getElementById('VerticalBarstKnightRiderGreen')
-
-  if (Blue.classList.contains('hidden')) {
-    Blue.classList.remove('hidden');
-    Green.classList.add('hidden');
-  } else {
-    Blue.classList.add('hidden');
-    Green.classList.remove('hidden');
-  }
-  verticaltoggleKnightRider()
-};
-
-
-var checkedItemsKnightRider = new Array();
-var imgArrayKnightRider = [];
-
-function toogleImage(y, z) {
-  let tmp1 = '#' + y + z + 'Green'
-  let tmp = document.querySelector(tmp1);
-  tmp.classList.toggle('active');
-  if (tmp.classList.contains('active')) {
-  }
-  getCheckedElement(z);
-};
 
 
 
@@ -1431,18 +1799,82 @@ function changeImage(y, z) {
   toogleImage(y, z)
 };
 
-function getCheckedElement(y, z) {
+
+function toogleImage(y, z) {
+  let tmp1 = '#' + y + z + 'Green'
+  let tmp = document.querySelector(tmp1);
+  // console.log(tmp1);
+  tmp.classList.toggle('active');
+  if (tmp.classList.contains('active')) {
+  }
+  getCheckedElementUniversal(z);
+};
+
+function getCheckedElementUniversal(z) {
+
+  if (z == "KnightRider") { var arrayCheckedItems = checkedItemsKnightRider; }
+  else if (z == "Rainbow") { var arrayCheckedItems = checkedItemsRainbow; }
+  else if (z == "SolidColor") { var arrayCheckedItems = checkedItemsSolidColor; }
+  else if (z == "AlternatingColors") { var arrayCheckedItems = checkedItemsAlternatingColors; }
+  else if (z == "DimPulse") { var arrayCheckedItems = checkedItemsDimPulse; }
+  else if (z == "DimPulse2") { var arrayCheckedItems = checkedItemsDimPulse2; }
+  else if (z == "DimPulse3") { var arrayCheckedItems = checkedItemsDimPulse3; }
+  else if (z == "Bouncing") { var arrayCheckedItems = checkedItemsBouncing; }
+  else if (z == "DualBounce") { var arrayCheckedItems = checkedItemsDualBounce; }
+  else if (z == "DualingColors") { var arrayCheckedItems = checkedItemsDualingColors; }
+  else if (z == "RandomColors") { var arrayCheckedItems = checkedItemsRandomColor; }
+  else if (z == "RandomColors2") { var arrayCheckedItems = checkedItemsRandomColor2; }
+  else if (z == "Flash") { var arrayCheckedItems = checkedItemsFlash; }
+  else if (z == "ShortCircuit") { var arrayCheckedItems = checkedItemsShortCircuit; }
+  else if (z == "PulseBeat") { var arrayCheckedItems = checkedItemsPulseBeat; }
+  else if (z == "PulseBeat2") { var arrayCheckedItems = checkedItemsPulseBeat2; }
+  else if (z == "WigWag") { var arrayCheckedItems = checkedItemsWigWag; }
+  else if (z == "WigWag2") { var arrayCheckedItems = checkedItemsWigWag2; }
+  else if (z == "ZigZag") { var arrayCheckedItems = checkedItemsZigZag; }
+  else if (z == "ZigZg2") { var arrayCheckedItems = checkedItemsZigZag2; }
+  else if (z == "FLD") { var arrayCheckedItems = checkedItemsFLD; }
+  else if (z == "RLD") { var arrayCheckedItems = checkedItemsRLD; }
+  else if (z == "Pulse") { var arrayCheckedItems = checkedItemsPulse; }
+  else if (z == "DualPulse") { var arrayCheckedItems = checkedItemsDualPulse; }
+  else if (z == "AutoSequence") { var arrayCheckedItems = checkedItemsAutoSequence; }
+  else if (z == "Equalizer") { var arrayCheckedItems = checkedItemsEqualizer; }
+
+
   var imgArray = document.getElementsByName('stripSelector' + z);
-  checkedItemsKnightRider.length = 0;
+  arrayCheckedItems.length = 0;
   for (var i = 0; i < imgArray.length; i++) {
     var tmp = imgArray[i].classList.toString();
     if (tmp.indexOf('active') != -1) {
-      checkedItemsKnightRider.push(imgArray[i].id.toString());
+      arrayCheckedItems.push(imgArray[i].id.toString());
     }
   }
 };
 
-function commandNoOptionsBodyOnly(y, t, u, z) {
+
+
+
+
+
+
+function commandStripOff(u, z, d) {
+  var checkmark = document.getElementById(u)
+  checkmark.classList.remove('hidden');
+  setTimeout(function () { checkmark.classList.add('hidden') }, 2000);
+
+  var check = getcheckedElementsforBodyController(z);
+  console.log("Check: " + check);
+  let commandtoSend = "&param1=" + BLCommandPrefix + check + "98";
+  bodyControllerLEDFunctionExecution(commandtoSend);
+  if (d == 'hasDome') {
+    var checkHP = getcheckedElementsforHPController(z);
+    let commandtoSendtoHPController = checkHP + "98";
+    setTimeout(function () { HPLEDFunctionExecution(commandtoSendtoHPController) }, delaySecondHTTPGet);
+  }
+};
+
+
+
+function commandNoOptions(y, t, u, z, d) {
   var checkmark = document.getElementById(u)
   checkmark.classList.remove('hidden');
   setTimeout(function () { checkmark.classList.add('hidden') }, 2000);
@@ -1450,30 +1882,17 @@ function commandNoOptionsBodyOnly(y, t, u, z) {
   var check = getcheckedElementsforBodyController(z);
   console.log("Check: " + check);
   let commandtoSend = "&param1=" + BLCommandPrefix + check + y + t;
-  let fullURL = commandtoSend;
   bodyControllerLEDFunctionExecution(commandtoSend);
-  // setTimeout(function () { bodyControllerLEDFunctionExecution(commandtoSend) }, 2000);
+  if (d == 'hasDome') {
+    var checkHP = getcheckedElementsforHPController(z);
+    let commandtoSendtoHPController = checkHP + y;
+    setTimeout(function () { HPLEDFunctionExecution(commandtoSendtoHPController) }, delaySecondHTTPGet);
+  };
 };
 
-function commandNoOptionsBodyandDome(y, t, u, z) {
-  var checkmark = document.getElementById(u)
-  checkmark.classList.remove('hidden');
-  setTimeout(function () { checkmark.classList.add('hidden') }, 2000);
-
-  var check = getcheckedElementsforBodyController(z);
-  console.log("Check: " + check);
-  let commandtoSend = "&param1=" + BLCommandPrefix + check + y + t;
-  let fullURL = commandtoSend;
-  bodyControllerLEDFunctionExecution(commandtoSend);
 
 
-  var checkHP = getcheckedElementsforHPController(z);
-  let commandtoSendtoHPController = checkHP + y;
-  setTimeout(function () { HPLEDFunctionExecution(commandtoSendtoHPController) }, delaySecondHTTPGet);
-
-};
-
-function commandSingleColorBodyOnly(y, t, z, u, x) {
+function commandSingleColor(y, t, z, u, x, d) {
   let colorValues = getcolor1(z);
   var checkmark = document.getElementById(u)
   checkmark.classList.remove('hidden');
@@ -1483,14 +1902,71 @@ function commandSingleColorBodyOnly(y, t, z, u, x) {
   var check = getcheckedElementsforBodyController(x);
   console.log("Check: " + check);
   let commandtoSend = "&param1=" + BLCommandPrefix + check + y + t + colorValues;
-  let fullURL = commandtoSend;
   bodyControllerLEDFunctionExecution(commandtoSend);
+  if (d == 'hasDome') {
+    var checkHP = getcheckedElementsforHPController(x);
+    let commandtoSendtoHPController = checkHP + y + colorValues;
+    setTimeout(function () { HPLEDFunctionExecution(commandtoSendtoHPController) }, 2000);
+  };
+};
 
+
+function commandTwoColorswithSpeed(a, b, c, d, u, x) {
+  let sliderValue = getSliderValue(b);
+  let colorValues1 = getcolor1(c);
+  let colorValues2 = getcolor2(d);
+  var checkmark = document.getElementById(u)
+  checkmark.classList.remove('hidden');
+  setTimeout(function () { checkmark.classList.add('hidden') }, 2000);
+
+  var check = getcheckedElementsforBodyController(x);
+  console.log("Check: " + check);
+  let commandtoSend = "&param1=" + BLCommandPrefix + check + a + sliderValue + colorValues1 + colorValues2;
+  // let fullURL = commandtoSend;
+  bodyControllerLEDFunctionExecution(commandtoSend);
 
 };
 
-function commandSingleColorBodyandDome(y, t, z, u, x) {
-  let colorValues = getcolor1(z);
+
+function commandTwoColorswithSpeed(y, t, z, s, u, x) {
+  let sliderValue = getSliderValue(t);
+  let colorValues1 = getcolor1(z);
+  let colorValues2 = getcolor2(s);
+  var checkmark = document.getElementById(u)
+  checkmark.classList.remove('hidden');
+  setTimeout(function () { checkmark.classList.add('hidden') }, 2000);
+
+  var check = getcheckedElementsforBodyController(x);
+  console.log("Check: " + check);
+  let commandtoSend = "&param1=" + BLCommandPrefix + check + y + sliderValue + colorValues1 + colorValues2;
+  // let fullURL = commandtoSend;
+  bodyControllerLEDFunctionExecution(commandtoSend);
+
+};
+
+
+function commandOneColorAndSpeed(y, t, z, u, x, d) {
+  let sliderValue = getSliderValue(t);
+  let colorValues1 = getcolor1(z);
+  var checkmark = document.getElementById(u)
+  checkmark.classList.remove('hidden');
+  setTimeout(function () { checkmark.classList.add('hidden') }, 2000);
+
+  var check = getcheckedElementsforBodyController(x);
+  console.log("Check: " + check);
+  let commandtoSend = "&param1=" + BLCommandPrefix + check + y + colorValues1 + sliderValue;;
+  bodyControllerLEDFunctionExecution(commandtoSend);
+  if (d == 'hasDome') {
+    var checkHP = getcheckedElementsforHPController(x);
+    let commandtoSendtoHPController = checkHP + y + colorValues1 + sliderValue;;
+    setTimeout(function () { HPLEDFunctionExecution(commandtoSendtoHPController) }, delaySecondHTTPGet);
+  };
+};
+
+
+function commandTwoColorsNoSlider(y, t, z, s, u, x, d) {
+  let colorValues1 = getcolor1(z);
+  let colorValues2 = getcolor2(s);
   var checkmark = document.getElementById(u)
   checkmark.classList.remove('hidden');
   setTimeout(function () { checkmark.classList.add('hidden') }, 2000);
@@ -1498,13 +1974,17 @@ function commandSingleColorBodyandDome(y, t, z, u, x) {
 
   var check = getcheckedElementsforBodyController(x);
   console.log("Check: " + check);
-  let commandtoSend = "&param1=" + BLCommandPrefix + check + y + t + colorValues;
-  let fullURL = commandtoSend;
+  let commandtoSend = "&param1=" + BLCommandPrefix + check + y + t + colorValues1 + colorValues2;
   bodyControllerLEDFunctionExecution(commandtoSend);
+  if (d == 'hasDome') {
+    var checkHP = getcheckedElementsforHPController(x);
+    let commandtoSendtoHPController = checkHP + y + colorValues1 + colorValues2;;
+    setTimeout(function () { HPLEDFunctionExecution(commandtoSendtoHPController) }, delaySecondHTTPGet);
+  };
 
-  setTimeout(function () { bodyControllerLEDFunctionExecution(commandtoSend) }, 2000);
 
 };
+
 
 function getcheckedElementsforBodyController(z) {
   // checkedItemsKnightRider
@@ -1514,7 +1994,6 @@ function getcheckedElementsforBodyController(z) {
   var v = false;
   var i = false;
   var d = false;
-  var arrayName = "checkedItems" + z;
   if (z == "KnightRider") { var arrayName2 = checkedItemsKnightRider.slice(); }
   else if (z == "Rainbow") { var arrayName2 = checkedItemsRainbow.slice(); }
   else if (z == "SolidColor") { var arrayName2 = checkedItemsSolidColor.slice(); }
@@ -1522,7 +2001,7 @@ function getcheckedElementsforBodyController(z) {
   else if (z == "DimPulse") { var arrayName2 = checkedItemsDimPulse.slice(); }
   else if (z == "DimPulse2") { var arrayName2 = checkedItemsDimPulse2.slice(); }
   else if (z == "DimPulse3") { var arrayName2 = checkedItemsDimPulse3.slice(); }
-  else if (z == "Bounce") { var arrayName2 = checkedItemsBouncing.slice(); }
+  else if (z == "Bouncing") { var arrayName2 = checkedItemsBouncing.slice(); }
   else if (z == "DualBounce") { var arrayName2 = checkedItemsDualBounce.slice(); }
   else if (z == "DualingColors") { var arrayName2 = checkedItemsDualingColors.slice(); }
   else if (z == "RandomColors") { var arrayName2 = checkedItemsRandomColor.slice(); }
@@ -1546,9 +2025,9 @@ function getcheckedElementsforBodyController(z) {
   var checkLDP = "LDP" + z + "Green";
   var checkMaint = "Maint" + z + "Green";
   var checkCoin = "Coin" + z + "Green";
-  var checkVU = "VerticalBarst" + z + "Green";
+  var checkVU = "VU" + z + "Green";
   var checkCBI = "CBI" + z + "Green";
-  var checkDP = "DataPanel" + z + "Green";
+  var checkDP = "DP" + z + "Green";
   // console.log("Arrray test: " + arrayName2[0]);
   console.log(arrayName2.length);
   for (var b = 0; b < arrayName2.length; b++) {
@@ -1602,7 +2081,7 @@ function getcheckedElementsforBodyController(z) {
   // if (i == undefined) { i = false; };
   // if (d == undefined) { d = false; };
   if (l == true & m == true & c == true & v == true & i == false & d == false) { return "A"; }
-  else if (l == false & m == false & c == false & v == false & i == false & d == false) { return "B"; }
+  else if (l == false & m == false & c == false & v == false & i == true & d == true) { return "B"; }
   else if (l == false & m == false & c == true & v == false & i == false & d == false) { return "C"; }
   else if (l == false & m == false & c == false & v == false & i == false & d == true) { return "D"; }
   else if (l == true & m == true & c == true & v == true & i == true & d == true) { return "E"; }
@@ -1694,7 +2173,7 @@ function getcheckedElementsforHPController(z) {
   else if (z == "DimPulse") { var arrayHP = checkedItemsDimPulse.slice(); }
   else if (z == "DimPulse2") { var arrayHP = checkedItemsDimPulse2.slice(); }
   else if (z == "DimPulse3") { var arrayHP = checkedItemsDimPulse3.slice(); }
-  else if (z == "Bounce") { var arrayHP = checkedItemsBouncing.slice(); }
+  else if (z == "Bouncing") { var arrayHP = checkedItemsBouncing.slice(); }
   else if (z == "DualBounce") { var arrayHP = checkedItemsDualBounce.slice(); }
   else if (z == "DualingColors") { var arrayHP = checkedItemsDualingColors.slice(); }
   else if (z == "RandomColors") { var arrayHP = checkedItemsRandomColor.slice(); }
@@ -1759,47 +2238,6 @@ function getcheckedElementsforHPController(z) {
 
 
 
-
-function commandStripOffKnightRider(u) {
-  var checkmark = document.getElementById(u)
-  checkmark.classList.remove('hidden');
-  setTimeout(function () { checkmark.classList.add('hidden') }, 2000);
-
-  for (var i = 0; i < checkedItemsKnightRider.length; i++) {
-    if (checkedItemsKnightRider[i] === "LDPKnightRiderGreen") {
-      // console.log("L selected");
-      var ldpcommandstring = true;
-      console.log(ldpcommandstring);
-    };
-
-    if (checkedItemsKnightRider[i] === "CoinKnightRiderGreen") {
-      // console.log("C selected");
-      var coincommandstring = true;
-      console.log(coincommandstring);
-    };
-
-    if (checkedItemsKnightRider[i] === "VerticalBarstKnightRiderGreen") {
-      // console.log("V selected");
-      var vucommandstring = true;
-      console.log(vucommandstring);
-    };
-
-    if (checkedItemsKnightRider[i] === "MaintKnightRiderGreen") {
-      // console.log("M selected");
-      var mcommandstring = true;
-      console.log(mcommandstring);
-    };
-
-  }
-
-  var check = getcheckedElementsforBodyController(ldpcommandstring, mcommandstring, coincommandstring, vucommandstring);
-  console.log("Check: " + check);
-  let commandtoSend = "&param1=" + BLCommandPrefix + check + "98";
-  let fullURL = commandtoSend;
-  bodyControllerLEDFunctionExecution(commandtoSend);
-
-  bodyControllerLEDFunctionExecution(fullBodyControllerURL);
-};
 
 
 
@@ -2743,48 +3181,9 @@ function changeImageVerticalBarsAlternatingColors() {
 };
 
 
-function commandTwoColorsAlternatingColors(y, t, z, s, u) {
-  let sliderValue = getSliderValue(t);
-  let colorValues1 = getcolor1(z);
-  let colorValues2 = getcolor2(s);
-  // document.getElementById(u).src = "Images/checkmark.png";
-  // setTimeout(function () { document.getElementById(u).src = "Images/blankcheckmark.png"; }, 2000)
-  for (var i = 0; i < checkedItemsAlternatingColors.length; i++) {
-    if (checkedItemsAlternatingColors[i] === "LDPAlternatingColorsGreen") {
-      // console.log("L selected");
-      var ldpcommandstring = true;
-
-      console.log(ldpcommandstring);
-    };
-
-    if (checkedItemsAlternatingColors[i] === "CoinAlternatingColorsGreen") {
-      // console.log("C selected");
-      var coincommandstring = true;
-      console.log(coincommandstring);
-    };
-
-    if (checkedItemsAlternatingColors[i] === "VerticalBarstAlternatingColorsGreen") {
-      // console.log("V selected");
-      var vucommandstring = true;
-      console.log(vucommandstring);
-    };
-
-    if (checkedItemsAlternatingColors[i] === "MaintAlternatingColorsGreen") {
-      // console.log("M selected");
-      var mcommandstring = true
-      console.log(mcommandstring);
-    };
-
-  };
-  var check = getcheckedElementsforBodyController(ldpcommandstring, mcommandstring, coincommandstring, vucommandstring);
-  console.log("Check: " + check);
-  let commandtoSend = "&param1=" + BLCommandPrefix + check + y + sliderValue + colorValues1 + colorValues2;
-  // let fullURL = commandtoSend;
-  bodyControllerLEDFunctionExecution(commandtoSend);
 
 
 
-};
 function commandStripOffAlternatingColors(u) {
   var checkmark = document.getElementById(u)
   checkmark.classList.remove('hidden');
@@ -3042,61 +3441,6 @@ function changeImageRearHPDimPulse() {
   rearHPtoggleDimPulse()
 };
 
-function commandOneColorAndSpeedDimPulse(y, t, z, u) {
-  let sliderValue = getSliderValue(t);
-  let colorValues1 = getcolor1(z);
-  document.getElementById(u).src = "Images/checkmark.png";
-  setTimeout(function () { document.getElementById(u).src = "Images/blankcheckmark.png"; }, 2000)
-
-  for (var i = 0; i < checkedItemsDimPulse.length; i++) {
-    if (checkedItemsDimPulse[i] === "LDPDimPulse") {
-      // console.log("L selected");
-      var ldpcommandstring = true;
-      console.log(ldpcommandstring);
-    };
-    if (checkedItemsDimPulse[i] === "CoinDimPulse") {
-      // console.log("C selected");
-      var coincommandstring = true
-      console.log(coincommandstring);
-    };
-    if (checkedItemsDimPulse[i] === "VerticalBarsDimPulse") {
-      // console.log("V selected");
-      var vucommandstring = true;
-      console.log(vucommandstring);
-    };
-    if (checkedItemsDimPulse[i] === "MaintDimPulse") {
-      // console.log("M selected");
-      var mcommandstring = true;
-      console.log(mcommandstring);
-    };
-    if (checkedItemsDimPulse[i] === "FrontHPDimPulse") {
-      // console.log("M selected");
-      var hpfcommandstring = true;
-      console.log(hpfcommandstring);
-    };
-    if (checkedItemsDimPulse[i] === "TopHPDimPulse") {
-      // console.log("M selected");
-      var hptcommandstring = true;
-      console.log(hptcommandstring);
-    };
-    if (checkedItemsDimPulse[i] === "RearHPDimPulse") {
-      // console.log("M selected");
-      var hprcommandstring = true;
-      console.log(hprcommandstring);
-    };
-  };
-
-
-  var check = getcheckedElementsforBodyController(ldpcommandstring, mcommandstring, coincommandstring, vucommandstring);
-  console.log("Check: " + check);
-  let commandtoSend = "&param1=" + BLCommandPrefix + check + y + colorValues1 + sliderValue;;
-  bodyControllerLEDFunctionExecution(commandtoSend);
-
-  var checkHP = getcheckedElementsforHPController(hpfcommandstring, hptcommandstring, hprcommandstring);
-  let commandtoSendtoHPController = '&param1=' + checkHP + y + colorValues1 + sliderValue;;
-  setTimeout(function () { HPLEDFunctionExecution(commandtoSendtoHPController) }, delaySecondHTTPGet);
-
-};
 
 function commandStripOffDimPulse(u) {
   var checkmark = document.getElementById(u)
@@ -10951,506 +11295,133 @@ function geti2CDevice(g) {
 // var socket2 = io.connect('10.0.0.40:5000');
 // var socket = io.connect('127.0.0.1:3000');
 
-function commandSingleColor(x, y, t, z) {
-  // let LEDSelector = getStripName();
-  let colorValues = getcolor1(z);
 
-  for (var i = 0; i < checkedItems.length; i++) {
-    if (checkedItems[i] === "L") {
-      // console.log("L selected");
-      var ldpcommandstring = "L" + y + t + colorValues;
-      console.log(ldpcommandstring);
-    }
-    if (checkedItems[i] === "C") {
-      // console.log("C selected");
-      var coincommandstring = checkedItems[i] + y + t + colorValues;
-      console.log(coincommandstring);
-    };
 
-    if (checkedItems[i] === "V") {
-      // console.log("V selected");
-      var vucommandstring = checkedItems[i] + y + t + colorValues;
-      console.log(vucommandstring);
-    };
-
-    if (checkedItems[i] === "M") {
-      // console.log("M selected");
-      var mcommandstring = checkedItems[i] + y + t + colorValues;
-      console.log(mcommandstring);
-    };
-  };
-
-  // socket.emit('command', {
-  //   ldpcommandstring: ldpcommandstring,
-  //   coincommandstring: coincommandstring,
-  //   vucommandstring: vucommandstring,
-  //   mcommandstring: mcommandstring
-  // });
-};
-
-
-
-function commandNoOptions(x, y, t, z) {
-
-  for (var i = 0; i < checkedItems.length; i++) {
-    if (checkedItems[i] === "L") {
-      // console.log("L selected");
-      var ldpcommandstring = checkedItems[i] + y + t;
-      console.log(ldpcommandstring);
-    }
-    if (checkedItems[i] === "C") {
-      // console.log("C selected");
-      var coincommandstring = checkedItems[i] + y + t;
-      console.log(coincommandstring);
-    };
-
-    if (checkedItems[i] === "V") {
-      // console.log("V selected");
-      var vucommandstring = checkedItems[i] + y + t;
-      console.log(vucommandstring);
-    };
-
-    if (checkedItems[i] === "M") {
-      // console.log("M selected");
-      var mcommandstring = checkedItems[i] + y + t;
-      console.log(mcommandstring);
-    };
-    if (checkedItems[i] === "D") {
-      // console.log("M selected");
-      var dcommandstring = checkedItems[i] + y + t;
-      console.log(dcommandstring);
-    };
-    if (checkedItems[i] === "I") {
-      // console.log("M selected");
-      var icommandstring = checkedItems[i] + y + t;
-      console.log(icommandstring);
-    };
-  };
-
-  // socket.emit('command', {
-  //   ldpcommandstring: ldpcommandstring,
-  //   coincommandstring: coincommandstring,
-  //   vucommandstring: vucommandstring,
-  //   mcommandstring: mcommandstring,
-  //   dcommandstring: dcommandstring,
-  //   icommandstring: icommandstring
-  // });
-  // socket1.emit('command', {
-  //   ldpcommandstring: ldpcommandstring,
-  //   coincommandstring: coincommandstring,
-  //   vucommandstring: vucommandstring,
-  //   mcommandstring: mcommandstring
-  // });
-  // socket2.emit('command', {
-  //   ldpcommandstring: ldpcommandstring,
-  //   coincommandstring: coincommandstring,
-  //   vucommandstring: vucommandstring,
-  //   mcommandstring: mcommandstring
-  // });
-  // socket3.emit('command', {
-  //   ldpcommandstring: ldpcommandstring,
-  //   coincommandstring: coincommandstring,
-  //   vucommandstring: vucommandstring,
-  //   mcommandstring: mcommandstring
-  // });
-};
-
-
-
-
-
-
-
-
-function commandTwoColors(x, y, t, z, s) {
-  let LEDSelector = getStripName(x);
-  let sliderValue = getSliderValue(t);
-  let colorValues1 = getcolor1(z);
-  let colorValues2 = getcolor2(s);
-  for (var i = 0; i < checkedItems.length; i++) {
-    if (checkedItems[i] === "L") {
-      // console.log("L selected");
-      var ldpcommandstring = checkedItems[i] + y + sliderValue + colorValues1 + colorValues2;
-      console.log(ldpcommandstring);
-    };
-
-    if (checkedItems[i] === "C") {
-      // console.log("C selected");
-      var coincommandstring = checkedItems[i] + y + sliderValue + colorValues1 + colorValues2;
-      console.log(coincommandstring);
-    };
-
-    if (checkedItems[i] === "V") {
-      // console.log("V selected");
-      var vucommandstring = checkedItems[i] + y + sliderValue + colorValues1 + colorValues2;
-      console.log(vucommandstring);
-    };
-
-    if (checkedItems[i] === "M") {
-      // console.log("M selected");
-      var mcommandstring = checkedItems[i] + y + sliderValue + colorValues1 + colorValues2;
-      console.log(mcommandstring);
-    };
-  };
-
-  // socket.emit('command', {
-  //   ldpcommandstring: ldpcommandstring,
-  //   coincommandstring: coincommandstring,
-  //   vucommandstring: vucommandstring,
-  //   mcommandstring: mcommandstring
-  // });
-  // socket1.emit('command', {
-  //   ldpcommandstring: ldpcommandstring,
-  //   coincommandstring: coincommandstring,
-  //   vucommandstring: vucommandstring,
-  //   mcommandstring: mcommandstring
-  // });
-  // socket2.emit('command', {
-  //   ldpcommandstring: ldpcommandstring,
-  //   coincommandstring: coincommandstring,
-  //   vucommandstring: vucommandstring,
-  //   mcommandstring: mcommandstring
-  // });
-  // socket3.emit('command', {
-  //   ldpcommandstring: ldpcommandstring,
-  //   coincommandstring: coincommandstring,
-  //   vucommandstring: vucommandstring,
-  //   mcommandstring: mcommandstring
-  // });
-};
-
-
-function commandTwoColorsNoSlider(y, t, z, s) {
-  let colorValues1 = getcolor1(z);
-  let colorValues2 = getcolor2(s);
-  for (var i = 0; i < checkedItems.length; i++) {
-    if (checkedItems[i] === "L") {
-      // console.log("L selected");
-      var ldpcommandstring = checkedItems[i] + y + t + colorValues1 + colorValues2;
-      console.log(ldpcommandstring);
-    };
-
-    if (checkedItems[i] === "C") {
-      // console.log("C selected");
-      var coincommandstring = checkedItems[i] + y + t + colorValues1 + colorValues2;
-      console.log(coincommandstring);
-    };
-
-    if (checkedItems[i] === "V") {
-      // console.log("V selected");
-      var vucommandstring = checkedItems[i] + y + t + colorValues1 + colorValues2;
-      console.log(vucommandstring);
-    };
-
-    if (checkedItems[i] === "M") {
-      // console.log("M selected");
-      var mcommandstring = checkedItems[i] + y + t + colorValues1 + colorValues2;
-      console.log(mcommandstring);
-    };
-  };
-
-  // socket.emit('command', {
-  //   ldpcommandstring: ldpcommandstring,
-  //   coincommandstring: coincommandstring,
-  //   vucommandstring: vucommandstring,
-  //   mcommandstring: mcommandstring
-  // });
-  // socket1.emit('command', {
-  //   ldpcommandstring: ldpcommandstring,
-  //   coincommandstring: coincommandstring,
-  //   vucommandstring: vucommandstring,
-  //   mcommandstring: mcommandstring
-  // });
-  // socket2.emit('command', {
-  //   ldpcommandstring: ldpcommandstring,
-  //   coincommandstring: coincommandstring,
-  //   vucommandstring: vucommandstring,
-  //   mcommandstring: mcommandstring
-  // });
-  // socket3.emit('command', {
-  //   ldpcommandstring: ldpcommandstring,
-  //   coincommandstring: coincommandstring,
-  //   vucommandstring: vucommandstring,
-  //   mcommandstring: mcommandstring
-  // });
-};
-
-
-function commandOneColorAndSpeed(x, y, t, z) {
-  let LEDSelector = getStripName(x);
-  let sliderValue = getSliderValue(t);
-  let colorValues1 = getcolor1(z);
-  for (var i = 0; i < checkedItems.length; i++) {
-    if (checkedItems[i] === "L") {
-      // console.log("L selected");
-      var ldpcommandstring = checkedItems[i] + y + sliderValue + colorValues1;
-      console.log(ldpcommandstring);
-    };
-
-    if (checkedItems[i] === "C") {
-      // console.log("C selected");
-      var coincommandstring = checkedItems[i] + y + sliderValue + colorValues1;
-      console.log(coincommandstring);
-    };
-
-    if (checkedItems[i] === "V") {
-      // console.log("V selected");
-      var vucommandstring = checkedItems[i] + y + sliderValue + colorValues1;
-      console.log(vucommandstring);
-    };
-
-    if (checkedItems[i] === "M") {
-      // console.log("M selected");
-      var mcommandstring = checkedItems[i] + y + sliderValue + colorValues1;
-      console.log(mcommandstring);
-    };
-  };
-
-  // socket.emit('command', {
-  //   ldpcommandstring: ldpcommandstring,
-  //   coincommandstring: coincommandstring,
-  //   vucommandstring: vucommandstring,
-  //   mcommandstring: mcommandstring
-  // });
-  // socket1.emit('command', {
-  //   ldpcommandstring: ldpcommandstring,
-  //   coincommandstring: coincommandstring,
-  //   vucommandstring: vucommandstring,
-  //   mcommandstring: mcommandstring
-  // });
-  // socket2.emit('command', {
-  //   ldpcommandstring: ldpcommandstring,
-  //   coincommandstring: coincommandstring,
-  //   vucommandstring: vucommandstring,
-  //   mcommandstring: mcommandstring
-  // });
-  // socket3.emit('command', {
-  //   ldpcommandstring: ldpcommandstring,
-  //   coincommandstring: coincommandstring,
-  //   vucommandstring: vucommandstring,
-  //   mcommandstring: mcommandstring
-  // });
-};
-
-
-
-function commandStripOff(x,) {
-  let LEDSelector = getStripName(x);
-  console.log("something");
-  for (var i = 0; i < checkedItems.length; i++) {
-    if (checkedItems[i] === "L") {
-      console.log("L selected");
-      var ldpcommandstring = checkedItems[i] + '98';
-      console.log(ldpcommandstring);
-    };
-
-    if (checkedItems[i] === "C") {
-      console.log("C selected");
-      var coincommandstring = checkedItems[i] + '98';
-      console.log(coincommandstring);
-    };
-
-    if (checkedItems[i] === "V") {
-      console.log("V selected");
-      var vucommandstring = checkedItems[i] + '98';
-      console.log(vucommandstring);
-    };
-
-    if (checkedItems[i] === "M") {
-      console.log("M selected");
-      var mcommandstring = checkedItems[i] + '98';
-      console.log(mcommandstring);
-    };
-    if (checkedItems[i] === "D") {
-      // console.log("M selected");
-      var dcommandstring = checkedItems[i] + '98';
-      console.log(mcommandstring);
-    };
-    if (checkedItems[i] === "I") {
-      // console.log("M selected");
-      var icommandstring = checkedItems[i] + '98';
-      console.log(mcommandstring);
-    };
-  };
-
-  let ldpCommandParam = "/?param1=" + ldpcommandstring;
-  let maintCommandParam = "&param2=" + mcommandstring;
-  let coinCommandParam = "&param3=" + coincommandstring;
-  let vuCommandParam = "&param4=" + vucommandstring;
-  let fullURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
-  bodyControllerLEDFuntionExecution(fullURL);
-
-};
-
-function commandStripAllOff() {
-  var ldpcommandstring = 'A98';
-  var coincommandstring = 'L98';
-  var vucommandstring = 'L98';
-  var mcommandstring = 'L98';
-  let ldpCommandParam = "/?param1=" + ldpcommandstring;
-  let maintCommandParam = "&param2=" + mcommandstring;
-  let coinCommandParam = "&param3=" + coincommandstring;
-  let vuCommandParam = "&param4=" + vucommandstring;
-  let fullURL = ldpCommandParam + maintCommandParam + coinCommandParam + vuCommandParam;
-  bodyControllerLEDFuntionExecution(fullURL);
-
-  // socket1.emit('command', {
-  //   ldpcommandstring: ldpcommandstring,
-  //   coincommandstring: coincommandstring,
-  //   vucommandstring: vucommandstring,
-  //   mcommandstring: mcommandstring
-  // });
-  // socket2.emit('command', {
-  //   ldpcommandstring: ldpcommandstring,
-  //   coincommandstring: coincommandstring,
-  //   vucommandstring: vucommandstring,
-  //   mcommandstring: mcommandstring
-  // });
-  // socket3.emit('command', {
-  //   ldpcommandstring: ldpcommandstring,
-  //   coincommandstring: coincommandstring,
-  //   vucommandstring: vucommandstring,
-  //   mcommandstring: mcommandstring
-  // });
-};
-
-function sendSerialCommand(x) {
-  let command = document.getElementById(x).value;
-  let commandUpper = command.toUpperCase();
-  console.log(commandUpper);
-  // socket.emit('command', {
-  //   serialcommandstring: commandUpper,
-
-  // });
-};
-function sendi2CCommand(b, x) {
-  let i2Ccommand = document.getElementById(x).value;
-  let i2CcommandUpper = i2Ccommand.toUpperCase();
-  // let i2CcommandUpper = i2Ccommand.toUpperCase();
-  let i2cDevice = geti2CDevice(b);
-  // console.log(commandUpper);
-  // socket.emit('command', {
-  //   i2Ccommandstring: i2Ccommand,
-  //   i2cCommandDevice: i2cDevice,
-
-  // });
-};
-
-// Varialbles for the selection of the LED selector buttons
-var ldpImageClicked = '/Images/Buttons/Button-LED-Selector-LDP-Yellowv5.png';
-var ldpImageUnclicked = '/Images/Buttons/Button-LED-Selector-LDP-Whitev5.png';
-var ldpState;
-
-var maintImageClicked = '/Images/Buttons/Button-LED-Selector-Maint-Yellow.png';
-var maintImageUnclicked = '/Images/Buttons/Button-LED-Selector-Maint-White.png';
-var maintState = false;
-
-var coinImageClicked = '/Images/Buttons/Button-LED-Selector-Coin-Yellowv5.png';
-var coinImageUnclicked = '/Images/Buttons/Button-LED-Selector-Coin-Whitev5.png';
-var coinState = false;
-
-var vuImageClicked = '/Images/Buttons/Button-LED-Selector-VU-Yellow.png';
-var vuImageUnclicked = '/Images/Buttons/Button-LED-Selector-VU-White.png';
-var vuState = false;
-
-var checkedItems = new Array();
-
-function swapImageLDP(imgID) {
-
-  let theldpImage = document.getElementById(imgID);
-  let theldpState = theldpImage.src;
-
-  if (theldpState.indexOf(ldpImageUnclicked) != -1) {
-    theldpImage.src = ldpImageClicked;
-    ldpState = true;
-    // console.log('changed to Clicked');
-  } else {
-    theldpImage.src = ldpImageUnclicked;
-    ldpState = false;
-
-    // console.log('changed to Unclicked');
-  }
-
-  getCheckedElements();
-};
-
-function swapImageMaint(imgID) {
-
-  let themaintImage = document.getElementById(imgID);
-  let themaintState = themaintImage.src;
-
-  if (themaintState.indexOf(maintImageUnclicked) != -1) {
-    themaintImage.src = maintImageClicked;
-    // console.log('changed to Clicked');
-  } else {
-    themaintImage.src = maintImageUnclicked;
-    // console.log('changed to Unclicked');
-  }
-  getCheckedElements();
-};
-
-function swapImageCoin(imgID) {
-
-  let thecoinImage = document.getElementById(imgID);
-  let thecoinState = thecoinImage.src;
-
-  if (thecoinState.indexOf(coinImageUnclicked) != -1) {
-    thecoinImage.src = coinImageClicked;
-    // console.log('changed to Clicked');
-  } else {
-    thecoinImage.src = coinImageUnclicked;
-    // console.log('changed to Unclicked');
-  }
-  getCheckedElements();
-};
-
-function swapImageVU(imgID) {
-
-  let thevuImage = document.getElementById(imgID);
-  let thevuState = thevuImage.src;
-
-  if (thevuState.indexOf(vuImageUnclicked) != -1) {
-    thevuImage.src = vuImageClicked;
-    // console.log('changed to Clicked');
-  } else {
-    thevuImage.src = vuImageUnclicked;
-    // console.log('changed to Unclicked');
-  }
-  getCheckedElements();
-};
-var imgArray = [];
-
-function getCheckedElements() {
-  var imgArray = document.getElementsByName('checkboximg');
-  checkedItems.length = 0;
-  for (var i = 0; i < imgArray.length; i++) {
-    var tmp = imgArray[i].src.toString();
-    if (tmp.indexOf(ldpImageClicked) != -1) {
-      checkedItems.push(imgArray[i].id.toString());
-    }
-    if (tmp.indexOf(maintImageClicked) != -1) {
-      checkedItems.push(imgArray[i].id.toString());
-    }
-    if (tmp.indexOf(coinImageClicked) != -1) {
-      checkedItems.push(imgArray[i].id.toString());
-    }
-    if (tmp.indexOf(vuImageClicked) != -1) {
-      checkedItems.push(imgArray[i].id.toString());
-    }
-  }
-}
-
-// const blankBorderLDP = document.querySelector('.blankBorderLDP');
-// const ldp = document.querySelector('#ldp12');
-// const coin = document.getElementById('coin');
-// const vu = document.getElementById('vu');
-// const maint = document.getElementById('maint');
-//
-// ldp.addEventListener('click' => () {
-//   // blankBorderLDP.classList.toggle('active');
-//   alert("ldp clicked");
-//
+// socket.emit('command', {
+//   ldpcommandstring: ldpcommandstring,
+//   coincommandstring: coincommandstring,
+//   vucommandstring: vucommandstring,
+//   mcommandstring: mcommandstring
 // });
+
+
+
+
+// socket.emit('command', {
+//   ldpcommandstring: ldpcommandstring,
+//   coincommandstring: coincommandstring,
+//   vucommandstring: vucommandstring,
+//   mcommandstring: mcommandstring,
+//   dcommandstring: dcommandstring,
+//   icommandstring: icommandstring
+// });
+// socket1.emit('command', {
+//   ldpcommandstring: ldpcommandstring,
+//   coincommandstring: coincommandstring,
+//   vucommandstring: vucommandstring,
+//   mcommandstring: mcommandstring
+// });
+// socket2.emit('command', {
+//   ldpcommandstring: ldpcommandstring,
+//   coincommandstring: coincommandstring,
+//   vucommandstring: vucommandstring,
+//   mcommandstring: mcommandstring
+// });
+// socket3.emit('command', {
+//   ldpcommandstring: ldpcommandstring,
+//   coincommandstring: coincommandstring,
+//   vucommandstring: vucommandstring,
+//   mcommandstring: mcommandstring
+// });
+
+
+
+
+
+
+
+// socket.emit('command', {
+//   ldpcommandstring: ldpcommandstring,
+//   coincommandstring: coincommandstring,
+//   vucommandstring: vucommandstring,
+//   mcommandstring: mcommandstring
+// });
+// socket1.emit('command', {
+//   ldpcommandstring: ldpcommandstring,
+//   coincommandstring: coincommandstring,
+//   vucommandstring: vucommandstring,
+//   mcommandstring: mcommandstring
+// });
+// socket2.emit('command', {
+//   ldpcommandstring: ldpcommandstring,
+//   coincommandstring: coincommandstring,
+//   vucommandstring: vucommandstring,
+//   mcommandstring: mcommandstring
+// });
+// socket3.emit('command', {
+//   ldpcommandstring: ldpcommandstring,
+//   coincommandstring: coincommandstring,
+//   vucommandstring: vucommandstring,
+//   mcommandstring: mcommandstring
+
+
+
+
+// socket.emit('command', {
+//   ldpcommandstring: ldpcommandstring,
+//   coincommandstring: coincommandstring,
+//   vucommandstring: vucommandstring,
+//   mcommandstring: mcommandstring
+// });
+// socket1.emit('command', {
+//   ldpcommandstring: ldpcommandstring,
+//   coincommandstring: coincommandstring,
+//   vucommandstring: vucommandstring,
+//   mcommandstring: mcommandstring
+// });
+// socket2.emit('command', {
+//   ldpcommandstring: ldpcommandstring,
+//   coincommandstring: coincommandstring,
+//   vucommandstring: vucommandstring,
+//   mcommandstring: mcommandstring
+// });
+// socket3.emit('command', {
+//   ldpcommandstring: ldpcommandstring,
+//   coincommandstring: coincommandstring,
+//   vucommandstring: vucommandstring,
+//   mcommandstring: mcommandstring
+
+
+
+
+// socket.emit('command', {
+//   ldpcommandstring: ldpcommandstring,
+//   coincommandstring: coincommandstring,
+//   vucommandstring: vucommandstring,
+//   mcommandstring: mcommandstring
+// });
+// socket1.emit('command', {
+//   ldpcommandstring: ldpcommandstring,
+//   coincommandstring: coincommandstring,
+//   vucommandstring: vucommandstring,
+//   mcommandstring: mcommandstring
+// });
+// socket2.emit('command', {
+//   ldpcommandstring: ldpcommandstring,
+//   coincommandstring: coincommandstring,
+//   vucommandstring: vucommandstring,
+//   mcommandstring: mcommandstring
+// });
+// socket3.emit('command', {
+//   ldpcommandstring: ldpcommandstring,
+//   coincommandstring: coincommandstring,
+//   vucommandstring: vucommandstring,
+//   mcommandstring: mcommandstring
+// });
+
+
+
+
 
 
 
@@ -11573,7 +11544,7 @@ function ESP32SendCommand(b, x) {
     console.log(FullURLtoSendCommandTo);
   };
   if (ESP32DeviceSelected === "HP") {
-    var URLtoSendCommandTo = 'http://192.168.4.101/?param0=:&param1=:L:EDC:SHP';
+    var URLtoSendCommandTo = 'http://192.168.4.101/?param0=:&param1=:L:EHP';
     var FullURLtoSendCommandTo = URLtoSendCommandTo + ESP32commandUpper;
     httpGet(FullURLtoSendCommandTo);
     console.log(FullURLtoSendCommandTo);
@@ -11619,7 +11590,7 @@ function BrightnessRangeFunc(a, b, c) {
 
 function sendEEPROMBodyLEDController(t, v) {
   var BodyBright = t;
-  var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=:&param1=:L:EBC%23EA";
+  var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=:&param1=:L:EBC%23EAP";
 
   var bodyLEDControllerFullURL = bodyLEDControllerSPURL + v + BodyBright;
   // console.log(bodyLEDControllerFullURL);
