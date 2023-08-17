@@ -2341,62 +2341,40 @@
 
       <div class="menu-Level-1-Content" id="PulseBeat">
         <h1 class="menuHeader-Level-1">Pulse Beat</h1>
-        <img
-            class="r2menupictureLDP1"
-            src="Images/Body/LDPBlue.png"
-            alt="picture"
-            name="stripSelectorPulseBeat"
-            onclick=changeImageLDPPulseBeat()
-            id="LDPPulseBeat"
-          />
+        <!-- LDP Selection-->
+        <img id="LDPPulseBeatBlue" class="r2menupictureLDP1 " name="stripSelectorPulseBeat" onclick="changeImage('LDP', 'PulseBeat')" src="./Images/LEDTab/Selectors/LDPBlue.png">
+        <img id="LDPPulseBeatGreen" class="r2menupictureLDP1 hidden" name="stripSelectorPulseBeat" onclick="changeImage('LDP', 'PulseBeat')" src="./Images/LEDTab/Selectors/LDPGreen.png">
+        <!-- Coin Slots Selection-->
+        <img id="CoinPulseBeatBlue" class="r2menupictureCoin " name="stripSelectorPulseBeat" onclick="changeImage('Coin', 'PulseBeat')" src="./Images/LEDTab/Selectors/CoinSlotsBlue.png">
+        <img id="CoinPulseBeatGreen" class="r2menupictureCoin hidden" name="stripSelectorPulseBeat" onclick="changeImage('Coin', 'PulseBeat')" src="./Images/LEDTab/Selectors/CoinSlotsGreen.png">
+        <!-- Maintenance Selection-->
+        <img id="MaintPulseBeatBlue" class="r2menupictureMaint " name="stripSelectorPulseBeat" onclick="changeImage('Maint', 'PulseBeat')" src="./Images/LEDTab/Selectors/SkirtBlue.png">
+        <img id="MaintPulseBeatGreen" class="r2menupictureMaint hidden" name="stripSelectorPulseBeat" onclick="changeImage('Maint', 'PulseBeat')" src="./Images/LEDTab/Selectors/SkirtGreen.png">
+        <!-- Vertical Slots Selection-->
+        <img id="VUPulseBeatBlue" class="r2menupictureDataPanelVerticalBars " name="stripSelectorPulseBeat" onclick="changeImage('VU', 'PulseBeat')" src="./Images/LEDTab/Selectors/DataPanelVerticalBlue.png">
+        <img id="VUPulseBeatGreen" class="r2menupictureDataPanelVerticalBars hidden" name="stripSelectorPulseBeat" onclick="changeImage('VU', 'PulseBeat')" src="./Images/LEDTab/Selectors/DataPanelVerticalGreen.png">
+        <!-- Front HP Selection-->
+        <img id="FrontHPPulseBeatBlue" class="r2menupictureFrontHP " name="stripSelectorPulseBeat" onclick="changeImage('FrontHP', 'PulseBeat')" src="./Images/LEDTab/Selectors/FrontHPBlue.png">
+        <img id="FrontHPPulseBeatGreen" class="r2menupictureFrontHP hidden" name="stripSelectorPulseBeat" onclick="changeImage('FrontHP', 'PulseBeat')" src="./Images/LEDTab/Selectors/FrontHPGreen.png">
+        <!--Top HP Selection-->
+        <img id="TopHPPulseBeatBlue" class="r2menupictureTopHP " name="stripSelectorPulseBeat" onclick="changeImage('TopHP', 'PulseBeat')" src="./Images/LEDTab/Selectors/TopHPBlue.png">
+        <img id="TopHPPulseBeatGreen" class="r2menupictureTopHP hidden" name="stripSelectorPulseBeat" onclick="changeImage('TopHP', 'PulseBeat')" src="./Images/LEDTab/Selectors/TopHPGreen.png">
+        <!-- Rear HP Selection-->
+        <img id="RearHPPulseBeatBlue" class="r2menupictureRearHP  " name="stripSelectorPulseBeat" onclick="changeImage('RearHP', 'PulseBeat')" src="./Images/LEDTab/Selectors/RearHPBlue.png">
+        <img id="RearHPPulseBeatGreen" class="r2menupictureRearHP hidden" name="stripSelectorPulseBeat" onclick="changeImage('RearHP', 'PulseBeat')" src="./Images/LEDTab/Selectors/RearHPGreen.png">   
+        <!-- Data Panel Logics -->    
+        <img id="CBIPulseBeatBlue" class="r2menupictureCBI hidden" name="stripSelectorPulseBeat" onclick="changeImage('CBI', 'PulseBeat')" src="./Images/Body/CBIDoorBlue.png">
+        <img id="CBIPulseBeatGreen" class="r2menupictureCBI hidden" name="stripSelectorPulseBeat" onclick="changeImage('CBI', 'PulseBeat')" src="./Images/Body/CBIDoorGreen.png">
+        <!-- CBI Panel Logics -->    
+        <img id="DPPulseBeatBlue" class="r2menupictureDataPanelLED1 hidden" name="stripSelectorPulseBeat" onclick="changeImage('DP', 'PulseBeat')" src="./Images/Body/DataPanelLEDsBlue.png">
+        <img id="DPPulseBeatGreen" class="r2menupictureDataPanelLED1 hidden" name="stripSelectorPulseBeat" onclick="changeImage('DP', 'PulseBeat')" src="./Images/Body/DataPanelLEDsGreen.png"> 
 
-        <img
-          class="r2menupictureCoin"
-          src="Images/Body/CoinSLotsBlue.png"
-          alt="picture"
-          name="stripSelectorPulseBeat"
-          onclick=changeImageCoinPulseBeat()
-          id="CoinPulseBeat"
-        />
 
-        <img
-            class="r2menupictureMaint"
-            src="Images/Body/SkirtBlue.png"
-            alt="picture"
-            name="stripSelectorPulseBeat"
-            onclick=changeImageMaintPulseBeat()
-            id="MaintPulseBeat"
-          />
-
-        <img
-            class="r2menupictureDataPanelVerticalBars"
-            src="Images/Body/DataPanelVerticalBlue.png"
-            alt="picture"
-            name="stripSelectorPulseBeat"
-            onclick=changeImageVerticalBarsPulseBeat()
-            id="VerticalBarstPulseBeat"
-          />
-          <img
-          class="selectALLpic"
-          src="Images/Button-Select-All-GIMP.png"
-          alt="picture"
-          onclick=selectALLStripsPulseBeat()
-          id="checkmarkallRSeries"
-        />
-      
-        <img
-          class="selectNonepic"
-          src="Images/Button-Select-None-GIMP.png"
-          alt="picture"
-          onclick=selectNoneStripsPulseBeat()
-          id="checkmarkNoneRSeries"
-        />
-
-          <!-- <h3 class="selectAll" onclick=selectALLStripsPulseBeat()> A </h3>
-          <h3 class="selectNone" onclick=selectNoneStripsPulseBeat()> N </h3> -->
-          <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallPulseBeat">
-          <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknonePulseBeat">
-
+        <!-- Select All Selection-->
+        <img id="checkmarkall" class="selectALLpic" onclick="selectALLStrips('PulseBeat', 'hasDome', 'hasBodyLogics')" src="./Images/LEDTab/Selectors/Button-Select-All.png">
+        <img id="checkmarkallPulseBeat" class="checkmarkall hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+          <!-- Select None Selection-->
+        <img id="checkmarkNone" class="selectNonepic" onclick="selectNoneStrips('PulseBeat', 'hasDome', 'hasBodyLogics')" src="./Images/LEDTab/Selectors/Button-Select-None.png">
 
 
         <div class="menu-Level-2">
