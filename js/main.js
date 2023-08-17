@@ -183,7 +183,7 @@ $("document").ready(function () {
       });
   }
 
-  canvasInit("../Images/R2D2-Wiring-Diagram.png");
+  canvasInit("../Images/R2D2-Wiring-Diagram_small.png");
 
   $(".scale").on("click", function () {
     if ($(this).data("scale") === "down") {
@@ -1954,7 +1954,7 @@ function commandOneColorAndSpeed(y, t, z, u, x, d) {
 
   var check = getcheckedElementsforBodyController(x);
   console.log("Check: " + check);
-  let commandtoSend = "&param1=" + BLCommandPrefix + check + y + colorValues1 + sliderValue;;
+  let commandtoSend = "&param1=" + BLCommandPrefix + check + y + sliderValue + colorValues1;
   bodyControllerLEDFunctionExecution(commandtoSend);
   if (d == 'hasDome') {
     var checkHP = getcheckedElementsforHPController(x);

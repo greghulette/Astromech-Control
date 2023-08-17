@@ -2262,14 +2262,14 @@
                         <p class="shadowtext1LineLED">apply</p>
                       </div>
                       <!-- Off Button-->
-                      <div id="BounceOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffShortCircuit', 'Flash')">
+                      <div id="BounceOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffShortCircuitRedBlue', 'Flash')">
                         <img id="RBounceOffImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
                       <p class="shadowtext1LineLED">off</p>
                     </div>
 
                     </form>
                     <img id="checkmarkapplyShortCircuitRedBlue" class="checkmarkapply hidden" src="./Images/LEDTab/Selectors/checkmark.png">
-                    <img id="checkmarkoffShortCircuit"   class="checkmarkoff hidden" src="./Images/LEDTab/Selectors/checkmark.png">  
+                    <img id="checkmarkoffShortCircuitRedBlue"   class="checkmarkoff hidden" src="./Images/LEDTab/Selectors/checkmark.png">  
 
                     </div><!--end of ColorPickerdiv div-->
                   </div> <!-- end of Level 2 Conetent RedBlue-->
@@ -2277,7 +2277,25 @@
                 <h2 class="menuHeader-Level-2">Red/Blue</h2>
                 <div class="ColorPickerdiv">
                    <form class="" action="index.html" method="post">
-                    <a href="#" onclick="commandNoOptionsShortCircuit('14','2','checkmarkapplyShortCircuitRandomeColor')" class="applyButton1"></a>
+                    <!-- Apply Button-->
+                  <div id="BounceApply" class="applyButton"onclick="commandNoOptions('14','2','checkmarkapplyShortCircuitRandom', 'ShortCircuit', 'hasDome')" >
+                    <img id="BounceApplyImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                    <p class="shadowtext1LineLED">apply</p>
+                  </div>
+                  <!-- Off Button-->
+                  <div id="BounceOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffShortCircuitRandom', 'ShortCircuit')">
+                    <img id="RBounceOffImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext1LineLED">off</p>
+                </div>
+
+                </form>
+                <img id="checkmarkapplyShortCircuitRandom" class="checkmarkapply hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+                <img id="checkmarkoffShortCircuitRandom"   class="checkmarkoff hidden" src="./Images/LEDTab/Selectors/checkmark.png">  
+
+                   
+                   
+                   
+                    <a href="#"  class="applyButton1"></a>
                     <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
                   </form>
                   <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyShortCircuitRandomeColor">
@@ -2354,13 +2372,13 @@
         <img id="VUPulseBeatBlue" class="r2menupictureDataPanelVerticalBars " name="stripSelectorPulseBeat" onclick="changeImage('VU', 'PulseBeat')" src="./Images/LEDTab/Selectors/DataPanelVerticalBlue.png">
         <img id="VUPulseBeatGreen" class="r2menupictureDataPanelVerticalBars hidden" name="stripSelectorPulseBeat" onclick="changeImage('VU', 'PulseBeat')" src="./Images/LEDTab/Selectors/DataPanelVerticalGreen.png">
         <!-- Front HP Selection-->
-        <img id="FrontHPPulseBeatBlue" class="r2menupictureFrontHP " name="stripSelectorPulseBeat" onclick="changeImage('FrontHP', 'PulseBeat')" src="./Images/LEDTab/Selectors/FrontHPBlue.png">
+        <img id="FrontHPPulseBeatBlue" class="r2menupictureFrontHP hidden" name="stripSelectorPulseBeat" onclick="changeImage('FrontHP', 'PulseBeat')" src="./Images/LEDTab/Selectors/FrontHPBlue.png">
         <img id="FrontHPPulseBeatGreen" class="r2menupictureFrontHP hidden" name="stripSelectorPulseBeat" onclick="changeImage('FrontHP', 'PulseBeat')" src="./Images/LEDTab/Selectors/FrontHPGreen.png">
         <!--Top HP Selection-->
-        <img id="TopHPPulseBeatBlue" class="r2menupictureTopHP " name="stripSelectorPulseBeat" onclick="changeImage('TopHP', 'PulseBeat')" src="./Images/LEDTab/Selectors/TopHPBlue.png">
+        <img id="TopHPPulseBeatBlue" class="r2menupictureTopHP hidden" name="stripSelectorPulseBeat" onclick="changeImage('TopHP', 'PulseBeat')" src="./Images/LEDTab/Selectors/TopHPBlue.png">
         <img id="TopHPPulseBeatGreen" class="r2menupictureTopHP hidden" name="stripSelectorPulseBeat" onclick="changeImage('TopHP', 'PulseBeat')" src="./Images/LEDTab/Selectors/TopHPGreen.png">
         <!-- Rear HP Selection-->
-        <img id="RearHPPulseBeatBlue" class="r2menupictureRearHP  " name="stripSelectorPulseBeat" onclick="changeImage('RearHP', 'PulseBeat')" src="./Images/LEDTab/Selectors/RearHPBlue.png">
+        <img id="RearHPPulseBeatBlue" class="r2menupictureRearHP  hidden" name="stripSelectorPulseBeat" onclick="changeImage('RearHP', 'PulseBeat')" src="./Images/LEDTab/Selectors/RearHPBlue.png">
         <img id="RearHPPulseBeatGreen" class="r2menupictureRearHP hidden" name="stripSelectorPulseBeat" onclick="changeImage('RearHP', 'PulseBeat')" src="./Images/LEDTab/Selectors/RearHPGreen.png">   
         <!-- Data Panel Logics -->    
         <img id="CBIPulseBeatBlue" class="r2menupictureCBI hidden" name="stripSelectorPulseBeat" onclick="changeImage('CBI', 'PulseBeat')" src="./Images/Body/CBIDoorBlue.png">
@@ -2371,21 +2389,21 @@
 
 
         <!-- Select All Selection-->
-        <img id="checkmarkall" class="selectALLpic" onclick="selectALLStrips('PulseBeat', 'hasDome', 'hasBodyLogics')" src="./Images/LEDTab/Selectors/Button-Select-All.png">
+        <img id="checkmarkall" class="selectALLpic" onclick="selectALLStrips('PulseBeat', 'noDome', )" src="./Images/LEDTab/Selectors/Button-Select-All.png">
         <img id="checkmarkallPulseBeat" class="checkmarkall hidden" src="./Images/LEDTab/Selectors/checkmark.png">
           <!-- Select None Selection-->
-        <img id="checkmarkNone" class="selectNonepic" onclick="selectNoneStrips('PulseBeat', 'hasDome', 'hasBodyLogics')" src="./Images/LEDTab/Selectors/Button-Select-None.png">
+        <img id="checkmarkNone" class="selectNonepic" onclick="selectNoneStrips('PulseBeat', 'noDome')" src="./Images/LEDTab/Selectors/Button-Select-None.png">
 
 
         <div class="menu-Level-2">
 
             <div class="menu-Level-2-Links " >
-              <button class="active" rel="PulseBeat123"><img
-                  class="buttonwidth"
-                  id ="transparent"
-                  src="Images/Buttons/LEDFunctionButtons/Generic/Button-PulseBeat-Yellow.png"
-                  alt="button for Solid Color"
-                /></button>
+              <button class="active " rel="PulseBeat123">
+                <div class="ButtonBlankLED" onclick="">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2LinesLED">pulse beat</p>
+                </div>                        
+              </button> 
             </div>
 
           <div class="menu-Level-2-Content active" id="PulseBeat123">
@@ -2414,10 +2432,27 @@
                   value="3"
                   min="0"
                   max="9"
-                /><a href="#" onclick="commandOneColorAndSpeedPulseBeat('16','PulseBeat123Slider', 'PulseBeat123ColorChoiceColorSelect', 'checkmarkapplyPulseBeat')" class="applyButton1"></a>
-                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff()"  class="applyButtonoff"></img>
-              </form>
-              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyPulseBeat">
+                />
+                
+                  <!-- Apply Button-->
+                  <div id="BounceApply" class="applyButton"  onclick="commandOneColorAndSpeed('16','PulseBeat123Slider', 'PulseBeat123ColorChoiceColorSelect', 'checkmarkapplyPulseBeat', 'PulseBeat', 'noDome')" >
+                    <img id="BounceApplyImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                    <p class="shadowtext1LineLED">apply</p>
+                  </div>
+                  <!-- Off Button-->
+                  <div id="BounceOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffPulseBeat', 'PulseBeat')">
+                    <img id="RBounceOffImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext1LineLED">off</p>
+                </div>
+
+                </form>
+                <img id="checkmarkapplyPulseBeat" class="checkmarkapply hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+                <img id="checkmarkoffPulseBeat"   class="checkmarkoff hidden" src="./Images/LEDTab/Selectors/checkmark.png">  
+
+
+                
+                
+                
             </div><!--end of ColorPickerdiv div-->
           </div> <!-- end of Level 2 Conetent Pule Beat-->
 
