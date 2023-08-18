@@ -41,22 +41,22 @@ left: -95px;
 }
 .DomePanelIdentifier03{
 position: absolute;
-top: 235px;
-left: -55px;
+top: 220px;
+left: -65px;
 
 }
 
 .DomePanelIdentifier04{
 position: absolute;
 top: 155px;
-left: -35px;
+left: -45px;
 
 }
 
 .DomePanelIdentifier05{
 position: absolute;
-top: -25px;
-left: -95px;
+top: -15px;
+left: -115px;
 
 }
 
@@ -101,7 +101,61 @@ left: -175px;
 
 }
 
-
+.BodyPanelIdentifier01{
+  position: absolute;
+  top: 420px;
+  left: -255px;
+}  
+.BodyPanelIdentifier02{
+  position: absolute;
+  top: 475px;
+  left: -255px;
+} 
+.BodyPanelIdentifier03{
+  position: absolute;
+  top: 490px;
+  left: -405px;
+} 
+.BodyPanelIdentifier04{
+  position: absolute;
+  top: 490px;
+  left: -125px;
+} 
+.BodyPanelIdentifier05{
+  position: absolute;
+  top: 523px;
+  left: -340px;
+} 
+.BodyPanelIdentifier06{
+  position: absolute;
+  top: 560px;
+  left: -195px;
+} 
+.BodyPanelIdentifier10{
+  position: absolute;
+  top: 660px;
+  left: -335px;
+} 
+.BodyPanelIdentifier09{
+  position: absolute;
+  top: 660px;
+  left: -270px;
+} 
+.BodyPanelIdentifier08{
+  position: absolute;
+  top: 660px;
+  left: -185px;
+} 
+.BodyPanelIdentifier07{
+  position: absolute;
+  top: 660px;
+  left: -125px;
+} 
+.BodyPanelIdentifier01{
+  position: absolute;
+  top: 420px;
+  left: -255px;
+} 
             
 .DomePanelIdentifierText{
   position:relative;

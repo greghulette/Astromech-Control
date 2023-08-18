@@ -1204,6 +1204,17 @@ function PSICommand(t) {
   // }
 
 };
+doorStateBody1 = false;
+doorStateBody2 = false;
+doorStateBody3 = false;
+doorStateBody4 = false;
+doorStateBody5 = false;
+doorStateBody6 = false;
+doorStateBody7 = false;
+doorStateBody8 = false;
+doorStateBody9 = false;
+doorStateBody10 = false;
+
 
 doorStateDome1 = false;
 doorStateDome2 = false;
@@ -1231,7 +1242,174 @@ function ToggleSingleDoor(b, c, u) {
   var delayCallInt = parseInt(delayCallID);
   var delayCallText = (delayCallInt).toLocaleString('en-US', { minimumIntegerDigits: 5, useGrouping: false });
   if (b == 1) {
+    switch (c) {
+      case '01':
+        if (doorStateBody1 == true) {
+          var z = "02";
+          let tmp = document.getElementById(u)
+          tmp.classList.add('DomePanelFormatBlue');
+          tmp.classList.remove('DomePanelFormatGreen');
+        }
+        else if (doorStateBody1 == false) {
+          var z = '01';
+          let tmp = document.getElementById(u)
+          console.log(tmp);
+          tmp.classList.remove('DomePanelFormatBlue');
+          tmp.classList.add('DomePanelFormatGreen');
+        };
+        doorStateBody1 = !doorStateBody1;
+        break;
+      case '02':
+        if (doorStateBody2 == true) {
+          var z = "02";
+          let tmp = document.getElementById(u)
+          tmp.classList.add('DomePanelFormatBlue');
+          tmp.classList.remove('DomePanelFormatGreen');
+        }
+        else if (doorStateBody2 == false) {
+          var z = '01';
+          let tmp = document.getElementById(u)
+          console.log(tmp);
+          tmp.classList.remove('DomePanelFormatBlue');
+          tmp.classList.add('DomePanelFormatGreen');
+        };
+        doorStateBody2 = !doorStateBody2;
+        break;
+      case '03':
+        if (doorStateBody3 == true) {
+          var z = "02";
+          let tmp = document.getElementById(u)
+          tmp.classList.add('DomePanelFormatBlue');
+          tmp.classList.remove('DomePanelFormatGreen');
+        }
+        else if (doorStateBody3 == false) {
+          var z = '01';
+          let tmp = document.getElementById(u)
+          console.log(tmp);
+          tmp.classList.remove('DomePanelFormatBlue');
+          tmp.classList.add('DomePanelFormatGreen');
+        };
+        doorStateBody3 = !doorStateBody3;
+        break;
+      case '04':
+        if (doorStateBody4 == true) {
+          var z = "02";
+          let tmp = document.getElementById(u)
+          tmp.classList.add('DomePanelFormatBlue');
+          tmp.classList.remove('DomePanelFormatGreen');
+        }
+        else if (doorStateBody4 == false) {
+          var z = '01';
+          let tmp = document.getElementById(u)
+          console.log(tmp);
+          tmp.classList.remove('DomePanelFormatBlue');
+          tmp.classList.add('DomePanelFormatGreen');
+        };
+        doorStateBody4 = !doorStateBody4;
+        break;
+      case '05':
+        if (doorStateBody5 == true) {
+          var z = "02";
+          let tmp = document.getElementById(u)
+          tmp.classList.add('DomePanelFormatBlue');
+          tmp.classList.remove('DomePanelFormatGreen');
+        }
+        else if (doorStateBody5 == false) {
+          var z = '01';
+          let tmp = document.getElementById(u)
+          console.log(tmp);
+          tmp.classList.remove('DomePanelFormatBlue');
+          tmp.classList.add('DomePanelFormatGreen');
+        };
+        doorStateBody5 = !doorStateBody5;
+        break;
+      case '06':
+        if (doorStateBody6 == true) {
+          var z = "02";
+          let tmp = document.getElementById(u)
+          tmp.classList.add('DomePanelFormatBlue');
+          tmp.classList.remove('DomePanelFormatGreen');
+        }
+        else if (doorStateBody6 == false) {
+          var z = '01';
+          let tmp = document.getElementById(u)
+          console.log(tmp);
+          tmp.classList.remove('DomePanelFormatBlue');
+          tmp.classList.add('DomePanelFormatGreen');
+        };
+        doorStateBody6 = !doorStateBody6;
+        break;
+      case '07':
+        if (doorStateBody7 == true) {
+          var z = "02";
+          let tmp = document.getElementById(u)
+          tmp.classList.add('DomePanelFormatBlue');
+          tmp.classList.remove('DomePanelFormatGreen');
+        }
+        else if (doorStateBody7 == false) {
+          var z = '01';
+          let tmp = document.getElementById(u)
+          console.log(tmp);
+          tmp.classList.remove('DomePanelFormatBlue');
+          tmp.classList.add('DomePanelFormatGreen');
+        };
+        doorStateBody7 = !doorStateBody7;
+        break;
+      case '08':
+        if (doorStateBody8 == true) {
+          var z = "02";
+          let tmp = document.getElementById(u)
+          tmp.classList.add('DomePanelFormatBlue');
+          tmp.classList.remove('DomePanelFormatGreen');
+        }
+        else if (doorStateBody8 == false) {
+          var z = '01';
+          let tmp = document.getElementById(u)
+          console.log(tmp);
+          tmp.classList.remove('DomePanelFormatBlue');
+          tmp.classList.add('DomePanelFormatGreen');
+        };
+        doorStateBody8 = !doorStateBody8;
+        break;
+      case '09':
+        if (doorStateBody9 == true) {
+          var z = "02";
+          let tmp = document.getElementById(u)
+          tmp.classList.add('DomePanelFormatBlue');
+          tmp.classList.remove('DomePanelFormatGreen');
+        }
+        else if (doorStateBody9 == false) {
+          var z = '01';
+          let tmp = document.getElementById(u)
+          console.log(tmp);
+          tmp.classList.remove('DomePanelFormatBlue');
+          tmp.classList.add('DomePanelFormatGreen');
+        };
+        doorStateBody9 = !doorStateBody9;
+        break;
+      case '10':
+        if (doorStateBody10 == true) {
+          var z = "02";
+          let tmp = document.getElementById(u)
+          tmp.classList.add('DomePanelFormatBlue');
+          tmp.classList.remove('DomePanelFormatGreen');
+        }
+        else if (doorStateBody10 == false) {
+          var z = '01';
+          let tmp = document.getElementById(u)
+          console.log(tmp);
+          tmp.classList.remove('DomePanelFormatBlue');
+          tmp.classList.add('DomePanelFormatGreen');
+        };
+        doorStateBody10 = !doorStateBody10;
+        break;
 
+
+
+
+
+
+    }
 
 
 
@@ -1247,7 +1425,6 @@ function ToggleSingleDoor(b, c, u) {
           tmp.classList.add('DomePanelFormatBlue');
           tmp.classList.remove('DomePanelFormatGreen');
         }
-
         else if (doorStateDome1 == false) {
           var z = '01';
           let tmp = document.getElementById(u)
@@ -1256,7 +1433,6 @@ function ToggleSingleDoor(b, c, u) {
           tmp.classList.add('DomePanelFormatGreen');
         };
         doorStateDome1 = !doorStateDome1;
-
         break;
       case '02':
         if (doorStateDome2 == true) {
