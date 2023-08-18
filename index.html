@@ -202,26 +202,26 @@
               <table class="homeButtonClass">
                 <tr>
                   <td>
-                    <div class="ButtonBlank" onclick="animateSequence('A01')">
+                    <div class="ButtonBlank" onclick="animateSequence('A01');allCloseServoFormatting();">
                       <img id="HomeTab-NormalOperations" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
                       <p class="shadowtext2Lines">normal operations</p>
 
                     </div>
                   </td>
                   <td>
-                    <div class="ButtonBlank" onclick="animateSequence('A02')">
+                    <div class="ButtonBlank" onclick="animateSequence('A02');allCloseServoFormatting();">
                       <img id="HomeTab-PanelWave" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
                       <p class="shadowtext2Lines-2">Panel Wave</p>
                     </div>
                   </td>
                   <td>
-                    <div class="ButtonBlank" onclick="animateSequence('A03')">
+                    <div class="ButtonBlank" onclick="animateSequence('A03');allCloseServoFormatting();">
                       <img id="HomeTab-PanelWaveFast" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
                       <p class="shadowtext2Lines-2">Panel Wave fast</p>
                     </div>
                   </td>
                   <td>
-                    <div class="ButtonBlank" onclick="animateSequence('A04')">
+                    <div class="ButtonBlank" onclick="animateSequence('A04');allCloseServoFormatting();">
                       <img id="HomeTab-BLank1" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
                       <p class="shadowtext2Lines-2">dome periscope</p>
                     </div>
@@ -229,25 +229,25 @@
                 </tr>
                 <tr>
                   <td>
-                    <div class="ButtonBlank" onclick="animateSequence('A05')">
+                    <div class="ButtonBlank" onclick="animateSequence('A05');allCloseServoFormatting();">
                       <img id="HomeTab-AllOpenClose" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
                       <p class="shadowtext2Lines-2">all open close</p>
                     </div>
                   </td>
                   <td>
-                    <div class="ButtonBlank" onclick="">
-                      <img id="HomeTab-BLank2" class="homebuttonwidth seethrough"  src="./Images/HomeTab/Button-Blank.png">
-                      <p class="shadowtext2Lines-2"></p>
+                    <div class="ButtonBlank" onclick="animateSequence('EBS:D118');allCloseServoFormatting();">
+                      <img id="HomeTab-BLank2" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
+                      <p class="shadowtext2Lines-2">drawer wave</p>
                     </div>                  
                   </td>
                   <td>
-                    <div class="ButtonBlank" onclick="animateSequence('A06')">
+                    <div class="ButtonBlank" onclick="animateSequence('A06');allCloseServoFormatting();">
                       <img id="HomeTab-HarlemShake" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
                       <p class="shadowtext2Lines-2">harlem shake</p>
                     </div>
                   </td>
                   <td>
-                    <div class="ButtonBlank" onclick="animateSequence('')">
+                    <div class="ButtonBlank" onclick="animateSequence('');allCloseServoFormatting();">
                       <img id="HomeTabAllClose" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
                       <p class="shadowtext"></p>
                     </div>  
@@ -319,13 +319,13 @@
                     </div>                   
                   </td>
                   <td>
-                    <div class="ButtonBlank" onclick="animateSequence('A11')">
+                    <div class="ButtonBlank" onclick="animateSequence('A11');allOpenServoFormatting();">
                       <img id="HomeTab-Blank1" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
                       <p class="shadowtext">all open</p>
                     </div>
                   </td>
                   <td>
-                    <div class="ButtonBlank" onclick="animateSequence('A07')">
+                    <div class="ButtonBlank" onclick="animateSequence('A07');allCloseServoFormatting();">
                       <img id="HomeTab-BLank2" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
                       <p class="shadowtext">all close</p>
                     </div>                    
@@ -4866,20 +4866,20 @@ id="FrontLogicsTopBlueSelector"
       <h3 class="openclosedoorsheader">Door/Pie Control</h3>
       <img src="Images/Buttons/Button-Open-White.png" class="openButton" alt="image for the dome" onclick="servoControl('01')">
       <img src="Images/Buttons/Button-Close-White.png" class="closeButton" alt="image for the dome" onclick="servoControl('02')">
-      <img src="Images/Button-Servo-All-Panel-Dance.png" class="AllPanelDanceButton" alt="image for the dome" onclick="servoControl('15')">
-      <img src="Images/Button-Servo-All-Long-Disco.png" class="AllLongDiscoButton" alt="image for the dome" onclick="servoControl('16')">
-      <img src="Images/Button-Servo-Marching-Ants.png" class="MarchingAntsButton" alt="image for the dome" onclick="servoControl('13')">
+      <img src="Images/Button-Servo-All-Panel-Dance.png" class="AllPanelDanceButton" alt="image for the dome" onclick="servoControl('15');allCloseServoFormatting();">
+      <img src="Images/Button-Servo-All-Long-Disco.png" class="AllLongDiscoButton" alt="image for the dome" onclick="servoControl('16');allCloseServoFormatting();">
+      <img src="Images/Button-Servo-Marching-Ants.png" class="MarchingAntsButton" alt="image for the dome" onclick="servoControl('13');allCloseServoFormatting();">
       <img src="Images/Button-Servo-All-Open.png" class="AllOpenButton" alt="image for the dome" onclick="servoControl('03');allOpenServoFormatting();">
       <img src="Images/Button-Servo-All-Close.png" class="AllCloseButton" alt="image for the dome" onclick="servoControl('04');allCloseServoFormatting();">
-      <img src="Images/Button-Servo-All-Open-Close.png" class="AllOpenCloseButton" alt="image for the dome" onclick="servoControl('06')">
-      <img src="Images/Button-Servo-All-Open-Close-Long.png" class="AllOpenCloseLongButton" alt="image for the dome" onclick="servoControl('07')">
-      <img src="Images/Button-Servo-Flutter.png" class="FlutterButton" alt="image for the dome" onclick="servoControl('08')">
-      <img src="Images/Button-Servo-All-Open-Close-Repeat.png" class="AllOpenCloseRepeatButton" alt="image for the dome" onclick="servoControl('09')">
-      <img src="Images/Button-Servo-All-Panel-Wave.png" class="AllPanelWaveButton" alt="image for the dome" onclick="servoControl('10')">
-      <img src="Images/Button-Servo-All-Panel-Wave-Fast.png" class="AllPanelWaveFastButton" alt="image for the dome" onclick="servoControl('11')">
-      <img src="Images/Button-Servo-All-Open-Close-Wave.png" class="AllOpenCloseWaveButton" alt="image for the dome" onclick="servoControl('12')">
-      <img src="Images/Button-Servo-All-Panel-Alternate.png" class="AllPanelAlternateButton" alt="image for the dome" onclick="servoControl('14')">
-      <img src="Images/Button-Servo-All-Harlem-Shake.png" class="AllHarlemShake" alt="image for the dome" onclick="servoControl('17')">
+      <img src="Images/Button-Servo-All-Open-Close.png" class="AllOpenCloseButton" alt="image for the dome" onclick="servoControl('06');allCloseServoFormatting();">
+      <img src="Images/Button-Servo-All-Open-Close-Long.png" class="AllOpenCloseLongButton" alt="image for the dome" onclick="servoControl('07');allCloseServoFormatting();">
+      <img src="Images/Button-Servo-Flutter.png" class="FlutterButton" alt="image for the dome" onclick="servoControl('08');allCloseServoFormatting();">
+      <img src="Images/Button-Servo-All-Open-Close-Repeat.png" class="AllOpenCloseRepeatButton" alt="image for the dome" onclick="servoControl('09');allCloseServoFormatting();">
+      <img src="Images/Button-Servo-All-Panel-Wave.png" class="AllPanelWaveButton" alt="image for the dome" onclick="servoControl('10');allCloseServoFormatting();">
+      <img src="Images/Button-Servo-All-Panel-Wave-Fast.png" class="AllPanelWaveFastButton" alt="image for the dome" onclick="servoControl('11');allCloseServoFormatting();">
+      <img src="Images/Button-Servo-All-Open-Close-Wave.png" class="AllOpenCloseWaveButton" alt="image for the dome" onclick="servoControl('12');allCloseServoFormatting();">
+      <img src="Images/Button-Servo-All-Panel-Alternate.png" class="AllPanelAlternateButton" alt="image for the dome" onclick="servoControl('14');allCloseServoFormatting();">
+      <img src="Images/Button-Servo-All-Harlem-Shake.png" class="AllHarlemShake" alt="image for the dome" onclick="servoControl('17');allCloseServoFormatting();">
       <img src="Images/Buttons/Button-Body-Servos-GIMP.png" class="BodyServoButton active" alt="Body Servo Bords" id="BodyServo" onclick="servoBoardSelector('body')">
       <img src="Images/Buttons/Button-Dome-Servos-GIMP.png" class="DomeServoButton active" alt="Dome Servo Bords" id="DomeServo" onclick="servoBoardSelector('dome')">
       <img src="Images/Buttons/Button-Both-Servos-GIMP.png" class="BothServoButton active" alt="Both Servo Bords" id="BothServo" onclick="servoBoardSelector('both')">
