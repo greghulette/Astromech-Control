@@ -11,6 +11,115 @@ body {
 
 }
 
+.DomePanelFormatBlue{
+  height: 40px;
+  width: 40px;
+  border: solid 2px black;
+  border-radius: 20px;
+  background-color: blue;
+}
+
+.DomePanelFormatGreen{
+  height: 40px;
+  width: 40px;
+  border: solid 2px black;
+  border-radius: 20px;
+  background-color: green;
+}
+
+.DomePanelIdentifier01{
+position: absolute;
+top: 305px;
+left: -135px;
+
+}
+.DomePanelIdentifier02{
+position: absolute;
+top: 270px;
+left: -95px;
+
+}
+.DomePanelIdentifier03{
+position: absolute;
+top: 235px;
+left: -55px;
+
+}
+
+.DomePanelIdentifier04{
+position: absolute;
+top: 155px;
+left: -35px;
+
+}
+
+.DomePanelIdentifier05{
+position: absolute;
+top: -25px;
+left: -95px;
+
+}
+
+.DomePanelIdentifier06{
+position: absolute;
+top: 235px;
+left: -435px;
+
+}
+
+.DomePanelIdentifier07{
+position: absolute;
+top: 135px;
+left: -330px;
+
+}
+
+.DomePanelIdentifier08{
+position: absolute;
+top: 205px;
+left: -290px;
+
+}
+
+.DomePanelIdentifier09{
+position: absolute;
+top: 205px;
+left: -215px;
+
+}
+
+.DomePanelIdentifier10{
+position: absolute;
+top: 135px;
+left: -175px;
+
+}
+.DomePanelIdentifier10{
+position: absolute;
+top: 135px;
+left: -175px;
+
+}
+
+
+            
+.DomePanelIdentifierText{
+  position:relative;
+  top: -30px;
+  left: 0px;
+  font-family: 'Star Jedi', 'Starjedi', arial, camb;
+  text-align: center;
+  text-shadow: 0 4px 10px black;
+  text-decoration: solid;
+line-height: 2rem;
+  font-size: 2rem;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
+
+
+
+
 /* html,
 body {
   background: #274d83;

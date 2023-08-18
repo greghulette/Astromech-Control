@@ -281,9 +281,9 @@
                 </tr>
                 <tr>
                   <td>
-                    <div class="ButtonBlank" onclick="">
-                      <img id="HomeTab-BLank2" class="homebuttonwidth seethrough"  src="./Images/HomeTab/Button-Blank.png">
-                      <p class="shadowtext2Lines-2"></p>
+                    <div class="ButtonBlank" onclick="animateSequence('A14')">
+                      <img id="HomeTab-BLank2" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
+                      <p class="shadowtext">sc lights</p>
                     </div>                    
                   </td>
                   <td>
@@ -1824,7 +1824,7 @@
                         <button class="" rel="RedBlueRandom">
                           <div class="ButtonBlankLED" onclick="">
                             <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
-                            <p class="shadowtext2LinesLED">red/blue</p>
+                            <p class="shadowtext1LineLED">red/blue</p>
                           </div>                        
                         </button> 
                         </div>
@@ -1987,7 +1987,7 @@
                       <button class="" rel="RedBlueRandom2">
                         <div class="ButtonBlankLED" onclick="">
                           <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
-                          <p class="shadowtext2LinesLED">red/blue</p>
+                          <p class="shadowtext1LineLED">red/blue</p>
                         </div>                        
                       </button> 
                       </div>
@@ -2126,7 +2126,7 @@
                         <button class="active" rel="Flash1">
                           <div class="ButtonBlankLED" onclick="">
                             <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
-                            <p class="shadowtext2LinesLED">flash</p>
+                            <p class="shadowtext1LineLED">flash</p>
                           </div>                        
                         </button> 
                       </div>
@@ -2227,7 +2227,7 @@
                     <button class="active" rel="ShortCircuitRedBlue">
                       <div class="ButtonBlankLED" onclick="">
                         <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
-                        <p class="shadowtext2LinesLED">red/blue</p>
+                        <p class="shadowtext1LineLED">red/blue</p>
                       </div>                        
                     </button> 
 
@@ -2236,7 +2236,7 @@
                   <button class="" rel="ShortCircuitRandom">
                     <div class="ButtonBlankLED" onclick="">
                       <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
-                      <p class="shadowtext2LinesLED">random</p>
+                      <p class="shadowtext1LineLED">random</p>
                     </div>                        
                   </button> 
                   
@@ -2392,8 +2392,8 @@
         <img id="checkmarkall" class="selectALLpic" onclick="selectALLStrips('PulseBeat', 'noDome', )" src="./Images/LEDTab/Selectors/Button-Select-All.png">
         <img id="checkmarkallPulseBeat" class="checkmarkall hidden" src="./Images/LEDTab/Selectors/checkmark.png">
           <!-- Select None Selection-->
-        <img id="checkmarkNone" class="selectNonepic" onclick="selectNoneStrips('PulseBeat', 'noDome')" src="./Images/LEDTab/Selectors/Button-Select-None.png">
-
+          <img id="checkmarkNone" class="selectNonepic" onclick="selectNoneStrips('PulseBeat', 'noDome',)" src="./Images/LEDTab/Selectors/Button-Select-None.png">
+          <img id="checkmarknonePulseBeat" class="checkmarknone hidden" src="./Images/LEDTab/Selectors/checkmark.png">
 
         <div class="menu-Level-2">
 
@@ -2461,73 +2461,55 @@
 
       <div class="menu-Level-1-Content" id="PulseBeat2">
         <h1 class="menuHeader-Level-1">Pulse Beat 2</h1>
-        <img
-            class="r2menupictureLDP1"
-            src="Images/Body/LDPBlue.png"
-            alt="picture"
-            name="stripSelectorPulseBeat2"
-            onclick=changeImageLDPPulseBeat2()
-            id="LDPPulseBeat2"
-          />
-
-        <img
-          class="r2menupictureCoin"
-          src="Images/Body/CoinSLotsBlue.png"
-          alt="picture"
-          name="stripSelectorPulseBeat2"
-          onclick=changeImageCoinPulseBeat2()
-          id="CoinPulseBeat2"
-        />
-
-        <img
-            class="r2menupictureMaint"
-            src="Images/Body/SkirtBlue.png"
-            alt="picture"
-            name="stripSelectorPulseBeat2"
-            onclick=changeImageMaintPulseBeat2()
-            id="MaintPulseBeat2"
-          />
-
-        <img
-            class="r2menupictureDataPanelVerticalBars"
-            src="Images/Body/DataPanelVerticalBlue.png"
-            alt="picture"
-            name="stripSelectorPulseBeat2"
-            onclick=changeImageVerticalBarsPulseBeat2()
-            id="VerticalBarstPulseBeat2"
-          />
-          <img
-          class="selectALLpic"
-          src="Images/Button-Select-All-GIMP.png"
-          alt="picture"
-          onclick=selectALLStripsPulseBeat2()
-          id="checkmarkallRSeries"
-        />
-      
-        <img
-          class="selectNonepic"
-          src="Images/Button-Select-None-GIMP.png"
-          alt="picture"
-          onclick=selectNoneStripsPulseBeat2()
-          id="checkmarkNoneRSeries"
-        />
-
-          <!-- <h3 class="selectAll" onclick=selectALLStripsPulseBeat2()> A </h3>
-          <h3 class="selectNone" onclick=selectNoneStripsPulseBeat2()> N </h3> -->
-          <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallPulseBeat2">
-          <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknonePulseBeat2">
-
+         <!-- LDP Selection-->
+         <img id="LDPPulseBeat2Blue" class="r2menupictureLDP1 " name="stripSelectorPulseBeat2" onclick="changeImage('LDP', 'PulseBeat2')" src="./Images/LEDTab/Selectors/LDPBlue.png">
+         <img id="LDPPulseBeat2Green" class="r2menupictureLDP1 hidden" name="stripSelectorPulseBeat2" onclick="changeImage('LDP', 'PulseBeat2')" src="./Images/LEDTab/Selectors/LDPGreen.png">
+         <!-- Coin Slots Selection-->
+         <img id="CoinPulseBeat2Blue" class="r2menupictureCoin " name="stripSelectorPulseBeat2" onclick="changeImage('Coin', 'PulseBeat2')" src="./Images/LEDTab/Selectors/CoinSlotsBlue.png">
+         <img id="CoinPulseBeat2Green" class="r2menupictureCoin hidden" name="stripSelectorPulseBeat2" onclick="changeImage('Coin', 'PulseBeat2')" src="./Images/LEDTab/Selectors/CoinSlotsGreen.png">
+         <!-- Maintenance Selection-->
+         <img id="MaintPulseBeat2Blue" class="r2menupictureMaint " name="stripSelectorPulseBeat2" onclick="changeImage('Maint', 'PulseBeat2')" src="./Images/LEDTab/Selectors/SkirtBlue.png">
+         <img id="MaintPulseBeat2Green" class="r2menupictureMaint hidden" name="stripSelectorPulseBeat2" onclick="changeImage('Maint', 'PulseBeat2')" src="./Images/LEDTab/Selectors/SkirtGreen.png">
+         <!-- Vertical Slots Selection-->
+         <img id="VUPulseBeat2Blue" class="r2menupictureDataPanelVerticalBars " name="stripSelectorPulseBeat2" onclick="changeImage('VU', 'PulseBeat2')" src="./Images/LEDTab/Selectors/DataPanelVerticalBlue.png">
+         <img id="VUPulseBeat2Green" class="r2menupictureDataPanelVerticalBars hidden" name="stripSelectorPulseBeat2" onclick="changeImage('VU', 'PulseBeat2')" src="./Images/LEDTab/Selectors/DataPanelVerticalGreen.png">
+         <!-- Front HP Selection-->
+         <img id="FrontHPPulseBeat2Blue" class="r2menupictureFrontHP hidden" name="stripSelectorPulseBeat2" onclick="changeImage('FrontHP', 'PulseBeat2')" src="./Images/LEDTab/Selectors/FrontHPBlue.png">
+         <img id="FrontHPPulseBeat2Green" class="r2menupictureFrontHP hidden" name="stripSelectorPulseBeat2" onclick="changeImage('FrontHP', 'PulseBeat2')" src="./Images/LEDTab/Selectors/FrontHPGreen.png">
+         <!--Top HP Selection-->
+         <img id="TopHPPulseBeat2Blue" class="r2menupictureTopHP hidden" name="stripSelectorPulseBeat2" onclick="changeImage('TopHP', 'PulseBeat2')" src="./Images/LEDTab/Selectors/TopHPBlue.png">
+         <img id="TopHPPulseBeat2Green" class="r2menupictureTopHP hidden" name="stripSelectorPulseBeat2" onclick="changeImage('TopHP', 'PulseBeat2')" src="./Images/LEDTab/Selectors/TopHPGreen.png">
+         <!-- Rear HP Selection-->
+         <img id="RearHPPulseBeat2Blue" class="r2menupictureRearHP  hidden" name="stripSelectorPulseBeat2" onclick="changeImage('RearHP', 'PulseBeat2')" src="./Images/LEDTab/Selectors/RearHPBlue.png">
+         <img id="RearHPPulseBeat2Green" class="r2menupictureRearHP hidden" name="stripSelectorPulseBeat2" onclick="changeImage('RearHP', 'PulseBeat2')" src="./Images/LEDTab/Selectors/RearHPGreen.png">   
+         <!-- Data Panel Logics -->    
+         <img id="CBIPulseBeat2Blue" class="r2menupictureCBI hidden" name="stripSelectorPulseBeat2" onclick="changeImage('CBI', 'PulseBeat2')" src="./Images/Body/CBIDoorBlue.png">
+         <img id="CBIPulseBeat2Green" class="r2menupictureCBI hidden" name="stripSelectorPulseBeat2" onclick="changeImage('CBI', 'PulseBeat2')" src="./Images/Body/CBIDoorGreen.png">
+         <!-- CBI Panel Logics -->    
+         <img id="DPPulseBeat2Blue" class="r2menupictureDataPanelLED1 hidden" name="stripSelectorPulseBeat2" onclick="changeImage('DP', 'PulseBeat2')" src="./Images/Body/DataPanelLEDsBlue.png">
+         <img id="DPPulseBeat2Green" class="r2menupictureDataPanelLED1 hidden" name="stripSelectorPulseBeat2" onclick="changeImage('DP', 'PulseBeat2')" src="./Images/Body/DataPanelLEDsGreen.png"> 
+ 
+ 
+         <!-- Select All Selection-->
+         <img id="checkmarkall" class="selectALLpic" onclick="selectALLStrips('PulseBeat2', 'noDome', )" src="./Images/LEDTab/Selectors/Button-Select-All.png">
+         <img id="checkmarkallPulseBeat2" class="checkmarkall hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+           <!-- Select None Selection-->
+           <img id="checkmarkNone" class="selectNonepic" onclick="selectNoneStrips('PulseBeat2', 'noDome',)" src="./Images/LEDTab/Selectors/Button-Select-None.png">
+           <img id="checkmarknonePulseBeat2" class="checkmarknone hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+ 
 
 
         <div class="menu-Level-2">
 
             <div class="menu-Level-2-Links " >
-              <button class="active" rel="PulseBeat2123"><img
-                  class="buttonwidth"
-                  id ="transparent"
-                  src="Images/Buttons/LEDFunctionButtons/Generic/Button-PulseBeat2-Yellow.png"
-                  alt="button for Solid Color"
-                /></button>
+              <button class="active " rel="PulseBeat2123">
+                <div class="ButtonBlankLED" onclick="">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2LinesLongLED">pulse beat (c,v)</p>
+                </div>                        
+              </button> 
+              
+              
             </div>
 
           <div class="menu-Level-2-Content active" id="PulseBeat2123">
@@ -2556,10 +2538,23 @@
                   value="3"
                   min="0"
                   max="9"
-                /><a href="#" onclick="commandOneColorAndSpeedPulseBeat2('17','PulseBeat2123Slider', 'PulseBeat2123ColorChoiceColorSelect', 'checkmarkapplyPulseBeat2')" class="applyButton1"></a>
-                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff()"  class="applyButtonoff"></img>
+                />
+                
+                <!-- Apply Button-->
+                <div id="BounceApply" class="applyButton"  onclick="commandOneColorAndSpeed('17','PulseBeat2123Slider', 'PulseBeat2123ColorChoiceColorSelect', 'checkmarkapplyPulseBeat2', 'PulseBeat2', 'noDome')" >
+                  <img id="BounceApplyImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext1LineLED">apply</p>
+                </div>
+                <!-- Off Button-->
+                <div id="BounceOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffPulseBeat', 'PulseBeat2')">
+                  <img id="RBounceOffImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                <p class="shadowtext1LineLED">off</p>
+              </div>
+
               </form>
-              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyPulseBeat2">
+              <img id="checkmarkapplyPulseBeat2" class="checkmarkapply hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+              <img id="checkmarkoffPulseBeat2"   class="checkmarkoff hidden" src="./Images/LEDTab/Selectors/checkmark.png">  
+     
             </div><!--end of ColorPickerdiv div-->
           </div> <!-- end of Level 2 Conetent Pule Beat-->
 
@@ -2568,72 +2563,51 @@
 
       <div class="menu-Level-1-Content" id="WigWag">
         <h1 class="menuHeader-Level-1">Wig Wag</h1>
-        <img
-            class="r2menupictureLDP1"
-            src="Images/Body/LDPBlue.png"
-            alt="picture"
-            name="stripSelectorWigWag"
-            onclick=changeImageLDPWigWag()
-            id="LDPWigWag"
-          />
+        <!-- LDP Selection-->
+        <img id="LDPWigWagBlue" class="r2menupictureLDP1 " name="stripSelectorWigWag" onclick="changeImage('LDP', 'WigWag')" src="./Images/LEDTab/Selectors/LDPBlue.png">
+        <img id="LDPWigWagGreen" class="r2menupictureLDP1 hidden" name="stripSelectorWigWag" onclick="changeImage('LDP', 'WigWag')" src="./Images/LEDTab/Selectors/LDPGreen.png">
+        <!-- Coin Slots Selection-->
+        <img id="CoinWigWagBlue" class="r2menupictureCoin " name="stripSelectorWigWag" onclick="changeImage('Coin', 'WigWag')" src="./Images/LEDTab/Selectors/CoinSlotsBlue.png">
+        <img id="CoinWigWagGreen" class="r2menupictureCoin hidden" name="stripSelectorWigWag" onclick="changeImage('Coin', 'WigWag')" src="./Images/LEDTab/Selectors/CoinSlotsGreen.png">
+        <!-- Maintenance Selection-->
+        <img id="MaintWigWagBlue" class="r2menupictureMaint " name="stripSelectorWigWag" onclick="changeImage('Maint', 'WigWag')" src="./Images/LEDTab/Selectors/SkirtBlue.png">
+        <img id="MaintWigWagGreen" class="r2menupictureMaint hidden" name="stripSelectorWigWag" onclick="changeImage('Maint', 'WigWag')" src="./Images/LEDTab/Selectors/SkirtGreen.png">
+        <!-- Vertical Slots Selection-->
+        <img id="VUWigWagBlue" class="r2menupictureDataPanelVerticalBars " name="stripSelectorWigWag" onclick="changeImage('VU', 'WigWag')" src="./Images/LEDTab/Selectors/DataPanelVerticalBlue.png">
+        <img id="VUWigWagGreen" class="r2menupictureDataPanelVerticalBars hidden" name="stripSelectorWigWag" onclick="changeImage('VU', 'WigWag')" src="./Images/LEDTab/Selectors/DataPanelVerticalGreen.png">
+        <!-- Front HP Selection-->
+        <img id="FrontHPWigWagBlue" class="r2menupictureFrontHP hidden" name="stripSelectorWigWag" onclick="changeImage('FrontHP', 'WigWag')" src="./Images/LEDTab/Selectors/FrontHPBlue.png">
+        <img id="FrontHPWigWagGreen" class="r2menupictureFrontHP hidden" name="stripSelectorWigWag" onclick="changeImage('FrontHP', 'WigWag')" src="./Images/LEDTab/Selectors/FrontHPGreen.png">
+        <!--Top HP Selection-->
+        <img id="TopHPWigWagBlue" class="r2menupictureTopHP hidden" name="stripSelectorWigWag" onclick="changeImage('TopHP', 'WigWag')" src="./Images/LEDTab/Selectors/TopHPBlue.png">
+        <img id="TopHPWigWagGreen" class="r2menupictureTopHP hidden" name="stripSelectorWigWag" onclick="changeImage('TopHP', 'WigWag')" src="./Images/LEDTab/Selectors/TopHPGreen.png">
+        <!-- Rear HP Selection-->
+        <img id="RearHPWigWagBlue" class="r2menupictureRearHP  hidden" name="stripSelectorWigWag" onclick="changeImage('RearHP', 'WigWag')" src="./Images/LEDTab/Selectors/RearHPBlue.png">
+        <img id="RearHPWigWagGreen" class="r2menupictureRearHP hidden" name="stripSelectorWigWag" onclick="changeImage('RearHP', 'WigWag')" src="./Images/LEDTab/Selectors/RearHPGreen.png">   
+        <!-- Data Panel Logics -->    
+        <img id="CBIWigWagBlue" class="r2menupictureCBI hidden" name="stripSelectorWigWag" onclick="changeImage('CBI', 'WigWag')" src="./Images/Body/CBIDoorBlue.png">
+        <img id="CBIWigWagGreen" class="r2menupictureCBI hidden" name="stripSelectorWigWag" onclick="changeImage('CBI', 'WigWag')" src="./Images/Body/CBIDoorGreen.png">
+        <!-- CBI Panel Logics -->    
+        <img id="DPWigWagBlue" class="r2menupictureDataPanelLED1 hidden" name="stripSelectorWigWag" onclick="changeImage('DP', 'WigWag')" src="./Images/Body/DataPanelLEDsBlue.png">
+        <img id="DPWigWagGreen" class="r2menupictureDataPanelLED1 hidden" name="stripSelectorWigWag" onclick="changeImage('DP', 'WigWag')" src="./Images/Body/DataPanelLEDsGreen.png"> 
 
-        <img
-          class="r2menupictureCoin"
-          src="Images/Body/CoinSLotsBlue.png"
-          alt="picture"
-          name="stripSelectorWigWag"
-          onclick=changeImageCoinWigWag()
-          id="CoinWigWag"
-        />
-
-        <img
-            class="r2menupictureMaint"
-            src="Images/Body/SkirtBlue.png"
-            alt="picture"
-            name="stripSelectorWigWag"
-            onclick=changeImageMaintWigWag()
-            id="MaintWigWag"
-          />
-
-        <img
-            class="r2menupictureDataPanelVerticalBars"
-            src="Images/Body/DataPanelVerticalBlue.png"
-            alt="picture"
-            name="stripSelectorWigWag"
-            onclick=changeImageVerticalBarsWigWag()
-            id="VerticalBarstWigWag"
-          />
-          <img
-          class="selectALLpic"
-          src="Images/Button-Select-All-GIMP.png"
-          alt="picture"
-          onclick=selectALLStripsWigWag()
-          id="checkmarkallRSeries"
-        />
-      
-        <img
-          class="selectNonepic"
-          src="Images/Button-Select-None-GIMP.png"
-          alt="picture"
-          onclick=selectNoneStripsWigWag()
-          id="checkmarkNoneRSeries"
-        />
-
-          <!-- <h3 class="selectAll" onclick=selectALLStripsWigWag()> A </h3>
-          <h3 class="selectNone" onclick=selectNoneStripsWigWag()> N </h3> -->
-          <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallWigWag">
-          <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneWigWag">
-
-
+         <!-- Select All Selection-->
+         <img id="checkmarkall" class="selectALLpic" onclick="selectALLStrips('WigWag', 'noDome', )" src="./Images/LEDTab/Selectors/Button-Select-All.png">
+         <img id="checkmarkallWigWag" class="checkmarkall hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+           <!-- Select None Selection-->
+           <img id="checkmarkNone" class="selectNonepic" onclick="selectNoneStrips('WigWag', 'noDome',)" src="./Images/LEDTab/Selectors/Button-Select-None.png">
+           <img id="checkmarknoneWigWag" class="checkmarknone hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+ 
         <div class="menu-Level-2">
 
             <div class="menu-Level-2-Links " >
-              <button class="active" rel="WigWag123"><img
-                  class="buttonwidth"
-                  id ="transparent"
-                  src="Images/Buttons/LEDFunctionButtons/Generic/Button-WigWag-Yellow.png"
-                  alt="button for Solid Color"
-                /></button>
+              <button class="active " rel="WigWag123">
+                <div class="ButtonBlankLED" onclick="">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext1LineLED">wig wag</p>
+                </div>                        
+              </button> 
+
             </div>
 
           <div class="menu-Level-2-Content active" id="WigWag123">
@@ -2662,10 +2636,24 @@
                   value="3"
                   min="0"
                   max="9"
-                /><a href="#" onclick="commandOneColorAndSpeedWigWag('18','WigWag123Slider', 'WigWag123ColorChoiceColorSelect', 'checkmarkapplyWigWag')" class="applyButton1"></a>
-                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff()"  class="applyButtonoff"></img>
+                />
+                 <!-- Apply Button-->
+                 <div id="BounceApply" class="applyButton"  onclick="commandOneColorAndSpeed('18','WigWag123Slider', 'WigWag123ColorChoiceColorSelect', 'checkmarkapplyWigWag', 'WigWag', 'noDome')" >
+                  <img id="BounceApplyImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext1LineLED">apply</p>
+                </div>
+                <!-- Off Button-->
+                <div id="BounceOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffWigWag', 'WigWag')">
+                  <img id="RBounceOffImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                <p class="shadowtext1LineLED">off</p>
+              </div>
+
               </form>
-              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyWigWag">
+              <img id="checkmarkapplyWigWag" class="checkmarkapply hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+              <img id="checkmarkoffWigWag"   class="checkmarkoff hidden" src="./Images/LEDTab/Selectors/checkmark.png">  
+                
+                
+
             </div><!--end of ColorPickerdiv div-->
           </div> <!-- end of Level 2 Conetent Wig Wag-->
 
@@ -2674,71 +2662,49 @@
 
       <div class="menu-Level-1-Content" id="WigWag2">
         <h1 class="menuHeader-Level-1">Wig Wag 2</h1>
-        <img
-            class="r2menupictureLDP1"
-            src="Images/Body/LDPBlue.png"
-            alt="picture"
-            name="stripSelectorWigWag2"
-            onclick=changeImageLDPWigWag2()
-            id="LDPWigWag2"
-          />
+        <!-- LDP Selection-->
+        <img id="LDPWigWag2Blue" class="r2menupictureLDP1 " name="stripSelectorWigWag2" onclick="changeImage('LDP', 'WigWag2')" src="./Images/LEDTab/Selectors/LDPBlue.png">
+        <img id="LDPWigWag2Green" class="r2menupictureLDP1 hidden" name="stripSelectorWigWag2" onclick="changeImage('LDP', 'WigWag2')" src="./Images/LEDTab/Selectors/LDPGreen.png">
+        <!-- Coin Slots Selection-->
+        <img id="CoinWigWag2Blue" class="r2menupictureCoin " name="stripSelectorWigWag2" onclick="changeImage('Coin', 'WigWag2')" src="./Images/LEDTab/Selectors/CoinSlotsBlue.png">
+        <img id="CoinWigWag2Green" class="r2menupictureCoin hidden" name="stripSelectorWigWag2" onclick="changeImage('Coin', 'WigWag2')" src="./Images/LEDTab/Selectors/CoinSlotsGreen.png">
+        <!-- Maintenance Selection-->
+        <img id="MaintWigWag2Blue" class="r2menupictureMaint " name="stripSelectorWigWag2" onclick="changeImage('Maint', 'WigWag2')" src="./Images/LEDTab/Selectors/SkirtBlue.png">
+        <img id="MaintWigWag2Green" class="r2menupictureMaint hidden" name="stripSelectorWigWag2" onclick="changeImage('Maint', 'WigWag2')" src="./Images/LEDTab/Selectors/SkirtGreen.png">
+        <!-- Vertical Slots Selection-->
+        <img id="VUWigWag2Blue" class="r2menupictureDataPanelVerticalBars " name="stripSelectorWigWag2" onclick="changeImage('VU', 'WigWag2')" src="./Images/LEDTab/Selectors/DataPanelVerticalBlue.png">
+        <img id="VUWigWag2Green" class="r2menupictureDataPanelVerticalBars hidden" name="stripSelectorWigWag2" onclick="changeImage('VU', 'WigWag2')" src="./Images/LEDTab/Selectors/DataPanelVerticalGreen.png">
+        <!-- Front HP Selection-->
+        <img id="FrontHPWigWag2Blue" class="r2menupictureFrontHP hidden" name="stripSelectorWigWag2" onclick="changeImage('FrontHP', 'WigWag2')" src="./Images/LEDTab/Selectors/FrontHPBlue.png">
+        <img id="FrontHPWigWag2Green" class="r2menupictureFrontHP hidden" name="stripSelectorWigWag2" onclick="changeImage('FrontHP', 'WigWag2')" src="./Images/LEDTab/Selectors/FrontHPGreen.png">
+        <!--Top HP Selection-->
+        <img id="TopHPWigWag2Blue" class="r2menupictureTopHP hidden" name="stripSelectorWigWag2" onclick="changeImage('TopHP', 'WigWag2')" src="./Images/LEDTab/Selectors/TopHPBlue.png">
+        <img id="TopHPWigWag2Green" class="r2menupictureTopHP hidden" name="stripSelectorWigWag2" onclick="changeImage('TopHP', 'WigWag2')" src="./Images/LEDTab/Selectors/TopHPGreen.png">
+        <!-- Rear HP Selection-->
+        <img id="RearHPWigWag2Blue" class="r2menupictureRearHP  hidden" name="stripSelectorWigWag2" onclick="changeImage('RearHP', 'WigWag2')" src="./Images/LEDTab/Selectors/RearHPBlue.png">
+        <img id="RearHPWigWag2Green" class="r2menupictureRearHP hidden" name="stripSelectorWigWag2" onclick="changeImage('RearHP', 'WigWag2')" src="./Images/LEDTab/Selectors/RearHPGreen.png">   
+        <!-- Data Panel Logics -->    
+        <img id="CBIWigWag2Blue" class="r2menupictureCBI hidden" name="stripSelectorWigWag2" onclick="changeImage('CBI', 'WigWag2')" src="./Images/Body/CBIDoorBlue.png">
+        <img id="CBIWigWag2Green" class="r2menupictureCBI hidden" name="stripSelectorWigWag2" onclick="changeImage('CBI', 'WigWag2')" src="./Images/Body/CBIDoorGreen.png">
+        <!-- CBI Panel Logics -->    
+        <img id="DPWigWag2Blue" class="r2menupictureDataPanelLED1 hidden" name="stripSelectorWigWag2" onclick="changeImage('DP', 'WigWag2')" src="./Images/Body/DataPanelLEDsBlue.png">
+        <img id="DPWigWag2Green" class="r2menupictureDataPanelLED1 hidden" name="stripSelectorWigWag2" onclick="changeImage('DP', 'WigWag2')" src="./Images/Body/DataPanelLEDsGreen.png"> 
 
-        <img
-          class="r2menupictureCoin"
-          src="Images/Body/CoinSLotsBlue.png"
-          alt="picture"
-          name="stripSelectorWigWag2"
-          onclick=changeImageCoinWigWag2()
-          id="CoinWigWag2"
-        />
-
-        <img
-            class="r2menupictureMaint"
-            src="Images/Body/SkirtBlue.png"
-            alt="picture"
-            name="stripSelectorWigWag2"
-            onclick=changeImageMaintWigWag2()
-            id="MaintWigWag2"
-          />
-
-        <img
-            class="r2menupictureDataPanelVerticalBars"
-            src="Images/Body/DataPanelVerticalBlue.png"
-            alt="picture"
-            name="stripSelectorWigWag2"
-            onclick=changeImageVerticalBarsWigWag2()
-            id="VerticalBarstWigWag2"
-          />
-          <img
-          class="selectALLpic"
-          src="Images/Button-Select-All-GIMP.png"
-          alt="picture"
-          onclick=selectALLStripsWigWag2()
-          id="checkmarkallRSeries"
-        />
-      
-        <img
-          class="selectNonepic"
-          src="Images/Button-Select-None-GIMP.png"
-          alt="picture"
-          onclick=selectNoneStripsWigWag2()
-          id="checkmarkNoneRSeries"
-        />
-
-          <!-- <h3 class="selectAll" onclick=selectALLStripsWigWag2()> A </h3>
-          <h3 class="selectNone" onclick=selectNoneStripsWigWag2()> N </h3> -->
-          <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallWigWag2">
-          <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneWigWag2">
-
+         <!-- Select All Selection-->
+         <img id="checkmarkall" class="selectALLpic" onclick="selectALLStrips('WigWag2', 'noDome', )" src="./Images/LEDTab/Selectors/Button-Select-All.png">
+         <img id="checkmarkallWigWag2" class="checkmarkall hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+           <!-- Select None Selection-->
+           <img id="checkmarkNone" class="selectNonepic" onclick="selectNoneStrips('WigWag2', 'noDome',)" src="./Images/LEDTab/Selectors/Button-Select-None.png">
+           <img id="checkmarknoneWigWag2" class="checkmarknone hidden" src="./Images/LEDTab/Selectors/checkmark.png">
         <div class="menu-Level-2">
 
             <div class="menu-Level-2-Links " >
-              <button class="active" rel="WigWag2123"><img
-                  class="buttonwidth"
-                  id ="transparent"
-                  src="Images/Buttons/LEDFunctionButtons/Generic/Button-WigWag2-Yellow.png"
-                  alt="button for Solid Color"
-                /></button>
+              <button class="active " rel="WigWag123">
+                <div class="ButtonBlankLED" >
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext1LineLED">wig wag</p>
+                </div>                        
+              </button> 
             </div>
 
           <div class="menu-Level-2-Content active" id="WigWag2123">
@@ -2767,10 +2733,24 @@
                   value="3"
                   min="0"
                   max="9"
-                /><a href="#" onclick="commandOneColorAndSpeedWigWag2('18','WigWag2123Slider', 'WigWag2123ColorChoiceColorSelect' , 'checkmarkapplyWigWag2')" class="applyButton1"></a>
-                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff()"  class="applyButtonoff"></img>
+                />
+                <!-- Apply Button-->
+                <div id="BounceApply" class="applyButton"  onclick="commandOneColorAndSpeed('20','WigWag2123Slider', 'WigWag2123ColorChoiceColorSelect', 'checkmarkapplyWigWag2', 'WigWag2', 'noDome')" >
+                  <img id="BounceApplyImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext1LineLED">apply</p>
+                </div>
+                <!-- Off Button-->
+                <div id="BounceOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffWigWag2', 'WigWag2')">
+                  <img id="RBounceOffImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                <p class="shadowtext1LineLED">off</p>
+              </div>
+
               </form>
-              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyWigWag2">
+              <img id="checkmarkapplyWigWag2" class="checkmarkapply hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+              <img id="checkmarkoffWigWag2"   class="checkmarkoff hidden" src="./Images/LEDTab/Selectors/checkmark.png"> 
+                
+                
+               
             </div><!--end of ColorPickerdiv div-->
           </div> <!-- end of Level 2 Conetent Wig Wag-->
 
@@ -2780,74 +2760,51 @@
 
       <div class="menu-Level-1-Content" id="ZigZag">
         <h1 class="menuHeader-Level-1">zig zag</h1>
-        <img
-            class="r2menupictureLDP1"
-            src="Images/Body/LDPBlue.png"
-            alt="picture"
-            name="stripSelectorZigZag"
-            onclick=changeImageLDPZigZag()
-            id="LDPZigZag"
-          />
+        <!-- LDP Selection-->
+        <img id="LDPZigZagBlue" class="r2menupictureLDP1 " name="stripSelectorZigZag" onclick="changeImage('LDP', 'ZigZag')" src="./Images/LEDTab/Selectors/LDPBlue.png">
+        <img id="LDPZigZagGreen" class="r2menupictureLDP1 hidden" name="stripSelectorZigZag" onclick="changeImage('LDP', 'ZigZag')" src="./Images/LEDTab/Selectors/LDPGreen.png">
+        <!-- Coin Slots Selection-->
+        <img id="CoinZigZagBlue" class="r2menupictureCoin " name="stripSelectorZigZag" onclick="changeImage('Coin', 'ZigZag')" src="./Images/LEDTab/Selectors/CoinSlotsBlue.png">
+        <img id="CoinZigZagGreen" class="r2menupictureCoin hidden" name="stripSelectorZigZag" onclick="changeImage('Coin', 'ZigZag')" src="./Images/LEDTab/Selectors/CoinSlotsGreen.png">
+        <!-- Maintenance Selection-->
+        <img id="MaintZigZagBlue" class="r2menupictureMaint " name="stripSelectorZigZag" onclick="changeImage('Maint', 'ZigZag')" src="./Images/LEDTab/Selectors/SkirtBlue.png">
+        <img id="MaintZigZagGreen" class="r2menupictureMaint hidden" name="stripSelectorZigZag" onclick="changeImage('Maint', 'ZigZag')" src="./Images/LEDTab/Selectors/SkirtGreen.png">
+        <!-- Vertical Slots Selection-->
+        <img id="VUZigZagBlue" class="r2menupictureDataPanelVerticalBars " name="stripSelectorZigZag" onclick="changeImage('VU', 'ZigZag')" src="./Images/LEDTab/Selectors/DataPanelVerticalBlue.png">
+        <img id="VUZigZagGreen" class="r2menupictureDataPanelVerticalBars hidden" name="stripSelectorZigZag" onclick="changeImage('VU', 'ZigZag')" src="./Images/LEDTab/Selectors/DataPanelVerticalGreen.png">
+        <!-- Front HP Selection-->
+        <img id="FrontHPZigZagBlue" class="r2menupictureFrontHP hidden" name="stripSelectorZigZag" onclick="changeImage('FrontHP', 'ZigZag')" src="./Images/LEDTab/Selectors/FrontHPBlue.png">
+        <img id="FrontHPZigZagGreen" class="r2menupictureFrontHP hidden" name="stripSelectorZigZag" onclick="changeImage('FrontHP', 'ZigZag')" src="./Images/LEDTab/Selectors/FrontHPGreen.png">
+        <!--Top HP Selection-->
+        <img id="TopHPZigZagBlue" class="r2menupictureTopHP hidden" name="stripSelectorZigZag" onclick="changeImage('TopHP', 'ZigZag')" src="./Images/LEDTab/Selectors/TopHPBlue.png">
+        <img id="TopHPZigZagGreen" class="r2menupictureTopHP hidden" name="stripSelectorZigZag" onclick="changeImage('TopHP', 'ZigZag')" src="./Images/LEDTab/Selectors/TopHPGreen.png">
+        <!-- Rear HP Selection-->
+        <img id="RearHPZigZagBlue" class="r2menupictureRearHP  hidden" name="stripSelectorZigZag" onclick="changeImage('RearHP', 'ZigZag')" src="./Images/LEDTab/Selectors/RearHPBlue.png">
+        <img id="RearHPZigZagGreen" class="r2menupictureRearHP hidden" name="stripSelectorZigZag" onclick="changeImage('RearHP', 'ZigZag')" src="./Images/LEDTab/Selectors/RearHPGreen.png">   
+        <!-- Data Panel Logics -->    
+        <img id="CBIZigZagBlue" class="r2menupictureCBI hidden" name="stripSelectorZigZag" onclick="changeImage('CBI', 'ZigZag')" src="./Images/Body/CBIDoorBlue.png">
+        <img id="CBIZigZagGreen" class="r2menupictureCBI hidden" name="stripSelectorZigZag" onclick="changeImage('CBI', 'ZigZag')" src="./Images/Body/CBIDoorGreen.png">
+        <!-- CBI Panel Logics -->    
+        <img id="DPZigZagBlue" class="r2menupictureDataPanelLED1 hidden" name="stripSelectorZigZag" onclick="changeImage('DP', 'ZigZag')" src="./Images/Body/DataPanelLEDsBlue.png">
+        <img id="DPZigZagGreen" class="r2menupictureDataPanelLED1 hidden" name="stripSelectorZigZag" onclick="changeImage('DP', 'ZigZag')" src="./Images/Body/DataPanelLEDsGreen.png"> 
 
-        <img
-          class="r2menupictureCoin"
-          src="Images/Body/CoinSLotsBlue.png"
-          alt="picture"
-          name="stripSelectorZigZag"
-          onclick=changeImageCoinZigZag()
-          id="CoinZigZag"
-        />
-
-        <img
-            class="r2menupictureMaint"
-            src="Images/Body/SkirtBlue.png"
-            alt="picture"
-            name="stripSelectorZigZag"
-            onclick=changeImageMaintZigZag()
-            id="MaintZigZag"
-          />
-
-        <img
-            class="r2menupictureDataPanelVerticalBars"
-            src="Images/Body/DataPanelVerticalBlue.png"
-            alt="picture"
-            name="stripSelectorZigZag"
-            onclick=changeImageVerticalBarsZigZag()
-            id="VerticalBarstZigZag"
-          />
-          <img
-          class="selectALLpic"
-          src="Images/Button-Select-All-GIMP.png"
-          alt="picture"
-          onclick=selectALLStripsZigZag()
-          id="checkmarkallRSeries"
-        />
-      
-        <img
-          class="selectNonepic"
-          src="Images/Button-Select-None-GIMP.png"
-          alt="picture"
-          onclick=selectNoneStripsZigZag()
-          id="checkmarkNoneRSeries"
-        />
-
-          <!-- <h3 class="selectAll" onclick=selectALLStripsZigZag()> A </h3>
-          <h3 class="selectNone" onclick=selectNoneStripsZigZag()> N </h3> -->
-          <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallZigZag">
-          <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneZigZag">
-
+         <!-- Select All Selection-->
+         <img id="checkmarkall" class="selectALLpic" onclick="selectALLStrips('ZigZag', 'noDome', )" src="./Images/LEDTab/Selectors/Button-Select-All.png">
+         <img id="checkmarkallZigZag" class="checkmarkall hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+           <!-- Select None Selection-->
+           <img id="checkmarkNone" class="selectNonepic" onclick="selectNoneStrips('ZigZag', 'noDome',)" src="./Images/LEDTab/Selectors/Button-Select-None.png">
+           <img id="checkmarknoneZigZag" class="checkmarknone hidden" src="./Images/LEDTab/Selectors/checkmark.png">
         <div class="menu-Level-2">
 
             <div class="menu-Level-2-Links " >
-              <button class="active" rel="ZigZag123"><img
-                  class="buttonwidth"
-                  id ="transparent"
-                  src="Images/Buttons/LEDFunctionButtons/Generic/Button-ZigZag-White.png"
-                  alt="button for Solid Color"
-                /></button>
-            </div>
-
-          <div class="menu-Level-2-Content active" id="ZigZag123">
+              <button class="active " rel="ZigZag123">
+                <div class="ButtonBlankLED" >
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext1LineLED">zig zag</p>
+                </div>                        
+              </button> 
+              </div>
+           <div class="menu-Level-2-Content active" id="ZigZag123">
             <h2 class="menuHeader-Level-2"></h2>
             <div class="ColorPickerdiv">
               <form class="" action="index.html" method="post">
@@ -2873,10 +2830,24 @@
                   value="3"
                   min="0"
                   max="9"
-                /><a href="#" onclick="commandOneColorAndSpeedZigZag('19','ZigZag123Slider', 'ZigZag123ColorChoiceColorSelect', 'checkmarkapplyZigZag')" class="applyButton1"></a>
-                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff()"  class="applyButtonoff"></img>
+                />
+
+                <!-- Apply Button-->
+                <div id="BounceApply" class="applyButton"  onclick="commandOneColorAndSpeed('19','ZigZag123Slider', 'ZigZag123ColorChoiceColorSelect', 'checkmarkapplyZigZag', 'ZigZag', 'noDome')" >
+                  <img id="BounceApplyImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext1LineLED">apply</p>
+                </div>
+                <!-- Off Button-->
+                <div id="BounceOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffZigZag', 'ZigZag')">
+                  <img id="RBounceOffImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                <p class="shadowtext1LineLED">off</p>
+              </div>
+
               </form>
-              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyZigZag">
+              <img id="checkmarkapplyZigZag" class="checkmarkapply hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+              <img id="checkmarkoffZigZag"   class="checkmarkoff hidden" src="./Images/LEDTab/Selectors/checkmark.png"> 
+                
+       
             </div><!--end of ColorPickerdiv div-->
           </div> <!-- end of Level 2 Conetent Zig Zag-->
 
@@ -2885,72 +2856,51 @@
 
       <div class="menu-Level-1-Content" id="ZigZag2">
         <h1 class="menuHeader-Level-1">zig zag 2</h1>
-        <img
-            class="r2menupictureLDP1"
-            src="Images/Body/LDPBlue.png"
-            alt="picture"
-            name="stripSelectorZigZag2"
-            onclick=changeImageLDPZigZag2()
-            id="LDPZigZag2"
-          />
+        <!-- LDP Selection-->
+        <img id="LDPZigZag2Blue" class="r2menupictureLDP1 " name="stripSelectorZigZag2" onclick="changeImage('LDP', 'ZigZag2')" src="./Images/LEDTab/Selectors/LDPBlue.png">
+        <img id="LDPZigZag2Green" class="r2menupictureLDP1 hidden" name="stripSelectorZigZag2" onclick="changeImage('LDP', 'ZigZag2')" src="./Images/LEDTab/Selectors/LDPGreen.png">
+        <!-- Coin Slots Selection-->
+        <img id="CoinZigZag2Blue" class="r2menupictureCoin " name="stripSelectorZigZag2" onclick="changeImage('Coin', 'ZigZag2')" src="./Images/LEDTab/Selectors/CoinSlotsBlue.png">
+        <img id="CoinZigZag2Green" class="r2menupictureCoin hidden" name="stripSelectorZigZag2" onclick="changeImage('Coin', 'ZigZag2')" src="./Images/LEDTab/Selectors/CoinSlotsGreen.png">
+        <!-- Maintenance Selection-->
+        <img id="MaintZigZag2Blue" class="r2menupictureMaint " name="stripSelectorZigZag2" onclick="changeImage('Maint', 'ZigZag2')" src="./Images/LEDTab/Selectors/SkirtBlue.png">
+        <img id="MaintZigZag2Green" class="r2menupictureMaint hidden" name="stripSelectorZigZag2" onclick="changeImage('Maint', 'ZigZag2')" src="./Images/LEDTab/Selectors/SkirtGreen.png">
+        <!-- Vertical Slots Selection-->
+        <img id="VUZigZag2Blue" class="r2menupictureDataPanelVerticalBars " name="stripSelectorZigZag2" onclick="changeImage('VU', 'ZigZag2')" src="./Images/LEDTab/Selectors/DataPanelVerticalBlue.png">
+        <img id="VUZigZag2Green" class="r2menupictureDataPanelVerticalBars hidden" name="stripSelectorZigZag2" onclick="changeImage('VU', 'ZigZag2')" src="./Images/LEDTab/Selectors/DataPanelVerticalGreen.png">
+        <!-- Front HP Selection-->
+        <img id="FrontHPZigZag2Blue" class="r2menupictureFrontHP hidden" name="stripSelectorZigZag2" onclick="changeImage('FrontHP', 'ZigZag2')" src="./Images/LEDTab/Selectors/FrontHPBlue.png">
+        <img id="FrontHPZigZag2Green" class="r2menupictureFrontHP hidden" name="stripSelectorZigZag2" onclick="changeImage('FrontHP', 'ZigZag2')" src="./Images/LEDTab/Selectors/FrontHPGreen.png">
+        <!--Top HP Selection-->
+        <img id="TopHPZigZag2Blue" class="r2menupictureTopHP hidden" name="stripSelectorZigZag2" onclick="changeImage('TopHP', 'ZigZag2')" src="./Images/LEDTab/Selectors/TopHPBlue.png">
+        <img id="TopHPZigZag2Green" class="r2menupictureTopHP hidden" name="stripSelectorZigZag2" onclick="changeImage('TopHP', 'ZigZag2')" src="./Images/LEDTab/Selectors/TopHPGreen.png">
+        <!-- Rear HP Selection-->
+        <img id="RearHPZigZag2Blue" class="r2menupictureRearHP  hidden" name="stripSelectorZigZag2" onclick="changeImage('RearHP', 'ZigZag2')" src="./Images/LEDTab/Selectors/RearHPBlue.png">
+        <img id="RearHPZigZag2Green" class="r2menupictureRearHP hidden" name="stripSelectorZigZag2" onclick="changeImage('RearHP', 'ZigZag2')" src="./Images/LEDTab/Selectors/RearHPGreen.png">   
+        <!-- Data Panel Logics -->    
+        <img id="CBIZigZag2Blue" class="r2menupictureCBI hidden" name="stripSelectorZigZag2" onclick="changeImage('CBI', 'ZigZag2')" src="./Images/Body/CBIDoorBlue.png">
+        <img id="CBIZigZag2Green" class="r2menupictureCBI hidden" name="stripSelectorZigZag2" onclick="changeImage('CBI', 'ZigZag2')" src="./Images/Body/CBIDoorGreen.png">
+        <!-- CBI Panel Logics -->    
+        <img id="DPZigZag2Blue" class="r2menupictureDataPanelLED1 hidden" name="stripSelectorZigZag2" onclick="changeImage('DP', 'ZigZag2')" src="./Images/Body/DataPanelLEDsBlue.png">
+        <img id="DPZigZag2Green" class="r2menupictureDataPanelLED1 hidden" name="stripSelectorZigZag2" onclick="changeImage('DP', 'ZigZag2')" src="./Images/Body/DataPanelLEDsGreen.png"> 
 
-        <img
-          class="r2menupictureCoin"
-          src="Images/Body/CoinSLotsBlue.png"
-          alt="picture"
-          name="stripSelectorZigZag2"
-          onclick=changeImageCoinZigZag2()
-          id="CoinZigZag2"
-        />
-
-        <img
-            class="r2menupictureMaint"
-            src="Images/Body/SkirtBlue.png"
-            alt="picture"
-            name="stripSelectorZigZag2"
-            onclick=changeImageMaintZigZag2()
-            id="MaintZigZag2"
-          />
-
-        <img
-            class="r2menupictureDataPanelVerticalBars"
-            src="Images/Body/DataPanelVerticalBlue.png"
-            alt="picture"
-            name="stripSelectorZigZag2"
-            onclick=changeImageVerticalBarsZigZag2()
-            id="VerticalBarstZigZag2"
-          />
-          <img
-          class="selectALLpic"
-          src="Images/Button-Select-All-GIMP.png"
-          alt="picture"
-          onclick=selectALLStripsZigZag2()
-          id="checkmarkallRSeries"
-        />
-      
-        <img
-          class="selectNonepic"
-          src="Images/Button-Select-None-GIMP.png"
-          alt="picture"
-          onclick=selectNoneStripsZigZag2()
-          id="checkmarkNoneRSeries"
-        />
-
-          <!-- <h3 class="selectAll" onclick=selectALLStripsZigZag2()> A </h3>
-          <h3 class="selectNone" onclick=selectNoneStripsZigZag2()> N </h3> -->
-          <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallZigZag2">
-          <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneZigZag2">
-
+         <!-- Select All Selection-->
+         <img id="checkmarkall" class="selectALLpic" onclick="selectALLStrips('ZigZag2', 'noDome', )" src="./Images/LEDTab/Selectors/Button-Select-All.png">
+         <img id="checkmarkallZigZag2" class="checkmarkall hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+           <!-- Select None Selection-->
+           <img id="checkmarkNone" class="selectNonepic" onclick="selectNoneStrips('ZigZag2', 'noDome',)" src="./Images/LEDTab/Selectors/Button-Select-None.png">
+           <img id="checkmarknoneZigZag2" class="checkmarknone hidden" src="./Images/LEDTab/Selectors/checkmark.png">
         <div class="menu-Level-2">
 
             <div class="menu-Level-2-Links " >
-              <button class="active" rel="ZigZag2123"><img
-                  class="buttonwidth"
-                  id ="transparent"
-                  src="Images/Buttons/LEDFunctionButtons/Generic/Button-ZigZag2-White.png"
-                  alt="button for Solid Color"
-                /></button>
-            </div>
+              <button class="active " rel="ZigZag2123">
+                <div class="ButtonBlankLED" >
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext1LineLED">zig zag</p>
+                </div>                        
+              </button> 
+             
+             </div>
 
           <div class="menu-Level-2-Content active" id="ZigZag2123">
             <h2 class="menuHeader-Level-2"></h2>
@@ -2958,11 +2908,11 @@
               <form class="" action="index.html" method="post">
                 <label for="ColorPicker1">First color:</label>
                   <select class="ColorPicker1" id="ZigZag2123FirstColorSelctionBox" name="ColorPicker1">
-                  <option value="5">Blue</option>
                   <option value="1">Red</option>
                   <option value="2">Yellow</option>
                   <option value="3">Green</option>
                   <option value="4">Cyan</option>
+                  <option value="5">Blue</option>
                   <option value="6">Magenta</option>
                   <option value="7">Orange</option>
                   <option value="8">White</option>
@@ -2993,11 +2943,22 @@
                   min="0"
                   max="8"
                 />
-                <a href="#" onclick="commandTwoColorsZigZag2('21','ZigZag2123Slider', 'ZigZag2123FirstColorSelctionBox', 'ZigZag2123econdColorSelectionBox', 'checkmarkapplyZigZag2')" class="applyButton1"></a>
-                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
-              </form>
-              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyZigZag2">
+               
+                 <!-- Apply Button-->
+                 <div id="BounceApply" class="applyButton"  onclick="commandTwoColorswithSpeed('21','ZigZag2123Slider', 'ZigZag2123FirstColorSelctionBox', 'ZigZag2123econdColorSelectionBox', 'checkmarkapplyZigZag2', 'ZigZag2', 'noDome')" >
+                  <img id="BounceApplyImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext1LineLED">apply</p>
+                </div>
+                <!-- Off Button-->
+                <div id="BounceOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffZigZag', 'ZigZag2')">
+                  <img id="RBounceOffImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                <p class="shadowtext1LineLED">off</p>
+              </div>
 
+              </form>
+              <img id="checkmarkapplyZigZag2" class="checkmarkapply hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+              <img id="checkmarkoffZigZag2"   class="checkmarkoff hidden" src="./Images/LEDTab/Selectors/checkmark.png"> 
+   
             </div><!--end of ColorPickerdiv div-->
           </div> <!-- end of Level 2 Conetent Zig Zag 2-->
 
@@ -3006,71 +2967,51 @@
 
       <div class="menu-Level-1-Content" id="DimPulse2">
         <h1 class="menuHeader-Level-1">Dim Pulse 2</h1>
-        <img
-            class="r2menupictureLDP1"
-            src="Images/Body/LDPBlue.png"
-            alt="picture"
-            name="stripSelectorDimPulse2"
-            onclick=changeImageLDPDimPulse2()
-            id="LDPDimPulse2"
-          />
+        <!-- LDP Selection-->
+        <img id="LDPDimPulse2Blue" class="r2menupictureLDP1 " name="stripSelectorDimPulse2" onclick="changeImage('LDP', 'DimPulse2')" src="./Images/LEDTab/Selectors/LDPBlue.png">
+        <img id="LDPDimPulse2Green" class="r2menupictureLDP1 hidden" name="stripSelectorDimPulse2" onclick="changeImage('LDP', 'DimPulse2')" src="./Images/LEDTab/Selectors/LDPGreen.png">
+        <!-- Coin Slots Selection-->
+        <img id="CoinDimPulse2Blue" class="r2menupictureCoin " name="stripSelectorDimPulse2" onclick="changeImage('Coin', 'DimPulse2')" src="./Images/LEDTab/Selectors/CoinSlotsBlue.png">
+        <img id="CoinDimPulse2Green" class="r2menupictureCoin hidden" name="stripSelectorDimPulse2" onclick="changeImage('Coin', 'DimPulse2')" src="./Images/LEDTab/Selectors/CoinSlotsGreen.png">
+        <!-- Maintenance Selection-->
+        <img id="MaintDimPulse2Blue" class="r2menupictureMaint " name="stripSelectorDimPulse2" onclick="changeImage('Maint', 'DimPulse2')" src="./Images/LEDTab/Selectors/SkirtBlue.png">
+        <img id="MaintDimPulse2Green" class="r2menupictureMaint hidden" name="stripSelectorDimPulse2" onclick="changeImage('Maint', 'DimPulse2')" src="./Images/LEDTab/Selectors/SkirtGreen.png">
+        <!-- Vertical Slots Selection-->
+        <img id="VUDimPulse2Blue" class="r2menupictureDataPanelVerticalBars " name="stripSelectorDimPulse2" onclick="changeImage('VU', 'DimPulse2')" src="./Images/LEDTab/Selectors/DataPanelVerticalBlue.png">
+        <img id="VUDimPulse2Green" class="r2menupictureDataPanelVerticalBars hidden" name="stripSelectorDimPulse2" onclick="changeImage('VU', 'DimPulse2')" src="./Images/LEDTab/Selectors/DataPanelVerticalGreen.png">
+        <!-- Front HP Selection-->
+        <img id="FrontHPDimPulse2Blue" class="r2menupictureFrontHP hidden" name="stripSelectorDimPulse2" onclick="changeImage('FrontHP', 'DimPulse2')" src="./Images/LEDTab/Selectors/FrontHPBlue.png">
+        <img id="FrontHPDimPulse2Green" class="r2menupictureFrontHP hidden" name="stripSelectorDimPulse2" onclick="changeImage('FrontHP', 'DimPulse2')" src="./Images/LEDTab/Selectors/FrontHPGreen.png">
+        <!--Top HP Selection-->
+        <img id="TopHPDimPulse2Blue" class="r2menupictureTopHP hidden" name="stripSelectorDimPulse2" onclick="changeImage('TopHP', 'DimPulse2')" src="./Images/LEDTab/Selectors/TopHPBlue.png">
+        <img id="TopHPDimPulse2Green" class="r2menupictureTopHP hidden" name="stripSelectorDimPulse2" onclick="changeImage('TopHP', 'DimPulse2')" src="./Images/LEDTab/Selectors/TopHPGreen.png">
+        <!-- Rear HP Selection-->
+        <img id="RearHPDimPulse2Blue" class="r2menupictureRearHP  hidden" name="stripSelectorDimPulse2" onclick="changeImage('RearHP', 'DimPulse2')" src="./Images/LEDTab/Selectors/RearHPBlue.png">
+        <img id="RearHPDimPulse2Green" class="r2menupictureRearHP hidden" name="stripSelectorDimPulse2" onclick="changeImage('RearHP', 'DimPulse2')" src="./Images/LEDTab/Selectors/RearHPGreen.png">   
+        <!-- Data Panel Logics -->    
+        <img id="CBIDimPulse2Blue" class="r2menupictureCBI hidden" name="stripSelectorDimPulse2" onclick="changeImage('CBI', 'DimPulse2')" src="./Images/Body/CBIDoorBlue.png">
+        <img id="CBIDimPulse2Green" class="r2menupictureCBI hidden" name="stripSelectorDimPulse2" onclick="changeImage('CBI', 'DimPulse2')" src="./Images/Body/CBIDoorGreen.png">
+        <!-- CBI Panel Logics -->    
+        <img id="DPDimPulse2Blue" class="r2menupictureDataPanelLED1 hidden" name="stripSelectorDimPulse2" onclick="changeImage('DP', 'DimPulse2')" src="./Images/Body/DataPanelLEDsBlue.png">
+        <img id="DPDimPulse2Green" class="r2menupictureDataPanelLED1 hidden" name="stripSelectorDimPulse2" onclick="changeImage('DP', 'DimPulse2')" src="./Images/Body/DataPanelLEDsGreen.png"> 
 
-        <img
-          class="r2menupictureCoin"
-          src="Images/Body/CoinSLotsBlue.png"
-          alt="picture"
-          name="stripSelectorDimPulse2"
-          onclick=changeImageCoinDimPulse2()
-          id="CoinDimPulse2"
-        />
-
-        <img
-            class="r2menupictureMaint"
-            src="Images/Body/SkirtBlue.png"
-            alt="picture"
-            name="stripSelectorDimPulse2"
-            onclick=changeImageMaintDimPulse2()
-            id="MaintDimPulse2"
-          />
-
-        <img
-            class="r2menupictureDataPanelVerticalBars"
-            src="Images/Body/DataPanelVerticalBlue.png"
-            alt="picture"
-            name="stripSelectorDimPulse2"
-            onclick=changeImageVerticalBarsDimPulse2()
-            id="VerticalBarstDimPulse2"
-          />
-          <img
-          class="selectALLpic"
-          src="Images/Button-Select-All-GIMP.png"
-          alt="picture"
-          onclick=selectALLStripsDimPulse2()
-          id="checkmarkallRSeries"
-        />
-      
-        <img
-          class="selectNonepic"
-          src="Images/Button-Select-None-GIMP.png"
-          alt="picture"
-          onclick=selectNoneStripsDimPulse2()
-          id="checkmarkNoneRSeries"
-        />
-
-          <!-- <h3 class="selectAll" onclick=selectALLStripsDimPulse2()> A </h3>
-          <h3 class="selectNone" onclick=selectNoneStripsDimPulse2()> N </h3> -->
-          <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallDimPulse2">
-          <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneDimPulse2">
-
+         <!-- Select All Selection-->
+         <img id="checkmarkall" class="selectALLpic" onclick="selectALLStrips('DimPulse2', 'noDome', )" src="./Images/LEDTab/Selectors/Button-Select-All.png">
+         <img id="checkmarkallDimPulse2" class="checkmarkall hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+           <!-- Select None Selection-->
+           <img id="checkmarkNone" class="selectNonepic" onclick="selectNoneStrips('DimPulse2', 'noDome',)" src="./Images/LEDTab/Selectors/Button-Select-None.png">
+           <img id="checkmarknoneDimPulse2" class="checkmarknone hidden" src="./Images/LEDTab/Selectors/checkmark.png">
         <div class="menu-Level-2">
 
             <div class="menu-Level-2-Links " >
-              <button class="active" rel="DimPulse1">
-                <div class="ButtonBlankLED" onclick="">
+              <button class="active " rel="DimPulse1">
+                <div class="ButtonBlankLED" >
                   <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
-                  <p class="shadowtext2LinesLongLED">dim pulse 2</p>
+                  <p class="shadowtext1LineLED">dim pulse</p>
                 </div>                        
-              </button>            
+              </button> 
+             
+                    
             </div>
 
           <div class="menu-Level-2-Content active" id="DimPulse12">
@@ -3100,25 +3041,23 @@
                   min="1"
                   max="3"
                 />
-<!-- 
-                Apply Button
-                <div id="DimPulseApply" class="applyButton" onclick="commandOneColorAndSpeedDimPulse2('22','DimPulse12Slider')">
-                  <img id="DimPulseApplyImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
-                  <p class="shadowtext1LineLED">apply</p>
-                </div> -->
-                <!-- Off Button-->
-                <!-- <div id="DimPulseOff" class="applyButtonoff" onclick="commandStripOffDimPulse('checkmarkoffDimPulse')">
-                  <img id="RDimPulseOffImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
-                <p class="shadowtext1LineLED">off</p>
-                </div>
-              </form>
-                <img id="checkmarkapplyDimPulse" class="checkmarkapply hidden" src="./Images/LEDTab/Selectors/checkmark.png">
-                <img id="checkmarkoffDimPulse" class="checkmarkoff hidden" src="./Images/LEDTab/Selectors/checkmark.png">  -->
-                <a href="#" onclick="commandOneColorAndSpeedDimPulse2('22','DimPulse12Slider', 'DimPulse12ColorChoiceColorSelect', 'checkmarkapplyDimPulse2')" class="applyButton1"></a>
-                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOffDimPulse2('checkmarkoffDimPulse2')"  class="applyButtonoff"></img>
-              </form>
-              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyDimPulse2">
-              <img src="Images/blankcheckmark.png" alt="" class="checkmarkoff" id="checkmarkoffDimPulse2">
+              <!-- Apply Button-->
+              <div id="BounceApply" class="applyButton"  onclick="commandOneColorAndSpeed('22','DimPulse12Slider', 'DimPulse12ColorChoiceColorSelect', 'checkmarkapplyDimPulse2', 'DimPulse2', 'noDome')"  >
+                <img id="BounceApplyImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                <p class="shadowtext1LineLED">apply</p>
+              </div>
+              <!-- Off Button-->
+              <div id="BounceOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffZigZag', 'DimPulse2')">
+                <img id="RBounceOffImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext1LineLED">off</p>
+            </div>
+
+            </form>
+            <img id="checkmarkapplyDimPulse2" class="checkmarkapply hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+            <img id="checkmarkoffDimPulse2"   class="checkmarkoff hidden" src="./Images/LEDTab/Selectors/checkmark.png"> 
+
+                
+               
 
 
             </div><!--end of ColorPickerdiv div-->
@@ -3129,71 +3068,49 @@
 
       <div class="menu-Level-1-Content" id="DimPulse3">
         <h1 class="menuHeader-Level-1">Dim Pulse 3</h1>
-        <img
-            class="r2menupictureLDP1"
-            src="Images/Body/LDPBlue.png"
-            alt="picture"
-            name="stripSelectorDimPulse3"
-            onclick=changeImageLDPDimPulse3()
-            id="LDPDimPulse3"
-          />
+        <!-- LDP Selection-->
+        <img id="LDPDimPulse3Blue" class="r2menupictureLDP1 " name="stripSelectorDimPulse3" onclick="changeImage('LDP', 'DimPulse3')" src="./Images/LEDTab/Selectors/LDPBlue.png">
+        <img id="LDPDimPulse3Green" class="r2menupictureLDP1 hidden" name="stripSelectorDimPulse3" onclick="changeImage('LDP', 'DimPulse3')" src="./Images/LEDTab/Selectors/LDPGreen.png">
+        <!-- Coin Slots Selection-->
+        <img id="CoinDimPulse3Blue" class="r2menupictureCoin " name="stripSelectorDimPulse3" onclick="changeImage('Coin', 'DimPulse3')" src="./Images/LEDTab/Selectors/CoinSlotsBlue.png">
+        <img id="CoinDimPulse3Green" class="r2menupictureCoin hidden" name="stripSelectorDimPulse3" onclick="changeImage('Coin', 'DimPulse3')" src="./Images/LEDTab/Selectors/CoinSlotsGreen.png">
+        <!-- Maintenance Selection-->
+        <img id="MaintDimPulse3Blue" class="r2menupictureMaint " name="stripSelectorDimPulse3" onclick="changeImage('Maint', 'DimPulse3')" src="./Images/LEDTab/Selectors/SkirtBlue.png">
+        <img id="MaintDimPulse3Green" class="r2menupictureMaint hidden" name="stripSelectorDimPulse3" onclick="changeImage('Maint', 'DimPulse3')" src="./Images/LEDTab/Selectors/SkirtGreen.png">
+        <!-- Vertical Slots Selection-->
+        <img id="VUDimPulse3Blue" class="r2menupictureDataPanelVerticalBars " name="stripSelectorDimPulse3" onclick="changeImage('VU', 'DimPulse3')" src="./Images/LEDTab/Selectors/DataPanelVerticalBlue.png">
+        <img id="VUDimPulse3Green" class="r2menupictureDataPanelVerticalBars hidden" name="stripSelectorDimPulse3" onclick="changeImage('VU', 'DimPulse3')" src="./Images/LEDTab/Selectors/DataPanelVerticalGreen.png">
+        <!-- Front HP Selection-->
+        <img id="FrontHPDimPulse3Blue" class="r2menupictureFrontHP hidden" name="stripSelectorDimPulse3" onclick="changeImage('FrontHP', 'DimPulse3')" src="./Images/LEDTab/Selectors/FrontHPBlue.png">
+        <img id="FrontHPDimPulse3Green" class="r2menupictureFrontHP hidden" name="stripSelectorDimPulse3" onclick="changeImage('FrontHP', 'DimPulse3')" src="./Images/LEDTab/Selectors/FrontHPGreen.png">
+        <!--Top HP Selection-->
+        <img id="TopHPDimPulse3Blue" class="r2menupictureTopHP hidden" name="stripSelectorDimPulse3" onclick="changeImage('TopHP', 'DimPulse3')" src="./Images/LEDTab/Selectors/TopHPBlue.png">
+        <img id="TopHPDimPulse3Green" class="r2menupictureTopHP hidden" name="stripSelectorDimPulse3" onclick="changeImage('TopHP', 'DimPulse3')" src="./Images/LEDTab/Selectors/TopHPGreen.png">
+        <!-- Rear HP Selection-->
+        <img id="RearHPDimPulse3Blue" class="r2menupictureRearHP  hidden" name="stripSelectorDimPulse3" onclick="changeImage('RearHP', 'DimPulse3')" src="./Images/LEDTab/Selectors/RearHPBlue.png">
+        <img id="RearHPDimPulse3Green" class="r2menupictureRearHP hidden" name="stripSelectorDimPulse3" onclick="changeImage('RearHP', 'DimPulse3')" src="./Images/LEDTab/Selectors/RearHPGreen.png">   
+        <!-- Data Panel Logics -->    
+        <img id="CBIDimPulse3Blue" class="r2menupictureCBI hidden" name="stripSelectorDimPulse3" onclick="changeImage('CBI', 'DimPulse3')" src="./Images/Body/CBIDoorBlue.png">
+        <img id="CBIDimPulse3Green" class="r2menupictureCBI hidden" name="stripSelectorDimPulse3" onclick="changeImage('CBI', 'DimPulse3')" src="./Images/Body/CBIDoorGreen.png">
+        <!-- CBI Panel Logics -->    
+        <img id="DPDimPulse3Blue" class="r2menupictureDataPanelLED1 hidden" name="stripSelectorDimPulse3" onclick="changeImage('DP', 'DimPulse3')" src="./Images/Body/DataPanelLEDsBlue.png">
+        <img id="DPDimPulse3Green" class="r2menupictureDataPanelLED1 hidden" name="stripSelectorDimPulse3" onclick="changeImage('DP', 'DimPulse3')" src="./Images/Body/DataPanelLEDsGreen.png"> 
 
-        <img
-          class="r2menupictureCoin"
-          src="Images/Body/CoinSLotsBlue.png"
-          alt="picture"
-          name="stripSelectorDimPulse3"
-          onclick=changeImageCoinDimPulse3()
-          id="CoinDimPulse3"
-        />
-
-        <img
-            class="r2menupictureMaint"
-            src="Images/Body/SkirtBlue.png"
-            alt="picture"
-            name="stripSelectorDimPulse3"
-            onclick=changeImageMaintDimPulse3()
-            id="MaintDimPulse3"
-          />
-
-        <img
-            class="r2menupictureDataPanelVerticalBars"
-            src="Images/Body/DataPanelVerticalBlue.png"
-            alt="picture"
-            name="stripSelectorDimPulse3"
-            onclick=changeImageVerticalBarsDimPulse3()
-            id="VerticalBarstDimPulse3"
-          />
-          <img
-          class="selectALLpic"
-          src="Images/Button-Select-All-GIMP.png"
-          alt="picture"
-          onclick=selectALLStripsDimPulse3()
-          id="checkmarkallRSeries"
-        />
-      
-        <img
-          class="selectNonepic"
-          src="Images/Button-Select-None-GIMP.png"
-          alt="picture"
-          onclick=selectNoneStripsDimPulse3()
-          id="checkmarkNoneRSeries"
-        />
-
-          <!-- <h3 class="selectAll" onclick=selectALLStripsDimPulse3()> A </h3>
-          <h3 class="selectNone" onclick=selectNoneStripsDimPulse3()> N </h3> -->
-          <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallDimPulse3">
-          <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneDimPulse3">
-
+         <!-- Select All Selection-->
+         <img id="checkmarkall" class="selectALLpic" onclick="selectALLStrips('DimPulse3', 'noDome', )" src="./Images/LEDTab/Selectors/Button-Select-All.png">
+         <img id="checkmarkallDimPulse3" class="checkmarkall hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+           <!-- Select None Selection-->
+           <img id="checkmarkNone" class="selectNonepic" onclick="selectNoneStrips('DimPulse3', 'noDome',)" src="./Images/LEDTab/Selectors/Button-Select-None.png">
+           <img id="checkmarknoneDimPulse3" class="checkmarknone hidden" src="./Images/LEDTab/Selectors/checkmark.png">
         <div class="menu-Level-2">
 
             <div class="menu-Level-2-Links " >
-              <button class="active" rel="DimPulse13"><img
-                  class="buttonwidth"
-                  id ="transparent"
-                  src="Images/Buttons/LEDFunctionButtons/Generic/Button-DimPulse3-Yellow.png"
-                  alt="button for Large Span"
-                /></button>
+              <button class="active " rel="DimPulse13">
+                <div class="ButtonBlankLED" WigWag2123="">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext1LineLED">dim pulse</p>
+                </div>                        
+              </button> 
             </div>
 
           <div class="menu-Level-2-Content active" id="DimPulse13">
@@ -3223,13 +3140,22 @@
                   min="1"
                   max="3"
                 />
-                <a href="#" onclick="commandOneColorAndSpeedDimPulse3('23','DimPulse13Slider', 'DimPulse13ColorChoiceColorSelect', 'checkmarkapplyDimPulse3')" class="applyButton1"></a>
-                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOffDimPulse3('checkmarkoffyDimPulse3')" class="applyButtonoff"></img>
-              </form>
-              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyDimPulse3">
+                <!-- Apply Button-->
+              <div id="BounceApply" class="applyButton"  onclick="commandOneColorAndSpeed('23','DimPulse13Slider', 'DimPulse13ColorChoiceColorSelect', 'checkmarkapplyDimPulse3', 'DimPulse3', 'noDome')"  >
+                <img id="BounceApplyImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                <p class="shadowtext1LineLED">apply</p>
+              </div>
+              <!-- Off Button-->
+              <div id="BounceOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffDimPulse3', 'DimPulse3')">
+                <img id="RBounceOffImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext1LineLED">off</p>
+            </div>
 
-              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkoffyDimPulse3">
-
+            </form>
+            <img id="checkmarkapplyDimPulse3" class="checkmarkapply hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+            <img id="checkmarkoffDimPulse3"   class="checkmarkoff hidden" src="./Images/LEDTab/Selectors/checkmark.png"> 
+                
+                
             </div><!--end of ColorPickerdiv div-->
           </div> <!-- end of Level 2 Conetent Dim Pulse 2-->
 
@@ -3240,97 +3166,76 @@
 
       <div class="menu-Level-1-Content" id="DualingColors2">
         <h1 class="menuHeader-Level-1">Dualing Colors 2</h1>
-        <img
-            class="r2menupictureLDP1"
-            src="Images/Body/LDPBlue.png"
-            alt="picture"
-            name="stripSelectorDualingColors2"
-            onclick=changeImageLDPDualingColors2()
-            id="LDPDualingColors2"
-          />
-
-        <img
-          class="r2menupictureCoin"
-          src="Images/Body/CoinSLotsBlue.png"
-          alt="picture"
-          name="stripSelectorDualingColors2"
-          onclick=changeImageCoinDualingColors2()
-          id="CoinDualingColors2"
-        />
-
-        <img
-            class="r2menupictureMaint"
-            src="Images/Body/SkirtBlue.png"
-            alt="picture"
-            name="stripSelectorDualingColors2"
-            onclick=changeImageMaintDualingColors2()
-            id="MaintDualingColors2"
-          />
-
-        <img
-            class="r2menupictureDataPanelVerticalBars"
-            src="Images/Body/DataPanelVerticalBlue.png"
-            alt="picture"
-            name="stripSelectorDualingColors2"
-            onclick=changeImageVerticalBarsDualingColors2()
-            id="VerticalBarstDualingColors2"
-          />
-          <img
-          class="selectALLpic"
-          src="Images/Button-Select-All-GIMP.png"
-          alt="picture"
-          onclick=selectALLStripsDualingColors2()
-          id="checkmarkallRSeries"
-        />
-      
-        <img
-          class="selectNonepic"
-          src="Images/Button-Select-None-GIMP.png"
-          alt="picture"
-          onclick=selectNoneStripsDualingColors2()
-          id="checkmarkNoneRSeries"
-        />
-          <!-- <h3 class="selectAll" onclick=selectALLStripsDualingColors2()> A </h3>
-          <h3 class="selectNone" onclick=selectNoneStripsDualingColors2()> N </h3> -->
-          <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallDualingColors2">
-          <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneDualingColors2">
+        <!-- LDP Selection-->
+        <img id="LDPDualingColors2Blue" class="r2menupictureLDP1 " name="stripSelectorDualingColors2" onclick="changeImage('LDP', 'DualingColors2')" src="./Images/LEDTab/Selectors/LDPBlue.png">
+        <img id="LDPDualingColors2Green" class="r2menupictureLDP1 hidden" name="stripSelectorDualingColors2" onclick="changeImage('LDP', 'DualingColors2')" src="./Images/LEDTab/Selectors/LDPGreen.png">
+        <!-- Coin Slots Selection-->
+        <img id="CoinDualingColors2Blue" class="r2menupictureCoin " name="stripSelectorDualingColors2" onclick="changeImage('Coin', 'DualingColors2')" src="./Images/LEDTab/Selectors/CoinSlotsBlue.png">
+        <img id="CoinDualingColors2Green" class="r2menupictureCoin hidden" name="stripSelectorDualingColors2" onclick="changeImage('Coin', 'DualingColors2')" src="./Images/LEDTab/Selectors/CoinSlotsGreen.png">
+        <!-- Maintenance Selection-->
+        <img id="MaintDualingColors2Blue" class="r2menupictureMaint " name="stripSelectorDualingColors2" onclick="changeImage('Maint', 'DualingColors2')" src="./Images/LEDTab/Selectors/SkirtBlue.png">
+        <img id="MaintDualingColors2Green" class="r2menupictureMaint hidden" name="stripSelectorDualingColors2" onclick="changeImage('Maint', 'DualingColors2')" src="./Images/LEDTab/Selectors/SkirtGreen.png">
+        <!-- Vertical Slots Selection-->
+        <img id="VUDualingColors2Blue" class="r2menupictureDataPanelVerticalBars " name="stripSelectorDualingColors2" onclick="changeImage('VU', 'DualingColors2')" src="./Images/LEDTab/Selectors/DataPanelVerticalBlue.png">
+        <img id="VUDualingColors2Green" class="r2menupictureDataPanelVerticalBars hidden" name="stripSelectorDualingColors2" onclick="changeImage('VU', 'DualingColors2')" src="./Images/LEDTab/Selectors/DataPanelVerticalGreen.png">
+        <!-- Front HP Selection-->
+        <img id="FrontHPDualingColors2Blue" class="r2menupictureFrontHP hidden" name="stripSelectorDualingColors2" onclick="changeImage('FrontHP', 'DualingColors2')" src="./Images/LEDTab/Selectors/FrontHPBlue.png">
+        <img id="FrontHPDualingColors2Green" class="r2menupictureFrontHP hidden" name="stripSelectorDualingColors2" onclick="changeImage('FrontHP', 'DualingColors2')" src="./Images/LEDTab/Selectors/FrontHPGreen.png">
+        <!--Top HP Selection-->
+        <img id="TopHPDualingColors2Blue" class="r2menupictureTopHP hidden" name="stripSelectorDualingColors2" onclick="changeImage('TopHP', 'DualingColors2')" src="./Images/LEDTab/Selectors/TopHPBlue.png">
+        <img id="TopHPDualingColors2Green" class="r2menupictureTopHP hidden" name="stripSelectorDualingColors2" onclick="changeImage('TopHP', 'DualingColors2')" src="./Images/LEDTab/Selectors/TopHPGreen.png">
+        <!-- Rear HP Selection-->
+        <img id="RearHPDualingColors2Blue" class="r2menupictureRearHP  hidden" name="stripSelectorDualingColors2" onclick="changeImage('RearHP', 'DualingColors2')" src="./Images/LEDTab/Selectors/RearHPBlue.png">
+        <img id="RearHPDualingColors2Green" class="r2menupictureRearHP hidden" name="stripSelectorDualingColors2" onclick="changeImage('RearHP', 'DualingColors2')" src="./Images/LEDTab/Selectors/RearHPGreen.png">   
+        <!-- Data Panel Logics -->    
+        <img id="CBIDualingColors2Blue" class="r2menupictureCBI hidden" name="stripSelectorDualingColors2" onclick="changeImage('CBI', 'DualingColors2')" src="./Images/Body/CBIDoorBlue.png">
+        <img id="CBIDualingColors2Green" class="r2menupictureCBI hidden" name="stripSelectorDualingColors2" onclick="changeImage('CBI', 'DualingColors2')" src="./Images/Body/CBIDoorGreen.png">
+        <!-- CBI Panel Logics -->    
+        <img id="DPDualingColors2Blue" class="r2menupictureDataPanelLED1 hidden" name="stripSelectorDualingColors2" onclick="changeImage('DP', 'DualingColors2')" src="./Images/Body/DataPanelLEDsBlue.png">
+        <img id="DPDualingColors2Green" class="r2menupictureDataPanelLED1 hidden" name="stripSelectorDualingColors2" onclick="changeImage('DP', 'DualingColors2')" src="./Images/Body/DataPanelLEDsGreen.png"> 
+         <!-- Select All Selection-->
+         <img id="checkmarkall" class="selectALLpic" onclick="selectALLStrips('DualingColors2', 'noDome', )" src="./Images/LEDTab/Selectors/Button-Select-All.png">
+         <img id="checkmarkallDualingColors2" class="checkmarkall hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+           <!-- Select None Selection-->
+           <img id="checkmarkNone" class="selectNonepic" onclick="selectNoneStrips('DualingColors2', 'noDome',)" src="./Images/LEDTab/Selectors/Button-Select-None.png">
+           <img id="checkmarknoneDualingColors2" class="checkmarknone hidden" src="./Images/LEDTab/Selectors/checkmark.png">
 
         <div class="menu-Level-2">
 
             <div class="menu-Level-2-Links " >
-              <button class="active" rel="Option1"><img
-                  class="buttonwidth"
-                  id ="transparent"
-                  src="Images/Buttons/LEDFunctionButtons/Generic/Button-Option1-White.png"
-                  alt="button for Large Span"
-                /></button>
-            </div>
+              <button class="active " rel="Option1">
+                <div class="ButtonBlankLED" onclick="">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext1LineLED">option 1</p>
+                </div>                        
+              </button> 
+              </div>
 
           <div class="menu-Level-2-Links " >
-            <button class="" rel="Option2"><img
-                class="buttonwidth"
-                id ="transparent"
-                src="Images/Buttons/LEDFunctionButtons/Generic/Button-Option2-White.png"
-                alt="button for Large Span"
-              /></button>
+            <button class=" " rel="Option2">
+              <div class="ButtonBlankLED" onclick="">
+                <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                <p class="shadowtext1LineLED">option 2</p>
+              </div>                        
+            </button> 
           </div>
 
         <div class="menu-Level-2-Links " >
-          <button class="" rel="Option3"><img
-              class="buttonwidth"
-              id ="transparent"
-              src="Images/Buttons/LEDFunctionButtons/Generic/Button-Option3-White.png"
-              alt="button for Large Span"
-            /></button>
+          <button class=" " rel="Option3">
+            <div class="ButtonBlankLED" onclick="">
+              <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext1LineLED">option 3</p>
+            </div>                        
+          </button> 
         </div>
 
         <div class="menu-Level-2-Links " >
-          <button class="" rel="Option4"><img
-              class="buttonwidth"
-              id ="transparent"
-              src="Images/Buttons/LEDFunctionButtons/Generic/Button-Option4-White.png"
-              alt="button for Large Span"
-            /></button>
+          <button class=" " rel="Option4">
+            <div class="ButtonBlankLED" onclick="">
+              <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext1LineLED">option 4</p>
+            </div>                        
+          </button> 
         </div>
 
 
@@ -3355,21 +3260,34 @@
                 <form class="" action="#" method="post">
                   <label for="ColorPicker2">Second color:</label>
                     <select class="ColorPicker2Bounce" id="Option1SecondColorSelectionBox" name="ColorPicker2">
-                    <option value="5">Blue</option>
                     <option value="1">Red</option>
                     <option value="2">Yellow</option>
                     <option value="3">Green</option>
                     <option value="4">Cyan</option>
+                    <option value="5">Blue</option>
                     <option value="6">Magenta</option>
                     <option value="7">Orange</option>
                     <option value="8">White</option>
                     <option value="0">Off</option>
                   </select>
                 <br />
-                <a href="#" onclick="commandTwoColorsNoSliderDualingColors2('25','1', 'Option1FirstColorSelctionBox', 'Option1SecondColorSelectionBox', 'checkmarkapplyDualingColors2Option1')" class="applyButton1"></a>
-                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
-              </form>
-              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyDualingColors2Option1">
+                <!-- Apply Button-->
+              <div id="BounceApply" class="applyButton"  onclick="commandTwoColorsNoSlider('25','1', 'Option1FirstColorSelctionBox', 'Option1SecondColorSelectionBox', 'checkmarkapplyDualingColors2Option1', 'DualingColors2', 'noDome')" class="applyButton1"  >
+                <img id="BounceApplyImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                <p class="shadowtext1LineLED">apply</p>
+              </div>
+              <!-- Off Button-->
+              <div id="BounceOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffDualingColors2Option1', 'DualingColors2')">
+                <img id="RBounceOffImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext1LineLED">off</p>
+            </div>
+
+            </form>
+            <img id="checkmarkapplyDualingColors2Option1" class="checkmarkapply hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+            <img id="checkmarkoffDualingColors2Option1"   class="checkmarkoff hidden" src="./Images/LEDTab/Selectors/checkmark.png"> 
+                
+
+               
             </div><!--end of ColorPickerdiv div-->
           </div> <!-- end of Level 2 Conetent Option 1-->
 
@@ -3394,21 +3312,32 @@
                 <form class="" action="#" method="post">
                   <label for="ColorPicker2">Second color:</label>
                     <select class="ColorPicker2Bounce" id="Option2SecondColorSelectionBox" name="ColorPicker2">
-                    <option value="5">Blue</option>
                     <option value="1">Red</option>
                     <option value="2">Yellow</option>
                     <option value="3">Green</option>
                     <option value="4">Cyan</option>
+                    <option value="5">Blue</option>
                     <option value="6">Magenta</option>
                     <option value="7">Orange</option>
                     <option value="8">White</option>
                     <option value="0">Off</option>
                   </select>
                 <br />
-                <a href="#" onclick="commandTwoColorsNoSliderDualingColors2('25','2', 'Option2FirstColorSelctionBox', 'Option2SecondColorSelectionBox', 'checkmarkapplyDualingColors2Option2')" class="applyButton1"></a>
-                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
-              </form>
-              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyDualingColors2Option2">
+                 <!-- Apply Button-->
+              <div id="BounceApply" class="applyButton"  onclick="commandTwoColorsNoSlider('25','2', 'Option2FirstColorSelctionBox', 'Option2SecondColorSelectionBox', 'checkmarkapplyDualingColors2Option2', 'DualingColors2', 'noDome')" class="applyButton1"  >
+                <img id="BounceApplyImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                <p class="shadowtext1LineLED">apply</p>
+              </div>
+              <!-- Off Button-->
+              <div id="BounceOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffDualingColors2Option2', 'DualingColors2')">
+                <img id="RBounceOffImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext1LineLED">off</p>
+            </div>
+
+            </form>
+            <img id="checkmarkapplyDualingColors2Option2" class="checkmarkapply hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+            <img id="checkmarkoffDualingColors2Option2"   class="checkmarkoff hidden" src="./Images/LEDTab/Selectors/checkmark.png"> 
+
             </div><!--end of ColorPickerdiv div-->
           </div> <!-- end of Level 2 Conetent Option 2-->
 
@@ -3433,21 +3362,32 @@
                 <form class="" action="#" method="post">
                   <label for="ColorPicker2">Second color:</label>
                     <select class="ColorPicker2Bounce" id="Option3SecondColorSelectionBox" name="ColorPicker2">
-                    <option value="5">Blue</option>
                     <option value="1">Red</option>
                     <option value="2">Yellow</option>
                     <option value="3">Green</option>
                     <option value="4">Cyan</option>
+                    <option value="5">Blue</option>
                     <option value="6">Magenta</option>
                     <option value="7">Orange</option>
                     <option value="8">White</option>
                     <option value="0">Off</option>
                   </select>
                 <br />
-                <a href="#" onclick="commandTwoColorsNoSliderDualingColors2('25','3', 'Option3FirstColorSelctionBox', 'Option3SecondColorSelectionBox', 'checkmarkapplyDualingColors2Option3')" class="applyButton1"></a>
-                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
-              </form>
-              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyDualingColors2Option3">
+                 <!-- Apply Button-->
+              <div id="BounceApply" class="applyButton"  onclick="commandTwoColorsNoSlider('25','3', 'Option3FirstColorSelctionBox', 'Option3SecondColorSelectionBox', 'checkmarkapplyDualingColors2Option3', 'DualingColors2', 'noDome')" class="applyButton1"  >
+                <img id="BounceApplyImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                <p class="shadowtext1LineLED">apply</p>
+              </div>
+              <!-- Off Button-->
+              <div id="BounceOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffDualingColors2Option3', 'DualingColors2')">
+                <img id="RBounceOffImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext1LineLED">off</p>
+            </div>
+
+            </form>
+            <img id="checkmarkapplyDualingColors2Option3" class="checkmarkapply hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+            <img id="checkmarkoffDualingColors2Option3"   class="checkmarkoff hidden" src="./Images/LEDTab/Selectors/checkmark.png"> 
+
             </div><!--end of ColorPickerdiv div-->
           </div> <!-- end of Level 2 Conetent Option 3-->
 
@@ -3472,10 +3412,10 @@
                 <form class="" action="#" method="post">
                   <label for="ColorPicker2">Second color:</label>
                     <select class="ColorPicker2Bounce" id="Option4SecondColorSelectionBox" name="ColorPicker2">
-                    <option value="5">Blue</option>
                     <option value="1">Red</option>
                     <option value="2">Yellow</option>
                     <option value="3">Green</option>
+                    <option value="5">Blue</option>
                     <option value="4">Cyan</option>
                     <option value="6">Magenta</option>
                     <option value="7">Orange</option>
@@ -3483,10 +3423,21 @@
                     <option value="0">Off</option>
                   </select>
                 <br />
-                <a href="#" onclick="commandTwoColorsNoSliderDualingColors2('25','4', 'Option4FirstColorSelctionBox', 'Option4SecondColorSelectionBox', 'checkmarkapplyDualingColors2Option4')" class="applyButton1"></a>
-                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
-              </form>
-              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyDualingColors2Option4">
+                <!-- Apply Button-->
+              <div id="BounceApply" class="applyButton"  onclick="commandTwoColorsNoSlider('25','4', 'Option4FirstColorSelctionBox', 'Option4SecondColorSelectionBox', 'checkmarkapplyDualingColors2Option4', 'DualingColors2', 'noDome')" class="applyButton1"  >
+                <img id="BounceApplyImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                <p class="shadowtext1LineLED">apply</p>
+              </div>
+              <!-- Off Button-->
+              <div id="BounceOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffDualingColors2Option4', 'DualingColors2')">
+                <img id="RBounceOffImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext1LineLED">off</p>
+            </div>
+
+            </form>
+            <img id="checkmarkapplyDualingColors2Option4" class="checkmarkapply hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+            <img id="checkmarkoffDualingColors2Option4"   class="checkmarkoff hidden" src="./Images/LEDTab/Selectors/checkmark.png"> 
+
             </div><!--end of ColorPickerdiv div-->
           </div> <!-- end of Level 2 Conetent Option 4-->
 
@@ -3496,81 +3447,72 @@
 
       <div class="menu-Level-1-Content" id="FLD">
         <h1 class="menuHeader-Level-1">Front Logic Display</h1>
-        <img
-            class="r2menupictureLDP1"
-            src="Images/Body/LDPBlue.png"
-            alt="picture"
-            name="stripSelectorFLD"
-            onclick=changeImageLDPFLD()
-            id="LDPFLD"
-          />
-
-        <img
-          class="r2menupictureCoin"
-          src="Images/Body/CoinSLotsBlue.png"
-          alt="picture"
-          name="stripSelectorFLD"
-          onclick=changeImageCoinFLD()
-          id="CoinFLD"
-        />
-
-        <img
-            class="r2menupictureMaint"
-            src="Images/Body/SkirtBlue.png"
-            alt="picture"
-            name="stripSelectorFLD"
-            onclick=changeImageMaintFLD()
-            id="MaintFLD"
-          />
-
-        <img
-            class="r2menupictureDataPanelVerticalBars"
-            src="Images/Body/DataPanelVerticalBlue.png"
-            alt="picture"
-            name="stripSelectorFLD"
-            onclick=changeImageVerticalBarsFLD()
-            id="VerticalBarstFLD"
-          />
-          <img
-          class="selectALLpic"
-          src="Images/Button-Select-All-GIMP.png"
-          alt="picture"
-          onclick=selectALLStripsFLD()
-          id="checkmarkallRSeries"
-        />
-      
-        <img
-          class="selectNonepic"
-          src="Images/Button-Select-None-GIMP.png"
-          alt="picture"
-          onclick=selectNoneStripsFLD()
-          id="checkmarkNoneRSeries"
-        />
-
-          <!-- <h3 class="selectAll" onclick=selectALLStripsFLD()> A </h3>
-          <h3 class="selectNone" onclick=selectNoneStripsFLD()> N </h3> -->
-          <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallFLD">
-          <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneFLD">
+         <!-- LDP Selection-->
+         <img id="LDPFLDBlue" class="r2menupictureLDP1 " name="stripSelectorFLD" onclick="changeImage('LDP', 'FLD')" src="./Images/LEDTab/Selectors/LDPBlue.png">
+         <img id="LDPFLDGreen" class="r2menupictureLDP1 hidden" name="stripSelectorFLD" onclick="changeImage('LDP', 'FLD')" src="./Images/LEDTab/Selectors/LDPGreen.png">
+         <!-- Coin Slots Selection-->
+         <img id="CoinFLDBlue" class="r2menupictureCoin " name="stripSelectorFLD" onclick="changeImage('Coin', 'FLD')" src="./Images/LEDTab/Selectors/CoinSlotsBlue.png">
+         <img id="CoinFLDGreen" class="r2menupictureCoin hidden" name="stripSelectorFLD" onclick="changeImage('Coin', 'FLD')" src="./Images/LEDTab/Selectors/CoinSlotsGreen.png">
+         <!-- Maintenance Selection-->
+         <img id="MaintFLDBlue" class="r2menupictureMaint " name="stripSelectorFLD" onclick="changeImage('Maint', 'FLD')" src="./Images/LEDTab/Selectors/SkirtBlue.png">
+         <img id="MaintFLDGreen" class="r2menupictureMaint hidden" name="stripSelectorFLD" onclick="changeImage('Maint', 'FLD')" src="./Images/LEDTab/Selectors/SkirtGreen.png">
+         <!-- Vertical Slots Selection-->
+         <img id="VUFLDBlue" class="r2menupictureDataPanelVerticalBars " name="stripSelectorFLD" onclick="changeImage('VU', 'FLD')" src="./Images/LEDTab/Selectors/DataPanelVerticalBlue.png">
+         <img id="VUFLDGreen" class="r2menupictureDataPanelVerticalBars hidden" name="stripSelectorFLD" onclick="changeImage('VU', 'FLD')" src="./Images/LEDTab/Selectors/DataPanelVerticalGreen.png">
+         <!-- Front HP Selection-->
+         <img id="FrontHPFLDBlue" class="r2menupictureFrontHP hidden" name="stripSelectorFLD" onclick="changeImage('FrontHP', 'FLD')" src="./Images/LEDTab/Selectors/FrontHPBlue.png">
+         <img id="FrontHPFLDGreen" class="r2menupictureFrontHP hidden" name="stripSelectorFLD" onclick="changeImage('FrontHP', 'FLD')" src="./Images/LEDTab/Selectors/FrontHPGreen.png">
+         <!--Top HP Selection-->
+         <img id="TopHPFLDBlue" class="r2menupictureTopHP hidden" name="stripSelectorFLD" onclick="changeImage('TopHP', 'FLD')" src="./Images/LEDTab/Selectors/TopHPBlue.png">
+         <img id="TopHPFLDGreen" class="r2menupictureTopHP hidden" name="stripSelectorFLD" onclick="changeImage('TopHP', 'FLD')" src="./Images/LEDTab/Selectors/TopHPGreen.png">
+         <!-- Rear HP Selection-->
+         <img id="RearHPFLDBlue" class="r2menupictureRearHP  hidden" name="stripSelectorFLD" onclick="changeImage('RearHP', 'FLD')" src="./Images/LEDTab/Selectors/RearHPBlue.png">
+         <img id="RearHPFLDGreen" class="r2menupictureRearHP hidden" name="stripSelectorFLD" onclick="changeImage('RearHP', 'FLD')" src="./Images/LEDTab/Selectors/RearHPGreen.png">   
+         <!-- Data Panel Logics -->    
+         <img id="CBIFLDBlue" class="r2menupictureCBI hidden" name="stripSelectorFLD" onclick="changeImage('CBI', 'FLD')" src="./Images/Body/CBIDoorBlue.png">
+         <img id="CBIFLDGreen" class="r2menupictureCBI hidden" name="stripSelectorFLD" onclick="changeImage('CBI', 'FLD')" src="./Images/Body/CBIDoorGreen.png">
+         <!-- CBI Panel Logics -->    
+         <img id="DPFLDBlue" class="r2menupictureDataPanelLED1 hidden" name="stripSelectorFLD" onclick="changeImage('DP', 'FLD')" src="./Images/Body/DataPanelLEDsBlue.png">
+         <img id="DPFLDGreen" class="r2menupictureDataPanelLED1 hidden" name="stripSelectorFLD" onclick="changeImage('DP', 'FLD')" src="./Images/Body/DataPanelLEDsGreen.png"> 
+          <!-- Select All Selection-->
+          <img id="checkmarkall" class="selectALLpic" onclick="selectALLStrips('FLD', 'noDome', )" src="./Images/LEDTab/Selectors/Button-Select-All.png">
+          <img id="checkmarkallFLD" class="checkmarkall hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+            <!-- Select None Selection-->
+            <img id="checkmarkNone" class="selectNonepic" onclick="selectNoneStrips('FLD', 'noDome',)" src="./Images/LEDTab/Selectors/Button-Select-None.png">
+            <img id="checkmarknoneFLD" class="checkmarknone hidden" src="./Images/LEDTab/Selectors/checkmark.png">
 
         <div class="menu-Level-2">
 
             <div class="menu-Level-2-Links " >
-              <button class="active" rel="FLD1"><img
-                  class="buttonwidth"
-                  id ="transparent"
-                  src="Images/Buttons/LEDFunctionButtons/Generic/Button-FLD-White.png"
-                  alt="button for Large Span"
-                /></button>
+              <button class="active " rel="FLD1">
+                <div class="ButtonBlankLED" onclick="">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2LinesLongLED">front logics display</p>
+                </div>                        
+              </button> 
+             
             </div>
 
           <div class="menu-Level-2-Content active" id="FLD1">
             <h2 class="menuHeader-Level-2"></h2>
             <div class="ColorPickerdiv">
-              <a href="#" onclick="commandNoOptionsFLD('70','5','checkmarkapplyFLD')" class="applyButton1"></a>
-                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
-              </form>
-              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyFLD">
+              <!-- Apply Button-->
+              <div id="BounceApply" class="applyButton"  onclick="commandNoOptions('70','5','checkmarkapplyFLD', 'FLD', 'noDome')" class="applyButton1"  >
+                <img id="BounceApplyImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                <p class="shadowtext1LineLED">apply</p>
+              </div>
+              <!-- Off Button-->
+              <div id="BounceOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffFLD', 'DualingColors2')">
+                <img id="RBounceOffImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext1LineLED">off</p>
+            </div>
 
+            </form>
+            <img id="checkmarkapplyFLD" class="checkmarkapply hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+            <img id="checkmarkoffFLD"   class="checkmarkoff hidden" src="./Images/LEDTab/Selectors/checkmark.png"> 
+
+
+            
             </div><!--end of ColorPickerdiv div-->
           </div> <!-- end of Level 2 Conetent FLD-->
 
@@ -3579,81 +3521,69 @@
 
       <div class="menu-Level-1-Content" id="RLD">
         <h1 class="menuHeader-Level-1">Rear Logic Display</h1>
-        <img
-            class="r2menupictureLDP1"
-            src="Images/Body/LDPBlue.png"
-            alt="picture"
-            name="stripSelectorRLD"
-            onclick=changeImageLDPRLD()
-            id="LDPRLD"
-          />
-
-        <img
-          class="r2menupictureCoin"
-          src="Images/Body/CoinSLotsBlue.png"
-          alt="picture"
-          name="stripSelectorRLD"
-          onclick=changeImageCoinRLD()
-          id="CoinRLD"
-        />
-
-        <img
-            class="r2menupictureMaint"
-            src="Images/Body/SkirtBlue.png"
-            alt="picture"
-            name="stripSelectorRLD"
-            onclick=changeImageMaintRLD()
-            id="MaintRLD"
-          />
-
-        <img
-            class="r2menupictureDataPanelVerticalBars"
-            src="Images/Body/DataPanelVerticalBlue.png"
-            alt="picture"
-            name="stripSelectorRLD"
-            onclick=changeImageVerticalBarsRLD()
-            id="VerticalBarstRLD"
-          />
-
-          <img
-          class="selectALLpic"
-          src="Images/Button-Select-All-GIMP.png"
-          alt="picture"
-          onclick=selectALLStripsRLD()
-          id="checkmarkallRSeries"
-        />
-      
-        <img
-          class="selectNonepic"
-          src="Images/Button-Select-None-GIMP.png"
-          alt="picture"
-          onclick=selectNoneStripsRLD()
-          id="checkmarkNoneRSeries"
-        />
-
-          <!-- <h3 class="selectAll" onclick=selectALLStripsRLD()> A </h3>
-          <h3 class="selectNone" onclick=selectNoneStripsRLD()> N </h3> -->
-          <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallRLD">
-          <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneRLD">
+        <!-- LDP Selection-->
+        <img id="LDPRLDBlue" class="r2menupictureLDP1 " name="stripSelectorRLD" onclick="changeImage('LDP', 'RLD')" src="./Images/LEDTab/Selectors/LDPBlue.png">
+        <img id="LDPRLDGreen" class="r2menupictureLDP1 hidden" name="stripSelectorRLD" onclick="changeImage('LDP', 'RLD')" src="./Images/LEDTab/Selectors/LDPGreen.png">
+        <!-- Coin Slots Selection-->
+        <img id="CoinRLDBlue" class="r2menupictureCoin " name="stripSelectorRLD" onclick="changeImage('Coin', 'RLD')" src="./Images/LEDTab/Selectors/CoinSlotsBlue.png">
+        <img id="CoinRLDGreen" class="r2menupictureCoin hidden" name="stripSelectorRLD" onclick="changeImage('Coin', 'RLD')" src="./Images/LEDTab/Selectors/CoinSlotsGreen.png">
+        <!-- Maintenance Selection-->
+        <img id="MaintRLDBlue" class="r2menupictureMaint " name="stripSelectorRLD" onclick="changeImage('Maint', 'RLD')" src="./Images/LEDTab/Selectors/SkirtBlue.png">
+        <img id="MaintRLDGreen" class="r2menupictureMaint hidden" name="stripSelectorRLD" onclick="changeImage('Maint', 'RLD')" src="./Images/LEDTab/Selectors/SkirtGreen.png">
+        <!-- Vertical Slots Selection-->
+        <img id="VURLDBlue" class="r2menupictureDataPanelVerticalBars " name="stripSelectorRLD" onclick="changeImage('VU', 'RLD')" src="./Images/LEDTab/Selectors/DataPanelVerticalBlue.png">
+        <img id="VURLDGreen" class="r2menupictureDataPanelVerticalBars hidden" name="stripSelectorRLD" onclick="changeImage('VU', 'RLD')" src="./Images/LEDTab/Selectors/DataPanelVerticalGreen.png">
+        <!-- Front HP Selection-->
+        <img id="FrontHPRLDBlue" class="r2menupictureFrontHP hidden" name="stripSelectorRLD" onclick="changeImage('FrontHP', 'RLD')" src="./Images/LEDTab/Selectors/FrontHPBlue.png">
+        <img id="FrontHPRLDGreen" class="r2menupictureFrontHP hidden" name="stripSelectorRLD" onclick="changeImage('FrontHP', 'RLD')" src="./Images/LEDTab/Selectors/FrontHPGreen.png">
+        <!--Top HP Selection-->
+        <img id="TopHPRLDBlue" class="r2menupictureTopHP hidden" name="stripSelectorRLD" onclick="changeImage('TopHP', 'RLD')" src="./Images/LEDTab/Selectors/TopHPBlue.png">
+        <img id="TopHPRLDGreen" class="r2menupictureTopHP hidden" name="stripSelectorRLD" onclick="changeImage('TopHP', 'RLD')" src="./Images/LEDTab/Selectors/TopHPGreen.png">
+        <!-- Rear HP Selection-->
+        <img id="RearHPRLDBlue" class="r2menupictureRearHP  hidden" name="stripSelectorRLD" onclick="changeImage('RearHP', 'RLD')" src="./Images/LEDTab/Selectors/RearHPBlue.png">
+        <img id="RearHPRLDGreen" class="r2menupictureRearHP hidden" name="stripSelectorRLD" onclick="changeImage('RearHP', 'RLD')" src="./Images/LEDTab/Selectors/RearHPGreen.png">   
+        <!-- Data Panel Logics -->    
+        <img id="CBIRLDBlue" class="r2menupictureCBI hidden" name="stripSelectorRLD" onclick="changeImage('CBI', 'RLD')" src="./Images/Body/CBIDoorBlue.png">
+        <img id="CBIRLDGreen" class="r2menupictureCBI hidden" name="stripSelectorRLD" onclick="changeImage('CBI', 'RLD')" src="./Images/Body/CBIDoorGreen.png">
+        <!-- CBI Panel Logics -->    
+        <img id="DPRLDBlue" class="r2menupictureDataPanelLED1 hidden" name="stripSelectorRLD" onclick="changeImage('DP', 'RLD')" src="./Images/Body/DataPanelLEDsBlue.png">
+        <img id="DPRLDGreen" class="r2menupictureDataPanelLED1 hidden" name="stripSelectorRLD" onclick="changeImage('DP', 'RLD')" src="./Images/Body/DataPanelLEDsGreen.png"> 
+         <!-- Select All Selection-->
+         <img id="checkmarkall" class="selectALLpic" onclick="selectALLStrips('RLD', 'noDome', )" src="./Images/LEDTab/Selectors/Button-Select-All.png">
+         <img id="checkmarkallRLD" class="checkmarkall hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+           <!-- Select None Selection-->
+           <img id="checkmarkNone" class="selectNonepic" onclick="selectNoneStrips('RLD', 'noDome',)" src="./Images/LEDTab/Selectors/Button-Select-None.png">
+           <img id="checkmarknoneRLD" class="checkmarknone hidden" src="./Images/LEDTab/Selectors/checkmark.png">
 
         <div class="menu-Level-2">
 
             <div class="menu-Level-2-Links " >
-              <button class="active" rel="RLD1"><img
-                  class="buttonwidth"
-                  id ="transparent"
-                  src="Images/Buttons/LEDFunctionButtons/Generic/Button-RLD-White.png"
-                  alt="button for Large Span"
-                /></button>
+              <button class="active " rel="RLD1">
+                <div class="ButtonBlankLED" onclick="">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext2LinesLongLED">rear logics display</p>
+                </div>                        
+              </button> 
             </div>
 
           <div class="menu-Level-2-Content active" id="RLD1">
             <h2 class="menuHeader-Level-2"></h2>
             <div class="ColorPickerdiv">
-              <a href="#" onclick="commandNoOptionsRLD('71','5','checkmarkapplyRLD')" class="applyButton1"></a>
-                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff('LDP')" class="applyButtonoff"></img>
-              </form>
-              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyRLD">
+              <!-- Apply Button-->
+              <div id="BounceApply" class="applyButton"  onclick="commandNoOptions('71','5','checkmarkapplyRLD', 'RLD', 'noDome')" class="applyButton1"  >
+                <img id="BounceApplyImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                <p class="shadowtext1LineLED">apply</p>
+              </div>
+              <!-- Off Button-->
+              <div id="BounceOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffRLD', 'RLD')">
+                <img id="RBounceOffImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext1LineLED">off</p>
+            </div>
+
+            </form>
+            <img id="checkmarkapplyRLD" class="checkmarkapply hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+            <img id="checkmarkoffRLD"   class="checkmarkoff hidden" src="./Images/LEDTab/Selectors/checkmark.png"> 
+ 
             </div><!--end of ColorPickerdiv div-->
           </div> <!-- end of Level 2 Conetent FLD-->
 
@@ -3662,70 +3592,50 @@
 
       <div class="menu-Level-1-Content" id="Pulse">
         <h1 class="menuHeader-Level-1">Pulse</h1>
-        <img
-            class="r2menupictureLDP1"
-            src="Images/Body/LDPBlue.png"
-            alt="picture"
-            name="stripSelectorPulse"
-            onclick=changeImageLDPPulse()
-            id="LDPPulse"
-          />
-
-        <img
-          class="r2menupictureCoin"
-          src="Images/Body/CoinSLotsBlue.png"
-          alt="picture"
-          name="stripSelectorPulse"
-          onclick=changeImageCoinPulse()
-          id="CoinPulse"
-        />
-
-        <img
-            class="r2menupictureMaint"
-            src="Images/Body/SkirtBlue.png"
-            alt="picture"
-            name="stripSelectorPulse"
-            onclick=changeImageMaintPulse()
-            id="MaintPulse"
-          />
-
-        <img
-            class="r2menupictureDataPanelVerticalBars"
-            src="Images/Body/DataPanelVerticalBlue.png"
-            alt="picture"
-            name="stripSelectorPulse"
-            onclick=changeImageVerticalBarsPulse()
-            id="VerticalBarstPulse"
-          />
-          <img
-          class="selectALLpic"
-          src="Images/Button-Select-All-GIMP.png"
-          alt="picture"
-          onclick=selectALLStripsPulse()
-          id="checkmarkallRSeries"
-        />
-      
-        <img
-          class="selectNonepic"
-          src="Images/Button-Select-None-GIMP.png"
-          alt="picture"
-          onclick=selectNoneStripsPulse()
-          id="checkmarkNoneRSeries"
-        />
-          <!-- <h3 class="selectAll" onclick=selectALLStripsPulse()> A </h3>
-          <h3 class="selectNone" onclick=selectNoneStripsPulse()> N </h3> -->
-          <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallPulse">
-          <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknonePulse">
+        <!-- LDP Selection-->
+        <img id="LDPPulseBlue" class="r2menupictureLDP1 " name="stripSelectorPulse" onclick="changeImage('LDP', 'Pulse')" src="./Images/LEDTab/Selectors/LDPBlue.png">
+        <img id="LDPPulseGreen" class="r2menupictureLDP1 hidden" name="stripSelectorPulse" onclick="changeImage('LDP', 'Pulse')" src="./Images/LEDTab/Selectors/LDPGreen.png">
+        <!-- Coin Slots Selection-->
+        <img id="CoinPulseBlue" class="r2menupictureCoin " name="stripSelectorPulse" onclick="changeImage('Coin', 'Pulse')" src="./Images/LEDTab/Selectors/CoinSlotsBlue.png">
+        <img id="CoinPulseGreen" class="r2menupictureCoin hidden" name="stripSelectorPulse" onclick="changeImage('Coin', 'Pulse')" src="./Images/LEDTab/Selectors/CoinSlotsGreen.png">
+        <!-- Maintenance Selection-->
+        <img id="MaintPulseBlue" class="r2menupictureMaint " name="stripSelectorPulse" onclick="changeImage('Maint', 'Pulse')" src="./Images/LEDTab/Selectors/SkirtBlue.png">
+        <img id="MaintPulseGreen" class="r2menupictureMaint hidden" name="stripSelectorPulse" onclick="changeImage('Maint', 'Pulse')" src="./Images/LEDTab/Selectors/SkirtGreen.png">
+        <!-- Vertical Slots Selection-->
+        <img id="VUPulseBlue" class="r2menupictureDataPanelVerticalBars " name="stripSelectorPulse" onclick="changeImage('VU', 'Pulse')" src="./Images/LEDTab/Selectors/DataPanelVerticalBlue.png">
+        <img id="VUPulseGreen" class="r2menupictureDataPanelVerticalBars hidden" name="stripSelectorPulse" onclick="changeImage('VU', 'Pulse')" src="./Images/LEDTab/Selectors/DataPanelVerticalGreen.png">
+        <!-- Front HP Selection-->
+        <img id="FrontHPPulseBlue" class="r2menupictureFrontHP hidden" name="stripSelectorPulse" onclick="changeImage('FrontHP', 'Pulse')" src="./Images/LEDTab/Selectors/FrontHPBlue.png">
+        <img id="FrontHPPulseGreen" class="r2menupictureFrontHP hidden" name="stripSelectorPulse" onclick="changeImage('FrontHP', 'Pulse')" src="./Images/LEDTab/Selectors/FrontHPGreen.png">
+        <!--Top HP Selection-->
+        <img id="TopHPPulseBlue" class="r2menupictureTopHP hidden" name="stripSelectorPulse" onclick="changeImage('TopHP', 'Pulse')" src="./Images/LEDTab/Selectors/TopHPBlue.png">
+        <img id="TopHPPulseGreen" class="r2menupictureTopHP hidden" name="stripSelectorPulse" onclick="changeImage('TopHP', 'Pulse')" src="./Images/LEDTab/Selectors/TopHPGreen.png">
+        <!-- Rear HP Selection-->
+        <img id="RearHPPulseBlue" class="r2menupictureRearHP  hidden" name="stripSelectorPulse" onclick="changeImage('RearHP', 'Pulse')" src="./Images/LEDTab/Selectors/RearHPBlue.png">
+        <img id="RearHPPulseGreen" class="r2menupictureRearHP hidden" name="stripSelectorPulse" onclick="changeImage('RearHP', 'Pulse')" src="./Images/LEDTab/Selectors/RearHPGreen.png">   
+        <!-- Data Panel Logics -->    
+        <img id="CBIPulseBlue" class="r2menupictureCBI hidden" name="stripSelectorPulse" onclick="changeImage('CBI', 'Pulse')" src="./Images/Body/CBIDoorBlue.png">
+        <img id="CBIPulseGreen" class="r2menupictureCBI hidden" name="stripSelectorPulse" onclick="changeImage('CBI', 'Pulse')" src="./Images/Body/CBIDoorGreen.png">
+        <!-- CBI Panel Logics -->    
+        <img id="DPPulseBlue" class="r2menupictureDataPanelLED1 hidden" name="stripSelectorPulse" onclick="changeImage('DP', 'Pulse')" src="./Images/Body/DataPanelLEDsBlue.png">
+        <img id="DPPulseGreen" class="r2menupictureDataPanelLED1 hidden" name="stripSelectorPulse" onclick="changeImage('DP', 'Pulse')" src="./Images/Body/DataPanelLEDsGreen.png"> 
+         <!-- Select All Selection-->
+         <img id="checkmarkall" class="selectALLpic" onclick="selectALLStrips('Pulse', 'noDome', )" src="./Images/LEDTab/Selectors/Button-Select-All.png">
+         <img id="checkmarkallPulse" class="checkmarkall hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+           <!-- Select None Selection-->
+           <img id="checkmarkNone" class="selectNonepic" onclick="selectNoneStrips('Pulse', 'noDome',)" src="./Images/LEDTab/Selectors/Button-Select-None.png">
+           <img id="checkmarknonePulse" class="checkmarknone hidden" src="./Images/LEDTab/Selectors/checkmark.png">
 
         <div class="menu-Level-2">
 
             <div class="menu-Level-2-Links " >
-              <button class="active" rel="Pulse1"><img
-                  class="buttonwidth"
-                  id ="transparent"
-                  src="Images/Buttons/LEDFunctionButtons/Generic/Button-Pulse-White.png"
-                  alt="button for Large Span"
-                /></button>
+              <button class="active " rel="Pulse1">
+                <div class="ButtonBlankLED" onclick="">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext1LineLED">Pulse</p>
+                </div>                        
+              </button> 
+              
             </div>
 
           <div class="menu-Level-2-Content active" id="Pulse1">
@@ -3755,10 +3665,24 @@
                   min="1"
                   max="3"
                 />
-                <a href="#" onclick="commandOneColorAndSpeedPulse('72','Pulse1Slider', 'Pulse1ColorChoiceColorSelect', 'checkmarkapplyPulse')" class="applyButton1"></a>
-                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff()"  class="applyButtonoff"></img>
-              </form>
-              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyPulse">
+
+                <!-- Apply Button-->
+              <div id="BounceApply" class="applyButton"  onclick="commandOneColorAndSpeed('72','Pulse1Slider', 'Pulse1ColorChoiceColorSelect', 'checkmarkapplyPulse', 'Pulse', 'noDome')" class="applyButton1"  >
+                <img id="BounceApplyImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                <p class="shadowtext1LineLED">apply</p>
+              </div>
+              <!-- Off Button-->
+              <div id="BounceOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffPulse', 'Pulse')">
+                <img id="RBounceOffImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext1LineLED">off</p>
+            </div>
+
+            </form>
+            <img id="checkmarkapplyPulse" class="checkmarkapply hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+            <img id="checkmarkoffPulse"   class="checkmarkoff hidden" src="./Images/LEDTab/Selectors/checkmark.png"> 
+
+
+              
             </div><!--end of ColorPickerdiv div-->
           </div> <!-- end of Level 2 Conetent Pulse-->
 
@@ -3767,72 +3691,51 @@
 
       <div class="menu-Level-1-Content" id="DualPulse">
         <h1 class="menuHeader-Level-1">Dual Pulse</h1>
-        <img
-            class="r2menupictureLDP1"
-            src="Images/Body/LDPBlue.png"
-            alt="picture"
-            name="stripSelectorDualPulse"
-            onclick=changeImageLDPDualPulse()
-            id="LDPDualPulse"
-          />
-
-        <img
-          class="r2menupictureCoin"
-          src="Images/Body/CoinSLotsBlue.png"
-          alt="picture"
-          name="stripSelectorDualPulse"
-          onclick=changeImageCoinDualPulse()
-          id="CoinDualPulse"
-        />
-
-        <img
-            class="r2menupictureMaint"
-            src="Images/Body/SkirtBlue.png"
-            alt="picture"
-            name="stripSelectorDualPulse"
-            onclick=changeImageMaintDualPulse()
-            id="MaintDualPulse"
-          />
-
-        <img
-            class="r2menupictureDataPanelVerticalBars"
-            src="Images/Body/DataPanelVerticalBlue.png"
-            alt="picture"
-            name="stripSelectorDualPulse"
-            onclick=changeImageVerticalBarsDualPulse()
-            id="VerticalBarstDualPulse"
-          />
-          <img
-          class="selectALLpic"  
-          src="Images/Button-Select-All-GIMP.png"
-          alt="picture"
-          onclick=selectALLStripsDualPulse()
-          id="checkmarkallRSeries"
-        />
-      
-        <img
-          class="selectNonepic"
-          src="Images/Button-Select-None-GIMP.png"
-          alt="picture"
-          onclick=selectNoneStripsDualPulse()
-          id="checkmarkNoneRSeries"
-        />
-<!-- 
-          <h3 class="selectAll" onclick=selectALLStripsDualPulse()> A </h3>
-          <h3 class="selectNone" onclick=selectNoneStripsDualPulse()> N </h3> -->
-          <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallDualPulse">
-          <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneDualPulse">
+        <!-- LDP Selection-->
+        <img id="LDPDualPulseBlue" class="r2menupictureLDP1 " name="stripSelectorDualPulse" onclick="changeImage('LDP', 'DualPulse')" src="./Images/LEDTab/Selectors/LDPBlue.png">
+        <img id="LDPDualPulseGreen" class="r2menupictureLDP1 hidden" name="stripSelectorDualPulse" onclick="changeImage('LDP', 'DualPulse')" src="./Images/LEDTab/Selectors/LDPGreen.png">
+        <!-- Coin Slots Selection-->
+        <img id="CoinDualPulseBlue" class="r2menupictureCoin " name="stripSelectorDualPulse" onclick="changeImage('Coin', 'DualPulse')" src="./Images/LEDTab/Selectors/CoinSlotsBlue.png">
+        <img id="CoinDualPulseGreen" class="r2menupictureCoin hidden" name="stripSelectorDualPulse" onclick="changeImage('Coin', 'DualPulse')" src="./Images/LEDTab/Selectors/CoinSlotsGreen.png">
+        <!-- Maintenance Selection-->
+        <img id="MaintDualPulseBlue" class="r2menupictureMaint " name="stripSelectorDualPulse" onclick="changeImage('Maint', 'DualPulse')" src="./Images/LEDTab/Selectors/SkirtBlue.png">
+        <img id="MaintDualPulseGreen" class="r2menupictureMaint hidden" name="stripSelectorDualPulse" onclick="changeImage('Maint', 'DualPulse')" src="./Images/LEDTab/Selectors/SkirtGreen.png">
+        <!-- Vertical Slots Selection-->
+        <img id="VUDualPulseBlue" class="r2menupictureDataPanelVerticalBars " name="stripSelectorDualPulse" onclick="changeImage('VU', 'DualPulse')" src="./Images/LEDTab/Selectors/DataPanelVerticalBlue.png">
+        <img id="VUDualPulseGreen" class="r2menupictureDataPanelVerticalBars hidden" name="stripSelectorDualPulse" onclick="changeImage('VU', 'DualPulse')" src="./Images/LEDTab/Selectors/DataPanelVerticalGreen.png">
+        <!-- Front HP Selection-->
+        <img id="FrontHPDualPulseBlue" class="r2menupictureFrontHP hidden" name="stripSelectorDualPulse" onclick="changeImage('FrontHP', 'DualPulse')" src="./Images/LEDTab/Selectors/FrontHPBlue.png">
+        <img id="FrontHPDualPulseGreen" class="r2menupictureFrontHP hidden" name="stripSelectorDualPulse" onclick="changeImage('FrontHP', 'DualPulse')" src="./Images/LEDTab/Selectors/FrontHPGreen.png">
+        <!--Top HP Selection-->
+        <img id="TopHPDualPulseBlue" class="r2menupictureTopHP hidden" name="stripSelectorDualPulse" onclick="changeImage('TopHP', 'DualPulse')" src="./Images/LEDTab/Selectors/TopHPBlue.png">
+        <img id="TopHPDualPulseGreen" class="r2menupictureTopHP hidden" name="stripSelectorDualPulse" onclick="changeImage('TopHP', 'DualPulse')" src="./Images/LEDTab/Selectors/TopHPGreen.png">
+        <!-- Rear HP Selection-->
+        <img id="RearHPDualPulseBlue" class="r2menupictureRearHP  hidden" name="stripSelectorDualPulse" onclick="changeImage('RearHP', 'DualPulse')" src="./Images/LEDTab/Selectors/RearHPBlue.png">
+        <img id="RearHPDualPulseGreen" class="r2menupictureRearHP hidden" name="stripSelectorDualPulse" onclick="changeImage('RearHP', 'DualPulse')" src="./Images/LEDTab/Selectors/RearHPGreen.png">   
+        <!-- Data Panel Logics -->    
+        <img id="CBIDualPulseBlue" class="r2menupictureCBI hidden" name="stripSelectorDualPulse" onclick="changeImage('CBI', 'DualPulse')" src="./Images/Body/CBIDoorBlue.png">
+        <img id="CBIDualPulseGreen" class="r2menupictureCBI hidden" name="stripSelectorDualPulse" onclick="changeImage('CBI', 'DualPulse')" src="./Images/Body/CBIDoorGreen.png">
+        <!-- CBI Panel Logics -->    
+        <img id="DPDualPulseBlue" class="r2menupictureDataPanelLED1 hidden" name="stripSelectorDualPulse" onclick="changeImage('DP', 'DualPulse')" src="./Images/Body/DataPanelLEDsBlue.png">
+        <img id="DPDualPulseGreen" class="r2menupictureDataPanelLED1 hidden" name="stripSelectorDualPulse" onclick="changeImage('DP', 'DualPulse')" src="./Images/Body/DataPanelLEDsGreen.png"> 
+         <!-- Select All Selection-->
+         <img id="checkmarkall" class="selectALLpic" onclick="selectALLStrips('DualPulse', 'noDome', )" src="./Images/LEDTab/Selectors/Button-Select-All.png">
+         <img id="checkmarkallDualPulse" class="checkmarkall hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+           <!-- Select None Selection-->
+           <img id="checkmarkNone" class="selectNonepic" onclick="selectNoneStrips('DualPulse', 'noDome',)" src="./Images/LEDTab/Selectors/Button-Select-None.png">
+           <img id="checkmarknoneDualPulse" class="checkmarknone hidden" src="./Images/LEDTab/Selectors/checkmark.png">
 
         <div class="menu-Level-2">
 
             <div class="menu-Level-2-Links " >
-              <button class="active" rel="DualPulse1"><img
-                  class="buttonwidth"
-                  id ="transparent"
-                  src="Images/Buttons/LEDFunctionButtons/Generic/Button-DualPulse-White.png"
-                  alt="button for Large Span"
-                /></button>
-            </div>
+              <button class="active " rel="DualPulse1">
+                <div class="ButtonBlankLED" onclick="">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext1LineLED">dual pulse</p>
+                </div>                        
+              </button> 
+
+             </div>
 
           <div class="menu-Level-2-Content active" id="DualPulse1">
             <h2 class="menuHeader-Level-2"></h2>
@@ -3861,10 +3764,24 @@
                   min="1"
                   max="3"
                 />
-                <a href="#" onclick="commandOneColorAndSpeedDualPulse('73','DualPulseSlider', 'DualPulseColorChoiceColorSelect', 'checkmarkapplyDualPulse')" class="applyButton1"></a>
-                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff()"  class="applyButtonoff"></img>
-              </form>
-              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyDualPulse">
+               
+                <!-- Apply Button-->
+              <div id="BounceApply" class="applyButton"  onclick="commandOneColorAndSpeed('73','DualPulseSlider', 'DualPulseColorChoiceColorSelect', 'checkmarkapplyDualPulse', 'DualPulse', 'noDome')" class="applyButton1"  >
+                <img id="BounceApplyImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                <p class="shadowtext1LineLED">apply</p>
+              </div>
+              <!-- Off Button-->
+              <div id="BounceOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffDualPulse', 'DualPulse')">
+                <img id="RBounceOffImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext1LineLED">off</p>
+            </div>
+
+            </form>
+            <img id="checkmarkapplyDualPulse" class="checkmarkapply hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+            <img id="checkmarkoffDualPulse"   class="checkmarkoff hidden" src="./Images/LEDTab/Selectors/checkmark.png"> 
+
+               
+              
             </div><!--end of ColorPickerdiv div-->
           </div> <!-- end of Level 2 Conetent Pulse-->
 
@@ -3874,78 +3791,64 @@
 
       <div class="menu-Level-1-Content" id="AutoSequence">
         <h1 class="menuHeader-Level-1">Auto Sequence</h1>
-        <img
-            class="r2menupictureLDP1"
-            src="Images/Body/LDPBlue.png"
-            alt="picture"
-            name="stripSelectorAutoSequence"
-            onclick=changeImageLDPAutoSequence()
-            id="LDPAutoSequence"
-          />
-
-        <img
-          class="r2menupictureCoin"
-          src="Images/Body/CoinSLotsBlue.png"
-          alt="picture"
-          name="stripSelectorAutoSequence"
-          onclick=changeImageCoinAutoSequence()
-          id="CoinAutoSequence"
-        />
-
-        <img
-            class="r2menupictureMaint"
-            src="Images/Body/SkirtBlue.png"
-            alt="picture"
-            name="stripSelectorAutoSequence"
-            onclick=changeImageMaintAutoSequence()
-            id="MaintAutoSequence"
-          />
-
-        <img
-            class="r2menupictureDataPanelVerticalBars"
-            src="Images/Body/DataPanelVerticalBlue.png"
-            alt="picture"
-            name="stripSelectorAutoSequence"
-            onclick=changeImageVerticalBarsAutoSequence()
-            id="VerticalBarstAutoSequence"
-          />
-          <img
-          class="selectALLpic"
-          src="Images/Button-Select-All-GIMP.png"
-          alt="picture"
-          onclick=selectALLStripsAutoSequence()
-          id="checkmarkallRSeries"
-        />
-      
-        <img
-          class="selectNonepic"
-          src="Images/Button-Select-None-GIMP.png"
-          alt="picture"
-          onclick=selectNoneStripsAutoSequence()
-          id="checkmarkNoneRSeries"
-        />
-          <!-- <h3 class="selectAll" onclick=selectALLStripsAutoSequence()> A </h3>
-          <h3 class="selectNone" onclick=selectNoneStripsAutoSequence()> N </h3> -->
-          <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallAutoSequence">
-          <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneAutoSequence">
+        <!-- LDP Selection-->
+        <img id="LDPAutoSequenceBlue" class="r2menupictureLDP1 " name="stripSelectorAutoSequence" onclick="changeImage('LDP', 'AutoSequence')" src="./Images/LEDTab/Selectors/LDPBlue.png">
+        <img id="LDPAutoSequenceGreen" class="r2menupictureLDP1 hidden" name="stripSelectorAutoSequence" onclick="changeImage('LDP', 'AutoSequence')" src="./Images/LEDTab/Selectors/LDPGreen.png">
+        <!-- Coin Slots Selection-->
+        <img id="CoinAutoSequenceBlue" class="r2menupictureCoin " name="stripSelectorAutoSequence" onclick="changeImage('Coin', 'AutoSequence')" src="./Images/LEDTab/Selectors/CoinSlotsBlue.png">
+        <img id="CoinAutoSequenceGreen" class="r2menupictureCoin hidden" name="stripSelectorAutoSequence" onclick="changeImage('Coin', 'AutoSequence')" src="./Images/LEDTab/Selectors/CoinSlotsGreen.png">
+        <!-- Maintenance Selection-->
+        <img id="MaintAutoSequenceBlue" class="r2menupictureMaint " name="stripSelectorAutoSequence" onclick="changeImage('Maint', 'AutoSequence')" src="./Images/LEDTab/Selectors/SkirtBlue.png">
+        <img id="MaintAutoSequenceGreen" class="r2menupictureMaint hidden" name="stripSelectorAutoSequence" onclick="changeImage('Maint', 'AutoSequence')" src="./Images/LEDTab/Selectors/SkirtGreen.png">
+        <!-- Vertical Slots Selection-->
+        <img id="VUAutoSequenceBlue" class="r2menupictureDataPanelVerticalBars " name="stripSelectorAutoSequence" onclick="changeImage('VU', 'AutoSequence')" src="./Images/LEDTab/Selectors/DataPanelVerticalBlue.png">
+        <img id="VUAutoSequenceGreen" class="r2menupictureDataPanelVerticalBars hidden" name="stripSelectorAutoSequence" onclick="changeImage('VU', 'AutoSequence')" src="./Images/LEDTab/Selectors/DataPanelVerticalGreen.png">
+        <!-- Front HP Selection-->
+        <img id="FrontHPAutoSequenceBlue" class="r2menupictureFrontHP " name="stripSelectorAutoSequence" onclick="changeImage('FrontHP', 'AutoSequence')" src="./Images/LEDTab/Selectors/FrontHPBlue.png">
+        <img id="FrontHPAutoSequenceGreen" class="r2menupictureFrontHP hidden" name="stripSelectorAutoSequence" onclick="changeImage('FrontHP', 'AutoSequence')" src="./Images/LEDTab/Selectors/FrontHPGreen.png">
+        <!--Top HP Selection-->
+        <img id="TopHPAutoSequenceBlue" class="r2menupictureTopHP " name="stripSelectorAutoSequence" onclick="changeImage('TopHP', 'AutoSequence')" src="./Images/LEDTab/Selectors/TopHPBlue.png">
+        <img id="TopHPAutoSequenceGreen" class="r2menupictureTopHP hidden" name="stripSelectorAutoSequence" onclick="changeImage('TopHP', 'AutoSequence')" src="./Images/LEDTab/Selectors/TopHPGreen.png">
+        <!-- Rear HP Selection-->
+        <img id="RearHPAutoSequenceBlue" class="r2menupictureRearHP  " name="stripSelectorAutoSequence" onclick="changeImage('RearHP', 'AutoSequence')" src="./Images/LEDTab/Selectors/RearHPBlue.png">
+        <img id="RearHPAutoSequenceGreen" class="r2menupictureRearHP hidden" name="stripSelectorAutoSequence" onclick="changeImage('RearHP', 'AutoSequence')" src="./Images/LEDTab/Selectors/RearHPGreen.png">   
+        <!-- Data Panel Logics -->    
+        <img id="CBIAutoSequenceBlue" class="r2menupictureCBI hidden" ="stripSelectorAutoSequence" onclick="changeImage('CBI', 'AutoSequence')" src="./Images/Body/CBIDoorBlue.png">
+        <img id="CBIAutoSequenceGreen" class="r2menupictureCBI hidden" name="stripSelectorAutoSequence" onclick="changeImage('CBI', 'AutoSequence')" src="./Images/Body/CBIDoorGreen.png">
+        <!-- CBI Panel Logics -->    
+        <img id="DPAutoSequenceBlue" class="r2menupictureDataPanelLED1 " name="stripSelectorAutoSequence" onclick="changeImage('DP', 'AutoSequence')" src="./Images/Body/DataPanelLEDsBlue.png">
+        <img id="DPAutoSequenceGreen" class="r2menupictureDataPanelLED1 hidden" name="stripSelectorAutoSequence" onclick="changeImage('DP', 'AutoSequence')" src="./Images/Body/DataPanelLEDsGreen.png"> 
+         <!-- Select All Selection-->
+         <img id="checkmarkall" class="selectALLpic" onclick="selectALLStrips('AutoSequence', 'hasDome', 'hasBodyLogics' )" src="./Images/LEDTab/Selectors/Button-Select-All.png">
+         <img id="checkmarkallAutoSequence" class="checkmarkall hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+           <!-- Select None Selection-->
+           <img id="checkmarkNone" class="selectNonepic" onclick="selectNoneStrips('AutoSequence', 'hasDome','hasBodyLogics')" src="./Images/LEDTab/Selectors/Button-Select-None.png">
+           <img id="checkmarknoneAutoSequence" class="checkmarknone hidden" src="./Images/LEDTab/Selectors/checkmark.png">
 
         <div class="menu-Level-2">
 
             <div class="menu-Level-2-Links " >
-              <button class="active" rel="AutoSequenceEnable"><img
-                  class="buttonwidth"
-                  id ="transparent"
-                  src="Images/Buttons/LEDFunctionButtons/Generic/Button-Enable-White.png"
-                  alt="button for Large Span"
-                /></button>
-
-            <button class="" rel="AutoSequenceDisable"><img
-                class="buttonwidth"
-                id ="transparent"
-                src="Images/Buttons/LEDFunctionButtons/Generic/Button-Disable-White.png"
-                alt="button for Large Span"
-              /></button>
+             
+              <button class="active " rel="AutoSequenceEnable">
+                <div class="ButtonBlankLED" onclick="">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext1LineLED">enable</p>
+                </div>                        
+              </button> 
             </div>
+
+            <div class="menu-Level-2-Links " >
+             
+              <button class=" " rel="AutoSequenceDisable">
+                <div class="ButtonBlankLED" onclick="">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext1LineLED">disable</p>
+                </div>                        
+              </button> 
+            </div>
+
+             
+          
 
           <div class="menu-Level-2-Content active" id="AutoSequenceEnable">
             <h2 class="menuHeader-Level-2">Enable</h2>
@@ -3953,11 +3856,22 @@
               <form class="" action="index.html" method="post">
                 <br />
                 <br />
-                <a href="#" onclick="commandNoOptionsAutoSequence('99','','checkmarkapplyAutoSequenceEnable')" class="applyButton1"></a>
-                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img>
-              </form>
-              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyAutoSequenceEnable">
+                
+                <!-- Apply Button-->
+              <div id="BounceApply" class="applyButton"  onclick="commandNoOptions('99','','checkmarkapplyAutoSequenceEnable', 'AutoSequence', 'hasDome')" class="applyButton1"  >
+                <img id="BounceApplyImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                <p class="shadowtext1LineLED">apply</p>
+              </div>
+              <!-- Off Button-->
+              <div id="BounceOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffAutoSequenceEnable','AutoSequence', 'hasDome' )">
+                <img id="RBounceOffImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext1LineLED">off</p>
+            </div>
 
+            </form>
+            <img id="checkmarkapplyAutoSequenceEnable" class="checkmarkapply hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+            <img id="checkmarkoffAutoSequenceEnable"   class="checkmarkoff hidden" src="./Images/LEDTab/Selectors/checkmark.png"> 
+                
             </div><!--end of Auto Sequence Enble div-->
           </div> <!-- end of Level 2 Content Auto Sequence Enable-->
 
@@ -3967,10 +3881,21 @@
               <form class="" action="index.html" method="post">
                 <br />
                 <br />
-                <a href="#" onclick="commandNoOptionsAutoSequence('98','','checkmarkapplyAutoSequenceDisable')" class="applyButton1"></a>
-                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img>
-              </form>
-              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyAutoSequenceDisable">
+                <!-- Apply Button-->
+              <div id="BounceApply" class="applyButton"  onclick="commandNoOptions('98','','checkmarkapplyAutoSequenceDisable', 'AutoSequence', 'hasDome')" class="applyButton1"  >
+                <img id="BounceApplyImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                <p class="shadowtext1LineLED">apply</p>
+              </div>
+              <!-- Off Button-->
+              <div id="BounceOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffAutoSequenceDisable','AutoSequence', 'hasDome' )">
+                <img id="RBounceOffImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext1LineLED">off</p>
+            </div>
+
+            </form>
+            <img id="checkmarkapplyAutoSequenceDisable" class="checkmarkapply hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+            <img id="checkmarkoffAutoSequenceDisable"   class="checkmarkoff hidden" src="./Images/LEDTab/Selectors/checkmark.png"> 
+        
             </div><!--end of Auto Sequence Disable div-->
           </div> <!-- end of Level 2 Auto Sequence Disable-->
 
@@ -3980,110 +3905,99 @@
 
       <div class="menu-Level-1-Content" id="Equalizer">
         <h1 class="menuHeader-Level-1">Sound Equalizer</h1>
-        <img
-            class="r2menupictureLDP1"
-            src="Images/Body/LDPBlue.png"
-            alt="picture"
-            name="stripSelectorEqualizer"
-            onclick=changeImageLDPEqualizer()
-            id="LDPEqualizer"
-          />
-
-        <img
-          class="r2menupictureCoin"
-          src="Images/Body/CoinSLotsBlue.png"
-          alt="picture"
-          name="stripSelectorEqualizer"
-          onclick=changeImageCoinEqualizer()
-          id="CoinEqualizer"
-        />
-
-        <img
-            class="r2menupictureMaint"
-            src="Images/Body/SkirtBlue.png"
-            alt="picture"
-            name="stripSelectorEqualizer"
-            onclick=changeImageMaintEqualizer()
-            id="MaintEqualizer"
-          />
-
-        <img
-          class="r2menupictureDataPanelVerticalBars"
-          src="Images/Body/DataPanelVerticalBlue.png"
-          alt="picture"
-          name="stripSelectorEqualizer"
-          onclick=changeImageVerticalBarsEqualizer()
-          id="VerticalBarstEqualizer"
-        />
-
-        <img
-    class="selectALLpic"
-    src="Images/Button-Select-All-GIMP.png"
-    alt="picture"
-    onclick=selectALLStripsEqualizer()
-    id="checkmarkallRSeries"
-  />
-
-  <img
-    class="selectNonepic"
-    src="Images/Button-Select-None-GIMP.png"
-    alt="picture"
-    onclick=selectNoneStripsEqualizer()
-    id="checkmarkNoneRSeries"
-  />
-
-          <!-- <h3 class="selectAll" onclick=selectALLStripsEqualizer()> A </h3>
-          <h3 class="selectNone" onclick=selectNoneStripsEqualizer()> N </h3> -->
-          <img src="Images/blankcheckmark.png" alt="" class="checkmarkall" id="checkmarkallEqualizer">
-          <img src="Images/blankcheckmark.png" alt="" class="checkmarknone" id="checkmarknoneEqualizer">
+        <!-- LDP Selection-->
+        <img id="LDPEqualizerBlue" class="r2menupictureLDP1 " name="stripSelectorEqualizer" onclick="changeImage('LDP', 'Equalizer')" src="./Images/LEDTab/Selectors/LDPBlue.png">
+        <img id="LDPEqualizerGreen" class="r2menupictureLDP1 hidden" name="stripSelectorEqualizer" onclick="changeImage('LDP', 'Equalizer')" src="./Images/LEDTab/Selectors/LDPGreen.png">
+        <!-- Coin Slots Selection-->
+        <img id="CoinEqualizerBlue" class="r2menupictureCoin " name="stripSelectorEqualizer" onclick="changeImage('Coin', 'Equalizer')" src="./Images/LEDTab/Selectors/CoinSlotsBlue.png">
+        <img id="CoinEqualizerGreen" class="r2menupictureCoin hidden" name="stripSelectorEqualizer" onclick="changeImage('Coin', 'Equalizer')" src="./Images/LEDTab/Selectors/CoinSlotsGreen.png">
+        <!-- Maintenance Selection-->
+        <img id="MaintEqualizerBlue" class="r2menupictureMaint " name="stripSelectorEqualizer" onclick="changeImage('Maint', 'Equalizer')" src="./Images/LEDTab/Selectors/SkirtBlue.png">
+        <img id="MaintEqualizerGreen" class="r2menupictureMaint hidden" name="stripSelectorEqualizer" onclick="changeImage('Maint', 'Equalizer')" src="./Images/LEDTab/Selectors/SkirtGreen.png">
+        <!-- Vertical Slots Selection-->
+        <img id="VUEqualizerBlue" class="r2menupictureDataPanelVerticalBars " name="stripSelectorEqualizer" onclick="changeImage('VU', 'Equalizer')" src="./Images/LEDTab/Selectors/DataPanelVerticalBlue.png">
+        <img id="VUEqualizerGreen" class="r2menupictureDataPanelVerticalBars hidden" name="stripSelectorEqualizer" onclick="changeImage('VU', 'Equalizer')" src="./Images/LEDTab/Selectors/DataPanelVerticalGreen.png">
+        <!-- Front HP Selection-->
+        <img id="FrontHPEqualizerBlue" class="r2menupictureFrontHP hidden" name="stripSelectorEqualizer" onclick="changeImage('FrontHP', 'Equalizer')" src="./Images/LEDTab/Selectors/FrontHPBlue.png">
+        <img id="FrontHPEqualizerGreen" class="r2menupictureFrontHP hidden" name="stripSelectorEqualizer" onclick="changeImage('FrontHP', 'Equalizer')" src="./Images/LEDTab/Selectors/FrontHPGreen.png">
+        <!--Top HP Selection-->
+        <img id="TopHPEqualizerBlue" class="r2menupictureTopHP hidden" name="stripSelectorEqualizer" onclick="changeImage('TopHP', 'Equalizer')" src="./Images/LEDTab/Selectors/TopHPBlue.png">
+        <img id="TopHPEqualizerGreen" class="r2menupictureTopHP hidden" name="stripSelectorEqualizer" onclick="changeImage('TopHP', 'Equalizer')" src="./Images/LEDTab/Selectors/TopHPGreen.png">
+        <!-- Rear HP Selection-->
+        <img id="RearHPEqualizerBlue" class="r2menupictureRearHP  hidden" name="stripSelectorEqualizer" onclick="changeImage('RearHP', 'Equalizer')" src="./Images/LEDTab/Selectors/RearHPBlue.png">
+        <img id="RearHPEqualizerGreen" class="r2menupictureRearHP hidden" name="stripSelectorEqualizer" onclick="changeImage('RearHP', 'Equalizer')" src="./Images/LEDTab/Selectors/RearHPGreen.png">   
+        <!-- Data Panel Logics -->    
+        <img id="CBIEqualizerBlue" class="r2menupictureCBI hidden" name="stripSelectorEqualizer" onclick="changeImage('CBI', 'Equalizer')" src="./Images/Body/CBIDoorBlue.png">
+        <img id="CBIEqualizerGreen" class="r2menupictureCBI hidden" name="stripSelectorEqualizer" onclick="changeImage('CBI', 'Equalizer')" src="./Images/Body/CBIDoorGreen.png">
+        <!-- CBI Panel Logics -->    
+        <img id="DPEqualizerBlue" class="r2menupictureDataPanelLED1 hidden" name="stripSelectorEqualizer" onclick="changeImage('DP', 'Equalizer')" src="./Images/Body/DataPanelLEDsBlue.png">
+        <img id="DPEqualizerGreen" class="r2menupictureDataPanelLED1 hidden" name="stripSelectorEqualizer" onclick="changeImage('DP', 'Equalizer')" src="./Images/Body/DataPanelLEDsGreen.png"> 
+         <!-- Select All Selection-->
+         <img id="checkmarkall" class="selectALLpic" onclick="selectALLStrips('Equalizer', 'noDome', )" src="./Images/LEDTab/Selectors/Button-Select-All.png">
+         <img id="checkmarkallEqualizer" class="checkmarkall hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+           <!-- Select None Selection-->
+           <img id="checkmarkNone" class="selectNonepic" onclick="selectNoneStrips('Equalizer', 'noDome',)" src="./Images/LEDTab/Selectors/Button-Select-None.png">
+           <img id="checkmarknoneEqualizer" class="checkmarknone hidden" src="./Images/LEDTab/Selectors/checkmark.png">
 
         <div class="menu-Level-2">
 
             <div class="menu-Level-2-Links " >
-              <button class="active" rel="SoundOption1"><img
-                  class="buttonwidth"
-                  id ="transparent"
-                  src="Images/Buttons/LEDFunctionButtons/Generic/Button-Option1-White.png"
-                  alt="button for Large Span"
-                /></button>
+              <button class="active " rel="SoundOption1">
+                <div class="ButtonBlankLED" onclick="">
+                  <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                  <p class="shadowtext1LineLED">option 1</p>
+                </div>                        
+              </button> 
             </div>
 
           <div class="menu-Level-2-Links " >
-            <button class="" rel="SoundOption2"><img
-                class="buttonwidth"
-                id ="transparent"
-                src="Images/Buttons/LEDFunctionButtons/Generic/Button-Option2-White.png"
-                alt="button for Large Span"
-              /></button>
+            <button class=" " rel="SoundOption2">
+              <div class="ButtonBlankLED" onclick="">
+                <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                <p class="shadowtext1LineLED">option 2</p>
+              </div>                        
+            </button> 
+            
           </div> 
 
         <div class="menu-Level-2-Links " >
-          <button class="" rel="SoundOption3"><img
-              class="buttonwidth"
-              id ="transparent"
-              src="Images/Buttons/LEDFunctionButtons/Generic/Button-Option3-White.png"
-              alt="button for Large Span"
-            /></button>
+          <button class=" " rel="SoundOption3">
+            <div class="ButtonBlankLED" onclick="">
+              <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext1LineLED">option 3</p>
+            </div>                        
+          </button> 
         </div>
 
         <div class="menu-Level-2-Links " >
-          <button class="" rel="SoundOption4"><img
-              class="buttonwidth"
-              id ="transparent"
-              src="Images/Buttons/LEDFunctionButtons/Generic/Button-Option4-White.png"
-              alt="button for Large Span"
-            /></button>
+          <button class=" " rel="SoundOption4">
+            <div class="ButtonBlankLED" onclick="">
+              <img id="AlternatingColorsLink1" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext1LineLED">option 4</p>
+            </div>                        
+          </button> 
         </div>
 
           <div class="menu-Level-2-Content active" id="SoundOption1">
             <h2 class="menuHeader-Level-2">option 1</h2>
             <div class="ColorPickerdiv">
               <form class="" action="index.html" method="post">
-                <a href="#" onclick="commandNoOptionsEqualizer('02','1','checkmarkapplyEqualizerOption1')" class="applyButton1"></a>
-                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img>
+                
+                  <!-- Apply Button-->
+              <div id="BounceApply" class="applyButton"  onclick="commandNoOptions('02','1','checkmarkapplyEqualizerOption1', 'Equalizer', 'noDome')"  class="applyButton1"  >
+                <img id="BounceApplyImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                <p class="shadowtext1LineLED">apply</p>
+              </div>
+              <!-- Off Button-->
+              <div id="BounceOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffEqualizerOption1','Equalizer', 'hasDome' )">
+                <img id="RBounceOffImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext1LineLED">off</p>
+            </div>
 
-              </form>
-              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyEqualizerOption1">
+            </form>
+            <img id="checkmarkapplyEqualizerOption1" class="checkmarkapply hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+            <img id="checkmarkoffEqualizerOption1"   class="checkmarkoff hidden" src="./Images/LEDTab/Selectors/checkmark.png"> 
+          
             </div><!--end of ColorPickerdiv div-->
           </div> <!-- end of Level 2 Conetent Option 1-->
 
@@ -4091,12 +4005,22 @@
             <h2 class="menuHeader-Level-2">option 2</h2>
             <div class="ColorPickerdiv">
               <form class="" action="index.html" method="post">
-                <a href="#" onclick="commandNoOptionsEqualizer('02','2','checkmarkapplyEqualizerOption2')" class="applyButton1"></a>
-                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img>
+              <!-- Apply Button-->
+              <div id="BounceApply" class="applyButton"  onclick="commandNoOptions('02','2','checkmarkapplyEqualizerOption2', 'Equalizer', 'noDome')"  class="applyButton1"  >
+                <img id="BounceApplyImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                <p class="shadowtext1LineLED">apply</p>
+              </div>
+              <!-- Off Button-->
+              <div id="BounceOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffEqualizerOption2','Equalizer', 'hasDome' )">
+                <img id="RBounceOffImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext1LineLED">off</p>
+            </div>
 
-              </form>
-              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyEqualizerOption2">
-
+            </form>
+            <img id="checkmarkapplyEqualizerOption2" class="checkmarkapply hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+            <img id="checkmarkoffEqualizerOption2"   class="checkmarkoff hidden" src="./Images/LEDTab/Selectors/checkmark.png"> 
+                
+              
             </div><!--end of ColorPickerdiv div-->
           </div> <!-- end of Level 2 Conetent Option 1-->
 
@@ -4104,12 +4028,21 @@
             <h2 class="menuHeader-Level-2">option 3</h2>
             <div class="ColorPickerdiv">
               <form class="" action="index.html" method="post">
-                <a href="#" onclick="commandNoOptionsEqualizer('02','3','checkmarkapplyEqualizerOption3')" class="applyButton1"></a>
-                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img>
+              <!-- Apply Button-->
+              <div id="BounceApply" class="applyButton"  onclick="commandNoOptions('02','3','checkmarkapplyEqualizerOption3', 'Equalizer', 'noDome')"  class="applyButton1"  >
+                <img id="BounceApplyImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                <p class="shadowtext1LineLED">apply</p>
+              </div>
+              <!-- Off Button-->
+              <div id="BounceOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffEqualizerOption3','Equalizer', 'hasDome' )">
+                <img id="RBounceOffImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext1LineLED">off</p>
+            </div>
 
-              </form>
-              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyEqualizerOption3">
-
+            </form>
+            <img id="checkmarkapplyEqualizerOption3" class="checkmarkapply hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+            <img id="checkmarkoffEqualizerOption3"   class="checkmarkoff hidden" src="./Images/LEDTab/Selectors/checkmark.png"> 
+   
             </div><!--end of ColorPickerdiv div-->
           </div> <!-- end of Level 2 Conetent Option 1-->
 
@@ -4117,11 +4050,21 @@
             <h2 class="menuHeader-Level-2">option 4</h2>
             <div class="ColorPickerdiv">
               <form class="" action="index.html" method="post">
-                <a href="#" onclick="commandNoOptionsEqualizer('02','4','checkmarkapplyEqualizerOption4')" class="applyButton1"></a>
-                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripAllOff()" class="applyButtonoff"></img>
+              <!-- Apply Button-->
+              <div id="BounceApply" class="applyButton"  onclick="commandNoOptions('02','4','checkmarkapplyEqualizerOption4', 'Equalizer', 'noDome')"  class="applyButton1"  >
+                <img id="BounceApplyImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                <p class="shadowtext1LineLED">apply</p>
+              </div>
+              <!-- Off Button-->
+              <div id="BounceOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffEqualizerOption4','Equalizer', 'hasDome' )">
+                <img id="RBounceOffImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext1LineLED">off</p>
+            </div>
 
-              </form>
-              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyEqualizerOption4">
+            </form>
+            <img id="checkmarkapplyEqualizerOption4" class="checkmarkapply hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+            <img id="checkmarkoffEqualizerOption4"   class="checkmarkoff hidden" src="./Images/LEDTab/Selectors/checkmark.png"> 
+
 
             </div><!--end of ColorPickerdiv div-->
           </div> <!-- end of Level 2 Conetent Option 1-->
@@ -4163,6 +4106,39 @@
       
       <div class="menu-Level-1-Content" id="DataPanel">
         <h1 class="menuHeader-Level-1">Data Panel/CBi</h1>
+        <!-- LDP Selection-->
+        <img id="LDPCBIDPBlue" class="r2menupictureLDP1 hidden" name="stripSelectorCBIDP" onclick="changeImage('LDP', 'CBIDP')" src="./Images/LEDTab/Selectors/LDPBlue.png">
+        <img id="LDPCBIDPGreen" class="r2menupictureLDP1 hidden" name="stripSelectorCBIDP" onclick="changeImage('LDP', 'CBIDP')" src="./Images/LEDTab/Selectors/LDPGreen.png">
+        <!-- Coin Slots Selection-->
+        <img id="CoinCBIDPBlue" class="r2menupictureCoin hidden" name="stripSelectorCBIDP" onclick="changeImage('Coin', 'CBIDP')" src="./Images/LEDTab/Selectors/CoinSlotsBlue.png">
+        <img id="CoinCBIDPGreen" class="r2menupictureCoin hidden" name="stripSelectorCBIDP" onclick="changeImage('Coin', 'CBIDP')" src="./Images/LEDTab/Selectors/CoinSlotsGreen.png">
+        <!-- Maintenance Selection-->
+        <img id="MaintCBIDPBlue" class="r2menupictureMaint hidden" name="stripSelectorCBIDP" onclick="changeImage('Maint', 'CBIDP')" src="./Images/LEDTab/Selectors/SkirtBlue.png">
+        <img id="MaintCBIDPGreen" class="r2menupictureMaint hidden" name="stripSelectorCBIDP" onclick="changeImage('Maint', 'CBIDP')" src="./Images/LEDTab/Selectors/SkirtGreen.png">
+        <!-- Vertical Slots Selection-->
+        <img id="VUCBIDPBlue" class="r2menupictureDataPanelVerticalBars hidden" name="stripSelectorCBIDP" onclick="changeImage('VU', 'CBIDP')" src="./Images/LEDTab/Selectors/DataPanelVerticalBlue.png">
+        <img id="VUCBIDPGreen" class="r2menupictureDataPanelVerticalBars hidden" name="stripSelectorCBIDP" onclick="changeImage('VU', 'CBIDP')" src="./Images/LEDTab/Selectors/DataPanelVerticalGreen.png">
+        <!-- Front HP Selection-->
+        <img id="FrontHPCBIDPBlue" class="r2menupictureFrontHP hidden" name="stripSelectorCBIDP" onclick="changeImage('FrontHP', 'CBIDP')" src="./Images/LEDTab/Selectors/FrontHPBlue.png">
+        <img id="FrontHPCBIDPGreen" class="r2menupictureFrontHP hidden" name="stripSelectorCBIDP" onclick="changeImage('FrontHP', 'CBIDP')" src="./Images/LEDTab/Selectors/FrontHPGreen.png">
+        <!--Top HP Selection-->
+        <img id="TopHPCBIDPBlue" class="r2menupictureTopHP hidden" name="stripSelectorCBIDP" onclick="changeImage('TopHP', 'CBIDP')" src="./Images/LEDTab/Selectors/TopHPBlue.png">
+        <img id="TopHPCBIDPGreen" class="r2menupictureTopHP hidden" name="stripSelectorCBIDP" onclick="changeImage('TopHP', 'CBIDP')" src="./Images/LEDTab/Selectors/TopHPGreen.png">
+        <!-- Rear HP Selection-->
+        <img id="RearHPCBIDPBlue" class="r2menupictureRearHP  hidden" name="stripSelectorCBIDP" onclick="changeImage('RearHP', 'CBIDP')" src="./Images/LEDTab/Selectors/RearHPBlue.png">
+        <img id="RearHPCBIDPGreen" class="r2menupictureRearHP hidden" name="stripSelectorCBIDP" onclick="changeImage('RearHP', 'CBIDP')" src="./Images/LEDTab/Selectors/RearHPGreen.png">   
+        <!-- Data Panel Logics -->    
+        <img id="CBICBIDPBlue" class="r2menupictureCBI " name="stripSelectorCBIDP" onclick="changeImage('CBI', 'CBIDP')" src="./Images/Body/CBIDoorBlue.png">
+        <img id="CBICBIDPGreen" class="r2menupictureCBI hidden" name="stripSelectorCBIDP" onclick="changeImage('CBI', 'CBIDP')" src="./Images/Body/CBIDoorGreen.png">
+        <!-- CBI Panel Logics -->    
+        <img id="DPCBIDPBlue" class="r2menupictureDataPanelLED1 " name="stripSelectorCBIDP" onclick="changeImage('DP', 'CBIDP')" src="./Images/Body/DataPanelLEDsBlue.png">
+        <img id="DPCBIDPGreen" class="r2menupictureDataPanelLED1 hidden" name="stripSelectorCBIDP" onclick="changeImage('DP', 'CBIDP')" src="./Images/Body/DataPanelLEDsGreen.png"> 
+         <!-- Select All Selection-->
+         <img id="checkmarkall" class="selectALLpic hidden" onclick="selectALLStrips('CBIDP', 'noDome', )" src="./Images/LEDTab/Selectors/Button-Select-All.png">
+         <img id="checkmarkallCBIDP" class="checkmarkall hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+           <!-- Select None Selection-->
+           <img id="checkmarkNone" class="selectNonepic hidden" onclick="selectNoneStrips('CBIDP', 'noDome',)" src="./Images/LEDTab/Selectors/Button-Select-None.png">
+           <img id="checkmarknoneCBIDP" class="checkmarknone hidden" src="./Images/LEDTab/Selectors/checkmark.png">
         <div class="menu-Level-2">
 
             <div class="menu-Level-2-Links " >
@@ -4802,68 +4778,42 @@ id="FrontLogicsTopBlueSelector"
           onclick=changeImageLargeDoorPanelServo()
           id="LargePanel"
         />
-        <svg version="1.1" class="testingPie" id="Layer_1"  x="0px" y="0px"
-        width="7%" viewBox="0 0 178 288"  >
-     <path fill="#05FF47" opacity="1.000000" stroke="none" 
-       d="
-     M137.454102,289.000000 
-       C135.272003,287.323029 133.806366,285.177155 131.775787,284.040924 
-       C109.165176,271.388855 86.463936,258.898773 63.793858,246.352890 
-       C44.973961,235.937744 26.211546,225.417145 7.314970,215.143188 
-       C2.415847,212.479553 3.666010,208.594803 4.654705,204.905487 
-       C6.165752,199.267014 8.411420,193.827789 9.985859,188.203400 
-       C12.967654,177.551453 15.217042,166.768097 14.003427,155.583664 
-       C12.343568,140.286789 11.157238,124.914597 8.763799,109.732994 
-       C7.799247,103.614815 4.178175,97.915459 1.383048,92.012741 
-       C1.000000,88.969406 1.000000,85.938812 1.378015,82.453140 
-       C2.254149,81.974312 2.858979,82.127678 3.234949,81.901169 
-       C16.192354,74.094971 29.141977,66.275620 42.064137,58.411198 
-       C69.428268,41.757397 96.806335,25.125969 124.091675,8.343911 
-       C127.338501,6.346930 130.043732,3.469380 133.000000,1.000000 
-       C135.370560,1.000000 137.741104,1.000000 140.228638,1.289694 
-       C141.350220,3.983096 142.333786,6.395868 143.362946,8.789029 
-       C149.595795,23.282631 156.793015,37.447575 161.853317,52.338993 
-       C169.284454,74.207314 175.949875,96.422920 177.088028,119.802925 
-       C177.125092,120.564499 178.336182,121.268929 179.000000,122.000000 
-       C179.000000,141.020889 179.000000,160.041794 178.600342,179.317490 
-       C177.800934,180.752838 177.167603,181.908676 177.039825,183.117950 
-       C176.281357,190.295456 176.258682,197.609955 174.841293,204.647324 
-       C170.860275,224.412979 165.733200,243.886887 157.843277,262.534515 
-       C154.128647,271.313965 150.608368,280.175598 147.000000,289.000000 
-       C143.969406,289.000000 140.938812,289.000000 137.454102,289.000000 
-     M12.511512,94.009338 
-       C14.673811,101.475510 17.352701,108.839294 18.858196,116.435631 
-       C20.476915,124.603271 21.218500,132.970078 21.926455,141.285431 
-       C22.570892,148.854721 23.513462,156.552734 22.802572,164.049683 
-       C21.512325,177.656403 19.186066,191.201172 13.868579,203.942749 
-       C12.468222,207.298233 13.562168,208.695038 16.340843,210.107834 
-       C20.414366,212.179001 24.340866,214.537613 28.351154,216.735168 
-       C45.080021,225.902222 61.865574,234.967102 78.538284,244.235031 
-       C99.203217,255.722153 119.777046,267.373169 140.768845,279.166077 
-       C159.042816,243.843826 168.455978,206.174835 170.722824,167.085007 
-       C173.884018,112.572983 160.420090,61.379879 135.258896,12.637524 
-       C133.212708,13.549615 131.191696,14.198942 129.429550,15.272996 
-       C91.450653,38.421638 53.584892,61.758327 15.430184,84.612793 
-       C11.047699,87.237877 10.005984,89.210037 12.511512,94.009338 
-     z"/>
-     <path fill="#000000" opacity="1.000000" stroke="none" 
-       d="
-     M12.299420,93.690079 
-       C10.005984,89.210037 11.047699,87.237877 15.430184,84.612793 
-       C53.584892,61.758327 91.450653,38.421638 129.429550,15.272996 
-       C131.191696,14.198942 133.212708,13.549615 135.258896,12.637524 
-       C160.420090,61.379879 173.884018,112.572983 170.722824,167.085007 
-       C168.455978,206.174835 159.042816,243.843826 140.768845,279.166077 
-       C119.777046,267.373169 99.203217,255.722153 78.538284,244.235031 
-       C61.865574,234.967102 45.080021,225.902222 28.351154,216.735168 
-       C24.340866,214.537613 20.414366,212.179001 16.340843,210.107834 
-       C13.562168,208.695038 12.468222,207.298233 13.868579,203.942749 
-       C19.186066,191.201172 21.512325,177.656403 22.802572,164.049683 
-       C23.513462,156.552734 22.570892,148.854721 21.926455,141.285431 
-       C21.218500,132.970078 20.476915,124.603271 18.858196,116.435631 
-       C17.352701,108.839294 14.673811,101.475510 12.299420,93.690079 
-     z"/>
-     </svg>
+
+
+        <div id="DomePanelIdentifier01" class="DomePanelIdentifier01 DomePanelFormatBlue" onclick="ToggleSingleDoor('2', '01', id)">
+          <p class="DomePanelIdentifierText"> 1</p>
+        </div> 
+        <div id="DomePanelIdentifier02" class="DomePanelIdentifier02 DomePanelFormatBlue" onclick="ToggleSingleDoor('2', '02', id)">
+          <p class="DomePanelIdentifierText"> 2</p>
+        </div> 
+        <div id="DomePanelIdentifier03" class="DomePanelIdentifier03 DomePanelFormatBlue" onclick="ToggleSingleDoor('2', '03', id)">
+          <p class="DomePanelIdentifierText"> 3</p>
+        </div> 
+        <div id="DomePanelIdentifier04" class="DomePanelIdentifier04 DomePanelFormatBlue" onclick="ToggleSingleDoor('2', '04', id)">
+          <p class="DomePanelIdentifierText"> 4</p>
+        </div> 
+        <div id="DomePanelIdentifier05" class="DomePanelIdentifier05 DomePanelFormatBlue" onclick="ToggleSingleDoor('2', '05', id)">
+          <p class="DomePanelIdentifierText"> 5</p>
+        </div> 
+        <div id="DomePanelIdentifier06" class="DomePanelIdentifier06 DomePanelFormatBlue" onclick="ToggleSingleDoor('2', '06', id)">
+          <p class="DomePanelIdentifierText"> 6</p>
+        </div> 
+        <div id="DomePanelIdentifier07" class="DomePanelIdentifier07 DomePanelFormatBlue" onclick="ToggleSingleDoor('2', '07', id)">
+          <p class="DomePanelIdentifierText"> 7</p>
+        </div> 
+        <div id="DomePanelIdentifier08" class="DomePanelIdentifier08 DomePanelFormatBlue" onclick="ToggleSingleDoor('2', '08', id)">
+          <p class="DomePanelIdentifierText"> 8</p>
+        </div> 
+        <div id="DomePanelIdentifier09" class="DomePanelIdentifier09 DomePanelFormatBlue" onclick="ToggleSingleDoor('2', '09',id)">
+          <p class="DomePanelIdentifierText"> 9</p>
+        </div> 
+        <div id="DomePanelIdentifier10" class="DomePanelIdentifier10 DomePanelFormatBlue" onclick="ToggleSingleDoor('2', '10', id)">
+          <p class="DomePanelIdentifierText"> 10</p>
+        </div> 
+
+
+
+        
 
 
     <div class="HPServo">
@@ -4887,7 +4837,7 @@ id="FrontLogicsTopBlueSelector"
       <img src="Images/Button-Servo-All-Long-Disco.png" class="AllLongDiscoButton" alt="image for the dome" onclick="servoControl('16')">
       <img src="Images/Button-Servo-Marching-Ants.png" class="MarchingAntsButton" alt="image for the dome" onclick="servoControl('13')">
       <img src="Images/Button-Servo-All-Open.png" class="AllOpenButton" alt="image for the dome" onclick="servoControl('03')">
-      <img src="Images/Button-Servo-All-Close.png" class="AllCloseButton" alt="image for the dome" onclick="servoControl('04')">
+      <img src="Images/Button-Servo-All-Close.png" class="AllCloseButton" alt="image for the dome" onclick="servoControl('04');clearServoFormatting();">
       <img src="Images/Button-Servo-All-Open-Close.png" class="AllOpenCloseButton" alt="image for the dome" onclick="servoControl('06')">
       <img src="Images/Button-Servo-All-Open-Close-Long.png" class="AllOpenCloseLongButton" alt="image for the dome" onclick="servoControl('07')">
       <img src="Images/Button-Servo-Flutter.png" class="FlutterButton" alt="image for the dome" onclick="servoControl('08')">
