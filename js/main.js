@@ -479,8 +479,8 @@ var HPCommandPrefix = ":L:EHP:H"
 var DLCommandPrefix = ":L:EDC:SDL"
 var PSCommandPrefix = ":L:EDC:SFU"
 
-var statusQueryLength = 2000
-var delaySecondHTTPGet = 1000
+var statusQueryLength = 2000;
+var delaySecondHTTPGet = 5;
 
 function httpGetStatus() {
   let theStatusURL = "http://192.168.4.101/status"
@@ -1204,28 +1204,28 @@ function PSICommand(t) {
   // }
 
 };
-doorStateBody1 = false;
-doorStateBody2 = false;
-doorStateBody3 = false;
-doorStateBody4 = false;
-doorStateBody5 = false;
-doorStateBody6 = false;
-doorStateBody7 = false;
-doorStateBody8 = false;
-doorStateBody9 = false;
-doorStateBody10 = false;
+var doorStateBody1 = false;
+var doorStateBody2 = false;
+var doorStateBody3 = false;
+var doorStateBody4 = false;
+var doorStateBody5 = false;
+var doorStateBody6 = false;
+var doorStateBody7 = false;
+var doorStateBody8 = false;
+var doorStateBody9 = false;
+var doorStateBody10 = false;
 
 
-doorStateDome1 = false;
-doorStateDome2 = false;
-doorStateDome3 = false;
-doorStateDome4 = false;
-doorStateDome5 = false;
-doorStateDome6 = false;
-doorStateDome7 = false;
-doorStateDome8 = false;
-doorStateDome9 = false;
-doorStateDome10 = false;
+var doorStateDome1 = false;
+var doorStateDome2 = false;
+var doorStateDome3 = false;
+var doorStateDome4 = false;
+var doorStateDome5 = false;
+var doorStateDome6 = false;
+var doorStateDome7 = false;
+var doorStateDome8 = false;
+var doorStateDome9 = false;
+var doorStateDome10 = false;
 
 function ToggleSingleDoor(b, c, u) {
   var easingMethod = document.getElementById('ServoEasingSelectionBox');
@@ -1593,7 +1593,98 @@ function ToggleSingleDoor(b, c, u) {
   bodyServoFunctionExecution(fullBodyServoURL);
 }
 
-function clearServoFormatting() {
+function allOpenServoFormatting() {
+  let tmp = document.getElementById('DomePanelIdentifier01')
+  tmp.classList.remove('DomePanelFormatBlue');
+  tmp.classList.add('DomePanelFormatGreen');
+  tmp = document.getElementById('DomePanelIdentifier02')
+  tmp.classList.remove('DomePanelFormatBlue');
+  tmp.classList.add('DomePanelFormatGreen');
+  tmp = document.getElementById('DomePanelIdentifier03')
+  tmp.classList.remove('DomePanelFormatBlue');
+  tmp.classList.add('DomePanelFormatGreen');
+  tmp = document.getElementById('DomePanelIdentifier04')
+  tmp.classList.remove('DomePanelFormatBlue');
+  tmp.classList.add('DomePanelFormatGreen');
+  tmp = document.getElementById('DomePanelIdentifier05')
+  tmp.classList.remove('DomePanelFormatBlue');
+  tmp.classList.add('DomePanelFormatGreen');
+  tmp = document.getElementById('DomePanelIdentifier06')
+  tmp.classList.remove('DomePanelFormatBlue');
+  tmp.classList.add('DomePanelFormatGreen');
+  tmp = document.getElementById('DomePanelIdentifier07')
+  tmp.classList.remove('DomePanelFormatBlue');
+  tmp.classList.add('DomePanelFormatGreen');
+  tmp = document.getElementById('DomePanelIdentifier08')
+  tmp.classList.remove('DomePanelFormatBlue');
+  tmp.classList.add('DomePanelFormatGreen');
+  tmp = document.getElementById('DomePanelIdentifier09')
+  tmp.classList.remove('DomePanelFormatBlue');
+  tmp.classList.add('DomePanelFormatGreen');
+  tmp = document.getElementById('DomePanelIdentifier10')
+  tmp.classList.remove('DomePanelFormatBlue');
+  tmp.classList.add('DomePanelFormatGreen');
+
+
+
+  tmp = document.getElementById('BodyPanelIdentifier01')
+  tmp.classList.remove('DomePanelFormatBlue');
+  tmp.classList.add('DomePanelFormatGreen');
+  tmp = document.getElementById('BodyPanelIdentifier02')
+  tmp.classList.remove('DomePanelFormatBlue');
+  tmp.classList.add('DomePanelFormatGreen');
+  tmp = document.getElementById('BodyPanelIdentifier03')
+  tmp.classList.remove('DomePanelFormatBlue');
+  tmp.classList.add('DomePanelFormatGreen');
+  tmp = document.getElementById('BodyPanelIdentifier04')
+  tmp.classList.remove('DomePanelFormatBlue');
+  tmp.classList.add('DomePanelFormatGreen');
+  tmp = document.getElementById('BodyPanelIdentifier05')
+  tmp.classList.remove('DomePanelFormatBlue');
+  tmp.classList.add('DomePanelFormatGreen');
+  tmp = document.getElementById('BodyPanelIdentifier06')
+  tmp.classList.remove('DomePanelFormatBlue');
+  tmp.classList.add('DomePanelFormatGreen');
+  tmp = document.getElementById('BodyPanelIdentifier07')
+  tmp.classList.remove('DomePanelFormatBlue');
+  tmp.classList.add('DomePanelFormatGreen');
+  tmp = document.getElementById('BodyPanelIdentifier08')
+  tmp.classList.remove('DomePanelFormatBlue');
+  tmp.classList.add('DomePanelFormatGreen');
+  tmp = document.getElementById('BodyPanelIdentifier09')
+  tmp.classList.remove('DomePanelFormatBlue');
+  tmp.classList.add('DomePanelFormatGreen');
+  tmp = document.getElementById('BodyPanelIdentifier10')
+  tmp.classList.remove('DomePanelFormatBlue');
+  tmp.classList.add('DomePanelFormatGreen');
+
+  doorStateBody1 = true;
+  doorStateBody2 = true;
+  doorStateBody3 = true;
+  doorStateBody4 = true;
+  doorStateBody5 = true;
+  doorStateBody6 = true;
+  doorStateBody7 = true;
+  doorStateBody8 = true;
+  doorStateBody9 = true;
+  doorStateBody10 = true;
+
+
+  doorStateDome1 = true;
+  doorStateDome2 = true;
+  doorStateDome3 = true;
+  doorStateDome4 = true;
+  doorStateDome5 = true;
+  doorStateDome6 = true;
+  doorStateDome7 = true;
+  doorStateDome8 = true;
+  doorStateDome9 = true;
+  doorStateDome10 = true;
+
+}
+
+
+function allCloseServoFormatting() {
 
   let tmp = document.getElementById('DomePanelIdentifier01')
   tmp.classList.add('DomePanelFormatBlue');
@@ -1625,6 +1716,62 @@ function clearServoFormatting() {
   tmp = document.getElementById('DomePanelIdentifier10')
   tmp.classList.add('DomePanelFormatBlue');
   tmp.classList.remove('DomePanelFormatGreen');
+
+
+
+  tmp = document.getElementById('BodyPanelIdentifier01')
+  tmp.classList.add('DomePanelFormatBlue');
+  tmp.classList.remove('DomePanelFormatGreen');
+  tmp = document.getElementById('BodyPanelIdentifier02')
+  tmp.classList.add('DomePanelFormatBlue');
+  tmp.classList.remove('DomePanelFormatGreen');
+  tmp = document.getElementById('BodyPanelIdentifier03')
+  tmp.classList.add('DomePanelFormatBlue');
+  tmp.classList.remove('DomePanelFormatGreen');
+  tmp = document.getElementById('BodyPanelIdentifier04')
+  tmp.classList.add('DomePanelFormatBlue');
+  tmp.classList.remove('DomePanelFormatGreen');
+  tmp = document.getElementById('BodyPanelIdentifier05')
+  tmp.classList.add('DomePanelFormatBlue');
+  tmp.classList.remove('DomePanelFormatGreen');
+  tmp = document.getElementById('BodyPanelIdentifier06')
+  tmp.classList.add('DomePanelFormatBlue');
+  tmp.classList.remove('DomePanelFormatGreen');
+  tmp = document.getElementById('BodyPanelIdentifier07')
+  tmp.classList.add('DomePanelFormatBlue');
+  tmp.classList.remove('DomePanelFormatGreen');
+  tmp = document.getElementById('BodyPanelIdentifier08')
+  tmp.classList.add('DomePanelFormatBlue');
+  tmp.classList.remove('DomePanelFormatGreen');
+  tmp = document.getElementById('BodyPanelIdentifier09')
+  tmp.classList.add('DomePanelFormatBlue');
+  tmp.classList.remove('DomePanelFormatGreen');
+  tmp = document.getElementById('BodyPanelIdentifier10')
+  tmp.classList.add('DomePanelFormatBlue');
+  tmp.classList.remove('DomePanelFormatGreen');
+
+  doorStateBody1 = false;
+  doorStateBody2 = false;
+  doorStateBody3 = false;
+  doorStateBody4 = false;
+  doorStateBody5 = false;
+  doorStateBody6 = false;
+  doorStateBody7 = false;
+  doorStateBody8 = false;
+  doorStateBody9 = false;
+  doorStateBody10 = false;
+
+
+  doorStateDome1 = false;
+  doorStateDome2 = false;
+  doorStateDome3 = false;
+  doorStateDome4 = false;
+  doorStateDome5 = false;
+  doorStateDome6 = false;
+  doorStateDome7 = false;
+  doorStateDome8 = false;
+  doorStateDome9 = false;
+  doorStateDome10 = false;
 }
 
 
