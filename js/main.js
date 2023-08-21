@@ -480,7 +480,7 @@ var DLCommandPrefix = ":L:EDC:SDL"
 var PSCommandPrefix = ":L:EDC:SFU"
 
 var statusQueryLength = 2000;
-var delaySecondHTTPGet = 5;
+var delaySecondHTTPGet = 1250;
 
 function httpGetStatus() {
   let theStatusURL = "http://192.168.4.101/status"
@@ -640,7 +640,6 @@ function httpGetStatus() {
     domePlateControllerStatus = false;
     domeControllerStatus = false;
     hpControllerStatus = false;
-    checkDroidGatewayStatus = false;
     batteryPercent = 0;
   }
   req.send(null)
@@ -2431,16 +2430,20 @@ function commandStripOff(u, z, d) {
   var checkmark = document.getElementById(u)
   checkmark.classList.remove('hidden');
   setTimeout(function () { checkmark.classList.add('hidden') }, 2000);
+  let fullURL;
+  var bodyParam = "";
+  var domeParam = "";
 
   var check = getcheckedElementsforBodyController(z);
   console.log("Check: " + check);
-  let commandtoSend = "&param1=" + BLCommandPrefix + check + "98";
-  bodyControllerLEDFunctionExecution(commandtoSend);
+  bodyParam = "&param1=" + BLCommandPrefix + check + "98";
   if (d == 'hasDome') {
     var checkHP = getcheckedElementsforHPController(z);
-    let commandtoSendtoHPController = checkHP + "98";
-    setTimeout(function () { HPLEDFunctionExecution(commandtoSendtoHPController) }, delaySecondHTTPGet);
+    let domeParam = "&param2=" + HPCommandPrefix + checkHP + "98";
   }
+  fullURL = bodyParam + domeParam;
+  bodyControllerLEDFunctionExecution(fullURL);
+
 };
 
 
@@ -2449,16 +2452,20 @@ function commandNoOptions(y, t, u, z, d) {
   var checkmark = document.getElementById(u)
   checkmark.classList.remove('hidden');
   setTimeout(function () { checkmark.classList.add('hidden') }, 2000);
-
+  let fullURL;
+  var bodyParam = "";
+  var domeParam = "";
   var check = getcheckedElementsforBodyController(z);
   console.log("Check: " + check);
-  let commandtoSend = "&param1=" + BLCommandPrefix + check + y + t;
-  bodyControllerLEDFunctionExecution(commandtoSend);
+  bodyParam = "&param1=" + BLCommandPrefix + check + y + t;
+
   if (d == 'hasDome') {
     var checkHP = getcheckedElementsforHPController(z);
-    let commandtoSendtoHPController = checkHP + y;
-    setTimeout(function () { HPLEDFunctionExecution(commandtoSendtoHPController) }, delaySecondHTTPGet);
+    domeParam = "&param2=" + HPCommandPrefix + checkHP + y;
   };
+  fullURL = bodyParam + domeParam;
+  bodyControllerLEDFunctionExecution(fullURL);
+
 };
 
 
@@ -2468,17 +2475,20 @@ function commandSingleColor(y, t, z, u, x, d) {
   var checkmark = document.getElementById(u)
   checkmark.classList.remove('hidden');
   setTimeout(function () { checkmark.classList.add('hidden') }, 2000);
-
+  let fullURL;
+  let bodyParam = "";
+  let domeParam = "";
 
   var check = getcheckedElementsforBodyController(x);
   console.log("Check: " + check);
-  let commandtoSend = "&param1=" + BLCommandPrefix + check + y + t + colorValues;
-  bodyControllerLEDFunctionExecution(commandtoSend);
+  bodyParam = "&param1=" + BLCommandPrefix + check + y + t + colorValues;
   if (d == 'hasDome') {
     var checkHP = getcheckedElementsforHPController(x);
-    let commandtoSendtoHPController = checkHP + y + colorValues;
-    setTimeout(function () { HPLEDFunctionExecution(commandtoSendtoHPController) }, 2000);
+    domeParam = "&param2=" + HPCommandPrefix + checkHP + y + colorValues;
   };
+  fullURL = bodyParam + domeParam;
+  bodyControllerLEDFunctionExecution(fullURL);
+
 };
 
 
@@ -2486,6 +2496,7 @@ function commandTwoColorswithSpeed(a, b, c, d, u, x) {
   let sliderValue = getSliderValue(b);
   let colorValues1 = getcolor1(c);
   let colorValues2 = getcolor2(d);
+
   var checkmark = document.getElementById(u)
   checkmark.classList.remove('hidden');
   setTimeout(function () { checkmark.classList.add('hidden') }, 2000);
@@ -2522,16 +2533,20 @@ function commandOneColorAndSpeed(y, t, z, u, x, d) {
   var checkmark = document.getElementById(u)
   checkmark.classList.remove('hidden');
   setTimeout(function () { checkmark.classList.add('hidden') }, 2000);
+  let fullURL;
+  let bodyParam = "";
+  let domeParam = "";
 
   var check = getcheckedElementsforBodyController(x);
   console.log("Check: " + check);
-  let commandtoSend = "&param1=" + BLCommandPrefix + check + y + sliderValue + colorValues1;
-  bodyControllerLEDFunctionExecution(commandtoSend);
+  bodyParam = "&param1=" + BLCommandPrefix + check + y + sliderValue + colorValues1;
   if (d == 'hasDome') {
     var checkHP = getcheckedElementsforHPController(x);
-    let commandtoSendtoHPController = checkHP + y + colorValues1 + sliderValue;;
-    setTimeout(function () { HPLEDFunctionExecution(commandtoSendtoHPController) }, delaySecondHTTPGet);
+    domeParam = "&param2=" + HPCommandPrefix + checkHP + y + colorValues1 + sliderValue;;
   };
+  fullURL = bodyParam + domeParam;
+  bodyControllerLEDFunctionExecution(fullURL);
+
 };
 
 
