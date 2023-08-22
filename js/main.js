@@ -6133,17 +6133,18 @@ function sendEEPROMBodyLEDController(t, v) {
 
 
 function periscopeHeightSliderFunction(a, b) {
-  var VUslide = document.getElementById(a),
-    sliderDiv = document.getElementById(b);
+  // var slidervalue1 = document.getElementById(a),
+  let sliderDiv = document.getElementById(b);
+  let sliderValue = getSliderValue(a);
 
-  VUslide.onchange = function () {
-    sliderDiv.innerHTML = this.value;
-    let slidervalue1 = this.value;
-    console.log(slidervalue1);
-    httpGet("http://192.168.4.101/?param0=:&param1=:L:EDP:SUS:PP" + slidervalue1);
-    // changeVolume(slidervalue1);
-    // sendEEPROMBodyLEDController(slidervalue1, c);
-  }
+  // VUslide.onchange = function () {
+  sliderDiv.innerHTML = sliderValue;
+  // let slidervalue1 = this.value;
+  console.log(sliderValue);
+  httpGet("http://192.168.4.101/?param0=:&param1=:L:EDP:SUS:PP" + sliderValue);
+  // changeVolume(slidervalue1);
+  // sendEEPROMBodyLEDController(slidervalue1, c);
+  // }
 }
 
 

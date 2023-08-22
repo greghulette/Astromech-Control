@@ -407,6 +407,17 @@ canvas.loaded + .s-loader {
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: black;
 }
+.shadowtext1Line{
+  position:relative;
+  top: -155px;
+  /* left: 60px; */
+  text-align: center;
+  text-shadow: 0 4px 10px black;
+  text-decoration: solid;
+  font-size: 2.25rem;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
 .shadowtext2Lines{
   position:relative;
   top: -155px;
