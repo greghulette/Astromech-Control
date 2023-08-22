@@ -318,11 +318,12 @@ canvas.loaded + .s-loader {
 .gesturesheaders{
   position: absolute;
   width: 700px;
+  top: -50px;
 
 }
 .Gestures_Quick_Reference{
   position: absolute;
-  top: 100px;
+  top: 40px;
   left: -300px;
   width: 1000px;
 }
