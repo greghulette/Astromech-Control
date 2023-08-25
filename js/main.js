@@ -1,4 +1,274 @@
-// const { text } = require("express");
+let port;
+let reader;
+let inputDone;
+let outputDone;
+let inputStream;
+let outputStream;
+
+const log = document.getElementById('log');
+
+const butConnect = document.getElementById('connect-button');
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  butConnect.addEventListener('click', clickConnect);
+
+  // CODELAB: Add feature detection here.
+  const notSupported = document.getElementById('notSupported');
+  notSupported.classList.toggle('hidden', 'serial' in navigator);
+});
+
+
+/**
+ * @name connect
+ * Opens a Web Serial connection to a micro:bit and sets up the input and
+ * output stream.
+ */
+async function connect() {
+  // CODELAB: Add code to request & open port here.
+  port = await navigator.serial.requestPort();
+  // - Wait for the port to open.
+  await port.open({ baudRate: 115200 });
+  // CODELAB: Add code setup the output stream here.
+  banner.classList.add('hidden');
+
+  const encoder = new TextEncoderStream();
+  outputDone = encoder.readable.pipeTo(port.writable);
+  outputStream = encoder.writable;
+  // CODELAB: Send CTRL-C and turn off echo on REPL
+  // writeToStream('\x03', 'echo(false);');
+
+  // CODELAB: Add code to read the stream here.
+  let decoder = new TextDecoderStream();
+  inputDone = port.readable.pipeTo(decoder.writable);
+  inputStream = decoder.readable.pipeThrough(new TransformStream(new LineBreakTransformer()));
+  reader = inputStream.getReader();
+  readLoop();
+
+}
+
+
+/**
+ * @name disconnect
+ * Closes the Web Serial connection.
+ */
+async function disconnect() {
+
+
+  // CODELAB: Close the input stream (reader).
+  if (reader) {
+    await reader.cancel();
+    await inputDone.catch(() => { });
+    reader = null;
+    inputDone = null;
+  }
+  // CODELAB: Close the output stream.
+  if (outputStream) {
+    await outputStream.getWriter().close();
+    await outputDone;
+    outputStream = null;
+    outputDone = null;
+  }
+  // CODELAB: Close the port.
+  await port.close();
+  port = null;
+}
+
+var banner = document.getElementById('serialBannerID');
+
+/**
+ * @name clickConnect
+ * Click handler for the connect/disconnect button.
+ */
+async function clickConnect() {
+  // CODELAB: Add disconnect code here.
+  if (port) {
+    await disconnect();
+    banner.classList.remove('hidden');
+    // toggleUIConnected(false);
+    return;
+  }
+  // CODELAB: Add connect code here.
+  await connect();
+
+  // CODELAB: Reset the grid on connect here.
+
+  // CODELAB: Initialize micro:bit buttons.
+
+  // toggleUIConnected(true);
+}
+
+
+/**
+ * @name readLoop
+ * Reads data from the input stream and displays it on screen.
+ */
+async function readLoop() {
+  // CODELAB: Add read loop here.
+  while (true) {
+    const { value, done } = await reader.read();
+    if (value) {
+      log.textContent += value + '\r';
+    }
+    if (done) {
+      console.log('[readLoop] DONE', done);
+      reader.releaseLock();
+      break;
+    }
+  }
+}
+
+
+
+
+
+/**
+ * @name writeToStream
+ * Gets a writer from the output stream and send the lines to the micro:bit.
+ * @param  {...string} lines lines to send to the micro:bit
+ */
+function writeToStream(...lines) {
+  // CODELAB: Write to output stream
+  const writer = outputStream.getWriter();
+  lines.forEach((line) => {
+    console.log('[SEND]', line);
+    writer.write(line + '\r');
+  });
+  writer.releaseLock();
+}
+
+
+/**
+
+
+/**
+ * @name LineBreakTransformer
+ * TransformStream to parse the stream into lines.
+ */
+class LineBreakTransformer {
+  constructor() {
+    // A container for holding stream data until a new line.
+    this.container = '';
+  }
+
+  transform(chunk, controller) {
+    // CODELAB: Handle incoming chunk
+    this.container += chunk;
+    const lines = this.container.split('\r\n');
+    this.container = lines.pop();
+    lines.forEach(line => controller.enqueue(line));
+  }
+
+  flush(controller) {
+    // CODELAB: Flush the stream.
+    controller.enqueue(this.container);
+
+  }
+}
+
+
+
+
+
+/**
+
+
+
+/**
+
+
+
+// const connectButton = document.getElementById('connect-button');
+// let port;
+
+// async function disconnect() {
+//   if (getReader()) {
+//     await reader.cancel();
+//     await inputDone.catch(() => { });
+//     reader = null;
+//     inputDone = null;
+//   }
+//   if (outputStream) {
+//     await outputStream.getWriter().close();
+//     await outputDone;
+//     outputStream = null;
+//     outputDone = null;
+//     await port.close();
+//     port = null;
+//   }
+// }
+// // function connect() {
+// if ('serial' in navigator) {
+//   connectButton.addEventListener('click', async function () {
+//     if (port) {
+//       await disconnect();
+
+//       // port.close();
+//       // port = undefined;
+
+//       // connectButton.innerText = '🔌 Connect';
+//       // document.querySelector('figure').classList.replace('bounceIn', 'fadeOut');
+//     }
+//     else {
+//       getReader();
+//     }
+//   });
+
+//   connectButton.disabled = false;
+// }
+// // }
+
+// async function getReader() {
+
+//   port = await navigator.serial.requestPort();
+
+//   await port.open({ baudRate: 115200 });
+
+//   connectButton.innerText = '🔌 Disconnect';
+//   // document.querySelector('figure').classList.remove('fadeOut');
+//   // document.querySelector('figure').classList.add('bounceIn');
+
+//   const appendStream = new WritableStream({
+//     write(chunk) {
+//       lineBuffer += chunk;
+
+//       let lines = lineBuffer.split('\r');
+
+//       if (lines.length > 1) {
+//         lineBuffer = lines.pop();
+//         latestValue = parseInt(lines.pop().trim());
+//       }
+//     }
+//   });
+
+//   port.readable
+//     .pipeThrough(new TextDecoderStream())
+//     .pipeTo(appendStream);
+// }
+
+
+// async function sendString(x) {
+//   let outString = x + '\r'; // get the string to send from the term_input textarea
+//   // document.getElementById("term_input").value = ""; // clear the term_input textarea for the next user input
+
+//   // Get a text encoder, pipe it to the SerialPort object, and get a writer
+//   const textEncoder = new TextEncoderStream();
+//   const writableStreamClosed = textEncoder.readable.pipeTo(port.writable);
+//   const writer = textEncoder.writable.getWriter();
+
+//   // write the outString to the writer
+//   await writer.write(outString);
+//   console.log(outString);
+//   // add the outgoing string to the term_window textarea on its own new line denoted by a ">"
+//   // document.getElementById("term_window").value += "\n>" + outString + "\n";
+
+//   // close the writer since we're done sending for now
+//   writer.close();
+//   await writableStreamClosed;
+// }
+
 
 var dstatus = true;
 function openAllDoorsMS() {
@@ -75,6 +345,24 @@ function scaleCanvas() {
 
   redraw = requestAnimationFrame(canvasDraw);
 }
+
+// function connectSerial() {
+//   document.querySelector('SerialButton').addEventListener('click', async () => {
+//     const port = await navigator.serial.requestPort();
+//   });
+// }
+
+// function connectSerial() {
+//   // - Request a port and open a connection.
+//   port = await navigator.serial.requestPort();
+//   // - Wait for the port to open.
+//   await port.open({ baudrate: 9600 })
+
+//   // document.querySelector('SerialButton').addEventListener('click', async () => {
+//   //   const port = await navigator.serial.requestPort();
+//   // });
+// }
+
 
 function scaleCanvasTouch() {
   if (lastDistance > distance) {
@@ -183,7 +471,7 @@ $("document").ready(function () {
       });
   }
 
-  canvasInit("../Images/R2");
+  canvasInit("../Images/R2D2-Wiring-Diagram.png");
 
   $(".scale").on("click", function () {
     if ($(this).data("scale") === "down") {
@@ -2455,16 +2743,28 @@ function commandNoOptions(y, t, u, z, d) {
   let fullURL;
   var bodyParam = "";
   var domeParam = "";
+  var domeSerialCommand = "";
+  var bodySerialCommand = "";
   var check = getcheckedElementsforBodyController(z);
   console.log("Check: " + check);
-  bodyParam = "&param1=" + BLCommandPrefix + check + y + t;
-
+  // bodyParam = "&param1=" + BLCommandPrefix + check + y + t;
+  bodySerialCommand = BLCommandPrefix + check + y + t;
   if (d == 'hasDome') {
     var checkHP = getcheckedElementsforHPController(z);
-    domeParam = "&param2=" + HPCommandPrefix + checkHP + y;
+    console.log("Check: " + checkHP);
+
+    // domeParam = "&param2=" + HPCommandPrefix + checkHP + y;
+    domeSerialCommand = HPCommandPrefix + checkHP + y;
+    // writeToStream(domeSerialCommand);
+
   };
-  fullURL = bodyParam + domeParam;
-  bodyControllerLEDFunctionExecution(fullURL);
+  let SerialCommand = bodySerialCommand + "\r" + domeSerialCommand;
+  // bodyControllerLEDFunctionExecution(fullURL);
+  // fullURL = bodyParam + domeParam;
+  writeToStream(SerialCommand);
+  // setTimeout(function () { writeToStream(bodySerialCommand) }, 50);
+  // setTimeout(function () { HPLEDFunctionExecution(commandtoSendtoHPController) }, delaySecondHTTPGet);
+
 
 };
 
@@ -6831,3 +7131,9 @@ function HeightSelection100(t) {
   tmp100.classList.add('active');
   getPeriscope('P', '100', 'HeightSpeed');
 }
+
+
+///////////////////////////////////////////////
+// The command I issue on my computer to load the sketch.  
+// "/Users/gregoryhulette/Library/Arduino15/packages/arduino/tools/avrdude/6.3.0-arduino17/bin/avrdude" "-C/Users/gregoryhulette/Library/Arduino15/packages/arduino/tools/avrdude/6.3.0-arduino17/etc/avrdude.conf" -v -V -patmega2560 -cavr109 "-P/dev/cu.usbserial-AB6ZMBRD" -b115200 -D "-Uflash:w:/Users/gregoryhulette/Documents/GitHub/Arduino-Code/AmidalaFirmware/build/arduino.avr.mega/AmidalaFirmware.ino.hex:i"
+///////////////////////////////////////////////

@@ -17,7 +17,12 @@
 </head>
 
 <body scroll="no" >
-  
+  <!-- <button style="position: absolute; left: 25px; top: 875px;" id="connect-button" type="button" disabled>🔌</button> -->
+  <div id="serialBannerID"class="serialBanner "><p class="serialBannerText">serial not connected</p></div>
+  <img src="./Images/serialport.png" class="serialportDashboard" id="connect-button" alt="">
+  <!-- <img src="./Images/serialport.png" class="serialportDashboardDisconnect" id="disconnect-button" alt=""> -->
+
+
   <!-- <div class="stopsign">
     
   </div>
@@ -293,14 +298,14 @@
                     </div>                   
                   </td>
                   <td>
-                    <div class="ButtonBlank" onclick="">
-                      <img id="HomeTab-BLank2" class="homebuttonwidth seethrough"  src="./Images/HomeTab/Button-Blank.png">
-                      <p class="shadowtext2Lines-2"></p>
+                    <div  class="ButtonBlank" onclick="">
+                      <img id="SerialButton" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
+                      <p class="shadowtext2Lines-2">connect serial</p>
                     </div>                    
                   </td>
                   <td>
-                    <div class="ButtonBlank" onclick="animatePeriscope(':PS10')">
-                      <img id="HomeTab-BLank2" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
+                    <div  class="ButtonBlank" onclick="animatePeriscope(':PS10')">
+                      <img id="HomeTab-" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
                       <p class="shadowtext2Lines-2">periscope seq 10</p>
                     </div>                    
                   </td>
@@ -4980,6 +4985,10 @@ id="FrontLogicsTopBlueSelector"
     <div class="menuheader">
       <h1 class="">Settings</h1>
     </div>
+
+      <!-- <button style="position: absolute; left: 25px; top: 875px;" id="connect-button" type="button" disabled>🔌</button> -->
+
+
     <div class="menu-Level-1">
 
 
@@ -5957,6 +5966,11 @@ id="FrontLogicsTopBlueSelector"
 
 $(document).ready(function(){
 
+  if ("serial" in navigator){
+    console.log("Serial Supported");
+  } else {console.log("Serial Not Supported");}
+ 
+  
   $('.menu-Level-0 .menu-Level-0-Links button').on('click', function() {
 
 

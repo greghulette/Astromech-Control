@@ -1,0 +1,9 @@
+{
+    "liverServer.settings.https":
+    {
+        "enable": true,
+        "cert": "/server.crt",
+        "key": "/server.key",
+        "passphrase": "astromech"
+    }
+}

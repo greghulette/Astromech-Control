@@ -305,12 +305,41 @@ canvas.loaded + .s-loader {
   display: block
 }
 
+.serialBanner{
+position: absolute;
+width: 1700px;
+height: 40px;
+border: solid 2px red;
+background-color: red;
+z-index: 1;
+}
 
+.serialBannerText{
+position: relative;
+top: -25px;
+left: 700px;
+color: white;
 
+}
+.serialport{
+  position: absolute;
+  top: 675px;
+  left: -360px;
+  width: 130px;
+}
 
+.serialportDashboard{
+ position: absolute;
+ width: 75px;
+ top: 855px; 
+}
 
-
-
+.serialportDashboardDisconnect{
+  position: absolute;
+  width: 75px;
+  top: 905px; 
+ }
+ 
 
 
 
