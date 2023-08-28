@@ -304,7 +304,16 @@ canvas.loaded + .s-loader {
 .touch canvas.loaded ~ .info:not(.hidden) {
   display: block
 }
+.WiFiSwitch{
+  position: relative;
+  left: 1100px;
+  top: -85px;
+  width: 300px;
+  height: 35px;
+  font-size: 1.75rem;
+  font-family: 'Star Jedi', 'Starjedi', arial, camb;
 
+}
 .serialBanner{
 position: absolute;
 width: 1700px;
