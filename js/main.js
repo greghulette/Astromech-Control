@@ -10,6 +10,10 @@ const log = document.getElementById('log');
 const butConnect = document.getElementById('connect-button');
 
 
+function switchtoWiFi() {
+  document.getElementById('serialBannerID').classList.add('hidden');
+  CommandConnectionSerial = false;
+}
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -45,8 +49,11 @@ async function connect() {
   // CODELAB: Add code to read the stream here.
   let decoder = new TextDecoderStream();
   inputDone = port.readable.pipeTo(decoder.writable);
-  inputStream = decoder.readable.pipeThrough(new TransformStream(new LineBreakTransformer()));
+  inputStream = decoder.readable
+    .pipeThrough(new TransformStream(new LineBreakTransformer()))
+    .pipeThrough(new TransformStream(new JSONTransformer()));
   reader = inputStream.getReader();
+
   readLoop();
 
 }
@@ -94,12 +101,6 @@ async function clickConnect() {
   }
   // CODELAB: Add connect code here.
   await connect();
-
-  // CODELAB: Reset the grid on connect here.
-
-  // CODELAB: Initialize micro:bit buttons.
-
-  // toggleUIConnected(true);
 }
 
 
@@ -111,13 +112,11 @@ async function readLoop() {
   // CODELAB: Add read loop here.
   while (true) {
     const { value, done } = await reader.read();
-    if (value) {
-      log.textContent += value + '\r';
-    }
-    if (done) {
-      console.log('[readLoop] DONE', done);
-      reader.releaseLock();
-      break;
+    if (value && value.JSONDone) {
+      // console.log(value);
+    } else {
+      // log.textContent += value + '\r';
+      console.log(value);
     }
   }
 }
@@ -141,7 +140,56 @@ function writeToStream(...lines) {
   writer.releaseLock();
 }
 
+/**
+ * @name JSONTransformer
+ * TransformStream to parse the stream into a JSON object.
+ */
+class JSONTransformer {
+  transform(chunk, controller) {
+    // CODELAB: Attempt to parse JSON content
+    try {
+      controller.enqueue(JSON.parse(chunk));
+      // console.log("Data is JSON");
+      parseSerialUpdate(chunk);
+    } catch (e) {
+      controller.enqueue(chunk);
+      // const obj = JSON.parse(chunk);
+      // console.log("Data is not JSON");
+      // console.log(obj);
+      console.log(chunk);
 
+    }
+  }
+}
+
+
+
+function parseSerialUpdate(x) {
+  console.log("Parse JSON ogject: ");
+  let parsedInfo = (JSON.parse(x));
+  droidremoteControllerStatus = parsedInfo.droidremoteControllerStatus;
+  droidgatewayControllerStatus = parsedInfo.droidgatewayControllerStatus;
+  relayStatus = parsedInfo.relayStatus;
+  bodyControllerStatus = parsedInfo.bodyControllerStatus;
+  bodyServoControllerStatus = parsedInfo.bodyServoControllerStatus;
+  domeControllerStatus = parsedInfo.domeControllerStatus;
+  domePlateControllerStatus = parsedInfo.domePlateControllerStatus;
+  hpControllerStatus = parsedInfo.hpControllerStatus;
+  batteryPercent = parsedInfo.BatteryPercent;
+  batteryVoltage = parsedInfo.BatteryVoltage;
+  LDPBright = parsedInfo.LDPBright;
+  MaintBright = parsedInfo.MaintBright;
+  CoinBright = parsedInfo.CoinBright;
+  VUBright = parsedInfo.VUBright;
+  VUIntOffset = parsedInfo.VUIntOffset;
+  VUExtOffset = parsedInfo.VUExtOffset;
+  VUIntBaseline = parsedInfo.VUIntBaseline;
+  VUExtBaseline = parsedInfo.VUExtBaseline;
+  // console.log(batteryPercent);
+  updateEEPROMSettings();
+
+
+}
 /**
 
 
@@ -171,10 +219,14 @@ class LineBreakTransformer {
 }
 
 
+function isTouchDevice() {
+  return (('ontouchstart' in window) ||
+    (navigator.maxTouchPoints > 0) ||
+    (navigator.msMaxTouchPoints > 0));
+}
 
 
-
-/**
+/** 
 
 
 
@@ -755,6 +807,7 @@ var hpControllerStatus = false;
 var droidremoteControllerStatus = false;
 var CommandConnectionSerial = false;
 var batteryPercent = 0
+var batteryVoltage = 0.0
 var LDPBright = 0
 var MaintBright = 0
 var VUBright = 0
@@ -776,168 +829,182 @@ var statusQueryLength = 2000;
 var delaySecondHTTPGet = 1250;
 
 function httpGetStatus() {
-  let theStatusURL = "http://192.168.4.101/status"
-  var req = new XMLHttpRequest();
-  req.responseType = 'json';
-  req.open('GET', theStatusURL, true);
-  req.onload = function () {
-    var jsonResponse = req.response;
-    // do something with jsonResponse
-    // console.log(typeof (jsonResponse));
-    // console.log(jsonResponse);
-    // if (jsonResponse.remoteLoRaControllerStatus == "Online") {
-    if (jsonResponse.droidremoteControllerStatus == true) {
+  if (CommandConnectionSerial = false) {
+    let theStatusURL = "http://192.168.4.101/status"
+    var req = new XMLHttpRequest();
+    req.responseType = 'json';
+    req.open('GET', theStatusURL, true);
+    req.onload = function () {
+      var jsonResponse = req.response;
+      // do something with jsonResponse
+      // console.log(typeof (jsonResponse));
+      // console.log(jsonResponse);
+      // if (jsonResponse.remoteLoRaControllerStatus == "Online") {
+      if (jsonResponse.droidremoteControllerStatus == true) {
 
-      // console.log("Body Controller Online");
-      droidremoteControllerStatus = true;
-    } else {
-      // console.log("Droid Remote Offline");
-      droidremoteControllerStatus = false;
+        // console.log("Body Controller Online");
+        droidremoteControllerStatus = true;
+      } else {
+        // console.log("Droid Remote Offline");
+        droidremoteControllerStatus = false;
+      }
+      if (jsonResponse.droidgatewayControllerStatus == true) {
+
+        // console.log("Body Controller Online");
+        droidgatewayControllerStatus = true;
+      } else {
+        // console.log("Body Controller Offline");
+        droidgatewayControllerStatus = false;
+      }
+      if (jsonResponse.bodyControllerStatus == true) {
+
+        // console.log("Body Controller Online");
+        bodyControllerStatus = true;
+      } else {
+        // console.log("Body Controller Offline");
+        bodyControllerStatus = false;
+      }
+      if (jsonResponse.bodyServoControllerStatus == true) {
+        // console.log("Body Servo Controller Online");
+        bodyServoControllerStatus = true;
+
+      } else {
+        // console.log("Body Servo Controller Offline");
+        bodyServoControllerStatus = false;
+      }
+      if (jsonResponse.domeControllerStatus == true) {
+        // console.log("Dome Controller Online");
+        domeControllerStatus = true;
+
+      } else {
+        // console.log("Dome Controller Offline");
+        domeControllerStatus = false;
+      }
+      if (jsonResponse.hpControllerStatus == true) {
+        // console.log("Dome Controller Online");
+        hpControllerStatus = true;
+
+      } else {
+        // console.log("HP Controller Offline");
+        hpControllerStatus = false;
+      }
+      if (jsonResponse.domePlateControllerStatus == true) {
+        // console.log("Persicope Controller Online");
+        domePlateControllerStatus = true;
+      } else {
+        // console.log("Dome Plate Controller Offline");
+        domePlateControllerStatus = false;
+      }
+      if (jsonResponse.hpControllerStatus == true) {
+        // console.log("Persicope Controller Online");
+        hpControllerStatus = true;
+      } else {
+        // console.log("Droid Gateway Offline");
+        hpControllerStatus = false;
+      }
+      if (jsonResponse.relayStatus == true) {
+        // console.log("Persicope Controller Online");
+        relayStatus = true;
+      } else {
+        // console.log("Droid Gateway Offline");
+        relayStatus = false;
+      }
+
+      if (jsonResponse.BL_BatteryVoltage > 0) {
+        // console.log("Dome Controller Online");
+        batteryVoltage = jsonResponse.BL_BatteryVoltage;
+        // console.log(batteryVoltage);
+        document.getElementById('droidBatteryPar').innerText = batteryVoltage.toFixed(2);
+
+      } else {
+        // console.log("No Battery Voltage");
+      }
+      if (jsonResponse.BL_BatteryPercentage > 0) {
+        // console.log("Dome Controller Online");
+        batteryPercent = jsonResponse.BL_BatteryPercentage;
+        // console.log(batteryPercent);
+        document.getElementById('DroidbatteryChargeLevelDiv').innerHTML = batteryPercent;
+
+      } else {
+        document.getElementById('DroidbatteryChargeLevelDiv').innerText = "--";
+
+        // console.log("No Battery percentage");
+      }
+      if (jsonResponse.BL_LDP_Bright > 0) {
+        LDPBright = jsonResponse.BL_LDP_Bright;
+
+      }
+      if (jsonResponse.BL_MAINT_Bright > 0) {
+        MaintBright = jsonResponse.BL_MAINT_Bright;
+
+      }
+      if (jsonResponse.BL_VU_Bright > 0) {
+        VUBright = jsonResponse.BL_VU_Bright;
+
+      }
+      if (jsonResponse.BL_CS_Bright > 0) {
+        CoinBright = jsonResponse.BL_CS_Bright;
+
+      }
+      if (jsonResponse.BL_vuOffsetInt > 0) {
+        VUIntOffset = jsonResponse.BL_vuOffsetInt;
+
+      }
+      if (jsonResponse.BL_vuBaselineInt > 0) {
+        VUIntBaseline = jsonResponse.BL_vuBaselineInt;
+
+      }
+      if (jsonResponse.BL_vuOffsetExt > 0) {
+        VUExtOffset = jsonResponse.BL_vuOffsetExt;
+
+      }
+      if (jsonResponse.BL_vuBaselineExt > 0) {
+        VUExtBaseline = jsonResponse.BL_vuBaselineExt;
+
+      }
+      if (jsonResponse.MP3TriggerVolume >= 0) {
+        mp3TriggerVolume = jsonResponse.MP3TriggerVolume;
+
+      }
+      updateEEPROMSettings();
     }
-    if (jsonResponse.droidgatewayControllerStatus == true) {
-
-      // console.log("Body Controller Online");
-      droidgatewayControllerStatus = true;
-    } else {
-      // console.log("Body Controller Offline");
+    req.onerror = function (error) {
+      // console.log(error);
       droidgatewayControllerStatus = false;
-    }
-    if (jsonResponse.bodyControllerStatus == true) {
-
-      // console.log("Body Controller Online");
-      bodyControllerStatus = true;
-    } else {
-      // console.log("Body Controller Offline");
-      bodyControllerStatus = false;
-    }
-    if (jsonResponse.bodyServoControllerStatus == true) {
-      // console.log("Body Servo Controller Online");
-      bodyServoControllerStatus = true;
-
-    } else {
-      // console.log("Body Servo Controller Offline");
-      bodyServoControllerStatus = false;
-    }
-    if (jsonResponse.domeControllerStatus == true) {
-      // console.log("Dome Controller Online");
-      domeControllerStatus = true;
-
-    } else {
-      // console.log("Dome Controller Offline");
-      domeControllerStatus = false;
-    }
-    if (jsonResponse.hpControllerStatus == true) {
-      // console.log("Dome Controller Online");
-      hpControllerStatus = true;
-
-    } else {
-      // console.log("HP Controller Offline");
-      hpControllerStatus = false;
-    }
-    if (jsonResponse.domePlateControllerStatus == true) {
-      // console.log("Persicope Controller Online");
-      domePlateControllerStatus = true;
-    } else {
-      // console.log("Dome Plate Controller Offline");
-      domePlateControllerStatus = false;
-    }
-    if (jsonResponse.hpControllerStatus == true) {
-      // console.log("Persicope Controller Online");
-      hpControllerStatus = true;
-    } else {
-      // console.log("Droid Gateway Offline");
-      hpControllerStatus = false;
-    }
-    if (jsonResponse.relayStatus == true) {
-      // console.log("Persicope Controller Online");
-      relayStatus = true;
-    } else {
-      // console.log("Droid Gateway Offline");
       relayStatus = false;
+      bodyControllerStatus = false;
+      bodyLEDControllerStatus = false;
+      bodyServoControllerStatus = false;
+      domePlateControllerStatus = false;
+      domeControllerStatus = false;
+      hpControllerStatus = false;
+      batteryPercent = 0;
     }
-
-    if (jsonResponse.BL_BatteryVoltage > 0) {
-      // console.log("Dome Controller Online");
-      var batteryVoltage = jsonResponse.BL_BatteryVoltage;
-      // console.log(batteryVoltage);
-      document.getElementById('droidBatteryPar').innerText = batteryVoltage.toFixed(2);
-
-    } else {
-      // console.log("No Battery Voltage");
-    }
-    if (jsonResponse.BL_BatteryPercentage > 0) {
-      // console.log("Dome Controller Online");
-      batteryPercent = jsonResponse.BL_BatteryPercentage;
-      // console.log(batteryPercent);
-      document.getElementById('DroidbatteryChargeLevelDiv').innerHTML = batteryPercent;
-
-    } else {
-      document.getElementById('DroidbatteryChargeLevelDiv').innerText = "--";
-
-      // console.log("No Battery percentage");
-    }
-    if (jsonResponse.BL_LDP_Bright > 0) {
-      LDPBright = jsonResponse.BL_LDP_Bright;
-      document.getElementById('LDPBrightnessRange').value = LDPBright;
-      document.getElementById('LDPBrightnesssliderAmount').innerHTML = LDPBright;
-    }
-    if (jsonResponse.BL_MAINT_Bright > 0) {
-      MaintBright = jsonResponse.BL_MAINT_Bright;
-      document.getElementById('MaintBrightnessRange').value = MaintBright;
-      document.getElementById('MaintBrightnesssliderAmount').innerHTML = MaintBright;
-    }
-    if (jsonResponse.BL_VU_Bright > 0) {
-      VUBright = jsonResponse.BL_VU_Bright;
-      document.getElementById('VUBrightnessRange').value = VUBright;
-      document.getElementById('VUBrightnesssliderAmount').innerHTML = VUBright;
-    }
-    if (jsonResponse.BL_CS_Bright > 0) {
-      CoinBright = jsonResponse.BL_CS_Bright;
-      document.getElementById('CoinBrightnessRange').value = CoinBright;
-      document.getElementById('CoinBrightnesssliderAmount').innerHTML = CoinBright;
-    }
-    if (jsonResponse.BL_vuOffsetInt > 0) {
-      VUIntOffset = jsonResponse.BL_vuOffsetInt;
-      document.getElementById('IntOffsetParam').value = VUIntOffset;
-      document.getElementById('IntOffsetsliderAmount').innerHTML = VUIntOffset;
-    }
-    if (jsonResponse.BL_vuBaselineInt > 0) {
-      VUIntBaseline = jsonResponse.BL_vuBaselineInt;
-      document.getElementById('IntBaselineParam').value = VUIntBaseline;
-      document.getElementById('IntBaselinesliderAmount').innerHTML = VUIntBaseline;
-    }
-    if (jsonResponse.BL_vuOffsetExt > 0) {
-      VUExtOffset = jsonResponse.BL_vuOffsetExt;
-      document.getElementById('ExtOffsetParam').value = VUExtOffset;
-      document.getElementById('ExtOffsetsliderAmount').innerHTML = VUExtOffset;
-    }
-    if (jsonResponse.BL_vuBaselineExt > 0) {
-      VUExtBaseline = jsonResponse.BL_vuBaselineExt;
-      document.getElementById('ExtBaselineParam').value = VUExtBaseline;
-      document.getElementById('ExtBaselinesliderAmount').innerHTML = VUExtBaseline;
-    }
-    if (jsonResponse.MP3TriggerVolume >= 0) {
-      mp3TriggerVolume = jsonResponse.MP3TriggerVolume;
-      document.getElementById('volumeSliderRange').value = 100 - mp3TriggerVolume;
-      document.getElementById('volumeTextDiv').innerHTML = mp3TriggerVolume;
-    }
-
+    req.send(null)
   }
-  req.onerror = function (error) {
-    // console.log(error);
-    droidgatewayControllerStatus = false;
-    relayStatus = false;
-    bodyControllerStatus = false;
-    bodyLEDControllerStatus = false;
-    bodyServoControllerStatus = false;
-    domePlateControllerStatus = false;
-    domeControllerStatus = false;
-    hpControllerStatus = false;
-    batteryPercent = 0;
-  }
-  req.send(null)
 }
 
+function updateEEPROMSettings() {
+  document.getElementById('LDPBrightnessRange').value = LDPBright;
+  document.getElementById('LDPBrightnesssliderAmount').innerHTML = LDPBright;
+  document.getElementById('MaintBrightnessRange').value = MaintBright;
+  document.getElementById('MaintBrightnesssliderAmount').innerHTML = MaintBright;
+
+  document.getElementById('VUBrightnessRange').value = VUBright;
+  document.getElementById('VUBrightnesssliderAmount').innerHTML = VUBright;
+  document.getElementById('CoinBrightnessRange').value = CoinBright;
+  document.getElementById('CoinBrightnesssliderAmount').innerHTML = CoinBright;
+  document.getElementById('IntOffsetParam').value = VUIntOffset;
+  document.getElementById('IntOffsetsliderAmount').innerHTML = VUIntOffset;
+  document.getElementById('IntBaselineParam').value = VUIntBaseline;
+  document.getElementById('IntBaselinesliderAmount').innerHTML = VUIntBaseline;
+  document.getElementById('ExtOffsetParam').value = VUExtOffset;
+  document.getElementById('ExtOffsetsliderAmount').innerHTML = VUExtOffset;
+  document.getElementById('ExtBaselineParam').value = VUExtBaseline;
+  document.getElementById('ExtBaselinesliderAmount').innerHTML = VUExtBaseline;
+  document.getElementById('volumeSliderRange').value = 100 - mp3TriggerVolume;
+  document.getElementById('volumeTextDiv').innerHTML = mp3TriggerVolume;
+}
 
 
 function checkDomePlateStatus() {
@@ -2716,10 +2783,6 @@ function getCheckedElementUniversal(z) {
 
 
 
-function switchtoWiFi() {
-  document.getElementById('serialBannerID').classList.add('hidden');
-  CommandConnectionSerial = false;
-}
 
 
 
