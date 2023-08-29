@@ -4544,7 +4544,39 @@ id="FrontLogicsTopBlueSelector"
       </div> <!-- end of WigWag-->
       <div class="menu-Level-1-Content" id="HoloProjector">
         <h1 class="menuHeader-Level-1">holo projector</h1>
-        
+         <!-- LDP Selection-->
+         <img id="LDPHoloProjectorBlue" class="r2menupictureLDP1 hidden" name="stripSelectorHoloProjector" onclick="changeImage('LDP', 'HoloProjector')" src="./Images/LEDTab/Selectors/LDPBlue.png">
+         <img id="LDPHoloProjectorGreen" class="r2menupictureLDP1 hidden" name="stripSelectorHoloProjector" onclick="changeImage('LDP', 'HoloProjector')" src="./Images/LEDTab/Selectors/LDPGreen.png">
+         <!-- Coin Slots Selection-->
+         <img id="CoinHoloProjectorBlue" class="r2menupictureCoin hidden" name="stripSelectorHoloProjector" onclick="changeImage('Coin', 'HoloProjector')" src="./Images/LEDTab/Selectors/CoinSlotsBlue.png">
+         <img id="CoinHoloProjectorGreen" class="r2menupictureCoin hidden" name="stripSelectorHoloProjector" onclick="changeImage('Coin', 'HoloProjector')" src="./Images/LEDTab/Selectors/CoinSlotsGreen.png">
+         <!-- Maintenance Selection-->
+         <img id="MaintHoloProjectorBlue" class="r2menupictureMaint hidden" name="stripSelectorHoloProjector" onclick="changeImage('Maint', 'HoloProjector')" src="./Images/LEDTab/Selectors/SkirtBlue.png">
+         <img id="MaintHoloProjectorGreen" class="r2menupictureMaint hidden" name="stripSelectorHoloProjector" onclick="changeImage('Maint', 'HoloProjector')" src="./Images/LEDTab/Selectors/SkirtGreen.png">
+         <!-- Vertical Slots Selection-->
+         <img id="VUHoloProjectorBlue" class="r2menupictureDataPanelVerticalBars hidden" name="stripSelectorHoloProjector" onclick="changeImage('VU', 'HoloProjector')" src="./Images/LEDTab/Selectors/DataPanelVerticalBlue.png">
+         <img id="VUHoloProjectorGreen" class="r2menupictureDataPanelVerticalBars hidden" name="stripSelectorHoloProjector" onclick="changeImage('VU', 'HoloProjector')" src="./Images/LEDTab/Selectors/DataPanelVerticalGreen.png">
+         <!-- Front HP Selection-->
+         <img id="FrontHPHoloProjectorBlue" class="r2menupictureFrontHP " name="stripSelectorHoloProjector" onclick="changeImage('FrontHP', 'HoloProjector')" src="./Images/LEDTab/Selectors/FrontHPBlue.png">
+         <img id="FrontHPHoloProjectorGreen" class="r2menupictureFrontHP hidden" name="stripSelectorHoloProjector" onclick="changeImage('FrontHP', 'HoloProjector')" src="./Images/LEDTab/Selectors/FrontHPGreen.png">
+         <!--Top HP Selection-->
+         <img id="TopHPHoloProjectorBlue" class="r2menupictureTopHP " name="stripSelectorHoloProjector" onclick="changeImage('TopHP', 'HoloProjector')" src="./Images/LEDTab/Selectors/TopHPBlue.png">
+         <img id="TopHPHoloProjectorGreen" class="r2menupictureTopHP hidden" name="stripSelectorHoloProjector" onclick="changeImage('TopHP', 'HoloProjector')" src="./Images/LEDTab/Selectors/TopHPGreen.png">
+         <!-- Rear HP Selection-->
+         <img id="RearHPHoloProjectorBlue" class="r2menupictureRearHP  " name="stripSelectorHoloProjector" onclick="changeImage('RearHP', 'HoloProjector')" src="./Images/LEDTab/Selectors/RearHPBlue.png">
+         <img id="RearHPHoloProjectorGreen" class="r2menupictureRearHP hidden" name="stripSelectorHoloProjector" onclick="changeImage('RearHP', 'HoloProjector')" src="./Images/LEDTab/Selectors/RearHPGreen.png">   
+         <!-- Data Panel Logics -->    
+         <img id="CBIHoloProjectorBlue" class="r2menupictureCBI hidden" name="stripSelectorHoloProjector" onclick="changeImage('CBI', 'HoloProjector')" src="./Images/Body/CBIDoorBlue.png">
+         <img id="CBIHoloProjectorGreen" class="r2menupictureCBI hidden" name="stripSelectorHoloProjector" onclick="changeImage('CBI', 'HoloProjector')" src="./Images/Body/CBIDoorGreen.png">
+         <!-- CBI Panel Logics -->    
+         <img id="DPHoloProjectorBlue" class="r2menupictureDataPanelLED1 hidden" name="stripSelectorHoloProjector" onclick="changeImage('DP', 'HoloProjector')" src="./Images/Body/DataPanelLEDsBlue.png">
+         <img id="DPHoloProjectorGreen" class="r2menupictureDataPanelLED1 hidden" name="stripSelectorHoloProjector" onclick="changeImage('DP', 'HoloProjector')" src="./Images/Body/DataPanelLEDsGreen.png"> 
+          <!-- Select All Selection-->
+          <img id="checkmarkall" class="selectALLpic " onclick="selectALLStrips('HoloProjector', 'hasDome', )" src="./Images/LEDTab/Selectors/Button-Select-All.png">
+          <img id="checkmarkallHoloProjector" class="checkmarkall hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+            <!-- Select None Selection-->
+            <img id="checkmarkNone" class="selectNonepic " onclick="selectNoneStrips('HoloProjector', 'hasDome',)" src="./Images/LEDTab/Selectors/Button-Select-None.png">
+            <img id="checkmarknoneHoloProjector" class="checkmarknone hidden" src="./Images/LEDTab/Selectors/checkmark.png">
 
         <div class="menu-Level-2">
 
@@ -4567,10 +4599,25 @@ id="FrontLogicsTopBlueSelector"
                 </select>
                 <br />
                 <br />
-                <a href="#" onclick="commandOneColorHP('02','HPColorChoiceColorSelect', 'checkmarkapplyRadarEye')" class="applyButton1"></a>
+ <!-- Apply Button-->
+ <div id="KnightRiderColorChoiceApply" class="applyButton" onclick="commandSingleColor('02','1','HPColorChoiceColorSelect', 'checkmarkapplyHoloProjector', 'HoloProjector', 'hasDome')">
+  <img id="ColorWheelLink" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+  <p class="shadowtext1LineLED">apply</p>
+</div>
+<!-- Off Button-->
+<div id="KnightRiderColorChoiceOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffHoloProjector', 'HoloProjector', 'noDome')">
+<img id="ColorWheelLink" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+  <p class="shadowtext1LineLED">off</p>
+</div>
+</form>
+<img id="checkmarkapplyHoloProjector" class="checkmarkapply hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+<img id="checkmarkoffHoloProjector" class="checkmarkoff hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+
+
+                <!-- <a href="#" onclick="commandSingleColor('02','HPColorChoiceColorSelect', 'checkmarkapplyRadarEye')" class="applyButton1"></a>
                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff()"  class="applyButtonoff"></img>
               </form>
-              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyRadarEye">
+              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyRadarEye"> -->
             </div><!--end of ColorPickerdiv div-->
           </div> <!-- end of Level 2 Conetent Wig Wag-->
 

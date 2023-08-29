@@ -37,6 +37,9 @@ var SerialHPPrefix = ":EHP:H"
 var RADHPrefix = ":EBC:R"
 var HCRCHannel = 1
 
+var statusQueryLength = 2000
+var delaySecondHTTPGet = 1250
+
 
 var doorStateBody1 = false;
 var doorStateBody2 = false;
@@ -144,6 +147,9 @@ var imgArrayAutoSequence = [];
 //Equalizer stuff
 var checkedItemsEqualizer = new Array();
 var imgArrayEqualizer = [];
+//Equalizer stuff
+var checkedItemsHoloProjector = new Array();
+var imgArrayHoloProjector = [];
 //Misc arrays
 var checkedItems = new Array();
 var servoCheckedItems = new Array();
@@ -310,8 +316,9 @@ class JSONTransformer {
 
 
 function parseSerialUpdate(x) {
-  console.log("Parse JSON ogject: ");
+  // console.log("Parse JSON ogject: ");
   let parsedInfo = (JSON.parse(x));
+  console.log(parsedInfo);
   droidremoteControllerStatus = parsedInfo.droidremoteControllerStatus;
   droidgatewayControllerStatus = parsedInfo.droidgatewayControllerStatus;
   relayStatus = parsedInfo.relayStatus;
@@ -503,8 +510,7 @@ $("document").ready(function () {
 
 
 
-var statusQueryLength = 2000;
-var delaySecondHTTPGet = 1250;
+
 
 function httpGetStatus() {
   if (CommandConnectionSerial == false) {
@@ -2181,6 +2187,8 @@ function getCheckedElementUniversal(z) {
   else if (z == "AutoSequence") { var arrayCheckedItems = checkedItemsAutoSequence; }
   else if (z == "Equalizer") { var arrayCheckedItems = checkedItemsEqualizer; }
   else if (z == "CBIDP") { var arrayCheckedItems = checkedItemsCBIDP; }
+  else if (z == "HoloProjector") { var arrayCheckedItems = checkedItemsHoloProjector; }
+
 
 
   var imgArray = document.getElementsByName('stripSelector' + z);
@@ -2428,7 +2436,8 @@ function getcheckedElementsforBodyController(z) {
   else if (z == "DualPulse") { var arrayName2 = checkedItemsDualPulse.slice(); }
   else if (z == "AutoSequence") { var arrayName2 = checkedItemsAutoSequence.slice(); }
   else if (z == "Equalizer") { var arrayName2 = checkedItemsEqualizer.slice(); }
-  else if (z == "CBIDP") { var arrayCheckedItems = checkedItemsCBIDP.slice(); }
+  else if (z == "CBIDP") { var arrayName2 = checkedItemsCBIDP.slice(); }
+  else if (z == "HoloProjector") { var arrayName2 = checkedItemsHoloProjector.slice(); }
 
   // console.log(arrayName2);
   var checkLDP = "LDP" + z + "Green";
@@ -2551,6 +2560,8 @@ function getcheckedElementsforHPController(z) {
   else if (z == "DualPulse") { var arrayHP = checkedItemsDualPulse.slice(); }
   else if (z == "AutoSequence") { var arrayHP = checkedItemsAutoSequence.slice(); }
   else if (z == "Equalizer") { var arrayHP = checkedItemsEqualizer.slice(); }
+  else if (z == "CBIDP") { var arrayHP = checkedItemsCBIDP.slice(); }
+  else if (z == "HoloProjector") { var arrayHP = checkedItemsHoloProjector.slice(); }
 
 
   var checkFrontHP = "FrontHP" + z + "Green";
