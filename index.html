@@ -248,7 +248,7 @@
                     </div>
                   </td>
                   <td>
-                    <div class="ButtonBlank" onclick="animateSequence('EBS:D118');allCloseServoFormatting();">
+                    <div class="ButtonBlank" onclick="animateSequence('A12');allCloseServoFormatting();">
                       <img id="HomeTab-BLank2" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
                       <p class="shadowtext2Lines-2">drawer wave</p>
                     </div>                  
@@ -260,7 +260,7 @@
                     </div>
                   </td>
                   <td>
-                    <div class="ButtonBlank" onclick="animateServo('D306B312000400000050');allCloseServoFormatting();">
+                    <div class="ButtonBlank" onclick="animateSequence('A13');allCloseServoFormatting();">
                       <img id="HomeTabAllClose" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
                       <p class="shadowtext2Lines-2">o/c easing</p>
                     </div>  
@@ -268,13 +268,13 @@
                 </tr>
                 <tr>
                   <td>
-                    <div class="ButtonBlank" onclick="playHCRWave('0001')">
+                    <div class="ButtonBlank" onclick="animateSequence('A15')">
                     <img id="HomeTab-Blank3" class="homebuttonwidth  "  src="./Images/HomeTab/Button-Blank.png">
                     <p class="shadowtext2Lines-2">star wars theme</p>
                   </div>
                   </td>
                   <td>
-                    <div class="ButtonBlank" onclick="playHCRWave('0002')">
+                    <div class="ButtonBlank" onclick="animateSequence('A16')">
                       <img id="HomeTab-Blank4" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
                       <p class="shadowtext1Line">vader theme</p>
                     </div>
@@ -286,7 +286,7 @@
                     </div>
                   </td>
                   <td>
-                    <div class="ButtonBlank" onclick="animatePeriscope(':PS2')">
+                    <div class="ButtonBlank" onclick="animateSequence('A17')">
                       <img id="HomeTab-BLank2" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
                       <p class="shadowtext2Lines-2">periscope seq 2</p>
                     </div>                    
@@ -300,19 +300,19 @@
                     </div>                    
                   </td>
                   <td>
-                    <div class="ButtonBlank" onclick="">
-                      <img id="HomeTab-BLank2" class="homebuttonwidth seethrough"  src="./Images/HomeTab/Button-Blank.png">
-                      <p class="shadowtext2Lines-2"></p>
+                    <div class="ButtonBlank" onclick="animateSequence('A09')">
+                      <img id="HomeTab-BLank2" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
+                      <p class="shadowtext2Lines-2">toggle doors</p>
                     </div>                   
                   </td>
                   <td>
-                    <div  class="ButtonBlank" onclick="">
-                      <img id="SerialButton" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
-                      <p class="shadowtext2Lines-2">connect serial</p>
+                    <div  class="ButtonBlank" onclick="animateSequence('')">
+                      <img id="SerialButton" class="homebuttonwidth seethrough"  src="./Images/HomeTab/Button-Blank.png">
+                      <p class="shadowtext2Lines-2"></p>
                     </div>                    
                   </td>
                   <td>
-                    <div  class="ButtonBlank" onclick="animatePeriscope(':PS10')">
+                    <div  class="ButtonBlank" onclick="animateSequence('A18')">
                       <img id="HomeTab-" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
                       <p class="shadowtext2Lines-2">periscope seq 10</p>
                     </div>                    
@@ -320,13 +320,13 @@
                 </tr>
                 <tr>
                   <td>
-                    <div class="ButtonBlank" onclick="animateSequence('LE98')">
+                    <div class="ButtonBlank" onclick="animateSequence('A19')">
                       <img id="HomeTab-BLank2" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
                       <p class="shadowtext">light's off</p>
                     </div>                    
                   </td>
                   <td>
-                    <div class="ButtonBlank" onclick="animateSequence('LK99')">
+                    <div class="ButtonBlank" onclick="animateSequence('A20')">
                       <img id="HomeTab-BLank2" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
                       <p class="shadowtext">light's on</p>
                     </div>                   
@@ -4591,10 +4591,10 @@ id="FrontLogicsTopBlueSelector"
 
                 <br />
                 <br />
-                <a href="#" onclick="batteryLevel()" class="applyButton1"></a>
-                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff()"  class="applyButtonoff"></img>
+                <!-- <a href="#" onclick="batteryLevel()" class="applyButton1"></a>
+                <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff()"  class="applyButtonoff"></img> -->
               </form>
-              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyRadarEye">
+              <!-- <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyRadarEye"> -->
             </div><!--end of ColorPickerdiv div-->
           </div> <!-- end of Level 2 Conetent Wig Wag-->
 
@@ -5399,17 +5399,6 @@ id="FrontLogicsTopBlueSelector"
           <input type="range" id="PeriscopeHeightSlider" class="slider" min="0" max="100" step="5" value="0" onchange="periscopeHeightSliderFunction('PeriscopeHeightSlider','PeriscopeHeightSliderValue')">
           <div class="PeriscopeHeightSliderValue" id="PeriscopeHeightSliderValue">0</div>
       </div>
-      <!-- <img src="Images/Buttons/Button-Height-0-Grey.png" class="Height0 periscopeheightwidth" onclick="HeightSelection0('0')" alt="" id="Height0">
-      <img src="Images/Buttons/Button-Height-10-Grey.png" class="Height10 periscopeheightwidth" onclick="HeightSelection10()" alt="" id="Height10">
-      <img src="Images/Buttons/Button-Height-20-Grey.png"" class="Height20 periscopeheightwidth" alt=""id="Height20"onclick="HeightSelection20('20')">
-      <img src="Images/Buttons/Button-Height-30-Grey.png"" class="Height30 periscopeheightwidth" alt=""id="Height30"onclick="HeightSelection30('30')">
-      <img src="Images/Buttons/Button-Height-40-Grey.png"" class="Height40 periscopeheightwidth" alt=""id="Height40"onclick="HeightSelection40('40')">
-      <img src="Images/Buttons/Button-Height-50-Grey.png"" class="Height50 periscopeheightwidth" alt=""id="Height50"onclick="HeightSelection50('50')">
-      <img src="Images/Buttons/Button-Height-60-Grey.png"" class="Height60 periscopeheightwidth" alt=""id="Height60"onclick="HeightSelection60('60')">
-      <img src="Images/Buttons/Button-Height-70-Grey.png"" class="Height70 periscopeheightwidth" alt=""id="Height70"onclick="HeightSelection70('70')">   
-      <img src="Images/Buttons/Button-Height-80-Grey.png"" class="Height80 periscopeheightwidth" alt=""id="Height80"onclick="HeightSelection80('80')">
-      <img src="Images/Buttons/Button-Height-90-Grey.png"" class="Height90 periscopeheightwidth" alt=""id="Height90"onclick="HeightSelection90('90')">
-      <img src="Images/Buttons/Button-Height-100-Grey.png"" class="Height100 periscopeheightwidth" alt=""id="Height100"onclick="HeightSelection100('100')">  -->
       <p class="HeightSpeedText">speed</p>
       <!-- <input  class="HeightSpeed" type="text" name="RotateCounterClockwiseRelative" id="RotateCounterClockwiseRelative" value="100"> -->
 
@@ -5436,15 +5425,15 @@ id="FrontLogicsTopBlueSelector"
     <div style="border: 2px solid white" class="periscopeRotationControl">
       <h3 class="PeriscopeRotateHeader">rotation</h3>
       
-         <input class="RotateClockwiseRelativeText" type="text" name="RotateClockwiseRelative" id="RotateClockwiseRelative" value="90">
-        <img src="Images/Buttons/Button-Periscope-90deg-CW-.png" class="rotateCWPicturePeriscope homebuttonwidth2" alt="image for the dome" onclick="getPeriscope('D','RotateClockwiseRelative','RotateSpeed')">
+         <input class="RotateClockwiseRelativeText" type="text" name="RotateClockwiseRelative" id="RotateClockwiseRelative" value=90>
+        <img src="Images/Buttons/Button-Periscope-90deg-CC-.png" class="rotateCWPicturePeriscope homebuttonwidth2" alt="image for the dome" onclick="getPeriscope('D','RotateCounterClockwiseRelative','RotateSpeed')">
   
        <input type="submit" onclick="ESP32SendCommand('ESP32SelectionBox', 'ESP32CommandTextBox')"name="" value="" style="display: none">
 
   
 
       
-      <img  src="Images/Buttons/Button-Periscope-90deg-CC-.png" class=" rotateCCPicturePeriscope homebuttonwidth2" alt="image for the dome" onclick="getPeriscope('D','RotateCounterClockwiseRelative','RotateSpeed')">
+      <img  src="Images/Buttons/Button-Periscope-90deg-CW-.png" class=" rotateCCPicturePeriscope homebuttonwidth2" alt="image for the dome" onclick="getPeriscope('D','RotateClockwiseRelative','RotateSpeed')">
       <input  class="RotateCounterClockwiseRelativeText" type="text" name="RotateCounterClockwiseRelative" id="RotateCounterClockwiseRelative" value="90">
 
       
