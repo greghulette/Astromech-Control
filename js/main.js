@@ -1507,7 +1507,7 @@ function ToggleSingleDoor(b, c, u) {
     let fullBodyServoURL = bodyServoCommandParam
     bodyServoFunctionExecution(fullBodyServoURL);
   } else {
-    let bodyServoSerialCommand = SerialLoRaPrefix + "EBS:D" + b + z + c + "E" + easingMethodSelection + varspeedMinText + varspeedMaxText;
+    let bodyServoSerialCommand = SerialLoRaPrefix + ":EBS:D" + b + z + c + "E" + easingMethodSelection + varspeedMinText + varspeedMaxText;
     writeToStream(bodyServoSerialCommand);
   }
 }
@@ -1804,7 +1804,7 @@ function animateSequence(t) {
     console.log(animationFullURL);
     httpGet(animationFullURL);
   } else {
-    let animationSerialCommand = SerialLoRaPrefix + "EBC:" + t;
+    let animationSerialCommand = SerialLoRaPrefix + ":EBC:" + t;
     writeToStream(animationSerialCommand);
   }
 }
@@ -1833,7 +1833,7 @@ function playEmotion(a, b) {
     var playSoundFullPURL = playsoundURL + emotion + "," + emotionLevel;
     httpGet(playSoundFullPURL);
   } else {
-    let soundSerialCommand = SerialLoRaPrefix + ":EBC:M04" + emotion + "," + emotionLevel;
+    let soundSerialCommand = SerialLoRaPrefix + ":EBC:M04," + emotion + "," + emotionLevel;
     writeToStream(soundSerialCommand);
   }
 
@@ -2300,6 +2300,39 @@ function commandSingleColor(y, t, z, u, x, d) {
   }
 
 };
+
+function commandSingleColor(y, t, z, u, x, d) {
+  let colorValues = getcolor1(z);
+  var checkmark = document.getElementById(u)
+  checkmark.classList.remove('hidden');
+  setTimeout(function () { checkmark.classList.add('hidden') }, 2000);
+  let fullURL;
+  let bodyParam = "";
+  let domeParam = "";
+  var domeSerialCommand = "";
+  var bodySerialCommand = "";
+  var check = getcheckedElementsforBodyController(x);
+  console.log("Check: " + check);
+  bodyParam = "&param1=" + BLCommandPrefix + check + y + t + colorValues;
+  bodySerialCommand = SerialBCPrefix + check + y + t + colorValues;
+
+  if (d == 'hasDome') {
+    var checkHP = getcheckedElementsforHPController(x);
+    domeParam = "&param2=" + HPCommandPrefix + checkHP + y + colorValues;
+    domeSerialCommand = SerialHPPrefix + checkHP + y + colorValues;
+
+  };
+  if (CommandConnectionSerial == true) {
+    let SerialCommand = SerialLoRaPrefix + bodySerialCommand + "." + domeSerialCommand + "\r";
+    writeToStream(SerialCommand);
+
+  } else {
+    fullURL = bodyParam + domeParam;
+    bodyControllerLEDFunctionExecution(fullURL);
+  }
+
+};
+
 
 
 function commandTwoColorswithSpeed(a, b, c, d, u, x) {

@@ -1,19 +1,12 @@
 Features or ESP32's 
-10. Figure out how to updated code to Arduinos via the ESP32's 
-13. Figure out how to get status of remote boards (ESP initially and then eventually Arduinos/Stealth)
-
+1.
 
 
 To-Do for website
-1. create icons for camera, PSI's, and all dome panels
-4. Add RSSI for LoRa Link
-5. 
-6. 
-10. Fix all Logics to work with new ESP system (Completed only Knight Rider and Rainbow so far)
-11. Add RSeries full control functionality
-12. dim pulse 1, 2, 3 off button
-13. add doem logics and psi to short circuit
-
+1. create icons for camera, PSI's, and rseries
+2. Add RSSI for LoRa Link
+3. Add RSeries full control functionality
+4. Add functionality to
 
 
 
