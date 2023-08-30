@@ -1,19 +1,35 @@
 Features or ESP32's 
-1.
+1. debug reason why the website commands don't always perform action
+2. Implement queue for all ESP32 boards 
+3. Send confirmation of command recieved
+4. Extend the PSI short circuit sequence to match the other boards 
 
 
 To-Do for website
-1. create icons for camera, PSI's, and rseries
-2. Add RSSI for LoRa Link
-3. Add RSeries full control functionality
-4. Add functionality to
+1. debug reason why the website commands don't always perform action
+2. create icons for camera, PSI's, and rseries
+3. Add RSSI for LoRa Link
+4. Add RSeries full control functionality
+5.
 
 
+To-Do for R2
+1. Locktight pulley on feet Motors 
+2. Mount and wire the Preamp and label wires
+3. mount and wire the bluetooth receiver and label wires 
+
+To-Do for Remote
+1. model 4 pin connector for the back shell 
+2. Identify 180 degree micro usb connector for ESP connection
 
 
+Sequence Ideas:
+1. add Wave utility arms to respond to kids that wave to R2
+2. add Persicope sequence to look like it's easing with the doors opening and closing 
+3. add periscope and dome to the short circuit sequence and maybe radar eye 
+4. 
 
-
-
+commands to reflash the stealth
 avrdude -p atmega2560 -P /dev/cu.usbserial-AB6ZMBRD -c avr109 -b 115200 -U flash:w:SRC_1_0_15.hex
 
 "/Users/gregoryhulette/Library/Arduino15/packages/arduino/tools/avrdude/6.3.0-arduino17/bin/avrdude" "-C/Users/gregoryhulette/Library/Arduino15/packages/arduino/tools/avrdude/6.3.0-arduino17/etc/avrdude.conf" -v -V -patmega2560 -cavr109 "-P/dev/cu.usbserial-AB6ZMBRD" -b115200 -D "-Uflash:w:/private/var/folders/dv/fmc3qlt9101c_mfjbl19twzw0000gn/T/arduino/sketches/BCC4639460B6EEFDB3F43E9F047B0A72/AmidalaFirmware.ino.hex:i"

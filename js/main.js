@@ -2248,7 +2248,7 @@ function commandNoOptions(y, t, u, z, d) {
   var domeSerialCommand = "";
   var bodySerialCommand = "";
   var check = getcheckedElementsforBodyController(z);
-  console.log("Check: " + check);
+  // console.log("Check: " + check);
   bodyParam = "&param1=" + BLCommandPrefix + check + y + t;
   bodySerialCommand = SerialBCPrefix + check + y + t;
   if (d == 'hasDome') {
@@ -2280,7 +2280,7 @@ function commandSingleColor(y, t, z, u, x, d) {
   var domeSerialCommand = "";
   var bodySerialCommand = "";
   var check = getcheckedElementsforBodyController(x);
-  console.log("Check: " + check);
+  // console.log("Check: " + check);
   bodyParam = "&param1=" + BLCommandPrefix + check + y + t + colorValues;
   bodySerialCommand = SerialBCPrefix + check + y + t + colorValues;
 
@@ -2300,6 +2300,20 @@ function commandSingleColor(y, t, z, u, x, d) {
   }
 
 };
+function commandOneColorAndSpeedRadarEye(y, t, z, u) {
+  let sliderValue = getSliderValue(t);
+  let colorValues1 = getcolor1(z);
+  document.getElementById(u).src = "Images/checkmark.png";
+  setTimeout(function () { document.getElementById(u).src = "Images/blankcheckmark.png"; }, 2000)
+  var radarEyeCommand = "R" + y + colorValues1 + sliderValue;
+  // console.log(radarEyeCommand);
+  if (CommandConnectionSerial == false) {
+    radarEyeCommandExecution(radarEyeCommand);
+  } else {
+    let radarEyeSerialCommand = SerialLoRaPrefix + ":EDC:R" + y + colorValues1 + sliderValue;
+    writeToStream(radarEyeSerialCommand);
+  }
+}
 
 function commandSingleColor(y, t, z, u, x, d) {
   let colorValues = getcolor1(z);
@@ -2312,7 +2326,7 @@ function commandSingleColor(y, t, z, u, x, d) {
   var domeSerialCommand = "";
   var bodySerialCommand = "";
   var check = getcheckedElementsforBodyController(x);
-  console.log("Check: " + check);
+  // console.log("Check: " + check);
   bodyParam = "&param1=" + BLCommandPrefix + check + y + t + colorValues;
   bodySerialCommand = SerialBCPrefix + check + y + t + colorValues;
 
@@ -2348,7 +2362,7 @@ function commandTwoColorswithSpeed(a, b, c, d, u, x) {
   var bodySerialCommand = "";
 
   var check = getcheckedElementsforBodyController(x);
-  console.log("Check: " + check);
+  // console.log("Check: " + check);
   bodyParam = "&param1=" + BLCommandPrefix + check + a + sliderValue + colorValues1 + colorValues2;
   bodySerialCommand = SerialBCPrefix + check + a + sliderValue + colorValues1 + colorValues2;
 
@@ -2375,7 +2389,7 @@ function commandOneColorAndSpeed(y, t, z, u, x, d) {
   var domeSerialCommand = "";
   var bodySerialCommand = "";
   var check = getcheckedElementsforBodyController(x);
-  console.log("Check: " + check);
+  // console.log("Check: " + check);
   bodyParam = "&param1=" + BLCommandPrefix + check + y + sliderValue + colorValues1;
   bodySerialCommand = SerialBCPrefix + check + y + sliderValue + colorValues1;
 
@@ -2411,7 +2425,7 @@ function commandTwoColorsNoSlider(y, t, z, s, u, x, d) {
 
   var bodySerialCommand = "";
   var check = getcheckedElementsforBodyController(x);
-  console.log("Check: " + check);
+  // console.log("Check: " + check);
   bodyParam = "&param1=" + BLCommandPrefix + check + y + t + colorValues1 + colorValues2;
   bodySerialCommand = SerialBCPrefix + check + y + colorValues1 + colorValues2;
 
@@ -2480,51 +2494,51 @@ function getcheckedElementsforBodyController(z) {
   var checkCBI = "CBI" + z + "Green";
   var checkDP = "DP" + z + "Green";
   // console.log("Arrray test: " + arrayName2[0]);
-  console.log(arrayName2.length);
+  // console.log(arrayName2.length);
   for (var b = 0; b < arrayName2.length; b++) {
     if (arrayName2[b] === checkLDP) {
-      console.log("L selected");
+      // console.log("L selected");
       l = true;
-      console.log(l);
+      // console.log(l);
     } else { };
 
     if (arrayName2[b] === checkCoin) {
-      console.log("C selected");
+      // console.log("C selected");
       c = true;
-      console.log(c);
+      // console.log(c);
     } else { };
 
     if (arrayName2[b] === checkVU) {
-      console.log("V selected");
+      // console.log("V selected");
       v = true;
-      console.log(v);
+      // console.log(v);
     } else { };
 
     if (arrayName2[b] === checkMaint) {
-      console.log("M selected");
+      // console.log("M selected");
       m = true;
-      console.log(m);
+      // console.log(m);
     } else { };
 
     if (arrayName2[b] === checkCBI) {
-      console.log("I selected");
+      // console.log("I selected");
       i = true;
-      console.log(m);
+      // console.log(m);
     } else { };
     if (arrayName2[b] === checkDP) {
       console.log("D selected");
       d = true;
-      console.log(m);
+      // console.log(m);
     } else { };
 
   }
 
-  console.log("LDP: " + l);
-  console.log("Maint: " + m);
-  console.log("Coin: " + c);
-  console.log("VU: " + v);
-  console.log("CBI: " + i);
-  console.log("DataPanel: " + d);
+  // console.log("LDP: " + l);
+  // console.log("Maint: " + m);
+  // console.log("Coin: " + c);
+  // console.log("VU: " + v);
+  // console.log("CBI: " + i);
+  // console.log("DataPanel: " + d);
   // if (l == undefined) { l = false; };
   // if (m == undefined) { m = false; };
   // if (c == undefined) { c = false; };
@@ -2604,29 +2618,29 @@ function getcheckedElementsforHPController(z) {
   console.log(arrayHP.length);
   for (var b = 0; b < arrayHP.length; b++) {
     if (arrayHP[b] === checkFrontHP) {
-      console.log("Front HP selected");
+      // console.log("Front HP selected");
       f = true;
-      console.log(f);
+      // console.log(f);
     } else { };
 
     if (arrayHP[b] === checkTopHP) {
-      console.log("Top HP selected");
+      // console.log("Top HP selected");
       t = true;
-      console.log(t);
+      // console.log(t);
     } else { };
 
     if (arrayHP[b] === checkRearHP) {
-      console.log("Rear HP selected");
+      // console.log("Rear HP selected");
       r = true;
-      console.log(r);
+      // console.log(r);
     } else { };
 
 
   }
 
-  console.log("HP Front: " + f);
-  console.log("HP Top: " + t);
-  console.log("HP Rear: " + r);
+  // console.log("HP Front: " + f);
+  // console.log("HP Top: " + t);
+  // console.log("HP Rear: " + r);
 
 
   if (f == true & t == false & r == false) { return "F0"; }

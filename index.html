@@ -4531,10 +4531,28 @@ id="FrontLogicsTopBlueSelector"
                   value="5"
                   min="0"
                   max="9"
-                /><a href="#" onclick="commandOneColorAndSpeedRadarEye('01','RadarEyeSlider', 'RadarEyeColorChoiceColorSelect', 'checkmarkapplyRadarEye')" class="applyButton1"></a>
+                />
+                              <!-- Apply Button-->
+              <div id="BounceApply" class="applyButton" onclick="commandOneColorAndSpeedRadarEye('01','RadarEyeSlider', 'RadarEyeColorChoiceColorSelect', 'checkmarkapplyRadarEye')"  class="applyButton1"  >
+                <img id="BounceApplyImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+                <p class="shadowtext1LineLED">apply</p>
+              </div>
+              <!-- Off Button-->
+              <div id="BounceOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffRadarEye','RadarEyeSlider', 'hasDome' )">
+                <img id="RBounceOffImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtext1LineLED">off</p>
+            </div>
+
+            </form>
+            <img id="checkmarkapplyRadarEye" class="checkmarkapply hidden" src="./Images/LEDTab/Selectors/checkmark.png">
+            <img id="checkmarkoffRadarEye"   class="checkmarkoff hidden" src="./Images/LEDTab/Selectors/checkmark.png"> 
+                
+                
+                
+                <!-- <a href="#" onclick="commandOneColorAndSpeedRadarEye('01','RadarEyeSlider', 'RadarEyeColorChoiceColorSelect', 'checkmarkapplyRadarEye')" class="applyButton"></a>
                 <img src="Images/Buttons/Button-Off-WhiteNT.png" onclick="commandStripOff()"  class="applyButtonoff"></img>
               </form>
-              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyRadarEye">
+              <img src="Images/blankcheckmark.png" alt="" class="checkmarkapply" id="checkmarkapplyRadarEye"> -->
             </div><!--end of ColorPickerdiv div-->
           </div> <!-- end of Level 2 Conetent Wig Wag-->
 
