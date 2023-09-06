@@ -1098,6 +1098,17 @@ function rdCommand(t) {
   }
 }
 
+function rdCommandAuto(t) {
+  if (CommandConnectionSerial == false) {
+    var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=:&param1=:L:EBC:R%23" + t;
+    console.log(bodyLEDControllerSPURL);
+    httpGet(bodyLEDControllerSPURL);
+  } else {
+    let SerialCommand = SerialLoRaPrefix + RADHPrefix + '#' + t;
+    writeToStream(SerialCommand);
+  }
+}
+
 function rdCommandText(t) {
   let command12 = document.getElementById(t).value
 

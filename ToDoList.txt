@@ -1,22 +1,21 @@
 Features or ESP32's 
-1. debug reason why the website commands don't always perform action
+1. debug reason why the website commands don't always perform action (Might have a work around for this implemented)
 2. Implement queue for all ESP32 boards 
 3. Send confirmation of command recieved
 4. Extend the PSI short circuit sequence to match the other boards 
 
-
 To-Do for website
-1. debug reason why the website commands don't always perform action
+1. debug reason why the website commands don't always perform action (Might have a work around for this implemented)
 2. create icons for camera, PSI's, and rseries
 3. Add RSSI for LoRa Link
 4. Add RSeries full control functionality
-5.
-
+5.Fix auto enable/disable for RADH.  need to use # instead of %23 for serial .
+6. Fix Wiring Diagram Canvas
 
 To-Do for R2
 1. Locktight pulley on feet Motors 
-2. Mount and wire the Preamp and label wires
-3. mount and wire the bluetooth receiver and label wires 
+2. Label new ground loop isolators
+3. 
 
 To-Do for Remote
 1. model 4 pin connector for the back shell 
