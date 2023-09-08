@@ -3,6 +3,7 @@ Features or ESP32's
 2. Implement queue for all ESP32 boards 
 3. Send confirmation of command recieved
 4. Extend the PSI short circuit sequence to match the other boards 
+5. turn off and on cbi and data panel with door openings.
 
 To-Do for website
 1. debug reason why the website commands don't always perform action (Might have a work around for this implemented)
