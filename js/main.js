@@ -413,7 +413,7 @@ $("document").ready(function () {
       .on("touchstart", function () {
         hideTooltip();
       });
-    canvasInit("../Images/R2D2-Wiring-Diagram.png");
+    canvasInit("../Images/Wiring_Diagram/R2D2-Wiring-Diagram.png");
 
   }
 
@@ -464,7 +464,7 @@ $("document").ready(function () {
     })
 
     .on("mousemove touchmove", function (e) {
-      e.preventDefault();
+      // e.preventDefault();
 
       isDragging = true;
 

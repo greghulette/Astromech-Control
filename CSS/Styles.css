@@ -559,10 +559,56 @@ line-height: 2rem;
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: black;
 }
+
+.lightSequenceHeader{
+  position: relative;
+  top: 20px;
+  left: 20px;
+}
+
 .shadowtext2LinesLongLED{
   position:relative;
   top: -90px;
   /* left: -10px; */
+  width: 190px;
+  font-family: 'Star Jedi', 'Starjedi', arial, camb;
+  color: lightyellow;
+  /* left: 60px; */
+  text-align: center;
+  text-shadow: 0 4px 10px black;
+  text-decoration: solid;
+line-height: 1.5rem;
+  font-size: 1.5rem;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
+.lightTableBorder{
+  padding-top: 5px;
+  border: solid 2px white;
+
+}
+.shadowtext2LinesLongStoredSequence{
+  position:relative;
+  top: -100px;
+  /* left: -10px; */
+  width: 190px;
+  font-family: 'Star Jedi', 'Starjedi', arial, camb;
+  color: lightyellow;
+  /* left: 60px; */
+  text-align: center;
+  text-shadow: 0 4px 10px black;
+  text-decoration: solid;
+line-height: 1.5rem;
+  font-size: 1.5rem;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
+
+
+.shadowtextPeriscopeLight{
+  position:relative;
+  top: -90px;
+  left: -20px;
   width: 190px;
   font-family: 'Star Jedi', 'Starjedi', arial, camb;
   color: lightyellow;
@@ -791,6 +837,18 @@ line-height: 2rem;
   position: relative;
   top: -2px;
   left: 0px;
+}
+.buttonwidthPeriscopeLight {
+  width:150px;
+  height: 60px;
+  position: relative;
+  top: -2px;
+  left: 0px;
+}
+.PeriscopeLightTable{
+  position: absolute;
+  top: 570px;
+  left: -350px;
 }
 .soundbuttons{
   position: relative;
@@ -2629,8 +2687,8 @@ left: 100px;
 }
 .RandomHeader{
   position: absolute;
-  top: 530px;
-  left: 500px;
+  top: -60px;
+  left: 35px;
   width: 265px;
 }
 .RotateClockwiseContinous{
@@ -2717,7 +2775,7 @@ left: 10px;
   }
   .RandomPeriscope{
     position: absolute;
-    top: 530px;
+    top: 500px;
     left: 580px;
     border: 2px solid white;
     height: 80px;
@@ -2934,12 +2992,16 @@ left: 10px;
 
 .StoredSequenceDiv{
   position: absolute;
-  top:-90px;
+  top:20px;
   left: 130px;
   /* border: 2px solid white; */
 }
 
-
+.periscopeLight{
+  position: absolute;
+  top: 00px;
+  left: -400px;
+}
 
 .HPServoHeader{
   position: absolute;
@@ -3320,7 +3382,7 @@ width: 100%;
 }
 .periscopePicture{
   position: absolute;
-  height: 625px;
+  height: 525px;
   left: -400px;
   top: 30px;
 

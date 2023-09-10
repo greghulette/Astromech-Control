@@ -3,24 +3,30 @@ Features or ESP32's
 2. Implement queue for all ESP32 boards 
 3. Send confirmation of command recieved
 4. Extend the PSI short circuit sequence to match the other boards 
+<<<<<<< Updated upstream
 5. turn off and on cbi and data panel with door openings.
+=======
+5. CBI battery lights not working.  Figure out why.  
+
+>>>>>>> Stashed changes
 
 To-Do for website
 1. debug reason why the website commands don't always perform action (Might have a work around for this implemented)
 2. create icons for camera, PSI's, and rseries
 3. Add RSSI for LoRa Link
 4. Add RSeries full control functionality
-5.Fix auto enable/disable for RADH.  need to use # instead of %23 for serial .
+5. Add Home and change buttons on periscope tab
 6. Fix Wiring Diagram Canvas
 
 To-Do for R2
-1. Locktight pulley on feet Motors 
-2. Label new ground loop isolators
+1. change pulley for feet motors
+2. 
 3. 
 
 To-Do for Remote
-1. model 4 pin connector for the back shell 
-2. Identify 180 degree micro usb connector for ESP connection
+1. 
+2. 
+3. Test out usb to serial adapter
 
 
 Sequence Ideas:

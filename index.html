@@ -5531,27 +5531,132 @@ id="FrontLogicsTopBlueSelector"
     </div>
 
    <div class="RandomPeriscope">
+    <p class="RandomHeader">random movement</p>
+
     <img src="Images/Buttons/Button-Rotate-RotateRandom-GIMP.png" class=" RotateRandomRotate homebuttonwidth2" alt="image for the dome" onclick="getPeriscope('AR','0','RotateSpeed')">
     <img src="Images/Buttons/Button-Rotate-HeightRandom-GIMP.png" class=" RotateRandomHeight homebuttonwidth2" alt="image for the dome" onclick="getPeriscope('PR','0','HeightSpeed')">
 
 
    </div>
 
-    <dir class="StoredSequenceDiv">
-      <p class="RandomHeader">random movement</p>
-
-      <img class="applyButtonStored" style="position: absolute; top: 120px;"src="Images/Buttons/Button-Stored-Sequence1-GIMP.png" alt="image for the dome" onclick="getPeriscope('S','1','RotateSpeed')">
-      <img class="applyButtonStored" style="position: absolute; top: 200px;"src="Images/Buttons/Button-Stored-Sequence2-GIMP.png" alt="image for the dome" onclick="getPeriscope('S','2','RotateSpeed')">
-      <img class="applyButtonStored" style="position: absolute; top: 280px;"src="Images/Buttons/Button-Stored-Sequence3-GIMP.png" alt="image for the dome" onclick="getPeriscope('S','3','RotateSpeed')">
-      <img class="applyButtonStored" style="position: absolute; top: 360px;"src="Images/Buttons/Button-Stored-Sequence4-GIMP.png" alt="image for the dome" onclick="getPeriscope('S','4','RotateSpeed')">
-      <img class="applyButtonStored" style="position: absolute; top: 440px;"src="Images/Buttons/Button-Stored-Sequence5-GIMP.png" alt="image for the dome" onclick="getPeriscope('S','5','RotateSpeed')">
-      <img class="applyButtonStored" style="position: absolute; top: 520px;"src="Images/Buttons/Button-Stored-Sequence6-GIMP.png" alt="image for the dome" onclick="getPeriscope('S','6','RotateSpeed')">
-
-    </dir>
-
-  
+    <div class="StoredSequenceDiv">
+      <table>
+        <tr>
+          <div class="ButtonBlankLED paddingTopBottom" onclick="getPeriscope('H', '', 'RotateSpeed')">
+            <img id="ColorChangingLink" class="buttonwidthLED"  src="./Images/HomeTab/Button-Blank.png">
+            <p class="shadowtext2LinesLED">home</p>
+          </div> 
+        </tr>
+        <tr>
+          <div class="ButtonBlankLED paddingTopBottom" onclick="getPeriscope('S', '1', 'RotateSpeed')">
+            <img id="ColorChangingLink" class="buttonwidthLED"  src="./Images/HomeTab/Button-Blank.png">
+            <p class="shadowtext2LinesLongStoredSequence">stored sequence 1</p>
+          </div> 
+        </tr>
+        <tr>
+          <div class="ButtonBlankLED paddingTopBottom" onclick="getPeriscope('S', '2', 'RotateSpeed')">
+            <img id="ColorChangingLink" class="buttonwidthLED"  src="./Images/HomeTab/Button-Blank.png">
+            <p class="shadowtext2LinesLongStoredSequence">stored sequence 2</p>
+          </div> 
+        </tr>
+        <tr>
+          <div class="ButtonBlankLED paddingTopBottom" onclick="getPeriscope('S', '3', 'RotateSpeed')">
+            <img id="ColorChangingLink" class="buttonwidthLED"  src="./Images/HomeTab/Button-Blank.png">
+            <p class="shadowtext2LinesLongStoredSequence">stored sequence 3</p>
+          </div> 
+        </tr>
+        <tr>
+          <div class="ButtonBlankLED paddingTopBottom" onclick="getPeriscope('S', '4', 'RotateSpeed')">
+            <img id="ColorChangingLink" class="buttonwidthLED"  src="./Images/HomeTab/Button-Blank.png">
+            <p class="shadowtext2LinesLongStoredSequence">stored sequence 4</p>
+          </div> 
+        </tr>
+        <tr>
+          <div class="ButtonBlankLED paddingTopBottom" onclick="getPeriscope('S', '5', 'RotateSpeed')">
+            <img id="ColorChangingLink" class="buttonwidthLED"  src="./Images/HomeTab/Button-Blank.png">
+            <p class="shadowtext2LinesLongStoredSequence">stored sequence 5</p>
+          </div> 
+        </tr>
+        <tr>
+          <div class="ButtonBlankLED paddingTopBottom" onclick="getPeriscope('S', '6', 'RotateSpeed')">
+            <img id="ColorChangingLink" class="buttonwidthLED"  src="./Images/HomeTab/Button-Blank.png">
+            <p class="shadowtext2LinesLongStoredSequence">stored sequence 6</p>
+          </div> 
+        </tr>
+        <tr>
+          <div class="ButtonBlankLED paddingTopBottom" onclick="getPeriscope('S', '7', 'RotateSpeed')">
+            <img id="ColorChangingLink" class="buttonwidthLED"  src="./Images/HomeTab/Button-Blank.png">
+            <p class="shadowtext2LinesLongStoredSequence">stored sequence 7</p>
+          </div> 
+        </tr>
+      </table>
 
     </div>
+
+    <div class="PeriscopeLightTable">
+      <p class="lightSequenceHeader">light sequences</p>
+      <table class="lightTableBorder">
+        <tr>
+          <td>
+            <div class="buttonwidthPeriscopeLight paddingTopBottom" onclick="getPeriscope('S', '7', 'RotateSpeed')">
+              <img id="ColorChangingLink" class="buttonwidthPeriscopeLight"  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtextPeriscopeLight">off</p>
+            </div> 
+          </td>
+          <td>
+            <div class="buttonwidthPeriscopeLight paddingTopBottom" onclick="getPeriscope('S', '7', 'RotateSpeed')">
+              <img id="ColorChangingLink" class="buttonwidthPeriscopeLight"  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtextPeriscopeLight">cycle</p>
+            </div> 
+          </td>
+          <td>
+            <div class="buttonwidthPeriscopeLight paddingTopBottom" onclick="getPeriscope('S', '7', 'RotateSpeed')">
+              <img id="ColorChangingLink" class="buttonwidthPeriscopeLight"  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtextPeriscopeLight">obi wan</p>
+            </div> 
+          </td>
+          <td>
+            <div class="buttonwidthPeriscopeLight paddingTopBottom" onclick="getPeriscope('S', '7', 'RotateSpeed')">
+              <img id="ColorChangingLink" class="buttonwidthPeriscopeLight"  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtextPeriscopeLight">yoda</p>
+            </div> 
+          </td>
+          </tr>
+          <tr>
+          <td>
+            <div class="buttonwidthPeriscopeLight paddingTopBottom" onclick="getPeriscope('S', '7', 'RotateSpeed')">
+              <img id="ColorChangingLink" class="buttonwidthPeriscopeLight"  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtextPeriscopeLight">sith</p>
+            </div> 
+          </td>
+          <td>
+            <div class="buttonwidthPeriscopeLight paddingTopBottom" onclick="getPeriscope('S', '7', 'RotateSpeed')">
+              <img id="ColorChangingLink" class="buttonwidthPeriscopeLight"  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtextPeriscopeLight">search</p>
+            </div> 
+          </td>
+          <td>
+            <div class="buttonwidthPeriscopeLight paddingTopBottom" onclick="getPeriscope('S', '7', 'RotateSpeed')">
+              <img id="ColorChangingLink" class="buttonwidthPeriscopeLight"  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtextPeriscopeLight">degobah</p>
+            </div> 
+          </td>
+          <td>
+            <div class="buttonwidthPeriscopeLight paddingTopBottom" onclick="getPeriscope('S', '7', 'RotateSpeed')">
+              <img id="ColorChangingLink" class="buttonwidthPeriscopeLight"  src="./Images/HomeTab/Button-Blank.png">
+              <p class="shadowtextPeriscopeLight">sparkle</p>
+            </div> 
+          </td>
+        </tr>
+      </table>
+
+
+    </div>
+
+
+
+
+  </div>
     <div class="menu-Level-0-Content " id="RoamADome">
       <div id="HomeTab" class="">
         <h2 class="menuheadermain">roam-a-dome-home</h2>
@@ -5644,6 +5749,8 @@ id="FrontLogicsTopBlueSelector"
       </div> 
 
     </div>
+
+
     <!-- <div class="RDTextCommandInput">
       <label for="RDTextInput" class="RDTextInputLabel">send command: </label>
       <input type="text" class="RDTextInput" id="RDTextInput">
