@@ -862,7 +862,7 @@ line-height: 2rem;
   position: relative;
   top: -2px;
   left: 0px;
-  border: solid 2px green;
+  /* border: solid 2px green; */
 }
 
 .soundbuttons{
@@ -3009,7 +3009,7 @@ left: 10px;
   position: absolute;
   top:20px;
   left: 130px;
-  border: 2px solid greenyellow;
+  /* border: 2px solid white; */
 }
 
 .periscopeLight{

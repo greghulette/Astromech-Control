@@ -5222,7 +5222,7 @@ id="FrontLogicsTopBlueSelector"
         <label for="ExtOffsetParam" style="position:relative; left:-170px; top:40px;">High</label>
         <label for="ExtOffsetParam" style="position:relative; left:300px; top:40px;">Low</label>
         <input type="hidden" name="param1" id="ExtOffsetParam1" value="">
-        <input class="" type="range" id="ExtOffsetParam" min="1" max="15" step="1" value="" onchange="BrightnessRangeFunc('ExtOffsetParam', 'ExtOffsetsliderAmount', '05')">
+        <input class="" type="range" id="ExtOffsetParam" min="1" max="15" step="1" value="" onchange="BrightnessRangeFunc('ExtOffsetParam', 'ExtOffsetsliderAmount', '08')">
         </div>
         <div class="buttonspacing2" id="ExtOffsetsliderAmount" style="position:absolute; left:190px; top:40px;">--</div>
         </form>
@@ -5237,7 +5237,7 @@ id="FrontLogicsTopBlueSelector"
         <label for="IntBaselineParam" style="position:relative; left:-270px; top:40px;">Low</label>
         <label for="IntBaselineParam" style="position:relative; left:210px; top:40px;">High</label>
         <input type="hidden" name="param1" id="ExtBaselineParam1" value="">
-        <input class="" type="range" id="ExtBaselineParam" min="0" max="255" step="1" value="" onchange="BrightnessRangeFunc('ExtBaselineParam', 'ExtBaselinesliderAmount', '06')">
+        <input class="" type="range" id="ExtBaselineParam" min="0" max="255" step="1" value="" onchange="BrightnessRangeFunc('ExtBaselineParam', 'ExtBaselinesliderAmount', '07')">
         </div>
         <div class="buttonspacing2" id="ExtBaselinesliderAmount" style="position:absolute; left:190px; top:40px;">--</div>
         </form>
@@ -5584,9 +5584,9 @@ id="FrontLogicsTopBlueSelector"
           </div> 
         </tr>
         <tr>
-          <div class="ButtonBlankLED paddingTopBottom"  onclick="periscopeSingleCommand(':PS7')">
+          <div class="ButtonBlankLED paddingTopBottom"  onclick="periscopeSingleCommand(':PS14')">
             <img id="ColorChangingLink" class="buttonwidthLED"  src="./Images/HomeTab/Button-Blank.png">
-            <p class="shadowtext2LinesLongStoredSequence">stored sequence 7</p>
+            <p class="shadowtext2LinesLongStoredSequence">short circuit</p>
           </div> 
         </tr>
       </table>
@@ -5736,6 +5736,10 @@ id="FrontLogicsTopBlueSelector"
       <div class="ButtonBlankLED paddingTopBottom" onclick="rdCommand(':DPS4')">
         <img id="ColorChangingLink" class="buttonwidthLED"  src="./Images/HomeTab/Button-Blank.png">
         <p class="shadowtext1LineLED">Stored 4</p>
+      </div> 
+      <div class="ButtonBlankLED paddingTopBottom" onclick="rdCommand(':DPS14')">
+        <img id="ColorChangingLink" class="buttonwidthLED"  src="./Images/HomeTab/Button-Blank.png">
+        <p class="shadowtext2LinesLED">short circuit</p>
       </div> 
     </div>
 
