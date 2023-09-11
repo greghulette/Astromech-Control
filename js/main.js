@@ -2923,6 +2923,17 @@ function periscopeHeightSliderFunction(a, b) {
   }
 }
 
+function periscopeSingleCommand(s) {
+  if (CommandConnectionSerial == false) {
+    let periscopeESPURL = "http://192.168.4.101/?param0=:&param1=:L:EDP:SUS"
+    let periscopeESPFullURL = periscopeESPURL + s;
+    httpGet(periscopeESPFullURL);
+  } else {
+    let periscopeSerialCommand = SerialLoRaPrefix + ":EDP:SUS" + s;
+    writeToStream(periscopeSerialCommand);
+  }
+
+}
 
 
 

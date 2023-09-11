@@ -560,10 +560,32 @@ line-height: 2rem;
   -webkit-text-stroke-color: black;
 }
 
+
+
+.PeriscopeLightTable{
+  position: absolute;
+  top: 650px;
+  left: -350px;
+   height: 170px;
+  width: 685px;
+
+}
+
 .lightSequenceHeader{
-  position: relative;
-  top: 20px;
+  position: absolute;
+  top: -60px;
   left: 20px;
+  width: 250px;
+  height: 40px;
+  /* border: solid 2px white; */
+}
+
+.lightTableBorder{
+  position: relative;
+  top: 0px;
+  padding-top: 5px;
+  border: solid 2px white;
+
 }
 
 .shadowtext2LinesLongLED{
@@ -582,11 +604,7 @@ line-height: 1.5rem;
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: black;
 }
-.lightTableBorder{
-  padding-top: 5px;
-  border: solid 2px white;
 
-}
 .shadowtext2LinesLongStoredSequence{
   position:relative;
   top: -100px;
@@ -844,12 +862,9 @@ line-height: 2rem;
   position: relative;
   top: -2px;
   left: 0px;
+  border: solid 2px green;
 }
-.PeriscopeLightTable{
-  position: absolute;
-  top: 570px;
-  left: -350px;
-}
+
 .soundbuttons{
   position: relative;
   top: 350px;
@@ -2994,13 +3009,15 @@ left: 10px;
   position: absolute;
   top:20px;
   left: 130px;
-  /* border: 2px solid white; */
+  border: 2px solid greenyellow;
 }
 
 .periscopeLight{
   position: absolute;
   top: 00px;
   left: -400px;
+  border: 2px solid blue;
+
 }
 
 .HPServoHeader{

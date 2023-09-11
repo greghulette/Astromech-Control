@@ -3,7 +3,6 @@ Features or ESP32's
 2. Implement queue for all ESP32 boards 
 3. Send confirmation of command recieved
 4. Extend the PSI short circuit sequence to match the other boards 
-<<<<<<< Updated upstream
 5. turn off and on cbi and data panel with door openings.
 =======
 5. CBI battery lights not working.  Figure out why.  
