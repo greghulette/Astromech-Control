@@ -27,6 +27,7 @@ var VUIntBaseline = 0
 var VUExtOffset = 0
 var VUExtBaseline = 0
 var mp3TriggerVolume = 0
+var domePlatePrefix = ":EDP"
 var BLCommandPrefix = ":L:EBC:L"
 var HPCommandPrefix = ":L:EHP:H"
 var DLCommandPrefix = ":EDC:SDL"
@@ -1083,6 +1084,17 @@ function rdSliderOnChange(t) {
     httpGet(bodyLEDControllerSPURL);
   } else {
     let SerialCommand = SerialLoRaPrefix + RADHPrefix + "PA" + t;
+    writeToStream(SerialCommand);
+  }
+}
+
+function domePlateControllerCommand(t) {
+  if (CommandConnectionSerial == false) {
+    var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=:&param1=:L:EDP" + t;
+    console.log(bodyLEDControllerSPURL);
+    httpGet(bodyLEDControllerSPURL);
+  } else {
+    let SerialCommand = SerialLoRaPrefix + domePlatePrefix + t;
     writeToStream(SerialCommand);
   }
 }
