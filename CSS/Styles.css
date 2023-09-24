@@ -172,7 +172,11 @@ line-height: 2rem;
 }
 
 
-
+.r2menupictureSS{
+  position: absolute;
+  top: 340px;
+  left: -700px;
+}
 
 /* html,
 body {
