@@ -1087,7 +1087,16 @@
           <img id="TopHPSolidColorGreen" class="r2menupictureTopHP hidden" name="stripSelectorSolidColor" onclick="changeImage('TopHP', 'SolidColor')" src="./Images/LEDTab/Selectors/TopHPGreen.png">
           <!-- Rear HP Selection-->
           <img id="RearHPSolidColorBlue" class="r2menupictureRearHP  " name="stripSelectorSolidColor" onclick="changeImage('RearHP', 'SolidColor')" src="./Images/LEDTab/Selectors/RearHPBlue.png">
-          <img id="RearHPSolidColorGreen" class="r2menupictureRearHP hidden" name="stripSelectorSolidColor" onclick="changeImage('RearHP', 'SolidColor')" src="./Images/LEDTab/Selectors/RearHPGreen.png">    
+          <img id="RearHPSolidColorGreen" class="r2menupictureRearHP hidden" name="stripSelectorSolidColor" onclick="changeImage('RearHP', 'SolidColor')" src="./Images/LEDTab/Selectors/RearHPGreen.png">
+
+          <!-- Smoke Cell-->
+          <div id="SSSolidColorBlue" class="BodyPanelIdentifier05 DomePanelFormatBlue" name="stripSelectorSolidColor" onclick="changeImage('SS', 'SolidColor')">
+            <p class="DomePanelIdentifierText">ss</p>
+          </div> 
+          <div id="SSSolidColorGreen" class="BodyPanelIdentifier05 DomePanelFormatGreen hidden" name="stripSelectorSolidColor" onclick="changeImage('SS', 'SolidColor')">
+            <p class="DomePanelIdentifierText">ss</p>
+          </div> 
+
           <!-- Select All Selection-->
           <img id="checkmarkall" class="selectALLpic" onclick="selectALLStrips('SolidColor', 'hasDome')" src="./Images/LEDTab/Selectors/Button-Select-All.png">
           <img id="checkmarkallSolidColor" class="checkmarkall hidden" src="./Images/LEDTab/Selectors/checkmark.png">
@@ -1124,12 +1133,12 @@
                   <br />
                   <br />
                   <!-- Apply Button-->
-                  <div id="SolidColorApply" class="applyButton" onclick="commandSingleColor('15','1', 'SolidColorSolidColorChoiceColorSelect','checkmarkapplySolidColor', 'SolidColor', 'hasDome')">
+                  <div id="SolidColorApply" class="applyButton" onclick="commandSingleColor('15','1', 'SolidColorSolidColorChoiceColorSelect','checkmarkapplySolidColor', 'SolidColor', 'hasDome', true)">
                     <img id="SolidColorApplyImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
                     <p class="shadowtext1LineLED">apply</p>
                   </div>
                   <!-- Off Button-->
-                  <div id="RainbowShortSpanOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffSolidColor', 'SolidColor', 'hasDome')">
+                  <div id="RainbowShortSpanOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffSolidColor', 'SolidColor', 'hasDome', true)">
                     <img id="RainbowLargeSpanOffImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
                     <p class="shadowtext1LineLED">off</p>
                   </div>
@@ -1165,6 +1174,15 @@
           <!-- Rear HP Selection-->
           <img id="RearHPAlternatingColorsBlue" class="r2menupictureRearHP  hidden" name="stripSelectorAlternatingColors" onclick="changeImage('RearHP', 'AlternatingColors')" src="./Images/LEDTab/Selectors/RearHPBlue.png">
           <img id="RearHPAlternatingColorsGreen" class="r2menupictureRearHP hidden" name="stripSelectorAlternatingColors" onclick="changeImage('RearHP', 'AlternatingColors')" src="./Images/LEDTab/Selectors/RearHPGreen.png">    
+
+          <!-- Smoke Cell-->
+          <div id="SSAlternatingColorsBlue" class="BodyPanelIdentifier05 DomePanelFormatBlue" name="stripSelectorAlternatingColors" onclick="changeImage('SS', 'AlternatingColors')">
+            <p class="DomePanelIdentifierText">ss</p>
+          </div> 
+          <div id="SSAlternatingColorsGreen" class="BodyPanelIdentifier05 DomePanelFormatGreen hidden" name="stripSelectorAlternatingColors" onclick="changeImage('SS', 'AlternatingColors')">
+            <p class="DomePanelIdentifierText">ss</p>
+          </div> 
+
           <!-- Select All Selection-->
           <img id="checkmarkall" class="selectALLpic" onclick="selectALLStrips('AlternatingColors', 'noDome')" src="./Images/LEDTab/Selectors/Button-Select-All.png">
           <img id="checkmarkallAlternatingColors" class="checkmarkall hidden" src="./Images/LEDTab/Selectors/checkmark.png">
@@ -1222,12 +1240,12 @@
                         max="8"/>
 
                   <!-- Apply Button-->
-                  <div id="AlternatingColorsApply" class="applyButton" onclick="commandTwoColorswithSpeed('06','AlternatingColorsSpeedSlider', 'FirstColorSelctionBox', 'SecondColorSelectionBox', 'checkmarkapplyAlternatingColors', 'AlternatingColors', 'noDome')">
+                  <div id="AlternatingColorsApply" class="applyButton" onclick="commandTwoColorswithSpeed('06','AlternatingColorsSpeedSlider', 'FirstColorSelctionBox', 'SecondColorSelectionBox', 'checkmarkapplyAlternatingColors', 'AlternatingColors', 'noDome', true)">
                     <img id="AlternatingColorsApplyImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
                     <p class="shadowtext1LineLED">apply</p>
                   </div>
                   <!-- Off Button-->
-                  <div id="AlternatingColorsOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffyAlternatingColors', 'AlternatingColors', 'noDome')">
+                  <div id="AlternatingColorsOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffyAlternatingColors', 'AlternatingColors', 'noDome', true)">
                     <img id="RAlternatingColorsOffImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
                     <p class="shadowtext1LineLED">off</p>
                   </div>
@@ -2223,6 +2241,13 @@
             <img id="DPShortCircuitBlue" class="r2menupictureDataPanelLED1 " name="stripSelectorShortCircuit" onclick="changeImage('DP', 'ShortCircuit')" src="./Images/Body/DataPanelLEDsBlue.png">
             <img id="DPShortCircuitGreen" class="r2menupictureDataPanelLED1 hidden" name="stripSelectorShortCircuit" onclick="changeImage('DP', 'ShortCircuit')" src="./Images/Body/DataPanelLEDsGreen.png"> 
 
+          <!-- Smoke Cell-->
+          <div id="SSShortCircuitBlue" class="BodyPanelIdentifier05 DomePanelFormatBlue" name="stripSelectorShortCircuit" onclick="changeImage('SS', 'ShortCircuit')">
+            <p class="DomePanelIdentifierText">ss</p>
+          </div> 
+          <div id="SSShortCircuitGreen" class="BodyPanelIdentifier05 DomePanelFormatGreen hidden" name="stripSelectorShortCircuit" onclick="changeImage('SS', 'ShortCircuit')">
+            <p class="DomePanelIdentifierText">ss</p>
+          </div> 
 
             <!-- Select All Selection-->
             <img id="checkmarkall" class="selectALLpic" onclick="selectALLStrips('ShortCircuit', 'hasDome', 'hasBodyLogics')" src="./Images/LEDTab/Selectors/Button-Select-All.png">
@@ -2270,12 +2295,12 @@
                   <div class="ColorPickerdiv">
                        <form class="" action="index.html" method="post">
                        <!-- Apply Button-->
-                       <div id="BounceApply" class="applyButton"onclick="commandNoOptions('14','1','checkmarkapplyShortCircuitRedBlue', 'ShortCircuit', 'hasDome')">
+                       <div id="BounceApply" class="applyButton"onclick="commandNoOptions('14','1','checkmarkapplyShortCircuitRedBlue', 'ShortCircuit', 'hasDome', true)">
                         <img id="BounceApplyImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
                         <p class="shadowtext1LineLED">apply</p>
                       </div>
                       <!-- Off Button-->
-                      <div id="BounceOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffShortCircuitRedBlue', 'Flash')">
+                      <div id="BounceOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffShortCircuitRedBlue', 'Flash', true)">
                         <img id="RBounceOffImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
                       <p class="shadowtext1LineLED">off</p>
                     </div>
@@ -2291,12 +2316,12 @@
                 <div class="ColorPickerdiv">
                    <form class="" action="index.html" method="post">
                     <!-- Apply Button-->
-                  <div id="BounceApply" class="applyButton"onclick="commandNoOptions('14','2','checkmarkapplyShortCircuitRandom', 'ShortCircuit', 'hasDome')" >
+                  <div id="BounceApply" class="applyButton"onclick="commandNoOptions('14','2','checkmarkapplyShortCircuitRandom', 'ShortCircuit', 'hasDome', true)" >
                     <img id="BounceApplyImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
                     <p class="shadowtext1LineLED">apply</p>
                   </div>
                   <!-- Off Button-->
-                  <div id="BounceOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffShortCircuitRandom', 'ShortCircuit')">
+                  <div id="BounceOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffShortCircuitRandom', 'ShortCircuit', true)">
                     <img id="RBounceOffImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
                   <p class="shadowtext1LineLED">off</p>
                 </div>
@@ -2344,12 +2369,12 @@
                     </select>
                   <br />
                   <!-- Apply Button-->
-                  <div id="BounceApply" class="applyButton"onclick="commandTwoColorsNoSlider('14', '1', 'ShortCircuitColorChoiceFirstColorSelctionBox', 'ShortCircuitColorChoiceSecondColorSelectionBox', 'checkmarkapplyShortCircuitColorChoice', 'ShortCircuit', 'hasDome')" >
+                  <div id="BounceApply" class="applyButton"onclick="commandTwoColorsNoSlider('14', '1', 'ShortCircuitColorChoiceFirstColorSelctionBox', 'ShortCircuitColorChoiceSecondColorSelectionBox', 'checkmarkapplyShortCircuitColorChoice', 'ShortCircuit', 'hasDome' , true)" >
                     <img id="BounceApplyImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
                     <p class="shadowtext1LineLED">apply</p>
                   </div>
                   <!-- Off Button-->
-                  <div id="BounceOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffShortCircuitColorChoice', 'Flash')">
+                  <div id="BounceOff" class="applyButtonoff" onclick="commandStripOff('checkmarkoffShortCircuitColorChoice', 'Flash', true)">
                     <img id="RBounceOffImg" class="buttonwidthLED "  src="./Images/HomeTab/Button-Blank.png">
                   <p class="shadowtext1LineLED">off</p>
                 </div>
@@ -5675,7 +5700,7 @@ id="FrontLogicsTopBlueSelector"
           <img id="ColorChangingLink" class="buttonwidthLEDRD"  src="./Images/HomeTab/Button-Blank.png">
           <p class="shadowtext1PosShort">90</p>
         </div>
-        <div class="ButtonBlankRD" onclick="rdCommand(':DPA180')">
+        <div class="ButtonBlankRD" onclick="rdCommand(':DPA181')">
           <img id="ColorChangingLink" class="buttonwidthLEDRD"  src="./Images/HomeTab/Button-Blank.png">
           <p class="shadowtext1PosShort">180</p>
         </div>

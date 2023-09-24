@@ -29,6 +29,7 @@ var VUExtBaseline = 0
 var mp3TriggerVolume = 0
 var domePlatePrefix = ":EDP"
 var BLCommandPrefix = ":L:EBC:L"
+var DPCommandPrefix = "L:EDP:"
 var HPCommandPrefix = ":L:EHP:H"
 var DLCommandPrefix = ":EDC:SDL"
 var PSCommandPrefix = ":L:EDC:SFU"
@@ -2230,69 +2231,97 @@ function getCheckedElementUniversal(z) {
 
 
 
-function commandStripOff(u, z, d) {
+function commandStripOff(u, z, d, e = false) {
   var checkmark = document.getElementById(u)
   checkmark.classList.remove('hidden');
   setTimeout(function () { checkmark.classList.add('hidden') }, 2000);
   let fullURL;
   var bodyParam = "";
   var domeParam = "";
+  var domePlateParam = "";
   var domeSerialCommand = "";
   var bodySerialCommand = "";
+  var domePlateSerialCommand = "";
   var check = getcheckedElementsforBodyController(z);
   console.log("Check: " + check);
-  bodyParam = "&param1=" + BLCommandPrefix + check + "98";
-  bodySerialCommand = SerialBCPrefix + check + "98";
-
+  if (check != undefined) {
+    bodyParam = "&param1=" + BLCommandPrefix + check + "98";
+    bodySerialCommand = SerialBCPrefix + check + "98";
+  }
   if (d == 'hasDome') {
     var checkHP = getcheckedElementsforHPController(z);
-    let domeParam = "&param2=" + HPCommandPrefix + checkHP + "98";
-    domeSerialCommand = SerialHPPrefix + checkHP + "98";
+    if (checkHP != undefined) {
+      domeParam = "&param2=" + HPCommandPrefix + checkHP + "98";
+      domeSerialCommand = SerialHPPrefix + checkHP + "98";
+    }
   }
-
+  if (e == true) {
+    console.log("DP Selected");
+    var checkDP = getcheckedElementsforDPController(z);
+    if (checkDP != undefined) {
+      domePlateParam = "&param3=" + DPCommandPrefix + checkDP + "98";
+      domePlateSerialCommand = SerialLoRaPrefix + checkDP + "98";
+    }
+  }
   if (CommandConnectionSerial == true) {
-    let SerialCommand = SerialLoRaPrefix + bodySerialCommand + "." + domeSerialCommand + "\r";
+    let SerialCommand = SerialLoRaPrefix + bodySerialCommand + "." + domeSerialCommand + "." + domePlateSerialCommand + "\r";
     writeToStream(SerialCommand);
 
   } else {
-    fullURL = bodyParam + domeParam;
+    fullURL = bodyParam + domeParam + domePlateParam;
     bodyControllerLEDFunctionExecution(fullURL);
   }
 };
 
 
-function commandNoOptions(y, t, u, z, d) {
+function commandNoOptions(y, t, u, z, d, e = false) {
   var checkmark = document.getElementById(u)
   checkmark.classList.remove('hidden');
   setTimeout(function () { checkmark.classList.add('hidden') }, 2000);
   let fullURL;
   var bodyParam = "";
   var domeParam = "";
+  var domePlateParam = "";
   var domeSerialCommand = "";
   var bodySerialCommand = "";
+  var domePlateSerialCommand = "";
   var check = getcheckedElementsforBodyController(z);
   // console.log("Check: " + check);
-  bodyParam = "&param1=" + BLCommandPrefix + check + y + t;
-  bodySerialCommand = SerialBCPrefix + check + y + t;
+  if (check != undefined) {
+    bodyParam = "&param1=" + BLCommandPrefix + check + y + t;
+    bodySerialCommand = SerialBCPrefix + check + y + t;
+  }
   if (d == 'hasDome') {
-    var checkHP = getcheckedElementsforHPController(z);
-    console.log("Check: " + checkHP);
-    domeParam = "&param2=" + HPCommandPrefix + checkHP + y;
-    domeSerialCommand = SerialHPPrefix + checkHP + y;
+    if (checkHP == !undefined) {
+
+      var checkHP = getcheckedElementsforHPController(z);
+      console.log("Check: " + checkHP);
+      domeParam = "&param2=" + HPCommandPrefix + checkHP + y;
+      domeSerialCommand = SerialHPPrefix + checkHP + y;
+    }
   };
+  if (e == true) {
+    console.log("DP Selected");
+    var checkDP = getcheckedElementsforDPController(z);
+    if (checkDP != undefined) {
+      domePlateParam = "&param3=" + DPCommandPrefix + checkDP + y + t;
+      domePlateSerialCommand = SerialLoRaPrefix + checkDP + y + t;
+    }
+  }
+
   if (CommandConnectionSerial == true) {
-    let SerialCommand = SerialLoRaPrefix + bodySerialCommand + "." + domeSerialCommand + "\r";
+    let SerialCommand = SerialLoRaPrefix + bodySerialCommand + "." + domeSerialCommand + "." + domePlateSerialCommand + "\r";
     writeToStream(SerialCommand);
 
   } else {
-    fullURL = bodyParam + domeParam;
+    fullURL = bodyParam + domeParam + domePlateParam;
     bodyControllerLEDFunctionExecution(fullURL);
   }
 };
 
 
 
-function commandSingleColor(y, t, z, u, x, d) {
+function commandSingleColor(y, t, z, u, x, d, e = false) {
   let colorValues = getcolor1(z);
   var checkmark = document.getElementById(u)
   checkmark.classList.remove('hidden');
@@ -2300,29 +2329,46 @@ function commandSingleColor(y, t, z, u, x, d) {
   let fullURL;
   let bodyParam = "";
   let domeParam = "";
+  let domePlateParam = "";
   var domeSerialCommand = "";
+  var domePlateSerialCommand = "";
   var bodySerialCommand = "";
   var check = getcheckedElementsforBodyController(x);
-  // console.log("Check: " + check);
-  bodyParam = "&param1=" + BLCommandPrefix + check + y + t + colorValues;
-  bodySerialCommand = SerialBCPrefix + check + y + t + colorValues;
-
+  console.log("Check: " + check);
+  if (check != undefined) {
+    console.log("Tested of undefined");
+    bodyParam = "&param1=" + BLCommandPrefix + check + y + t + colorValues;
+    bodySerialCommand = SerialBCPrefix + check + y + t + colorValues;
+  }
   if (d == 'hasDome') {
     var checkHP = getcheckedElementsforHPController(x);
-    domeParam = "&param2=" + HPCommandPrefix + checkHP + y + colorValues;
-    domeSerialCommand = SerialHPPrefix + checkHP + y + colorValues;
-
+    if (checkHP == !undefined) {
+      domeParam = "&param2=" + HPCommandPrefix + checkHP + y + colorValues;
+      domeSerialCommand = SerialHPPrefix + checkHP + y + colorValues;
+    }
   };
+
+  if (e == true) {
+    console.log("DP Selected");
+    var checkDP = getcheckedElementsforDPController(x);
+    if (checkDP != undefined) {
+      domePlateParam = "&param3=" + DPCommandPrefix + checkDP + y + t + colorValues;
+      domePlateSerialCommand = SerialLoRaPrefix + checkDP + y + t + colorValues;
+    }
+  }
+
   if (CommandConnectionSerial == true) {
-    let SerialCommand = SerialLoRaPrefix + bodySerialCommand + "." + domeSerialCommand + "\r";
+    let SerialCommand = SerialLoRaPrefix + bodySerialCommand + "." + domeSerialCommand + "." + domePlateSerialCommand + "\r";
     writeToStream(SerialCommand);
 
   } else {
-    fullURL = bodyParam + domeParam;
+    fullURL = bodyParam + domeParam + domePlateParam;
     bodyControllerLEDFunctionExecution(fullURL);
   }
 
 };
+
+
 function commandOneColorAndSpeedRadarEye(y, t, z, u) {
   let sliderValue = getSliderValue(t);
   let colorValues1 = getcolor1(z);
@@ -2338,41 +2384,8 @@ function commandOneColorAndSpeedRadarEye(y, t, z, u) {
   }
 }
 
-function commandSingleColor(y, t, z, u, x, d) {
-  let colorValues = getcolor1(z);
-  var checkmark = document.getElementById(u)
-  checkmark.classList.remove('hidden');
-  setTimeout(function () { checkmark.classList.add('hidden') }, 2000);
-  let fullURL;
-  let bodyParam = "";
-  let domeParam = "";
-  var domeSerialCommand = "";
-  var bodySerialCommand = "";
-  var check = getcheckedElementsforBodyController(x);
-  // console.log("Check: " + check);
-  bodyParam = "&param1=" + BLCommandPrefix + check + y + t + colorValues;
-  bodySerialCommand = SerialBCPrefix + check + y + t + colorValues;
 
-  if (d == 'hasDome') {
-    var checkHP = getcheckedElementsforHPController(x);
-    domeParam = "&param2=" + HPCommandPrefix + checkHP + y + colorValues;
-    domeSerialCommand = SerialHPPrefix + checkHP + y + colorValues;
-
-  };
-  if (CommandConnectionSerial == true) {
-    let SerialCommand = SerialLoRaPrefix + bodySerialCommand + "." + domeSerialCommand + "\r";
-    writeToStream(SerialCommand);
-
-  } else {
-    fullURL = bodyParam + domeParam;
-    bodyControllerLEDFunctionExecution(fullURL);
-  }
-
-};
-
-
-
-function commandTwoColorswithSpeed(a, b, c, d, u, x) {
+function commandTwoColorswithSpeed(a, b, c, d, u, x, z, e = false) {
   let sliderValue = getSliderValue(b);
   let colorValues1 = getcolor1(c);
   let colorValues2 = getcolor2(d);
@@ -2383,18 +2396,31 @@ function commandTwoColorswithSpeed(a, b, c, d, u, x) {
 
   let bodyParam = "";
   var bodySerialCommand = "";
+  let domePlateParam = "";
+  let domePlateSerialCommand = "";
 
   var check = getcheckedElementsforBodyController(x);
   // console.log("Check: " + check);
-  bodyParam = "&param1=" + BLCommandPrefix + check + a + sliderValue + colorValues1 + colorValues2;
-  bodySerialCommand = SerialBCPrefix + check + a + sliderValue + colorValues1 + colorValues2;
+  if (check != undefined) {
+    bodyParam = "&param1=" + BLCommandPrefix + check + a + sliderValue + colorValues1 + colorValues2;
+    bodySerialCommand = SerialBCPrefix + check + a + sliderValue + colorValues1 + colorValues2;
+  }
+
+  if (e == true) {
+    console.log("DP Selected");
+    var checkDP = getcheckedElementsforDPController(x);
+    if (checkDP != undefined) {
+      domePlateParam = "&param3=" + DPCommandPrefix + checkDP + a + sliderValue + colorValues1 + colorValues2;
+      domePlateSerialCommand = SerialLoRaPrefix + checkDP + a + sliderValue + colorValues1 + colorValues2;
+    }
+  }
 
   if (CommandConnectionSerial == true) {
-    let SerialCommand = SerialLoRaPrefix + bodySerialCommand + "\r";
+    let SerialCommand = SerialLoRaPrefix + bodySerialCommand + "." + domePlateSerialCommand + "\r";
     writeToStream(SerialCommand);
 
   } else {
-    fullURL = bodyParam;
+    fullURL = bodyParam + domePlateParam;
     bodyControllerLEDFunctionExecution(fullURL);
   };
 }
@@ -2413,14 +2439,16 @@ function commandOneColorAndSpeed(y, t, z, u, x, d) {
   var bodySerialCommand = "";
   var check = getcheckedElementsforBodyController(x);
   // console.log("Check: " + check);
-  bodyParam = "&param1=" + BLCommandPrefix + check + y + sliderValue + colorValues1;
-  bodySerialCommand = SerialBCPrefix + check + y + sliderValue + colorValues1;
-
+  if (check != undefined) {
+    bodyParam = "&param1=" + BLCommandPrefix + check + y + sliderValue + colorValues1;
+    bodySerialCommand = SerialBCPrefix + check + y + sliderValue + colorValues1;
+  }
   if (d == 'hasDome') {
     var checkHP = getcheckedElementsforHPController(x);
-    domeParam = "&param2=" + HPCommandPrefix + checkHP + y + colorValues1 + sliderValue;
-    domeSerialCommand = SerialHPPrefix + checkHP + y + colorValues1 + sliderValue;
-
+    if (checkHP != undefined) {
+      domeParam = "&param2=" + HPCommandPrefix + checkHP + y + colorValues1 + sliderValue;
+      domeSerialCommand = SerialHPPrefix + checkHP + y + colorValues1 + sliderValue;
+    }
   };
   if (CommandConnectionSerial == true) {
     let SerialCommand = SerialLoRaPrefix + bodySerialCommand + "." + domeSerialCommand + "\r";
@@ -2434,7 +2462,7 @@ function commandOneColorAndSpeed(y, t, z, u, x, d) {
 };
 
 
-function commandTwoColorsNoSlider(y, t, z, s, u, x, d) {
+function commandTwoColorsNoSlider(y, t, z, s, u, x, d, e = false) {
   let colorValues1 = getcolor1(z);
   let colorValues2 = getcolor2(s);
   var checkmark = document.getElementById(u)
@@ -2444,27 +2472,37 @@ function commandTwoColorsNoSlider(y, t, z, s, u, x, d) {
   let fullURL;
   let bodyParam = "";
   let domeParam = "";
+  let domePlateParam = "";
   var domeSerialCommand = "";
-
+  var domePlateSerialCommand = "";
   var bodySerialCommand = "";
   var check = getcheckedElementsforBodyController(x);
   // console.log("Check: " + check);
-  bodyParam = "&param1=" + BLCommandPrefix + check + y + t + colorValues1 + colorValues2;
-  bodySerialCommand = SerialBCPrefix + check + y + colorValues1 + colorValues2;
-
+  if (check != undefined) {
+    bodyParam = "&param1=" + BLCommandPrefix + check + y + t + colorValues1 + colorValues2;
+    bodySerialCommand = SerialBCPrefix + check + y + colorValues1 + colorValues2;
+  }
   if (d == 'hasDome') {
     var checkHP = getcheckedElementsforHPController(x);
-    domeParam = "&param2=" + HPCommandPrefix + checkHP + y + colorValues1 + colorValues2;
-    domeSerialCommand = SerialHPPrefix + checkHP + y + colorValues1 + colorValues2;
-
+    if (checkHP != undefined) {
+      domeParam = "&param2=" + HPCommandPrefix + checkHP + y + colorValues1 + colorValues2;
+      domeSerialCommand = SerialHPPrefix + checkHP + y + colorValues1 + colorValues2;
+    }
   };
-
+  if (e == true) {
+    console.log("DP Selected");
+    var checkDP = getcheckedElementsforDPController(x);
+    if (checkDP != undefined) {
+      domePlateParam = "&param3=" + DPCommandPrefix + checkDP + y + t + colorValues1 + colorValues2;
+      domePlateSerialCommand = SerialLoRaPrefix + checkDP + y + t + colorValues1 + colorValues2;
+    }
+  }
   if (CommandConnectionSerial == true) {
-    let SerialCommand = SerialLoRaPrefix + bodySerialCommand + "." + domeSerialCommand + "\r";
+    let SerialCommand = SerialLoRaPrefix + bodySerialCommand + "." + domeSerialCommand + "." + domePlateSerialCommand + "\r";
     writeToStream(SerialCommand);
 
   } else {
-    fullURL = bodyParam + domeParam;
+    fullURL = bodyParam + domeParam + domePlateParam;
     bodyControllerLEDFunctionExecution(fullURL);
   }
 };
@@ -2599,6 +2637,57 @@ function getcheckedElementsforBodyController(z) {
 }
 
 
+function getcheckedElementsforDPController(z) {
+  var a = false;
+  console.log("test");
+  if (z == "KnightRider") { var arrayDP = checkedItemsKnightRider.slice(); }
+  else if (z == "Rainbow") { var arrayDP = checkedItemsRainbow.slice(); }
+  else if (z == "SolidColor") { var arrayDP = checkedItemsSolidColor.slice(); }
+  else if (z == "AlternatingColors") { var arrayDP = checkedItemsAlternatingColors.slice(); }
+  else if (z == "DimPulse") { var arrayDP = checkedItemsDimPulse.slice(); }
+  else if (z == "DimPulse2") { var arrayDP = checkedItemsDimPulse2.slice(); }
+  else if (z == "DimPulse3") { var arrayDP = checkedItemsDimPulse3.slice(); }
+  else if (z == "Bouncing") { var arrayDP = checkedItemsBouncing.slice(); }
+  else if (z == "DualBounce") { var arrayDP = checkedItemsDualBounce.slice(); }
+  else if (z == "DualingColors") { var arrayDP = checkedItemsDualingColors.slice(); }
+  else if (z == "RandomColors") { var arrayDP = checkedItemsRandomColor.slice(); }
+  else if (z == "RandomColors2") { var arrayDP = checkedItemsRandomColor2.slice(); }
+  else if (z == "Flash") { var arrayDP = checkedItemsFlash.slice(); }
+  else if (z == "ShortCircuit") { var arrayDP = checkedItemsShortCircuit.slice(); }
+  else if (z == "PulseBeat") { var arrayDP = checkedItemsPulseBeat.slice(); }
+  else if (z == "PulseBeat2") { var arrayDP = checkedItemsPulseBeat2.slice(); }
+  else if (z == "WigWag") { var arrayDP = checkedItemsWigWag.slice(); }
+  else if (z == "WigWag2") { var arrayDP = checkedItemsWigWag2.slice(); }
+  else if (z == "ZigZag") { var arrayDP = checkedItemsZigZag.slice(); }
+  else if (z == "ZigZg2") { var arrayDP = checkedItemsZigZag2.slice(); }
+  else if (z == "FLD") { var arrayDP = checkedItemsFLD.slice(); }
+  else if (z == "RLD") { var arrayDP = checkedItemsRLD.slice(); }
+  else if (z == "Pulse") { var arrayDP = checkedItemsPulse.slice(); }
+  else if (z == "DualPulse") { var arrayDP = checkedItemsDualPulse.slice(); }
+  else if (z == "AutoSequence") { var arrayDP = checkedItemsAutoSequence.slice(); }
+  else if (z == "Equalizer") { var arrayDP = checkedItemsEqualizer.slice(); }
+  else if (z == "CBIDP") { var arrayDP = checkedItemsCBIDP.slice(); }
+  else if (z == "HoloProjector") { var arrayDP = checkedItemsHoloProjector.slice(); }
+
+
+  var checkSS = "SS" + z + "Green";
+
+
+  console.log(arrayDP.length);
+  for (var b = 0; b < arrayDP.length; b++) {
+    if (arrayDP[b] === checkSS) {
+      console.log("SS selected");
+      a = true;
+      console.log(a);
+    } else { };
+
+  }
+
+  if (a == true) { return "A"; }
+
+};
+
+
 function getcheckedElementsforHPController(z) {
   var t = false;
   var f = false;
@@ -2675,7 +2764,6 @@ function getcheckedElementsforHPController(z) {
   else if (f == true & t == true & r == true) { return "A0"; }
 
 }
-
 
 
 function getSliderValue(t) {
