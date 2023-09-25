@@ -29,12 +29,13 @@ var VUExtBaseline = 0
 var mp3TriggerVolume = 0
 var domePlatePrefix = ":EDP"
 var BLCommandPrefix = ":L:EBC:L"
-var DPCommandPrefix = "L:EDP:"
+var DPCommandPrefix = ":L:EDP:"
 var HPCommandPrefix = ":L:EHP:H"
 var DLCommandPrefix = ":EDC:SDL"
 var PSCommandPrefix = ":L:EDC:SFU"
 var SerialLoRaPrefix = ":L"
 var SerialBCPrefix = ":EBC:L"
+var SerialDPPrefix = ":EDP"
 var SerialHPPrefix = ":EHP:H"
 var RADHPrefix = ":EBC:R"
 var HCRCHannel = 1
@@ -2292,9 +2293,12 @@ function commandNoOptions(y, t, u, z, d, e = false) {
     bodySerialCommand = SerialBCPrefix + check + y + t;
   }
   if (d == 'hasDome') {
-    if (checkHP == !undefined) {
 
-      var checkHP = getcheckedElementsforHPController(z);
+    var checkHP = getcheckedElementsforHPController(z);
+    console.log("Check: " + checkHP);
+
+    if (checkHP != undefined) {
+
       console.log("Check: " + checkHP);
       domeParam = "&param2=" + HPCommandPrefix + checkHP + y;
       domeSerialCommand = SerialHPPrefix + checkHP + y;
@@ -2342,7 +2346,7 @@ function commandSingleColor(y, t, z, u, x, d, e = false) {
   }
   if (d == 'hasDome') {
     var checkHP = getcheckedElementsforHPController(x);
-    if (checkHP == !undefined) {
+    if (checkHP != !undefined) {
       domeParam = "&param2=" + HPCommandPrefix + checkHP + y + colorValues;
       domeSerialCommand = SerialHPPrefix + checkHP + y + colorValues;
     }
@@ -2744,20 +2748,20 @@ function getcheckedElementsforHPController(z) {
     if (arrayHP[b] === checkRearHP) {
       // console.log("Rear HP selected");
       r = true;
-      // console.log(r);
+      console.log(r);
     } else { };
 
 
   }
 
-  // console.log("HP Front: " + f);
-  // console.log("HP Top: " + t);
-  // console.log("HP Rear: " + r);
+  console.log("HP Front: " + f);
+  console.log("HP Top: " + t);
+  console.log("HP Rear: " + r);
 
 
   if (f == true & t == false & r == false) { return "F0"; }
   else if (f == false & t == true & r == false) { return "T0"; }
-  else if (f == false & t == true & r == false) { return "R0"; }
+  else if (f == false & t == false & r == true) { return "R0"; }
   else if (f == true & t == false & r == true) { return "X0"; }
   else if (f == true & t == true & r == false) { return "Y0"; }
   else if (f == false & t == true & r == true) { return "Z0"; }
