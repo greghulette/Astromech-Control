@@ -19,7 +19,7 @@ To-Do for website
 
 To-Do for R2
 1. change pulley for feet motors
-2. 
+2. fix slip ring holder for hps
 3. 
 
 To-Do for Remote
