@@ -342,7 +342,7 @@
                       <img id="HomeTab-BLank2" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
                       <p class="shadowtext">all close</p>
                     </div>                    
-                  </td>
+                  </td> 
                 </tr>
               </table>
             </div>  <!-- End of "home1" content-->
@@ -358,45 +358,45 @@
                   <td>
                     <div class="ButtonBlank" onclick="domePlateControllerCommand(':A61')">
                       <img id="HomeTab-BLank2" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
-                      <p class="shadowtext2Lines-2">arm saber</p>
+                      <p class="shadowtext">arm saber</p>
                     </div>                    
                   </td>
                   <td>
-                    <div class="ButtonBlank" onclick="">
-                      <img id="HomeTab-BLank2" class="homebuttonwidth seethrough"  src="./Images/HomeTab/Button-Blank.png">
-                      <p class="shadowtext2Lines-2"></p>
+                    <div class="ButtonBlank" onclick="domePlateControllerCommand(':A52')">
+                      <img id="HomeTab-BLank2" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
+                      <p class="shadowtext">fans on</p>
                     </div>                    
                   </td>
                   <td>
-                    <div class="ButtonBlank" onclick="">
-                      <img id="HomeTab-BLank2" class="homebuttonwidth seethrough"  src="./Images/HomeTab/Button-Blank.png">
-                      <p class="shadowtext2Lines-2"></p>
+                    <div class="ButtonBlank" onclick="domePlateControllerCommand(':A53')">
+                      <img id="HomeTab-BLank2" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
+                      <p class="shadowtext">fans off</p>
                     </div>                    
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <div class="ButtonBlank" onclick="">
-                      <img id="HomeTab-BLank2" class="homebuttonwidth seethrough"  src="./Images/HomeTab/Button-Blank.png">
-                      <p class="shadowtext2Lines-2"></p>
+                    <div class="ButtonBlank" onclick="domePlateControllerCommand(':A50')">
+                      <img id="HomeTab-BLank2" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
+                      <p class="shadowtext">smoke on</p>
                     </div>                    
                   </td>
                   <td>
-                    <div class="ButtonBlank" onclick="">
-                      <img id="HomeTab-BLank2" class="homebuttonwidth seethrough"  src="./Images/HomeTab/Button-Blank.png">
-                      <p class="shadowtext2Lines-2"></p>
+                    <div class="ButtonBlank" onclick="domePlateControllerCommand(':A51')">
+                      <img id="HomeTab-BLank2" class="homebuttonwidth"  src="./Images/HomeTab/Button-Blank.png">
+                      <p class="shadowtext">smoke off</p>
                     </div>                    
                   </td>
                   <td>
-                    <div class="ButtonBlank" onclick="">
-                      <img id="HomeTab-BLank2" class="homebuttonwidth seethrough"  src="./Images/HomeTab/Button-Blank.png">
-                      <p class="shadowtext2Lines-2"></p>
+                    <div class="ButtonBlank" onclick="domePlateControllerCommand(':A54')">
+                      <img id="HomeTab-BLank2" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
+                      <p class="shadowtext2Lines-2">smoke sequence</p>
                     </div>                   
                   </td>
                   <td>
-                    <div class="ButtonBlank" onclick="">
-                      <img id="HomeTab-BLank2" class="homebuttonwidth seethrough"  src="./Images/HomeTab/Button-Blank.png">
-                      <p class="shadowtext2Lines-2"></p>
+                    <div class="ButtonBlank" onclick="domePlateControllerCommand(':A55')">
+                      <img id="HomeTab-BLank2" class="homebuttonwidth "  src="./Images/HomeTab/Button-Blank.png">
+                      <p class="shadowtext2Lines-2">evacuate smoke</p>
                     </div>                    
                   </td>
                 </tr>
@@ -5441,7 +5441,7 @@ id="FrontLogicsTopBlueSelector"
 <div class="menu-Level-1-Content " id="Gestures">
     <!-- <img src="Images/Button-LED_Controller_Reset.png" alt="" class="resetLEDController " onclick="resetArduino()"> -->
     <h2 class="gesturesheaders">gestures reference</h2>
-   <img src="./Images/Gestures_Quick_Reference.png" class="Gestures_Quick_Reference">
+   <img src="./Images/Wiring_Diagram/R2D2-Wiring-Diagram-Gestures.png" class="Gestures_Quick_Reference">
     
 </div>
 
@@ -5452,19 +5452,28 @@ id="FrontLogicsTopBlueSelector"
 <!-- <img src="./Images/R2D2-Wiring-Diagram.png" class="Gestures_Quick_Reference"> -->
 
 
+<!-- <div class="canvas-container"> -->
+  <canvas class="canvas"></canvas>
+  <!-- <i class="fas fa-search-plus" aria-hidden="true"></i> -->
+<!-- </div> -->
 
-
-
+<!-- The image cannot be panned beyond its limits nor can be scaled below canvas dimensions or beyond its size -->
+<!-- <canvas id="canvas"></canvas> -->
+<!-- <span class="s-loader">The image is loading...</span>
+<span class="info">Use your fingers to zoom and move the image<br>(touch to hide this tooltip)</span>
 <div class="button-group">
+  <button type="button1" class="scale" data-scale="up">+</button>
+  <button type="button1" class="scale" data-scale="down">-</button>
+</div> -->
+<!-- <div class="button-group">
   
 </div>
-<!-- The image cannot be panned beyond its limits nor can be scaled below canvas dimensions or beyond its size -->
 <canvas class="canvaseClass" id="canvas"></canvas>
 <span class="s-loader">The image is loading...</span>
 <span class="info">Use your fingers to zoom and move the image<br>(touch to hide this tooltip)</span>
 
 <button type="button" class="scale" data-scale="up">+</button>
-<button type="button" class="scale1" data-scale="down" >-</button>
+<button type="button" class="scale1" data-scale="down" >-</button> -->
 </div>
 
 
@@ -6149,6 +6158,7 @@ id="FrontLogicsTopBlueSelector"
 </body>
 
 
+<script src="./js/canvas.js"></script>
 
 
 <script src="./js/main.js"></script>

@@ -1,3 +1,17 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 let port;
 let reader;
 let inputDone;
@@ -374,139 +388,141 @@ class LineBreakTransformer {
 }
 
 
-function isTouchDevice() {
-  return (('ontouchstart' in window) ||
-    (navigator.maxTouchPoints > 0) ||
-    (navigator.msMaxTouchPoints > 0));
-}
+// function isTouchDevice() {
+//   return (('ontouchstart' in window) ||
+//     (navigator.maxTouchPoints > 0) ||
+//     (navigator.msMaxTouchPoints > 0));
+// }
 
 
-function pointerEvents(e) {
-  var pos = {
-    x: 0,
-    y: 0
-  };
+// function pointerEvents(e) {
+//   var pos = {
+//     x: 0,
+//     y: 0
+//   };
 
-  if (e.type == "touchstart" || e.type == "touchmove" || e.type == "touchend") {
-    var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
-    pos.x = touch.pageX;
-    pos.y = touch.pageY;
-  } else if (
-    e.type == "mousedown" ||
-    e.type == "mouseup" ||
-    e.type == "mousemove"
-  ) {
-    pos.x = e.pageX;
-    pos.y = e.pageY;
-  }
+//   if (e.type == "touchstart" || e.type == "touchmove" || e.type == "touchend") {
+//     var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+//     pos.x = touch.pageX;
+//     pos.y = touch.pageY;
+//   } else if (
+//     e.type == "mousedown" ||
+//     e.type == "mouseup" ||
+//     e.type == "mousemove"
+//   ) {
+//     pos.x = e.pageX;
+//     pos.y = e.pageY;
+//   }
 
-  return pos;
-}
+//   return pos;
+// }
 
-$(window).on("resize", function () {
-  resizeCanvas($(window).width(), $(window).height());
-});
+// $(window).on("resize", function () {
+//   resizeCanvas($(window).width(), $(window).height());
+// });
 
-$("document").ready(function () {
-  //show info tooltip if is mobile
-  if (isTouchDevice()) {
-    scaleFactor = 1.02;
-    $("body")
-      .addClass("touch")
-      .on("touchstart", function () {
-        hideTooltip();
-      });
-    canvasInit("../Images/Wiring_Diagram/R2D2-Wiring-Diagram.png");
+// $("document").ready(function () {
+//   //show info tooltip if is mobile
+//   if (isTouchDevice()) {
+//     scaleFactor = 1.02;
+//     $("body")
+//       .addClass("touch")
+//       .on("touchstart", function () {
+//         hideTooltip();
+//       });
+//     canvasInit("../Images/Wiring_Diagram/R2D2-Wiring-Diagram.png");
 
-  }
+//   }
 
 
-  $(".scale").on("click", function () {
-    if ($(this).data("scale") === "down") {
-      scaling = "down";
-    } else {
-      scaling = "up";
-    }
+//   $(".scale").on("click", function () {
+//     if ($(this).data("scale") === "down") {
+//       scaling = "down";
+//     } else {
+//       scaling = "up";
+//     }
 
-    scaleDraw = requestAnimationFrame(scaleCanvas);
+//     scaleDraw = requestAnimationFrame(scaleCanvas);
 
-    scale < maxScale
-      ? $('[data-scale="up"]').removeAttr("disabled")
-      : $('[data-scale="up"]').attr("disabled", "true");
-    scale >= 1
-      ? $('[data-scale="down"]').removeAttr("disabled")
-      : $('[data-scale="down"]').attr("disabled", "true");
-  });
+//     scale < maxScale
+//       ? $('[data-scale="up"]').removeAttr("disabled")
+//       : $('[data-scale="up"]').attr("disabled", "true");
+//     scale >= 1
+//       ? $('[data-scale="down"]').removeAttr("disabled")
+//       : $('[data-scale="down"]').attr("disabled", "true");
+//   });
 
-  $("canvas")
+//   $("canvas")
 
-    .on("mousedown touchstart", function (e) {
-      e.preventDefault();
-      var position = pointerEvents(e),
-        touch = e.originalEvent.touches || e.originalEvent.changedTouches;
+//     .on("mousedown touchstart", function (e) {
+//       e.preventDefault();
+//       var position = pointerEvents(e),
+//         touch = e.originalEvent.touches || e.originalEvent.changedTouches;
 
-      if (e.type === "touchstart" && touch.length === 2) {
-        scaling = true;
+//       if (e.type === "touchstart" && touch.length === 2) {
+//         scaling = true;
 
-        // Pinch detection credits: http://stackoverflow.com/questions/11183174/simplest-way-to-detect-a-pinch/11183333#11183333
-        lastDistance = Math.sqrt(
-          (touch[0].clientX - touch[1].clientX) *
-          (touch[0].clientX - touch[1].clientX) +
-          (touch[0].clientY - touch[1].clientY) *
-          (touch[0].clientY - touch[1].clientY)
-        );
-      } else {
-        canDrag = true;
-        isDragging = scaling = false;
+//         // Pinch detection credits: http://stackoverflow.com/questions/11183174/simplest-way-to-detect-a-pinch/11183333#11183333
+//         lastDistance = Math.sqrt(
+//           (touch[0].clientX - touch[1].clientX) *
+//           (touch[0].clientX - touch[1].clientX) +
+//           (touch[0].clientY - touch[1].clientY) *
+//           (touch[0].clientY - touch[1].clientY)
+//         );
+//       } else {
+//         canDrag = true;
+//         isDragging = scaling = false;
 
-        startCoords = {
-          x: position.x - $(this).offset().left - last.x,
-          y: position.y - $(this).offset().top - last.y
-        };
-      }
-    })
+//         startCoords = {
+//           x: position.x - $(this).offset().left - last.x,
+//           y: position.y - $(this).offset().top - last.y
+//         };
+//       }
+//     })
 
-    .on("mousemove touchmove", function (e) {
-      // e.preventDefault();
+//     .on("mousemove touchmove", function (e) {
+//       e.preventDefault();
 
-      isDragging = true;
+//       isDragging = true;
+//       canDrag = true;
+//       scaling = true;
 
-      if (isDragging && canDrag && scaling === false) {
-        var position = pointerEvents(e),
-          offset = e.type === "touchmove" ? 1.3 : 1;
+//       if (isDragging && canDrag && scaling === false) {
+//         var position = pointerEvents(e),
+//           offset = e.type === "touchmove" ? 1.3 : 1;
 
-        moveX = (position.x - $(this).offset().left - startCoords.x) * offset;
-        moveY = (position.y - $(this).offset().top - startCoords.y) * offset;
+//         moveX = (position.x - $(this).offset().left - startCoords.x) * offset;
+//         moveY = (position.y - $(this).offset().top - startCoords.y) * offset;
 
-        redraw = requestAnimationFrame(canvasDraw);
-      } else if (scaling === true) {
-        var touch = e.originalEvent.touches || e.originalEvent.changedTouches;
+//         redraw = requestAnimationFrame(canvasDraw);
+//       } else if (scaling === true) {
+//         var touch = e.originalEvent.touches || e.originalEvent.changedTouches;
 
-        //Pinch detection credits: http://stackoverflow.com/questions/11183174/simplest-way-to-detect-a-pinch/11183333#11183333
-        distance = Math.sqrt(
-          (touch[0].clientX - touch[1].clientX) *
-          (touch[0].clientX - touch[1].clientX) +
-          (touch[0].clientY - touch[1].clientY) *
-          (touch[0].clientY - touch[1].clientY)
-        );
+//         //Pinch detection credits: http://stackoverflow.com/questions/11183174/simplest-way-to-detect-a-pinch/11183333#11183333
+//         distance = Math.sqrt(
+//           (touch[0].clientX - touch[1].clientX) *
+//           (touch[0].clientX - touch[1].clientX) +
+//           (touch[0].clientY - touch[1].clientY) *
+//           (touch[0].clientY - touch[1].clientY)
+//         );
 
-        scaleDraw = requestAnimationFrame(scaleCanvasTouch);
-      }
-    })
-    .on("mouseup touchend", function (e) {
-      var position = pointerEvents(e);
+//         scaleDraw = requestAnimationFrame(scaleCanvasTouch);
+//       }
+//     })
+//     .on("mouseup touchend", function (e) {
+//       var position = pointerEvents(e);
 
-      canDrag = isDragging = scaling = false;
+//       canDrag = isDragging = scaling = false;
 
-      last = {
-        x: position.x - $(this).offset().left - startCoords.x,
-        y: position.y - $(this).offset().top - startCoords.y
-      };
+//       last = {
+//         x: position.x - $(this).offset().left - startCoords.x,
+//         y: position.y - $(this).offset().top - startCoords.y
+//       };
 
-      cancelAnimationFrame(scaleDraw);
-      cancelAnimationFrame(redraw);
-    });
-});
+//       cancelAnimationFrame(scaleDraw);
+//       cancelAnimationFrame(redraw);
+//     });
+// });
 
 
 
