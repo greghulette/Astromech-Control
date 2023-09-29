@@ -1,14 +1,10 @@
 
+var translatePos = {
+    x: -500,
+    y: -3750
+};
 
-
-
-
-
-
-
-
-
-
+draw(1, translatePos);
 function draw(scale, translatePos) {
     var canvas = document.getElementById("myCanvas");
     canvas.height = 700;
@@ -56,26 +52,29 @@ function draw(scale, translatePos) {
     context.stroke();
     context.restore();
 }
-// function createImage() {
-//     var canvas = document.getElementById("myCanvas");
-//     var context = canvas.getContext("2d");
+function createImage() {
+    var canvas = document.getElementById("myCanvas");
+    var context = canvas.getContext("2d");
 
-//     canvas.height = 700;
-//     canvas.width = 1100;
-//     var width = canvas.width
-//     var height = canvas.height
-//     var x = 0
-//     var y = 0
+    canvas.height = 700;
+    canvas.width = 1100;
+    var width = canvas.width
+    var height = canvas.height
+    var x = 0
+    var y = 0
 
-//     var img = new Image
-//     img.onload = () => {
-//         context.drawImage(img, x, y, width, height * 2)
-//     }
-//     img.src = '../Images/Wiring_Diagram/R2D2-Wiring-Diagram.png'
-// }
+    var img = new Image
+    img.onload = () => {
+        context.drawImage(img, x, y, width, height * 2)
+    }
+    img.src = '../Images/Wiring_Diagram/R2D2-Wiring-Diagram.png'
+}
+
+
 var initialize = (function () {
     var canvas = document.getElementById("myCanvas");
 
+    createImage();
     var translatePos = {
         x: canvas.width / 2,
         y: canvas.height / 2
@@ -85,6 +84,7 @@ var initialize = (function () {
     var scaleMultiplier = 0.8;
     var startDragOffset = {};
     var mouseDown = false;
+
 
     // add button event listeners
     document.getElementById("plus").addEventListener("click", function () {

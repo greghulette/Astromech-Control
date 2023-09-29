@@ -58,6 +58,7 @@ border: solid 2px red;
     font-size: 24px;
     font-weight: bold;
     cursor: pointer;
+    color: black;
 }
 
 #minus:hover, #plus:hover
