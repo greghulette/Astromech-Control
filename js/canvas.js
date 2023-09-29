@@ -20,7 +20,7 @@ function draw(scale, translatePos) {
     context.scale(scale, scale);
 
     var img = new Image
-    img.src = './Images/Wiring_Diagram/R2D2-Wiring-Diagram.png'
+    img.src = '../Images/Wiring_Diagram/R2D2-Wiring-Diagram--29-Sep-2023-01-34-PM.png'
 
     context.drawImage(img, translatePos.x, translatePos.y, canvas.width, canvas.height * 2)
 
@@ -67,7 +67,7 @@ function createImage() {
     img.onload = () => {
         context.drawImage(img, x, y, width, height * 2)
     }
-    img.src = './Images/Wiring_Diagram/R2D2-Wiring-Diagram.png'
+    img.src = '../Images/Wiring_Diagram/R2D2-Wiring-Diagram--29-Sep-2023-01-34-PM.png'
 }
 
 
