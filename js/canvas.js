@@ -67,7 +67,7 @@ function createImage() {
     img.onload = () => {
         context.drawImage(img, x, y, width, height * 2)
     }
-    img.src = 'Images/Wiring_Diagram/R2D2-Wiring-Diagram.png'
+    img.src = './Images/Wiring_Diagram/R2D2-Wiring-Diagram.png'
 }
 
 
