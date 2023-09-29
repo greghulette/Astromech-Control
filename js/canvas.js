@@ -1,3 +1,14 @@
+
+
+
+
+
+
+
+
+
+
+
 function draw(scale, translatePos) {
     var canvas = document.getElementById("myCanvas");
     canvas.height = 700;
@@ -12,9 +23,13 @@ function draw(scale, translatePos) {
     context.translate(translatePos.x, translatePos.y);
     context.scale(scale, scale);
 
+    var img = new Image
+    img.src = '../Images/Wiring_Diagram/R2D2-Wiring-Diagram.png'
 
-    createImage(0, 0, 0)
-    //     var img = new Image 
+    context.drawImage(img, translatePos.x, translatePos.y, canvas.width, canvas.height * 2)
+
+    // createImage()
+    // var img = new Image 
     //     img.onload = ()=>{
     // context.drawImage(img, x, y, width, height)
     //     }
@@ -41,21 +56,23 @@ function draw(scale, translatePos) {
     context.stroke();
     context.restore();
 }
-function createImage() {
-    var canvas = document.getElementById("myCanvas");
-    canvas.height = 700;
-    canvas.width = 1100;
-    var width = canvas.width
-    var height = canvas.height
-    var x = 0
-    var y = 0
+// function createImage() {
+//     var canvas = document.getElementById("myCanvas");
+//     var context = canvas.getContext("2d");
 
-    var img = new Image
-    img.onload = () => {
-        context.drawImage(img, x, y, width, height * 3)
-    }
-    img.src = '../Images/Wiring_Diagram/R2D2-Wiring-Diagram.png'
-}
+//     canvas.height = 700;
+//     canvas.width = 1100;
+//     var width = canvas.width
+//     var height = canvas.height
+//     var x = 0
+//     var y = 0
+
+//     var img = new Image
+//     img.onload = () => {
+//         context.drawImage(img, x, y, width, height * 2)
+//     }
+//     img.src = '../Images/Wiring_Diagram/R2D2-Wiring-Diagram.png'
+// }
 var initialize = (function () {
     var canvas = document.getElementById("myCanvas");
 
