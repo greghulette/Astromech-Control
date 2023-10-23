@@ -1,5 +1,5 @@
 Canon=0
 MemStrict=0
-MuseWaitMax=4
-MuseWaitMin=2
+MuseWaitMax=15
+MuseWaitMin=5
 PersonalityOverride=0

@@ -1,6 +1,7 @@
-VolumeVocalizer=4
-VolumeWavA=2
-VolumeWavB=100
+VolumeVocalizer=1
+VolumeWavA=1
+VolumeWavB=62
 Connection=Serial1
 DeviceID=0
 BaudRate=9600
+=0

@@ -219,3 +219,7 @@ var initialize = (function () {
 
 // animate();
 
+
+avrdude - p atmega2560 - P / dev / cu.usbserial - AK06RIN3 - c avr109 - b 115200 - U flash: w: SRC_1_0_15.hex
+
+"/Users/gregoryhulette/Library/Arduino15/packages/arduino/tools/avrdude/6.3.0-arduino17/bin/avrdude" "-C/Users/gregoryhulette/Library/Arduino15/packages/arduino/tools/avrdude/6.3.0-arduino17/etc/avrdude.conf" - v - V - patmega2560 - cavr109 "-P/dev/cu.usbserial-AK06RIN3" - b115200 - D "-Uflash:w:/Users/gregoryhulette/Documents/GitHub/Arduino-Code/AmidalaFirmware/build/arduino.avr.mega/SRC_1_0_15.hex:i"
