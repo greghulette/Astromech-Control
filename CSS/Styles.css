@@ -11,6 +11,49 @@ body {
 
 }
 
+.GesturesPage1{
+position: absolute;
+top: 600px;
+left: -500px;
+width: 50px;
+}
+.GesturesPage2{
+  position: absolute;
+  top: 670px;
+  left: -500px;
+  width: 50px;
+  }
+  .GesturesPage3{
+    position: absolute;
+    top: 740px;
+    left: -500px;
+    width: 50px;
+    }
+.gesturesBlankFormat{
+  width:150px;
+  height: 60px;
+  position: relative;
+  top: -2px;
+  left: 0px;
+}
+
+.GestureText{
+  position:relative;
+  top: -75px;
+  left: -20px;
+  width: 190px;
+  font-family: 'Star Jedi', 'Starjedi', arial, camb;
+  color: lightyellow;
+  /* left: 60px; */
+  text-align: center;
+  text-shadow: 0 4px 10px black;
+  text-decoration: solid;
+line-height: 1.5rem;
+  font-size: 1.5rem;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
+
 .canvas{
   position: absolute;
   top: 60px;
@@ -293,7 +336,7 @@ color: white;
 .Gestures_Quick_Reference{
   position: absolute;
   top: 40px;
-  left: -300px;
+  left: -550px;
   width: 1000px;
 }
 .HomeSounds{
