@@ -1,17 +1,4 @@
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 let port;
 let reader;
 let inputDone;
@@ -53,6 +40,9 @@ var SerialDPPrefix = ":EDP"
 var SerialHPPrefix = ":EHP:H"
 var RADHPrefix = ":EBC:R"
 var HCRCHannel = 1
+var FunctionSWState;
+var HCRVocalizerVolume;
+var HCRWAVVolume;
 
 var statusQueryLength = 2000
 var delaySecondHTTPGet = 1250
@@ -330,7 +320,21 @@ class JSONTransformer {
   }
 }
 
+function updateGesturesDiagram(p) {
+  let downPageLink = document.getElementById('gestures1Link');
+  let middlePageLink = document.getElementById('gestures2Link');
+  let upPageLink = document.getElementById('gestures3Link');
 
+  if (p == 1) {
+    downPageLink.click();
+  }
+  if (p == 2) {
+    middlePageLink.click();
+  }
+  if (p == 3) {
+    upPageLink.click();
+  }
+}
 
 function parseSerialUpdate(x) {
   // console.log("Parse JSON ogject: ");
@@ -354,6 +358,7 @@ function parseSerialUpdate(x) {
   VUExtOffset = parsedInfo.VUExtOffset;
   VUIntBaseline = parsedInfo.VUIntBaseline;
   VUExtBaseline = parsedInfo.VUExtBaseline;
+  FunctionSWState = parsedInfo.FunctionSWState;
   // console.log(batteryPercent);
   updateEEPROMSettings();
 
