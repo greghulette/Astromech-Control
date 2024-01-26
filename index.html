@@ -5134,6 +5134,14 @@ id="FrontLogicsTopBlueSelector"
           </div>
         </button>
        </div>
+       <div class="menu-Level-1-Links move6" >
+        <button class="" rel="stats">
+          <div>
+            <img id="Reset_Remote_ESP" class="buttonwidth "  src="./Images/HomeTab/Button-Blank.png">
+            <p class="shadowtext2LinesLongLED">esp-now stats</p>
+          </div>
+        </button>
+       </div>
        <div id="droidBattery" class="droidBatteryClass">
         <p id="droidBatteryVoltagePar">voltage: </p>
         <p id="droidBatteryPar" class="droidBatteryPar">na</p>
@@ -5482,62 +5490,40 @@ id="FrontLogicsTopBlueSelector"
 <div class="menu-Level-1-Content " id="WiringDiagram">
   <!-- <img src="Images/Button-LED_Controller_Reset.png" alt="" class="resetLEDController " onclick="resetArduino()"> -->
   <h2 class="gesturesheaders">wiring diagram</h2>
-  <!-- <nav id="navTop" class="w-full z-30 top-0 text-white bg-nwoods-primary">
-    <div class="w-full container max-w-screen-lg mx-auto flex flex-wrap sm:flex-nowrap items-center justify-between mt-0 py-2">
-      <div class="md:pl-4">
-        <a class="text-white hover:text-white no-underline hover:no-underline
-        font-bold text-2xl lg:text-4xl rounded-lg hover:bg-nwoods-secondary " href="../">
-          <h1 class="my-0 p-1 ">GoJS</h1>
-        </a>
-      </div>
-      <button id="topnavButton" class="rounded-lg sm:hidden focus:outline-none focus:ring" aria-label="Navigation">
-        <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
-          <path id="topnavOpen" fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z" clip-rule="evenodd"></path>
-          <path id="topnavClosed" class="hidden" fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-        </svg>
-      </button>
-      <div id="topnavList" class="hidden sm:block items-center w-auto mt-0 text-white p-0 z-20">
-        
-      </div>
+
+</div>
+
+
+<div class="menu-Level-1-Content " id="stats">
+  <!-- <img src="Images/Button-LED_Controller_Reset.png" alt="" class="resetLEDController " onclick="resetArduino()"> -->
+  <h2 class="gesturesheaders">esp-now delivery statistics</h2>
+
+    <p class="statsHeader">success / failure</p>
+    <div class="DGStats">
+      <br>
+      <p id="DGSuccessLabel">droid gateway Stats:    <span id="DGSuccessCounter" class="">na</span>  / <span id="DGFailureCounter">na</span> </p>
     </div>
-    <hr class="border-b border-gray-600 opacity-50 my-0 py-0" />
-  </nav>
-  <div class="md:flex flex-col md:flex-row md:min-h-screen w-full max-w-screen-xl mx-auto">
-    <div id="navSide" class="flex flex-col w-full md:w-48 text-gray-700 bg-white flex-shrink-0"></div> -->
-  <!-- <canvas id="WiringDiagramCanvas" width="1000" height="700"  class="canvas"></canvas> -->
-<!-- <img src="./Images/R2D2-Wiring-Diagram.png" class="Gestures_Quick_Reference"> -->
- <div id="container">
-  <canvas id="myCanvas" class="canvas"></canvas>
-<div>
-  <span id="minus">-Zoom Out</span>&nbsp;&nbsp;<span id="plus">+Zoom In</span>
+  <div class="BCStats">
+    <br>
+    <p id="BCSuccessLabel">Body Controller Stats:    <span id="BCSuccessCounter" class="">na</span>  / <span id="BCFailureCounter">na</span> </p>
+  </div>
+  <div class="BSStats">
+    <br>
+    <p id="BSSuccessLabel">Body Servo Stats:  <span id="BSSuccessCounter" class="">na</span>  / <span id="BSFailureCounter">na</span> </p>
+  </div>
+  <div class="DPStats">
+    <br>
+    <p id="DPSuccessLabel">domeplate stats: <span id="DPSuccessCounter" class="">na</span>  / <span id="DPFailureCounter">na</span> </p>
+  </div>
+  <div class="DCStats">
+    <br>
+    <p id="DCSuccessLabel">dome controller Stats: <span id="DCSuccessCounter" class="">na</span>  / <span id="DCFailureCounter">na</span> </p>
+  </div>
+  <div class="HPStats">
+    <br>
+    <p id=HPSuccessLabel">hp controller Stats: <span id="HPSuccessCounter" class="">na</span>  / <span id="HPFailureCounter">na</span> </p>
+  </div>
 </div>
-</div>
-
-<!-- <div class="canvas-container"> -->
-  <!-- <canvas id="myCanvas" class="canvas"></canvas> -->
-  <!-- <span id="minus">-Zoom Out</span>&nbsp;&nbsp;<span id="plus">+Zoom In</span> -->
-  <!-- <i class="fas fa-search-plus" aria-hidden="true"></i> -->
-<!-- </div> -->
-
-<!-- The image cannot be panned beyond its limits nor can be scaled below canvas dimensions or beyond its size -->
-<!-- <canvas id="canvas"></canvas> -->
-<!-- <span class="s-loader">The image is loading...</span>
-<span class="info">Use your fingers to zoom and move the image<br>(touch to hide this tooltip)</span>
-<div class="button-group">
-  <button type="button1" class="scale" data-scale="up">+</button>
-  <button type="button1" class="scale" data-scale="down">-</button>
-</div> -->
-<!-- <div class="button-group">
-  
-</div>
-<canvas class="canvaseClass" id="canvas"></canvas>
-<span class="s-loader">The image is loading...</span>
-<span class="info">Use your fingers to zoom and move the image<br>(touch to hide this tooltip)</span>
-
-<button type="button" class="scale" data-scale="up">+</button>
-<button type="button" class="scale1" data-scale="down" >-</button> -->
-</div>
-
 
     </div>
 

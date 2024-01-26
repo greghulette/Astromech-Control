@@ -28,6 +28,8 @@ var VUIntBaseline = 0
 var VUExtOffset = 0
 var VUExtBaseline = 0
 var mp3TriggerVolume = 0
+var BSSuccessCounter = 0
+var BSFailureCounter = 0
 var domePlatePrefix = ":EDP"
 var BLCommandPrefix = ":L:EBC:L"
 var DPCommandPrefix = ":L:EDP:"
@@ -546,7 +548,7 @@ function httpGetStatus() {
       var jsonResponse = req.response;
       // do something with jsonResponse
       // console.log(typeof (jsonResponse));
-      // console.log(jsonResponse);
+      console.log(jsonResponse);
       // if (jsonResponse.remoteLoRaControllerStatus == "Online") {
       if (jsonResponse.droidremoteControllerStatus == true) {
 
@@ -618,11 +620,71 @@ function httpGetStatus() {
         relayStatus = false;
       }
 
+      if (jsonResponse.DGSuccessCounter >= 0) {
+        document.getElementById('DGSuccessCounter').innerText = jsonResponse.DGSuccessCounter;
+
+      } else {
+      }
+      if (jsonResponse.DGFailureCounter >= 0) {
+        document.getElementById('DGFailureCounter').innerText = jsonResponse.DGFailureCounter
+      } else {
+      }
+
+      if (jsonResponse.BCSuccessCounter >= 0) {
+        document.getElementById('BCSuccessCounter').innerText = jsonResponse.BCSuccessCounter;
+
+      } else {
+      }
+      if (jsonResponse.BCFailureCounter >= 0) {
+        document.getElementById('BCFailureCounter').innerText = jsonResponse.BCFailureCounter;
+
+      } else {
+      }
+      if (jsonResponse.BSSuccessCounter >= 0) {
+        document.getElementById('BSSuccessCounter').innerText = jsonResponse.BSSuccessCounter;
+
+      } else {
+      }
+      if (jsonResponse.BSFailureCounter >= 0) {
+        document.getElementById('BSFailureCounter').innerText = jsonResponse.BSFailureCounter;
+
+      } else {
+      }
+      if (jsonResponse.DPSuccessCounter >= 0) {
+        document.getElementById('DPSuccessCounter').innerText = jsonResponse.DPSuccessCounter;
+
+      } else {
+      }
+      if (jsonResponse.DPFailureCounter >= 0) {
+        document.getElementById('DPFailureCounter').innerText = jsonResponse.DPFailureCounter;
+
+      } else {
+      }
+      if (jsonResponse.DCSuccessCounter >= 0) {
+        document.getElementById('DCSuccessCounter').innerText = jsonResponse.DCSuccessCounter;
+
+      } else {
+      }
+      if (jsonResponse.DCFailureCounter >= 0) {
+        document.getElementById('DCFailureCounter').innerText = jsonResponse.DCFailureCounter;
+
+      } else {
+      }
+      if (jsonResponse.HPSuccessCounter >= 0) {
+        document.getElementById('HPSuccessCounter').innerText = jsonResponse.HPSuccessCounter;
+
+      } else {
+      }
+      if (jsonResponse.HPFailureCounter >= 0) {
+        document.getElementById('HPFailureCounter').innerText = jsonResponse.HPFailureCounter;
+
+      } else {
+      }
       if (jsonResponse.BL_BatteryVoltage > 0) {
         // console.log("Dome Controller Online");
         batteryVoltage = jsonResponse.BL_BatteryVoltage;
         // console.log(batteryVoltage);
-        document.getElementById('droidBatteryPar').innerText = batteryVoltage.toFixed(2);
+        document.getElementById('droidBatteryPar').innerText = batteryVoltage;
 
       } else {
         // console.log("No Battery Voltage");
