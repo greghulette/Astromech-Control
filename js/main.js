@@ -684,7 +684,7 @@ function httpGetStatus() {
         // console.log("Dome Controller Online");
         batteryVoltage = jsonResponse.BL_BatteryVoltage;
         // console.log(batteryVoltage);
-        document.getElementById('droidBatteryPar').innerText = batteryVoltage;
+        document.getElementById('droidBatteryPar').innerText = batteryVoltage.toFixed(2);
 
       } else {
         // console.log("No Battery Voltage");
