@@ -339,7 +339,7 @@ function updateGesturesDiagram(p) {
 }
 
 function parseSerialUpdate(x) {
-  // console.log("Parse JSON ogject: ");
+  console.log("Parse JSON ogject: ");
   let parsedInfo = (JSON.parse(x));
   console.log(parsedInfo);
   droidremoteControllerStatus = parsedInfo.droidremoteControllerStatus;
@@ -361,8 +361,26 @@ function parseSerialUpdate(x) {
   VUIntBaseline = parsedInfo.VUIntBaseline;
   VUExtBaseline = parsedInfo.VUExtBaseline;
   FunctionSWState = parsedInfo.FunctionSWState;
+  DGSuccessCounter = parsedInfo.DGSuccessCounter;
+  DGFailureCounter = parsedInfo.DGFailureCounter;
+  BCSuccessCounter = parsedInfo.BCSuccessCounter;
+  BCFailureCounter = parsedInfo.BCFailureCounter;
+  BSSuccessCounter = parsedInfo.BSSuccessCounter;
+  BSFailureCounter = parsedInfo.BSFailureCounter;
+  DPSuccessCounter = parsedInfo.DPSuccessCounter;
+  DPFailureCounter = parsedInfo.DPFailureCounter;
+  DCSuccessCounter = parsedInfo.DCSuccessCounter;
+  DCFailureCounter = parsedInfo.DCFailureCounter;
+  HPSuccessCounter = parsedInfo.HPSuccessCounter;
+  HPFailureCounter = parsedInfo.HPFailureCounter;
   // console.log(batteryPercent);
   updateEEPROMSettings();
+  updateESPNOWSTATS();
+
+}
+
+function updateESPNOWSTATS() {
+  document.getElementById('DPSuccessCounter').innerText = DPSuccessCounter;
 
 
 }
