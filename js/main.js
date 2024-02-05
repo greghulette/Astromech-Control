@@ -321,20 +321,32 @@ class JSONTransformer {
     }
   }
 }
+var pold = 0;
+var pnew;
+var remoteConnected;
 
 function updateGesturesDiagram(p) {
   let downPageLink = document.getElementById('gestures1Link');
   let middlePageLink = document.getElementById('gestures2Link');
   let upPageLink = document.getElementById('gestures3Link');
+  pnew = p;
+  if (pnew != pold) {
+    console.log("P is not equal to Pold");
+    console.log(pnew);
+    console.log(pold);
+    if (p == 1 && remoteConnected == true) {
+      pold = p;
+      downPageLink.click();
+    }
+    if (p == 2 && remoteConnected == true) {
+      pold = p;
 
-  if (p == 1) {
-    downPageLink.click();
-  }
-  if (p == 2) {
-    middlePageLink.click();
-  }
-  if (p == 3) {
-    upPageLink.click();
+      middlePageLink.click();
+    }
+    if (p == 3 && remoteConnected == true) {
+      pold = p;
+      upPageLink.click();
+    }
   }
 }
 
@@ -361,6 +373,7 @@ function parseSerialUpdate(x) {
   VUIntBaseline = parsedInfo.VUIntBaseline;
   VUExtBaseline = parsedInfo.VUExtBaseline;
   FunctionSWState = parsedInfo.FunctionSWState;
+  remoteConnected = parsedInfo.remoteConnected;
   DGSuccessCounter = parsedInfo.DGSuccessCounter;
   DGFailureCounter = parsedInfo.DGFailureCounter;
   BCSuccessCounter = parsedInfo.BCSuccessCounter;
@@ -376,8 +389,10 @@ function parseSerialUpdate(x) {
   // console.log(batteryPercent);
   updateEEPROMSettings();
   updateESPNOWSTATS();
-
+  updateGesturesDiagram(FunctionSWState);
 }
+
+
 
 function updateESPNOWSTATS() {
   document.getElementById('DPSuccessCounter').innerText = DPSuccessCounter;
@@ -637,7 +652,12 @@ function httpGetStatus() {
         // console.log("Droid Gateway Offline");
         relayStatus = false;
       }
+      if (jsonResponse.FunctionSWState > 0) {
+        FunctionSWState = jsonResponse.FunctionSWState;
+        remoteConnected = jsonResponse.remoteConnected;
+        updateGesturesDiagram(FunctionSWState);
 
+      }
       if (jsonResponse.DGSuccessCounter >= 0) {
         document.getElementById('DGSuccessCounter').innerText = jsonResponse.DGSuccessCounter;
 
