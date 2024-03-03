@@ -395,9 +395,25 @@ function parseSerialUpdate(x) {
 
 
 function updateESPNOWSTATS() {
+
+
+  document.getElementById('DGSuccessCounter').innerText = DGSuccessCounter;
+  document.getElementById('DGFailureCounter').innerText = DGFailureCounter;
+
+  document.getElementById('BCSuccessCounter').innerText = BCSuccessCounter;
+  document.getElementById('BCFailureCounter').innerText = BCFailureCounter;
+
+  document.getElementById('BSSuccessCounter').innerText = BSSuccessCounter;
+  document.getElementById('BSFailureCounter').innerText = BSFailureCounter;
+
   document.getElementById('DPSuccessCounter').innerText = DPSuccessCounter;
+  document.getElementById('DPFailureCounter').innerText = DPFailureCounter;
 
+  document.getElementById('DCSuccessCounter').innerText = DCSuccessCounter;
+  document.getElementById('DCFailureCounter').innerText = DCFailureCounter;
 
+  document.getElementById('HPSuccessCounter').innerText = HPSuccessCounter;
+  document.getElementById('HPFailureCounter').innerText = HPFailureCounter;
 }
 /**
 
