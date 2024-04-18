@@ -21,9 +21,9 @@ enable serial
 enable splash
 
 ## Used for website font
-download the star jedi font 
+download the star jedi font from https://www.dafont.com/star-jedi.font
 create hidden director in /home/pi called .font
-copy star jedi .tff into font folder
+copy Starjedi.ttf into the .font folder
 
 ## Download the webpage
 git clone https://github.com/greghulette/Astromech-Control
