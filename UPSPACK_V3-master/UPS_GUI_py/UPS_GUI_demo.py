@@ -7,7 +7,7 @@ import serial
 import time
 
 
-test = UPS2("/dev/ttyAMA0")
+test = UPS2("/dev/ttyS0")
 
 
 def reflash_data():
