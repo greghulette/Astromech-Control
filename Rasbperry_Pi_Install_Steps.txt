@@ -41,3 +41,7 @@ nano /home/pi/.config/lxsession/LXDE-pi/autostart
 @xscreensaver -no-splash
 @chromium-browser --start-fullscreen /home/pi/Astromech-Control/index.html
 
+## install Zoom for Google Chrom extension to allow custom zoom level to make the page fit correctly
+go into options and choose option to use built in browser zoom 
+zoom level should be set at 62, at least this is what looks best for me when the webpage is in fullscreen mode 
+
