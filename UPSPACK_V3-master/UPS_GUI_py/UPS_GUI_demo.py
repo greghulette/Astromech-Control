@@ -26,7 +26,7 @@ def reflash_data():
     batcap_int = int(batcap)
 #    print(type(batcap_int))
     b = open("BatteryCapacity.txt", "w")
-    b.write(vin)
+    b.write(str(vin))
     b.close()
     if vin == "NG":
         vin_lable.config(bg = "red")
