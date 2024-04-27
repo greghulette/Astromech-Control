@@ -9,7 +9,7 @@ sudo raspi-config
 > advanced
 >> Waylayd
 >>> switch to X11
-possible add Option "TransformationMatrix" "-1010-11001" to the touchscreen section in /usr/share/X11/xorg.conf/40-libinput.conf
+USE SPACES IN COMMAND Option "TransformationMatrix" "-1 0 1 0 -1 1 0 0 1" to the touchscreen section in /usr/share/X11/xorg.conf/40-libinput.conf
 rotate the screen
 
 

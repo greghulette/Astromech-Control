@@ -32,7 +32,9 @@ def reflash_data():
     else:
         vin_lable.config(bg = "green")
         vin_var.set("Power connected!")
-                  
+        ConnectedStatus = open("ConnectedStatus.txt", "w")
+        ConnectedStatus.write("connected")
+        ConnectedStatus.close()
     if batcap_int< 30:
         cap_lable.config(bg = "red")
         if batcap_int == 1:
