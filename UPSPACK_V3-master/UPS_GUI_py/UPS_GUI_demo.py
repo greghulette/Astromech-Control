@@ -25,15 +25,20 @@ def reflash_data():
     
     batcap_int = int(batcap)
 #    print(type(batcap_int))
-    
+    b = open("BatteryCapacity.txt", "w")
+    b.write(vin)
+    b.close()
     if vin == "NG":
         vin_lable.config(bg = "red")
         vin_var.set("Power NOT connected!")
+        c = open("ConnectedStatus.txt", "w")
+        c.write(vin)
+        c.close()
     else:
         vin_lable.config(bg = "green")
         vin_var.set("Power connected!")
         c = open("ConnectedStatus.txt", "w")
-        c.write("connected")
+        c.write(vin)
         c.close()
     if batcap_int< 30:
         cap_lable.config(bg = "red")
