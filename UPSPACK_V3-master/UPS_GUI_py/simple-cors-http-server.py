@@ -1,30 +1,27 @@
-# Python http.server that sets Access-Control-Allow-Origin header.
-# https://gist.github.com/razor-x/9542707
+#!/usr/bin/env python3
 
-import os
+# It's python3 -m http.server PORT for a CORS world
+
+from http.server import HTTPServer, SimpleHTTPRequestHandler
 import sys
-import http.server
-import socketserver
 
-PORT = 8000
 
-class HTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
+class CORSRequestHandler(SimpleHTTPRequestHandler):
+    
     def end_headers(self):
         self.send_header('Access-Control-Allow-Origin', '*')
-        http.server.SimpleHTTPRequestHandler.end_headers(self)
+        self.send_header('Access-Control-Allow-Methods', '*')
+        self.send_header('Access-Control-Allow-Headers', '*')
+        self.send_header('Cache-Control', 'no-store, no-cache, must-revalidate')
+        return super(CORSRequestHandler, self).end_headers()
 
-def server(port):
-    httpd = socketserver.TCPServer(('', port), HTTPRequestHandler)
-    return httpd
+    def do_OPTIONS(self):
+        self.send_response(200)
+        self.end_headers()
 
-if __name__ == "__main__":
-    port = PORT
-    httpd = server(port)
-    try:
-        os.chdir('build')
-        print("\nserving from build/ at localhost:" + str(port))
-        httpd.serve_forever()
-    except KeyboardInterrupt:
-        print("\n...shutting down http server")
-        httpd.shutdown()
-        sys.exit()
+host = sys.argv[1] if len(sys.argv) > 2 else '0.0.0.0'
+port = int(sys.argv[len(sys.argv)-1]) if len(sys.argv) > 1 else 8080
+
+print("Listening on {}:{}".format(host, port))
+httpd = HTTPServer((host, port), CORSRequestHandler)
+httpd.serve_forever()
