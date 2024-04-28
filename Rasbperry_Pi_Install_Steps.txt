@@ -18,6 +18,11 @@ enable vnc
 
 ## Required for the UPS monitoring
 enable serial
+
+# Disable Bluetooth
+sudo nano /boot/firmware/configt.txt 
+add dtovery=disable-bt 
+
 enable splash
 
 ## Used for website font
