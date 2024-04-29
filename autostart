@@ -1,0 +1,6 @@
+@lxpanel --profile LXDE-pi
+@pcmanfm --desktop --profile LXDE-pi
+lxterminal --geometry=3x3 -e "/home/pi/Astromech-Control/UPSPACK_V3-master/UPS_GUI_py/startGUI.sh"
+lxterminal --geometry=3x3 -e "/home/pi/Astromech-Control/UPSPACK_V3-master/UPS_GUI_py/starthttp.sh"
+chromium-browser --start-fullscreen /home/pi/Astromech-Control/index.html
+@xscreensaver -no-splash
