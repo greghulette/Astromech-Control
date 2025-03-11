@@ -4009,10 +4009,11 @@ label[for= ColorPickertab]{
    /* left:100px;
    top: 100px; */
    /* width: auto; */
-   height: 57px;
-   overflow: visible;
+   height: 85px;
+   overflow: auto;
    border: none;
-   padding-top: 0px;
+   padding-top: 1px;
+   padding-bottom: 1px;
    background-color: black;
 }
 
@@ -4090,11 +4091,12 @@ label[for= ColorPickertab]{
 
 .menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Content .menu-Level-2 .menu-Level-2-Links button{
  display: inline-block;
- width: 170px;
- height: 54px;
- overflow: visible;
+ width: 200px;
+ height: 85px;
+ overflow: auto;
 border: none;
-padding-top: 0px;
+padding-top: 2px;
+padding-bottom: 2px;
 background-color: black;
 /* padding-left: -25px; */
 }

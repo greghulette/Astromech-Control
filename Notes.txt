@@ -17,49 +17,6 @@
 
 
 
-# Steps to install new Raspberry Pi
-
-
-install OS 
-Update OS 
-
-## Only on my Raspberry Pi because I wanted to rotate my screen
-sudo raspi-config
-> advanced
->> Waylayd
->>> switch to X11
-possible add Option "TransformationMatrix" "-1010-11001" to the touchscreen section in /usr/share/X11/xorg.conf/40-libinput.conf
-rotate the screen
-
-
-## Optional if you want to remote desktop into the Pi
-enable vnc
-
-## Required for the UPS monitoring
-enable serial
-enable splash
-
-## Used for website font
-download the star jedi font 
-create hidden director in /home/pi called .font
-copy star jedi .tff into font folder
-
-## Download the webpage
-git clone https://github.com/greghulette/Astromech-Control
-
-## Setup the autostart of the website
-mkdir /home/pi/.config/lxsession
-mkdir /home/pi/.config/lxsession/LXDE-pi
-cp /etc/xdg/lxsession/LXDE-pi/autostart /home/pi/.config/lxsession/LXDE-pi/
-
-## open the file and ensure it looks like below
-nano /home/pi/.config/lxsession/LXDE-pi/autostart
-
-@lxpanel --profile LXDE-pi
-@pcmanfm --desktop --profile LXDE-pi
-@xscreensaver -no-splash
-@chromium-browser --start-fullscreen /home/pi/Astromech-Control/index.html
-
 
 
 
@@ -74,3 +31,8 @@ if [ "$?" -eq 1 ]
 	chromium-browser --start-fullscreen http://10.0.0.15:3000/public/index-test.html
 
 fi
+
+
+C913562
+C84354
+C3011914
