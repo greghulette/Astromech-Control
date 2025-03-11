@@ -4005,12 +4005,12 @@ label[for= ColorPickertab]{
 }
 
 .menu-Level-0  .menu-Level-0-Content .menu-Level-1 .menu-Level-1-Links button{
-   display: inline-block;
+   display:inline-flex;
    /* left:100px;
    top: 100px; */
-   /* width: auto; */
+   width: auto;
    height: 85px;
-   overflow: auto;
+   overflow: visible;
    border: none;
    padding-top: 1px;
    padding-bottom: 1px;
@@ -4023,7 +4023,7 @@ label[for= ColorPickertab]{
    /* color: yellow; */
    /* -webkit-text-fill-color: #7CFC00; */
    -webkit-text-fill-color: yellow;
-   width: auto;
+   /* width: auto; */
    border: none;
    outline: none;
   -webkit-transform: scale(1.15);
