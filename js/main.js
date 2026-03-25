@@ -674,66 +674,56 @@ function httpGetStatus() {
         updateGesturesDiagram(FunctionSWState);
 
       }
-      if (jsonResponse.DGSuccessCounter >= 0) {
-        document.getElementById('DGSuccessCounter').innerText = jsonResponse.DGSuccessCounter;
+      // ── ETM delivery stats (arrays of 6: index 0=DG,1=BC,2=BS,3=DC,4=DP,5=HP) ──
+      if (Array.isArray(jsonResponse.etmOnline)) {
+        const boardNames = ['DG', 'BC', 'BS', 'DC', 'DP', 'HP'];
+        const online  = jsonResponse.etmOnline;
+        const sent    = jsonResponse.etmSent    || [0,0,0,0,0,0];
+        const ackd    = jsonResponse.etmAckd    || [0,0,0,0,0,0];
+        const retries = jsonResponse.etmRetries || [0,0,0,0,0,0];
+        const failed  = jsonResponse.etmFailed  || [0,0,0,0,0,0];
+        const setEl   = (id, val) => { const el = document.getElementById(id); if (el) el.innerText = val; };
 
-      } else {
-      }
-      if (jsonResponse.DGFailureCounter >= 0) {
-        document.getElementById('DGFailureCounter').innerText = jsonResponse.DGFailureCounter
-      } else {
+        for (let i = 0; i < 6; i++) {
+          const name = boardNames[i];
+
+          // Online dot
+          const dotEl = document.getElementById('etmOnline_' + name);
+          if (dotEl) dotEl.className = 'etmDot ' + (online[i] ? 'etmDotOnline' : 'etmDotOffline');
+
+          setEl('etmSent_' + name, sent[i]);
+          setEl('etmAckd_' + name, ackd[i]);
+
+          // Retries — warn in amber if > 0
+          const retriesEl = document.getElementById('etmRetries_' + name);
+          if (retriesEl) {
+            retriesEl.innerText  = retries[i];
+            retriesEl.className  = retries[i] > 0 ? 'etmRetryWarn' : '';
+          }
+
+          // Failed — warn in red if > 0
+          const failedEl = document.getElementById('etmFailed_' + name);
+          if (failedEl) {
+            failedEl.innerText = failed[i];
+            failedEl.className = failed[i] > 0 ? 'etmFailedWarn' : '';
+          }
+
+          // Success rate = ackd / (ackd + failed) — colour-coded
+          const rateEl = document.getElementById('etmRate_' + name);
+          if (rateEl) {
+            const total = ackd[i] + failed[i];
+            if (total === 0) {
+              rateEl.innerText   = sent[i] > 0 ? '…' : '—';
+              rateEl.className   = '';
+            } else {
+              const pct          = ackd[i] / total * 100;
+              rateEl.innerText   = pct.toFixed(1) + '%';
+              rateEl.className   = pct >= 95 ? 'etmRateGood' : pct >= 75 ? 'etmRateWarn' : 'etmRateBad';
+            }
+          }
+        }
       }
 
-      if (jsonResponse.BCSuccessCounter >= 0) {
-        document.getElementById('BCSuccessCounter').innerText = jsonResponse.BCSuccessCounter;
-
-      } else {
-      }
-      if (jsonResponse.BCFailureCounter >= 0) {
-        document.getElementById('BCFailureCounter').innerText = jsonResponse.BCFailureCounter;
-
-      } else {
-      }
-      if (jsonResponse.BSSuccessCounter >= 0) {
-        document.getElementById('BSSuccessCounter').innerText = jsonResponse.BSSuccessCounter;
-
-      } else {
-      }
-      if (jsonResponse.BSFailureCounter >= 0) {
-        document.getElementById('BSFailureCounter').innerText = jsonResponse.BSFailureCounter;
-
-      } else {
-      }
-      if (jsonResponse.DPSuccessCounter >= 0) {
-        document.getElementById('DPSuccessCounter').innerText = jsonResponse.DPSuccessCounter;
-
-      } else {
-      }
-      if (jsonResponse.DPFailureCounter >= 0) {
-        document.getElementById('DPFailureCounter').innerText = jsonResponse.DPFailureCounter;
-
-      } else {
-      }
-      if (jsonResponse.DCSuccessCounter >= 0) {
-        document.getElementById('DCSuccessCounter').innerText = jsonResponse.DCSuccessCounter;
-
-      } else {
-      }
-      if (jsonResponse.DCFailureCounter >= 0) {
-        document.getElementById('DCFailureCounter').innerText = jsonResponse.DCFailureCounter;
-
-      } else {
-      }
-      if (jsonResponse.HPSuccessCounter >= 0) {
-        document.getElementById('HPSuccessCounter').innerText = jsonResponse.HPSuccessCounter;
-
-      } else {
-      }
-      if (jsonResponse.HPFailureCounter >= 0) {
-        document.getElementById('HPFailureCounter').innerText = jsonResponse.HPFailureCounter;
-
-      } else {
-      }
       if (jsonResponse.BL_BatteryVoltage > 0) {
         // console.log("Dome Controller Online");
         batteryVoltage = jsonResponse.BL_BatteryVoltage;

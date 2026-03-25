@@ -5614,33 +5614,79 @@ id="FrontLogicsTopBlueSelector"
 
 
 <div class="menu-Level-1-Content " id="stats">
-  <!-- <img loading="lazy" src="Images/Button-LED_Controller_Reset.png" alt="" class="resetLEDController " onclick="resetArduino()"> -->
   <h2 class="gesturesheaders">esp-now delivery statistics</h2>
 
-    <p class="statsHeader">success / failure</p>
-    <div class="DGStats">
-      <br>
-      <p id="DGSuccessLabel">droid gateway Stats:    <span id="DGSuccessCounter" class="">na</span>  / <span id="DGFailureCounter">na</span> </p>
-    </div>
-  <div class="BCStats">
-    <br>
-    <p id="BCSuccessLabel">Body Controller Stats:    <span id="BCSuccessCounter" class="">na</span>  / <span id="BCFailureCounter">na</span> </p>
-  </div>
-  <div class="BSStats">
-    <br>
-    <p id="BSSuccessLabel">Body Servo Stats:  <span id="BSSuccessCounter" class="">na</span>  / <span id="BSFailureCounter">na</span> </p>
-  </div>
-  <div class="DPStats">
-    <br>
-    <p id="DPSuccessLabel">domeplate stats: <span id="DPSuccessCounter" class="">na</span>  / <span id="DPFailureCounter">na</span> </p>
-  </div>
-  <div class="DCStats">
-    <br>
-    <p id="DCSuccessLabel">dome controller Stats: <span id="DCSuccessCounter" class="">na</span>  / <span id="DCFailureCounter">na</span> </p>
-  </div>
-  <div class="HPStats">
-    <br>
-    <p id=HPSuccessLabel">hp controller Stats: <span id="HPSuccessCounter" class="">na</span>  / <span id="HPFailureCounter">na</span> </p>
+  <div class="etmStatsWrapper">
+    <p class="etmStatsTitle">etm confirmed delivery &mdash; droid gateway perspective</p>
+    <table class="etmStatsTable">
+      <thead>
+        <tr>
+          <th>board</th>
+          <th>status</th>
+          <th>sent</th>
+          <th>ack'd</th>
+          <th>retries</th>
+          <th>failed</th>
+          <th>rate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="etmBoardName">dg</td>
+          <td><span id="etmOnline_DG" class="etmDot etmDotOffline"></span></td>
+          <td id="etmSent_DG">—</td>
+          <td id="etmAckd_DG">—</td>
+          <td id="etmRetries_DG">—</td>
+          <td id="etmFailed_DG">—</td>
+          <td id="etmRate_DG">—</td>
+        </tr>
+        <tr>
+          <td class="etmBoardName">bc</td>
+          <td><span id="etmOnline_BC" class="etmDot etmDotOffline"></span></td>
+          <td id="etmSent_BC">—</td>
+          <td id="etmAckd_BC">—</td>
+          <td id="etmRetries_BC">—</td>
+          <td id="etmFailed_BC">—</td>
+          <td id="etmRate_BC">—</td>
+        </tr>
+        <tr>
+          <td class="etmBoardName">bs</td>
+          <td><span id="etmOnline_BS" class="etmDot etmDotOffline"></span></td>
+          <td id="etmSent_BS">—</td>
+          <td id="etmAckd_BS">—</td>
+          <td id="etmRetries_BS">—</td>
+          <td id="etmFailed_BS">—</td>
+          <td id="etmRate_BS">—</td>
+        </tr>
+        <tr>
+          <td class="etmBoardName">dc</td>
+          <td><span id="etmOnline_DC" class="etmDot etmDotOffline"></span></td>
+          <td id="etmSent_DC">—</td>
+          <td id="etmAckd_DC">—</td>
+          <td id="etmRetries_DC">—</td>
+          <td id="etmFailed_DC">—</td>
+          <td id="etmRate_DC">—</td>
+        </tr>
+        <tr>
+          <td class="etmBoardName">dp</td>
+          <td><span id="etmOnline_DP" class="etmDot etmDotOffline"></span></td>
+          <td id="etmSent_DP">—</td>
+          <td id="etmAckd_DP">—</td>
+          <td id="etmRetries_DP">—</td>
+          <td id="etmFailed_DP">—</td>
+          <td id="etmRate_DP">—</td>
+        </tr>
+        <tr>
+          <td class="etmBoardName">hp</td>
+          <td><span id="etmOnline_HP" class="etmDot etmDotOffline"></span></td>
+          <td id="etmSent_HP">—</td>
+          <td id="etmAckd_HP">—</td>
+          <td id="etmRetries_HP">—</td>
+          <td id="etmFailed_HP">—</td>
+          <td id="etmRate_HP">—</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 

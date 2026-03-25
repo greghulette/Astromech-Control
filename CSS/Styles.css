@@ -1158,6 +1158,72 @@ height: 110px;
   top: 100px;
   left: 100px;
 }
+
+/* ── ETM Delivery Statistics Table ─────────────────────────────── */
+.etmStatsWrapper {
+  position: absolute;
+  top: 65px;
+  left: -190px;
+  width: 960px;
+}
+.etmStatsTitle {
+  color: #888;
+  font-size: 14px;
+  letter-spacing: 1px;
+  margin: 0 0 8px 2px;
+}
+.etmStatsTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+  color: #ccc;
+}
+.etmStatsTable thead tr {
+  background-color: #1a1a2e;
+}
+.etmStatsTable th {
+  color: #6aa3f0;
+  padding: 8px 10px;
+  text-align: center;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #2a2a3e;
+  font-weight: normal;
+}
+.etmStatsTable td {
+  padding: 7px 10px;
+  text-align: center;
+  border-bottom: 1px solid #1e1e1e;
+}
+.etmStatsTable tbody tr:hover {
+  background-color: #1a1a26;
+}
+.etmBoardName {
+  font-weight: bold;
+  color: #6aa3f0;
+  text-align: left !important;
+  padding-left: 15px !important;
+  letter-spacing: 1px;
+}
+.etmDot {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+.etmDotOnline {
+  background-color: #22cc55;
+  box-shadow: 0 0 5px #22cc55;
+}
+.etmDotOffline {
+  background-color: #993311;
+}
+.etmRetryWarn  { color: #ffaa22; }
+.etmFailedWarn { color: #ff4444; }
+.etmRateGood   { color: #22cc55; }
+.etmRateWarn   { color: #ffaa22; }
+.etmRateBad    { color: #ff4444; }
 .move1{
   position: absolute;
   left: -400px;
