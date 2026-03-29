@@ -386,6 +386,11 @@ function parseSerialUpdate(x) {
   DCFailureCounter = parsedInfo.DCFailureCounter;
   HPSuccessCounter = parsedInfo.HPSuccessCounter;
   HPFailureCounter = parsedInfo.HPFailureCounter;
+  etmBoardOnline  = parsedInfo.etmOnline   || [false,false,false,false,false,false];
+  etmBoardSent    = parsedInfo.etmSent     || [0,0,0,0,0,0];
+  etmBoardAckd    = parsedInfo.etmAckd     || [0,0,0,0,0,0];
+  etmBoardRetries = parsedInfo.etmRetries  || [0,0,0,0,0,0];
+  etmBoardFailed  = parsedInfo.etmFailed   || [0,0,0,0,0,0];
   // console.log(batteryPercent);
   updateEEPROMSettings();
   updateESPNOWSTATS();
