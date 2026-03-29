@@ -30,6 +30,11 @@ var VUExtBaseline = 0
 var mp3TriggerVolume = 0
 var BSSuccessCounter = 0
 var BSFailureCounter = 0
+var etmBoardOnline  = [false,false,false,false,false,false]
+var etmBoardSent    = [0,0,0,0,0,0]
+var etmBoardAckd    = [0,0,0,0,0,0]
+var etmBoardRetries = [0,0,0,0,0,0]
+var etmBoardFailed  = [0,0,0,0,0,0]
 var domePlatePrefix = ":EDP"
 var BLCommandPrefix = ":L:EBC:L"
 var DPCommandPrefix = ":L:EDP:"
@@ -394,6 +399,7 @@ function parseSerialUpdate(x) {
   // console.log(batteryPercent);
   updateEEPROMSettings();
   updateESPNOWSTATS();
+  updateETMStats();
   updateGesturesDiagram(FunctionSWState);
 }
 
@@ -419,6 +425,40 @@ function updateESPNOWSTATS() {
 
   document.getElementById('HPSuccessCounter').innerText = HPSuccessCounter;
   document.getElementById('HPFailureCounter').innerText = HPFailureCounter;
+}
+
+function updateETMStats() {
+  const boardNames = ['DG','BC','BS','DC','DP','HP'];
+  const setEl = (id, val) => { const el = document.getElementById(id); if (el) el.innerText = val; };
+  for (let i = 0; i < 6; i++) {
+    const name = boardNames[i];
+    const dotEl = document.getElementById('etmOnline_' + name);
+    if (dotEl) dotEl.className = 'etmDot ' + (etmBoardOnline[i] ? 'etmDotOnline' : 'etmDotOffline');
+    setEl('etmSent_'    + name, etmBoardSent[i]);
+    setEl('etmAckd_'    + name, etmBoardAckd[i]);
+    const retriesEl = document.getElementById('etmRetries_' + name);
+    if (retriesEl) {
+      retriesEl.innerText = etmBoardRetries[i];
+      retriesEl.className = etmBoardRetries[i] > 0 ? 'etmRetryWarn' : '';
+    }
+    const failedEl = document.getElementById('etmFailed_' + name);
+    if (failedEl) {
+      failedEl.innerText = etmBoardFailed[i];
+      failedEl.className = etmBoardFailed[i] > 0 ? 'etmFailedWarn' : '';
+    }
+    const rateEl = document.getElementById('etmRate_' + name);
+    if (rateEl) {
+      const total = etmBoardAckd[i] + etmBoardFailed[i];
+      if (total === 0) {
+        rateEl.innerText = etmBoardSent[i] > 0 ? '…' : '—';
+        rateEl.className = '';
+      } else {
+        const pct = etmBoardAckd[i] / total * 100;
+        rateEl.innerText = pct.toFixed(1) + '%';
+        rateEl.className = pct >= 95 ? 'etmRateGood' : pct >= 75 ? 'etmRateWarn' : 'etmRateBad';
+      }
+    }
+  }
 }
 /**
 
@@ -681,52 +721,12 @@ function httpGetStatus() {
       }
       // ── ETM delivery stats (arrays of 6: index 0=DG,1=BC,2=BS,3=DC,4=DP,5=HP) ──
       if (Array.isArray(jsonResponse.etmOnline)) {
-        const boardNames = ['DG', 'BC', 'BS', 'DC', 'DP', 'HP'];
-        const online  = jsonResponse.etmOnline;
-        const sent    = jsonResponse.etmSent    || [0,0,0,0,0,0];
-        const ackd    = jsonResponse.etmAckd    || [0,0,0,0,0,0];
-        const retries = jsonResponse.etmRetries || [0,0,0,0,0,0];
-        const failed  = jsonResponse.etmFailed  || [0,0,0,0,0,0];
-        const setEl   = (id, val) => { const el = document.getElementById(id); if (el) el.innerText = val; };
-
-        for (let i = 0; i < 6; i++) {
-          const name = boardNames[i];
-
-          // Online dot
-          const dotEl = document.getElementById('etmOnline_' + name);
-          if (dotEl) dotEl.className = 'etmDot ' + (online[i] ? 'etmDotOnline' : 'etmDotOffline');
-
-          setEl('etmSent_' + name, sent[i]);
-          setEl('etmAckd_' + name, ackd[i]);
-
-          // Retries — warn in amber if > 0
-          const retriesEl = document.getElementById('etmRetries_' + name);
-          if (retriesEl) {
-            retriesEl.innerText  = retries[i];
-            retriesEl.className  = retries[i] > 0 ? 'etmRetryWarn' : '';
-          }
-
-          // Failed — warn in red if > 0
-          const failedEl = document.getElementById('etmFailed_' + name);
-          if (failedEl) {
-            failedEl.innerText = failed[i];
-            failedEl.className = failed[i] > 0 ? 'etmFailedWarn' : '';
-          }
-
-          // Success rate = ackd / (ackd + failed) — colour-coded
-          const rateEl = document.getElementById('etmRate_' + name);
-          if (rateEl) {
-            const total = ackd[i] + failed[i];
-            if (total === 0) {
-              rateEl.innerText   = sent[i] > 0 ? '…' : '—';
-              rateEl.className   = '';
-            } else {
-              const pct          = ackd[i] / total * 100;
-              rateEl.innerText   = pct.toFixed(1) + '%';
-              rateEl.className   = pct >= 95 ? 'etmRateGood' : pct >= 75 ? 'etmRateWarn' : 'etmRateBad';
-            }
-          }
-        }
+        etmBoardOnline  = jsonResponse.etmOnline;
+        etmBoardSent    = jsonResponse.etmSent    || [0,0,0,0,0,0];
+        etmBoardAckd    = jsonResponse.etmAckd    || [0,0,0,0,0,0];
+        etmBoardRetries = jsonResponse.etmRetries || [0,0,0,0,0,0];
+        etmBoardFailed  = jsonResponse.etmFailed  || [0,0,0,0,0,0];
+        updateETMStats();
       }
 
       if (jsonResponse.BL_BatteryVoltage > 0) {
