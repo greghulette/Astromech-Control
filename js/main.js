@@ -433,8 +433,11 @@ function updateETMStats() {
   const setEl = (id, val) => { const el = document.getElementById(id); if (el) el.innerText = val; };
   for (let i = 0; i < 6; i++) {
     const name = boardNames[i];
+    // Update online dot for all boards
     const dotEl = document.getElementById('etmOnline_' + name);
     if (dotEl) dotEl.className = 'etmDot ' + (etmBoardOnline[i] ? 'etmDotOnline' : 'etmDotOffline');
+    // DG row has no stat cells (DG is the sender, not a destination)
+    if (i === 0) continue;
     setEl('etmSent_'    + name, etmBoardSent[i]);
     setEl('etmAckd_'    + name, etmBoardAckd[i]);
     const retriesEl = document.getElementById('etmRetries_' + name);
