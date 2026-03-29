@@ -334,6 +334,7 @@ function updateGesturesDiagram(p) {
   let downPageLink = document.getElementById('gestures1Link');
   let middlePageLink = document.getElementById('gestures2Link');
   let upPageLink = document.getElementById('gestures3Link');
+  if (!downPageLink || !middlePageLink || !upPageLink) return;
   pnew = p;
   if (pnew != pold) {
     console.log("P is not equal to Pold");
@@ -406,7 +407,7 @@ function parseSerialUpdate(x) {
 
 
 function updateESPNOWSTATS() {
-
+  if (!document.getElementById('DGSuccessCounter')) return;
 
   document.getElementById('DGSuccessCounter').innerText = DGSuccessCounter;
   document.getElementById('DGFailureCounter').innerText = DGFailureCounter;
@@ -804,6 +805,7 @@ function httpGetStatus() {
 }
 
 function updateEEPROMSettings() {
+  if (!document.getElementById('LDPBrightnessRange')) return;
   document.getElementById('LDPBrightnessRange').value = LDPBright;
   document.getElementById('LDPBrightnesssliderAmount').innerHTML = LDPBright;
   document.getElementById('MaintBrightnessRange').value = MaintBright;
@@ -829,6 +831,7 @@ function checkDomePlateStatus() {
   let StatusGrey = document.getElementById('domePlateControllerIconGrey')
   let StatusGreen = document.getElementById('domePlateControllerIconGreen')
   let StatusRed = document.getElementById('domePlateControllerIconRed')
+  if (!StatusGrey || !StatusGreen || !StatusRed) return;
   if (domePlateControllerStatus == true) {
 
     StatusGrey.classList.add('hidden');
@@ -851,6 +854,7 @@ function checkBodyLEDControllerStatus() {
   let StatusGrey = document.getElementById('BodyControllerIconGrey')
   let StatusGreen = document.getElementById('BodyControllerIconGreen')
   let StatusRed = document.getElementById('BodyControllerIconRed')
+  if (!StatusGrey || !StatusGreen || !StatusRed) return;
   if (bodyControllerStatus == true) {
     StatusGrey.classList.add('hidden');
     StatusGreen.classList.remove('hidden');
@@ -887,6 +891,7 @@ function checkDomeControllerStatus() {
   let StatusGrey = document.getElementById('DCIconGrey')
   let StatusGreen = document.getElementById('DCIconGreen')
   let StatusRed = document.getElementById('DCIconRed')
+  if (!StatusGrey || !StatusGreen || !StatusRed) return;
   if (domeControllerStatus === true) {
     StatusGrey.classList.add('hidden');
     StatusGreen.classList.remove('hidden');
@@ -907,6 +912,7 @@ function checkBodyServoStatus() {
   let StatusGrey = document.getElementById('BSIconGrey')
   let StatusGreen = document.getElementById('BSIconGreen')
   let StatusRed = document.getElementById('BSIconRed')
+  if (!StatusGrey || !StatusGreen || !StatusRed) return;
 
   if (bodyServoControllerStatus === true) {
     StatusGrey.classList.add('hidden');
@@ -933,6 +939,7 @@ function checkDroidGatewayStatus() {
   let StatusGrey = document.getElementById('DroidGatewayIconGrey')
   let StatusGreen = document.getElementById('DroidGatewayIconGreen')
   let StatusRed = document.getElementById('DroidGatewayIconRed')
+  if (!StatusGrey || !StatusGreen || !StatusRed) return;
 
   if (droidgatewayControllerStatus === true) {
     StatusGrey.classList.add('hidden');
@@ -953,6 +960,7 @@ function checkDroidGatewayStatus() {
 function checkRelayStatus() {
   let statusGreen = document.getElementById('greenStopSign');
   let statusRed = document.getElementById('redStopSign');
+  if (!statusGreen || !statusRed) return;
   if (relayStatus == true) {
     statusGreen.classList.remove('hidden');
     statusRed.classList.add('hidden');
@@ -966,6 +974,7 @@ function checkDroidRemoteStatus() {
   let StatusGrey = document.getElementById('DroidRemoteIconGrey')
   let StatusGreen = document.getElementById('DroidRemoteIconGreen')
   let StatusRed = document.getElementById('DroidRemoteIconRed')
+  if (!StatusGrey || !StatusGreen || !StatusRed) return;
 
   if (droidremoteControllerStatus === true) {
     StatusGrey.classList.add('hidden');
@@ -987,6 +996,7 @@ function checkHPControllerStatus() {
   let StatusGrey = document.getElementById('HPIconGrey')
   let StatusGreen = document.getElementById('HPIconGreen')
   let StatusRed = document.getElementById('HPIconRed')
+  if (!StatusGrey || !StatusGreen || !StatusRed) return;
 
   if (hpControllerStatus === true) {
     StatusGrey.classList.add('hidden');
@@ -1010,6 +1020,7 @@ function GetDroidBatteryLevel() {
   let PowerColorGreen = document.getElementById('droidPowerColorGreen');
   let PowerColorYellow = document.getElementById('droidPowerColorYellow');
   let PowerColorRed = document.getElementById('droidPowerColorRed');
+  if (!PowerColorGrey || !PowerColorGreen || !PowerColorYellow || !PowerColorRed) return;
 
   var greenLevel = 50;
   var yellowLevel = 20;
@@ -1064,6 +1075,7 @@ function GetRemoteBatteryLevel() {
   let remotePowerColorGreen = document.getElementById('remotePowerColorGreen');
   let remotePowerColorYellow = document.getElementById('remotePowerColorYellow');
   let remotePowerColorRed = document.getElementById('remotePowerColorRed');
+  if (!remotePowerColorGrey || !remotePowerColorGreen || !remotePowerColorYellow || !remotePowerColorRed) return;
 
   var connected = "good";
   var textLower = "";
@@ -1146,6 +1158,7 @@ function GetRemoteBatteryConnection() {
   // //   dump(req.responseText);
   // // }
   let remoteChargingIndicator = document.getElementById('remoteChargingIndicator')
+  if (!remoteChargingIndicator) return;
   var connected = "good";
   var textLower = "";
   var file = new XMLHttpRequest();
