@@ -36,3 +36,105 @@ fi
 C913562
 C84354
 C3011914
+
+
+
+
+-------------------------------------------------------
+Booting up the Wireless Communication Board 1 (W1)
+HW Version: 2.1
+Software Version: 6.0_292140RMAR2026
+Number of WCBs in the system: 3
+-------------------------------------------------------
+Serial Baud Rates and Broadcast Settings:
+Serial1 Baud: 115200, Broadcast Input: Disabled, Broadcast Output: Disabled Pins: Tx:8 Rx:5 (Kyber Maestro)
+Serial2 Baud: 9600, Broadcast Input: Enabled, Broadcast Output: Enabled Pins: Tx:20 Rx:7 (Kyber Marcuino)
+Serial3 Baud: 9600, Broadcast Input: Disabled, Broadcast Output: Disabled Pins: Tx:15 Rx:4
+Serial4 Baud: 9600, Broadcast Input: Disabled, Broadcast Output: Disabled Pins: Tx:14 Rx:27
+Serial5 Baud: 9600, Broadcast Input: Disabled, Broadcast Output: Disabled Pins: Tx:13 Rx:12
+------ESP_NOW Settings---------------------------------
+ESP-NOW Password: tvA33maxZm9Z4v
+ESP-NOW MAC Address: 02:58:96:00:00:01
+Added ESP-NOW peer: 02:58:96:00:00:02
+Added ESP-NOW peer: 02:58:96:00:00:03
+Added ESP-NOW broadcast peer: FF:58:96:FF:FF:FF
+----- Mappings -----------------------------------------
+Serial Mappings
+Mapping 1: Serial5 (RAW) -> W3S2
+PWM Mappings:
+No input mappings configured
+------ General Settings --------------------------------
+Delimeter Character: ^
+Local Function Identifier: ?
+Command Character: ;
+ETM: ENABLED 
+--------Kyber Settings ----------------------------------
+Kyber is Local
+Initialized Serial1 & Serial2 for Kyber Local mode
+------- Maestro Settings ----------------------------------
+Maestro 1 → WCB2 S1
+Maestro 2 → WCB2 S2
+Maestro 3 → WCB3 S3
+
+
+
+----------- Configuration Info ------------
+Hostname: Wireless Communication Board 1 (W1)
+HW Version: 2.1
+Software Version 6.0_301403RMAR2026
+Number of WCBs in system: 3
+--------------- Serial Settings ----------------------
+Serial Baud Rates and Broadcast Settings:
+Serial1 Baud: 115200, Broadcast Input: Disabled, Broadcast Output: Disabled Pins: Tx:8 Rx:5 (Kyber Maestro)
+Serial2 Baud: 9600, Broadcast Input: Enabled, Broadcast Output: Enabled Pins: Tx:20 Rx:7 (Kyber Marcuino)
+Serial3 Baud: 9600, Broadcast Input: Disabled, Broadcast Output: Disabled Pins: Tx:15 Rx:4
+Serial4 Baud: 9600, Broadcast Input: Disabled, Broadcast Output: Disabled Pins: Tx:14 Rx:27
+Serial5 Baud: 9600, Broadcast Input: Disabled, Broadcast Output: Disabled Pins: Tx:13 Rx:12
+
+--------------- ESPNOW Settings ----------------------
+ESP-NOW Password: tvA33maxZm9Z4v
+This board MAC: 02:58:96:00:00:01
+--------------- ESP-NOW Peers ---------------
+WCB1 : 02:58:96:00:00:01 (this board)
+WCB2: 02:58:96:00:00:02 Online (last seen 6s ago)
+WCB3: 02:58:96:00:00:03 Online (last seen 4s ago)
+Broadcast: FF:58:96:FF:FF:FF
+--------------- WCB Command Settings ----------------------
+Delimeter Character: ^
+Local Function Identifier: ?
+Command Character: ;
+No stored commands.
+--- Serial Mappings ------------------------
+Mapping 1: Serial5 (RAW) -> W3S2
+--------------- PWM Mappings ---------------
+No input mappings configured
+--- End of Mappings ---
+--------Kyber Settings ----------------------------------
+Kyber is Local
+Initialized Serial1 & Serial2 for Kyber Local mode
+📋 COPY-PASTE SETUP COMMANDS:
+WCB1 (this board):
+?KYBER_LOCAL,S1,M1:W2S1:115200,M2:W2S2:9600,M3:W3S3:9600
+WCB2:
+?KYBER_REMOTE^?MAESTRO,M1:W2S1:115200,M2:W2S2:9600,M3:W3S3:9600^?SLS1,Kyber Maestro^?SLS2,Kyber Marcuino^?REBOOT
+WCB3:
+?MAESTRO,M1:W2S1:115200,M2:W2S2:9600,M3:W3S3:9600^?REBOOT
+──────────────────���────────────────────��─────────────
+--- Maestro Configuration -------------------------------------
+Copy/paste this to configure all WCBs:
+?MAESTRO,M1:W2S1:115200^?MAESTRO,M2:W2S1:115200^?MAESTRO,M3:W3S1:57600
+Total: 3 configured (0 local, 3 remote)
+Breakdown:
+Maestro 1: Remote on WCB2 (unicast)
+Maestro 2: Remote on WCB2 (unicast)
+Maestro 3: Remote on WCB3 (unicast)
+-----------------------------
+--------------- ETM Settings ----------------------
+ETM: ENABLED ��️ All boards must match!
+Boot heartbeat: 1-2 sec
+Heartbeat interval: 10 sec (+/- 1)
+Offline after: 3 missed (33 sec max)
+Retry timeout: 500 ms
+Char message count: 20, delay: 100 ms
+Checksum Verification: Enabled
+--- End of Configuration Info ---
