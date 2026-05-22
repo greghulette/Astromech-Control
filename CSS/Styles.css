@@ -5110,3 +5110,31 @@ height: inherit;
   user-select: none;
 }
 
+/* ============================================================ */
+/* Sled Lights — custom-command text input                       */
+/* Sits inside a resetTable row so a positioned input would fight */
+/* the layout; this version is relative-positioned and matches    */
+/* the ESP32Pickertext aesthetic (font/size) without absolute pos.*/
+/* ============================================================ */
+.sledCustomCmdInput {
+  font-size: 2rem;
+  font-family: 'Star Jedi', 'Starjedi', arial, camb;
+  width: 95%;
+  padding: 6px 10px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #cfe6ff;
+  border: 2px solid #2c7fb8;
+  border-radius: 6px;
+  box-shadow: 0 0 8px rgba(44, 127, 184, 0.5) inset;
+  outline: none;
+}
+.sledCustomCmdInput:focus {
+  border-color: #5fb0e6;
+  box-shadow: 0 0 12px rgba(95, 176, 230, 0.7) inset,
+              0 0 8px rgba(95, 176, 230, 0.5);
+}
+.sledCustomCmdInput::placeholder {
+  color: rgba(207, 230, 255, 0.45);
+  font-style: italic;
+}
+

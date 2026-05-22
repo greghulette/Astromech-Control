@@ -5219,6 +5219,14 @@ id="FrontLogicsTopBlueSelector"
           </div>
         </button>
        </div>
+       <div class="menu-Level-1-Links move6" >
+        <button class="" rel="sledControls">
+          <div>
+            <img loading="lazy" id="Reset_Remote_ESP" class="buttonwidth "  src="./Images/HomeTab/Button-Blank.png">
+            <p class="shadowtext2LinesLongLED">sled lights</p>
+          </div>
+        </button>
+       </div>
        <div id="droidBattery" class="droidBatteryClass">
         <p id="droidBatteryVoltagePar">voltage: </p>
         <p id="droidBatteryPar" class="droidBatteryPar">na</p>
@@ -5360,6 +5368,108 @@ id="FrontLogicsTopBlueSelector"
 
 
 </div> -->
+<!-- ============================================================ -->
+<!-- Sled (ESP32-S3 on WCB 3.2) — routes through Droid Gateway ETM_BOARD_SL -->
+<!-- ============================================================ -->
+<div class="menu-Level-1-Content " id="sledControls">
+  <h2>sled lights</h2>
+  <table class="resetTable">
+    <tr>
+      <td>
+        <div class="ButtonBlank" onclick="sendSled(':PULSE,BLUE')">
+          <img loading="lazy" class="buttonwidthReset " src="./Images/HomeTab/Button-Blank.png">
+          <p class="shadowtext2Lines-Reset">pulse blue</p>
+        </div>
+      </td>
+      <td>
+        <div class="ButtonBlank" onclick="sendSled(':PULSE,RED')">
+          <img loading="lazy" class="buttonwidthReset " src="./Images/HomeTab/Button-Blank.png">
+          <p class="shadowtext2Lines-Reset">pulse red</p>
+        </div>
+      </td>
+      <td>
+        <div class="ButtonBlank" onclick="sendSled(':PULSE,GREEN')">
+          <img loading="lazy" class="buttonwidthReset " src="./Images/HomeTab/Button-Blank.png">
+          <p class="shadowtext2Lines-Reset">pulse green</p>
+        </div>
+      </td>
+      <td>
+        <div class="ButtonBlank" onclick="sendSled(':PULSE,WHITE')">
+          <img loading="lazy" class="buttonwidthReset " src="./Images/HomeTab/Button-Blank.png">
+          <p class="shadowtext2Lines-Reset">pulse white</p>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="ButtonBlank" onclick="sendSled(':WIPE,WHITE')">
+          <img loading="lazy" class="buttonwidthReset " src="./Images/HomeTab/Button-Blank.png">
+          <p class="shadowtext2Lines-Reset">wipe white</p>
+        </div>
+      </td>
+      <td>
+        <div class="ButtonBlank" onclick="sendSled(':WIPE,RED')">
+          <img loading="lazy" class="buttonwidthReset " src="./Images/HomeTab/Button-Blank.png">
+          <p class="shadowtext2Lines-Reset">wipe red</p>
+        </div>
+      </td>
+      <td>
+        <div class="ButtonBlank" onclick="sendSled(':WIPE,BLUE')">
+          <img loading="lazy" class="buttonwidthReset " src="./Images/HomeTab/Button-Blank.png">
+          <p class="shadowtext2Lines-Reset">wipe blue</p>
+        </div>
+      </td>
+      <td>
+        <div class="ButtonBlank" onclick="sendSled(':CHASE,BLUE,RED')">
+          <img loading="lazy" class="buttonwidthReset " src="./Images/HomeTab/Button-Blank.png">
+          <p class="shadowtext2Lines-Reset">chase b/r</p>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="ButtonBlank" onclick="sendSled(':RAINBOW')">
+          <img loading="lazy" class="buttonwidthReset " src="./Images/HomeTab/Button-Blank.png">
+          <p class="shadowtext2Lines-Reset">rainbow</p>
+        </div>
+      </td>
+      <td>
+        <div class="ButtonBlank" onclick="sendSled(':SCAN,RED')">
+          <img loading="lazy" class="buttonwidthReset " src="./Images/HomeTab/Button-Blank.png">
+          <p class="shadowtext2Lines-Reset">scanner red</p>
+        </div>
+      </td>
+      <td>
+        <div class="ButtonBlank" onclick="sendSled(':COLOR,WHITE')">
+          <img loading="lazy" class="buttonwidthReset " src="./Images/HomeTab/Button-Blank.png">
+          <p class="shadowtext2Lines-Reset">solid white</p>
+        </div>
+      </td>
+      <td>
+        <div class="ButtonBlank" onclick="sendSled(':OFF')">
+          <img loading="lazy" class="buttonwidthReset " src="./Images/HomeTab/Button-Blank.png">
+          <p class="shadowtext2Lines-Reset">off</p>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <!-- Custom command row -->
+  <table class="resetTable">
+    <tr>
+      <td colspan="3">
+        <input type="text" id="sledCustomCmd" class="sledCustomCmdInput" placeholder=":COLOR,#FF00AA">
+      </td>
+      <td>
+        <div class="ButtonBlank" onclick="sendSled(document.getElementById('sledCustomCmd').value)">
+          <img loading="lazy" class="buttonwidthReset " src="./Images/HomeTab/Button-Blank.png">
+          <p class="shadowtext2Lines-Reset">send custom</p>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
+
 <div class="menu-Level-1-Content settingsledmove" id="serialcommandstoesp">
   <!-- <img loading="lazy" src="Images/Button-LED_Controller_Reset.png" alt="" class="resetLEDController " onclick="resetArduino()"> -->
   <form class="settingsledmove" method="ESP32SendCommand('ESP32SelectionBox', 'ESP32CommandTextBox')" onSubmit="return false;">
@@ -5378,6 +5488,7 @@ id="FrontLogicsTopBlueSelector"
     <option value="PS">PSI Pro</option>
     <option value="ST">Stealth</option>
     <option value="HC">HCR (C++ API)</option>
+    <option value="SL">Sled</option>
 
 
 

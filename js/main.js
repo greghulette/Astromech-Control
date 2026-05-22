@@ -3127,7 +3127,38 @@ function ESP32SendCommand(b, x) {
       writeToStream(specificDeviceSerialCommand)
     }
   };
+  if (ESP32DeviceSelected === "SL") {
+    // Sled (ESP32-S3 on WCB 3.2) — routed via Droid Gateway as ETM_BOARD_SL.
+    // NOTE: case is preserved — uppercase ESP32commandUpper matches the Sled parser (strcasecmp).
+    if (CommandConnectionSerial == false) {
+      var URLtoSendCommandTo = 'http://192.168.4.101/?param0=:&param1=:L:ESL';
+      var FullURLtoSendCommandTo = URLtoSendCommandTo + ESP32commandUpper;
+      httpGet(FullURLtoSendCommandTo);
+      console.log(FullURLtoSendCommandTo);
+    } else {
+      let specificDeviceSerialCommand = SerialLoRaPrefix + ":ESL" + ESP32commandUpper;
+      writeToStream(specificDeviceSerialCommand)
+    }
+  };
 };
+
+// ---------------------------------------------------------------------------
+// Sled (ESP32-S3) — helper for dedicated buttons. Sends a single ":SLED-style"
+// command (already prefixed with ':') to the Sled via the Droid Gateway.
+// ---------------------------------------------------------------------------
+function sendSled(cmd) {
+  if (!cmd) return;
+  if (cmd[0] !== ':') cmd = ':' + cmd;
+  if (CommandConnectionSerial == false) {
+    var url = 'http://192.168.4.101/?param0=:&param1=:L:ESL' + cmd;
+    httpGet(url);
+    console.log('[Sled HTTP] ' + url);
+  } else {
+    var s = SerialLoRaPrefix + ":ESL" + cmd;
+    writeToStream(s);
+    console.log('[Sled Serial] ' + s);
+  }
+}
 
 function BrightnessRangeFunc(a, b, c) {
   var VUslide = document.getElementById(a),
