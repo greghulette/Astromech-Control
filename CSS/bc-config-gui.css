@@ -97,91 +97,235 @@
 
 .bcg-mode-label { font-size: 11px; color: var(--bcg-accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
 
-/* ── Reference view (dynamic transmitter layout) ────────────────────────────
+/* ── Gest sub-panes — viewport-anchored ─────────────────────────────────────
+   `position: fixed` escapes the parent's 800px width cap (Styles.css line
+   4100) and the 400px sub-pane cap (line 4210), anchoring the sub-pane to
+   the viewport directly. Each sub-pane has its OWN positioning rule below
+   so the image and the editor can be placed independently — the image
+   sometimes wants to be further right (e.g. to align with a particular spot
+   on the photo), while the editor benefits from filling the whole content
+   area. */
+
+/* Shared baseline (positioning override + escape parent caps). Position
+   left/right are set per-pane below. */
+#Gest .menu-Level-1 .menu-Level-1-Content#gestImage,
+#Gest .menu-Level-1 .menu-Level-1-Content#gestRemoteConfig {
+  position: fixed !important;
+  width: auto !important;
+  top:     90px !important;
+  bottom: 110px !important;
+  max-width: none !important;
+  overflow: auto !important;
+}
+
+/* Gestures image sub-pane — positioned independently of the editor, since
+   the image's natural placement may differ from where the editor reads best. */
+#Gest .menu-Level-1 .menu-Level-1-Content#gestImage {
+  left:  520px !important;     /* tuned for the photo's natural sit */
+  right:  80px !important;
+}
+
+/* Remote Config editor sub-pane — left-anchored at the same x as the image
+   pane (520) but capped with max-width so on wide viewports it does NOT
+   stretch all the way to the right edge. The `right: 80px` still acts as
+   an upper bound on narrower screens, but max-width wins first on wide
+   displays — keeps the cards from running off the right side. */
+#Gest .menu-Level-1 .menu-Level-1-Content#gestRemoteConfig {
+  left:      520px !important;
+  right:      80px !important;
+  max-width: 1150px !important;   /* cap so wide displays don't stretch it */
+}
+/* When the sub-pane isn't active, the global rule sets `display: none`
+   anyway — these don't need to add anything for that case. */
+
+/* Gestures image: 1308×1005 PNG with tight content bounds. Standard fit-
+   to-container with aspect-ratio preservation; drop-shadow filter follows
+   the actual image silhouette. */
+#gestImage {
+  text-align: left;
+  padding: 0;
+}
+.gesture-fullsize {
+  display: inline;
+  left: 500px;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  margin: 0 auto;          /* horizontally center within container */
+  border-radius: 6px;
+  filter: drop-shadow(0 4px 18px rgba(0,0,0,0.55));
+  user-select: none;
+}
+
+/* The Remote Config bcg-root needs to fill its parent now that we've made
+   the parent wide. Previously it was happy at max-width:1100px centered. */
+#gestRemoteConfig {
+  overflow-y: auto;
+}
+#gestRemoteConfig .bcg-root {
+  max-width: none;       /* let it fill the wide container */
+  margin: 0;
+}
+
+/* ── Reference view (photo + HTML callout overlay) ──────────────────────────
    Replaces the static gesture wiring-diagram PNGs the Gest section used to
-   show. Buttons + switches + knobs are clickable when they make sense and
-   each one is overlaid with its current mapping summary, so the diagram
-   doubles as a quick-reference card AND a visual editor entry point. */
+   show. The background is an actual photo of the transmitter; callout boxes
+   are positioned in percentage coordinates by the JS so they scale with the
+   image at any size (tuned for ~7" tablet readability). */
 .bcg-ref-help {
-  font-size: 11px; color: var(--bcg-muted); margin-bottom: 8px;
+  font-size: 12px; color: var(--bcg-muted); margin-bottom: 10px; line-height: 1.4;
 }
 .bcg-ref-wrap {
+  position: relative;
   background: #0d1326;
   border: 1px solid var(--bcg-border);
   border-radius: 10px;
   padding: 12px;
-  overflow: auto;
+  overflow: hidden;
+  max-width: 1200px;
+  margin: 0 auto;
 }
-.bcg-ref-svg {
-  width: 100%; max-width: 1000px; height: auto; display: block; margin: 0 auto;
+.bcg-ref-bg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
   user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;   /* clicks pass through to the overlay */
 }
-/* Default styling for every "zone" group — circles/rects look like physical
-   controls; text inside is the label. */
-.bcg-ref-svg g[data-sw] circle,
-.bcg-ref-svg g[data-sw] rect,
-.bcg-ref-svg g[data-knob] circle,
-.bcg-ref-svg .bcg-ref-btn-zone circle,
-.bcg-ref-svg .bcg-ref-btn-zone rect {
-  fill: #1f2d4d;
-  stroke: #4a6080;
-  stroke-width: 1.2;
-  transition: fill .15s, stroke .15s, filter .15s;
+/* When the image fails to load (file missing) show a fallback hint card so
+   the user knows what to do next instead of staring at a broken-image icon. */
+.bcg-ref-bg.missing {
+  width: 100%;
+  min-height: 200px;
+  background: repeating-linear-gradient(45deg, #1a2540 0 12px, #16213e 12px 24px);
+  position: relative;
 }
-.bcg-ref-svg g[data-sw] text,
-.bcg-ref-svg g[data-knob] text,
-.bcg-ref-svg .bcg-ref-btn-zone text {
-  fill: #cdd6e8;
-  font-size: 10px;
-  font-weight: 700;
-  font-family: 'Segoe UI', sans-serif;
-  pointer-events: none;
+.bcg-ref-bg.missing::after {
+  content: 'Save a clean transmitter photo to  Images/transmitter-config.png  to use this view.';
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--bcg-yellow);
+  font-weight: 700; font-size: 14px;
+  text-align: center; padding: 20px;
+  background: rgba(0,0,0,0.6);
 }
-.bcg-ref-trim-label {
-  fill: #8a99b3; font-size: 9px; font-weight: 700; font-family: 'Segoe UI', sans-serif;
-}
-/* Clickable hover state */
-.bcg-ref-svg .bcg-ref-btn-zone { cursor: pointer; }
-.bcg-ref-svg .bcg-ref-btn-zone:hover circle,
-.bcg-ref-svg .bcg-ref-btn-zone:hover rect {
-  fill: var(--bcg-accent2);
-  stroke: #fff;
-  stroke-width: 2;
-}
-/* Configured = a noticeable accent ring + warmer fill. */
-.bcg-ref-svg .bcg-ref-btn-zone.configured circle,
-.bcg-ref-svg .bcg-ref-btn-zone.configured rect {
-  fill: #2d4a78;
-  stroke: var(--bcg-accent2);
-  stroke-width: 2;
-  filter: drop-shadow(0 0 3px rgba(15,122,157,0.7));
-}
-/* Per-button mapping summary labels (rendered into #bcgRefLabels by JS). */
-.bcg-ref-labels text {
-  fill: var(--bcg-accent2);
-  font-size: 9px;
-  font-family: ui-monospace, Consolas, monospace;
-  font-weight: 600;
-  pointer-events: none;
-}
-.bcg-ref-labels text.empty { fill: #4a5878; font-style: italic; }
-.bcg-ref-labels text.line2 { fill: #8a99b3; font-weight: 500; }
 
-/* ── Button grid ── */
+/* Overlay container that holds all the callout boxes. Sits exactly on top of
+   the image and scales with it via inset:0. */
+.bcg-ref-overlay {
+  position: absolute;
+  inset: 12px;          /* matches parent .bcg-ref-wrap padding */
+  pointer-events: none; /* individual callouts opt back in to clicks */
+}
+
+/* Each callout box. Pale-cream paper look to match the user's reference image. */
+.bcg-ref-callout {
+  position: absolute;
+  transform: translate(-50%, -50%);    /* anchor by center, set top/left in % */
+  background: #fdf5d0;                 /* cream / sticky-note feel */
+  color: #1a1a1a;
+  border: 1px solid #6b5a1a;
+  border-radius: 4px;
+  padding: 4px 7px;
+  font-family: 'Segoe UI', 'Inter', sans-serif;
+  font-size: 12px;                     /* readable at 7" tablet sizes */
+  line-height: 1.35;
+  min-width: 90px;
+  max-width: 160px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.45);
+  pointer-events: auto;
+  cursor: pointer;
+  transition: transform .12s, box-shadow .12s, border-color .12s;
+}
+.bcg-ref-callout:hover {
+  transform: translate(-50%, -50%) scale(1.05);
+  box-shadow: 0 5px 12px rgba(0,0,0,0.6), 0 0 0 2px var(--bcg-accent2);
+  border-color: var(--bcg-accent2);
+  z-index: 5;
+}
+/* Title strip (the control label "B5", "T4 Left", "SE", etc.) */
+.bcg-ref-callout .bcg-co-title {
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: #2a4060;
+  border-bottom: 1px solid rgba(0,0,0,0.18);
+  margin: -1px -2px 3px;
+  padding-bottom: 2px;
+  text-align: center;
+}
+/* Body lines (1./2./3. or Down/Mid/Up labels + the typed note text). */
+.bcg-ref-callout .bcg-co-line {
+  display: flex;
+  gap: 4px;
+  align-items: baseline;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.bcg-ref-callout .bcg-co-tier {
+  font-weight: 700;
+  color: #6b5a1a;
+  flex-shrink: 0;
+  width: 16px;
+}
+.bcg-ref-callout .bcg-co-text {
+  font-weight: 500;
+  color: #1a1a1a;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.bcg-ref-callout .bcg-co-text.empty {
+  color: transparent;     /* keeps line height stable but shows nothing */
+}
+/* Configured callouts get a brighter title strip and slightly thicker border.
+   Empty ones (no mappings at all) fade back so the eye picks the configured
+   ones out at a glance. */
+.bcg-ref-callout.configured { border-color: #1f4b73; }
+.bcg-ref-callout.configured .bcg-co-title { color: #1f4b73; }
+.bcg-ref-callout.empty { opacity: 0.55; }
+
+/* Switch and knob callouts are NOT clickable yet (no editor modal for them
+   in this build). Visual cue: no hover transform, dimmer cursor. */
+.bcg-ref-callout.readonly { cursor: default; }
+.bcg-ref-callout.readonly:hover {
+  transform: translate(-50%, -50%);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.45);
+  border-color: #6b5a1a;
+}
+
+/* ── Button grid ─────────────────────────────────────────────────────────────
+   The Buttons tab is the most-used surface in this editor, so the cards are
+   sized for at-a-glance readability on a 7" tablet:
+     * Wider min-column (240px) → fewer columns, taller targets
+     * Larger title font (18px) → button label legible without leaning in
+     * Generous padding + min-height → fingers-not-styluses friendly tap area
+     * Tier summary font bumped to 13px so configured mappings are scannable */
 .bcg-button-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
 }
 .bcg-button-card {
-  background: var(--bcg-card); border: 1px solid var(--bcg-border); border-radius: 8px;
-  padding: 10px; cursor: pointer; transition: border-color .15s, transform .05s;
+  background: var(--bcg-card); border: 1px solid var(--bcg-border); border-radius: 10px;
+  padding: 16px 16px;
+  min-height: 100px;             /* keeps empty cards substantial-looking */
+  cursor: pointer;
+  transition: border-color .15s, transform .05s, background .15s;
+  display: flex; flex-direction: column; justify-content: flex-start;
 }
-.bcg-button-card:hover { border-color: var(--bcg-accent2); }
+.bcg-button-card:hover { border-color: var(--bcg-accent2); background: #143b6f; }
 .bcg-button-card:active { transform: translateY(1px); }
-.bcg-button-card.configured { border-color: var(--bcg-accent2); }
-.bcg-button-card .bcg-card-title { font-weight: 700; margin-bottom: 4px; font-size: 13px; }
-.bcg-button-card .bcg-card-title.empty { color: var(--bcg-muted); font-weight: 500; }
-.bcg-button-card .bcg-tier-summary { font-size: 11px; color: var(--bcg-muted); margin-top: 2px; line-height: 1.4; }
-.bcg-excl-badge { color: var(--bcg-yellow); font-size: 10px; margin-left: 4px; }
+.bcg-button-card.configured { border-color: var(--bcg-accent2); border-width: 2px; padding: 15px 15px; /* compensate for thicker border so layout doesn't shift */ }
+.bcg-button-card .bcg-card-title { font-weight: 700; margin-bottom: 8px; font-size: 18px; letter-spacing: 0.3px; }
+.bcg-button-card .bcg-card-title.empty { color: var(--bcg-muted); font-weight: 600; }
+.bcg-button-card .bcg-tier-summary { font-size: 13px; color: var(--bcg-text); margin-top: 4px; line-height: 1.45; }
+.bcg-button-card .bcg-tier-summary .bcg-tier-empty { color: var(--bcg-muted); font-style: italic; font-size: 12px; }
+.bcg-excl-badge { color: var(--bcg-yellow); font-size: 11px; margin-left: 6px; font-weight: 700; }
 
 /* ── List views (switches, knobs) ── */
 .bcg-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 8px; }

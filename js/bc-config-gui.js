@@ -253,115 +253,207 @@
   }
 
   // Reference view ────────────────────────────────────────────────────────
-  // Populates the SVG transmitter map with per-button action summaries for
-  // the currently-selected mode. Each .bcg-ref-btn-zone gets a .configured
-  // class when its mapping is non-empty, and a pair of <text> labels are
-  // dropped into #bcgRefLabels — primary = highest-priority action summary,
-  // secondary = number of tap tiers configured (e.g. "1× 2×").
+  // Photo-overlay version: drops cream-coloured callout boxes onto a clean
+  // photo of the transmitter at percentage coordinates, so the layout scales
+  // with the image at any size and stays usable on a 7" tablet.
   //
-  // The SVG coordinates for each button were chosen to match the visual
-  // layout in index.html; if you reposition a button there, mirror the
-  // change in BTN_LABEL_POS below.
-  const BTN_LABEL_POS = {
-    // Trim row (around gimbals)
-    11: { x: 364, y: 350, anchor: 'middle' },
-    12: { x: 364, y: 485, anchor: 'middle' },
-    13: { x: 636, y: 350, anchor: 'middle' },
-    14: { x: 636, y: 485, anchor: 'middle' },
-    7:  { x: 173, y: 595, anchor: 'middle' },
-    8:  { x: 213, y: 595, anchor: 'middle' },
-    9:  { x: 278, y: 595, anchor: 'middle' },
-    10: { x: 318, y: 595, anchor: 'middle' },
-    15: { x: 683, y: 595, anchor: 'middle' },
-    16: { x: 723, y: 595, anchor: 'middle' },
-    17: { x: 788, y: 595, anchor: 'middle' },
-    18: { x: 828, y: 595, anchor: 'middle' },
-    // B1-B6 cluster at bottom
-    1:  { x: 385, y: 660, anchor: 'middle' },
-    2:  { x: 435, y: 660, anchor: 'middle' },
-    3:  { x: 485, y: 660, anchor: 'middle' },
-    4:  { x: 535, y: 660, anchor: 'middle' },
-    5:  { x: 585, y: 660, anchor: 'middle' },
-    6:  { x: 635, y: 660, anchor: 'middle' },
+  // Each callout's content comes from the action `note` field that the user
+  // typed in the modal — NOT from a synthesized action summary. Per the
+  // user's design choice: if no note is typed, the line is left blank.
+  //
+  // REF_LAYOUT maps each control to its anchor position on the image and the
+  // tier/position labels to display on each line. Adjust the {l, t} percents
+  // if you change the transmitter background image.
+  const REF_LAYOUT = {
+    // ── Buttons (clickable — open the button modal on click) ────────────
+    //   Trim switches T1-T6 around the gimbals. Tiers labeled "1×/2×/3×"
+    //   matching the modal's Single/Double/Triple tap layout.
+    btn: [
+      // T3 (vertical, RIGHT of left gimbal): top/bottom = btn 11 / 12
+      { btn: 11, title: 'T3 Up',    l: 32, t: 50 },
+      { btn: 12, title: 'T3 Down',  l: 32, t: 73 },
+      // T2 (vertical, LEFT of right gimbal): top/bottom = btn 13 / 14
+      { btn: 13, title: 'T2 Up',    l: 66, t: 50 },
+      { btn: 14, title: 'T2 Down',  l: 66, t: 73 },
+      // T4 (horiz, bottom-LEFT): left/right = btn 7 / 8
+      { btn:  7, title: 'T4 Left',  l: 16, t: 87 },
+      { btn:  8, title: 'T4 Right', l: 27, t: 87 },
+      // T5 (horiz, bottom-LEFT inner): left/right = btn 9 / 10
+      { btn:  9, title: 'T5 Left',  l: 36, t: 87 },
+      { btn: 10, title: 'T5 Right', l: 47, t: 87 },   // (NOTE: was T5 wiring sub-row)
+      // T6 (horiz, bottom-RIGHT inner): left/right = btn 15 / 16
+      { btn: 15, title: 'T6 Left',  l: 53, t: 87 },
+      { btn: 16, title: 'T6 Right', l: 64, t: 87 },
+      // T1 (horiz, bottom-RIGHT): left/right = btn 17 / 18
+      { btn: 17, title: 'T1 Left',  l: 73, t: 87 },
+      { btn: 18, title: 'T1 Right', l: 84, t: 87 },
+      // Six programmable buttons B1-B6 at very bottom (rough positions)
+      { btn:  1, title: 'B1', l: 38, t: 97 },
+      { btn:  2, title: 'B2', l: 44, t: 97 },
+      { btn:  3, title: 'B3', l: 50, t: 97 },
+      { btn:  4, title: 'B4', l: 56, t: 97 },
+      { btn:  5, title: 'B5', l: 62, t: 97 },
+      { btn:  6, title: 'B6', l: 68, t: 97 },
+    ],
+    // ── Switches (display-only for now; modal editor TODO) ──────────────
+    sw: [
+      { sw: 'SF', title: 'SF', l:  3, t: 15 },
+      { sw: 'SE', title: 'SE', l:  3, t: 32 },
+      { sw: 'SA', title: 'SA', l:  3, t: 49 },
+      { sw: 'SB', title: 'SB', l: 18, t:  8 },
+      { sw: 'SC', title: 'SC', l: 82, t:  8 },
+      { sw: 'SD', title: 'SD', l: 97, t: 49 },
+      { sw: 'SG', title: 'SG', l: 97, t: 32 },
+      { sw: 'SH', title: 'SH', l: 97, t: 15 },
+      { sw: 'SI', title: 'SI', l: 33, t: 36 },
+      { sw: 'SJ', title: 'SJ', l: 67, t: 36 },
+    ],
+    // ── Knobs (display-only) ────────────────────────────────────────────
+    knob: [
+      { knob: 'S1', title: 'S1 — HCR Vocalizer Vol', l: 41, t: 33 },
+      { knob: 'S2', title: 'S2 — HCR WAV Vol',       l: 59, t: 33 },
+    ],
   };
 
+  // 3-position switch display labels (override per-switch if a switch only
+  // has 2 positions — Down/Up).
+  const SWITCH_POS_LABELS_3 = ['Dn:', 'Md:', 'Up:'];
+  const SWITCH_POS_LABELS_2 = ['Dn:', 'Up:'];
+
   function renderReferenceView() {
+    // Quick Reference is now a pure hand-curated image — no dynamic overlay,
+    // no per-mode mutation, no clickable callouts. Editing happens on the
+    // sibling editor tabs. Leaving this function as a no-op so the rest of
+    // the render chain (called from mode tabs, modal apply, etc.) doesn't
+    // need to know whether the dynamic overlay exists.
+    return;
+  }
+
+  // Dead-code path for the old dynamic-overlay reference view. Kept commented
+  // out below for reference in case we want to re-enable a dynamic version
+  // alongside the Quick Reference image in a future revision.
+  function _renderReferenceView_legacy_dynamicOverlay() {
     const refModeLbl = $('bcgRefModeLabel');
     if (refModeLbl) refModeLbl.textContent = `Mode ${state.currentMode} (${['', 'SW Down', 'SW Mid', 'SW Up'][state.currentMode]})`;
-    const screenMode = $('bcgRefScreenMode');
-    if (screenMode) screenMode.textContent = `Mode ${state.currentMode} — ${['', 'SW Down', 'SW Mid', 'SW Up'][state.currentMode]}`;
 
-    const labels = $('bcgRefLabels');
-    if (!labels) return;
-    labels.innerHTML = '';
+    const overlay = $('bcgRefOverlay');
+    if (!overlay) return;
+    overlay.innerHTML = '';
 
-    // Update per-button "configured" highlighting + summary labels
-    for (let btn = 1; btn <= 18; btn++) {
-      const zone = document.querySelector(`.bcg-ref-btn-zone[data-btn="${btn}"]`);
-      if (!zone) continue;
-      const key = String(state.currentMode * 100 + btn);
+    // ── Button callouts (clickable) ──────────────────────────────────────
+    for (const spec of REF_LAYOUT.btn) {
+      const key = String(state.currentMode * 100 + spec.btn);
       const m   = state.config.mappings[key];
-      const hasAny = m && (m.t1?.length || m.t2?.length || m.t3?.length);
-      zone.classList.toggle('configured', !!hasAny);
-
-      // Drop a small summary near the button. Line 1 = primary action label,
-      // line 2 = tier count badge ("1× 2× 3×" depending on which tiers exist).
-      const pos = BTN_LABEL_POS[btn]; if (!pos) continue;
-      if (!hasAny) {
-        const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        t.setAttribute('x', pos.x); t.setAttribute('y', pos.y);
-        t.setAttribute('text-anchor', pos.anchor);
-        t.setAttribute('class', 'empty');
-        t.textContent = '—';
-        labels.appendChild(t);
-        continue;
-      }
-      // Primary line: shortest sensible action summary from tier 1 (fallback to 2 or 3)
-      const primaryTier = m.t1?.length ? m.t1 : (m.t2?.length ? m.t2 : m.t3);
-      const primary = (primaryTier && primaryTier[0]) ? actionSummaryShort(primaryTier[0]) : '';
-      const t1 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-      t1.setAttribute('x', pos.x); t1.setAttribute('y', pos.y);
-      t1.setAttribute('text-anchor', pos.anchor);
-      t1.textContent = primary;
-      labels.appendChild(t1);
-
-      // Secondary line — small "1× 2×" badge for which tiers exist (only show if >1)
-      const tiers = ['t1','t2','t3'].map((k,i) => m[k]?.length ? (i+1)+'×' : null).filter(Boolean);
-      if (tiers.length > 1) {
-        const t2 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        t2.setAttribute('x', pos.x); t2.setAttribute('y', pos.y + 11);
-        t2.setAttribute('text-anchor', pos.anchor);
-        t2.setAttribute('class', 'line2');
-        t2.textContent = tiers.join(' ');
-        labels.appendChild(t2);
-      }
+      const note1 = noteForTier(m, 't1');
+      const note2 = noteForTier(m, 't2');
+      const note3 = noteForTier(m, 't3');
+      const hasAny = !!(note1 || note2 || note3);
+      const callout = makeCallout({
+        title: spec.title,
+        lines: [
+          { tier: '1×', text: note1 },
+          { tier: '2×', text: note2 },
+          { tier: '3×', text: note3 },
+        ],
+        left: spec.l, top: spec.t,
+        configured: hasAny,
+        onClick: () => openButtonModal(spec.btn),
+      });
+      overlay.appendChild(callout);
     }
 
-    // Wire click handlers (idempotent — using onclick property)
-    document.querySelectorAll('.bcg-ref-btn-zone').forEach(g => {
-      const btn = +g.dataset.btn;
-      if (!btn) return;
-      g.onclick = () => openButtonModal(btn);
-    });
+    // ── Switch callouts (display-only) ───────────────────────────────────
+    for (const spec of REF_LAYOUT.sw) {
+      const sw = state.config.switches?.[spec.sw];
+      const positions = sw?.positions || 3;
+      const labels = (positions === 2) ? SWITCH_POS_LABELS_2 : SWITCH_POS_LABELS_3;
+      const slots = (positions === 2) ? ['p0', 'p2'] : ['p0', 'p1', 'p2'];
+      const lines = slots.map((slot, i) => ({
+        tier: labels[i],
+        text: noteForSwitchSlot(sw, slot),
+      }));
+      const hasAny = lines.some(l => l.text);
+      const callout = makeCallout({
+        title: spec.title,
+        lines,
+        left: spec.l, top: spec.t,
+        configured: hasAny,
+        readonly: true,
+      });
+      overlay.appendChild(callout);
+    }
+
+    // ── Knob callouts (display-only) ─────────────────────────────────────
+    for (const spec of REF_LAYOUT.knob) {
+      const kn = state.config.knobs?.[spec.knob];
+      const fnLabels = { 0: '— none —', 1: 'HCR Vocalizer Volume', 2: 'HCR WAV Volume' };
+      const fnText = kn ? (fnLabels[kn.function] || `fn${kn.function}`) : '';
+      const chText = kn ? `CH ${kn.channel ?? '?'}` : '';
+      const callout = makeCallout({
+        title: spec.title,
+        lines: [
+          { tier: 'fn:', text: fnText },
+          { tier: 'ch:', text: chText },
+        ],
+        left: spec.l, top: spec.t,
+        configured: !!(kn && kn.function),
+        readonly: true,
+      });
+      overlay.appendChild(callout);
+    }
   }
 
-  // Tight one-line action summary for the SVG label (vs. actionSummary which
-  // is more verbose and used in the button-grid cards).
-  function actionSummaryShort(a) {
-    if (!a || !a.type) return '—';
-    if (a.type === 'espnow') return `${a.target||'?'}:${truncate(a.cmd||'',8)}`;
-    if (a.type === 'hcr') {
-      const fnLbl = (HCR_FN_LIST.find(x => x[0] === +a.fn) || [0, `fn${a.fn}`])[1];
-      return `HCR ${fnLbl}`;
-    }
-    if (a.type === 'anim') {
-      const fnLbl = (ANIM_FN_LIST.find(x => x[0] === +a.fn) || [0, `a${a.fn}`])[1];
-      return truncate(fnLbl, 14);
-    }
-    if (a.type === 'serial') return `${a.port||'?'}:${truncate(a.cmd||'',8)}`;
-    return a.type;
+  // Pull the typed `note` string off the first action in a tap tier. If
+  // there's no action in that tier, or the action has no note, returns ''.
+  function noteForTier(mapping, tierKey) {
+    if (!mapping) return '';
+    const arr = mapping[tierKey];
+    if (!Array.isArray(arr) || arr.length === 0) return '';
+    // If multiple actions in one tier, just show the first's note — keeps
+    // the callout to one line per tier. User can open the modal for detail.
+    return (arr[0] && arr[0].note) || '';
   }
-  function truncate(s, n) { return s.length > n ? s.slice(0, n - 1) + '…' : s; }
+  // Same but for switch position slots (p0/p1/p2).
+  function noteForSwitchSlot(sw, slotKey) {
+    if (!sw) return '';
+    const arr = sw[slotKey];
+    if (!Array.isArray(arr) || arr.length === 0) return '';
+    return (arr[0] && arr[0].note) || '';
+  }
+
+  // Build a callout DIV. `lines` = array of { tier, text }. Each line is
+  // rendered as `tier` (bold) + `text` (the note); empty text shows as a
+  // blank space-holder so layout stays stable across mode/config changes.
+  function makeCallout(opts) {
+    const el = document.createElement('div');
+    el.className = 'bcg-ref-callout';
+    if (opts.configured) el.classList.add('configured');
+    else el.classList.add('empty');
+    if (opts.readonly) el.classList.add('readonly');
+    el.style.left = opts.left + '%';
+    el.style.top  = opts.top  + '%';
+    // Title
+    const t = document.createElement('div');
+    t.className = 'bcg-co-title';
+    t.textContent = opts.title || '';
+    el.appendChild(t);
+    // Lines
+    for (const ln of opts.lines || []) {
+      const row = document.createElement('div');
+      row.className = 'bcg-co-line';
+      const tier = document.createElement('span');
+      tier.className = 'bcg-co-tier';
+      tier.textContent = ln.tier || '';
+      const text = document.createElement('span');
+      text.className = 'bcg-co-text' + (ln.text ? '' : ' empty');
+      text.textContent = ln.text || ' ';  // single space keeps the line tall
+      row.appendChild(tier);
+      row.appendChild(text);
+      el.appendChild(row);
+    }
+    if (opts.onClick) el.addEventListener('click', opts.onClick);
+    return el;
+  }
 
   // Buttons ───────────────────────────────────────────────────────────────
   function renderButtonGrid() {
