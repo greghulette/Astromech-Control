@@ -289,11 +289,11 @@
       { btn: 17, title: 'T1 Left',  l: 92, t: 76 },
       // ── 6 programmable buttons B1-B6 (bottom rows) ────────────────────
       { btn:  1, title: 'B1', l: 28, t: 75 },
-      { btn:  2, title: 'B2', l: 29, t: 84 },
-      { btn:  3, title: 'B3', l: 28, t: 93 },
+      { btn:  2, title: 'B2', l: 29, t: 85 },
+      { btn:  3, title: 'B3', l: 28, t: 95 },
       { btn:  4, title: 'B4', l: 72, t: 75 },
-      { btn:  5, title: 'B5', l: 71, t: 84 },
-      { btn:  6, title: 'B6', l: 72, t: 93 },
+      { btn:  5, title: 'B5', l: 71, t: 85 },
+      { btn:  6, title: 'B6', l: 72, t: 95 },
     ],
     // ── Switches (display-only — these are fixed-function physical
     //    hardware switches whose labels won't change at runtime, so we

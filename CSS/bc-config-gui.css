@@ -107,7 +107,10 @@
    area. */
 
 /* Shared baseline (positioning override + escape parent caps). Position
-   left/right are set per-pane below. */
+   left/right and overflow are set per-pane below — the image pane needs
+   visible overflow so callouts at the edges can bleed past the image
+   bounds without being clipped; the editor pane needs scroll overflow
+   so long forms can scroll. */
 #Gest .menu-Level-1 .menu-Level-1-Content#gestImage,
 #Gest .menu-Level-1 .menu-Level-1-Content#gestRemoteConfig {
   position: fixed !important;
@@ -115,15 +118,18 @@
   top:     90px !important;
   bottom: 110px !important;
   max-width: none !important;
-  overflow: auto !important;
 }
 
 /* Gestures image sub-pane — positioned independently of the editor, since
-   the image's natural placement may differ from where the editor reads best. */
+   the image's natural placement may differ from where the editor reads best.
+   `overflow: visible` lets callouts that anchor near the image edges
+   (B3/B6 at the bottom, T1 callouts at the far right) bleed past the
+   image bounds without being clipped. */
 #Gest .menu-Level-1 .menu-Level-1-Content#gestImage {
-  left:  -120px !important;     /* tuned for the photo's natural sit */
+  left:  450px !important;     /* tuned for the photo's natural sit */
   top: -50px;
-  right:  80px !important;
+  /* right:  80px !important; */
+  overflow: visible !important;
 }
 
 /* Remote Config editor sub-pane — left-anchored at the same x as the image
@@ -135,6 +141,7 @@
   left:      420px !important;
   right:      80px !important;
   max-width: 1150px !important;   /* cap so wide displays don't stretch it */
+  overflow: auto !important;      /* long editor forms scroll within the pane */
 }
 /* When the sub-pane isn't active, the global rule sets `display: none`
    anyway — these don't need to add anything for that case. */
@@ -148,7 +155,7 @@
 }
 .gesture-fullsize {
   display: inline;
-  left: 400px;
+  left: 500px;
   max-width: 100%;
   max-height: 100%;
   width: auto;
@@ -283,7 +290,10 @@
 
 /* Mode content panes: now that the tab buttons are viewport-fixed in the
    left column, each pane fills the entire #gestImage sub-pane. Reset the
-   LED section's `position: absolute; left: 250px` defaults. */
+   LED section's `position: absolute; left: 250px` defaults.
+   `overflow: visible` so callouts anchored near the image edges (B3/B6
+   at the bottom, T1 callouts at the far right) can extend past the
+   image without being clipped. */
 #gestImage .menu-Level-2.bcg-gest-modes .menu-Level-2-Content {
   position: static !important;
   left: auto !important;
@@ -291,7 +301,7 @@
   height: 100%;
   padding: 0;
   display: none;
-  overflow: auto;
+  overflow: visible;
 }
 #gestImage .menu-Level-2.bcg-gest-modes .menu-Level-2-Content.active {
   display: block;
@@ -312,17 +322,16 @@
   line-height: 0;
 }
 /* Image sized against the viewport rather than the parent so it behaves
-   predictably regardless of ancestor flex/block sizing. #gestImage uses
-   top:90px + bottom:110px (200px of vertical chrome). Mode tabs are now
-   in the left column (viewport-fixed), not stealing vertical space, so
-   the image gets the full sub-pane height minus the chrome — drop a bit
-   extra for the shadow filter. */
+   predictably regardless of ancestor flex/block sizing. We force-fill the
+   available vertical space with `height: calc(100vh - 220px)` so the
+   image always scales up to fit the sub-pane regardless of the PNG's
+   intrinsic dimensions. `width: auto` keeps aspect ratio. `max-width: 100%`
+   prevents horizontal overflow on very wide images / narrow viewports. */
 .bcg-gest-img {
   display: block;
+  height: calc(100vh - 220px);   /* fill the available vertical space */
   width: auto;
-  height: auto;
   max-width: 100%;
-  max-height: calc(100vh - 220px);
   border-radius: 6px;
   filter: drop-shadow(0 4px 18px rgba(0,0,0,0.55));
   user-select: none;
