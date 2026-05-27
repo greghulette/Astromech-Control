@@ -1,0 +1,294 @@
+/* ============================================================================
+   BC Remote Config GUI styles
+   ----------------------------------------------------------------------------
+   Lives inside the existing #Gest section. The scoped .bcg-* prefix keeps
+   styles from leaking into / colliding with the rest of the app's CSS.
+   Tokens chosen to match the existing dark Astromech-Control aesthetic.
+   ============================================================================ */
+
+.bcg-root {
+  --bcg-bg:        #1a1a2e;
+  --bcg-surface:   #16213e;
+  --bcg-card:      #0f3460;
+  --bcg-accent:    #e94560;
+  --bcg-accent2:   #0f7a9d;
+  --bcg-text:      #e0e0e0;
+  --bcg-muted:     #888;
+  --bcg-border:    #2a3a5a;
+  --bcg-green:     #4caf50;
+  --bcg-yellow:    #ffc107;
+  --bcg-red:       #f44336;
+  --bcg-mode1:     #e94560;
+  --bcg-mode2:     #0f7a9d;
+  --bcg-mode3:     #4caf50;
+
+  background: var(--bcg-bg);
+  color: var(--bcg-text);
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 14px;
+  padding: 14px;
+  border-radius: 8px;
+  max-width: 1100px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+.bcg-root *, .bcg-root *::before, .bcg-root *::after { box-sizing: border-box; }
+
+/* ── Top bar ── */
+.bcg-topbar {
+  display: flex; align-items: center; gap: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--bcg-border);
+  flex-wrap: wrap;
+}
+.bcg-title { font-size: 16px; font-weight: 700; color: var(--bcg-accent); flex: 1; }
+.bcg-sync {
+  font-size: 11px; padding: 3px 8px; border-radius: 10px;
+  background: var(--bcg-card); color: var(--bcg-muted);
+  font-family: ui-monospace, Consolas, monospace;
+}
+.bcg-sync.busy   { background: var(--bcg-yellow); color: #000; }
+.bcg-sync.synced { background: var(--bcg-green);  color: #000; }
+.bcg-sync.error  { background: var(--bcg-red);    color: #fff; }
+
+/* ── Buttons (scoped to avoid colliding with the app's existing .btn) ── */
+.bcg-btn {
+  padding: 6px 13px; border: none; border-radius: 5px; cursor: pointer;
+  font-size: 12px; font-weight: 600; transition: opacity .15s; white-space: nowrap;
+}
+.bcg-btn:hover:not(:disabled) { opacity: .82; }
+.bcg-btn:disabled { opacity: .4; cursor: not-allowed; }
+.bcg-btn-ghost { background: transparent; border: 1px solid var(--bcg-border); color: var(--bcg-text); }
+.bcg-btn-green { background: var(--bcg-green); color: #fff; }
+.bcg-btn-warn  { background: var(--bcg-yellow); color: #000; }
+.bcg-btn-blue  { background: var(--bcg-accent2); color: #fff; }
+.bcg-btn-red   { background: var(--bcg-red); color: #fff; }
+.bcg-btn-sm    { padding: 3px 9px; font-size: 11px; }
+
+.bcg-toggle { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--bcg-muted); cursor: pointer; }
+.bcg-toggle input { margin: 0; cursor: pointer; }
+
+/* ── Mode tabs (3-pos switch picker) ── */
+.bcg-mode-tabs { display: flex; gap: 0; margin: 12px 0 0; border-radius: 8px; overflow: hidden; border: 1px solid var(--bcg-border); }
+.bcg-mode-tab {
+  flex: 1; padding: 9px; text-align: center; cursor: pointer; font-size: 12px;
+  font-weight: 600; background: var(--bcg-surface); color: var(--bcg-text);
+  border: none; transition: background .2s;
+}
+.bcg-mode-tab small { display: block; font-weight: 400; opacity: .75; margin-top: 2px; }
+.bcg-mode-tab:hover { background: var(--bcg-card); }
+.bcg-mode-tab.active[data-mode="1"] { background: var(--bcg-mode1); color: #fff; }
+.bcg-mode-tab.active[data-mode="2"] { background: var(--bcg-mode2); color: #fff; }
+.bcg-mode-tab.active[data-mode="3"] { background: var(--bcg-mode3); color: #000; }
+
+/* ── Section tabs (Buttons / Switches / Knobs / …) ── */
+.bcg-section-tabs { display: flex; gap: 4px; margin-top: 12px; border-bottom: 1px solid var(--bcg-border); }
+.bcg-section-tab {
+  background: transparent; border: 1px solid var(--bcg-border); border-bottom: none;
+  color: var(--bcg-muted); padding: 7px 14px; cursor: pointer; font-size: 12px; font-weight: 600;
+  border-top-left-radius: 6px; border-top-right-radius: 6px;
+}
+.bcg-section-tab:hover { color: var(--bcg-text); }
+.bcg-section-tab.active { background: var(--bcg-surface); color: var(--bcg-text); }
+
+/* ── Section panes ── */
+.bcg-pane { display: none; padding: 14px 0; }
+.bcg-pane.active { display: block; }
+
+.bcg-mode-label { font-size: 11px; color: var(--bcg-accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+
+/* ── Reference view (dynamic transmitter layout) ────────────────────────────
+   Replaces the static gesture wiring-diagram PNGs the Gest section used to
+   show. Buttons + switches + knobs are clickable when they make sense and
+   each one is overlaid with its current mapping summary, so the diagram
+   doubles as a quick-reference card AND a visual editor entry point. */
+.bcg-ref-help {
+  font-size: 11px; color: var(--bcg-muted); margin-bottom: 8px;
+}
+.bcg-ref-wrap {
+  background: #0d1326;
+  border: 1px solid var(--bcg-border);
+  border-radius: 10px;
+  padding: 12px;
+  overflow: auto;
+}
+.bcg-ref-svg {
+  width: 100%; max-width: 1000px; height: auto; display: block; margin: 0 auto;
+  user-select: none;
+}
+/* Default styling for every "zone" group — circles/rects look like physical
+   controls; text inside is the label. */
+.bcg-ref-svg g[data-sw] circle,
+.bcg-ref-svg g[data-sw] rect,
+.bcg-ref-svg g[data-knob] circle,
+.bcg-ref-svg .bcg-ref-btn-zone circle,
+.bcg-ref-svg .bcg-ref-btn-zone rect {
+  fill: #1f2d4d;
+  stroke: #4a6080;
+  stroke-width: 1.2;
+  transition: fill .15s, stroke .15s, filter .15s;
+}
+.bcg-ref-svg g[data-sw] text,
+.bcg-ref-svg g[data-knob] text,
+.bcg-ref-svg .bcg-ref-btn-zone text {
+  fill: #cdd6e8;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: 'Segoe UI', sans-serif;
+  pointer-events: none;
+}
+.bcg-ref-trim-label {
+  fill: #8a99b3; font-size: 9px; font-weight: 700; font-family: 'Segoe UI', sans-serif;
+}
+/* Clickable hover state */
+.bcg-ref-svg .bcg-ref-btn-zone { cursor: pointer; }
+.bcg-ref-svg .bcg-ref-btn-zone:hover circle,
+.bcg-ref-svg .bcg-ref-btn-zone:hover rect {
+  fill: var(--bcg-accent2);
+  stroke: #fff;
+  stroke-width: 2;
+}
+/* Configured = a noticeable accent ring + warmer fill. */
+.bcg-ref-svg .bcg-ref-btn-zone.configured circle,
+.bcg-ref-svg .bcg-ref-btn-zone.configured rect {
+  fill: #2d4a78;
+  stroke: var(--bcg-accent2);
+  stroke-width: 2;
+  filter: drop-shadow(0 0 3px rgba(15,122,157,0.7));
+}
+/* Per-button mapping summary labels (rendered into #bcgRefLabels by JS). */
+.bcg-ref-labels text {
+  fill: var(--bcg-accent2);
+  font-size: 9px;
+  font-family: ui-monospace, Consolas, monospace;
+  font-weight: 600;
+  pointer-events: none;
+}
+.bcg-ref-labels text.empty { fill: #4a5878; font-style: italic; }
+.bcg-ref-labels text.line2 { fill: #8a99b3; font-weight: 500; }
+
+/* ── Button grid ── */
+.bcg-button-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px;
+}
+.bcg-button-card {
+  background: var(--bcg-card); border: 1px solid var(--bcg-border); border-radius: 8px;
+  padding: 10px; cursor: pointer; transition: border-color .15s, transform .05s;
+}
+.bcg-button-card:hover { border-color: var(--bcg-accent2); }
+.bcg-button-card:active { transform: translateY(1px); }
+.bcg-button-card.configured { border-color: var(--bcg-accent2); }
+.bcg-button-card .bcg-card-title { font-weight: 700; margin-bottom: 4px; font-size: 13px; }
+.bcg-button-card .bcg-card-title.empty { color: var(--bcg-muted); font-weight: 500; }
+.bcg-button-card .bcg-tier-summary { font-size: 11px; color: var(--bcg-muted); margin-top: 2px; line-height: 1.4; }
+.bcg-excl-badge { color: var(--bcg-yellow); font-size: 10px; margin-left: 4px; }
+
+/* ── List views (switches, knobs) ── */
+.bcg-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 8px; }
+.bcg-list-item {
+  background: var(--bcg-card); border: 1px solid var(--bcg-border); border-radius: 8px;
+  padding: 10px; display: flex; flex-direction: column; gap: 8px;
+}
+.bcg-list-item-title { font-weight: 700; font-size: 13px; display: flex; justify-content: space-between; align-items: center; }
+.bcg-list-item-title small { font-weight: 400; color: var(--bcg-muted); font-size: 11px; }
+.bcg-list-item-row { display: flex; gap: 6px; align-items: center; font-size: 12px; }
+.bcg-list-item-row label { color: var(--bcg-muted); flex-shrink: 0; min-width: 60px; }
+.bcg-list-item-row select,
+.bcg-list-item-row input {
+  flex: 1; background: var(--bcg-bg); border: 1px solid var(--bcg-border);
+  color: var(--bcg-text); padding: 4px 7px; border-radius: 4px; font-size: 12px;
+}
+
+/* ── Threshold table ── */
+.bcg-thresh { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 10px; }
+.bcg-thresh th { text-align: left; color: var(--bcg-muted); font-weight: 600; padding: 6px 8px; border-bottom: 1px solid var(--bcg-border); }
+.bcg-thresh td { padding: 5px 8px; }
+.bcg-thresh tr:nth-child(even) td { background: rgba(255,255,255,.03); }
+.bcg-thresh input { width: 80px; background: var(--bcg-bg); border: 1px solid var(--bcg-border); color: var(--bcg-text); padding: 4px 7px; border-radius: 4px; font-size: 12px; }
+
+/* ── Settings fields ── */
+.bcg-field { display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px; max-width: 380px; }
+.bcg-field label { font-size: 12px; color: var(--bcg-muted); font-weight: 600; }
+.bcg-field small { font-size: 11px; color: var(--bcg-muted); }
+.bcg-field input, .bcg-field select {
+  background: var(--bcg-bg); border: 1px solid var(--bcg-border); color: var(--bcg-text);
+  padding: 5px 8px; border-radius: 5px; font-size: 13px;
+}
+
+/* ── Modal ──────────────────────────────────────────────────────────────────
+   Higher contrast + dimmer backdrop than the previous build. The blur on the
+   backdrop visually separates the modal from the busy page beneath it and the
+   z-index sits above the app's leaflet / panzoom / dropdown layers so nothing
+   pokes through. Body scroll-lock is handled by the open/close JS (sets
+   document.body.style.overflow = 'hidden' while open). */
+.bcg-modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(5, 8, 22, 0.88);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 99999;
+  align-items: center; justify-content: center;
+  padding: 20px;
+}
+.bcg-modal-overlay.open { display: flex; }
+.bcg-modal {
+  background: var(--bcg-surface);
+  /* Solid background even if a parent stacking context bleeds through. */
+  background-image: linear-gradient(180deg, #18253e 0%, #14203a 100%);
+  border: 1px solid var(--bcg-accent2);
+  border-radius: 12px;
+  width: 720px; max-width: 100%; max-height: 90vh; display: flex; flex-direction: column;
+  /* Strong drop shadow + subtle outer glow makes the modal pop off the page. */
+  box-shadow: 0 24px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(15,122,157,0.25), 0 0 32px rgba(15,122,157,0.15);
+}
+.bcg-modal-header {
+  padding: 14px 18px; border-bottom: 1px solid var(--bcg-border);
+  background: rgba(15, 52, 96, 0.55);
+  border-top-left-radius: 11px; border-top-right-radius: 11px;
+  display: flex; align-items: center; gap: 10px;
+}
+.bcg-modal-title { font-size: 15px; font-weight: 700; flex: 1; }
+.bcg-modal-body { padding: 16px 18px; overflow-y: auto; flex: 1; }
+.bcg-modal-footer { padding: 11px 18px; border-top: 1px solid var(--bcg-border); display: flex; gap: 8px; justify-content: flex-end; }
+
+.bcg-mode-badge {
+  display: inline-block; padding: 2px 8px; border-radius: 10px;
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+}
+.bcg-mode-badge.m1 { background: var(--bcg-mode1); color: #fff; }
+.bcg-mode-badge.m2 { background: var(--bcg-mode2); color: #fff; }
+.bcg-mode-badge.m3 { background: var(--bcg-mode3); color: #000; }
+
+.bcg-exclusive-row { display: flex; align-items: center; gap: 8px; font-size: 12px; margin-bottom: 14px; padding: 8px 10px; background: rgba(255,255,255,.03); border-radius: 6px; cursor: pointer; }
+.bcg-exclusive-row input { cursor: pointer; }
+
+/* ── Tier card (single/double/triple tap groupings inside the modal) ── */
+.bcg-tier-card {
+  background: var(--bcg-card); border-radius: 8px; padding: 12px; margin-bottom: 12px;
+}
+.bcg-tier-title { font-size: 11px; text-transform: uppercase; color: var(--bcg-muted); letter-spacing: 1px; margin-bottom: 8px; }
+.bcg-action-row {
+  display: flex; gap: 6px; align-items: flex-start; flex-wrap: wrap;
+  padding: 6px; background: rgba(255,255,255,.03); border-radius: 5px; margin-bottom: 6px;
+}
+.bcg-action-row .bcg-fg { display: flex; flex-direction: column; gap: 3px; }
+.bcg-action-row .bcg-fg label { font-size: 10px; color: var(--bcg-muted); }
+.bcg-action-row select,
+.bcg-action-row input {
+  background: var(--bcg-bg); border: 1px solid var(--bcg-border); color: var(--bcg-text);
+  padding: 4px 7px; border-radius: 4px; font-size: 12px;
+}
+.bcg-action-row select { cursor: pointer; }
+.bcg-btn-remove-action {
+  background: transparent; color: var(--bcg-red); border: 1px solid var(--bcg-red);
+  border-radius: 4px; width: 26px; height: 26px; padding: 0; font-size: 16px; line-height: 1;
+  cursor: pointer; align-self: center; margin-left: auto;
+}
+.bcg-btn-remove-action:hover { background: var(--bcg-red); color: #fff; }
+.bcg-btn-add-action {
+  width: 100%; padding: 7px; font-size: 11px;
+  border: 1px dashed var(--bcg-border); background: transparent; color: var(--bcg-muted);
+  border-radius: 5px; cursor: pointer;
+}
+.bcg-btn-add-action:hover:not(:disabled) { border-color: var(--bcg-accent2); color: var(--bcg-accent2); }
+.bcg-btn-add-action:disabled { cursor: not-allowed; opacity: .5; }

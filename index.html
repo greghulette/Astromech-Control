@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="./CSS/Styles.css" />
   <link rel="stylesheet" href="./CSS/ZoomSlider.css" />
   <link rel="stylesheet" href="./CSS/leaflet.css" />
+  <link rel="stylesheet" href="./CSS/bc-config-gui.css" />
   <meta name="viewport" content="width=device-width, initial-scale=.5" />
   <script src="./js/jquery-3.5.1.min.js"></script>
   <script src="./js/circular-slider.js"></script>
@@ -219,44 +220,203 @@
         <img loading="lazy" src="./Images/pngegg.png" alt="" class="t3p0">
       </div>     
       
+      <!-- ────────────────────────────────────────────────────────────────────
+           BC Remote Config GUI — ported from the standalone WebSerial config
+           tool, plumbed to push config over LoRa/ESP-NOW via the existing
+           transport in main.js (writeToStream / httpGet). All edits auto-push
+           a chunked-JSON SET_CONFIG to the BC. See js/bc-config-gui.js for
+           state + chunker, CSS/bc-config-gui.css for layout.
+           ──────────────────────────────────────────────────────────────────── -->
       <div class="menu-Level-0-Content" id="Gest">
-        <h1>quick reference</h1>
-        <div class="menu-Level-1-Content " id="Gestures">
-          <!-- <img loading="lazy" src="Images/Button-LED_Controller_Reset.png" alt="" class="resetLEDController " onclick="resetArduino()"> -->
-          <h2 class="gesturesheaders">gestures reference</h2>
-          <div class="menu-Level-1">
-          
-          <div class="menu-Level-1-Links " >
-          <button id="gestures1Link" class="GesturesPage1 active" rel="gestures1"> 
-            <div class=" paddingTopBottom " onclick="" >
-              <img loading="lazy" id="ColorChangingLink" class="gesturesBlankFormat"  src="./Images/HomeTab/Button-Blank.png">
-              <p class="GestureText2 active">down</p>
-            </div> </button>
-        </div>
-        <div class="menu-Level-1-Links  " >
-          <button id="gestures2Link" class="GesturesPage2 " rel="gestures2"> <div class=" paddingTopBottom" onclick="" >
-            <img loading="lazy" id="ColorChangingLink" class="gesturesBlankFormat"  src="./Images/HomeTab/Button-Blank.png">
-            <p class="GestureText2">middle</p>
-          </div> </button>  
-        </div>
-        <div class="menu-Level-1-Links  " >
-          <button id="gestures3Link" class="GesturesPage3 " rel="gestures3" ><div class=" paddingTopBottom" onclick="">
-            <img loading="lazy" id="ColorChangingLink" class="gesturesBlankFormat"  src="./Images/HomeTab/Button-Blank.png">
-            <p class="GestureText2">up</p>
-          </div> </button>
-      </div>
-      
-          <div class="menu-Level-1-Content active" id="gestures1">
-              <img loading="lazy" id="gestures1Image" src="./Images/Wiring_Diagram/R2D2-Wiring-Diagram-Gestures-Down.png" class="Gestures_Quick_Reference2 active">
+        <div class="bcg-root">
+
+          <!-- ── Top bar: status / refresh / reset ─────────────────────────── -->
+          <div class="bcg-topbar">
+            <span class="bcg-title">Remote Config</span>
+            <span class="bcg-sync" id="bcgSyncStatus">idle</span>
+            <button class="bcg-btn bcg-btn-ghost" id="bcgRefreshBtn" type="button" title="Read current config from the BC (GET_CONFIG)">↻ Refresh</button>
+            <button class="bcg-btn bcg-btn-warn"  id="bcgDefaultsBtn" type="button" title="Reload factory defaults on the BC">Reset Defaults</button>
+            <label class="bcg-toggle" title="When on, every edit auto-pushes to BC. When off, edits stay local until you hit Apply.">
+              <input type="checkbox" id="bcgLiveToggle" checked>
+              <span>Live push</span>
+            </label>
+            <button class="bcg-btn bcg-btn-green" id="bcgApplyBtn" type="button" title="Manually push the current config to the BC">Apply</button>
           </div>
-          <div class="menu-Level-1-Content  " id="gestures2" >
-            <img loading="lazy" id="gestures3Image" src="./Images/Wiring_Diagram/R2D2-Wiring-Diagram-Gestures-Middle.png " class="Gestures_Quick_Reference2 ">
+
+          <!-- ── Mode tabs (1/2/3) ─────────────────────────────────────────── -->
+          <div class="bcg-mode-tabs">
+            <button class="bcg-mode-tab active" data-mode="1" type="button">Mode 1<br><small>SW Down</small></button>
+            <button class="bcg-mode-tab"        data-mode="2" type="button">Mode 2<br><small>SW Mid</small></button>
+            <button class="bcg-mode-tab"        data-mode="3" type="button">Mode 3<br><small>SW Up</small></button>
           </div>
-            <div class="menu-Level-1-Content  " id="gestures3" >
-              <img loading="lazy" id="gestures3Image" src="./Images/Wiring_Diagram/R2D2-Wiring-Diagram-Gestures-Up.png " class="Gestures_Quick_Reference2 ">
+
+          <!-- ── Section tabs: Reference / Buttons / Switches / Knobs / Thresholds / Settings ── -->
+          <div class="bcg-section-tabs">
+            <button class="bcg-section-tab active" data-section="reference" type="button">Reference</button>
+            <button class="bcg-section-tab"        data-section="buttons" type="button">Buttons</button>
+            <button class="bcg-section-tab"        data-section="switches" type="button">Switches</button>
+            <button class="bcg-section-tab"        data-section="knobs" type="button">Knobs</button>
+            <button class="bcg-section-tab"        data-section="thresholds" type="button">Thresholds</button>
+            <button class="bcg-section-tab"        data-section="settings" type="button">Settings</button>
+          </div>
+
+          <!-- ── Section panes ─────────────────────────────────────────────── -->
+          <!-- Reference pane — dynamic transmitter map showing the current
+               config. Click any button to jump into the modal editor for that
+               control under the active mode. -->
+          <div class="bcg-pane active" id="bcgPane-reference">
+            <div class="bcg-mode-label" id="bcgRefModeLabel">Mode 1 (SW Down)</div>
+            <div class="bcg-ref-help">Click any button to edit its mappings. Action summaries update live as you change the config.</div>
+            <div class="bcg-ref-wrap">
+              <svg id="bcgRefSvg" class="bcg-ref-svg" viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg" aria-label="Transmitter mapping reference">
+                <!-- Body + screen (purely decorative) -->
+                <rect x="60" y="180" width="880" height="500" rx="50" fill="#1a2540" stroke="#0a1428" stroke-width="2"/>
+                <rect x="290" y="20" width="420" height="240" rx="20" fill="#0a0a0a" stroke="#1a2a4a" stroke-width="2"/>
+                <rect x="305" y="35" width="390" height="210" rx="6" fill="#0e2440"/>
+                <text x="500" y="115" text-anchor="middle" fill="#5a9ac6" font-size="14" font-family="monospace">R2D2 Body Controller</text>
+                <text x="500" y="138" text-anchor="middle" fill="#3a6a9a" font-size="11" font-family="monospace" id="bcgRefScreenMode">Mode 1 — SW Down</text>
+                <text x="500" y="180" text-anchor="middle" fill="#2a5a8a" font-size="10" font-family="monospace">click any control below to edit</text>
+
+                <!-- Switches SA-SH along top edge (decorative — not clickable yet, future feature) -->
+                <g class="bcg-ref-sw-group">
+                  <g data-sw="SF"><circle cx="125" cy="225" r="16"/><text x="125" y="229" text-anchor="middle">SF</text></g>
+                  <g data-sw="SE"><circle cx="175" cy="225" r="16"/><text x="175" y="229" text-anchor="middle">SE</text></g>
+                  <g data-sw="SA"><circle cx="225" cy="225" r="16"/><text x="225" y="229" text-anchor="middle">SA</text></g>
+                  <g data-sw="SB"><circle cx="275" cy="225" r="16"/><text x="275" y="229" text-anchor="middle">SB</text></g>
+                  <g data-sw="SC"><circle cx="725" cy="225" r="16"/><text x="725" y="229" text-anchor="middle">SC</text></g>
+                  <g data-sw="SD"><circle cx="775" cy="225" r="16"/><text x="775" y="229" text-anchor="middle">SD</text></g>
+                  <g data-sw="SG"><circle cx="825" cy="225" r="16"/><text x="825" y="229" text-anchor="middle">SG</text></g>
+                  <g data-sw="SH"><circle cx="875" cy="225" r="16"/><text x="875" y="229" text-anchor="middle">SH</text></g>
+                  <g data-sw="SI"><rect x="335" y="270" width="22" height="22" rx="4"/><text x="346" y="286" text-anchor="middle">SI</text></g>
+                  <g data-sw="SJ"><rect x="643" y="270" width="22" height="22" rx="4"/><text x="654" y="286" text-anchor="middle">SJ</text></g>
+                </g>
+
+                <!-- Knobs S1, S2 -->
+                <g class="bcg-ref-knob-group">
+                  <g data-knob="S1"><circle cx="430" cy="310" r="22"/><text x="430" y="315" text-anchor="middle">S1</text></g>
+                  <g data-knob="S2"><circle cx="570" cy="310" r="22"/><text x="570" y="315" text-anchor="middle">S2</text></g>
+                </g>
+
+                <!-- Power button (decorative) -->
+                <circle cx="500" cy="370" r="18" fill="#08101e" stroke="#1a2a4a"/>
+                <path d="M 500 360 L 500 374 M 491 364 A 13 13 0 1 0 509 364" stroke="#888" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+                <!-- Gimbals (decorative squares) -->
+                <rect x="155" y="330" width="170" height="170" rx="20" fill="#000" stroke="#1a1a1a" stroke-width="2"/>
+                <rect x="167" y="342" width="146" height="146" rx="12" fill="#0a0a0a"/>
+                <circle cx="240" cy="415" r="18" fill="#252525" stroke="#3a3a3a"/>
+                <rect x="675" y="330" width="170" height="170" rx="20" fill="#000" stroke="#1a1a1a" stroke-width="2"/>
+                <rect x="687" y="342" width="146" height="146" rx="12" fill="#0a0a0a"/>
+                <circle cx="760" cy="415" r="18" fill="#252525" stroke="#3a3a3a"/>
+
+                <!-- Trim buttons around gimbals: each is one clickable matrix button.
+                     T3 (vert, right of L-gimbal):  btn 11 (top) / 12 (bottom)
+                     T2 (vert, left  of R-gimbal): btn 13 (top) / 14 (bottom)
+                     T4 (horiz, bottom-left):       btn 7 (left)  / 8 (right)
+                     T5 (horiz, bottom-left inner): btn 9 (left)  / 10 (right)
+                     T6 (horiz, bottom-right inner):btn 15 (left) / 16 (right)
+                     T1 (horiz, bottom-right):      btn 17 (left) / 18 (right) -->
+                <g class="bcg-ref-trim-group">
+                  <g class="bcg-ref-btn-zone" data-btn="11"><rect x="350" y="355" width="28" height="22" rx="3"/><text x="364" y="370" text-anchor="middle">▲</text></g>
+                  <g class="bcg-ref-btn-zone" data-btn="12"><rect x="350" y="445" width="28" height="22" rx="3"/><text x="364" y="460" text-anchor="middle">▼</text></g>
+                  <text x="364" y="415" text-anchor="middle" class="bcg-ref-trim-label">T3</text>
+                  <g class="bcg-ref-btn-zone" data-btn="13"><rect x="622" y="355" width="28" height="22" rx="3"/><text x="636" y="370" text-anchor="middle">▲</text></g>
+                  <g class="bcg-ref-btn-zone" data-btn="14"><rect x="622" y="445" width="28" height="22" rx="3"/><text x="636" y="460" text-anchor="middle">▼</text></g>
+                  <text x="636" y="415" text-anchor="middle" class="bcg-ref-trim-label">T2</text>
+                  <g class="bcg-ref-btn-zone" data-btn="7"><rect x="160" y="525" width="26" height="22" rx="3"/><text x="173" y="540" text-anchor="middle">◀</text></g>
+                  <g class="bcg-ref-btn-zone" data-btn="8"><rect x="200" y="525" width="26" height="22" rx="3"/><text x="213" y="540" text-anchor="middle">▶</text></g>
+                  <text x="193" y="570" text-anchor="middle" class="bcg-ref-trim-label">T4</text>
+                  <g class="bcg-ref-btn-zone" data-btn="9"><rect x="265" y="525" width="26" height="22" rx="3"/><text x="278" y="540" text-anchor="middle">◀</text></g>
+                  <g class="bcg-ref-btn-zone" data-btn="10"><rect x="305" y="525" width="26" height="22" rx="3"/><text x="318" y="540" text-anchor="middle">▶</text></g>
+                  <text x="298" y="570" text-anchor="middle" class="bcg-ref-trim-label">T5</text>
+                  <g class="bcg-ref-btn-zone" data-btn="15"><rect x="670" y="525" width="26" height="22" rx="3"/><text x="683" y="540" text-anchor="middle">◀</text></g>
+                  <g class="bcg-ref-btn-zone" data-btn="16"><rect x="710" y="525" width="26" height="22" rx="3"/><text x="723" y="540" text-anchor="middle">▶</text></g>
+                  <text x="703" y="570" text-anchor="middle" class="bcg-ref-trim-label">T6</text>
+                  <g class="bcg-ref-btn-zone" data-btn="17"><rect x="775" y="525" width="26" height="22" rx="3"/><text x="788" y="540" text-anchor="middle">◀</text></g>
+                  <g class="bcg-ref-btn-zone" data-btn="18"><rect x="815" y="525" width="26" height="22" rx="3"/><text x="828" y="540" text-anchor="middle">▶</text></g>
+                  <text x="808" y="570" text-anchor="middle" class="bcg-ref-trim-label">T1</text>
+                </g>
+
+                <!-- Six programmable buttons B1-B6 -->
+                <g class="bcg-ref-btn-group">
+                  <g class="bcg-ref-btn-zone" data-btn="1"><circle cx="385" cy="620" r="18"/><text x="385" y="625" text-anchor="middle">B1</text></g>
+                  <g class="bcg-ref-btn-zone" data-btn="2"><circle cx="435" cy="620" r="18"/><text x="435" y="625" text-anchor="middle">B2</text></g>
+                  <g class="bcg-ref-btn-zone" data-btn="3"><circle cx="485" cy="620" r="18"/><text x="485" y="625" text-anchor="middle">B3</text></g>
+                  <g class="bcg-ref-btn-zone" data-btn="4"><circle cx="535" cy="620" r="18"/><text x="535" y="625" text-anchor="middle">B4</text></g>
+                  <g class="bcg-ref-btn-zone" data-btn="5"><circle cx="585" cy="620" r="18"/><text x="585" y="625" text-anchor="middle">B5</text></g>
+                  <g class="bcg-ref-btn-zone" data-btn="6"><circle cx="635" cy="620" r="18"/><text x="635" y="625" text-anchor="middle">B6</text></g>
+                </g>
+
+                <!-- Per-button summary labels — populated dynamically by renderReferenceView() -->
+                <g id="bcgRefLabels" class="bcg-ref-labels"></g>
+              </svg>
+            </div>
+          </div>
+
+          <div class="bcg-pane" id="bcgPane-buttons">
+            <div class="bcg-mode-label" id="bcgModeLabel">Mode 1 (SW Down)</div>
+            <div class="bcg-button-grid" id="bcgButtonGrid"></div>
+          </div>
+          <div class="bcg-pane" id="bcgPane-switches">
+            <div class="bcg-list" id="bcgSwitchList"></div>
+          </div>
+          <div class="bcg-pane" id="bcgPane-knobs">
+            <div class="bcg-list" id="bcgKnobList"></div>
+          </div>
+          <div class="bcg-pane" id="bcgPane-thresholds">
+            <table class="bcg-thresh">
+              <thead><tr><th>#</th><th>Label</th><th>min</th><th>max</th></tr></thead>
+              <tbody id="bcgThreshBody"></tbody>
+            </table>
+            <button class="bcg-btn bcg-btn-ghost" id="bcgThreshRebuildBtn" type="button">Rebuild defaults</button>
+          </div>
+          <div class="bcg-pane" id="bcgPane-settings">
+            <div class="bcg-field">
+              <label>Tap window (ms)</label>
+              <input type="number" id="bcgTapWindow" min="100" max="2000" step="50" value="500">
+              <small>Time window for multi-tap detection.</small>
+            </div>
+            <div class="bcg-field">
+              <label>Matrix channel</label>
+              <input type="number" id="bcgMatrixCh" min="1" max="24" value="7">
+              <small>SBUS channel carrying the multiplexed button matrix (Kyber default: 7).</small>
+            </div>
+            <div class="bcg-field">
+              <label>Mode selector switch</label>
+              <select id="bcgModeBind">
+                <option value="-1">— disabled (always Mode 1) —</option>
+                <option value="0">SA</option><option value="1">SB</option><option value="2">SC</option><option value="3">SD</option>
+                <option value="4" selected>SE</option><option value="5">SF</option><option value="6">SG</option><option value="7">SH</option>
+              </select>
+              <small>Which 3-position switch toggles between Modes 1 / 2 / 3.</small>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ── Button-config modal (tap1 / tap2 / tap3 action editor) ────── -->
+        <div class="bcg-modal-overlay" id="bcgModal">
+          <div class="bcg-modal">
+            <div class="bcg-modal-header">
+              <span class="bcg-modal-title" id="bcgModalTitle">Button</span>
+              <span class="bcg-mode-badge" id="bcgModalModeBadge"></span>
+              <button class="bcg-btn bcg-btn-ghost" type="button" id="bcgModalClose">✕</button>
+            </div>
+            <div class="bcg-modal-body">
+              <label class="bcg-exclusive-row">
+                <input type="checkbox" id="bcgModalExclusive">
+                <span>Exclusive mode — tap 2 replaces tap 1 (waits for window before firing)</span>
+              </label>
+              <div id="bcgTiersContainer"></div>
+            </div>
+            <div class="bcg-modal-footer">
+              <button class="bcg-btn bcg-btn-ghost" type="button" id="bcgModalClear">Clear All</button>
+              <button class="bcg-btn bcg-btn-ghost" type="button" id="bcgModalCancel">Cancel</button>
+              <button class="bcg-btn bcg-btn-green" type="button" id="bcgModalApply">Apply</button>
             </div>
           </div>
         </div>
+
       </div>
 
 
@@ -6524,6 +6684,9 @@ id="FrontLogicsTopBlueSelector"
 
 
 <script src="./js/main.js"></script>
+<!-- BC Remote Config GUI — Gest section editor + chunked SET_CONFIG over LoRa/ESP-NOW.
+     Loaded AFTER main.js because it references writeToStream() / httpGet() / SerialBCPrefix. -->
+<script src="./js/bc-config-gui.js"></script>
 
 <script src="./js/jquery-3.5.1.min.js"></script>
 
