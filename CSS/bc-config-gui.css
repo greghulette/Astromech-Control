@@ -221,9 +221,9 @@
   margin: 0;
   z-index: 10;            /* same stacking layer as the menu-Level-1 buttons */
 }
-#gestImage .menu-Level-2.bcg-gest-modes .menu-Level-2-Links.bcg-gest-mode-link:nth-of-type(1) { top: 280px !important; }
-#gestImage .menu-Level-2.bcg-gest-modes .menu-Level-2-Links.bcg-gest-mode-link:nth-of-type(2) { top: 380px !important; }
-#gestImage .menu-Level-2.bcg-gest-modes .menu-Level-2-Links.bcg-gest-mode-link:nth-of-type(3) { top: 480px !important; }
+#gestImage .menu-Level-2.bcg-gest-modes .menu-Level-2-Links.bcg-gest-mode-link:nth-of-type(1) { top: 340px !important; }
+#gestImage .menu-Level-2.bcg-gest-modes .menu-Level-2-Links.bcg-gest-mode-link:nth-of-type(2) { top: 440px !important; }
+#gestImage .menu-Level-2.bcg-gest-modes .menu-Level-2-Links.bcg-gest-mode-link:nth-of-type(3) { top: 540px !important; }
 
 /* Mode tab BUTTON STYLING is fully inherited from the global menu-Level-2
    rules in Styles.css line 4232+ (width:200, height:85, overflow:auto,
@@ -240,7 +240,7 @@
 .bcg-gest-live-indicator {
   position: fixed !important;
   left: 130px;
-  top:  570px;
+  top:  630px;
   width: 200px;
   display: flex;
   align-items: center;
