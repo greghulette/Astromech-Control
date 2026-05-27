@@ -253,12 +253,84 @@
             </button>
           </div>
 
-          <!-- ── Sub-pane: Gestures (image-only, full size) ─────────────── -->
+          <!-- ── Sub-pane: Gestures ─────────────────────────────────────────
+               One image per mode (1=SW Down, 2=SW Mid, 3=SW Up) so the user
+               sees the actual mapped function notes for the mode they're in.
+               Auto-switches to follow the live SE-switch (FunctionSWState
+               telemetry from the BC); the user can override by tapping a
+               mode tab manually until the SE switch position changes again.
+               Uses the app's standard menu-Level-2 markup so the existing
+               jQuery click handler in index.html drives the slide animation;
+               the .bcg-gest-modes wrapper class hangs custom CSS off it so
+               this section gets a horizontal-tab-strip layout instead of
+               the LED section's left-column layout. ─────────────────────── -->
           <div class="menu-Level-1-Content active" id="gestImage">
-            <img class="gesture-fullsize"
-                 src="./Images/Blank_Gestures.png"
-                 alt="Transmitter gesture reference"
-                 loading="lazy">
+            <div class="menu-Level-2 bcg-gest-modes">
+
+              <!-- Mode tab buttons (markup mirrors the LED section's
+                   menu-Level-2 buttons exactly: ButtonBlankLED div +
+                   buttonwidthLED img + shadowtext2LinesLED p. This keeps
+                   them visually consistent with the rest of the app and
+                   inherits all the correct click-area behavior from the
+                   global rules. The .bcg-gest-mode-link class is just a
+                   hook for our positioning CSS — it adds no styles to the
+                   button itself. -->
+              <div class="menu-Level-2-Links bcg-gest-mode-link">
+                <button id="bcgGestureMode1Tab" class="active" rel="gestMode1" type="button" data-bcg-gest-mode="1">
+                  <div class="ButtonBlankLED">
+                    <img loading="lazy" class="buttonwidthLED" src="./Images/HomeTab/Button-Blank.png" alt="">
+                    <p class="shadowtext2LinesLED">mode 1<br>sw down</p>
+                  </div>
+                </button>
+              </div>
+              <div class="menu-Level-2-Links bcg-gest-mode-link">
+                <button id="bcgGestureMode2Tab" rel="gestMode2" type="button" data-bcg-gest-mode="2">
+                  <div class="ButtonBlankLED">
+                    <img loading="lazy" class="buttonwidthLED" src="./Images/HomeTab/Button-Blank.png" alt="">
+                    <p class="shadowtext2LinesLED">mode 2<br>sw mid</p>
+                  </div>
+                </button>
+              </div>
+              <div class="menu-Level-2-Links bcg-gest-mode-link">
+                <button id="bcgGestureMode3Tab" rel="gestMode3" type="button" data-bcg-gest-mode="3">
+                  <div class="ButtonBlankLED">
+                    <img loading="lazy" class="buttonwidthLED" src="./Images/HomeTab/Button-Blank.png" alt="">
+                    <p class="shadowtext2LinesLED">mode 3<br>sw up</p>
+                  </div>
+                </button>
+              </div>
+
+              <!-- "Following live SE switch" indicator — JS toggles the
+                   .manual-override class on this wrapper when the user has
+                   manually picked a mode (it shows a different label then). -->
+              <div class="bcg-gest-live-indicator" id="bcgGestureLiveIndicator">
+                <span class="bcg-gest-live-dot"></span>
+                <span class="bcg-gest-live-label">following SE switch</span>
+              </div>
+
+              <!-- Mode 1 pane (SW Down) -->
+              <div class="menu-Level-2-Content active" id="gestMode1">
+                <div class="bcg-gest-wrap">
+                  <img class="bcg-gest-img" src="./Images/Blank_Gestures.png" alt="Mode 1 (SW Down) mapping" loading="lazy">
+                  <div class="bcg-gest-overlay" id="bcgGestOverlay1" data-mode="1"></div>
+                </div>
+              </div>
+              <!-- Mode 2 pane (SW Mid) -->
+              <div class="menu-Level-2-Content" id="gestMode2">
+                <div class="bcg-gest-wrap">
+                  <img class="bcg-gest-img" src="./Images/Blank_Gestures.png" alt="Mode 2 (SW Mid) mapping" loading="lazy">
+                  <div class="bcg-gest-overlay" id="bcgGestOverlay2" data-mode="2"></div>
+                </div>
+              </div>
+              <!-- Mode 3 pane (SW Up) -->
+              <div class="menu-Level-2-Content" id="gestMode3">
+                <div class="bcg-gest-wrap">
+                  <img class="bcg-gest-img" src="./Images/Blank_Gestures.png" alt="Mode 3 (SW Up) mapping" loading="lazy">
+                  <div class="bcg-gest-overlay" id="bcgGestOverlay3" data-mode="3"></div>
+                </div>
+              </div>
+
+            </div>
           </div>
 
           <!-- ── Sub-pane: Remote Config (BC editor) ────────────────────── -->

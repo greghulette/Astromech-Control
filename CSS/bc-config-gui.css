@@ -121,7 +121,8 @@
 /* Gestures image sub-pane — positioned independently of the editor, since
    the image's natural placement may differ from where the editor reads best. */
 #Gest .menu-Level-1 .menu-Level-1-Content#gestImage {
-  left:  520px !important;     /* tuned for the photo's natural sit */
+  left:  -120px !important;     /* tuned for the photo's natural sit */
+  top: -50px;
   right:  80px !important;
 }
 
@@ -131,7 +132,7 @@
    an upper bound on narrower screens, but max-width wins first on wide
    displays — keeps the cards from running off the right side. */
 #Gest .menu-Level-1 .menu-Level-1-Content#gestRemoteConfig {
-  left:      520px !important;
+  left:      420px !important;
   right:      80px !important;
   max-width: 1150px !important;   /* cap so wide displays don't stretch it */
 }
@@ -147,7 +148,7 @@
 }
 .gesture-fullsize {
   display: inline;
-  left: 500px;
+  left: 400px;
   max-width: 100%;
   max-height: 100%;
   width: auto;
@@ -156,6 +157,186 @@
   border-radius: 6px;
   filter: drop-shadow(0 4px 18px rgba(0,0,0,0.55));
   user-select: none;
+}
+
+/* The GESTURES / REMOTE CONFIG menu-Level-1 buttons inherit all their
+   styling from the global `.menu-Level-0 .menu-Level-1 .menu-Level-1-Links
+   button` rules in Styles.css — matching the rest of the app.
+
+   THE REAL CLICK-AREA BUG (discovered via live DOM inspection):
+   #gestImage's pane spans x=-120 to x=1049, putting the dynamic callout
+   overlay inside it directly over the menu-Level-1 button column on the
+   left. Since #gestImage's contents come AFTER the buttons in document
+   order, the callouts paint on top and intercept clicks at their
+   percentage-positioned locations. Fix: z-index the menu buttons (and
+   the mode tabs below them) ABOVE the overlay's stacking context. */
+#Gest .menu-Level-1 > .menu-Level-1-Links {
+  z-index: 10;            /* sits above the .bcg-gest-overlay callouts */
+}
+
+/* ── Per-mode Gestures menu-Level-2 ─────────────────────────────────────────
+   The Gestures sub-tab hosts a 3-mode picker (SW Down / Mid / Up). The
+   mode tab BUTTONS live in the left column below GESTURES/REMOTE CONFIG
+   (viewport-fixed coordinates that match the .moveN pattern used by the
+   sibling menu-Level-1 buttons), so they don't push the image down/right.
+   The mode-content panes (image + overlay) fill the entire #gestImage
+   sub-pane.
+
+   We keep the menu-Level-2 markup so the existing jQuery click handler in
+   index.html drives the slide animation between modes — only the layout
+   is overridden via the `.bcg-gest-modes` wrapper class. */
+
+/* Mode tabs are fixed-positioned to the viewport so they sit alongside the
+   GESTURES / REMOTE CONFIG buttons in the left column. They naturally
+   disappear when #gestImage is `display: none` (the user switched to the
+   Remote Config sub-pane) because they're descendants of it.
+
+   Coordinates tuned to match the screenshot:
+     GESTURES button → roughly viewport y=90
+     REMOTE CONFIG    → roughly viewport y=170
+     Mode 1           → viewport y=280  (~80px below REMOTE CONFIG)
+     Mode 2           → viewport y=380
+     Mode 3           → viewport y=480
+     Live indicator   → viewport y=580
+   Tunable: bump or shrink the spacing to taste. */
+#gestImage .menu-Level-2.bcg-gest-modes {
+  position: static !important;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+#gestImage .menu-Level-2.bcg-gest-modes .menu-Level-2-Links.bcg-gest-mode-link {
+  position: fixed !important;
+  left: 130px !important;
+  width: 200px;
+  display: block;
+  margin: 0;
+  z-index: 10;            /* same stacking layer as the menu-Level-1 buttons */
+}
+#gestImage .menu-Level-2.bcg-gest-modes .menu-Level-2-Links.bcg-gest-mode-link:nth-of-type(1) { top: 280px !important; }
+#gestImage .menu-Level-2.bcg-gest-modes .menu-Level-2-Links.bcg-gest-mode-link:nth-of-type(2) { top: 380px !important; }
+#gestImage .menu-Level-2.bcg-gest-modes .menu-Level-2-Links.bcg-gest-mode-link:nth-of-type(3) { top: 480px !important; }
+
+/* Mode tab BUTTON STYLING is fully inherited from the global menu-Level-2
+   rules in Styles.css line 4232+ (width:200, height:85, overflow:auto,
+   etc.) — same as the LED section's menu-Level-2 buttons. The HTML uses
+   the exact same .ButtonBlankLED / .buttonwidthLED / .shadowtext2LinesLED
+   classes, so the visible button graphic + text overlay match the rest
+   of the app pixel-for-pixel, including click-area behavior. No button
+   styling overrides here. */
+
+/* Live-follow indicator — small, minimal text below the Mode 3 tab.
+   Just plain text in the app's existing aesthetic (yellow on dark),
+   no pill / box / chip so it doesn't compete visually with the
+   actual nav buttons. */
+.bcg-gest-live-indicator {
+  position: fixed !important;
+  left: 130px;
+  top:  570px;
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 4px 8px;
+  background: transparent;
+  border: none;
+  color: #b8e6bb;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  text-align: center;
+  user-select: none;
+  box-sizing: border-box;
+}
+.bcg-gest-live-indicator .bcg-gest-live-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #4caf50;
+  box-shadow: 0 0 6px #4caf50;
+  animation: bcgLivePulse 1.6s ease-in-out infinite;
+}
+@keyframes bcgLivePulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.45; }
+}
+.bcg-gest-live-indicator.manual-override {
+  background: rgba(255, 193, 7, 0.15);
+  border-color: rgba(255, 193, 7, 0.55);
+  color: #ffe28a;
+}
+.bcg-gest-live-indicator.manual-override .bcg-gest-live-dot {
+  background: #ffc107;
+  box-shadow: 0 0 6px #ffc107;
+  animation: none;
+}
+.bcg-gest-live-indicator.disconnected {
+  background: rgba(136, 136, 136, 0.15);
+  border-color: rgba(136, 136, 136, 0.45);
+  color: #aaa;
+}
+.bcg-gest-live-indicator.disconnected .bcg-gest-live-dot {
+  background: #888;
+  box-shadow: none;
+  animation: none;
+}
+
+/* Mode content panes: now that the tab buttons are viewport-fixed in the
+   left column, each pane fills the entire #gestImage sub-pane. Reset the
+   LED section's `position: absolute; left: 250px` defaults. */
+#gestImage .menu-Level-2.bcg-gest-modes .menu-Level-2-Content {
+  position: static !important;
+  left: auto !important;
+  width: 100% !important;
+  height: 100%;
+  padding: 0;
+  display: none;
+  overflow: auto;
+}
+#gestImage .menu-Level-2.bcg-gest-modes .menu-Level-2-Content.active {
+  display: block;
+}
+
+/* Image+overlay wrap: relative-positioned so absolute callouts inside the
+   overlay are anchored to the image edges. width:fit-content lets the
+   wrap shrink to the rendered image dimensions exactly so the overlay
+   matches the image bounds; margin:0 auto centers it if it's narrower
+   than the available pane. line-height:0 kills the inline-image baseline
+   gap that would otherwise add a few px under the image. */
+.bcg-gest-wrap {
+  position: relative;
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
+  line-height: 0;
+}
+/* Image sized against the viewport rather than the parent so it behaves
+   predictably regardless of ancestor flex/block sizing. #gestImage uses
+   top:90px + bottom:110px (200px of vertical chrome). Mode tabs are now
+   in the left column (viewport-fixed), not stealing vertical space, so
+   the image gets the full sub-pane height minus the chrome — drop a bit
+   extra for the shadow filter. */
+.bcg-gest-img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: calc(100vh - 220px);
+  border-radius: 6px;
+  filter: drop-shadow(0 4px 18px rgba(0,0,0,0.55));
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+.bcg-gest-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  line-height: 1.35;  /* restore line-height inside overlay (parent set 0) */
+}
+.bcg-gest-overlay .bcg-ref-callout {
+  pointer-events: auto;   /* callouts re-enable clicks */
 }
 
 /* The Remote Config bcg-root needs to fill its parent now that we've made
@@ -381,58 +562,80 @@
   background-image: linear-gradient(180deg, #18253e 0%, #14203a 100%);
   border: 1px solid var(--bcg-accent2);
   border-radius: 12px;
-  width: 720px; max-width: 100%; max-height: 90vh; display: flex; flex-direction: column;
+  width: 1000px; max-width: 100%; max-height: 92vh; display: flex; flex-direction: column;
   /* Strong drop shadow + subtle outer glow makes the modal pop off the page. */
   box-shadow: 0 24px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(15,122,157,0.25), 0 0 32px rgba(15,122,157,0.15);
 }
 .bcg-modal-header {
-  padding: 14px 18px; border-bottom: 1px solid var(--bcg-border);
+  padding: 18px 24px; border-bottom: 1px solid var(--bcg-border);
   background: rgba(15, 52, 96, 0.55);
   border-top-left-radius: 11px; border-top-right-radius: 11px;
-  display: flex; align-items: center; gap: 10px;
+  display: flex; align-items: center; gap: 12px;
 }
-.bcg-modal-title { font-size: 15px; font-weight: 700; flex: 1; }
-.bcg-modal-body { padding: 16px 18px; overflow-y: auto; flex: 1; }
-.bcg-modal-footer { padding: 11px 18px; border-top: 1px solid var(--bcg-border); display: flex; gap: 8px; justify-content: flex-end; }
+.bcg-modal-title { font-size: 20px; font-weight: 700; flex: 1; }
+.bcg-modal-body { padding: 22px 24px; overflow-y: auto; flex: 1; font-size: 14px; }
+.bcg-modal-footer { padding: 14px 24px; border-top: 1px solid var(--bcg-border); display: flex; gap: 10px; justify-content: flex-end; }
+.bcg-modal-footer .bcg-btn { padding: 9px 18px; font-size: 14px; }
 
 .bcg-mode-badge {
-  display: inline-block; padding: 2px 8px; border-radius: 10px;
-  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+  display: inline-block; padding: 4px 12px; border-radius: 12px;
+  font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
 }
 .bcg-mode-badge.m1 { background: var(--bcg-mode1); color: #fff; }
 .bcg-mode-badge.m2 { background: var(--bcg-mode2); color: #fff; }
 .bcg-mode-badge.m3 { background: var(--bcg-mode3); color: #000; }
 
-.bcg-exclusive-row { display: flex; align-items: center; gap: 8px; font-size: 12px; margin-bottom: 14px; padding: 8px 10px; background: rgba(255,255,255,.03); border-radius: 6px; cursor: pointer; }
-.bcg-exclusive-row input { cursor: pointer; }
+.bcg-exclusive-row { display: flex; align-items: center; gap: 10px; font-size: 14px; margin-bottom: 18px; padding: 11px 14px; background: rgba(255,255,255,.03); border-radius: 6px; cursor: pointer; }
+.bcg-exclusive-row input { cursor: pointer; width: 16px; height: 16px; }
 
 /* ── Tier card (single/double/triple tap groupings inside the modal) ── */
 .bcg-tier-card {
-  background: var(--bcg-card); border-radius: 8px; padding: 12px; margin-bottom: 12px;
+  background: var(--bcg-card); border-radius: 8px; padding: 16px; margin-bottom: 14px;
 }
-.bcg-tier-title { font-size: 11px; text-transform: uppercase; color: var(--bcg-muted); letter-spacing: 1px; margin-bottom: 8px; }
+.bcg-tier-title { font-size: 13px; text-transform: uppercase; color: var(--bcg-muted); letter-spacing: 1.2px; margin-bottom: 10px; font-weight: 700; }
 .bcg-action-row {
-  display: flex; gap: 6px; align-items: flex-start; flex-wrap: wrap;
-  padding: 6px; background: rgba(255,255,255,.03); border-radius: 5px; margin-bottom: 6px;
+  display: flex; gap: 10px; align-items: flex-start; flex-wrap: wrap;
+  padding: 10px; background: rgba(255,255,255,.03); border-radius: 6px; margin-bottom: 8px;
 }
-.bcg-action-row .bcg-fg { display: flex; flex-direction: column; gap: 3px; }
-.bcg-action-row .bcg-fg label { font-size: 10px; color: var(--bcg-muted); }
+.bcg-action-row .bcg-fg { display: flex; flex-direction: column; gap: 4px; }
+.bcg-action-row .bcg-fg label { font-size: 12px; color: var(--bcg-muted); font-weight: 600; }
 .bcg-action-row select,
 .bcg-action-row input {
   background: var(--bcg-bg); border: 1px solid var(--bcg-border); color: var(--bcg-text);
-  padding: 4px 7px; border-radius: 4px; font-size: 12px;
+  padding: 7px 10px; border-radius: 5px; font-size: 14px;
 }
-.bcg-action-row select { cursor: pointer; }
+.bcg-action-row select { cursor: pointer; min-width: 120px; }
+/* Explicit option styling — without this, the browser/OS renders the open
+   dropdown list with system colors (white text on white background on some
+   Windows/Chrome combos). Forcing dark bg + light text keeps the dropdown
+   readable when expanded.
+
+   Chrome on Windows is especially picky: it ignores `background` shorthand
+   inside option elements and only sometimes respects CSS variables across
+   the option boundary. Using `background-color` with a literal hex value
+   and `!important` is the most reliable form. */
+.bcg-root select option,
+.bcg-root select optgroup,
+.bcg-modal select option,
+.bcg-modal select optgroup {
+  background-color: #1a1a2e !important;
+  color:            #ffffff !important;
+}
+.bcg-root select option:checked,
+.bcg-modal select option:checked {
+  background-color: #0f7a9d !important;   /* accent2 — matches hover */
+  color:            #ffffff !important;
+}
 .bcg-btn-remove-action {
   background: transparent; color: var(--bcg-red); border: 1px solid var(--bcg-red);
-  border-radius: 4px; width: 26px; height: 26px; padding: 0; font-size: 16px; line-height: 1;
+  border-radius: 5px; width: 34px; height: 34px; padding: 0; font-size: 20px; line-height: 1;
   cursor: pointer; align-self: center; margin-left: auto;
 }
 .bcg-btn-remove-action:hover { background: var(--bcg-red); color: #fff; }
 .bcg-btn-add-action {
-  width: 100%; padding: 7px; font-size: 11px;
+  width: 100%; padding: 10px; font-size: 13px; font-weight: 600;
   border: 1px dashed var(--bcg-border); background: transparent; color: var(--bcg-muted);
-  border-radius: 5px; cursor: pointer;
+  border-radius: 6px; cursor: pointer;
 }
 .bcg-btn-add-action:hover:not(:disabled) { border-color: var(--bcg-accent2); color: var(--bcg-accent2); }
 .bcg-btn-add-action:disabled { cursor: not-allowed; opacity: .5; }

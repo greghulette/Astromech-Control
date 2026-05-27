@@ -265,53 +265,93 @@
   // tier/position labels to display on each line. Adjust the {l, t} percents
   // if you change the transmitter background image.
   const REF_LAYOUT = {
-    // ── Buttons (clickable — open the button modal on click) ────────────
-    //   Trim switches T1-T6 around the gimbals. Tiers labeled "1×/2×/3×"
-    //   matching the modal's Single/Double/Triple tap layout.
+    // ── Coordinates tuned to the reference image the user provided. Each
+    //    `l`/`t` is the % offset of the callout's CENTER inside the
+    //    .bcg-gest-overlay rect (which matches the rendered image bounds).
+    //    Tweak any single entry without breaking the others — they're
+    //    independent. Hint: l=0 is image left edge, l=100 is right edge;
+    //    t=0 is image top, t=100 is image bottom. ──────────────────────
     btn: [
-      // T3 (vertical, RIGHT of left gimbal): top/bottom = btn 11 / 12
-      { btn: 11, title: 'T3 Up',    l: 32, t: 50 },
-      { btn: 12, title: 'T3 Down',  l: 32, t: 73 },
-      // T2 (vertical, LEFT of right gimbal): top/bottom = btn 13 / 14
-      { btn: 13, title: 'T2 Up',    l: 66, t: 50 },
-      { btn: 14, title: 'T2 Down',  l: 66, t: 73 },
-      // T4 (horiz, bottom-LEFT): left/right = btn 7 / 8
-      { btn:  7, title: 'T4 Left',  l: 16, t: 87 },
-      { btn:  8, title: 'T4 Right', l: 27, t: 87 },
-      // T5 (horiz, bottom-LEFT inner): left/right = btn 9 / 10
-      { btn:  9, title: 'T5 Left',  l: 36, t: 87 },
-      { btn: 10, title: 'T5 Right', l: 47, t: 87 },   // (NOTE: was T5 wiring sub-row)
-      // T6 (horiz, bottom-RIGHT inner): left/right = btn 15 / 16
-      { btn: 15, title: 'T6 Left',  l: 53, t: 87 },
-      { btn: 16, title: 'T6 Right', l: 64, t: 87 },
-      // T1 (horiz, bottom-RIGHT): left/right = btn 17 / 18
-      { btn: 17, title: 'T1 Left',  l: 73, t: 87 },
-      { btn: 18, title: 'T1 Right', l: 84, t: 87 },
-      // Six programmable buttons B1-B6 at very bottom (rough positions)
-      { btn:  1, title: 'B1', l: 38, t: 97 },
-      { btn:  2, title: 'B2', l: 44, t: 97 },
-      { btn:  3, title: 'B3', l: 50, t: 97 },
-      { btn:  4, title: 'B4', l: 56, t: 97 },
-      { btn:  5, title: 'B5', l: 62, t: 97 },
-      { btn:  6, title: 'B6', l: 68, t: 97 },
+      // ── Vertical trim switches around the gimbals (T3 left, T2 right) ──
+      { btn: 11, title: 'T3 Up',    l: 28, t: 45 },
+      { btn: 12, title: 'T3 Down',  l: 28, t: 55 },
+      { btn: 13, title: 'T2 Up',    l: 74, t: 45 },
+      { btn: 14, title: 'T2 Down',  l: 74, t: 55 },
+      // ── Horizontal trim switches (T4 far-left, T5 left-mid,
+      //    T6 right-mid, T1 far-right) ─────────────────────────────────
+      { btn:  8, title: 'T4 Right', l: 8, t: 66 },
+      { btn:  7, title: 'T4 Left',  l: 8, t: 78 },
+      { btn:  9, title: 'T5 Left',  l: 26, t: 65 },
+      { btn: 10, title: 'T5 Right', l: 40, t: 65 },
+      { btn: 16, title: 'T6 Right', l: 74, t: 65 },
+      { btn: 15, title: 'T6 Left',  l: 60, t: 65 },
+      { btn: 18, title: 'T1 Right', l: 92, t: 66 },
+      { btn: 17, title: 'T1 Left',  l: 92, t: 76 },
+      // ── 6 programmable buttons B1-B6 (bottom rows) ────────────────────
+      { btn:  1, title: 'B1', l: 28, t: 75 },
+      { btn:  2, title: 'B2', l: 29, t: 84 },
+      { btn:  3, title: 'B3', l: 28, t: 93 },
+      { btn:  4, title: 'B4', l: 72, t: 75 },
+      { btn:  5, title: 'B5', l: 71, t: 84 },
+      { btn:  6, title: 'B6', l: 72, t: 93 },
     ],
-    // ── Switches (display-only for now; modal editor TODO) ──────────────
+    // ── Switches (display-only — these are fixed-function physical
+    //    hardware switches whose labels won't change at runtime, so we
+    //    hard-code them here instead of pulling from state.config.switches.
+    //    If a switch has a `lines` array, the renderer uses it verbatim;
+    //    if not, the renderer falls back to per-mode config-driven render.
+    //    Edit the strings below to relabel a switch. ─────────────────────
     sw: [
-      { sw: 'SF', title: 'SF', l:  3, t: 15 },
-      { sw: 'SE', title: 'SE', l:  3, t: 32 },
-      { sw: 'SA', title: 'SA', l:  3, t: 49 },
-      { sw: 'SB', title: 'SB', l: 18, t:  8 },
-      { sw: 'SC', title: 'SC', l: 82, t:  8 },
-      { sw: 'SD', title: 'SD', l: 97, t: 49 },
-      { sw: 'SG', title: 'SG', l: 97, t: 32 },
-      { sw: 'SH', title: 'SH', l: 97, t: 15 },
-      { sw: 'SI', title: 'SI', l: 33, t: 36 },
-      { sw: 'SJ', title: 'SJ', l: 67, t: 36 },
+      { sw: 'SF', title: 'SF: Maint Lights', l: 19, t:  8,
+        lines: [
+          { tier: 'Dn:', text: 'Off' },
+          { tier: 'Up:', text: 'Forward: On' },
+        ] },
+      { sw: 'SE', title: 'SE: Function Select', l:  8, t: 18,
+        lines: [
+          { tier: 'Dn:', text: 'Mode 1' },
+          { tier: 'Md:', text: 'Mode 2' },
+          { tier: 'Up:', text: 'Mode 3' },
+        ] },
+      { sw: 'SA', title: 'SA: Drive Mode', l:  8, t: 32,
+        lines: [
+          { tier: 'Dn:', text: 'Standby' },
+          { tier: 'Md:', text: 'Active' },
+          { tier: 'Up:', text: 'Dome Only' },
+        ] },
+      { sw: 'SB', title: 'SB: RADH Mode', l: 28, t: 22,
+        lines: [
+          { tier: 'Rr:', text: 'Disabled' },
+          { tier: 'Md:', text: 'Enabled' },
+          { tier: 'Up:', text: 'Enabled' },
+        ] },
+      { sw: 'SC', title: 'SC: Light Mode', l: 72, t: 22,
+        lines: [
+          { tier: 'Dn:', text: 'Normal' },
+          { tier: 'Md:', text: 'All On' },
+          { tier: 'Up:', text: 'All Off' },
+        ] },
+      { sw: 'SH', title: 'SH', l: 82, t: 11,
+        lines: [] },
+      { sw: 'SG', title: 'SG: Slow Drive', l: 92, t: 18,
+        lines: [
+          { tier: 'Dn:', text: 'Normal' },
+          { tier: 'Md:', text: 'Slow Mode' },
+          { tier: 'Up:', text: '' },
+        ] },
+      { sw: 'SD', title: 'SD: Muse', l: 92, t: 32,
+        lines: [
+          { tier: 'Dn:', text: 'Muse On' },
+          { tier: 'Md:', text: 'Muse Off' },
+          { tier: 'Up:', text: 'Muse Off' },
+        ] },
+      // { sw: 'SI', title: 'SI', l: 33, t: 42 },
+      // { sw: 'SJ', title: 'SJ', l: 67, t: 42 },
     ],
-    // ── Knobs (display-only) ────────────────────────────────────────────
+    // ── Knobs (display-only). S1/S2 sit just above the LCD as labels. ─
     knob: [
-      { knob: 'S1', title: 'S1 — HCR Vocalizer Vol', l: 41, t: 33 },
-      { knob: 'S2', title: 'S2 — HCR WAV Vol',       l: 59, t: 33 },
+      { knob: 'S1', title: 'S1 — HCR Vocalizer Vol', l: 35, t: 34 },
+      { knob: 'S2', title: 'S2 — HCR WAV Vol',       l: 60, t: 34 },
     ],
   };
 
@@ -320,18 +360,180 @@
   const SWITCH_POS_LABELS_3 = ['Dn:', 'Md:', 'Up:'];
   const SWITCH_POS_LABELS_2 = ['Dn:', 'Up:'];
 
+  // Reference view ────────────────────────────────────────────────────────
+  // The Gestures sub-tab hosts a menu-Level-2 with one image per mode
+  // (#bcgGestOverlay1/2/3). We render callouts into ALL THREE overlays
+  // up-front so switching modes via the tabs is instant — no JS runs on
+  // the tab click itself. Switches/knobs aren't mode-keyed in the BC's
+  // config, so their callouts repeat identically across the three panes;
+  // only the button callouts vary per mode.
   function renderReferenceView() {
-    // Quick Reference is now a pure hand-curated image — no dynamic overlay,
-    // no per-mode mutation, no clickable callouts. Editing happens on the
-    // sibling editor tabs. Leaving this function as a no-op so the rest of
-    // the render chain (called from mode tabs, modal apply, etc.) doesn't
-    // need to know whether the dynamic overlay exists.
-    return;
+    for (const mode of [1, 2, 3]) {
+      _renderGestureOverlayForMode(mode);
+    }
   }
 
-  // Dead-code path for the old dynamic-overlay reference view. Kept commented
-  // out below for reference in case we want to re-enable a dynamic version
-  // alongside the Quick Reference image in a future revision.
+  function _renderGestureOverlayForMode(mode) {
+    const overlay = $('bcgGestOverlay' + mode);
+    if (!overlay) return;
+    overlay.innerHTML = '';
+
+    // ── Button callouts (clickable — open the modal pinned to this mode) ──
+    for (const spec of REF_LAYOUT.btn) {
+      const key = String(mode * 100 + spec.btn);
+      const m   = state.config.mappings[key];
+      const note1 = noteForTier(m, 't1');
+      const note2 = noteForTier(m, 't2');
+      const note3 = noteForTier(m, 't3');
+      const hasAny = !!(note1 || note2 || note3);
+      const callout = makeCallout({
+        title: spec.title,
+        lines: [
+          { tier: '1×', text: note1 },
+          { tier: '2×', text: note2 },
+          { tier: '3×', text: note3 },
+        ],
+        left: spec.l, top: spec.t,
+        configured: hasAny,
+        onClick: () => {
+          // Sync the editor's currentMode to whichever pane the user clicked
+          // through from, so the modal's tier rows reflect that mode.
+          state.currentMode = mode;
+          const editorTab = document.querySelector('.bcg-mode-tab[data-mode="' + mode + '"]');
+          if (editorTab) editorTab.click();
+          openButtonModal(spec.btn);
+        },
+      });
+      overlay.appendChild(callout);
+    }
+
+    // ── Switch callouts (display-only) ───────────────────────────────────
+    //  If the spec has hard-coded `lines`, render those verbatim (fixed-
+    //  function physical switches). Otherwise fall back to pulling per-
+    //  position notes from state.config.switches (the original behavior,
+    //  used when a switch's labels are editable via the config).
+    for (const spec of REF_LAYOUT.sw) {
+      let lines, hasAny;
+      if (Array.isArray(spec.lines)) {
+        lines  = spec.lines;
+        hasAny = lines.length > 0 && lines.some(l => l.text);
+      } else {
+        const sw = state.config.switches?.[spec.sw];
+        const positions = sw?.positions || 3;
+        const labels = (positions === 2) ? SWITCH_POS_LABELS_2 : SWITCH_POS_LABELS_3;
+        const slots  = (positions === 2) ? ['p0', 'p2'] : ['p0', 'p1', 'p2'];
+        lines = slots.map((slot, i) => ({
+          tier: labels[i],
+          text: noteForSwitchSlot(sw, slot),
+        }));
+        hasAny = lines.some(l => l.text);
+      }
+      const callout = makeCallout({
+        title: spec.title,
+        lines,
+        left: spec.l, top: spec.t,
+        configured: hasAny,
+        readonly: true,
+      });
+      overlay.appendChild(callout);
+    }
+
+    // ── Knob callouts (display-only) ─────────────────────────────────────
+    for (const spec of REF_LAYOUT.knob) {
+      const kn = state.config.knobs?.[spec.knob];
+      const fnLabels = { 0: '— none —', 1: 'HCR Vocalizer Volume', 2: 'HCR WAV Volume' };
+      const fnText = kn ? (fnLabels[kn.function] || `fn${kn.function}`) : '';
+      const chText = kn ? `CH ${kn.channel ?? '?'}` : '';
+      const callout = makeCallout({
+        title: spec.title,
+        lines: [
+          { tier: 'fn:', text: fnText },
+          { tier: 'ch:', text: chText },
+        ],
+        left: spec.l, top: spec.t,
+        configured: !!(kn && kn.function),
+        readonly: true,
+      });
+      overlay.appendChild(callout);
+    }
+  }
+
+  // ── Gesture mode auto-switch + manual override ──────────────────────────
+  // The Gest menu-Level-2 mode panes follow the live SE-switch position by
+  // default. Main.js calls window.bcgSetGestureMode(p, true) from its
+  // updateGesturesDiagram() whenever telemetry FunctionSWState changes. The
+  // user can override by manually tapping a mode tab; that override sticks
+  // until the SE switch position actually moves to a different value.
+  //
+  // _gestureLastFSW  — last FunctionSWState we saw (1/2/3 or null)
+  // _gestureOverride — true while the user's manual pick is overriding
+  // _gestureProgClick — true while we're programmatically activating a tab,
+  //                     so the click listener doesn't mis-attribute it as
+  //                     a user override.
+  let _gestureLastFSW   = null;
+  let _gestureOverride  = false;
+  let _gestureProgClick = false;
+
+  function bcgSetGestureMode(mode, isAuto) {
+    mode = parseInt(mode, 10);
+    if (!(mode === 1 || mode === 2 || mode === 3)) return;
+
+    if (isAuto) {
+      // Auto-switch from telemetry. Only apply when FunctionSWState actually
+      // changed value — an unchanged repeat must not blow away the override.
+      if (mode === _gestureLastFSW) return;
+      _gestureLastFSW  = mode;
+      _gestureOverride = false;
+    } else {
+      // Manual call (programmatic or unit-test). Treat as user override.
+      _gestureOverride = true;
+    }
+    _activateGestureModeTab(mode);
+    _updateGestureLiveIndicator();
+  }
+
+  function _activateGestureModeTab(mode) {
+    const tab = $('bcgGestureMode' + mode + 'Tab');
+    if (!tab) return;
+    if (tab.classList.contains('active')) {
+      _updateGestureLiveIndicator();
+      return;
+    }
+    _gestureProgClick = true;
+    try { tab.click(); } finally { _gestureProgClick = false; }
+  }
+
+  function _updateGestureLiveIndicator() {
+    const el = $('bcgGestureLiveIndicator');
+    if (!el) return;
+    const label = el.querySelector('.bcg-gest-live-label');
+    el.classList.remove('manual-override', 'disconnected');
+    if (_gestureLastFSW === null && !_gestureOverride) {
+      el.classList.add('disconnected');
+      if (label) label.textContent = 'no SE switch data';
+    } else if (_gestureOverride) {
+      el.classList.add('manual-override');
+      if (label) label.textContent = 'manual override (move SE to resume)';
+    } else {
+      if (label) label.textContent = 'following SE switch';
+    }
+  }
+
+  function bindGestureModeTabs() {
+    for (const m of [1, 2, 3]) {
+      const tab = $('bcgGestureMode' + m + 'Tab');
+      if (!tab) continue;
+      tab.addEventListener('click', function () {
+        if (_gestureProgClick) return;       // programmatic — not a user override
+        _gestureOverride = true;
+        _updateGestureLiveIndicator();
+      });
+    }
+    _updateGestureLiveIndicator();
+  }
+
+  // Dead-code path for the old single-overlay reference view. Kept here so
+  // future revisions can fork off it if a single-image variant is wanted.
   function _renderReferenceView_legacy_dynamicOverlay() {
     const refModeLbl = $('bcgRefModeLabel');
     if (refModeLbl) refModeLbl.textContent = `Mode ${state.currentMode} (${['', 'SW Down', 'SW Mid', 'SW Up'][state.currentMode]})`;
@@ -363,16 +565,26 @@
     }
 
     // ── Switch callouts (display-only) ───────────────────────────────────
+    //  If the spec has hard-coded `lines`, render those verbatim (fixed-
+    //  function physical switches). Otherwise fall back to pulling per-
+    //  position notes from state.config.switches (the original behavior,
+    //  used when a switch's labels are editable via the config).
     for (const spec of REF_LAYOUT.sw) {
-      const sw = state.config.switches?.[spec.sw];
-      const positions = sw?.positions || 3;
-      const labels = (positions === 2) ? SWITCH_POS_LABELS_2 : SWITCH_POS_LABELS_3;
-      const slots = (positions === 2) ? ['p0', 'p2'] : ['p0', 'p1', 'p2'];
-      const lines = slots.map((slot, i) => ({
-        tier: labels[i],
-        text: noteForSwitchSlot(sw, slot),
-      }));
-      const hasAny = lines.some(l => l.text);
+      let lines, hasAny;
+      if (Array.isArray(spec.lines)) {
+        lines  = spec.lines;
+        hasAny = lines.length > 0 && lines.some(l => l.text);
+      } else {
+        const sw = state.config.switches?.[spec.sw];
+        const positions = sw?.positions || 3;
+        const labels = (positions === 2) ? SWITCH_POS_LABELS_2 : SWITCH_POS_LABELS_3;
+        const slots  = (positions === 2) ? ['p0', 'p2'] : ['p0', 'p1', 'p2'];
+        lines = slots.map((slot, i) => ({
+          tier: labels[i],
+          text: noteForSwitchSlot(sw, slot),
+        }));
+        hasAny = lines.some(l => l.text);
+      }
       const callout = makeCallout({
         title: spec.title,
         lines,
@@ -970,8 +1182,12 @@
     bindModal();
     bindSettings();
     bindThresholdRebuild();
+    bindGestureModeTabs();
     renderAll();
     setSyncStatus('idle');
+    // Expose the gesture-mode auto-switch entry point on window so the
+    // main.js telemetry parser can call it without reaching into the IIFE.
+    window.bcgSetGestureMode = bcgSetGestureMode;
     console.log('[BCG] Remote BC Config GUI initialized.');
   }
   if (document.readyState === 'loading') {

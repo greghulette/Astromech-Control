@@ -334,25 +334,41 @@ function updateGesturesDiagram(p) {
   let downPageLink = document.getElementById('gestures1Link');
   let middlePageLink = document.getElementById('gestures2Link');
   let upPageLink = document.getElementById('gestures3Link');
-  if (!downPageLink || !middlePageLink || !upPageLink) return;
   pnew = p;
   if (pnew != pold) {
     console.log("P is not equal to Pold");
     console.log(pnew);
     console.log(pold);
-    if (p == 1 && remoteConnected == true) {
+    // Legacy Quick-Reference (#Gestures settings panel — static wiring PNGs).
+    // Only click these if the buttons exist AND the remote is connected.
+    if (downPageLink && middlePageLink && upPageLink) {
+      if (p == 1 && remoteConnected == true) {
+        pold = p;
+        downPageLink.click();
+      }
+      if (p == 2 && remoteConnected == true) {
+        pold = p;
+        middlePageLink.click();
+      }
+      if (p == 3 && remoteConnected == true) {
+        pold = p;
+        upPageLink.click();
+      }
+    } else {
+      // No legacy buttons present, but we still want pold to track so the new
+      // BCG Gestures menu-Level-2 receives the auto-switch on every change.
       pold = p;
-      downPageLink.click();
     }
-    if (p == 2 && remoteConnected == true) {
-      pold = p;
-
-      middlePageLink.click();
-    }
-    if (p == 3 && remoteConnected == true) {
-      pold = p;
-      upPageLink.click();
-    }
+  }
+  // BCG Gestures sub-tab (per-mode overlay images). Hook is defined in
+  // js/bc-config-gui.js once init() finishes; until then this is a no-op.
+  // We pass isAuto=true so the BCG side knows this is a telemetry-driven
+  // call (not a manual click) and can release any prior manual override
+  // when the SE switch position actually changes.
+  if (typeof window.bcgSetGestureMode === 'function' &&
+      (p === 1 || p === 2 || p === 3) &&
+      remoteConnected === true) {
+    window.bcgSetGestureMode(p, true);
   }
 }
 
