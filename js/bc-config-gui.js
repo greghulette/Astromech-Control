@@ -114,6 +114,16 @@
     debounceId:   null,     // pending debounced push
     livePush:     true,
     busy:         false,    // suppress overlapping pushes
+    // 2026-05 fix (BUG #1): when an edit happens during an in-flight push,
+    // remember to re-push when the current one finishes so the latest
+    // edit doesn't get silently discarded.
+    needsAnotherPush: false,
+    // 2026-05 reverse-channel ACK: tracks the most recent chunked-push
+    // seq so window.bcgHandleBcAck can match against it. lastAckSeenSeq
+    // dedupes the same ACK arriving on multiple telemetry frames (the
+    // BC re-sends the ACK on its next status-frame schedule).
+    lastSentSeq:    0,
+    lastAckSeenSeq: 0,
   };
 
   // ────────────────────────────────────────────────────────────────────────
@@ -162,7 +172,13 @@
   }
 
   async function pushConfigChunked() {
-    if (state.busy) return;     // another push in flight; latest debounced will catch up
+    // 2026-05 fix (BUG #1): if another push is in flight, defer this one
+    // instead of dropping it. The `finally` block below re-schedules so
+    // the latest state.config gets pushed eventually.
+    if (state.busy) {
+      state.needsAnotherPush = true;
+      return;
+    }
     state.busy = true;
     setSyncStatus('pushing…', 'busy');
 
@@ -178,22 +194,40 @@
     }
 
     const seq = (state.seqCounter++ & 0xFFFF) || 1;   // never 0 (BC uses 0 as "no active")
+    // 2026-05: remember which seq we just sent so bcgHandleBcAck can
+    // match the eventual ACK against it.
+    state.lastSentSeq = seq;
     try {
       sendBCCommand(`#CB ${seq} ${chunks.length}`);
+      // 2026-05 fix (SMELL #5): pace the #CB the same as the chunks. With
+      // zero gap between #CB and #CC[0] a slow LoRa retry could cause
+      // #CC[0] to arrive at the BC before the BEGIN completed processing,
+      // which the BC then rejects as "no active seq".
+      await sleep(CHUNK_INTER_DELAY_MS);
       for (let i = 0; i < chunks.length; i++) {
-        // Tiny delay between packets to avoid overrunning the LoRa relay
         if (i > 0) await sleep(CHUNK_INTER_DELAY_MS);
         sendBCCommand(`#CC ${seq} ${i}:${chunks[i]}`);
       }
       await sleep(CHUNK_INTER_DELAY_MS);
       sendBCCommand(`#CE ${seq}`);
       console.log(`[BCG] pushed config seq=${seq} (${chunks.length} chunks, ${payload.length} bytes)`);
-      setSyncStatus(`synced (${chunks.length}c · ${payload.length}B)`, 'synced');
+      // 2026-05: bytes are out the door. Status flips to "verified ✓"
+      // once the BC's reverse-channel ACK arrives via the telemetry
+      // pipeline (bcgHandleBcAck below), or to "BC: <reason>" on NACK.
+      // Telemetry frames are ~1 Hz so verification typically lands
+      // within 1-2 seconds of this point.
+      setSyncStatus(`pushed (${chunks.length}c · ${payload.length}B) — verifying…`, 'busy');
     } catch (e) {
       console.error('[BCG] push failed:', e);
       setSyncStatus('push failed', 'error');
     } finally {
       state.busy = false;
+      // 2026-05 fix (BUG #1): if an edit landed while we were pushing,
+      // re-schedule a follow-up push so the latest state.config goes out.
+      if (state.needsAnotherPush) {
+        state.needsAnotherPush = false;
+        schedulePush();
+      }
     }
   }
   function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
@@ -473,6 +507,35 @@
   let _gestureLastFSW   = null;
   let _gestureOverride  = false;
   let _gestureProgClick = false;
+
+  // ── Reverse-channel ACK handler ─────────────────────────────────────────
+  // 2026-05: invoked from main.js's parseSerialUpdate whenever the Remote
+  // forwards a telemetry frame that includes bcAckSeq>0. The ACK travels:
+  //   BC → ESP-NOW → Gateway → LoRa → Remote → USB → Web
+  // We only act on ACKs whose seq matches our most recent chunked push
+  // (state.lastSentSeq). Earlier seqs are stale (probably from a prior
+  // session) and ignored. The same ACK can arrive on multiple telemetry
+  // frames; lastAckSeenSeq dedupes so we only update the banner once.
+  function bcgHandleBcAck(seq, ok, msg) {
+    if (typeof seq !== 'number' || seq <= 0) return;
+    if (seq === state.lastAckSeenSeq) return;       // already handled
+    state.lastAckSeenSeq = seq;
+    // Ignore ACKs that don't match our most recent push. Could be:
+    //   - seq=0 (no fresh ACK) — already filtered at the call site
+    //   - seq from a previous session (stale buffer on BC after reboot)
+    //   - seq from another GUI talking to the same droid
+    if (seq !== state.lastSentSeq) {
+      console.log(`[BCG] ignoring stale BC ACK seq=${seq} (we expected ${state.lastSentSeq})`);
+      return;
+    }
+    if (ok) {
+      setSyncStatus(`verified ✓ ${msg || ''}`.trim(), 'synced');
+      console.log(`[BCG] BC verified push seq=${seq} msg="${msg}"`);
+    } else {
+      setSyncStatus(`BC: ${msg || 'rejected'}`, 'error');
+      console.warn(`[BCG] BC NACK seq=${seq} msg="${msg}"`);
+    }
+  }
 
   function bcgSetGestureMode(mode, isAuto) {
     mode = parseInt(mode, 10);
@@ -1188,6 +1251,9 @@
     // Expose the gesture-mode auto-switch entry point on window so the
     // main.js telemetry parser can call it without reaching into the IIFE.
     window.bcgSetGestureMode = bcgSetGestureMode;
+    // 2026-05: reverse-channel BC ACK hook — main.js's parseSerialUpdate
+    // calls this when the Remote forwards a telemetry frame with bcAckSeq>0.
+    window.bcgHandleBcAck = bcgHandleBcAck;
     console.log('[BCG] Remote BC Config GUI initialized.');
   }
   if (document.readyState === 'loading') {

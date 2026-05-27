@@ -413,6 +413,18 @@ function parseSerialUpdate(x) {
   etmBoardAckd    = parsedInfo.etmAckd     || [0,0,0,0,0,0];
   etmBoardRetries = parsedInfo.etmRetries  || [0,0,0,0,0,0];
   etmBoardFailed  = parsedInfo.etmFailed   || [0,0,0,0,0,0];
+  // 2026-05: BC reverse-channel ACK. The Remote includes bcAckSeq /
+  // bcAckOk / bcAckMsg in every telemetry frame; seq=0 means "no fresh
+  // ACK". Dispatch to the BCG handler so the editor's sync-status
+  // banner can flip to "verified" / "BC error" when the ACK for the
+  // most recent push arrives.
+  if (typeof window.bcgHandleBcAck === 'function' &&
+      typeof parsedInfo.bcAckSeq === 'number' &&
+      parsedInfo.bcAckSeq > 0) {
+    window.bcgHandleBcAck(parsedInfo.bcAckSeq,
+                          !!parsedInfo.bcAckOk,
+                          parsedInfo.bcAckMsg || '');
+  }
   // console.log(batteryPercent);
   updateEEPROMSettings();
   updateESPNOWSTATS();
