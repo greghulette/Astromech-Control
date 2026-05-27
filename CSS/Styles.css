@@ -1286,6 +1286,58 @@ height: 110px;
   left: -200px;
   width: 800px;
 }
+
+/* ── Sled lights in the LED tab (moved from Settings) ───────────────────────
+   The sled content uses .resetTable which has `left: -400px` baked in —
+   that hack was designed for the Settings tab where the nav-button column
+   sits at `left: -400px` (.move classes), leaving room to the right. In
+   the LED tab the nav buttons are in natural flow inside a 240px-wide
+   .menu-Level-1 column, so the -400px shift pushes the button table on
+   top of the LED nav. Override here to: widen the sled pane, push it to
+   the right of the LED nav column, give it padding, and zero out the
+   table's negative-left hack so it sits inside the pane normally. */
+.menu-Level-0-Content#led .menu-Level-1-Content#sledControls {
+  width: auto !important;
+  left:      250px !important;
+  right:      40px !important;
+  max-width: 1100px !important;
+  padding:    16px !important;
+  box-sizing: border-box !important;
+}
+.menu-Level-0-Content#led #sledControls .resetTable {
+  left: 0 !important;
+  top:  0 !important;
+  margin-bottom: 12px;
+}
+/* Narrow the sled buttons in the LED tab so all 4 columns fit within
+   the pane width. Global .buttonwidthReset (240px) is too wide here —
+   4 × 240 = 960 plus table padding overflows the available space.
+   Override scoped to this pane only; the Settings tab's other reset
+   buttons keep their original 240px width. */
+.menu-Level-0-Content#led #sledControls .buttonwidthReset {
+  width: 180px;
+}
+/* Trim cell padding too so the buttons pack tighter without losing
+   click-target size. */
+.menu-Level-0-Content#led #sledControls .resetTable td {
+  padding: 4px;
+}
+/* Shrink the button label font so "PULSE GREEN" / "SCANNER BLUE" /
+   "CYCLE NEXT" etc. fit in the narrower 180px buttons without wrapping
+   awkwardly or clipping. Global .shadowtext2Lines-Reset is 2rem (32px);
+   1.3rem (~21px) reads comfortably at this button size.
+
+   `top: -120px` from the global rule was tuned for the 240px button
+   (where the Button-Blank img renders ~89px tall). At 180px the img is
+   only ~67px tall, so -120 pushes the text completely above the visible
+   button graphic. -50px lands the text squarely in the middle of the
+   blue button rectangle. Scoped tightly so other Reset uses elsewhere
+   in the app keep their original positioning. */
+.menu-Level-0-Content#led #sledControls .shadowtext2Lines-Reset {
+  font-size:   1.3rem;
+  line-height: 1.4rem;
+  top:         -75px;
+}
 .resetLEDController{
   position: absolute;
   top: 700px;
