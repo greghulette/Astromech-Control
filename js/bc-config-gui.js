@@ -124,6 +124,16 @@
     // BC re-sends the ACK on its next status-frame schedule).
     lastSentSeq:    0,
     lastAckSeenSeq: 0,
+    // 2026-05 GET_CONFIG return path. CFG_CHUNK packets flow:
+    //   BC → ESP-NOW → Gateway → LoRa → Remote → USB → main.js → bcgHandleCfgChunk
+    // Each chunk carries seq/idx/total/payload (raw JSON slice). Reassemble
+    // by concatenation when idx===0..total-1 arrive in order, then
+    // JSON.parse and load into state.config.
+    cfgRecvBuf:     '',
+    cfgRecvSeq:     0,
+    cfgRecvIdx:     0,   // NEXT idx we expect (so we know we're done when idx===total)
+    cfgRecvTotal:   0,
+    cfgRecvStartMs: 0,
   };
 
   // ────────────────────────────────────────────────────────────────────────
@@ -252,8 +262,14 @@
   //  to print its current config to its USB monitor" affordance for now.
   // ────────────────────────────────────────────────────────────────────────
   function requestConfig() {
+    // Reset any in-flight reassembly state so a fresh request starts clean.
+    state.cfgRecvBuf     = '';
+    state.cfgRecvSeq     = 0;
+    state.cfgRecvIdx     = 0;
+    state.cfgRecvTotal   = 0;
+    state.cfgRecvStartMs = 0;
     sendBCCommand('{"type":"GET_CONFIG"}');
-    setSyncStatus('GET_CONFIG sent — see BC serial monitor', 'busy');
+    setSyncStatus('GET_CONFIG sent — waiting for chunks…', 'busy');
   }
 
   function requestDefaults() {
@@ -534,6 +550,80 @@
     } else {
       setSyncStatus(`BC: ${msg || 'rejected'}`, 'error');
       console.warn(`[BCG] BC NACK seq=${seq} msg="${msg}"`);
+    }
+  }
+
+  // ── GET_CONFIG return-path reassembler ──────────────────────────────────
+  // 2026-05: main.js's parseSerialUpdate dispatches CFG_CHUNK envelopes
+  // here. Each chunk carries:
+  //   { type:'CFG_CHUNK', seq, idx, total, payload:<raw JSON slice> }
+  // Reassemble by concatenation. idx===0 starts a new transaction; later
+  // chunks must match seq and be the next expected idx. When idx===total-1
+  // arrives we have the whole buffer and try JSON.parse — the BC packed
+  // the OUTER {"type":"CONFIG","data":{...}} envelope so we unwrap .data.
+  function bcgHandleCfgChunk(c) {
+    if (!c || c.type !== 'CFG_CHUNK') return;
+    if (typeof c.seq !== 'number' || typeof c.idx !== 'number' ||
+        typeof c.total !== 'number' || typeof c.payload !== 'string') {
+      console.warn('[BCG] CFG_CHUNK missing fields', c);
+      return;
+    }
+    if (c.idx === 0) {
+      // Start of a fresh transaction. Replace any stale state.
+      state.cfgRecvSeq     = c.seq;
+      state.cfgRecvBuf     = c.payload;
+      state.cfgRecvIdx     = 1;          // next expected idx
+      state.cfgRecvTotal   = c.total;
+      state.cfgRecvStartMs = Date.now();
+      setSyncStatus(`receiving config 1/${c.total}…`, 'busy');
+    } else {
+      if (c.seq !== state.cfgRecvSeq || c.idx !== state.cfgRecvIdx) {
+        console.warn(`[BCG] CFG_CHUNK out of order — got seq=${c.seq} idx=${c.idx}, expected seq=${state.cfgRecvSeq} idx=${state.cfgRecvIdx} — aborting reassembly`);
+        state.cfgRecvBuf   = '';
+        state.cfgRecvSeq   = 0;
+        state.cfgRecvIdx   = 0;
+        state.cfgRecvTotal = 0;
+        setSyncStatus('GET_CONFIG: out of order — retry', 'error');
+        return;
+      }
+      state.cfgRecvBuf += c.payload;
+      state.cfgRecvIdx++;
+      setSyncStatus(`receiving config ${state.cfgRecvIdx}/${state.cfgRecvTotal}…`, 'busy');
+    }
+    // Done? (cfgRecvIdx is now the count of chunks received.)
+    if (state.cfgRecvIdx >= state.cfgRecvTotal) {
+      const raw = state.cfgRecvBuf;
+      const elapsed = Date.now() - state.cfgRecvStartMs;
+      let parsed = null;
+      try {
+        parsed = JSON.parse(raw);
+      } catch (e) {
+        console.error('[BCG] CFG_CHUNK reassembly JSON.parse failed:', e, raw);
+        setSyncStatus('GET_CONFIG: parse failed', 'error');
+        state.cfgRecvBuf   = '';
+        state.cfgRecvSeq   = 0;
+        state.cfgRecvIdx   = 0;
+        state.cfgRecvTotal = 0;
+        return;
+      }
+      // BC packs the outer {"type":"CONFIG","data":{...}} envelope.
+      // Unwrap to .data for the editor; fall back to the parsed root if
+      // it already looks like a bare config object.
+      const cfg = (parsed && parsed.type === 'CONFIG' && parsed.data) ? parsed.data : parsed;
+      if (cfg && typeof cfg === 'object') {
+        state.config = cfg;
+        try { renderAll(); } catch (e) { console.error('[BCG] renderAll after load failed:', e); }
+        setSyncStatus(`loaded from BC (${raw.length}B in ${elapsed}ms)`, 'synced');
+        console.log(`[BCG] GET_CONFIG loaded seq=${state.cfgRecvSeq} bytes=${raw.length} ms=${elapsed}`);
+      } else {
+        setSyncStatus('GET_CONFIG: unexpected shape', 'error');
+        console.warn('[BCG] reassembled config has unexpected shape', parsed);
+      }
+      // Reset reassembly state.
+      state.cfgRecvBuf   = '';
+      state.cfgRecvSeq   = 0;
+      state.cfgRecvIdx   = 0;
+      state.cfgRecvTotal = 0;
     }
   }
 
@@ -1254,6 +1344,9 @@
     // 2026-05: reverse-channel BC ACK hook — main.js's parseSerialUpdate
     // calls this when the Remote forwards a telemetry frame with bcAckSeq>0.
     window.bcgHandleBcAck = bcgHandleBcAck;
+    // 2026-05 GET_CONFIG return path. main.js dispatches CFG_CHUNK
+    // envelopes here; we reassemble + load into state.config.
+    window.bcgHandleCfgChunk = bcgHandleCfgChunk;
     console.log('[BCG] Remote BC Config GUI initialized.');
   }
   if (document.readyState === 'loading') {

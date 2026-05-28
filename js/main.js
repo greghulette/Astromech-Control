@@ -376,6 +376,16 @@ function parseSerialUpdate(x) {
   console.log("Parse JSON ogject: ");
   let parsedInfo = (JSON.parse(x));
   console.log(parsedInfo);
+  // 2026-05 GET_CONFIG return path. CFG_CHUNK packets arrive as their own
+  // JSON line on USB Serial — dispatch to the BCG reassembler and return
+  // early so the telemetry-shaped field accesses below don't run on a
+  // chunk envelope.
+  if (parsedInfo && parsedInfo.type === 'CFG_CHUNK') {
+    if (typeof window.bcgHandleCfgChunk === 'function') {
+      window.bcgHandleCfgChunk(parsedInfo);
+    }
+    return;
+  }
   droidremoteControllerStatus = parsedInfo.droidremoteControllerStatus;
   droidgatewayControllerStatus = parsedInfo.droidgatewayControllerStatus;
   relayStatus = parsedInfo.relayStatus;
