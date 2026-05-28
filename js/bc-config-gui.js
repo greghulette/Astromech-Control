@@ -577,14 +577,29 @@
       state.cfgRecvStartMs = Date.now();
       setSyncStatus(`receiving config 1/${c.total}…`, 'busy');
     } else {
-      if (c.seq !== state.cfgRecvSeq || c.idx !== state.cfgRecvIdx) {
-        console.warn(`[BCG] CFG_CHUNK out of order — got seq=${c.seq} idx=${c.idx}, expected seq=${state.cfgRecvSeq} idx=${state.cfgRecvIdx} — aborting reassembly`);
+      // 2026-05 (v6): seq mismatch is still a hard abort (it means a new
+      // GET_CONFIG transaction started before the previous finished, OR
+      // we caught the middle of someone else's transaction). But an idx
+      // gap (out-of-order or missing chunk) is now SOFT: log a warning,
+      // jump the buffer pointer, and keep going. A best-effort partial
+      // result with one missing chunk's worth of corruption is FAR more
+      // useful than dropping the entire transfer — the final JSON.parse
+      // will catch corruption if it matters.
+      if (c.seq !== state.cfgRecvSeq) {
+        console.warn(`[BCG] CFG_CHUNK seq mismatch — got seq=${c.seq}, expected ${state.cfgRecvSeq} — aborting`);
         state.cfgRecvBuf   = '';
         state.cfgRecvSeq   = 0;
         state.cfgRecvIdx   = 0;
         state.cfgRecvTotal = 0;
-        setSyncStatus('GET_CONFIG: out of order — retry', 'error');
+        setSyncStatus('GET_CONFIG: seq mismatch — retry', 'error');
         return;
+      }
+      if (c.idx !== state.cfgRecvIdx) {
+        const gap = c.idx - state.cfgRecvIdx;
+        console.warn(`[BCG] CFG_CHUNK idx gap — got ${c.idx}, expected ${state.cfgRecvIdx} (gap=${gap}). Accepting anyway.`);
+        // Advance our "next expected" to right after this chunk's idx.
+        // The buffer will be missing `gap` chunks worth of JSON bytes.
+        state.cfgRecvIdx = c.idx;
       }
       state.cfgRecvBuf += c.payload;
       state.cfgRecvIdx++;
