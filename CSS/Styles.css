@@ -309,6 +309,28 @@ line-height: 2rem;
   font-family: 'Star Jedi', 'Starjedi', arial, camb;
 
 }
+
+/* Banner-level serial Connect — saves a trip to the Settings tab. Sits in
+   the red top banner next to the "switch to wifi" button. The .connecting
+   variant flips the styling while a connect attempt is in flight; .ok is
+   applied briefly on a successful connect to flash green confirmation
+   before the banner is hidden by switchtoSerial(). */
+.BannerConnectBtn{
+  position: relative;
+  left: 760px;
+  top: -85px;
+  width: 300px;
+  height: 35px;
+  font-size: 1.75rem;
+  font-family: 'Star Jedi', 'Starjedi', arial, camb;
+  background-color: #ffd000;
+  color: #000;
+  border: 2px solid #000;
+  cursor: pointer;
+}
+.BannerConnectBtn:hover { background-color: #ffe34a; }
+.BannerConnectBtn.connecting { background-color: #ffe34a; color: #555; cursor: wait; }
+.BannerConnectBtn.ok { background-color: #4caf50; color: #fff; }
 .serialBanner{
 position: absolute;
 width: 1700px;

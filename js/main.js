@@ -184,34 +184,87 @@ function switchtoWiFi() {
 document.addEventListener('DOMContentLoaded', () => {
   butConnect.addEventListener('click', clickConnect);
 
+  // Banner-level "connect serial" button — same handler as the dashboard one
+  // so you don't have to navigate into the Settings tab every page load.
+  const bannerBtn = document.getElementById('bannerConnectBtn');
+  if (bannerBtn) bannerBtn.addEventListener('click', clickConnect);
+
   // CODELAB: Add feature detection here.
   const notSupported = document.getElementById('notSupported');
   notSupported.classList.toggle('hidden', 'serial' in navigator);
+
+  // Try a silent auto-connect on page load. WebSerial keeps a list of
+  // previously-authorized ports per origin; if exactly one is remembered we
+  // can open it without showing the picker. After a fresh Chromium profile
+  // the user has to grant permission once via the picker — but every reload
+  // after that "just works" with no UI interaction.
+  if ('serial' in navigator) {
+    tryAutoConnectGrantedPort();
+  }
 });
 
+// VID/PIDs of the USB-serial chips that show up on this project's hardware.
+// Used to (a) filter requestPort()'s picker so it's a one-item list on first
+// use, and (b) match getPorts() entries when auto-connecting on page load.
+//   0x1A86 = WCH (CH340/CH9102 — common Arduino clones, droid remote)
+//   0x10C4 = Silicon Labs (CP210x — many ESP32 dev boards)
+//   0x0403 = FTDI (FT232R — older Arduino-style boards)
+//   0x303A = Espressif (ESP32-S3/C3 native USB-CDC)
+//   0x2341 = Arduino LLC (genuine boards)
+const USB_SERIAL_FILTERS = [
+  { usbVendorId: 0x1A86 },  // CH340 / CH9102
+  { usbVendorId: 0x10C4 },  // CP210x
+  { usbVendorId: 0x0403 },  // FTDI
+  { usbVendorId: 0x303A },  // Espressif native USB
+  { usbVendorId: 0x2341 },  // Arduino
+];
 
-/**
- * @name connect
- * Opens a Web Serial connection to a micro:bit and sets up the input and
- * output stream.
- */
-async function connect() {
-  // CODELAB: Add code to request & open port here.
-  port = await navigator.serial.requestPort();
-  // - Wait for the port to open.
-  await port.open({ baudRate: 115200 });
-  // CODELAB: Add code setup the output stream here.
+/** Returns the previously-authorized port to auto-open, or null. */
+async function pickGrantedPort() {
+  try {
+    const granted = await navigator.serial.getPorts();
+    if (!granted || granted.length === 0) return null;
+    // Prefer a port matching our known USB-serial VIDs.
+    const known = granted.find(p => {
+      const info = p.getInfo();
+      return info && USB_SERIAL_FILTERS.some(f => f.usbVendorId === info.usbVendorId);
+    });
+    return known || granted[0];   // fall back to whichever is remembered
+  } catch (e) {
+    console.warn('[serial] getPorts() failed:', e);
+    return null;
+  }
+}
+
+/** Page-load attempt — silent if it works, silent if it doesn't. */
+async function tryAutoConnectGrantedPort() {
+  const p = await pickGrantedPort();
+  if (!p) return;   // nothing remembered — user will click banner button
+  try {
+    port = p;
+    await port.open({ baudRate: 115200 });
+    onSerialOpened();
+    console.log('[serial] auto-connected to previously-authorized port');
+  } catch (e) {
+    // Common cause: another tab/app has the port open, or the cable is
+    // unplugged. Silent — user can still click banner Connect.
+    console.warn('[serial] auto-connect failed:', e);
+    port = null;
+  }
+}
+
+/** Common post-open wiring used by both manual + auto connect paths. */
+function onSerialOpened() {
   banner.classList.add('hidden');
   CommandConnectionSerial = true;
 
+  const bannerBtn = document.getElementById('bannerConnectBtn');
+  if (bannerBtn) { bannerBtn.classList.remove('connecting'); bannerBtn.classList.add('ok'); }
 
   const encoder = new TextEncoderStream();
   outputDone = encoder.readable.pipeTo(port.writable);
   outputStream = encoder.writable;
-  // CODELAB: Send CTRL-C and turn off echo on REPL
-  // writeToStream('\x03', 'echo(false);');
 
-  // CODELAB: Add code to read the stream here.
   let decoder = new TextDecoderStream();
   inputDone = port.readable.pipeTo(decoder.writable);
   inputStream = decoder.readable
@@ -220,7 +273,39 @@ async function connect() {
   reader = inputStream.getReader();
 
   readLoop();
+}
 
+/**
+ * @name connect
+ * Opens a Web Serial connection. Tries a previously-authorized port first
+ * (no picker UI). Only falls back to the browser's picker if no port has
+ * been authorized yet for this origin.
+ */
+async function connect() {
+  // 1) Try to silently reuse an already-authorized port — covers the common
+  //    case of "I already picked this dongle once on this machine."
+  const known = await pickGrantedPort();
+  if (known) {
+    try {
+      port = known;
+      await port.open({ baudRate: 115200 });
+      onSerialOpened();
+      return;
+    } catch (e) {
+      // Port exists in the grant list but couldn't be opened (e.g. another
+      // tab grabbed it). Fall through to requestPort() so the user can pick
+      // a different one.
+      console.warn('[serial] reuse of granted port failed, falling back to picker:', e);
+      port = null;
+    }
+  }
+
+  // 2) First-time-on-this-origin path — must use the picker. Filtered to
+  //    known USB-serial chips so on a Pi with only the droid dongle plugged
+  //    in, the picker shows exactly one item.
+  port = await navigator.serial.requestPort({ filters: USB_SERIAL_FILTERS });
+  await port.open({ baudRate: 115200 });
+  onSerialOpened();
 }
 
 
@@ -254,18 +339,31 @@ var banner = document.getElementById('serialBannerID');
 
 /**
  * @name clickConnect
- * Click handler for the connect/disconnect button.
+ * Click handler for the connect/disconnect button. Used by BOTH the
+ * dashboard Settings button AND the new banner Connect button.
  */
 async function clickConnect() {
-  // CODELAB: Add disconnect code here.
+  const bannerBtn = document.getElementById('bannerConnectBtn');
+
   if (port) {
     await disconnect();
     banner.classList.remove('hidden');
-    // toggleUIConnected(false);
+    if (bannerBtn) { bannerBtn.classList.remove('ok'); bannerBtn.textContent = 'connect serial'; }
     return;
   }
-  // CODELAB: Add connect code here.
-  await connect();
+
+  // Visual feedback while the picker is up / port is opening. Reset to
+  // idle if the user cancels the picker or open() throws.
+  if (bannerBtn) { bannerBtn.classList.add('connecting'); bannerBtn.textContent = 'connecting…'; }
+  try {
+    await connect();
+  } catch (e) {
+    console.warn('[serial] connect failed:', e);
+    if (bannerBtn) {
+      bannerBtn.classList.remove('connecting');
+      bannerBtn.textContent = 'connect serial';
+    }
+  }
 }
 
 
