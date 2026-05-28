@@ -428,7 +428,9 @@
     if (!overlay) return;
     overlay.innerHTML = '';
 
-    // ── Button callouts (clickable — open the modal pinned to this mode) ──
+    // ── Button callouts (clickable — open the zoom view; from inside the
+    //    zoom an "Edit Mappings" button opens the full action editor modal
+    //    pinned to this pane's mode) ─────────────────────────────────────
     for (const spec of REF_LAYOUT.btn) {
       const key = String(mode * 100 + spec.btn);
       const m   = state.config.mappings[key];
@@ -436,23 +438,31 @@
       const note2 = noteForTier(m, 't2');
       const note3 = noteForTier(m, 't3');
       const hasAny = !!(note1 || note2 || note3);
+      const lines = [
+        { tier: '1×', text: note1 },
+        { tier: '2×', text: note2 },
+        { tier: '3×', text: note3 },
+      ];
       const callout = makeCallout({
         title: spec.title,
-        lines: [
-          { tier: '1×', text: note1 },
-          { tier: '2×', text: note2 },
-          { tier: '3×', text: note3 },
-        ],
+        lines,
         left: spec.l, top: spec.t,
         configured: hasAny,
-        onClick: () => {
-          // Sync the editor's currentMode to whichever pane the user clicked
-          // through from, so the modal's tier rows reflect that mode.
-          state.currentMode = mode;
-          const editorTab = document.querySelector('.bcg-mode-tab[data-mode="' + mode + '"]');
-          if (editorTab) editorTab.click();
-          openButtonModal(spec.btn);
-        },
+        onClick: () => openCalloutZoom({
+          title: spec.title,
+          subtitle: `Mode ${mode} (${['', 'SW Down', 'SW Mid', 'SW Up'][mode]})`,
+          lines,
+          configured: hasAny,
+          modeBadge: mode,
+          onEdit: () => {
+            // Sync the editor's currentMode to whichever pane the user clicked
+            // through from, so the modal's tier rows reflect that mode.
+            state.currentMode = mode;
+            const editorTab = document.querySelector('.bcg-mode-tab[data-mode="' + mode + '"]');
+            if (editorTab) editorTab.click();
+            openButtonModal(spec.btn);
+          },
+        }),
       });
       overlay.appendChild(callout);
     }
@@ -484,6 +494,12 @@
         left: spec.l, top: spec.t,
         configured: hasAny,
         readonly: true,
+        onClick: () => openCalloutZoom({
+          title: spec.title,
+          subtitle: 'Switch position labels',
+          lines,
+          configured: hasAny,
+        }),
       });
       overlay.appendChild(callout);
     }
@@ -494,15 +510,22 @@
       const fnLabels = { 0: '— none —', 1: 'HCR Vocalizer Volume', 2: 'HCR WAV Volume' };
       const fnText = kn ? (fnLabels[kn.function] || `fn${kn.function}`) : '';
       const chText = kn ? `CH ${kn.channel ?? '?'}` : '';
+      const knobLines = [
+        { tier: 'fn:', text: fnText },
+        { tier: 'ch:', text: chText },
+      ];
       const callout = makeCallout({
         title: spec.title,
-        lines: [
-          { tier: 'fn:', text: fnText },
-          { tier: 'ch:', text: chText },
-        ],
+        lines: knobLines,
         left: spec.l, top: spec.t,
         configured: !!(kn && kn.function),
         readonly: true,
+        onClick: () => openCalloutZoom({
+          title: spec.title,
+          subtitle: 'Knob assignment',
+          lines: knobLines,
+          configured: !!(kn && kn.function),
+        }),
       });
       overlay.appendChild(callout);
     }
@@ -833,6 +856,115 @@
     }
     if (opts.onClick) el.addEventListener('click', opts.onClick);
     return el;
+  }
+
+  // ──────────────────────────────────────────────────────────────────────
+  //  Callout zoom — magnified view of a single callout
+  //  --------------------------------------------------------------------
+  //  Triggered by clicking any callout on the gesture overlay. Builds a
+  //  full-screen popup on demand (no markup required in index.html) showing
+  //  the same title + lines as the callout but at readable size. Dismissed
+  //  by × button, backdrop click, or Escape.
+  //
+  //  opts:
+  //    title      — string, control label ("B5", "T4 Left", "SE", ...)
+  //    subtitle   — optional string shown below the title
+  //    lines      — [{ tier, text }] — same shape as makeCallout
+  //    configured — bool, applies the "configured" accent if true
+  //    onEdit     — optional fn. If provided, renders an "Edit Mappings"
+  //                 button that closes the zoom and invokes onEdit().
+  //                 Buttons supply this; switches/knobs do not.
+  // ──────────────────────────────────────────────────────────────────────
+  let _zoomEl = null;   // singleton DOM node, removed on close
+
+  function openCalloutZoom(opts) {
+    closeCalloutZoom();  // ensure any prior zoom is gone
+
+    const overlay = document.createElement('div');
+    overlay.className = 'bcg-zoom-overlay';
+
+    const card = document.createElement('div');
+    card.className = 'bcg-zoom-card';
+    if (opts.configured) card.classList.add('configured');
+
+    // Close button (×) — top-right corner of the card
+    const close = document.createElement('button');
+    close.type = 'button';
+    close.className = 'bcg-zoom-close';
+    close.setAttribute('aria-label', 'Close');
+    close.textContent = '×';
+    close.addEventListener('click', (e) => { e.stopPropagation(); closeCalloutZoom(); });
+    card.appendChild(close);
+
+    // Title strip
+    const title = document.createElement('div');
+    title.className = 'bcg-zoom-title';
+    title.textContent = opts.title || '';
+    card.appendChild(title);
+
+    // Optional subtitle (mode label for buttons, control type for sw/knob)
+    if (opts.subtitle) {
+      const sub = document.createElement('div');
+      sub.className = 'bcg-zoom-subtitle';
+      sub.textContent = opts.subtitle;
+      card.appendChild(sub);
+    }
+
+    // Body — each line as tier + text
+    const body = document.createElement('div');
+    body.className = 'bcg-zoom-body';
+    for (const ln of opts.lines || []) {
+      const row = document.createElement('div');
+      row.className = 'bcg-zoom-line' + (ln.text ? '' : ' empty');
+      const tier = document.createElement('span');
+      tier.className = 'bcg-zoom-tier';
+      tier.textContent = ln.tier || '';
+      const txt = document.createElement('span');
+      txt.className = 'bcg-zoom-text';
+      txt.textContent = ln.text || '— (not configured)';
+      row.appendChild(tier);
+      row.appendChild(txt);
+      body.appendChild(row);
+    }
+    card.appendChild(body);
+
+    // Edit button — only for button callouts (switches/knobs are read-only)
+    if (typeof opts.onEdit === 'function') {
+      const edit = document.createElement('button');
+      edit.type = 'button';
+      edit.className = 'bcg-btn bcg-btn-blue bcg-zoom-edit';
+      edit.textContent = 'Edit Mappings';
+      edit.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const fn = opts.onEdit;
+        closeCalloutZoom();
+        fn();
+      });
+      card.appendChild(edit);
+    }
+
+    overlay.appendChild(card);
+    // Backdrop click closes (clicks inside the card don't bubble here because
+    // the card is a descendant — we filter to e.target === overlay so a click
+    // on the card itself doesn't close).
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) closeCalloutZoom();
+    });
+
+    document.body.appendChild(overlay);
+    // Force a tick so the .open class can drive a CSS fade-in transition
+    requestAnimationFrame(() => overlay.classList.add('open'));
+    document.addEventListener('keydown', onZoomKey);
+    _zoomEl = overlay;
+  }
+
+  function closeCalloutZoom() {
+    document.removeEventListener('keydown', onZoomKey);
+    if (_zoomEl && _zoomEl.parentNode) _zoomEl.parentNode.removeChild(_zoomEl);
+    _zoomEl = null;
+  }
+  function onZoomKey(e) {
+    if (e.key === 'Escape') { e.preventDefault(); closeCalloutZoom(); }
   }
 
   // Buttons ───────────────────────────────────────────────────────────────

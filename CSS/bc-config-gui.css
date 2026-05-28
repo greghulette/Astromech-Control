@@ -479,13 +479,103 @@
 .bcg-ref-callout.configured .bcg-co-title { color: #1f4b73; }
 .bcg-ref-callout.empty { opacity: 0.55; }
 
-/* Switch and knob callouts are NOT clickable yet (no editor modal for them
-   in this build). Visual cue: no hover transform, dimmer cursor. */
-.bcg-ref-callout.readonly { cursor: default; }
+/* Switch and knob callouts have no editor modal, but they ARE clickable to
+   open the magnified zoom view. Cursor uses zoom-in to advertise that, and
+   a softer hover (smaller scale, no accent ring) distinguishes them from
+   the editable button callouts. */
+.bcg-ref-callout.readonly { cursor: zoom-in; }
 .bcg-ref-callout.readonly:hover {
-  transform: translate(-50%, -50%);
-  box-shadow: 0 3px 6px rgba(0,0,0,0.45);
-  border-color: #6b5a1a;
+  transform: translate(-50%, -50%) scale(1.03);
+  box-shadow: 0 4px 9px rgba(0,0,0,0.55);
+  border-color: #b59a3a;
+  z-index: 4;
+}
+
+/* ── Callout zoom (magnified popup) ────────────────────────────────────────
+   Built on demand from JS (openCalloutZoom). Shares the modal's z-index
+   layering so it sits above leaflet / panzoom / dropdown surfaces. Backdrop
+   click and × button both call closeCalloutZoom; Escape key is handled in
+   JS via document keydown listener attached on open. */
+.bcg-zoom-overlay {
+  position: fixed; inset: 0;
+  background: rgba(5, 8, 22, 0.82);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 99998;            /* sits below the action-editor modal (99999) */
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity .14s ease-out;
+}
+.bcg-zoom-overlay.open { opacity: 1; }
+
+.bcg-zoom-card {
+  position: relative;
+  background: #fdf5d0;              /* cream — matches the original callout */
+  color: #1a1a1a;
+  border: 2px solid #6b5a1a;
+  border-radius: 10px;
+  padding: 28px 36px 26px;
+  min-width: 320px; max-width: 560px; width: 100%;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.08);
+  font-family: 'Segoe UI', 'Inter', sans-serif;
+  transform: scale(.94);
+  transition: transform .15s ease-out;
+}
+.bcg-zoom-overlay.open .bcg-zoom-card { transform: scale(1); }
+.bcg-zoom-card.configured { border-color: #1f4b73; }
+
+.bcg-zoom-close {
+  position: absolute; top: 8px; right: 12px;
+  width: 36px; height: 36px;
+  background: transparent; border: none;
+  font-size: 30px; line-height: 1; color: #6b5a1a;
+  cursor: pointer; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0;
+}
+.bcg-zoom-close:hover { background: rgba(0,0,0,0.08); color: #1a1a1a; }
+
+.bcg-zoom-title {
+  font-size: 32px; font-weight: 800; letter-spacing: 1px;
+  text-align: center; color: #2a4060;
+  border-bottom: 2px solid rgba(0,0,0,0.18);
+  padding-bottom: 10px; margin-bottom: 6px;
+}
+.bcg-zoom-card.configured .bcg-zoom-title { color: #1f4b73; }
+.bcg-zoom-subtitle {
+  font-size: 13px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 1.2px; color: #6b5a1a;
+  text-align: center; margin-bottom: 14px;
+}
+
+.bcg-zoom-body {
+  display: flex; flex-direction: column; gap: 12px;
+  margin: 10px 0 18px;
+}
+.bcg-zoom-line {
+  display: flex; align-items: baseline; gap: 14px;
+  font-size: 20px; line-height: 1.35;
+  padding: 8px 12px;
+  background: rgba(0,0,0,0.04); border-radius: 6px;
+  border-left: 4px solid #6b5a1a;
+}
+.bcg-zoom-card.configured .bcg-zoom-line { border-left-color: #1f4b73; }
+.bcg-zoom-line.empty { opacity: 0.45; font-style: italic; }
+.bcg-zoom-tier {
+  font-weight: 800; color: #6b5a1a;
+  min-width: 48px; flex-shrink: 0; font-size: 22px;
+}
+.bcg-zoom-card.configured .bcg-zoom-tier { color: #1f4b73; }
+.bcg-zoom-text {
+  font-weight: 600; color: #1a1a1a;
+  word-break: break-word;
+}
+
+.bcg-zoom-edit {
+  display: block; width: 100%;
+  padding: 12px 18px; font-size: 15px;
+  margin-top: 6px;
 }
 
 /* ── Button grid ─────────────────────────────────────────────────────────────
