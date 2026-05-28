@@ -336,9 +336,9 @@ function updateGesturesDiagram(p) {
   let upPageLink = document.getElementById('gestures3Link');
   pnew = p;
   if (pnew != pold) {
-    console.log("P is not equal to Pold");
-    console.log(pnew);
-    console.log(pold);
+    // console.log("P is not equal to Pold");
+    // console.log(pnew);
+    // console.log(pold);
     // Legacy Quick-Reference (#Gestures settings panel — static wiring PNGs).
     // Only click these if the buttons exist AND the remote is connected.
     if (downPageLink && middlePageLink && upPageLink) {
@@ -373,9 +373,9 @@ function updateGesturesDiagram(p) {
 }
 
 function parseSerialUpdate(x) {
-  console.log("Parse JSON ogject: ");
+  // console.log("Parse JSON ogject: ");
   let parsedInfo = (JSON.parse(x));
-  console.log(parsedInfo);
+  // console.log(parsedInfo);
   // 2026-05 GET_CONFIG return path. CFG_CHUNK packets arrive as their own
   // JSON line on USB Serial — dispatch to the BCG reassembler and return
   // early so the telemetry-shaped field accesses below don't run on a
