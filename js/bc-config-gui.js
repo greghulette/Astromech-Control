@@ -170,8 +170,12 @@
   //  CHUNK_PAYLOAD_BYTES is the budget for raw JSON per #CC command. The
   //  ESP-NOW structCommand[100] is the real hard limit; "#CC <seq> <idx>:"
   //  envelope is ~13 bytes for sane seq/idx → 85 bytes data is safe.
+  //  Held at 70 (not 80) so the fully-framed forward command
+  //  ":L:EBC#CC <seq> <idx>:<payload>" stays comfortably under the Remote's
+  //  99-char MAX_LINE_LENGTH/inputBuffer cap even at multi-digit seq/idx,
+  //  rather than riding ~1 byte of margin. Costs a few extra chunks per push.
   // ────────────────────────────────────────────────────────────────────────
-  const CHUNK_PAYLOAD_BYTES = 80;
+  const CHUNK_PAYLOAD_BYTES = 70;
   const CHUNK_INTER_DELAY_MS = 25;   // small gap between sends to give the relay breathing room
 
   function setSyncStatus(text, kind /* '', 'busy', 'synced', 'error' */) {
