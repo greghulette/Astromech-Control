@@ -73,9 +73,27 @@
   const HCR_FN_USES_EMOTION    = new Set([2,3,4,12,19]);
   const HCR_FN_USES_AUDIO_CHAN = new Set([14,15,16,17,22,24,25,26,28]);
 
+  // Full animation list — MUST stay in sync with ANIM_TABLE[] in the BC
+  // firmware (Body_Controller_ESP32_GUI.ino). The BC's GET_ANIM_LIST reply is
+  // printed to the BC's own USB Serial and does NOT travel back over the
+  // LoRa/ESP-NOW path to the web, so this hardcoded list is the dropdown's
+  // source of truth. If you add/rename an animation in callAnimation()/
+  // ANIM_TABLE on the BC, mirror the change here.
   const ANIM_FN_LIST = [
     [1,'Normal Operations'], [2,'Panel Wave'], [3,'Panel Wave Fast'],
     [4,'Dome Periscope'], [5,'All Open/Close'], [6,'Harlem Shake'],
+    [7,'All Close'], [8,'All Flutter'], [9,'Toggle Doors'],
+    [10,'All Lights Toggle'], [11,'All Open'], [12,'Drawer Wave'],
+    [13,'Open/Close Easing'], [14,'Short Circuit'], [15,'Star Wars Theme'],
+    [16,'Vader Theme'], [17,'Periscope Seq 2'], [18,'Periscope Seq 10'],
+    [19,'Lights Off'], [20,'Lights On'], [21,'Fart Noise'],
+    [22,'Wave Utility Arm'], [23,'Arm Saber'], [24,'Launch Saber'],
+    [25,'Smoke Sequence'], [26,'Display Mode'], [27,'Open/Close Wave'],
+    [28,'CPU Raise'], [29,'CPU Lower'], [30,'CPU Extend'],
+    [31,'CPU Retract'], [32,'CPU Rotate'], [33,'Long Dance'],
+    [34,'CPU Sequence'], [35,'Fire Extinguisher'], [36,'Stow Saber'],
+    [37,'Stop Sounds'], [38,'Staying Alive (song)'], [39,'Staying Alive (Servo)'],
+    [40,'Periscope Home'],
   ];
 
   const MAX_ACTIONS_PER_TIER = 5;
