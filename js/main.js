@@ -193,12 +193,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const notSupported = document.getElementById('notSupported');
   notSupported.classList.toggle('hidden', 'serial' in navigator);
 
-  // Try a silent auto-connect on page load. WebSerial keeps a list of
-  // previously-authorized ports per origin; if exactly one is remembered we
-  // can open it without showing the picker. After a fresh Chromium profile
-  // the user has to grant permission once via the picker — but every reload
-  // after that "just works" with no UI interaction.
-  if ('serial' in navigator) {
+  // NOTE: we intentionally do NOT auto-connect on page load. Connecting to a
+  // serial port on its own was surprising (and could grab the wrong port).
+  // Instead the user clicks "connect serial" — and clickConnect()/connect()
+  // still silently reuses the previously-authorized port via pickGrantedPort(),
+  // so that click connects WITHOUT the Chrome picker on every reload after the
+  // first grant. To re-enable hands-free auto-connect, set this flag true.
+  if (window.SERIAL_AUTOCONNECT === true && 'serial' in navigator) {
     tryAutoConnectGrantedPort();
   }
 });
@@ -403,6 +404,19 @@ function writeToStream(...lines) {
   writer.releaseLock();
 }
 
+// ───────────────────────────────────────────────────────────────────────────
+// Serial RX debug instrumentation. Toggle live from the browser console:
+//   SERIAL_DEBUG = true    → log CFG_CHUNK / bcAck / non-JSON lines / parse
+//                            failures, plus a throttled telemetry heartbeat.
+//   SERIAL_DEBUG_RAW = true → ALSO log every raw serial chunk and every split
+//                            line (very verbose — use to inspect line endings).
+// Defaults: SERIAL_DEBUG on, RAW off. Set SERIAL_DEBUG=false to silence.
+// ───────────────────────────────────────────────────────────────────────────
+window.SERIAL_DEBUG     = (window.SERIAL_DEBUG     === undefined) ? true  : window.SERIAL_DEBUG;
+window.SERIAL_DEBUG_RAW = (window.SERIAL_DEBUG_RAW === undefined) ? false : window.SERIAL_DEBUG_RAW;
+var _rxTelemetryCount   = 0;
+var _rxTelemetryLastLog = 0;
+
 /**
  * @name JSONTransformer
  * TransformStream to parse the stream into a JSON object.
@@ -411,16 +425,30 @@ class JSONTransformer {
   transform(chunk, controller) {
     // CODELAB: Attempt to parse JSON content
     try {
-      controller.enqueue(JSON.parse(chunk));
-      // console.log("Data is JSON");
+      const obj = JSON.parse(chunk);
+      controller.enqueue(obj);
+      if (window.SERIAL_DEBUG) {
+        if (obj && obj.type) {
+          // Non-telemetry frame (CFG_CHUNK, NACK, etc.) — always worth showing.
+          console.log('%c[RX json]', 'color:#0a0;font-weight:bold', obj.type, obj);
+        } else {
+          // Telemetry heartbeat — throttle to ~once/2s so it doesn't bury chunks.
+          _rxTelemetryCount++;
+          const now = Date.now();
+          if (now - _rxTelemetryLastLog > 2000) {
+            console.log('[RX telemetry] frames received so far:', _rxTelemetryCount);
+            _rxTelemetryLastLog = now;
+          }
+        }
+      }
       parseSerialUpdate(chunk);
     } catch (e) {
       controller.enqueue(chunk);
-      // const obj = JSON.parse(chunk);
-      // console.log("Data is not JSON");
-      // console.log(obj);
-      // console.log(chunk);
-
+      if (window.SERIAL_DEBUG && chunk && chunk.trim().length) {
+        // A line that arrived but failed to JSON.parse — often a partial/glued
+        // frame or a plain-text debug print from a board.
+        console.warn('[RX non-json]', JSON.stringify(chunk), '(parse err:', e.message + ')');
+      }
     }
   }
 }
@@ -479,8 +507,16 @@ function parseSerialUpdate(x) {
   // early so the telemetry-shaped field accesses below don't run on a
   // chunk envelope.
   if (parsedInfo && parsedInfo.type === 'CFG_CHUNK') {
+    if (window.SERIAL_DEBUG) {
+      console.log('%c[CFG_CHUNK]', 'color:#06c;font-weight:bold',
+        'seq=' + parsedInfo.seq, 'idx=' + parsedInfo.idx,
+        'total=' + parsedInfo.total,
+        'payloadLen=' + (parsedInfo.payload ? parsedInfo.payload.length : 0));
+    }
     if (typeof window.bcgHandleCfgChunk === 'function') {
       window.bcgHandleCfgChunk(parsedInfo);
+    } else {
+      console.warn('[CFG_CHUNK] dropped — window.bcgHandleCfgChunk is not defined');
     }
     return;
   }
@@ -526,12 +562,17 @@ function parseSerialUpdate(x) {
   // ACK". Dispatch to the BCG handler so the editor's sync-status
   // banner can flip to "verified" / "BC error" when the ACK for the
   // most recent push arrives.
-  if (typeof window.bcgHandleBcAck === 'function' &&
-      typeof parsedInfo.bcAckSeq === 'number' &&
-      parsedInfo.bcAckSeq > 0) {
-    window.bcgHandleBcAck(parsedInfo.bcAckSeq,
-                          !!parsedInfo.bcAckOk,
-                          parsedInfo.bcAckMsg || '');
+  if (typeof parsedInfo.bcAckSeq === 'number' && parsedInfo.bcAckSeq > 0) {
+    if (window.SERIAL_DEBUG) {
+      console.log('%c[bcAck]', 'color:#a60;font-weight:bold',
+        'seq=' + parsedInfo.bcAckSeq, 'ok=' + !!parsedInfo.bcAckOk,
+        'msg=' + (parsedInfo.bcAckMsg || ''));
+    }
+    if (typeof window.bcgHandleBcAck === 'function') {
+      window.bcgHandleBcAck(parsedInfo.bcAckSeq,
+                            !!parsedInfo.bcAckOk,
+                            parsedInfo.bcAckMsg || '');
+    }
   }
   // console.log(batteryPercent);
   updateEEPROMSettings();
@@ -615,10 +656,19 @@ class LineBreakTransformer {
 
   transform(chunk, controller) {
     // CODELAB: Handle incoming chunk
+    if (window.SERIAL_DEBUG_RAW) console.log('[RX raw chunk]', JSON.stringify(chunk));
     this.container += chunk;
-    const lines = this.container.split('\r\n');
+    // Split on CRLF *or* a bare LF. Telemetry frames end in '\r\n', but the
+    // Remote's CFG_CHUNK / bcAck JSON lines end in just '\n'. The old
+    // split('\r\n') never split an LF-only line, so it got glued onto the next
+    // frame and JSON.parse failed — which is why the config packets never
+    // surfaced on the webpage while telemetry did.
+    const lines = this.container.split(/\r?\n/);
     this.container = lines.pop();
-    lines.forEach(line => controller.enqueue(line));
+    lines.forEach(line => {
+      if (window.SERIAL_DEBUG_RAW && line.length) console.log('[RX line]', JSON.stringify(line));
+      controller.enqueue(line);
+    });
   }
 
   flush(controller) {

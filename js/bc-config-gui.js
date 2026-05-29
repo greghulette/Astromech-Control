@@ -657,6 +657,24 @@
         try { renderAll(); } catch (e) { console.error('[BCG] renderAll after load failed:', e); }
         setSyncStatus(`loaded from BC (${raw.length}B in ${elapsed}ms)`, 'synced');
         console.log(`[BCG] GET_CONFIG loaded seq=${state.cfgRecvSeq} bytes=${raw.length} ms=${elapsed}`);
+        // ── Diagnostic dump ──────────────────────────────────────────────
+        // Stash for console inspection and print a per-button tap-tier map
+        // across ALL THREE modes. A "missing" double-tap is usually either
+        // (a) stored in a different mode than the grid is showing, or
+        // (b) never actually pushed to the BC. This makes both obvious.
+        // Inspect in console:  bcgLastConfig.mappings['205']
+        window.bcgLastConfigRaw = raw;
+        window.bcgLastConfig    = cfg;
+        try {
+          const maps = cfg.mappings || {};
+          const keys = Object.keys(maps).sort();
+          const multi = keys.filter(k =>
+            (maps[k].t2 && maps[k].t2.length) || (maps[k].t3 && maps[k].t3.length));
+          console.log('%c[BCG] config dump', 'color:#06c;font-weight:bold',
+            '\n  mapping keys present:', keys,
+            '\n  buttons WITH 2-/3-tap tiers:', multi.length ? multi : '(none)',
+            '\n  full parsed config →', cfg);
+        } catch (e) { console.warn('[BCG] dump failed', e); }
       } else {
         setSyncStatus('GET_CONFIG: unexpected shape', 'error');
         console.warn('[BCG] reassembled config has unexpected shape', parsed);
