@@ -461,6 +461,16 @@ function updateGesturesDiagram(p) {
   let middlePageLink = document.getElementById('gestures2Link');
   let upPageLink = document.getElementById('gestures3Link');
   pnew = p;
+  // SE-switch auto-mode-switch diagnostic. Logs whenever FunctionSWState
+  // changes, showing the value AND the remoteConnected gate that controls
+  // whether the auto-switch is allowed to fire. Flip SE and watch this line.
+  if (window.SERIAL_DEBUG && p !== pold) {
+    const willFire = (p === 1 || p === 2 || p === 3) && remoteConnected === true;
+    console.log('%c[SE switch]', 'color:#90c;font-weight:bold',
+      'FunctionSWState=' + p, '(was ' + pold + ')',
+      'remoteConnected=' + remoteConnected,
+      '→ auto-switch ' + (willFire ? 'FIRING' : 'BLOCKED'));
+  }
   if (pnew != pold) {
     // console.log("P is not equal to Pold");
     // console.log(pnew);
@@ -491,9 +501,14 @@ function updateGesturesDiagram(p) {
   // We pass isAuto=true so the BCG side knows this is a telemetry-driven
   // call (not a manual click) and can release any prior manual override
   // when the SE switch position actually changes.
+  //
+  // 2026-05: dropped the `remoteConnected === true` requirement here. That
+  // gate (legacy, from the old static-PNG pages below) was blocking the
+  // auto-switch whenever remoteConnected reported false/undefined even though
+  // FunctionSWState was a valid live value. bcgSetGestureMode only acts on an
+  // actual CHANGE to a valid 1/2/3, so following it unconditionally is safe.
   if (typeof window.bcgSetGestureMode === 'function' &&
-      (p === 1 || p === 2 || p === 3) &&
-      remoteConnected === true) {
+      (p === 1 || p === 2 || p === 3)) {
     window.bcgSetGestureMode(p, true);
   }
 }
