@@ -176,7 +176,14 @@
   //  rather than riding ~1 byte of margin. Costs a few extra chunks per push.
   // ────────────────────────────────────────────────────────────────────────
   const CHUNK_PAYLOAD_BYTES = 70;
-  const CHUNK_INTER_DELAY_MS = 25;   // small gap between sends to give the relay breathing room
+  // The Remote forwards each chunk over LoRa as a SINGLE in-flight command and
+  // waits up to AckDuration (750 ms) for the Gateway's ACK before it can send
+  // the next one. If we send faster than that, the new chunk clobbers the one
+  // still awaiting its ACK at the Remote → ~97% loss, #CB lost, BC NACKs
+  // "wrong_seq". Pace ≥ the Remote's ACK window so each chunk clears first.
+  // (Combined with delta push below, a typical edit is only a handful of
+  // chunks, so the higher per-chunk delay costs a few seconds, not minutes.)
+  const CHUNK_INTER_DELAY_MS = 800;
 
   function setSyncStatus(text, kind /* '', 'busy', 'synced', 'error' */) {
     const el = $('bcgSyncStatus'); if (!el) return;
@@ -185,7 +192,52 @@
     if (kind) el.classList.add(kind);
   }
 
-  async function pushConfigChunked() {
+  // ── Delta push helpers ────────────────────────────────────────────────────
+  //  The BC's SET_CONFIG MERGES (rcConfigFromJSON only updates keys present in
+  //  the payload, leaving everything else untouched). So we send ONLY what
+  //  changed since the last successful load/push. A one-button edit goes from
+  //  ~90 chunks to ~2-3 — the difference between a reliable few-second push and
+  //  an 80-chunk LoRa marathon that almost always drops a packet and NACKs.
+  function deepCopy(o) { return JSON.parse(JSON.stringify(o)); }
+  function deepEq(a, b) { return JSON.stringify(a) === JSON.stringify(b); }
+
+  // Diff an object-keyed section (mappings / switches / knobs) key-by-key.
+  // Returns true if anything was added to delta[section].
+  function diffKeyedSection(section, clean, cur, delta) {
+    const c = cur[section] || {}, p = clean[section] || {};
+    const out = {}; let any = false;
+    for (const k of Object.keys(c)) {
+      if (!deepEq(c[k], p[k])) { out[k] = c[k]; any = true; }
+    }
+    if (any) delta[section] = out;
+    return any;
+  }
+
+  // Build the minimal SET_CONFIG payload. Returns null if nothing changed.
+  function buildConfigDelta(clean, cur) {
+    const delta = {}; let changed = false;
+    // Scalars
+    for (const k of ['tapWindowMs', 'matrixChannel', 'matrixDebounceFrames']) {
+      if (cur[k] !== undefined && cur[k] !== clean[k]) { delta[k] = cur[k]; changed = true; }
+    }
+    // Small whole-object / index-based sections: send entire if any change.
+    if (cur.funcBindings && !deepEq(cur.funcBindings, clean.funcBindings)) {
+      delta.funcBindings = cur.funcBindings; changed = true;
+    }
+    // thresholds is an ARRAY the BC applies by index — must send the whole
+    // array (a partial would misalign), but it's only 19 small entries.
+    if (cur.thresholds && !deepEq(cur.thresholds, clean.thresholds)) {
+      delta.thresholds = cur.thresholds; changed = true;
+    }
+    // Object-keyed sections — per-key delta (this is where the savings are).
+    if (diffKeyedSection('mappings', clean, cur, delta)) changed = true;
+    if (diffKeyedSection('switches', clean, cur, delta)) changed = true;
+    if (diffKeyedSection('knobs',    clean, cur, delta)) changed = true;
+    return changed ? delta : null;
+  }
+
+  async function pushConfigChunked(opts) {
+    opts = opts || {};
     // 2026-05 fix (BUG #1): if another push is in flight, defer this one
     // instead of dropping it. The `finally` block below re-schedules so
     // the latest state.config gets pushed eventually.
@@ -196,7 +248,25 @@
     state.busy = true;
     setSyncStatus('pushing…', 'busy');
 
-    const envelope = { type: 'SET_CONFIG', data: state.config };
+    // Delta unless forced full, or we have no clean snapshot to diff against
+    // (e.g. first push after page load without a prior GET_CONFIG load).
+    let data, isFull;
+    if (opts.full || !state.cleanConfig) {
+      data = state.config; isFull = true;
+    } else {
+      data = buildConfigDelta(state.cleanConfig, state.config); isFull = false;
+      if (!data) {
+        setSyncStatus('no changes to push', 'synced');
+        state.busy = false;
+        return;
+      }
+    }
+    // Snapshot exactly what state.config looks like right now. On the BC's
+    // success ACK we promote this to cleanConfig — after the merge the BC holds
+    // (previous-clean + delta) === this snapshot for all the keys we sent.
+    const pushedSnapshot = deepCopy(state.config);
+
+    const envelope = { type: 'SET_CONFIG', data: data };
     const payload  = JSON.stringify(envelope);
 
     // Split into raw byte chunks (no escaping — the BC reassembles by
@@ -224,13 +294,18 @@
       }
       await sleep(CHUNK_INTER_DELAY_MS);
       sendBCCommand(`#CE ${seq}`);
-      console.log(`[BCG] pushed config seq=${seq} (${chunks.length} chunks, ${payload.length} bytes)`);
+      const kind = isFull ? 'FULL' : 'delta';
+      console.log(`[BCG] pushed ${kind} config seq=${seq} (${chunks.length} chunks, ${payload.length} bytes)`,
+                  isFull ? '' : Object.keys(data));
+      // Remember what we just sent so the BC's success ACK can promote it to
+      // the clean snapshot (basis for the NEXT delta).
+      state.pendingCleanConfig = pushedSnapshot;
       // 2026-05: bytes are out the door. Status flips to "verified ✓"
       // once the BC's reverse-channel ACK arrives via the telemetry
       // pipeline (bcgHandleBcAck below), or to "BC: <reason>" on NACK.
       // Telemetry frames are ~1 Hz so verification typically lands
       // within 1-2 seconds of this point.
-      setSyncStatus(`pushed (${chunks.length}c · ${payload.length}B) — verifying…`, 'busy');
+      setSyncStatus(`pushed ${kind} (${chunks.length}c · ${payload.length}B) — verifying…`, 'busy');
     } catch (e) {
       console.error('[BCG] push failed:', e);
       setSyncStatus('push failed', 'error');
@@ -572,6 +647,12 @@
       return;
     }
     if (ok) {
+      // Push confirmed applied on the BC — the snapshot we sent is now the
+      // baseline future deltas diff against.
+      if (state.pendingCleanConfig) {
+        state.cleanConfig = state.pendingCleanConfig;
+        state.pendingCleanConfig = null;
+      }
       setSyncStatus(`verified ✓ ${msg || ''}`.trim(), 'synced');
       console.log(`[BCG] BC verified push seq=${seq} msg="${msg}"`);
     } else {
@@ -654,6 +735,10 @@
       const cfg = (parsed && parsed.type === 'CONFIG' && parsed.data) ? parsed.data : parsed;
       if (cfg && typeof cfg === 'object') {
         state.config = cfg;
+        // Baseline for delta pushes: what the BC currently holds === what we
+        // just loaded. The next edit diffs against this so only the change is
+        // sent. (Deep copy so later edits to state.config don't mutate it.)
+        state.cleanConfig = JSON.parse(JSON.stringify(cfg));
         try { renderAll(); } catch (e) { console.error('[BCG] renderAll after load failed:', e); }
         setSyncStatus(`loaded from BC (${raw.length}B in ${elapsed}ms)`, 'synced');
         console.log(`[BCG] GET_CONFIG loaded seq=${state.cfgRecvSeq} bytes=${raw.length} ms=${elapsed}`);
