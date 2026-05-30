@@ -5591,6 +5591,14 @@ id="FrontLogicsTopBlueSelector"
           </div>
         </button>
        </div>
+       <div class="menu-Level-1-Links move6" >
+        <button class="" rel="servoCal">
+          <div>
+            <img loading="lazy" class="buttonwidth "  src="./Images/HomeTab/Button-Blank.png">
+            <p class="shadowtext2LinesLongLED">servo calibration</p>
+          </div>
+        </button>
+       </div>
        <!-- sled lights moved out of Settings into the LED tab -->
        <div id="droidBattery" class="droidBatteryClass">
         <p id="droidBatteryVoltagePar">voltage: </p>
@@ -6059,6 +6067,76 @@ id="FrontLogicsTopBlueSelector"
         </tr>
       </tbody>
     </table>
+  </div>
+</div>
+
+<!-- ===== Servo Calibration ===== -->
+<div class="menu-Level-1-Content " id="servoCal">
+  <style>
+    /* Normalise font inside this section so it doesn't inherit the app's huge
+       glowing Star Wars font (which was overlapping the sliders). */
+    #servoCal .svc-wrap, #servoCal .svc-wrap * {
+      font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif !important;
+      text-shadow:none !important; letter-spacing:normal !important;
+    }
+    /* Push everything below the big absolutely-positioned "servo calibration"
+       title so it stops overlapping the board selector. */
+    #servoCal .svc-wrap { color:#fff; max-width:760px; margin-top:48px; }
+    #servoCal .svc-top { display:flex; align-items:center; gap:12px; margin-bottom:8px; flex-wrap:wrap; font-size:14px; }
+    #servoCal .svc-top label { display:flex; align-items:center; gap:8px; }
+    #servoCal .svc-top select { font-size:16px; padding:10px 14px; border-radius:6px; min-width:260px;
+                                height:auto; line-height:1.2; cursor:pointer; background:#222; color:#fff;
+                                border:1px solid #888; }
+    #servoCal .svc-top select:hover { border-color:#ffd000; }
+    #servoCal .svc-btn { font-size:13px; padding:5px 10px; border-radius:6px; border:1px solid #888;
+                         background:#333; color:#fff; cursor:pointer; }
+    #servoCal .svc-btn:hover { border-color:#ffd000; }
+    #servoCal .svc-btn:disabled { opacity:.35; cursor:default; border-color:#555; }
+    /* Pager row: only a handful of cards are in the DOM at once, so the list
+       can never run off the bottom of the screen regardless of board size. */
+    #servoCal .svc-pager { display:flex; align-items:center; gap:12px; margin:4px 0 8px; }
+    #servoCal .svc-pagelabel { font-size:13px; color:#cfd6e0; min-width:120px; text-align:center; font-weight:600; }
+    #servoCal #servoCalList { padding-right:6px; }
+    /* Each servo is a compact stacked card so it fits any pane width:
+       name+value row, then full-width slider, then the action buttons. */
+    #servoCal .svc-row { display:flex; flex-direction:column; gap:4px;
+                         padding:6px 12px; border:1px solid #444; border-radius:8px; margin:6px 0; background:#1e2230; }
+    #servoCal .svc-head { display:flex; justify-content:space-between; align-items:baseline; gap:10px; }
+    #servoCal .svc-name { font-weight:600; font-size:13px; line-height:1.25; color:#fff; }
+    /* The app's global input[type=range] is position:absolute; width:75%; left:15%
+       which would yank every slider out of the card flow and stack them. Force
+       them back into normal flow, full-width inside the card. */
+    #servoCal .svc-row input[type=range] {
+      position:static !important; left:auto !important; top:auto !important;
+      width:100% !important; min-width:0 !important; box-sizing:border-box;
+      height:28px; margin:0; }
+    #servoCal .svc-val { font-variant-numeric:tabular-nums; color:#ffd000; font-size:16px; font-weight:700; white-space:nowrap; }
+    #servoCal .svc-actions { display:flex; gap:8px; flex-wrap:wrap; }
+    #servoCal .svc-actions .open { border-color:#39d353; }
+    #servoCal .svc-actions .close { border-color:#5ca8ff; }
+    #servoCal .svc-actions .reset:hover { border-color:#ff5c5c; }
+    #servoCal .svc-ref { color:#9aa3af; font-size:11px; font-weight:400; }
+    #servoCal .svc-hint { color:#9aa3af; font-size:11px; line-height:1.35; margin-top:6px; max-width:720px; }
+  </style>
+  <h2 class="gesturesheaders">servo calibration</h2>
+  <div class="svc-wrap">
+    <div class="svc-top">
+      <label>Board:
+        <select id="servoCalBoard">
+          <option value="DC">Dome Controller</option>
+          <option value="BS">Body Servo Controller</option>
+          <option value="DP">Dome Plate Controller</option>
+        </select>
+      </label>
+      <button class="svc-btn" id="servoCalRestore" title="Reload saved limits on the board (undo live-move widening)">restore limits</button>
+    </div>
+    <div class="svc-pager">
+      <button class="svc-btn" id="servoCalPrev" title="Previous servos">&#9664; Prev</button>
+      <span id="servoCalPageLabel" class="svc-pagelabel">page 1 / 1</span>
+      <button class="svc-btn" id="servoCalNext" title="More servos">Next &#9654;</button>
+    </div>
+    <div id="servoCalList"></div>
+    <p class="svc-hint">Drag to move the servo <b>live</b>. <b>Set Open</b>/<b>Set Close</b> saves that endpoint to NVS; <b>Reset</b> restores the firmware default. Click <b>restore limits</b> when done. (Connect via serial or the droid's WiFi.)</p>
   </div>
 </div>
 

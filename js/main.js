@@ -1450,6 +1450,168 @@ function domePlateControllerCommand(t) {
   }
 }
 
+// ============================================================================
+//  Servo Calibration (Settings tab)
+//  Sends servo-limit commands to a board over the mesh (":E<board>#L...").
+//  Firmware (Dome/Body Servo/Dome Plate controllers) understands:
+//    #LMxxyyyy live-move servo xx to yyyy us (slider)
+//    #LOxxyyyy set OPEN  endpoint + save NVS
+//    #LCxxyyyy set CLOSE endpoint + save NVS
+//    #LRxx     reset servo xx to firmware default
+//    #LZ       reload all limits from NVS (undo live-move widening)
+//  Servo lists below MUST match each controller's servoSettings[] array.
+// ============================================================================
+const SERVO_MAP = {
+  DC: { name: "Dome Controller", servos: [
+    { i:0, name:"Small Panel 1 (radar L)", close:2363, open:1592 },
+    { i:1, name:"Small Panel 2 (radar M)", close:1915, open:1220 },
+    { i:2, name:"Small Panel 3 (radar R)", close:1155, open:1850 },
+    { i:3, name:"Medium Panel (painted)",  close:985,  open:1800 },
+    { i:4, name:"Medium Panel (silver)",   close:1100, open:1800 },
+    { i:5, name:"Big Panel (lower)",       close:1410, open:2100 },
+    { i:6, name:"Pie Panel 1 (smoker)",    close:1500, open:2200 },
+    { i:7, name:"Pie Panel 2 (plunger)",   close:1075, open:1850 },
+    { i:8, name:"Pie Panel 3 (saber)",     close:1230, open:1950 },
+    { i:9, name:"Pie Panel 4 (rubber saber)", close:1400, open:2000 },
+  ]},
+  BS: { name: "Body Servo Controller", servos: [
+    { i:0,  name:"Top Utility Arm",    close:2110, open:1100 },
+    { i:1,  name:"Bottom Utility Arm", close:1800, open:900  },
+    { i:2,  name:"Large Left Door",    close:1000, open:1750 },
+    { i:3,  name:"Large Right Door",   close:1850, open:1400 },
+    { i:4,  name:"Charge Bay Door",    close:758,  open:1590 },
+    { i:5,  name:"Data Panel Door",    close:1750, open:850  },
+    { i:6,  name:"Drawer S1",          close:1950, open:800  },
+    { i:7,  name:"Drawer S2",          close:1945, open:700  },
+    { i:8,  name:"Drawer S3",          close:650,  open:2300 },
+    { i:9,  name:"Drawer S4",          close:1000, open:2500 },
+    { i:10, name:"CPU Arm Raise",      close:1870, open:500  },
+    { i:11, name:"CPU Arm Rotate",     close:700,  open:2300 },
+    { i:12, name:"CPU Arm Extend",     close:1050, open:2450 },
+    { i:13, name:"Rear Left Door",     close:1500, open:1549 },
+    { i:14, name:"Rear Right Door",    close:1500, open:1549 },
+    { i:15, name:"Future",             close:1500, open:1549 },
+  ]},
+  DP: { name: "Dome Plate Controller", servos: [
+    { i:0, name:"Saber Launcher (Top Util Arm)", close:2250, open:1550 },
+    { i:1, name:"Extinguisher",                  close:1500, open:1300 },
+  ]},
+};
+
+// Send a raw "#L..." command to a board over the mesh (serial or HTTP fallback).
+function servoCalSend(board, cmd) {
+  if (typeof CommandConnectionSerial !== 'undefined' && CommandConnectionSerial == false) {
+    httpGet("http://192.168.4.101/?param0=:&param1=:L:E" + board + cmd.replace(/#/g, '%23'));
+  } else {
+    writeToStream(SerialLoRaPrefix + ":E" + board + cmd);
+  }
+}
+function svcPad2(n) { return ("0"   + (n | 0)).slice(-2); }
+function svcPad4(n) { return ("000" + (n | 0)).slice(-4); }
+
+// Throttle live-move sends so we don't flood the single-in-flight LoRa hop
+// (Remote->Gateway drains ~2-3 cmds/sec). The trailing 'change' on the slider
+// always sends the final, precise value, so dropped intermediate frames just
+// mean the servo lags the slider a touch while dragging.
+var _svcThrottle = {};
+function svcLiveMove(board, idx, val) {
+  var key = board + "_" + idx, now = Date.now();
+  if (!_svcThrottle[key] || now - _svcThrottle[key] >= 250) {
+    _svcThrottle[key] = now;
+    servoCalSend(board, "#LM" + svcPad2(idx) + svcPad4(val));
+  }
+}
+
+// Only a few servo cards live in the DOM at once (paged with Prev/Next) so the
+// list can never run off the bottom of the absolutely-positioned settings pane.
+var SVC_PAGE_SIZE = 4;
+var _svcPage = 0;
+
+function renderServoCalList(board) {
+  var host = document.getElementById('servoCalList');
+  if (!host) return;
+  host.innerHTML = "";
+  var def = SERVO_MAP[board];
+  if (!def) return;
+
+  var total     = def.servos.length;
+  var pageCount = Math.max(1, Math.ceil(total / SVC_PAGE_SIZE));
+  if (_svcPage < 0)           _svcPage = 0;
+  if (_svcPage >= pageCount)  _svcPage = pageCount - 1;
+  var start = _svcPage * SVC_PAGE_SIZE;
+  var pageServos = def.servos.slice(start, start + SVC_PAGE_SIZE);
+
+  // Update pager chrome.
+  var lbl  = document.getElementById('servoCalPageLabel');
+  var prev = document.getElementById('servoCalPrev');
+  var next = document.getElementById('servoCalNext');
+  if (lbl)  lbl.textContent = "servos " + (start + 1) + " to " + (start + pageServos.length) +
+                              " of " + total + "  (page " + (_svcPage + 1) + " / " + pageCount + ")";
+  if (prev) prev.disabled = (_svcPage <= 0);
+  if (next) next.disabled = (_svcPage >= pageCount - 1);
+
+  pageServos.forEach(function (s) {
+    var row = document.createElement('div'); row.className = "svc-row";
+
+    // Head: name (+ index/default) on the left, live value on the right.
+    var head = document.createElement('div'); head.className = "svc-head";
+    var name = document.createElement('div'); name.className = "svc-name";
+    name.innerHTML = s.name + "<div class='svc-ref'>#" + s.i + " &middot; default C " + s.close + " / O " + s.open + "</div>";
+    var valEl = document.createElement('div'); valEl.className = "svc-val"; valEl.textContent = s.close + " us";
+    head.appendChild(name); head.appendChild(valEl);
+
+    var slider = document.createElement('input');
+    slider.type = "range"; slider.min = "500"; slider.max = "2500"; slider.step = "5";
+    slider.value = s.close;
+
+    var actions = document.createElement('div'); actions.className = "svc-actions";
+    var bOpen  = document.createElement('button'); bOpen.className  = "svc-btn open";  bOpen.textContent  = "Set Open";
+    var bClose = document.createElement('button'); bClose.className = "svc-btn close"; bClose.textContent = "Set Close";
+    var bReset = document.createElement('button'); bReset.className = "svc-btn reset"; bReset.textContent = "Reset";
+
+    slider.addEventListener('input',  function () { valEl.textContent = slider.value + " us"; svcLiveMove(board, s.i, +slider.value); });
+    slider.addEventListener('change', function () { servoCalSend(board, "#LM" + svcPad2(s.i) + svcPad4(+slider.value)); });
+    bOpen.onclick  = function () { servoCalSend(board, "#LO" + svcPad2(s.i) + svcPad4(+slider.value)); };
+    bClose.onclick = function () { servoCalSend(board, "#LC" + svcPad2(s.i) + svcPad4(+slider.value)); };
+    bReset.onclick = function () { if (confirm("Reset \"" + s.name + "\" to firmware default?")) servoCalSend(board, "#LR" + svcPad2(s.i)); };
+
+    actions.appendChild(bOpen); actions.appendChild(bClose); actions.appendChild(bReset);
+    row.appendChild(head); row.appendChild(slider); row.appendChild(actions);
+    host.appendChild(row);
+  });
+}
+
+var _svcPrevBoard = null;
+document.addEventListener('DOMContentLoaded', function () {
+  var sel = document.getElementById('servoCalBoard');
+  if (sel) {
+    _svcPrevBoard = sel.value;
+    sel.addEventListener('change', function () {
+      // Restore the board we're leaving so a live-move widen doesn't linger.
+      if (_svcPrevBoard && _svcPrevBoard !== sel.value) servoCalSend(_svcPrevBoard, "#LZ");
+      _svcPrevBoard = sel.value;
+      _svcPage = 0;                       // back to first page for the new board
+      renderServoCalList(sel.value);
+    });
+    renderServoCalList(sel.value);
+  }
+  var restore = document.getElementById('servoCalRestore');
+  if (restore) restore.onclick = function () {
+    var b = document.getElementById('servoCalBoard').value;
+    servoCalSend(b, "#LZ");
+  };
+  var prev = document.getElementById('servoCalPrev');
+  if (prev) prev.onclick = function () {
+    _svcPage--;
+    renderServoCalList(document.getElementById('servoCalBoard').value);
+  };
+  var next = document.getElementById('servoCalNext');
+  if (next) next.onclick = function () {
+    _svcPage++;
+    renderServoCalList(document.getElementById('servoCalBoard').value);
+  };
+});
+
 function rdCommand(t) {
   if (CommandConnectionSerial == false) {
     var bodyLEDControllerSPURL = "http://192.168.4.101/?param0=:&param1=:L:EBC:R" + t;
