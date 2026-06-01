@@ -329,7 +329,17 @@
    prevents horizontal overflow on very wide images / narrow viewports. */
 .bcg-gest-img {
   display: block;
-  height: calc(100vh - 220px);   /* fill the available vertical space */
+  /* Size against the *visible* viewport, not the layout viewport. `100vh`
+     ignores browser chrome (tabs/address bar) and a non-maximized window, so
+     calc(100vh - 220px) could make the transmitter taller than what's on
+     screen and clip its bottom row (same code, different window = clip).
+     `svh` (small viewport height) tracks the actually-visible area, so it fits
+     regardless of window size or chrome. The vh line is the fallback for
+     browsers without svh; the svh line overrides where supported. Same sizing
+     model as before — only the unit changes — so the look and the callout
+     overlay alignment are unchanged. */
+  height: calc(100vh - 220px);
+  height: calc(100svh - 220px);
   width: auto;
   max-width: 100%;
   border-radius: 6px;

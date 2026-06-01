@@ -535,6 +535,12 @@ function parseSerialUpdate(x) {
     }
     return;
   }
+  // 2026-05 servo read-back. A SERVO_INFO line carries one "#LI..." describe
+  // reply (its own LoRa packet, separate from telemetry). Dispatch and return.
+  if (parsedInfo && parsedInfo.type === 'SERVO_INFO') {
+    if (typeof handleServoInfoReply === 'function') handleServoInfoReply(parsedInfo.payload || '');
+    return;
+  }
   droidremoteControllerStatus = parsedInfo.droidremoteControllerStatus;
   droidgatewayControllerStatus = parsedInfo.droidgatewayControllerStatus;
   relayStatus = parsedInfo.relayStatus;
@@ -1522,16 +1528,132 @@ function svcLiveMove(board, idx, val) {
   }
 }
 
-// Only a few servo cards live in the DOM at once (paged with Prev/Next) so the
-// list can never run off the bottom of the absolutely-positioned settings pane.
-var SVC_PAGE_SIZE = 4;
+// Cards are paged with Prev/Next so the list never runs off the bottom of the
+// absolutely-positioned settings pane. The page size is computed from the
+// window height (svcFitPageSize) so it fills the available space on any screen
+// without overflowing — capped at 8 so a page's read-back reply still fits the
+// firmware's relay buffer.
+var SVC_PAGE_SIZE = 4;          // adjusted to fit the window by svcFitToViewport()
+var SVC_MAX_PAGE  = 5;          // hard cap of 5 servos/page (also fits the read-back relay buffer)
 var _svcPage = 0;
+
+// Ground truth: does the rendered list (incl. the help text) spill past the
+// bottom of the window? We measure the real DOM instead of estimating, so the
+// fit loop can never be fooled by a bad pitch/offset guess.
+function svcOverflows() {
+  var pane = document.getElementById('servoCal');
+  if (!pane) return false;
+  var hint = pane.querySelector('.svc-hint');
+  var el   = hint || document.getElementById('servoCalList');
+  if (!el) return false;
+  return el.getBoundingClientRect().bottom > window.innerHeight - 4;
+}
+
+// Pick the largest page size (3..SVC_MAX_PAGE) that fits the current window by
+// actually rendering and measuring: grow while it still fits, then shrink while
+// it overflows. Bounded re-renders, only runs on show/resize. No-op while the
+// pane is hidden (the list's top sits at ~0 and nothing can be measured).
+function svcFitToViewport(board) {
+  renderServoCalList(board);
+  var host = document.getElementById('servoCalList');
+  if (!host || host.getBoundingClientRect().top < 50) return;   // hidden
+  var data  = getServoData(board);
+  var total = (data ? data.servos.length : 0);
+  var cap   = Math.min(SVC_MAX_PAGE, total || SVC_MAX_PAGE);
+  // grow to fill the space
+  while (SVC_PAGE_SIZE < cap) {
+    SVC_PAGE_SIZE++;
+    renderServoCalList(board);
+    if (svcOverflows()) { SVC_PAGE_SIZE--; renderServoCalList(board); break; }
+  }
+  // shrink if we were already too tall for this window (floor of 2 so very
+  // short windows still fit rather than running off the bottom)
+  while (SVC_PAGE_SIZE > 2 && svcOverflows()) {
+    SVC_PAGE_SIZE--;
+    renderServoCalList(board);
+  }
+}
+
+// ---- Dynamic per-board servo data, read from the boards themselves ----------
+// _svcBoardData[board] = { name, loaded:true, servos:[ {i,name,close,open} ] }.
+// Until a board is read via "load from board", getServoData falls back to the
+// static SERVO_MAP so this droid still shows sensible names offline.
+var _svcBoardData = {};
+function getServoData(board) { return _svcBoardData[board] || SERVO_MAP[board]; }
+
+function _svcStatus(t) { var s = document.getElementById('servoCalLoadStatus'); if (s) s.textContent = t; }
+
+// Sequential "describe" load: ask the board for one servo at a time and it
+// replies with the total count, that servo's close/open and its name. Reliable
+// over the single-value telemetry relay because only one request is in flight;
+// the expected-index gate dedups the latched field and enforces ordering.
+// Retries on timeout, then gives up cleanly.
+var _svcLoad = null;   // { board, next, count, tries, timer } or null
+function svcStartLoad() {
+  if (_svcLoad) return;                              // already loading
+  var board = document.getElementById('servoCalBoard').value;
+  _svcLoad = { board: board, next: 0, count: null, tries: 0, timer: null };
+  _svcStatus("reading servo 1...");
+  _svcRequestDescribe();
+}
+function _svcRequestDescribe() {
+  if (!_svcLoad) return;
+  clearTimeout(_svcLoad.timer);
+  _svcLoad.timer = setTimeout(_svcDescribeTimeout, 2500);
+  servoCalSend(_svcLoad.board, "#LD" + svcPad2(_svcLoad.next));
+}
+function _svcDescribeTimeout() {
+  if (!_svcLoad) return;
+  if (++_svcLoad.tries >= 4) {
+    _svcStatus("no response from board - is it powered and connected?");
+    _svcLoad = null;
+    return;
+  }
+  _svcRequestDescribe();                             // retry same index
+}
+// Parse "#LI<board2><idx2><count2><close4><open4><name>" describe replies.
+function handleServoInfoReply(str) {
+  if (!_svcLoad || !str || str.length < 17) return;
+  var board = str.substr(3, 2);
+  var idx   = parseInt(str.substr(5, 2), 10);
+  var count = parseInt(str.substr(7, 2), 10);
+  var close = parseInt(str.substr(9, 4), 10);
+  var open  = parseInt(str.substr(13, 4), 10);
+  var name  = str.substr(17);
+  if (board !== _svcLoad.board || isNaN(idx) || isNaN(count)) return;
+  if (idx !== _svcLoad.next) return;                 // dedup / ordering
+  if (_svcLoad.count === null) {                     // first reply: allocate
+    _svcLoad.count = count;
+    _svcBoardData[board] = {
+      name: (SERVO_MAP[board] ? SERVO_MAP[board].name : board),
+      loaded: true, servos: new Array(count)
+    };
+  }
+  _svcBoardData[board].servos[idx] = {
+    i: idx, name: (name || ("Servo " + idx)),
+    close: (isNaN(close) ? 1500 : close), open: (isNaN(open) ? 1500 : open)
+  };
+  _svcLoad.tries = 0;
+  _svcLoad.next++;
+  if (_svcLoad.next < _svcLoad.count) {
+    _svcStatus("reading servo " + (_svcLoad.next + 1) + " of " + _svcLoad.count + "...");
+    _svcRequestDescribe();
+  } else {
+    clearTimeout(_svcLoad.timer);
+    _svcStatus("loaded " + _svcLoad.count + " servos from board");
+    _svcLoad = null;
+    _svcPage = 0;
+    svcFitToViewport(board);
+  }
+}
+// Abort any in-flight load (e.g. when switching boards).
+function svcAbortLoad() { if (_svcLoad) { clearTimeout(_svcLoad.timer); _svcLoad = null; } }
 
 function renderServoCalList(board) {
   var host = document.getElementById('servoCalList');
   if (!host) return;
   host.innerHTML = "";
-  var def = SERVO_MAP[board];
+  var def = getServoData(board);
   if (!def) return;
 
   var total     = def.servos.length;
@@ -1550,19 +1672,25 @@ function renderServoCalList(board) {
   if (prev) prev.disabled = (_svcPage <= 0);
   if (next) next.disabled = (_svcPage >= pageCount - 1);
 
+  var loaded = !!def.loaded;     // true once read from the board (vs static map)
   pageServos.forEach(function (s) {
     var row = document.createElement('div'); row.className = "svc-row";
 
-    // Head: name (+ index/default) on the left, live value on the right.
+    var close   = s.close;
+    var open    = s.open;
+    var srcWord = loaded ? "saved" : "default";
+
+    // Head: name (+ index/source values) on the left, live value on the right.
     var head = document.createElement('div'); head.className = "svc-head";
     var name = document.createElement('div'); name.className = "svc-name";
-    name.innerHTML = s.name + "<div class='svc-ref'>#" + s.i + " &middot; default C " + s.close + " / O " + s.open + "</div>";
-    var valEl = document.createElement('div'); valEl.className = "svc-val"; valEl.textContent = s.close + " us";
+    name.innerHTML = s.name + "<div class='svc-ref'>#" + s.i + " &middot; " + srcWord +
+                     " C " + close + " / O " + open + "</div>";
+    var valEl = document.createElement('div'); valEl.className = "svc-val"; valEl.textContent = close + " us";
     head.appendChild(name); head.appendChild(valEl);
 
     var slider = document.createElement('input');
     slider.type = "range"; slider.min = "500"; slider.max = "2500"; slider.step = "5";
-    slider.value = s.close;
+    slider.value = close;
 
     var actions = document.createElement('div'); actions.className = "svc-actions";
     var bOpen  = document.createElement('button'); bOpen.className  = "svc-btn open";  bOpen.textContent  = "Set Open";
@@ -1581,6 +1709,16 @@ function renderServoCalList(board) {
   });
 }
 
+// Re-fit on window resize (debounced) so the page always fills the space.
+var _svcResizeTimer = null;
+window.addEventListener('resize', function () {
+  clearTimeout(_svcResizeTimer);
+  _svcResizeTimer = setTimeout(function () {
+    var sel = document.getElementById('servoCalBoard');
+    if (sel) svcFitToViewport(sel.value);
+  }, 150);
+});
+
 var _svcPrevBoard = null;
 document.addEventListener('DOMContentLoaded', function () {
   var sel = document.getElementById('servoCalBoard');
@@ -1591,9 +1729,10 @@ document.addEventListener('DOMContentLoaded', function () {
       if (_svcPrevBoard && _svcPrevBoard !== sel.value) servoCalSend(_svcPrevBoard, "#LZ");
       _svcPrevBoard = sel.value;
       _svcPage = 0;                       // back to first page for the new board
-      renderServoCalList(sel.value);
+      svcAbortLoad();                     // cancel any in-flight describe load
+      svcFitToViewport(sel.value);
     });
-    renderServoCalList(sel.value);
+    svcFitToViewport(sel.value);
   }
   var restore = document.getElementById('servoCalRestore');
   if (restore) restore.onclick = function () {
@@ -1610,6 +1749,19 @@ document.addEventListener('DOMContentLoaded', function () {
     _svcPage++;
     renderServoCalList(document.getElementById('servoCalBoard').value);
   };
+  var load = document.getElementById('servoCalLoad');
+  if (load) load.onclick = svcStartLoad;
+
+  // The pane is hidden at DOMContentLoaded, so the first render can't measure
+  // its height. Re-render when the Servo Calibration tab is opened so the page
+  // size fits the now-visible area.
+  var navBtn = document.querySelector('[rel="servoCal"]');
+  if (navBtn) navBtn.addEventListener('click', function () {
+    setTimeout(function () {
+      var sel = document.getElementById('servoCalBoard');
+      if (sel) svcFitToViewport(sel.value);
+    }, 60);
+  });
 });
 
 function rdCommand(t) {
