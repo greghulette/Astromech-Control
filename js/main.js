@@ -541,6 +541,32 @@ function parseSerialUpdate(x) {
     if (typeof handleServoInfoReply === 'function') handleServoInfoReply(parsedInfo.payload || '');
     return;
   }
+  // 2026-06 on-demand diagnostics. The per-board success/fail counters + ETM
+  // delivery stats no longer ride the 1 Hz telemetry — they arrive as their own
+  // {"type":"DIAG"} line only after the user clicks "Refresh stats" (which sends
+  // #L09 to the Gateway). Update the vars + repaint, then return.
+  if (parsedInfo && parsedInfo.type === 'DIAG') {
+    DGSuccessCounter = parsedInfo.DGSuccessCounter;
+    DGFailureCounter = parsedInfo.DGFailureCounter;
+    BCSuccessCounter = parsedInfo.BCSuccessCounter;
+    BCFailureCounter = parsedInfo.BCFailureCounter;
+    BSSuccessCounter = parsedInfo.BSSuccessCounter;
+    BSFailureCounter = parsedInfo.BSFailureCounter;
+    DPSuccessCounter = parsedInfo.DPSuccessCounter;
+    DPFailureCounter = parsedInfo.DPFailureCounter;
+    DCSuccessCounter = parsedInfo.DCSuccessCounter;
+    DCFailureCounter = parsedInfo.DCFailureCounter;
+    HPSuccessCounter = parsedInfo.HPSuccessCounter;
+    HPFailureCounter = parsedInfo.HPFailureCounter;
+    etmBoardOnline  = parsedInfo.etmOnline   || [false,false,false,false,false,false];
+    etmBoardSent    = parsedInfo.etmSent     || [0,0,0,0,0,0];
+    etmBoardAckd    = parsedInfo.etmAckd     || [0,0,0,0,0,0];
+    etmBoardRetries = parsedInfo.etmRetries  || [0,0,0,0,0,0];
+    etmBoardFailed  = parsedInfo.etmFailed   || [0,0,0,0,0,0];
+    updateESPNOWSTATS();
+    updateETMStats();
+    return;
+  }
   droidremoteControllerStatus = parsedInfo.droidremoteControllerStatus;
   droidgatewayControllerStatus = parsedInfo.droidgatewayControllerStatus;
   relayStatus = parsedInfo.relayStatus;
@@ -561,23 +587,9 @@ function parseSerialUpdate(x) {
   VUExtBaseline = parsedInfo.VUExtBaseline;
   FunctionSWState = parsedInfo.FunctionSWState;
   remoteConnected = parsedInfo.remoteConnected;
-  DGSuccessCounter = parsedInfo.DGSuccessCounter;
-  DGFailureCounter = parsedInfo.DGFailureCounter;
-  BCSuccessCounter = parsedInfo.BCSuccessCounter;
-  BCFailureCounter = parsedInfo.BCFailureCounter;
-  BSSuccessCounter = parsedInfo.BSSuccessCounter;
-  BSFailureCounter = parsedInfo.BSFailureCounter;
-  DPSuccessCounter = parsedInfo.DPSuccessCounter;
-  DPFailureCounter = parsedInfo.DPFailureCounter;
-  DCSuccessCounter = parsedInfo.DCSuccessCounter;
-  DCFailureCounter = parsedInfo.DCFailureCounter;
-  HPSuccessCounter = parsedInfo.HPSuccessCounter;
-  HPFailureCounter = parsedInfo.HPFailureCounter;
-  etmBoardOnline  = parsedInfo.etmOnline   || [false,false,false,false,false,false];
-  etmBoardSent    = parsedInfo.etmSent     || [0,0,0,0,0,0];
-  etmBoardAckd    = parsedInfo.etmAckd     || [0,0,0,0,0,0];
-  etmBoardRetries = parsedInfo.etmRetries  || [0,0,0,0,0,0];
-  etmBoardFailed  = parsedInfo.etmFailed   || [0,0,0,0,0,0];
+  // 2026-06: per-board counters + ETM stats are NOT in the periodic telemetry
+  // anymore (they'd arrive as `undefined` here and wipe the last DIAG snapshot).
+  // They come in via the {"type":"DIAG"} branch above on "Refresh stats".
   // 2026-05: BC reverse-channel ACK. The Remote includes bcAckSeq /
   // bcAckOk / bcAckMsg in every telemetry frame; seq=0 means "no fresh
   // ACK". Dispatch to the BCG handler so the editor's sync-status
@@ -1512,6 +1524,18 @@ function servoCalSend(board, cmd) {
     writeToStream(SerialLoRaPrefix + ":E" + board + cmd);
   }
 }
+// 2026-06: pull the on-demand diagnostics snapshot (per-board success/fail
+// counters + ETM delivery stats). These no longer ride the 1 Hz telemetry — the
+// button sends #L09 to the Gateway, which replies with one Diag_LoRa_Struct; the
+// Remote turns that into a {"type":"DIAG"} line handled in parseSerialUpdate.
+function refreshStats() {
+  if (typeof CommandConnectionSerial !== 'undefined' && CommandConnectionSerial == false) {
+    httpGet("http://192.168.4.101/?param0=:&param1=" + (SerialLoRaPrefix + "#L09").replace(/#/g, '%23'));
+  } else {
+    writeToStream(SerialLoRaPrefix + "#L09");
+  }
+}
+
 function svcPad2(n) { return ("0"   + (n | 0)).slice(-2); }
 function svcPad4(n) { return ("000" + (n | 0)).slice(-4); }
 
@@ -3030,7 +3054,7 @@ function commandSingleColor(y, t, z, u, x, d, e = false) {
   }
   if (d == 'hasDome') {
     var checkHP = getcheckedElementsforHPController(x);
-    if (checkHP != !undefined) {
+    if (checkHP != undefined) {
       domeParam = "&param2=" + HPCommandPrefix + checkHP + y + colorValues;
       domeSerialCommand = SerialHPPrefix + checkHP + y + colorValues;
     }

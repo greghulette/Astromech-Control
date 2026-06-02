@@ -6000,6 +6000,19 @@ id="FrontLogicsTopBlueSelector"
 <div class="menu-Level-1-Content " id="stats">
   <h2 class="gesturesheaders">esp-now delivery statistics</h2>
 
+  <!-- 2026-06: diagnostics are pulled on demand (not streamed on the 1 Hz
+       telemetry) so they don't eat LoRa airtime / slow commands. Click to fetch
+       a fresh snapshot — sends #L09 to the Gateway → Diag packet → DIAG line. -->
+  <p style="text-align:center;margin:0 0 14px;">
+    <button type="button" onclick="refreshStats()" class="etmRefreshBtn"
+            style="padding:8px 20px;font-size:1em;cursor:pointer;border-radius:6px;">
+      &#x27F3; Refresh stats
+    </button>
+    <span style="display:block;font-size:0.78em;opacity:0.6;margin-top:5px;">
+      pulled on demand to keep the link fast &mdash; click to update the snapshot
+    </span>
+  </p>
+
   <div class="etmStatsWrapper">
     <p class="etmStatsTitle">etm confirmed delivery &mdash; droid gateway perspective</p>
     <table class="etmStatsTable">
