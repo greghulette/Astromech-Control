@@ -1715,8 +1715,13 @@ function renderServoCalList(board) {
 
     slider.addEventListener('input',  function () { valEl.textContent = slider.value + " us"; svcLiveMove(board, s.i, +slider.value); });
     slider.addEventListener('change', function () { servoCalSend(board, "#LM" + svcPad2(s.i) + svcPad4(+slider.value)); });
-    bOpen.onclick  = function () { servoCalSend(board, "#LO" + svcPad2(s.i) + svcPad4(+slider.value)); };
-    bClose.onclick = function () { servoCalSend(board, "#LC" + svcPad2(s.i) + svcPad4(+slider.value)); };
+    // After saving an endpoint, send #LZ to reload BOTH limits from NVS into the
+    // live dispatch. Live-move jogging widens the working range to 500/2500, and
+    // saving only sets the one endpoint — so without this, the OTHER endpoint
+    // stays widened on the board until reboot/restore, and pose commands like
+    // :D103/:D104 (which use the live range) come out wrong. #LZ un-widens it.
+    bOpen.onclick  = function () { servoCalSend(board, "#LO" + svcPad2(s.i) + svcPad4(+slider.value)); servoCalSend(board, "#LZ"); };
+    bClose.onclick = function () { servoCalSend(board, "#LC" + svcPad2(s.i) + svcPad4(+slider.value)); servoCalSend(board, "#LZ"); };
     bReset.onclick = function () { if (confirm("Reset \"" + s.name + "\" to firmware default?")) servoCalSend(board, "#LR" + svcPad2(s.i)); };
 
     actions.appendChild(bOpen); actions.appendChild(bClose); actions.appendChild(bReset);
