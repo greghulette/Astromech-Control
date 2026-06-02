@@ -1515,17 +1515,33 @@ function servoCalSend(board, cmd) {
 function svcPad2(n) { return ("0"   + (n | 0)).slice(-2); }
 function svcPad4(n) { return ("000" + (n | 0)).slice(-4); }
 
-// Throttle live-move sends so we don't flood the single-in-flight LoRa hop
-// (Remote->Gateway drains ~2-3 cmds/sec). The trailing 'change' on the slider
-// always sends the final, precise value, so dropped intermediate frames just
-// mean the servo lags the slider a touch while dragging.
-var _svcThrottle = {};
+// Live-move pacing. The servo is driven over the single-in-flight LoRa hop,
+// which only carries ~2-3 commands/sec, so we CAN'T send faster than that
+// without the Remote's TX queue backing up — which makes the servo lag further
+// behind the slider, not less. Instead of a leading-edge throttle (which fires
+// a possibly-stale value at the window start and drops the rest), this is a
+// "latest-wins" throttle: it sends the newest slider position immediately if
+// the link is free, otherwise it schedules ONE trailing send of the most-recent
+// value at the next window boundary. So the servo always heads to where your
+// finger is now, and we never queue a burst of stale positions. The slider's
+// 'change' (release) still sends the exact final value.
+//   With the firmware's live-move fast lane (coalesce + fire-and-forget #LM),
+//   the radio can take ~10 updates/sec, and the Remote coalesces any excess to
+//   the newest target — so we can feed it at ~90ms. Raise this only if you see
+//   the servo lag during a drag.
+var SVC_LIVE_MS = 90;
+var _svcLive = {};   // key -> { last:ms, val:int, timer }
 function svcLiveMove(board, idx, val) {
-  var key = board + "_" + idx, now = Date.now();
-  if (!_svcThrottle[key] || now - _svcThrottle[key] >= 250) {
-    _svcThrottle[key] = now;
-    servoCalSend(board, "#LM" + svcPad2(idx) + svcPad4(val));
-  }
+  var key = board + "_" + idx;
+  var st  = _svcLive[key] || (_svcLive[key] = { last: 0, val: 0, timer: null });
+  st.val = val;                                    // always remember the newest target
+  var wait = SVC_LIVE_MS - (Date.now() - st.last);
+  var fire = function () {
+    st.timer = null; st.last = Date.now();
+    servoCalSend(board, "#LM" + svcPad2(idx) + svcPad4(st.val));
+  };
+  if (wait <= 0) fire();                           // link free → send the latest now
+  else if (!st.timer) st.timer = setTimeout(fire, wait);   // else flush the latest at window end
 }
 
 // Cards are paged with Prev/Next so the list never runs off the bottom of the
